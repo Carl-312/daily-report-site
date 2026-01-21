@@ -153,6 +153,31 @@ def parse_frontmatter(content: str) -> tuple[dict, str]:
     return meta, body
 
 
+def convert_ol_to_paragraphs(html: str) -> str:
+    """Convert <ol> lists to <p> tags with number prefixes for copyable numbers"""
+    import re
+    
+    # Pattern: <ol>...list items...</ol>
+    def replace_ol(match):
+        ol_content = match.group(1)
+        # Extract all <li> items
+        li_pattern = r'<li>\s*<p>(.+?)</p>\s*</li>'
+        items = re.findall(li_pattern, ol_content, re.DOTALL)
+        
+        # Convert to numbered paragraphs
+        paragraphs = []
+        for i, item in enumerate(items, 1):
+            # Remove inner p tags if nested
+            item_clean = item.strip()
+            paragraphs.append(f'<p>{i}. {item_clean}</p>')
+        
+        return '\n'.join(paragraphs)
+    
+    # Replace all <ol> blocks
+    result = re.sub(r'<ol>(.+?)</ol>', replace_ol, html, flags=re.DOTALL)
+    return result
+
+
 def build_article(md_path: Path, base_path: str = "") -> dict:
     """Build a single article HTML from markdown file"""
     content = md_path.read_text(encoding="utf-8")
@@ -163,6 +188,9 @@ def build_article(md_path: Path, base_path: str = "") -> dict:
         body,
         extensions=["tables", "fenced_code", "codehilite", "toc"]
     )
+    
+    # Post-process: convert <ol> to <p> tags for copyable numbers
+    html_content = convert_ol_to_paragraphs(html_content)
     
     # Extract date from filename if not in frontmatter
     date = meta.get("date") or md_path.stem
