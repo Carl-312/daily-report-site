@@ -45,7 +45,7 @@ python -m http.server 8000
 2. 启用 Actions 写入权限
 3. 启用 GitHub Pages (Source: GitHub Actions)
 
-每天 09:00 (UTC+8) 自动运行
+每天 22:00 (UTC+8) 自动运行
 
 ---
 

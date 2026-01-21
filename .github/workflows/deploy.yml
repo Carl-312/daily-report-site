@@ -9,9 +9,9 @@ on:
   push:
     branches: [main]
   
-  # 每天定时触发 (北京时间 09:00 = UTC 01:00)
+  # 每天定时触发 (北京时间 22:00 = UTC 14:00)
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 14 * * *'
 
 permissions:
   contents: write  # 需要写入权限以提交生成的内容
