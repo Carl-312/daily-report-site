@@ -1,0 +1,87 @@
+# Daily Report - Automated Generator & Deployment
+name: Daily Report Generator
+
+on:
+  # 手动触发
+  workflow_dispatch:
+  
+  # 代码推送触发
+  push:
+    branches: [main]
+  
+  # 每天定时触发 (北京时间 09:00 = UTC 01:00)
+  schedule:
+    - cron: '0 1 * * *'
+
+permissions:
+  contents: write  # 需要写入权限以提交生成的内容
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  generate-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 完整历史记录
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      
+      - name: Generate daily report
+        env:
+          MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+        run: |
+          if [ -z "$MODELSCOPE_API_KEY" ]; then
+            echo "⚠️  Warning: MODELSCOPE_API_KEY not set, using offline mode"
+            python main.py run --offline
+          else
+            echo "🤖 Using AI summarization"
+            python main.py run
+          fi
+      
+      - name: Commit and push changes
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add content/ data/ docs/
+          
+          # 仅在有变更时提交
+          if ! git diff --cached --quiet; then
+            git commit -m "🤖 Daily report: $(date +'%Y-%m-%d')"
+            git push
+            echo "✅ Changes committed and pushed"
+          else
+            echo "ℹ️  No changes to commit"
+          fi
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: generate-and-deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

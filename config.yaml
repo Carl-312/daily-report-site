@@ -1,0 +1,19 @@
+sources:
+  aibase: true
+  techcrunch: true
+  theverge: true
+  syft: false           # 需要配置 SYFT_* 环境变量
+
+limits:
+  max_articles: 14
+
+summarize:
+  prompt_path: prompts/daily.md
+  prefer_chinese: true
+  compress:
+    title_max: 200     # 增加字符限制，适应中文混合英文新闻
+    desc_max: 400      # 避免描述信息被过早截断
+
+output:
+  json_dir: data
+  md_dir: content

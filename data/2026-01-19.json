@@ -1,0 +1,59 @@
+{
+  "date": "2026-01-19",
+  "articles": [
+    {
+      "title": "AI日报：蚂蚁百灵发布 Ling Studio；飞书联手安克创新推AI录音豆；ChatGPT 官宣引入广告",
+      "link": "https://news.aibase.com/zh/daily/24729",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、蚂蚁百灵发布 Ling Studio：官方大模型 Web 交互平台正式上线 蚂蚁百灵大模型推出了全新的官方 Web 交互平台 Ling Studio，为开发者和 AI 爱好者提供了便捷的模型探索空间。该平台提供每日50万个免费 Token，支持多种模型切换，并集成了原生联网搜索工具、系统提示词定制及 API 接口，未来还将推出文件对话、AI 图像生成等功能，致力于打造全能型的 AI 交互中枢。 🧠 Ling-1T：追求 极致 响应速度的模型 🧩 Ring-1T：擅长处理逻辑难题的复杂推理模型 📷 Ming-flash-omni-Preview：具备图片和音…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：蚂蚁百灵发布 Ling Studio；飞书联手安克创新推AI录音豆；ChatGPT 官宣引入广告\n发布于最新AI日报\n发布时间 :\n2026年1月19号 15:27\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、蚂蚁百灵发布 Ling Studio：官方大模型 Web 交互平台正式上线\n蚂蚁百灵大模型推出了全新的官方 Web 交互平台 Ling Studio，为开发者和 AI 爱好者提供了便捷的模型探索空间。该平台提供每日50万个免费 Token，支持多种模型切换，并集成了原生联网搜索工具、系统提示词定制及 API 接口，未来还将推出文件对话、AI 图像生成等功能，致力于打造全能型的 AI 交互中枢。\n【AiBase提要:】\n🧠 Ling-1T：追求\n极致\n响应速度的模型\n🧩 Ring-1T：擅长处理逻辑难题的复杂推理模型\n📷 Ming-flash-omni-Preview：具备图片和音频双重识别能力的模型\n2、10 克“AI录音豆”来了！飞书联手安克创新推出无感佩戴智能录音设备，会议纪要自动生成并直连知识库\n飞书与安克创新合作推出的“AI录音豆”，这是一款轻巧且具备强大AI功能的智能录音设备。它能够实时生成字幕，并在会后自动输出结构化纪要，同时将内容同步至飞书知识库，提升工作效率。\n【AiBase提要:】\n📌 AI录音豆采用微型设计，便于佩戴，实现无感智能交互。\n💡 支持实时生成字幕和结构化纪要，提升会议效率。\n🔄 内容可同步至飞书知识库，便于快速检索与二次创作。\n3、ChatGPT 官宣引入广告：开启“搜索式”变现，免费用户将率先体验\nOpenAI宣布将在ChatGPT免费版和新推出的“ChatGPT Go”层级中测试广告，标志着其从纯订阅模式向“订阅+广告”混合模式的转型。广告将以更自然、更具交互性的方式呈现，并且不会影响AI回答的客观性。付费用户将继续享受无广告体验。\n【AiBase提要:】\n📢 测试开启: OpenAI 将在美区 ChatGPT 免费版及 Go 版测试广告，广告将以对话关联的形式出现在回答底部。\n🔒 隐私底线: 官方承诺不会向广告商出售对话数据，且对话内容不会被广告意图所左右，确保回答的独立性。\n💎 付费免扰: ChatGPT Plus、Business 及 Enterprise 等\n高级\n订阅账户将保持完全无广告状态。\n4、谷歌扩大 AI 视频工具 Flow 访问权限：支持竖屏与 8 秒 4K 生成\n谷歌扩大 AI 视频工具 Flow 的访问权限，新增竖屏视频支持，并集成音频与图像生成功能，提升视频创作效率。\n【AiBase提要:】\n🎥 Flow 工具现已全面开放给商务、企业及教育版 Workspace 用户\n🎞️ 支持竖屏视频和 8 秒 4K 视频生成\n🔊 集成音频支持与图像生成器 Nano Banana Pro\n5、英伟达发布 PersonaPlex-7B-v1:重塑实时语音交互的“全双工”黑科技\n英伟达研究团队发布了名为 PersonaPlex-7B-v1 的全双工语音对语音对话模型，该模型通过端到端的 Transformer 架构实现了更接近真人的自然对话体验，支持实时语音流处理、深度个性化控制以及更高的对话流畅度和任务达成率。\n【AiBase提要:】\n🎙️ 全双工交互: PersonaPlex-7B-v1 支持实时语音流处理，允许用户在 AI 说话时随时插话或重叠对话，实现极速响应。\n🧠 单模型架构: 舍弃了繁琐的插件式管道，采用单一 Transformer 结构同步预测文本和语音标记，从底层提升对话自然度。\n🎭 深度个性化: 支持高达200token 的系统提示词及特定的语音嵌入，可灵活定制 AI 的角色性格、业务知识及情感音色。\n详情链接:https://research.nvidia.com/labs/adlr/personaplex/\n6、国内首个AI原生游戏玩法落地！《超自然行动组》上线“AI大模型挑战”，千万玩家可与AI共演剧情\n《超自然行动组》上线‘AI大模型挑战’玩法，标志着AI原生游戏从概念走向规模化落地，通过深度嵌入任务系统与剧情引擎，实现了玩家与AI的实时互动和动态剧情生成，展现了AI在游戏领域的巨大潜力。\n【AiBase提要:】\n🧠 AI大模型深度嵌入游戏核心玩法，实现剧情动态生成与玩家实时互动。\n🎮\n首次\n在高DAU游戏中实现AI原生玩法，展现工程稳定性与用户体验一致性。\n🚀 为未来游戏类型扩展提供新方向，推动AI与游戏深度融合的创新尝试。\n7、OpenAI 密谋网页版重大升级:代号 Salute 与内联编辑功能曝光\nOpenAI 正在对 ChatGPT 网页版进行新一轮内部测试，预计推出增强功能，包括任务管理、本地服务优化及开发者工具改进。\n【AiBase提要:】\n🧠 代号 Salute 的任务管理功能允许用户创建包含文件上传的任务并实时追踪进度。\n🗺️ Preferred Model 标识暗示 ChatGPT 将优化本地商家、餐厅和酒店的查询结果。\n🛠️ 开发者将获得安全隧道和内联编辑功能，提升代码和公式修改的便捷性。\n8、OpenAI推出平价订阅计划“ChatGPT Go”：每月仅8美元，即可畅享GPT-5.2 Instant无限使用，但免费版与Go版即将插入广告\nOpenAI推出平价订阅计划ChatGPT Go，每月仅需8美元即可享受\n高级\nAI功能，同时免费版与Go版将测试插入广告。该计划旨在降低AI使用门槛，扩大用户基数，并通过广告补充收入，改善公司财务状况。\n【AiBase提要:】\n🧠 ChatGPT Go每月8美元，提供更\n高级\n的AI功能和无限使用GPT-5.2 Instant\n📢 免费版与Go版将测试插入广告，但核心回答质量不受影响\n💰 OpenAI通过低价订阅和广告补充收入，寻求多元化营收\n相关推荐\nAnthropic 进军印度：前微软高管领军，班加罗尔成 AI 扩张新前哨\n美国AI公司Anthropic任命前微软高管Irina Ghose为印度区负责人，将在班加罗尔设立办公室。印度是Anthropic旗下Claude的第二大市场，此举旨在加速其商业化进程。\n2026年1月19号 17:54\n83.3k\n京东京造AI玩具覆盖全龄段！“唠唠鹦”陪老人听戏、“球球墨墨”解职场焦虑，AI陪伴进入家庭刚需时代\n京东京造推出第二批自研AI玩具，覆盖儿童、青年和老年全年龄段，使AI陪伴从儿童专属扩展为家庭刚需。产品包括会讲方言的智能鹦鹉、懂情绪的桌面玩伴及健康守护者，以柔软方式融入家庭生活，满足不同群体的情感需求。\n2026年1月19号 17:04\n116.0k\n​从 OpenAI 办公室诞生的独角兽：Chai Discovery 携手礼来开启 AI 制药新纪元\n初创公司Chai Discovery与礼来合作，利用其AI算法Chai-2加速抗体药物研发。公司创始人来自OpenAI，获CEO支持，展现AI与生物医药融合潜力。\n2026年1月19号 15:13\n123.6k\n​营收与算力双爆发！OpenAI 首席财务官揭秘：三年狂涨十倍的增长逻辑\nOpenAI首席财务官回应外界质疑，强调公司过去三年在技术、商业变现和基础设施上实现“十倍级”增长。算力资源从2023年的0.2GW增至2025年的1.9GW，增长约9.5倍，收入增速与算力扩张基本同步。\n2026年1月19号 14:55\n100.1k\n​全线翻车？多款顶尖AI大模型竟算不清“明年是哪一年”\n多家顶尖AI模型在回答“2027年是不是明年”时集体出错，谷歌AI搜索摘要甚至错误地声称当前是2026年，将2027年误判为“去年”。这一常识性错误暴露了AI在基础逻辑判断上的局限性，引发业界对当前AI技术可靠性的讨论。\n2026年1月19号 14:14\n148.9k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Sequoia to invest in Anthropic, breaking VC taboo on backing rivals: FT",
+      "link": "https://techcrunch.com/2026/01/18/sequoia-to-invest-in-anthropic-breaking-vc-taboo-on-backing-rivals-ft/",
+      "description": "",
+      "publish_time": "2026-01-18",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "How YC-backed Bucket Robotics survived its first CES",
+      "link": "https://techcrunch.com/2026/01/18/how-yc-backed-bucket-robotics-survived-its-first-ces/",
+      "description": "",
+      "publish_time": "2026-01-18",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Moxie Marlinspike has a privacy-conscious alternative to ChatGPT",
+      "link": "https://techcrunch.com/2026/01/18/moxie-marlinspike-has-a-privacy-conscious-alternative-to-chatgpt/",
+      "description": "",
+      "publish_time": "2026-01-18",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: ‘Physical AI’ enters the hype machine",
+      "link": "https://techcrunch.com/2026/01/18/techcrunch-mobility-physical-ai-enters-the-hype-machine/",
+      "description": "",
+      "publish_time": "2026-01-18",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Threads edges out X in daily mobile users, new data shows",
+      "link": "https://techcrunch.com/2026/01/18/threads-edges-out-x-in-daily-mobile-users-new-data-shows/",
+      "description": "",
+      "publish_time": "2026-01-18",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
