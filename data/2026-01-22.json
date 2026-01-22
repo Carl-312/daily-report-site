@@ -1,0 +1,140 @@
+{
+  "date": "2026-01-22",
+  "articles": [
+    {
+      "title": "AI日报：天猫上线AI假图识别模型；百川发布医学模型Baichuan-M3 Plus；Remotion Skills开启一句话做大片时代",
+      "link": "https://news.aibase.com/zh/daily/24850",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、淘宝天猫出重拳！AI 假图识别模型上线，让 P 图骗保无所遁形 淘宝天猫推出AI假图识别模型，有效遏制恶意售后行为，同时通过优化物流赔付机制和账号诚信体系，为商家挽回巨额损失，推动电商生态健康发展。 🛒 AI假图识别模型上线，助力商家应对售后纠纷 💰 平台拦截异常退款行为，为商家挽回超40亿元损失 🚚 优化物流赔付机制，预计全年节约成本超10亿元 2、Inworld 推出全新 TTS-1.5：实时语音，延迟低，并支持多语言 Inworld 推出全新 TTS-1.5：实时语音，延迟低，并支持多语言。TTS-1.5在技术上实现了低于250毫秒的实时延迟，同时提…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：天猫上线AI假图识别模型；百川发布医学模型Baichuan-M3 Plus；Remotion Skills开启一句话做大片时代\n发布于最新AI日报\n发布时间 :\n2026年1月22号 16:20\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、淘宝天猫出重拳！AI 假图识别模型上线，让 P 图骗保无所遁形\n淘宝天猫推出AI假图识别模型，有效遏制恶意售后行为，同时通过优化物流赔付机制和账号诚信体系，为商家挽回巨额损失，推动电商生态健康发展。\n【AiBase提要:】\n🛒 AI假图识别模型上线，助力商家应对售后纠纷\n💰 平台拦截异常退款行为，为商家挽回超40亿元损失\n🚚 优化物流赔付机制，预计全年节约成本超10亿元\n2、Inworld 推出全新 TTS-1.5：实时语音，延迟低，并支持多语言\nInworld 推出全新 TTS-1.5：实时语音，延迟低，并支持多语言。TTS-1.5在技术上实现了低于250毫秒的实时延迟，同时提供多语言支持，价格仅为每分钟0.005美元，比市场上的同类产品便宜25倍。这一创新成果为游戏和虚拟现实领域的对话系统提供了新的可能性，用户对这一技术表现出浓厚兴趣并期待应用到自己的项目中。\n【AiBase提要:】\n📢 TTS-1.5模型推出，具备自然的语音合成和多语言支持。\n💰 该模型每分钟费用约为0.005美元，比市场同类产品便宜25倍。\n⚡ 实现低于250毫秒的实时延迟，为用户提供更真实的对话体验。\n3、百川智能发布Baichuan-M3 Plus，医学幻觉率降至2.6%，树立医疗AI新标杆\n百川智能推出的Baichuan-M3 Plus医疗大模型，在医学幻觉率方面取得重大突破，通过引入“六源循证范式”确保诊断建议的\n权威\n性和准确性，为医疗AI的可信应用树立了新标杆。\n【AiBase提要:】\n🧠 医疗AI模型Baichuan-M3 Plus发布，医学幻觉率降至2.6%\n📚 引入“六源循证范式”，确保诊断建议的\n权威\n性\n🏥 适用于医院、互联网医疗平台及医药研发机构，提升临床使用信心\n4、视频创作告别手打代码：Remotion Skills 开启“一句话做大片”新时代\nRemotion Skills 的推出标志着视频创作进入“AI 指令驱动”时代，用户只需自然语言指令即可生成专业视频动画，极大降低了创作门槛并提升了效率。\n【AiBase提要:】\n🗣️ 用户可通过自然语言直接指挥 AI 生成复杂的 React 视频动画，无需手动编写繁琐代码。\n🛠️ 智能体技能增强: 通过 Remotion Skills 工具集，AI 智能体可深度调用 Remotion 库，实现精准的像素级视频控制。\n🚀 高效集成协作: 支持与 Claude Code 及 MCP 协议 无缝对接，极大地简化了程序化视频的制作流程与开发成本。\n详情链接:https://www.remotion.dev/docs/ai/\n5、苹果内部AI双系统首度曝光：Enchanté负责写代码改文案，Enterprise Assistant秒答十万条公司规章\n苹果在2025年11月上线了两套生成式AI工具——Enchanté和Enterprise Assistant，旨在提升工程师、HR、营销和法务的日常工作效率。Enchanté能够快速完成代码补全、漏洞扫描和文案润色，而Enterprise Assistant则作为公司级搜索引擎，帮助员工快速获取内部文件信息。\n【AiBase提要:】\n🍎 Enchanté通过本地或私有服务器处理运算，确保数据安全。\n🔍 Enterprise Assistant利用大语言模型，实现自然语言提问并返回带引用的答案。\n📊 苹果通过用户反馈优化模型，为消费者AI功能做准备。\n6、YouTube 计划推出“AI个人形象”功能，Shorts 创作方式将迎新变化\nYouTube 首席执行官尼尔·莫汉透露，未来创作者将能够使用自己的‘个人形象’来制作短视频内容。这一功能是 YouTube 持续扩展创作者工具的一部分，同时平台也在优化内容质量管理机制。\n【AiBase提要:】\n✨ YouTube 将允许创作者使用 AI 生成的个人形象制作 Shorts 内容。\n🔍 平台正在优化内容质量机制，打击低质量内容和误导性标题。\n🖼️ Shorts 将整合图片帖等多样化内容形式，提升用户浏览体验。\n7、微软为Windows 11记事本与画图注入AI新能力：Markdown增强、流式生成、AI涂色书上线\n微软在Windows 11的记事本和画图应用中注入了AI新能力，包括Markdown增强、流式生成和AI涂色书功能，展现了其将AI能力下沉至操作系统每一层的战略意图。\n【AiBase提要:】\n🎨 画图新增AI涂色书功能，用户输入文本提示即可生成可填色线稿页面。\n📝 记事本全面扩展对Markdown语法的支持，优化AI文本生成体验。\n🔒 所有AI功能需登录微软账户启用，为未来个性化模型微调预留接口。\n8、告别“人工智障”:苹果拟将 Siri 转型类 ChatGPT 机器人，代号“Campos”决战 iOS27\n苹果计划将 Siri 重塑为类似 ChatGPT 的人工智能聊天机器人，代号“Campos”，并将其作为 2026 年 WWDC 开发者大会的核心亮点。新版 Siri 将支持语音与文本双输入，并集成于 iOS27 及其全线操作系统中，同时借助谷歌 Gemini 模型提升性能。\n【AiBase提要:】\n📱 交互进化：新版 Siri 支持语音与文本双输入，界面更接近 ChatGPT 或 Gemini 的对话流。\n⚙️ 系统感知：Siri 将集成于 iOS27 及其全线操作系统中，具备网页深度搜索、内容生成、文档分析和屏幕内容感知能力。\n🤝 强强联手：苹果与谷歌达成合作，Google Gemini 成为新版 Siri 及“苹果智能”的核心底层模型。\n相关推荐\n聚焦售后治理，淘宝天猫推出 AI假图识别模型 等 10 项规则调整\n淘宝天猫宣布2026年营商环境优化方向，将推出10项新举措，重点整治售后违规行为，降低商家隐性成本。针对利用合成或篡改图片骗取退款的问题，平台将启动专项治理，上线图片真实性识别功能，支持商家在旺旺聊天中验证图片真伪。\n2026年1月22号 14:59\n97.4k\n「6月30日AI日报」百度开源文心大模型4.5系列；通义千问多模态生成模型Qwen VLo\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.百度重磅开源文心大模型4.5系列，十款新模型亮相!百度正式发布文心大模型4.5系列并完全开源，包含多种参数配置的十款新模型，使用飞桨框架训练推理，FLOPs利用率47%，在文本多模态基准测试中表现优异，提供一站式使用指南和工具，方便开发者精调部署，已上传至Hugging Face、GitHub等平台。体验地址:https://yiyan.baidu.com Hugging Face:https://huggingface.co/baidu）Gi\n2025年6月30号 16:33\n132.1k\n「6月27日AI日报」腾讯开源轻量级混元-A13B模型；可灵AI推“视频音效”功能\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1、腾讯开源轻量级混元-A13B模型1张中低端GPU卡即可部署腾讯发布混元大模型家族的新成员混元-A13B模型，采用专家混合（MoE）架构，总参数规模达800亿，激活参数为130亿，大幅降低推理延迟与计算开销，为个人开发者和中小企业提供更具性价比的AI解决方案。该模型在数学、科学和逻辑推理任务中表现出色，支持调用工具生成复杂指令响应。体验入口:https:/\n2025年6月27号 16:32\n194.8k\n「6月26日AI日报」可灵AI推全球首部AIGC单元剧；谷歌开源AI智能体Gemini CLI\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.豆包AI编程重磅升级!零代码小白也能轻松打造专属网页，实时编辑超省心!豆包AI编程升级到“应用创作1.0”，有可视化编辑、实时预览和多版本管理功能，降低网页和应用开发门槛。零基础用户可像编辑PPT一样设计网页，专业开发者也能在对话窗口调用AI编程功能，提升创作效率。2.谷歌放大招!Gemini CLI开源发布，免费提供AI编程助手挑战Cursor谷歌发布开源\n2025年6月26号 16:45\n179.9k\n国产AI推理芯片新锐曦望一年融资近30亿元，获国资+产业+VC三方重注，加速GPU量产与生态突围\n曦望（Sunrise）作为AI推理专用GPU芯片公司，在成立一年内完成近30亿元融资，创国内AI芯片初创企业早期融资纪录。此轮融资汇聚产业资本、头部VC/PE及国家级基金，显示市场对其技术及国产替代前景的认可。投资方包括三一集团旗下华胥基金等，凸显高端制造与AI芯片的战略协同。\n2026年1月22号 17:58\n137.6k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Apps for boycotting American products surge to the top of the Danish App Store",
+      "link": "https://techcrunch.com/2026/01/21/apps-for-boycotting-american-products-surge-to-the-top-of-the-danish-app-store/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "X copies Bluesky with a ‘Starterpacks’ feature that helps you find who to follow",
+      "link": "https://techcrunch.com/2026/01/21/x-copies-bluesky-with-a-starterpacks-feature-that-helps-you-find-who-to-follow/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Sources: Project SGLang spins out as RadixArk with $400M valuation as inference market explodes",
+      "link": "https://techcrunch.com/2026/01/21/sources-project-sglang-spins-out-as-radixark-with-400m-valuation-as-inference-market-explodes/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Disrupt 2026 tickets now on sale: Lowest rates all year",
+      "link": "https://techcrunch.com/2026/01/21/techcrunch-disrupt-2026-tickets-now-on-sale-lowest-rates-all-year/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic revises Claude’s ‘Constitution,’ and hints at chatbot consciousness",
+      "link": "https://techcrunch.com/2026/01/21/anthropic-revises-claudes-constitution-and-hints-at-chatbot-consciousness/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Irony alert: Hallucinated citations found in papers from NeurIPS, the prestigious AI conference",
+      "link": "https://techcrunch.com/2026/01/21/irony-alert-hallucinated-citations-found-in-papers-from-neurips-the-prestigious-ai-conference/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple plans to make Siri an AI chatbot, report says",
+      "link": "https://techcrunch.com/2026/01/21/apple-plans-to-make-siri-an-ai-chatbot-report-says/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "We’re not nostalgic for 2016 — we’re nostalgic for the internet before all the slop",
+      "link": "https://techcrunch.com/2026/01/21/were-not-nostalgic-for-2016-were-nostalgic-for-the-internet-before-all-the-slop/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Spotify brings AI-powered Prompted Playlists to the U.S. and Canada",
+      "link": "https://techcrunch.com/2026/01/22/spotify-brings-ai-powered-prompted-playlists-to-the-u-s-and-canada/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Snapchat gives parents new insights into teens’ screen time and friends",
+      "link": "https://techcrunch.com/2026/01/22/snapchat-gives-parents-new-insights-into-teens-screen-time-and-friends/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Quadric rides the shift from cloud AI to on-device inference — and it’s paying off",
+      "link": "https://techcrunch.com/2026/01/22/quadric-rides-the-shift-from-cloud-ai-to-on-device-inference-and-its-paying-off/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tiger Global, Microsoft to fully exit Walmart-backed PhonePe via its IPO",
+      "link": "https://techcrunch.com/2026/01/22/tiger-global-microsoft-to-fully-exit-walmart-backed-phonepe-via-its-ipo/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Former Google trio is building an interactive AI-powered learning app for kids",
+      "link": "https://techcrunch.com/2026/01/22/former-google-trio-is-building-an-interactive-ai-powered-learning-app-for-kids/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Not to be outdone by OpenAI, Apple is reportedly developing an AI wearable",
+      "link": "https://techcrunch.com/2026/01/21/not-to-be-outdone-by-openai-apple-is-reportedly-developing-an-ai-wearable/",
+      "description": "",
+      "publish_time": "2026-01-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
