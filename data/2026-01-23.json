@@ -1,0 +1,140 @@
+{
+  "date": "2026-01-23",
+  "articles": [
+    {
+      "title": "AI日报：ChatGPT Atlas 浏览器重大更新；通义正式开源 Qwen3-TTS；Optimus 机器人2027年公售",
+      "link": "https://news.aibase.com/zh/daily/24894",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、OpenAI 发布 ChatGPT Atlas 浏览器重大更新：支持标签页分组，搜索模式实现“自动导航” OpenAI 对其专为 Mac 平台打造的 AI 浏览器 ChatGPT Atlas 进行了重磅升级，新增了标签页分组、搜索自动模式以及系统深度集成等功能，显著提升了用户的多任务处理能力和信息检索效率。 📌 高效组织会话 :新增标签页分组功能，支持垂直标签页优化，大幅提升多任务浏览的整洁度。 🤖 搜索智能切换 :引入“自动模式”，系统可根据查询内容在 ChatGPT 与 Google 搜索引擎间自动导航。 💻 系统深度集成 :支持 macOS 键盘文本…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：ChatGPT Atlas 浏览器重大更新；通义正式开源 Qwen3-TTS；Optimus 机器人2027年公售\n发布于最新AI日报\n发布时间 :\n2026年1月23号 16:04\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、OpenAI 发布 ChatGPT Atlas 浏览器重大更新：支持标签页分组，搜索模式实现“自动导航”\nOpenAI 对其专为 Mac 平台打造的 AI 浏览器 ChatGPT Atlas 进行了重磅升级，新增了标签页分组、搜索自动模式以及系统深度集成等功能，显著提升了用户的多任务处理能力和信息检索效率。\n【AiBase提要:】\n📌 高效组织会话 :新增标签页分组功能，支持垂直标签页优化，大幅提升多任务浏览的整洁度。\n🤖 搜索智能切换 :引入“自动模式”，系统可根据查询内容在 ChatGPT 与 Google 搜索引擎间自动导航。\n💻 系统深度集成 :支持 macOS 键盘文本替换及 iCloud 密码扩展，进一步优化了从主流浏览器的迁移体验。\n2、亚马逊再传大规模裁员:本轮或减员1. 6 万人，AI 自动化成主因\n亚马逊正计划启动新一轮大规模裁员，本轮裁员规模可能高达1. 6 万人，与以往不同，本次裁员将集中在公司总部的高薪岗位，其中隶属于人力资源部门的“员工体验与技术团队”预计将受到\n最大\n冲击。这主要归功于亚马逊正大力推行招聘、绩效跟踪等内部流程的AI自动化。\n【AiBase提要:】\n🤖 亚马逊计划裁员1. 6 万人，主要集中在总部高薪岗位。\n📊 AI自动化推动亚马逊精简层级和提升效率。\n💡 亚马逊将资金重新投入生成式AI和数据中心建设。\n3、阿里通义千问重磅开源 Qwen3-TTS：97ms超低延迟语音合成，3秒克隆+一句话设计音色，彻底颠覆实时AI语音！\n阿里通义千问团队开源了Qwen3-TTS语音生成模型家族，其采用端到端架构，支持秒级音色克隆、自然语言音色设计以及实时流式输出，极大降低了实时应用的门槛。该模型在延迟、音色克隆和语音设计方面表现出色，适合直播互动、实时翻译等场景。\n【AiBase提要:】\n🧪 Dual-Track双轨架构实现\n极致\n低延迟，端到端延迟低至97ms\n🎙️ 3秒极速克隆音色，支持跨语言/方言零损失迁移\n🎨 一句话“凭空”设计全新音色，自然语言指令生成个性化声音\n详情链接:https://github.com/QwenLM/Qwen3-TTS\n4、马斯克达沃斯首秀:Optimus 机器人2027年公售，将开启“家庭标配”时代\n马斯克在达沃斯论坛上\n首次\n亮相，并透露了Optimus机器人商业化的时间表。他提到2027年将向公众出售该机器人，并认为届时其性能将达到\n极高\n水平。然而，他也指出初期生产将面临困难，同时强调了Optimus成功的关键因素。\n【AiBase提要:】\n🤖 2027年特斯拉将向公众出售Optimus机器人，预计其可靠性、安全性和功能范围将达到\n极高\n水平。\n📈 马斯克预测到2026年底，Optimus将具备执行复杂工业任务的能力，但初期生产将面临“S型曲线”的挑战。\n💡 马斯克认为随着AI和机器人的普及，全球经济将迎来\n史无前例\n的“丰裕时代”，但Optimus的成功仍需可扩展的制造证据和清晰的单位经济效益。\n5、让AI编程指哪打哪：Agentation正式发布，为开发者开启精准导航时代\nAgentation这一革新性工具，它通过将Agent与Annotation深度融合，为AI编码助手提供了精准的网页结构透视能力，使开发者能够高效定位代码元素并提升协作效率。\n【AiBase提要:】\n🧠 Agentation通过将Agent与Annotation结合，为AI编码助手提供精准的网页结构透视能力。\n🛠️ 开发者只需点击页面元素，即可获取类名、CSS选择器和空间位置等结构化信息。\n🔄 项目设计工具中立，支持多种AI平台，实现从发现问题到修复的无缝闭环。\n详情链接:https://github.com/benjitaylor/agentation\n6、GPT-5.2 核心注入！OpenAI 编程神器 Codex 杀入 JetBrains 全家桶，开发者效率起飞\nOpenAI 的 Codex 程序员工具正式集成到 JetBrains 全系开发工具中，提升了开发效率，并支持云端与本地环境的无缝切换，同时提供多种接入方式和限时免费政策。\n【AiBase提要:】\n🧠 Codex 与 JetBrains IDE 深度整合，提升开发效率。\n🚀 支持云端与本地环境无缝切换，实现全流程 AI 编程闭环。\n💡 提供多种接入方式，限时免费，降低使用门槛。\n7、腾讯发布2025年反舞弊通报:AI 建模助力精准打击，70余起案件浮出水面\n腾讯发布了2025年全年反舞弊通报，显示其通过科技手段有效打击舞弊行为，查处了70余起案件，90余人被解聘，20余人涉嫌犯罪被移送公安机关处理。同时，腾讯还公布了‘永不合作主体清单’，并强调对舞弊行为的零容忍态度。\n【AiBase提要:】\n🔥 腾讯查处70余起舞弊案件，90余人被解聘，20余人涉嫌犯罪被移送公安机关。\n🤖 腾讯利用AI分析工具构建动态风险模型，实现主动发现与精准打击舞弊行为。\n🚫 腾讯公布‘永不合作主体清单’，15家公司因舞弊被列入黑名单。\n8、OpenAI拟从客户“AI辅助研发成果”中抽成，商业化模式再升级，引发行业关注\nOpenAI计划从客户通过其AI系统实现的‘AI辅助研发成果’中抽取分成，这一商业模式的升级可能改变AI服务商与客户的关系，成为创新价值链的共担共享者。\n【AiBase提要:】\n🧪 AI辅助研发成果：企业利用OpenAI大模型加速创新产出\n💰 商业模式升级：从“使用量”到“价值创造”的分成模式\n🌐 产业影响：重塑AI商业逻辑，引发法律与伦理挑战\n相关推荐\nOpenAI 商业版图再扩张：ChatGPT 广告业务 2 月上线，9 亿活跃用户变现开启\nOpenAI计划2月初上线聊天机器人广告业务，首批已签约数十家广告商。此举标志着其商业模式重大转折，AI领域进入流量变现新阶段。其广告策略独特，不采用传统按点击计费模式，具体细节尚未公布。\n2026年1月23号 17:56\n110.5k\n2025全球机器人暴涨500%，智元斩获“三冠王”称霸多场景\nIDC报告显示，2025年全球人形机器人市场爆发式增长508%，出货量约1.8万台。中国厂商智元以约39%的市场份额领跑全球，在整体出货量、五大主流场景及全尺寸细分领域均获世界第一。其领先优势得益于全方位的场景覆盖与产品矩阵，尤其在工业智造、科研教育等领域表现突出。\n2026年1月23号 17:42\n79.6k\n硅基生物的“思维广角”:Google DeepMind 推出 D4RT，赋予 AI 穿透时空的四维视觉\nGoogle DeepMind发布D4RT模型，将三维空间与时间维度结合，使AI不仅能实时观察，还能理解动态场景的过去与未来，标志着计算机视觉进入新阶段。\n2026年1月23号 16:39\n138.6k\n硅基生物的“视力瓶颈”：顶级大模型视觉推理竟难敌 6 岁孩童？\n顶尖机构联合研究显示，AI视觉推理能力仍远落后于人类儿童。即便是领先的Gemini 3 Pro Preview，其表现仅略胜三岁幼儿，与六岁儿童认知水平仍有差距。\n2026年1月23号 15:19\n148.8k\nGPT-5.2 核心注入！OpenAI 编程神器 Codex 杀入 JetBrains 全家桶，开发者效率起飞\nOpenAI的Codex现已正式集成到JetBrains全系IDE中，为开发者提供AI编程辅助。无论使用IntelliJ IDEA、PyCharm还是WebStorm，都能直接调用Codex提升开发效率。\n2026年1月23号 15:16\n149.8k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Capital One acquires Brex for a steep discount to its peak valuation, but early believers are laughing all the way to the bank",
+      "link": "https://techcrunch.com/2026/01/22/capital-one-acquires-brex-for-steep-discount-to-its-peak-valuation-but-early-believers-are-laughing-all-the-way-to-the-bank/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Are AI agents ready for the workplace? A new benchmark raises doubts",
+      "link": "https://techcrunch.com/2026/01/22/are-ai-agents-ready-for-the-workplace-a-new-benchmark-raises-doubts/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Palmer Luckey says the coolest thing about Anduril expanding to Long Beach is the fighter jets",
+      "link": "https://techcrunch.com/2026/01/22/palmer-luckey-says-the-coolest-thing-about-anduril-expanding-to-long-beach-is-the-fighter-jets/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Humans& thinks coordination is the next frontier for AI, and they’re building a model to prove it",
+      "link": "https://techcrunch.com/2026/01/22/humans-thinks-coordination-is-the-next-frontier-for-ai-and-theyre-building-a-model-to-prove-it/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google DeepMind CEO is ‘surprised’ OpenAI is rushing forward with ads in ChatGPT",
+      "link": "https://techcrunch.com/2026/01/22/google-deepmind-ceo-is-surprised-openai-is-rushing-forward-with-ads-in-chatgpt/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Microsoft 365 hit by outage, preventing access to emails and files",
+      "link": "https://techcrunch.com/2026/01/22/microsoft-365-hit-by-outage-preventing-access-to-emails-and-files/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tesla launches robotaxi rides in Austin with no human safety driver",
+      "link": "https://techcrunch.com/2026/01/22/tesla-launches-robotaxi-rides-in-austin-with-no-human-safety-driver/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tesla discontinues Autopilot in bid to boost adoption of its Full Self-Driving software",
+      "link": "https://techcrunch.com/2026/01/23/tesla-discontinues-autopilot-in-bid-to-boost-adoption-of-its-full-self-driving-software/",
+      "description": "",
+      "publish_time": "2026-01-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Former Sequoia partner’s new startup uses AI to negotiate your calendar for you",
+      "link": "https://techcrunch.com/2026/01/22/former-sequoia-partners-new-startup-uses-ai-to-negotiate-your-calendar-for-you/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "OpenAI is coming for those sweet enterprise dollars in 2026",
+      "link": "https://techcrunch.com/2026/01/22/openai-is-coming-for-those-sweet-enterprise-dollars-in-2026/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Vimeo starts layoffs after acquisition by Bending Spoons",
+      "link": "https://techcrunch.com/2026/01/22/vimeo-starts-layoffs-after-acquisition-by-bending-spoons/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "GM to end Chevy Bolt EV production next year, move China-made Buick to US factory",
+      "link": "https://techcrunch.com/2026/01/22/gm-to-end-chevy-bolt-ev-production-next-year-move-china-made-buick-to-u-s-factory/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Voice AI engine and OpenAI partner LiveKit hits $1B valuation",
+      "link": "https://techcrunch.com/2026/01/22/voice-ai-engine-and-openai-partner-livekit-hits-1b-valuation/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Inference startup Inferact lands $150M to commercialize vLLM",
+      "link": "https://techcrunch.com/2026/01/22/inference-startup-inferact-lands-150m-to-commercialize-vllm/",
+      "description": "",
+      "publish_time": "2026-01-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
