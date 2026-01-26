@@ -1,0 +1,104 @@
+{
+  "date": "2026-01-26",
+  "articles": [
+    {
+      "title": "AI日报：混元图像3.0图生图模型发布；开源AI助手Clawdbot一夜爆火；京东JoyGlance正式登陆乐奇AI眼镜",
+      "link": "https://news.aibase.com/zh/daily/24946",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、腾讯发布混元图像3.0图生图模型:语义理解驱动，“一句话”实现精准修图 腾讯混元图像3.0图生图模型凭借强大的语义理解与推理能力，为用户提供高效的图像编辑和多图融合功能，标志着大模型P图进入“意图驱动”的时代。 🖼️ 混元图像3.0图生图模型支持80余种细分任务，提供多样化的创作能力。 🧠 该模型具备卓越的语义理解与推理能力，能精准识别需要修改与保留的区域。 🔄 支持图片精修、风格变换及深度融合，实现高效精准修图。 2、GitHub 涨星 之王 !Clawdbot 一天狂揽9000Star，开源“赛博管家”火遍极客圈 Clawdbot 是一款开源 AI 助…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：混元图像3.0图生图模型发布；开源AI助手Clawdbot一夜爆火；京东JoyGlance正式登陆乐奇AI眼镜\n发布于最新AI日报\n发布时间 :\n2026年1月26号 15:50\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、腾讯发布混元图像3.0图生图模型:语义理解驱动，“一句话”实现精准修图\n腾讯混元图像3.0图生图模型凭借强大的语义理解与推理能力，为用户提供高效的图像编辑和多图融合功能，标志着大模型P图进入“意图驱动”的时代。\n【AiBase提要:】\n🖼️ 混元图像3.0图生图模型支持80余种细分任务，提供多样化的创作能力。\n🧠 该模型具备卓越的语义理解与推理能力，能精准识别需要修改与保留的区域。\n🔄 支持图片精修、风格变换及深度融合，实现高效精准修图。\n2、GitHub 涨星\n之王\n!Clawdbot 一天狂揽9000Star，开源“赛博管家”火遍极客圈\nClawdbot 是一款开源 AI 助手，因其强大的功能和极客特性在开发者圈层迅速走红。它能够在本地设备上运行，并通过多种聊天平台进行控制，具备物理级执行力和自我进化能力，成为个人 AI 助手的里程碑式项目。\n【AiBase提要:】\n🤖 自托管与全权限集成，通过聊天软件进行反向控制\n🖥️ 物理级执行力，能浏览网页、提取数据、处理任务\n🔄 自我进化机制，自主编写代码并安装到自身\n详情链接:https://clawd.bot/\n3、全球首创:京东购物智能体 JoyGlance 正式登陆乐奇 AI 眼镜\n京东科技旗下购物智能体 JoyGlance 正式上线乐奇 Rokid 智能眼镜，标志着全球\n首款\n智能眼镜购物应用进入实际可用阶段。通过深度融合 JoyAI 大模型与 Rokid 的技术，购物流程被简化为“说、看、付”，并采用金融级安全方案保障支付安全。\n【AiBase提要:】\n🛒 京东科技与乐奇Rokid合作推出全球\n首款\n智能眼镜购物应用\n🔊 用户可通过语音指令完成购物流程，提升效率\n🔒 采用“语音识别+声纹识别”金融级安全方案保障支付安全\n4、苹果 Siri 迎来“Gemini 核心”:二月发布，深度整合个人数据\n苹果公司的人工智能战略正迎来里程碑式的转折，与谷歌在 AI 领域的合作即将开花结果，基于谷歌 Gemini 架构的新版 Siri 计划于2月下半月正式发布。\n【AiBase提要:】\n🍎 深度语境感知：Siri 将\n首次\n获得访问用户个人数据及屏幕内容的能力，从而能够执行更复杂的跨应用任务。\n🤖 交互能力飞跃：依托 Gemini 模型，Siri 的对话体验将向 ChatGPT 看齐，具备更自然的交流能力。\n☁️ 底层架构变革：该版本将直接在谷歌的云端基础设施上运行。\n5、腾讯“元宝派”开启内测：AI 深度潜入微信、QQ 社交圈\n腾讯旗下AI助手“元宝”开启内部测试“元宝派”，探索AI在多人社交场景中的深度融合，旨在打造一个让AI与用户群体共同娱乐、协作的全新社交空间。\n【AiBase提要:】\n🤖 用户可创建或加入“派”，并直接@元宝总结聊天要点或引用其回复。\n🎥 通过腾讯会议音视频能力，支持“一起看”和“一起听”功能，提升沉浸式体验。\n🤝 与微信、QQ深度打通，用户可通过分享“派号”邀请好友加入，增强社交互动。\n6、5 亿现金红包雨来袭：百度文心助手成春晚“首席AI伙伴”，开启马年奇幻夜！\n百度文心助手通过“现金红包雨”活动，将AI技术与春节传统习俗深度融合，不仅带来丰厚的现金奖励，还提供了多种创新的AI互动体验，展现了AI在节日场景中的巨大潜力。\n【AiBase提要:】\n🕹️ 百度文心助手开启“现金红包雨”活动，用户可参与瓜分5亿现金奖金。\n🎥 百度与北京广播电视台春晚合作，推出近百种春节主题AI玩法，如AI写春联、AI拍贺岁大片等。\n💡 AI技术深度融入春节场景，为用户提供情绪价值和实际收益，开启万物皆可AIGC的新纪元。\n7、降维打击！中国团队“卖情绪”登顶全球：SeaArt 注册用户破 5000 万，剑指 AI 版 B 站\n文章讲述了中国初创公司海艺互娱通过‘卖情绪’和‘拼品味’登顶全球AI创作社区，SeaArt平台用户突破5000万，其\n最新\n产品SeaVerse2.0实现了从创意到变现的全链路闭环。\n【AiBase提要:】\n🧠SeaVerse2.0将AI从工具进化为创作消费平台\n🎨 用户通过自然语言生成图片、视频、音乐等多模态内容\n💰 实现从创意到变现的全链路闭环\n8、物理世界的“数字光脑”：上海交大发布 Optics GPT，垂直大模型再下一城\n上海交通大学发布的Optics GPT是光领域垂直大模型，通过深度学习光学专业知识，为科研、设计与教学提供高可靠性的智能化支持。其轻量化部署、高认知素养和强应用落地能力，重塑了光学领域的研发范式，成为科学家与工程师的数字化搭档。\n【AiBase提要:】\n🧠 Optics GPT通过深度学习光学专业知识，成为光学领域的“虚拟专家”\n⚙️ 模型规模仅为8B参数级，支持端侧与边缘高效运行，降低中小企业应用门槛\n🔍 在算法生成、系统诊断、仿真设计等场景中表现领先，实现光学研发范式变革\n相关推荐\n英伟达、谷歌联合押注：虚拟人初创企业 Synthesia 获 2 亿美元融资，估值翻倍\n英国AI公司Synthesia完成2亿美元融资，投后估值达40亿美元，较一年前翻倍。本轮由谷歌风投GV领投，英伟达等现有投资方跟投。资金将用于研发新一代交互式音视频“智能虚拟助手”。\n2026年1月26号 17:55\n132.0k\n分不清是真人还是机器？通义千问“任务助理”代打电话功能引发热烈讨论\n阿里通义千问App推出AI“打电话订餐厅”功能，其语音表现真实自然，引发关注。该功能能根据用户需求自动沟通，打破AI语音生硬的固有印象。\n2026年1月26号 17:23\n126.4k\nAI算力供需失衡：封测与存储迎来涨价潮，端侧 AI 开启“硬件进化”新纪元\nAI浪潮推动算力需求激增，导致硬件供需失衡。封测领域因AI芯片需求及成本上涨而提价，存储产业也面临供应紧张和价格波动，行业正经历深刻变革。\n2026年1月26号 17:12\n130.1k\n图像编辑进入“思考”时代：腾讯发布混元图像 3.0 图生图模型\n腾讯混元发布图像3.0图生图模型，已在元宝助手和官网上线。该模型采用混合专家架构，参数量达800亿，能根据用户指令智能编辑图片，实现“会思考”的图像处理。\n2026年1月26号 15:57\n158.3k\n苹果 Siri 争夺战：Anthropic 惜败，谷歌 Gemini 凭“性价比”胜出\n苹果曾与AI公司Anthropic洽谈合作，计划用其大模型彻底升级Siri，涉及数十亿美元年费，但谈判于去年夏天陷入僵局。\n2026年1月26号 15:29\n151.7k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "This founder cracked firefighting — now he’s creating an AI gold mine",
+      "link": "https://techcrunch.com/2026/01/25/this-founder-cracked-firefighting-now-hes-creating-an-ai-gold-mine/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: RIP, Tesla Autopilot, and the NTSB investigates Waymo",
+      "link": "https://techcrunch.com/2026/01/25/techcrunch-mobility-rip-tesla-autopilot-and-the-ntsb-investigates-waymo/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Science fiction writers, Comic-Con say goodbye to AI",
+      "link": "https://techcrunch.com/2026/01/25/science-fiction-writers-comic-con-say-goodbye-to-ai/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Humans& thinks coordination is the next frontier for AI, and they’re building a model to prove it",
+      "link": "https://techcrunch.com/2026/01/25/humans-thinks-coordination-is-the-next-frontier-for-ai-and-theyre-building-a-model-to-prove-it/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "What is Bending Spoons? The little-known firm behind Vimeo’s sweeping layoffs",
+      "link": "https://techcrunch.com/2026/01/25/what-is-bending-spoons-everything-to-know-about-aols-acquirer/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Nvidia’s new AI weather models probably saw this storm coming weeks ago",
+      "link": "https://techcrunch.com/2026/01/26/nvidias-new-ai-weather-models-probably-saw-this-storm-coming-weeks-ago/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Synthesia hits $4B valuation, lets employees cash out",
+      "link": "https://techcrunch.com/2026/01/26/synthesia-hits-4b-valuation-lets-employees-cash-in/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "ChatGPT is pulling answers from Elon Musk’s Grokipedia",
+      "link": "https://techcrunch.com/2026/01/25/chatgpt-is-pulling-answers-from-elon-musks-grokipedia/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple will reportedly unveil its Gemini-powered Siri assistant in February",
+      "link": "https://techcrunch.com/2026/01/25/apple-will-reportedly-unveil-its-gemini-powered-siri-assistant-in-february/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google says it’s fixed Gmail issues with spam and misclassification",
+      "link": "https://techcrunch.com/2026/01/25/gmail-is-having-issues-with-spam-and-misclassification/",
+      "description": "",
+      "publish_time": "2026-01-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
