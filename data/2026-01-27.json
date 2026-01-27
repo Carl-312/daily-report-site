@@ -1,0 +1,140 @@
+{
+  "date": "2026-01-27",
+  "articles": [
+    {
+      "title": "AI日报：Kimi K2.5上线；阿里发布推理模型Qwen3-Max-Thinking；Claude 深度集成 Slack 等办公神器",
+      "link": "https://news.aibase.com/zh/daily/24991",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、Kimi K2.5悄然上线 视觉与工具调用双升级 Kimi K2.5的发布标志着Moonshot AI在AI领域的持续发力，其视觉与工具调用功能的升级显著提升了模型的实用性。 🧠 Kimi K2.5新增视觉能力，支持图像分析和3D模型生成。 🛠️ 工具调用功能提升，使Kimi更接近“代理式智能”。 2、腾讯搜狗输入法发布 20.0 重磅版本全面AI 腾讯搜狗输入法发布20.0版本，全面AI化升级，涵盖AI语音、AI翻译和AI打字三大核心功能，显著提升输入效率与智能化体验。 🧠 AI语音输入识别延时下降40%，准确率高达98% 3、国产推理模型新标杆！阿里发…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：Kimi K2.5上线；阿里发布推理模型Qwen3-Max-Thinking；Claude 深度集成 Slack 等办公神器\n发布于最新AI日报\n发布时间 :\n2026年1月27号 15:39\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、Kimi K2.5悄然上线 视觉与工具调用双升级\nKimi K2.5的发布标志着Moonshot AI在AI领域的持续发力，其视觉与工具调用功能的升级显著提升了模型的实用性。\n【AiBase提要:】\n🧠 Kimi K2.5新增视觉能力，支持图像分析和3D模型生成。\n🛠️ 工具调用功能提升，使Kimi更接近“代理式智能”。\n🚀 用户反馈性能惊艳，开源期待高涨。\n2、腾讯搜狗输入法发布 20.0 重磅版本全面AI\n腾讯搜狗输入法发布20.0版本，全面AI化升级，涵盖AI语音、AI翻译和AI打字三大核心功能，显著提升输入效率与智能化体验。\n【AiBase提要:】\n🧠 AI语音输入识别延时下降40%，准确率高达98%\n🌐 AI翻译支持30种语言，实现输入即译\n💡 AI打字精准度提升，每日更新热门词汇\n3、国产推理模型新标杆！阿里发布万亿参数 Qwen3-Max-Thinking，性能直指 GPT-5.2\n阿里巴巴发布Qwen3-Max-Thinking，该模型在复杂推理、事实知识及智能体能力等核心维度实现跨越式升级，参数量突破万亿大关，并在多项\n权威\n基准测试中表现出色，性能直指国际\n顶尖\n模型。\n【AiBase提要:】\n🧠 万亿级参数推理：通过更大规模的强化学习与测试时扩展技术，提升科学知识与数学推理表现。\n🤖 原生智能体能力：模型具备自适应工具调用能力，可根据任务需求自主选择搜索引擎或代码解释器。\n🚀 性能对标国际顶流：在19项\n权威\n测试中，性能媲美GPT-5.2和Claude-4.5，处于国际领先水平。\n4、阿里健康医学AI应用“氢离子”上线新功能，支持全球医学文献日更追踪\n阿里健康旗下的医学AI应用“氢离子”发布了重大更新，新增了“动态证据定位”功能。该功能通过将传统的“静态引用”升级为“活证据”，解决了临床与科研中AI虚假信息（幻觉）的痛点，能够精准定位原文语句并同步校验信息的时效性、\n权威\n性和逻辑一致性。\n【AiBase提要:】\n✨ 新增“动态证据定位”功能，提升医学AI的可信度和实用性。\n🔍 支持精准定位原文语句，并同步校验信息的时效性、\n权威\n性和逻辑一致性。\n🌐 实现对全球医学指南与文献的日更追踪，便于医生查询复杂临床数据。\n5、百度文心APP开启行业首个“多人多Agent”群聊内测\n百度文心APP开启行业首个“多人多Agent”群聊内测，标志着国内AI应用迈入“多人+多AI”协同的新时代。\n【AiBase提要:】\n🧠 多智能体共存：群聊中可同时调用多个垂类Agent，形成多维度的“AI智囊团”。\n🗣️ 主动介入机制：AI助手能根据讨论氛围判断时机，主动提供建议。\n🤝 交互范式升级：AI从被动响应工具转化为具备社交属性的参与者。\n6.\n广告费直逼\n超级\n碗？OpenAI 开启 ChatGPT 广告内测，定价远超行业均值\nOpenAI 开启 ChatGPT 广告内测，定价远超行业均值，其每千次展示费用高达 60 美元左右，接近\n顶级\n电视节目的黄金时段广告报价。这一定价策略基于 AI 用户行为特点，采用按展示付费模式，以应对商业化压力。\n【AiBase提要:】\n💰 天价 CPM：OpenAI 为初期的 ChatGPT 广告设定了约 60 美元的千次展示成本，定价对标\n顶级\n电视直播赛事。\n🔄 展示量计费：由于 AI 用户极少点击外链，OpenAI 抛弃了传统的点击付费模式，转而采用与 Perplexity 类似的按展示收费机制。\n💼 商业化压力：尽管奥特曼曾对广告模式持保留意见，但为了支撑公司高估值，OpenAI 正在加速推进商业变现进程。\n详情入口：\n🔗 https://www.chinaz.com/ainews/24967.shtml\n7、告别对话框！Anthropic 发布交互式应用，Claude 深度集成 Slack 等办公神器\nAnthropic 推出 Claude 交互式应用功能，深度集成办公工具，提升协作效率，同时通过 MCP 协议实现生态兼容，并强调用户安全注意事项。\n【AiBase提要:】\n🧠 Claude 集成 Slack、Canva 等办公工具，提升工作效率。\n🔒 MCP 协议支持第三方服务对接，增强 AI 生态兼容性。\n🛠️ 用户需谨慎授权，避免敏感信息泄露，确保安全使用。\n8、蚂蚁灵波开源空间感知模型LingBot-Depth，让机器人精准抓取透明反光物\n蚂蚁灵波科技开源了高精度空间感知模型LingBot-Depth，该模型在透明和反光物体的深度感知方面取得突破，并在\n权威\n评测中表现出色。其核心数据资产将助力社区解决复杂场景的空间感知问题。\n【AiBase提要:】\n🧠 通过掩码深度建模技术，提升透明和反光物体的深度感知能力。\n📊 在多个基准评测中，LingBot-Depth展现出显著优于现有模型的性能。\n📦 开源2M真实世界深度数据和1M仿真数据，推动社区攻克复杂场景空间感知难题。\n相关推荐\n​Kimi 进化！发布 K2.5 模型：视觉理解、代码复现与“Agent 集群”协同\n月之暗面开源Kimi K2.5模型，该模型在视觉、代码及通用任务上达到开源领先水平，通过原生多模态设计实现从对话到复杂任务执行的进化。其突破在于低交互门槛，用户可通过上传拍照、截图或录屏让模型直接理解背后逻辑，例如在前端开发中仅凭录屏即可完成任务。\n2026年1月27号 14:14\n203.2k\nKimi K2.5悄然上线 视觉与工具调用双升级\nKimi K2.5版本近日在官网低调上线，通过web界面推送更新，用户聊天界面已自动切换。该版本包含思考模式和多模态支持，是对K2系列的迭代优化，旨在提升AI智能交互能力。\n2026年1月27号 9:15\n273.6k\n月之暗面融资新突破，估值飙升至 48 亿美元！\n人工智能初创公司月之暗面近期完成新一轮融资，估值从43亿美元跃升至48亿美元，增长5亿美元，反映出市场对其技术前景的强烈信心。\n2026年1月20号 8:53\n155.4k\nMoonshot AI 推出 Kosong:为 Kimi CLI 赋能的LLM抽象层\nMoonshot AI推出Kosong，作为LLM抽象层解决多模型工具交互的技术栈维护难题。它统一消息结构、支持异步工具编排和可插拔聊天提供商，避免业务逻辑硬编码，简化智能体开发。该Python库作为代理逻辑与LLM提供商间的中间层，是Kimi CLI的核心驱动组件。\n2025年11月11号 9:33\n184.4k\n月之暗面开源AI代理新框架Kosong！异步编排+插件化设计，开发者自由度拉满\n月之暗面开源AI代理框架Kosong，以轻量灵活特性助力下一代智能体开发。该框架通过统一抽象层解决工具碎片化问题，简化开发流程，旨在打通大模型与实际应用场景，引发开发者社区广泛关注。\n2025年11月11号 9:02\n195.7k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Meta to test premium subscriptions on Instagram, Facebook, and WhatsApp",
+      "link": "https://techcrunch.com/2026/01/26/meta-to-test-premium-subscriptions-on-instagram-facebook-and-whatsapp/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Vinod Khosla publicly disavows Keith Rabois’ comments on ICE shooting",
+      "link": "https://techcrunch.com/2026/01/26/vinod-khosla-publicly-disavows-keith-rabois-comments-on-ice-shooting/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic launches interactive Claude apps, including Slack and other workplace tools",
+      "link": "https://techcrunch.com/2026/01/26/anthropic-launches-interactive-claude-apps-including-slack-and-other-workplace-tools/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Some international attendees are skipping 2026 GDC due to safety fears and growing ICE presence",
+      "link": "https://techcrunch.com/2026/01/26/some-international-attendees-are-skipping-2026-gdc-due-to-safety-fears-and-growing-ice-presence/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Social network UpScrolled sees surge in downloads following TikTok’s US takeover",
+      "link": "https://techcrunch.com/2026/01/26/social-network-upscrolled-sees-surge-in-downloads-following-tiktoks-us-takeover/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Here’s the tech powering ICE’s deportation crackdown",
+      "link": "https://techcrunch.com/2026/01/26/heres-the-tech-powering-ices-deportation-crackdown/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "YouTubers sue Snap for alleged copyright infringement in training its AI models",
+      "link": "https://techcrunch.com/2026/01/26/youtubers-sue-snap-for-alleged-copyright-infringement-in-training-its-ai-models/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tech workers call for CEOs to speak up against ICE after the killing of Alex Pretti",
+      "link": "https://techcrunch.com/2026/01/26/tech-workers-call-for-ceos-to-speak-up-against-ice-after-the-killing-of-alex-pretti/",
+      "description": "",
+      "publish_time": "2026-01-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Luminar receives a larger $33 million bid for its lidar business",
+      "link": "https://techcrunch.com/2026/01/27/luminar-receives-a-larger-33-million-bid-for-its-lidar-business/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "China’s Moonshot releases a new open-source model Kimi K2.5 and a coding agent",
+      "link": "https://techcrunch.com/2026/01/27/chinas-moonshot-releases-a-new-open-source-model-kimi-k2-5-and-a-coding-agent/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Node-based design tool Flora raises $42M from Redpoint Ventures",
+      "link": "https://techcrunch.com/2026/01/27/node-based-design-tool-flora-raises-42m-from-redpoint-ventures/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Uber launches an ‘AV Labs’ division to gather driving data for robotaxi partners",
+      "link": "https://techcrunch.com/2026/01/27/uber-launches-an-av-labs-division-to-gather-driving-data-for-robotaxi-partners/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Northwood Space secures a $100M Series B and a $50M Space Force contract",
+      "link": "https://techcrunch.com/2026/01/27/northwood-space-secures-a-100m-series-b-and-a-50m-space-force-contract/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "‘Among the worst we’ve seen’: report slams xAI’s Grok over child safety failures",
+      "link": "https://techcrunch.com/2026/01/27/among-the-worst-weve-seen-report-slams-xais-grok-over-child-safety-failures/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
