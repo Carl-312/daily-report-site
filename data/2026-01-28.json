@@ -1,0 +1,140 @@
+{
+  "date": "2026-01-28",
+  "articles": [
+    {
+      "title": "AI日报：腾讯混元图像3.0正式开源；Clawdbot迫于压力更名Moltbot；月之暗面发布 Kimi Code",
+      "link": "https://news.aibase.com/zh/daily/25041",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、全球 最强 开源图生图!腾讯混元图像3.0正式开源，800亿参数助力 AI 创作 腾讯混元团队正式开源了其 最新 混元图像3.0图生图模型，该模型凭借强大的混合专家架构和多项核心技术突破，在全球影像编辑榜单中位列第七，成为目前全球 最强 的开源图生图模型。 🧠 混元图像3.0采用原生多模态架构，实现文本与视觉理解深度融合。 🎨 支持多种编辑功能，如增删改、风格变换及老照片修复等。 📦 腾讯混元已开源模型权重及完整代码，降低开发者使用门槛。 详情链接:https://hunyuan.tencent.com/chat/HunyuanDefault?from=m…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：腾讯混元图像3.0正式开源；Clawdbot迫于压力更名Moltbot；月之暗面发布 Kimi Code\n发布于最新AI日报\n发布时间 :\n2026年1月28号 16:32\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、全球\n最强\n开源图生图!腾讯混元图像3.0正式开源，800亿参数助力 AI 创作\n腾讯混元团队正式开源了其\n最新\n混元图像3.0图生图模型，该模型凭借强大的混合专家架构和多项核心技术突破，在全球影像编辑榜单中位列第七，成为目前全球\n最强\n的开源图生图模型。\n【AiBase提要:】\n🧠 混元图像3.0采用原生多模态架构，实现文本与视觉理解深度融合。\n🎨 支持多种编辑功能，如增删改、风格变换及老照片修复等。\n📦 腾讯混元已开源模型权重及完整代码，降低开发者使用门槛。\n详情链接:https://hunyuan.tencent.com/chat/HunyuanDefault?from=modelSquare&modelId=Hunyuan-Image-3.0-Instruct\n2、国产编程神器登场！月之暗面发布 Kimi Code：多模态加持，无缝集成主流编辑器\n月之暗面发布Kimi Code，标志着其在开发者生产力领域的重大突破。该工具通过多模态模型和开源SDK，为开发者提供高效、灵活的编程体验，推动国产AI编程工具进入大模型深度集成的新阶段。\n【AiBase提要:】\n🧠 多模态模型驱动，提升编程效率\n🌐 全场景覆盖，兼容主流编辑器\n🛠️ 开源Agent SDK，助力生态建设\n3、开源 AI 项目 Clawdbot 迫于压力更名 Moltbot，旧账号被抢注上演“发币骗局”\n开源 AI 项目 Clawdbot 更名为 Moltbot，因与 Claude 谐音存在商标冲突风险。更名后，旧账号被诈骗者抢注并发布虚假加密货币 $CLAWD，导致用户误信而买入，最终价格暴跌。开发者紧急澄清以防止更多用户受骗。\n【AiBase提要:】\n🔐 项目名称变更以避免商标冲突\n💸 旧账号被诈骗者抢注并发布虚假加密货币\n🚨 开发者紧急澄清以防止用户受骗\n详情链接:https://clawd.bot/\n4、谷歌 AI Plus 计划正式入美:200GB 空间+\n顶级\n模型共享，月费不足8刀\n谷歌宣布其 Google AI Plus 计划正式扩展至全球所有 AI 服务覆盖的市场，包括美国在内的35个新国家和地区。该计划以每月7.99美元的价格提供\n顶级\n模型、创意工具和云存储等权益，旨在通过低价策略吸引非专业用户并对抗 OpenAI 的 ChatGPT Go 计划。\n【AiBase提要:】\n🧠\n顶级\n模型体验: 包含 Gemini3Pro 及 Nano Banana Pro 模型。\n🎬 创意与办公工具: 接入 Flow AI 电影制作工具，以及 NotebookLM 的深度研究与写作辅助。\n💾 存储与共享: 提供 200GB 云存储空间，并支持最多5位家庭成员共享。\n5、OpenAI 发布 Prism：基于 GPT-5.2 的科研协作新纪元\nOpenAI 发布了名为 Prism 的 AI 原生在线工作空间，专为科研人员设计，基于 GPT-5.2 模型，整合了多种科研工具，提升了科研协作效率。\n【AiBase提要:】\n🧠 Prism 是基于 GPT-5.2 的科研协作平台，整合了文本编辑、LaTeX 编译等功能。\n👥 支持多人实时协作，适用于不同规模的科研团队。\n🚀 旨在减少科研过程中的摩擦成本，加速科学发现节奏。\n6、谷歌 Aluminum OS 界面首曝：Android 与 ChromeOS 深度融合，Gemini AI 坐镇 C 位\n谷歌正在推进 Android 与 ChromeOS 的深度融合，通过 Aluminum OS 实现桌面系统的革新。该系统不仅优化了大屏体验，还集成了 Gemini AI 和完整的 Chrome 插件生态，旨在提升安卓设备的生产力。\n【AiBase提要:】\n📱 Aluminum OS 是 Android 与 ChromeOS 的深度整合，针对大屏进行了底层逻辑重构。\n🤖 Gemini AI 成为系统核心，深度参与用户的桌面办公与日常交互。\n💻 支持完整的 Chrome 插件生态，提升安卓设备的生产力和兼容性。\n7、Mistral AI 发布 Vibe 2.0：终端编程助手步入“子代理”时代\nMistral AI 发布了其终端编程助手 Vibe 2.0，该版本由全新的 Devstral2 模型驱动，旨在为开发者提供更具沉浸感的自然语言编程体验。核心升级包括多文件协同、子代理模式以及操作增强，进一步提升了开发效率和用户体验。\n【AiBase提要:】\n🧠 多文件协同：支持通过自然语言直接操控多个文件，并能充分利用全代码库的上下文信息进行开发。\n🧩 子代理（Sub-agents）模式：引入自定义“子代理”功能，允许开发者根据任务需求分配不同的智能体进行分工协作，大幅提升复杂项目的开发效率。\n🔧 操作增强：新增终端斜杠命令，让开发者无需离开终端界面，即可通过快捷指令完成高效的操作切换与任务触发。\n8、小米 AI 眼镜深度集成支付宝：停车缴费与健康管理实现“无感交互”\n小米AI眼镜深度集成支付宝功能，推出停车缴费与健康管理服务，提升了用户体验并强化了设备的安全性。\n【AiBase提要:】\n🚗 无感支付：用户可通过语音或注视动作完成停车缴费，提升支付效率。\n📊 健康管理：接入蚂蚁“阿福”健康应用，实现健康数据的即时查询与追踪。\n🔒 安全保障：采用GPASS框架，确保支付安全和隐私保护。\n相关推荐\n百度智能云全面提速：AI 收入增速目标翻倍至 200%\n百度智能云在内部战略会上宣布，将2026年AI相关收入增速目标从100%大幅上调至200%，展现出全力争夺AI云市场领先地位的进攻性姿态。其底气源于对市场潜力的乐观预判，IDC预测全球AI云市场规模有望在2030年突破4000亿美元。\n2026年1月28号 17:22\n88.0k\n​英国政府祭出“全民 AI 计划”：向全体成年人提供免费在线培训\n英国政府推出全民免费AI培训计划，旨在提升劳动力技能。课程短小精悍，注重实操，涵盖文案撰写、创意生成等实用内容，降低学习门槛。\n2026年1月28号 16:59\n139.5k\n谷歌 Gemini 3 Flash 升级：新增“Agentic Vision”让 AI 像专家一样深度看图\n谷歌为Gemini 3 Flash模型推出“Agentic Vision”功能，突破传统AI视觉模型“单次猜测”局限。该功能使AI能主动探索图像细节，通过深度推理分析复杂内容，如远处路牌、电路图或微小文字，有效解决以往因一次性全局处理导致的细节丢失问题，实现更接近人类专家的图像理解能力。\n2026年1月28号 16:56\n159.1k\n全球最强开源图生图!腾讯混元图像3.0正式开源，800亿参数助力 AI 创作\n腾讯混元团队开源混元图像3.0图生图模型，拥有800亿参数，采用混合专家架构，在全球影像编辑榜单中位列第七。其核心突破在于“先思考，后编辑”的多模态架构，成为当前全球最强的开源图生图模型。\n2026年1月28号 15:58\n144.2k\n00 后天才少年领军：ThetaWave AI 获数百万美元 Pre-A 轮融资\nAI初创公司ThetaWave AI获数百万美元Pre-A轮融资，投资方包括BAI Capital、高瓴创投等。公司由“00后”天才少年李文轩带队，其16岁获物理奥赛金牌，团队技术背景突出，展现新生代创业者的高起点。\n2026年1月28号 15:51\n149.8k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Everything you need to know about viral personal AI assistant Clawdbot (now Moltbot)",
+      "link": "https://techcrunch.com/2026/01/27/everything-you-need-to-know-about-viral-personal-ai-assistant-clawdbot-now-moltbot/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anduril has invented a wild new drone-flying contest where jobs are the prize",
+      "link": "https://techcrunch.com/2026/01/27/anduril-has-invented-a-wild-new-drone-flying-contest-where-jobs-are-the-prize/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The price gap between Waymo and Uber is narrowing",
+      "link": "https://techcrunch.com/2026/01/27/the-price-gap-between-waymo-and-uber-is-narrowing/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic and OpenAI CEOs condemn ICE violence, praise Trump",
+      "link": "https://techcrunch.com/2026/01/27/anthropic-and-openai-ceos-condemn-ice-violence-praise-trump/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Bluesky teases 2026 roadmap: A better Discover feed, real-time features, and more",
+      "link": "https://techcrunch.com/2026/01/27/bluesky-teases-2026-roadmap-a-better-discover-feed-real-time-features-and-more/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amid Trump attacks and weaponized sanctions, Europeans look to rely less on US tech",
+      "link": "https://techcrunch.com/2026/01/27/amid-trump-attacks-and-weaponized-sanctions-europeans-look-to-rely-less-on-us-tech/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic reportedly upped its latest raise to $20B",
+      "link": "https://techcrunch.com/2026/01/27/anthropic-reportedly-upped-its-latest-raise-to-20b/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon is closing its physical Amazon Go and Amazon Fresh stores",
+      "link": "https://techcrunch.com/2026/01/27/amazon-is-closing-its-physical-amazon-go-and-amazon-fresh-stores/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon says it is laying off 16,000 employees",
+      "link": "https://techcrunch.com/2026/01/28/amazon-says-it-is-laying-off-16000-employees/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Snap gets serious about Specs, spins AR glasses into standalone company",
+      "link": "https://techcrunch.com/2026/01/28/snap-gets-serious-about-specs-spins-ar-glasses-into-standalone-company/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Redwood attracts Google for its $425M Series E as AI power needs rise",
+      "link": "https://techcrunch.com/2026/01/28/redwood-attracts-google-for-its-425m-series-e-as-ai-power-needs-rise/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waabi raises $1B and expands into robotaxis with Uber",
+      "link": "https://techcrunch.com/2026/01/28/waabi-raises-1b-and-expands-into-robotaxis-with-uber/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google pitches Gemini to students studying for India’s most competitive college entrance exam",
+      "link": "https://techcrunch.com/2026/01/28/google-turns-gemini-toward-indias-most-competitive-entrance-exam/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google Photos brings its prompt-based editing feature to India, Australia and Japan",
+      "link": "https://techcrunch.com/2026/01/27/google-photos-brings-its-prompt-based-editing-feature-to-india-australia-and-japan/",
+      "description": "",
+      "publish_time": "2026-01-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
