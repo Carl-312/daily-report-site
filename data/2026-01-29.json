@@ -1,0 +1,140 @@
+{
+  "date": "2026-01-29",
+  "articles": [
+    {
+      "title": "AI日报：MiniMax Music 2.5 发布；蚂蚁灵波开源世界模型LingBot-World；谷歌 Gemini 3.5 泄露",
+      "link": "https://news.aibase.com/zh/daily/25084",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、MiniMax Music 2.5 正式发布：攻克 AI 音乐“控”与“真”两大难题 MiniMax Music 2.5 的发布标志着 AI 音乐创作在可控性和真实度上取得了重大突破。通过段落级强控制和物理级高保真技术，该版本为创作者提供了更精准的音乐制作工具，同时针对华语市场进行了深度优化，提升了中文音乐的表现力和流畅性。 🎵 全段落掌控 :支持14种音乐结构标签，让 AI 创作从“随机生成”转向“精准指挥”。 🎤 真实人声质感 :具备细腻的转音与颤音表现，支持男女对唱中的自然协同感与和声层次。 🎹 专业级混音 :内置百余种乐器音色，具备自动适配风格的混…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：MiniMax Music 2.5 发布；蚂蚁灵波开源世界模型LingBot-World；谷歌 Gemini 3.5 泄露\n发布于最新AI日报\n发布时间 :\n2026年1月29号 15:59\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、MiniMax Music 2.5 正式发布：攻克 AI 音乐“控”与“真”两大难题\nMiniMax Music 2.5 的发布标志着 AI 音乐创作在可控性和真实度上取得了重大突破。通过段落级强控制和物理级高保真技术，该版本为创作者提供了更精准的音乐制作工具，同时针对华语市场进行了深度优化，提升了中文音乐的表现力和流畅性。\n【AiBase提要:】\n🎵 全段落掌控 :支持14种音乐结构标签，让 AI 创作从“随机生成”转向“精准指挥”。\n🎤 真实人声质感 :具备细腻的转音与颤音表现，支持男女对唱中的自然协同感与和声层次。\n🎹 专业级混音 :内置百余种乐器音色，具备自动适配风格的混音能力，实现录音室级音频交付。\n2、蚂蚁灵波开源世界模型LingBot-World，高保真高动态，毫秒级实时交互\n蚂蚁灵波科技开源了世界模型LingBot-World，该模型在视频质量、动态程度、长时一致性及交互能力等方面表现优异，可为具身智能、自动驾驶和游戏开发提供高保真的数字演练场。\n【AiBase提要:】\n🌍 LingBot-World具备高保真与高动态特性，支持10分钟连续稳定生成。\n🕹️ 实现16FPS生成吞吐与1秒内端到端交互延迟，支持实时控制。\n🔄 支持Zero-shot泛化能力，仅需输入真实照片或游戏截图即可生成可交互视频流。\n3、谷歌 Gemini 3.5 泄露：代号 Snow Bunny，单次提示可生成三千行代码\n谷歌 Gemini 3.5 的泄露信息揭示了其在编程领域的重大突破，包括单次提示生成3000行代码的能力以及引入深度推理架构。此外，还提到了多个专项模型以应对不同使用场景，显示出该模型的强大功能和潜在影响力。\n【AiBase提要:】\n🐰 Snow Bunny 计划 : 内部模型 Snow Bunny 具备极强的应用构建能力，单次可产出3000行代码。\n🧠 深度推理架构 : 引入“系统2”思维和 Deep Think 切换开关，显著提升复杂逻辑问题的解决率。\n🚀 多模型协同 : 泄露信息提及 Fierce Falcon（速度与逻辑）与 Ghost Falcon(多模态创作) 两款专项模型。\n4、Kimi K2.5 Agent 助力高效办公：Excel、Word、PDF 全面升级\nKimi K2.5 的发布标志着月之暗面旗下的 Kimi Agent 在办公能力上实现了重大突破，能够深入处理 Excel、Word、PDF 和 PPT 的核心功能，提供专业级的工作成果。此次升级显著提升了效率，使原本需要数小时甚至数天的任务在几分钟内完成，同时解锁了多项高阶办公场景，如数据建模、智能审阅和视觉叙事等，让用户无需复杂操作即可高效完成工作。\n【AiBase提要:】\n📊 模型升级：依托\n最新\nKimi K2.5，Agent 办公能力从“阅读总结”进化为“核心创作与排版”。\n💼 精通 Office：全面覆盖 Excel 数据建模、Word 审阅批注、PPT 逻辑生成及 PDF 视觉设计。\n⚡ 效率平权：将数天的机械劳动缩减至分钟级，让非专业人士也能交付专业级办公文档。\n5、工业AI新突破：蘑菇物联“灵知”垂直大模型通过国家网信办备案\n蘑菇物联的‘灵知AI’垂直大模型通过国家网信办生成式人工智能服务备案，标志着其在工业公辅能源领域的领先地位。该模型聚焦四大核心能力场景，包括智能问答、精准预测、实时诊断和优化控制，展现了强大的专业性和实用性。\n【AiBase提要:】\n🧠 智能问答:为复杂工业场景提供即时的专业知识解答。\n📈 精准预测:通过历史数据分析，预判设备运行趋势与能源消耗。\n🔧 实时诊断:快速定位工业设备故障，提升维护效率。\n6、昆仑万维 SkyReels-V3开源，实现多模态视频生成技术突破\n昆仑万维SkyReels-V3开源，标志着视频生成技术进入高保真、多模态的新阶段，通过单一建模架构实现了参考图像转视频、视频延长以及音频驱动虚拟形象三大核心能力的深度集成。\n【AiBase提要:】\n🎥 参考图像转视频（I2V）功能支持1至4张参考图输入，精准保留主体身份特征与空间构图。\n🎞 视频延长功能引入“镜头切换延长模式”，实现逻辑的“叙事扩展”。\n🎙 音频驱动虚拟形象模块实现\n极高\n口型同步率，支持分钟级长视频生成及多角色交互。\n详情链接:https://github.com/SkyworkAI/SkyReels-V3\n7、昆仑天工发布音乐大模型 Mureka V8：实现从“可生成”到“可发布”的跃迁\n昆仑天工音乐大模型 Mureka V8 的发布标志着 AI 音乐技术的重大进步。该模型基于 MusiCoT 技术体系，实现了更接近人类创作逻辑的音乐生成，提升了音乐性、编曲完成度、人声表达及音质质感，使 AI 音乐从“可生成”迈向“可发布”。\n【AiBase提要:】\n🎵 技术突破：依托 MusiCoT 技术体系，实现模拟人类创作逻辑的深度建模。\n🎹 成品级质感：在旋律、人声和编曲等维度全面升级，使作品达到“可发布”级别。\n🛠️ 创作协同：支持用户通过自然语言和参考素材进行反复调整迭代，而非随机生成。\n详情链接:https://www.mureka.ai/ https://www.mureka.cn/\n8、三星官宣：下一代 AR 眼镜将于 2026 年发布，主打多模态 AI\n三星正式确认其下一代 AR 眼镜将于 2026 年发布，主打多模态 AI 体验，核心卖点包括智能辅助、轻便设计以及先进的硬件配置。\n【AiBase提要:】\n🧠 智能辅助：通过语音、视觉及多种交互输入，提供沉浸式智能辅助服务。\n👓 轻便设计：外观接近普通眼镜，确保日常佩戴的舒适感。\n⚙️ 硬件规格：搭载高通 AR1 芯片组，配备 1200 万像素自动对焦摄像头。\n相关推荐\n​Meta 调整 WhatsApp 政策：部分第三方 AI 机器人将按消息付费\nMeta调整WhatsApp第三方AI机器人政策，在意大利监管压力下，将允许特定地区开发者通过“按消息计费”模式重新接入服务。此前，Meta为保护自家AI产品，曾封禁ChatGPT等第三方机器人。\n2026年1月29号 17:18\n113.3k\n奥尔特曼开年“带货”：主力机竟是超薄款 iPhone Air\nOpenAI CEO山姆·奥尔特曼在公开活动中展示其主力手机为苹果iPhone Air，并配有MagSafe磁吸钱包。他此前已在社交平台公开点赞该机型，称其设计“非常酷”并激发了他的升级欲望。\n2026年1月29号 16:51\n86.1k\n​2025 年度“十大科技热词”揭晓：智能体、具身智能领衔前沿赛道\n中国科技新闻学会发布2025年度“十大科技热词”，评选经大数据筛选、征集和专家评审。人工智能领域表现突出，“智能体”“具身智能”和“AI治理”入选，成为年度重要科技风向标。\n2026年1月29号 16:43\n133.0k\n巨头联手：英伟达、亚马逊与微软拟向 OpenAI 注资 600 亿美元\n英伟达、亚马逊和微软正洽谈向OpenAI投资约600亿美元，以助其与谷歌竞争。英伟达或投300亿美元，亚马逊考虑100亿至200亿美元，微软预计继续支持。此举凸显科技巨头对AI领域的战略布局。\n2026年1月29号 15:47\n85.2k\n昆仑万维 SkyReels-V3开源，实现多模态视频生成技术突破\n昆仑万维开源视频生成大模型SkyReels-V3，实现参考图像转视频、视频延长及音频驱动虚拟形象三大功能集成。该模型支持1至4张参考图输入，能精准保留主体身份与构图，推动视频生成技术进入高保真、多模态新阶段。\n2026年1月29号 15:45\n148.0k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Meta burned $19 billion on VR last year, and 2026 won’t be any better",
+      "link": "https://techcrunch.com/2026/01/28/meta-burned-19-billion-on-vr-last-year-and-2026-wont-be-any-better/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tesla is killing off the Model S and Model X",
+      "link": "https://techcrunch.com/2026/01/28/tesla-is-killing-off-the-model-s-and-model-x/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Microsoft gained $7.6B from OpenAI last quarter",
+      "link": "https://techcrunch.com/2026/01/28/microsoft-earnings-7-6-billion-openai/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Zuckerberg teases agentic commerce tools and major AI rollout in 2026",
+      "link": "https://techcrunch.com/2026/01/28/zuckerberg-teases-agentic-commerce-tools-and-major-ai-rollout-in-2026/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tesla profit tanked 46% in 2025",
+      "link": "https://techcrunch.com/2026/01/28/tesla-earnings-profit-q4-2025/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "AI security startup Outtake raises $40M from Iconiq, Satya Nadella, Bill Ackman, and other big names",
+      "link": "https://techcrunch.com/2026/01/28/ai-security-startup-outtake-raises-40m-from-iconiq-satya-nadella-bill-ackman-and-other-big-names/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Trump energy department loosens rules on nuclear safety",
+      "link": "https://techcrunch.com/2026/01/28/trump-energy-department-loosens-rules-on-nuclear-safety/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Chrome takes on AI browsers with tighter Gemini integration, agentic features for autonomous tasks",
+      "link": "https://techcrunch.com/2026/01/28/chrome-takes-on-ai-browsers-with-tighter-gemini-integration-agentic-features-for-autonomous-tasks/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google Maps now lets you access Gemini while walking and cycling",
+      "link": "https://techcrunch.com/2026/01/29/google-maps-now-lets-you-access-gemini-while-walking-and-cycling/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo robotaxi hits a child near an elementary school in Santa Monica",
+      "link": "https://techcrunch.com/2026/01/29/waymo-robotaxi-hits-a-child-near-an-elementary-school-in-santa-monica/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Upwind raises $250M at $1.5B valuation to continue building ‘runtime’ cloud security",
+      "link": "https://techcrunch.com/2026/01/29/upwind-raises-250m-at-1-5b-valuation-to-continue-building-runtime-cloud-security/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple hires iPhone camera app Halide’s co-founder for its design team",
+      "link": "https://techcrunch.com/2026/01/29/apple-hires-iphone-camera-app-halides-co-founder-for-its-design-team/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Deezer makes it easier for rival platforms to take a stance against AI-generated music",
+      "link": "https://techcrunch.com/2026/01/29/deezer-makes-it-easier-for-rival-platforms-to-take-a-stance-against-ai-generated-music/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Mark Zuckerberg says a future without smart glasses is ‘hard to imagine’",
+      "link": "https://techcrunch.com/2026/01/28/mark-zuckerberg-future-smart-glasses/",
+      "description": "",
+      "publish_time": "2026-01-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
