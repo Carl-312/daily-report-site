@@ -1,0 +1,140 @@
+{
+  "date": "2026-01-30",
+  "articles": [
+    {
+      "title": "AI日报：宇树开源UnifoLM-VLA-0大模型；腾讯“元宝派”内测截图泄露；Clawd更名为OpenClaw",
+      "link": "https://news.aibase.com/zh/daily/25123",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、蚂蚁集团发布 LingBot-VLA：双臂机器人操控步入“大模型时代” 蚂蚁集团发布了名为LingBot-VLA的视觉-语言-动作（VLA）基础模型，专注于现实世界中的机器人复杂操控。该模型通过海量数据训练，实现了在不同形态机器人上的通用操控能力，标志着具身智能领域的重要进展。 🤖 LingBot-VLA采用创新的“混合 Transformer”架构，以Qwen2.5-VL作为多模态主干，能够同时处理多视角图像和自然语言指令。 🔍 引入LingBot-Depth空间感知模型，通过特征蒸馏技术提升3D空间推理能力，在叠放、插入等任务中表现优异。 🚀 模型具有…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：宇树开源UnifoLM-VLA-0大模型；腾讯“元宝派”内测截图泄露；Clawd更名为OpenClaw\n发布于最新AI日报\n发布时间 :\n2026年1月30号 16:06\n阅读 :\n1\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、蚂蚁集团发布 LingBot-VLA：双臂机器人操控步入“大模型时代”\n蚂蚁集团发布了名为LingBot-VLA的视觉-语言-动作（VLA）基础模型，专注于现实世界中的机器人复杂操控。该模型通过海量数据训练，实现了在不同形态机器人上的通用操控能力，标志着具身智能领域的重要进展。\n【AiBase提要:】\n🤖 LingBot-VLA采用创新的“混合 Transformer”架构，以Qwen2.5-VL作为多模态主干，能够同时处理多视角图像和自然语言指令。\n🔍 引入LingBot-Depth空间感知模型，通过特征蒸馏技术提升3D空间推理能力，在叠放、插入等任务中表现优异。\n🚀 模型具有\n极高\n的数据效率，仅需约80条特定任务的演示数据即可快速适配新机器人，并已开源全套训练工具包和模型权重。\n详情链接:https://arxiv.org/pdf/2601.18692\n2、宇树开源 UnifoLM-VLA-0 大模型：为通用人形机器人注入“物理常识”\n宇树宣布开源 UnifoLM-VLA-0 大模型，该模型专为通用人形机器人设计，标志着机器人大脑从单纯的“图文理解”向具备“物理常识”的具身智能迈出了关键一步。\n【AiBase提要:】\n🧠 通过在机器人操作数据上的预训练，使模型理解物理世界的交互规律。\n🌐 深度融合文本指令与2D/3D空间细节，增强复杂环境下的空间感知能力。\n⚙️ 集成动作分块预测及动力学约束，实现对长时序动作序列的统一建模。\n3、又改名！Clawd更名为OpenClaw GitHub星标破10万引爆社区\n文章介绍了开源个人AI助手项目从Clawd到Moltbot再到OpenClaw的更名历程，以及其在GitHub上的爆发式增长和核心功能更新。项目强调开源、隐私保护和安全性，未来将加强安全性和扩展性。\n【AiBase提要:】\n🧩 项目经历多次更名，最终定名为OpenClaw，强调开源和社区驱动特性。\n🚀 OpenClaw GitHub星标数突破10万，功能强大且注重隐私保护。\n🔒 项目持续强化安全措施，并探索维护者薪酬机制以保障社区可持续发展。\n详情链接:https://github.com/openclaw/openclaw\n4、商汤开源 SenseNova-MARS：Agentic VLM 赋予 AI 独立“思考与行动”力\n商汤科技正式开源了其首个支持动态视觉推理与图文搜索深度融合的 Agentic VLM 模型——SenseNova-MARS，该模型在多个榜单中超越了 GPT-5.2，展现了强大的性能和自主规划能力。\n【AiBase提要:】\n🧠 SenseNova-MARS 是一个支持动态视觉推理与图文搜索深度融合的 Agentic VLM 模型。\n📊 在 MMSearch 和 HR-MMSearch 等评测中，SenseNova-MARS 表现优异，超越了 GPT-5.2。\n🛠️ 通过双阶段训练，SenseNova-MARS 赋予了 AI 自主规划和复杂任务处理能力。\n5、腾讯“元宝派”内测截图泄露，社交+AI重构娱乐体验\n腾讯旗下AI助手‘元宝’内测的社交功能‘元宝派’因公测版本截图泄露引发关注。该功能新增了‘一起听音乐’与‘一起看视频’功能，并打通了QQ音乐与腾讯视频的资源库，支持好友同步观影、听歌并实时互动。此外，‘元宝派’实现了微信与QQ好友的跨平台社交整合，\n首次\n打破两大社交生态的隔阂。AI在群聊中扮演活跃分子角色，提供智能总结、任务监督等工具化服务，还能生成梗图并调节气氛。马化腾计划投入10亿红包资源推广该功能，意图借春节时机复刻社交奇迹。\n【AiBase提要:】\n🎧 集成QQ音乐与腾讯视频资源，支持同步观影和听歌\n🤝 实现微信与QQ好友跨平台社交整合\n🤖 AI在群聊中提供智能总结、任务监督及冷场调节\n6、马斯克加码AI蓝图:xAI计划明年大规模推出定制化生成式游戏与影视\n马斯克对xAI的愿景充满信心，计划在明年推出实时生成、高画质且高度个性化的影视内容和电子游戏。尽管目前市场上已有部分AI辅助开发的游戏，但马斯克的目标是实现从玩法、美术设计到关卡生成的全链路AI产出，这引发了业界的广泛关注与质疑。\n【AiBase提要:】\n🎮 马斯克预测xAI将在2025年推出AI生成游戏，挑战传统内容创作范式。\n🖼️ 他强调游戏和影视内容将实现实时生成、高画质和高度个性化。\n🤔 当前尚未有令人印象深刻的纯AI生成游戏实机演示，其目标是否能实现仍需时间检验。\n7、索赔 30 亿美元！Anthropic遭音乐出版商起诉，被指大规模盗版\n文章报道了音乐出版商起诉Anthropic，指控其在训练AI模型过程中存在大规模盗版行为，并要求赔偿30亿美元。\n【AiBase提要:】\n🎼 Anthropic被指控大规模盗版音乐作品，涉及两万余首受版权保护的歌曲。\n💰 索赔金额可能超过30亿美元，成为美国历史上规模\n最大\n的非集体版权诉讼案之一。\n⚖️ 出版商指责Anthropic的商业行为与其宣传的合规与伦理形象严重不符。\n8、争夺云端主导权:字节与阿里拟于春节期间发布新一代大模型\n字节跳动与阿里巴巴在春节前后发布新一代底层模型技术的竞争情况，分析了双方在争夺国内技术领先地位及未来云服务市场主导权的较量中所采取的策略及其对行业前景的影响。\n【AiBase提要:】\n🧠 字节跳动计划推出三款核心模型，涵盖大规模语言处理、图像生成及视频生成领域。\n💻 阿里巴巴将推出旗舰级模型Qwen3.5，重点提升逻辑推理、数学计算和代码编写能力。\n💰 中国云市场规模预计到2030年将达到近900亿美元，技术竞赛将重塑未来科技产业竞争格局。\n相关推荐\n清华大学发布法律大模型 LegalOne-R1，助力智能司法新时代！\n清华大学在司法人工智能大会上推出开源法律大模型LegalOne-R1，获华为云昇腾AI云服务支持。该模型提供1.7B、4B和8B三种参数版本，基于中国司法数据深度训练，旨在为法律领域提供智能支持。\n2026年1月30号 17:39\n132.0k\nChatGPT Agent 用户流失 75%，定位模糊成“致命伤”\nOpenAI旗下ChatGPT Agent发布仅六个月即面临停用危机。其周活跃付费用户从高峰期的400万暴跌至不足100万，流失率高达75%。尽管初期吸引了约11%订阅用户尝试，但产品很快陷入增长停滞。主要问题在于用户普遍不理解其实际用途，甚至不知其存在，加之系统运行问题，导致用户大量流失。\n2026年1月30号 16:35\n160.1k\n又改名！Clawd更名为OpenClaw GitHub星标破10万引爆社区\n开源AI助手项目历经三次更名，从Clawd、Moltbot到最终定名OpenClaw，官方称“龙虾完成最终蜕变”，标志项目进入稳定期。更名因初期名称涉及商标问题，经Anthropic友好协商后调整，最终命名延续龙虾蜕壳成长的寓意。\n2026年1月30号 15:43\n234.1k\n京东科技 JoyAI 赋能“京办”：开启超大城市政务智能化新篇章\n京东科技通过自研JoyAI大模型，助力北京“京办”平台实现智能化升级，推动政务办公从数字化迈向智能化。该技术针对政务知识库分散、公文流转复杂等痛点，提供系统性解决方案，显著提升公文写作效率与城市治理水平。\n2026年1月30号 15:27\n132.0k\n建筑业的“智慧进化”:2033年人工智能市场规模将达320亿美元\n建筑业正从数字化转型的“慢热者”转变为AI应用的热点。面对成本超支、项目延期和劳动力短缺等挑战，行业正从“经验驱动”转向“数据驱动”。据预测，全球建筑业AI市场规模将从2026年的62亿美元猛增至2033年的320亿美元，年复合增长率高达26.4%，迎来爆发式增长。\n2026年1月30号 14:15\n141.3k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "The iPhone just had its best quarter ever",
+      "link": "https://techcrunch.com/2026/01/29/the-iphone-just-had-its-best-quarter-ever/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Elon Musk’s SpaceX, Tesla, and xAI in talks to merge, according to reports",
+      "link": "https://techcrunch.com/2026/01/29/elon-musk-spacex-tesla-xai-merger-talks-ipo-reuters/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Microsoft won’t stop buying AI chips from Nvidia, AMD, even after launching its own, Nadella says",
+      "link": "https://techcrunch.com/2026/01/29/microsoft-wont-stop-buying-ai-chips-from-nvidia-amd-even-after-launching-its-own-nadella-says/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "How Sequoia-backed Ethos reached the public market while rivals fell short",
+      "link": "https://techcrunch.com/2026/01/29/how-sequoia-backed-ethos-reached-the-public-market-while-rivals-fell-short/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Medium gives employees Friday off to participate in national strike protesting ICE",
+      "link": "https://techcrunch.com/2026/01/29/medium-gives-employees-friday-off-to-participate-in-national-strike-protesting-ice/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Fintech firm Marquis blames hack at firewall provider SonicWall for its data breach",
+      "link": "https://techcrunch.com/2026/01/29/fintech-firm-marquis-blames-hack-at-firewall-provider-sonicwall-for-its-data-breach/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "I built marshmallow castles in Google’s new AI-world generator",
+      "link": "https://techcrunch.com/2026/01/29/i-built-marshmallow-castles-in-googles-new-ai-world-generator-project-genie/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "OpenAI’s Sora app is struggling after its stellar launch",
+      "link": "https://techcrunch.com/2026/01/29/openais-sora-app-is-struggling-after-its-stellar-launch/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Guys, I don’t think Tim Cook knows how to monetize AI",
+      "link": "https://techcrunch.com/2026/01/29/guys-i-dont-think-tim-cook-knows-how-to-monetize-ai/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon is reportedly in talks to invest $50B in OpenAI",
+      "link": "https://techcrunch.com/2026/01/29/amazon-is-reportedly-in-talks-to-invest-50-billion-in-openai/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Satya Nadella insists people are using Microsoft’s Copilot AI a lot",
+      "link": "https://techcrunch.com/2026/01/29/satya-nadella-insists-people-are-using-microsofts-copilot-ai-a-lot/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple buys Israeli startup Q.ai as the AI race heats up",
+      "link": "https://techcrunch.com/2026/01/29/apple-buys-israeli-startup-q-ai-as-the-ai-race-heats-up/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo robotaxi hits a child near an elementary school in Santa Monica",
+      "link": "https://techcrunch.com/2026/01/29/waymo-robotaxi-hits-a-child-near-an-elementary-school-in-santa-monica/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Upwind raises $250M at $1.5B valuation to continue building ‘runtime’ cloud security",
+      "link": "https://techcrunch.com/2026/01/29/upwind-raises-250m-at-1-5b-valuation-to-continue-building-runtime-cloud-security/",
+      "description": "",
+      "publish_time": "2026-01-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
