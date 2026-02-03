@@ -1,0 +1,140 @@
+{
+  "date": "2026-02-03",
+  "articles": [
+    {
+      "title": "AI日报：OpenAI推出macOS版Codex应用；智谱发布0.9B轻量级GLM-OCR；火狐Firefox 148浏览器即将上线",
+      "link": "https://news.aibase.com/zh/daily/25214",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、Adobe Firefly 宣布为订阅用户提供无限量 AI 视频与图像生成 Adobe Firefly 的升级为创意专业人士提供了更强大的 AI 工具支持，显著提升了创作效率和质量。 🔥 Adobe Firefly 为订阅用户提供无限量图像和视频生成服务 🖼️ 整合了 Google Nano Banana Pro、GPT 图像生成等外部 顶尖 AI 模型 📹 支持生成高达 2K 分辨率的视频，并无缝对接 Photoshop 和 Premiere 等 Creative Cloud 软件 2、OpenAI 推出 macOS 版 Codex 应用：整合智能体化开…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：OpenAI推出macOS版Codex应用；智谱发布0.9B轻量级GLM-OCR；火狐Firefox 148浏览器即将上线\n发布于最新AI日报\n发布时间 :\n2026年2月3号 15:38\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、Adobe Firefly 宣布为订阅用户提供无限量 AI 视频与图像生成\nAdobe Firefly 的升级为创意专业人士提供了更强大的 AI 工具支持，显著提升了创作效率和质量。\n【AiBase提要:】\n🔥 Adobe Firefly 为订阅用户提供无限量图像和视频生成服务\n🖼️ 整合了 Google Nano Banana Pro、GPT 图像生成等外部\n顶尖\nAI 模型\n📹 支持生成高达 2K 分辨率的视频，并无缝对接 Photoshop 和 Premiere 等 Creative Cloud 软件\n2、OpenAI 推出 macOS 版 Codex 应用：整合智能体化开发逻辑，剑指 Claude Code\nOpenAI 推出了适用于 macOS 系统的全新 Codex 桌面应用，这款应用深度整合了“智能体化软件开发”逻辑，旨在为开发者提供一个更灵活、更高效的 AI 原生编程环境。Codex 支持多智能体并行作业，能够融合不同 AI 智能体的专项能力来处理复杂的开发流程，并搭载了 GPT-5.2-Codex 模型，以提升开发效率。此外，它还支持自动化任务设定和定制智能体的交互风格，进一步增强了用户体验。\n【AiBase提要:】\n💻 桌面端深度整合 :OpenAI 推出 macOS 版 Codex 应用，支持多智能体并行协作与自动化后台任务管理。\n🚀\n顶尖\n模型驱动 :该应用封装了 GPT-5.2-Codex 的核心能力，号称能在数小时内辅助用户从零开发出复杂的软件系统。\n⚔️ 行业竞争加剧 :此次发布直接对标 Anthropic 的 Claude Code，试图通过更灵活的交互界面吸引追求\n极致\n开发效率的专业程序员。\n3、智谱发布0.9B 轻量级 GLM-OCR:性能登顶，千次处理仅需0.1元\n智谱发布的GLM-OCR模型以0.9B参数规模实现了跨级性能突破，在多项\n权威\n基准测试中登顶，解决了复杂文档解析中的真实业务痛点。其在文本识别、数学公式推导、复杂表格解析和关键信息抽取方面表现优异，同时具备高效的推理速度和低成本优势，适用于多种高难度文档处理场景。\n【AiBase提要:】\n🧠 GLM-OCR 在0.9B参数下实现SOTA性能，超越多个\n权威\n基准测试。\n📄 针对复杂文档场景进行优化，支持表格、结构化提取、手写体等高难度任务。\n💰 成本极低，API价格仅为传统方案的1/10，处理千张A4扫描件仅需0.5元。\n4、火狐 Firefox 148 浏览器即将上线：引入“AI 控制”面板，支持一键屏蔽所有 AI\nMozilla 在 Firefox 148 浏览器中引入了全新的“AI 控制”面板，为用户提供对生成式 AI 功能的选择权。用户可以选择彻底屏蔽所有 AI 功能，或者按需开启五项核心 AI 组件，包括智能翻译、无障碍工具、AI 标签管理、链接预览和主流 AI 模型集成。这一功能体现了 Mozilla 对用户意愿的尊重，并在 AI 渗透日益加深的背景下，提供了更灵活的浏览体验。\n【AiBase提要:】\n🛡️ 一键彻底屏蔽所有 AI 功能及相关的推广弹窗，确保无干扰的浏览体验。\n🧩 用户可独立控制智能翻译、PDF 图像描述、标签页智能分组等五大 AI 组件的开启或关闭。\n🤖 侧边栏机器人支持接入 ChatGPT、Claude、Copilot、Gemini 及 Mistral 等多种\n顶尖\nAI 模型。\n5、腾讯元宝回应“红包刷屏”质疑:系无门槛福利，非诱导分享\n腾讯元宝回应春节红包活动的质疑，强调其为无门槛福利而非诱导分享，并表示将优化活动体验以符合合规要求。\n【AiBase提要:】\n🧧元宝红包活动通过分享获得额外抽奖机会，\n最高\n可叠加30次。\nTencent内部信强调元宝红包为“无门槛领取”，与“诱导分享”模式有本质区别。\n腾讯与法务、公关及业务部门紧密沟通，确保活动合规运行。\n6、港股大模型概念股强势走高：MINIMAX-WP 股价破纪录，智谱紧随其后\n港股大模型概念股强势走高，MINIMAX-WP股价破纪录，智谱紧随其后。\n【AiBase提要:】\n🧠 MINIMAX-WP股价突破历史高点，涨幅超14%\n📈 智谱午后涨幅超过11%，表现稳健\n💡 AI大模型在春节红包及社交场景竞争加剧\n7、百度、小米等联手加持:\n国家级\n具身智能平台获7亿注资，加速机器人产业革新\n北京人形机器人创新中心成功完成首轮超7亿元市场化融资，标志着其在资本市场获得高度认可。该中心由多家知名企业共同发起，并获得了百度、东土科技等产业方的战略支持。此次融资将进一步推动其打造国际一流的具身智能机器人创新平台，加速核心技术的突破与产业化进程。\n【AiBase提要:】\n🚀 北京人形机器人创新中心完成超7亿元市场化融资，获得多家\n顶级\n投资机构和产业方的深度参与。\n🤖 该中心由京城机电、小米、优必选等共同发起，并于2024年10月获授“国家地方共建具身智能机器人创新中心”称号。\n💡 巨额资金注入将推动中心打造国际一流具身智能机器人创新平台，助力核心技术突破与产业化进程。\n8、AI 学霸遭遇重创！GPT-4o 专家考试仅得 2.7 分\n文章指出，AI在名为“人类\n终极\n考试”的测试中表现不佳，揭示了其能力可能被高估的问题。HLE测试通过严格的审核流程和深度专业知识要求，挑战了AI的真正实力。传统测试方法因基准饱和和答案作弊而难以反映真实能力，促使我们重新审视AI的智能程度。\n【AiBase提要:】\n🧠 AI在专业领域测试中表现不佳，表明其能力可能被高估。\n🧪 HLE测试设计严格，旨在评估AI的真实理解与推理能力。\n📊 传统测试方法已无法准确衡量AI的实际水平。\n相关推荐\nAdobe Firefly 宣布为订阅用户提供无限量 AI 视频与图像生成\nAdobe升级AI服务，Firefly订阅用户现可无限量生成图像和视频，并整合Google、GPT、Runway等外部顶尖模型，功能全面升级。\n2026年2月3号 10:46\n141.5k\n马斯克旗下 xAI 发布 Grok Imagine 1.0：视频生成迎来新纪元！\n马斯克旗下xAI公司发布Grok Imagine 1.0，实现AI视频生成技术重大突破。该版本支持生成10秒720p高清视频，音频质量显著提升，大幅缩短高质量视频创作时间，标志着AI视频生成领域的重要进展。\n2026年2月2号 13:57\n171.4k\nxAI Grok Imagine 推出10秒视频生成功能，全面升级质量与音效xAI\nxAI旗下Grok Imagine新增10秒视频生成功能，视频质量显著提升，画面稳定、细节丰富，音频清晰同步。目前生成过程仍较随机，缺乏计时器选项，输出长度和一致性有待优化，但相关功能预计将很快完善。\n2026年1月22号 10:08\n344.8k\n​Adobe Firefly 集成 OpenAI GPT-Image 1.5：订阅用户限时开启不限量生成模式\nAdobe 为 Firefly 平台引入 OpenAI 的 GPT-Image1.5 模型，并推出限时激励：1月15日前，Pro 和 Premium 订阅用户可无限量使用该模型生成图片。此举显示 Adobe 正从单一模型转向构建多模态 AI 生态。\n2026年1月13号 8:52\n151.8k\n开源版“Veo 3”来了：LTX-2正式发布，一次性生成20秒4K音画同步AI视频，本地显卡轻松跑\nLightricks开源LTX-2模型，支持生成20秒4K高清视频，实现画面、声音、口型、环境音和音乐的完美同步。模型权重、训练代码、基准测试和工具包已全部开源，托管于GitHub，社区反响热烈。\n2026年1月7号 16:26\n408.5k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Elon Musk’s SpaceX officially acquires Elon Musk’s xAI, with plan to build data centers in space",
+      "link": "https://techcrunch.com/2026/02/02/elon-musk-spacex-acquires-xai-data-centers-space-merger/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Fintech CEO and Forbes 30 Under 30 alum has been charged for alleged fraud",
+      "link": "https://techcrunch.com/2026/02/02/fintech-ceo-and-forbes-30-under-30-alum-has-been-charged-for-alleged-fraud/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "China is leading the fight against hidden car door handles",
+      "link": "https://techcrunch.com/2026/02/02/china-is-leading-the-fight-against-hidden-car-door-handles/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "What Snowflake’s deal with OpenAI tells us about the enterprise AI race",
+      "link": "https://techcrunch.com/2026/02/02/what-snowflakes-deal-with-openai-tells-us-about-the-enterprise-ai-race/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Adobe Animate is shutting down as company focuses on AI",
+      "link": "https://techcrunch.com/2026/02/02/adobe-animate-is-shutting-down-as-company-focuses-on-ai/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Notepad++ says Chinese government hackers hijacked its software updates for months",
+      "link": "https://techcrunch.com/2026/02/02/notepad-says-chinese-government-hackers-hijacked-its-software-updates-for-months/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Carbon Robotics built an AI model that detects and identifies plants",
+      "link": "https://techcrunch.com/2026/02/02/carbon-robotics-built-an-ai-model-that-detects-and-identifies-plants/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Ring brings its ‘Search Party’ feature for finding lost dogs to non-Ring camera owners",
+      "link": "https://techcrunch.com/2026/02/02/ring-brings-its-search-party-feature-for-finding-lost-dogs-to-non-ring-camera-owners/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "PayPal hires HP’s Enrique Lores as its new CEO",
+      "link": "https://techcrunch.com/2026/02/03/paypal-hires-hps-enrique-lores-as-its-new-ceo/",
+      "description": "",
+      "publish_time": "2026-02-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Peak XV says internal disagreement led to partner exits as it doubles down on AI",
+      "link": "https://techcrunch.com/2026/02/03/peak-xv-says-internal-disagreement-led-to-partner-exits-as-it-doubles-down-on-ai/",
+      "description": "",
+      "publish_time": "2026-02-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "India’s Supreme Court to WhatsApp: ‘You cannot play with the right to privacy’",
+      "link": "https://techcrunch.com/2026/02/03/indias-supreme-court-to-whatsapp-you-cannot-play-with-the-right-to-privacy/",
+      "description": "",
+      "publish_time": "2026-02-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Vema predicts cheap hydrogen could change where data centers are built",
+      "link": "https://techcrunch.com/2026/02/03/vema-predicts-cheap-hydrogen-could-change-where-data-centers-are-built/",
+      "description": "",
+      "publish_time": "2026-02-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Avalanche thinks the fusion power industry should think smaller",
+      "link": "https://techcrunch.com/2026/02/03/avalanche-thinks-the-fusion-power-industry-should-think-smaller/",
+      "description": "",
+      "publish_time": "2026-02-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo raises $16B to scale robotaxi fleet internationally",
+      "link": "https://techcrunch.com/2026/02/02/waymo-raises-16-billion-round-to-scale-robotaxi-fleet-london-tokyo/",
+      "description": "",
+      "publish_time": "2026-02-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
