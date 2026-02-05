@@ -1,0 +1,140 @@
+{
+  "date": "2026-02-05",
+  "articles": [
+    {
+      "title": "AI日报：可灵3.0发布；阿里大模型品牌正式更名为千问；Mistral AI 发布 Voxtral Transcribe 2 语音模型",
+      "link": "https://news.aibase.com/zh/daily/25306",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、全球首创“主体参考”:可灵AI3.0正式发布，15秒长视频开启AI导演时代 可灵AI 3.0的发布标志着AI视频创作进入了一个全新的时代，通过多模态输入输出的一体化，重新定义了AI视频的创作工作流，让每个人都能成为导演。 🎥 全球首创主体参考功能，精准锁定主角、道具或场景特征。 🖼️ 支持多语言及方言，实现口型、神态与音色完美同步。 2、阿里AI战略再升级：大模型品牌正式更名为“千问” 阿里巴巴集团宣布将旗下AI技术总称及核心品牌统一为“千问”，以消除多品牌并存带来的市场认知混乱，标志着阿里在AI领域的品牌传播进入高度聚焦的新阶段。同时，SpaceX提交了…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：可灵3.0发布；阿里大模型品牌正式更名为千问；Mistral AI 发布 Voxtral Transcribe 2 语音模型\n发布于最新AI日报\n发布时间 :\n2026年2月5号 16:32\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、全球首创“主体参考”:可灵AI3.0正式发布，15秒长视频开启AI导演时代\n可灵AI 3.0的发布标志着AI视频创作进入了一个全新的时代，通过多模态输入输出的一体化，重新定义了AI视频的创作工作流，让每个人都能成为导演。\n【AiBase提要:】\n🎥 全球首创主体参考功能，精准锁定主角、道具或场景特征。\n🎬 智能分镜与超长生成，实现电影感叙事。\n🖼️ 支持多语言及方言，实现口型、神态与音色完美同步。\n2、阿里AI战略再升级：大模型品牌正式更名为“千问”\n阿里巴巴集团宣布将旗下AI技术总称及核心品牌统一为“千问”，以消除多品牌并存带来的市场认知混乱，标志着阿里在AI领域的品牌传播进入高度聚焦的新阶段。同时，SpaceX提交了部署百万卫星系统的申请，引发行业关注。\n【AiBase提要:】\n🧠 千问大模型品牌统一为“千问”，提升市场认知一致性。\n🌐 全球范围内统一使用英文名称 Qwen，强化国际品牌形象。\n🛰️ SpaceX提交部署百万卫星系统申请，引发广泛关注。\n3、延迟低于 0.2 秒！Mistral AI 发布 Voxtral Transcribe 2 语音模型，支持中文实时转录\nMistral AI 推出的 Voxtral Transcribe 2 语音转文字模型系列，针对不同应用场景优化，解决了语音交互中的高延迟和成本痛点。Voxtral Realtime 实现了极低延迟，而 Voxtral Mini 则以高性价比和长音频处理能力著称。两款模型均支持包括中文在内的13种语言，定价策略具有竞争力，适合多种语音交互场景。\n【AiBase提要:】\n⚡ 极低延迟: Voxtral Realtime 模型将转录延迟降至200ms 以内，支持音频即时转录，且已开源模型权重。\n🏆 高性价比: Voxtral Mini 版在准确率上优于 GPT-4o mini 等同类产品，支持3小时超长录音，价格极具优势。\n🌐 多语支持: 全系列模型原生支持中文等13种语言，广泛适配全球化的语音办公与实时交互场景。\n4、上海 AI 实验室发布科学多模态模型书生Intern-S1-Pro\n上海 AI 实验室发布了全球开源参数规模\n最大\n的科学多模态模型“书生 Intern-S1-Pro”，该模型基于 SAGE 技术架构，拥有 1 万亿参数，具备国际领先的科学能力，特别是在逻辑推理和科研智能体方面表现突出。\n【AiBase提要:】\n✨ 书生 Intern-S1-Pro 是全球开源参数规模\n最大\n的科学多模态模型，拥有 1 万亿参数。\n🧠 模型在高难度综合学科评测中表现出色，逻辑推理能力达到奥林匹克竞赛金牌选手水平。\n🚀 采用混合专家架构（MoE），优化计算效率并降低资源消耗，为超大规模模型训练奠定基础。\n5、Gemini 用户量突破 7.5 亿：谷歌财报亮眼，紧咬 ChatGPT 不放\n谷歌母公司 Alphabet 发布了 2025 年第四季度财报，其中 AI 业务表现亮眼。Gemini 的月活跃用户数已突破 7.5 亿，展现出惊人的增长势头。同时，谷歌推出了低价订阅方案 Google AI Plus，并推出了自研芯片 Ironwood，推动全年营收\n首次\n突破 4000 亿美元大关，标志着公司全面转型为“AI 优先”的企业实体。\n【AiBase提要:】\n📈 Gemini 用户量飙升至 7.5 亿，展现强劲增长势头。\n💰 谷歌推出低价订阅方案 Google AI Plus，吸引价格敏感用户。\n🚀 自研芯片 Ironwood 和 Gemini 3 推动 Alphabet 年营收突破 4000 亿美元。\n6、支持AI消除屏幕摩尔纹！华为 Mate 80 系列正式推送 HarmonyOS 新版固件\n华为Mate 80系列手机推送了HarmonyOS 6.0.0.130SP17系统更新，引入了AI消除屏幕摩尔纹功能，提升了影像处理能力，并优化了星闪和定位性能。\n【AiBase提要:】\n✨ 引入AI修图-消除屏纹功能，精准去除摩尔纹，提升成片清晰度。\n📶 优化星闪音频连接稳定性，增强蓝牙使用体验。\n🧭 提升导航定位精准度，优化移动网络连接性能。\n7、奥运史首创！米兰冬奥宣布启用阿里“千问”官方大模型\n文章介绍了2026年米兰冬奥会将启用阿里千问官方大模型，推动奥运科技迈向智能时代，并提到B站与春晚的合作，展示了AI在\n顶级\nIP中的广泛应用。\n【AiBase提要:】\n🧠 奥运史上首个官方大模型问世，标志着智能奥运的开启。\n📺 B站与春晚合作，提升弹幕互动体验。\n🚀 AI正在深度重塑全球\n顶级\nIP的商业逻辑与用户体验。\n8、我国生成式 AI 用户规模破 6 亿：普及率超四成，算力水平跃居全球前列\n我国生成式人工智能用户规模迅速增长，普及率显著提升，同时算力基础设施也取得突破性进展，为AI技术的广泛应用提供了坚实支撑。\n【AiBase提要:】\n📈 我国生成式人工智能用户规模已达 6.02 亿，较 2024 年底增长 141.7%，普及率达到 42.8%。\n💻 全国已建成 42 个万卡智算集群，智能算力总规模超过 1590 EFLOPS，位居全球前列。\n🚀 生成式 AI 正加速融入日常生活与生产，成为数字化转型及经济高质量发展的重要引擎。\n相关推荐\nAI语音巨头诞生！ElevenLabs狂揽5亿刀融资，估值飙至110亿美元，成全球最贵AI语音服务商\nElevenLabs完成5亿美元D轮融资，估值达110亿美元，成为全球最高估值AI语音服务商。本轮由红杉资本领投，a16z、ICONIQ Capital等跟投，显示资本市场对语音AI及该公司企业级业务增长的高度认可。\n2026年2月5号 17:36\n134.8k\n谷歌与苹果强强联手！下一代AI模型即将面世\n谷歌与苹果达成重要合作，成为其首选云服务提供商，苹果将基于谷歌Gemini技术开发下一代AI模型。同时，谷歌计划在2026年投入1750亿至1850亿美元加强基础设施建设，支持AI发展。\n2026年2月5号 17:30\n146.9k\n腾讯游戏启动2026寒假未成年人保护专项行动，AI功能助力家庭科学管控\n腾讯游戏发布2026年寒假未成年人游戏限玩通知，规定29天寒假期间未成年人累计可玩游戏15小时。同时启动寒假未成年人保护专项行动，以“科技赋能家庭守护”为核心，通过AI技术升级家长服务，并加强健康系统巡航与公益建设，应对假期用网时长增加及家庭共号等问题。\n2026年2月5号 17:05\n123.6k\n马斯克再放豪言:特斯拉人形机器人可在宜居星球独立建立文明\n特斯拉宣布人形机器人Optimus将具备在宜居星球独立建立文明的能力，展示其对具身智能技术的信心，呼应马斯克的多星球栖息愿景。第三代机器人即将发布，核心突破是强大的自主学习能力。\n2026年2月5号 16:37\n142.3k\n谷歌财报炸裂！年收破4000亿，AI狂飙Gemini用户直追ChatGPT\n谷歌母公司Alphabet财报显示，年收入首次突破4000亿美元，达4028亿美元，创历史新高。公司在人工智能领域表现强劲，通过创新实现跨越式增长，进一步巩固了全球科技市场的领先地位。\n2026年2月5号 16:05\n133.1k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Alphabet won’t talk about the Google-Apple AI deal, even to investors",
+      "link": "https://techcrunch.com/2026/02/04/alphabet-wont-talk-about-the-google-apple-ai-deal-even-to-investors/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Sam Altman got exceptionally testy over Claude Super Bowl ads",
+      "link": "https://techcrunch.com/2026/02/04/sam-altman-got-exceptionally-testy-over-claude-super-bowl-ads/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Meet Gizmo: A TikTok for interactive, vibe-coded mini apps",
+      "link": "https://techcrunch.com/2026/02/04/meet-gizmo-a-tiktok-for-interactive-vibe-coded-mini-apps/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Elon Musk’s SpaceX company town is getting a police department",
+      "link": "https://techcrunch.com/2026/02/04/elon-musks-spacex-company-town-is-getting-a-police-department/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Hackers publish personal information stolen during Harvard, UPenn data breaches",
+      "link": "https://techcrunch.com/2026/02/04/hackers-publish-personal-information-stolen-during-harvard-upenn-data-breaches/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "As it preps Specs for the masses, Snap’s Q4 shows revenue growth but fewer daily users",
+      "link": "https://techcrunch.com/2026/02/04/as-it-preps-specs-for-the-masses-snaps-q4-shows-revenue-growth-but-fewer-daily-users/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tinder looks to AI to help fight ‘swipe fatigue’ and dating app burnout",
+      "link": "https://techcrunch.com/2026/02/04/tinder-looks-to-ai-to-help-fight-swipe-fatigue-and-dating-app-burnout/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "ElevenLabs raises $500M from Sequoia at an $11 billion valuation",
+      "link": "https://techcrunch.com/2026/02/04/elevenlabs-raises-500m-from-sequioia-at-a-11-billion-valuation/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google’s subscriptions rise in Q4 as YouTube pulls $60B in yearly revenue",
+      "link": "https://techcrunch.com/2026/02/05/googles-subscriptions-rise-in-q4-as-youtube-pulls-60b-in-yearly-revenue/",
+      "description": "",
+      "publish_time": "2026-02-05",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Spotify ventures into physical book sales, adds new audiobook features",
+      "link": "https://techcrunch.com/2026/02/05/spotify-ventures-into-physical-book-sales-adds-new-audiobook-features/",
+      "description": "",
+      "publish_time": "2026-02-05",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Mundi Ventures closes on €750M for Kembara, its largest deep tech and climate fund",
+      "link": "https://techcrunch.com/2026/02/04/mundi-ventures-closes-on-e750m-for-kembara-its-largest-deep-tech-and-climate-fund/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Stripe alumni raise €30M Series A for Duna, backed by Stripe and Adyen execs",
+      "link": "https://techcrunch.com/2026/02/04/stripe-alumni-raise-e30m-series-a-for-duna-backed-by-stripe-and-adyen-execs/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google’s Gemini app has surpassed 750M monthly active users",
+      "link": "https://techcrunch.com/2026/02/04/googles-gemini-app-has-surpassed-750m-monthly-active-users/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The Wayback Machine debuts a new plug-in designed to fix the internet’s broken links problem",
+      "link": "https://techcrunch.com/2026/02/04/the-wayback-machine-debuts-a-new-plugin-designed-to-fix-the-internets-broken-links-problem/",
+      "description": "",
+      "publish_time": "2026-02-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
