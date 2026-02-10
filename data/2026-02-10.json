@@ -1,0 +1,140 @@
+{
+  "date": "2026-02-10",
+  "articles": [
+    {
+      "title": "AI日报：Seedance2.0紧急暂停真人参考功能；Qwen-Image-2.0发布；混元推首个产业级2Bit端侧模型",
+      "link": "https://news.aibase.com/zh/daily/25428",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、腾讯混元推出首个产业级2Bit端侧模型:0.3B体量实现性能逆袭 腾讯混元推出首个产业级2Bit端侧模型HY-1.8B-2Bit，通过创新的量化感知训练技术，在大幅压缩模型体积的同时保持了强大的性能和全科能力，适用于手机、耳机及智能家居等对隐私要求高的场景。 🧠 采用2Bit量化方案，将模型体积压缩至0.3B，内存占用仅约600MB。 ⚡ 生成速度提升2-3倍，适配多种端侧设备，性能表现优异。 🔄 支持灵活切换思维链能力，适用于复杂任务场景。 2、蚂蚁阿福成为央视CCTV健康生活合作伙伴 蚂蚁阿福作为专业的健康AI应用，已成为央视CCTV健康生活合作伙伴，…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：Seedance2.0紧急暂停真人参考功能；Qwen-Image-2.0发布；混元推首个产业级2Bit端侧模型\n发布于最新AI日报\n发布时间 :\n2026年2月10号 16:44\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、腾讯混元推出首个产业级2Bit端侧模型:0.3B体量实现性能逆袭\n腾讯混元推出首个产业级2Bit端侧模型HY-1.8B-2Bit，通过创新的量化感知训练技术，在大幅压缩模型体积的同时保持了强大的性能和全科能力，适用于手机、耳机及智能家居等对隐私要求高的场景。\n【AiBase提要:】\n🧠 采用2Bit量化方案，将模型体积压缩至0.3B，内存占用仅约600MB。\n⚡ 生成速度提升2-3倍，适配多种端侧设备，性能表现优异。\n🔄 支持灵活切换思维链能力，适用于复杂任务场景。\n2、蚂蚁阿福成为央视CCTV健康生活合作伙伴\n蚂蚁阿福作为专业的健康AI应用，已成为央视CCTV健康生活合作伙伴，其用户数快速增长，单日解答健康咨询达1000万次。通过与全国5000家医院和30万真人医生的合作，阿福为用户提供从健康问答到数字化就医的全链路服务。此外，全国六位院士领衔1000多位名医在阿福App上开设了“名医AI分身”，让农村用户也能方便地咨询名医专家。\n【AiBase提要:】\n🏥 蚂蚁阿福与全国5000家医院、30万真人医生合作，提供全链路健康服务。\n👨‍⚕️ 全国六位院士领衔1000多位名医在阿福App上开设“名医AI分身”，方便农村用户咨询名医专家。\n📈 阿福上线后用户数快速增长，单日解答健康咨询1000万次，成为央视CCTV健康生活合作伙伴。\n3、ChatGPT 免费版要看广告了！OpenAI 开启创收模式，竞争对手 Anthropic 隔空“补刀”\nOpenAI 面对巨大的基础设施成本压力，决定在 ChatGPT 免费版中引入赞助内容，这一举措引发了广泛讨论。为了缓解用户的隐私担忧，OpenAI 明确了广告投放的底线规则，包括内容隔离、隐私保护和敏感回避。与此同时，竞争对手 Anthropic 趁机发起“背刺”，承诺旗下 AI 机器人将\n永久\n无广告，甚至投放讽刺性广告。\n【AiBase提要:】\n📢 OpenAI 在 ChatGPT 免费版中引入赞助内容，以应对基础设施成本压力。\n🔒 为保护用户隐私，OpenAI 设定了广告投放的三条底线规则。\n🔄 竞争对手 Anthropic 发起“背刺”，承诺旗下 AI 机器人\n永久\n无广告。\n4、字节 Seedance2.0震撼发布却陷“肖像风暴”，紧急暂停真人参考功能\n字节跳动发布的新一代多模态视频生成大模型 Seedance2.0 引发了关于 AI 伦理和肖像隐私的广泛讨论，尽管其技术实力强大，但因生成音色与真人高度一致而引发公众担忧，最终字节跳动紧急暂停真人素材参考功能以保障创作环境的健康可持续。\n【AiBase提要:】\n🎥 Seedance2.0支持多模态文件输入，精准学习视频的运镜、动作及\n特效\n。\n🔊 生成音色与真人高度一致，引发肖像隐私担忧。\n💰 资本市场因技术利好而疯涨，AI概念股热度攀升。\n5、华为“天才少年”再立新标！Xmax AI发布全球首个虚实融合视频模型：毫秒级响应，打破次元壁\nXmax AI 发布的全球首个虚实融合实时交互视频生成模型 X1，该模型通过手机摄像头实现与虚拟内容的实时互动，打破了传统视频生成的限制，为 AI 视频生成领域树立了全新的交互标准。\n【AiBase提要:】\n🖼️ 让静态图片角色在现实中“活”过来，实现虚实结合的奇妙观感。\n⚡ 实现毫秒级响应速度，确保交互过程丝滑无卡顿。\n🔄 将 AI 视频从视觉消耗品转变为人人皆可参与的共创社交体验。\n6、Cursor 发布 Composer1.5:强化学习规模提升20倍，性能实现跨越式增长\nCursor团队发布了新一代智能编码模型Composer1.5，该模型通过强化学习显著提升了性能，并优化了处理复杂任务的能力，为开发者提供了更高效的编程体验。\n【AiBase提要:】\n🧠 Composer1.5通过强化学习提升智能水平，性能超越前代产品。\n⚡ 模型在处理简单和复杂问题时具备不同的响应模式，兼顾效率与深度思考。\n🔄 自摘要功能确保模型在超大规模代码探索中保持准确性和逻辑连续性。\n详情链接:https://cursor.com/docs/models\n7、生图编辑合二为一!Qwen-Image-2.0发布:2K\n极致\n质感挑战视觉极限\n阿里云推出新一代图像生成基础模型 Qwen-Image-2.0，标志着通义千问在图像能力上的重大突破，成功将“图像生成”与“图像编辑”两条研发支线合二为一，在多项盲测基准中展现出卓越性能。\n【AiBase提要:】\n🧠 专业的文字渲染（“准”与“多”）: 支持高达1k token 的超长复杂指令。\n🖼️\n极致\n的真实质感（“真”）: 原生支持2K 分辨率（2048×2048），能够细腻刻画皮肤毛孔、织物纹理及建筑细节。\n🎨 审美与对齐（“美”与“齐”）: 模型具备\n极高\n的排版美学，能自动在画面留白处布置文字。\n8、AI 版“App Store”来了？亚马逊入局内容授权市场：出版商向大模型“收租”时代开启\n亚马逊推出全新AI内容市场以解决版权争议，并通过该市场扩展其在AI生态中的战略野心。同时，微软也正在入场，争夺高质量数据资源的控制权。\n【AiBase提要:】\n📚 出版商将直接向科技公司出售内容版权，开启基于“使用量”的计费模式。\n🌐 亚马逊通过AI内容市场扩展AWS价值链，稳固云计算地位并构建AI供应链。\n🔄 微软也在秘密开发类似出版商内容市场，争夺AI领域的话语权。\n相关推荐\n​  挖掘视频“暗数据”！谷歌前员工创办 InfiniMind，助企业解锁 PB 级视频资产\n东京初创公司InfiniMind获580万美元种子轮融资，由前谷歌员工创立，致力于开发AI基础设施，将海量未利用的视频音频“暗数据”转化为可搜索的结构化商业智能，应对企业数据处理挑战。\n2026年2月10号 18:01\n119.9k\n五角大楼引入“最强大脑”：OpenAI 与美国国防部达成深度合作\n美国国防部与OpenAI合作，将ChatGPT集成至其AI平台，面向300万人员开放，旨在提升任务效率和战备水平。\n2026年2月10号 17:04\n132.1k\n进军印度受阻?Anthropic 遭遇重名诉讼，本土公司索赔千万卢比\n美国AI巨头Anthropic在印度扩张时，遭本土公司Anthropic Software起诉商标侵权。后者称自2017年使用该名称，美企近期活动已引发客户混淆。\n2026年2月10号 14:22\n125.5k\n腾讯混元推出首个产业级2Bit端侧模型:0.3B体量实现性能逆袭\n腾讯混元发布极小模型HY-1.8B-2Bit，通过产业级2Bit量化方案将等效参数量降至0.3B，内存占用仅约600MB，体积小于部分手机应用。该技术突破传统量化方法，解决了低位数量化精度损失大的难题，为大模型在消费级硬件上的高效部署提供了新路径。\n2026年2月10号 13:57\n150.8k\nCursor 发布 Composer1.5:强化学习规模提升20倍，性能实现跨越式增长\nCursor发布新一代智能编码模型Composer1.5，在推理深度、响应速度及处理复杂长任务方面实现显著突破。新模型基于强化学习进行大规模后训练，计算量远超以往，带来智能跃迁。\n2026年2月10号 11:02\n159.3k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "The first signs of burnout are coming from the people who embrace AI the most",
+      "link": "https://techcrunch.com/2026/02/09/the-first-signs-of-burnout-are-coming-from-the-people-who-embrace-ai-the-most/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Databricks CEO says SaaS isn’t dead, but AI will soon make it irrelevant",
+      "link": "https://techcrunch.com/2026/02/09/databricks-ceo-says-saas-isnt-dead-but-ai-will-soon-make-it-irrelevant/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tem raises $75M to remake electricity markets using AI",
+      "link": "https://techcrunch.com/2026/02/09/tem-raises-75m-to-remake-electricity-markets-using-ai/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "MrBeast’s company buys Gen Z-focused fintech app Step",
+      "link": "https://techcrunch.com/2026/02/09/mrbeasts-company-buys-gen-z-focused-fintech-app-step/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "ChatGPT rolls out ads",
+      "link": "https://techcrunch.com/2026/02/09/chatgpt-rolls-out-ads/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The battle begins: 2026 Startup Battlefield 200 nominations are open",
+      "link": "https://techcrunch.com/2026/02/09/the-battle-begins-startup-battlefield-200-nominations-are-open/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Discord to roll out age verification next month for full access to its platform",
+      "link": "https://techcrunch.com/2026/02/09/discord-to-roll-out-age-verification-next-month-for-full-access-to-its-platform/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Call for speakers: TechCrunch Founder Summit 2026",
+      "link": "https://techcrunch.com/2026/02/09/call-for-speakers-techcrunch-founder-summit-2026/",
+      "description": "",
+      "publish_time": "2026-02-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "India orders social media platforms to take down deepfakes faster",
+      "link": "https://techcrunch.com/2026/02/10/india-orders-social-media-platforms-to-take-down-deepfakes-faster/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Former GitHub CEO raises record $60M dev tool seed round at $300M valuation",
+      "link": "https://techcrunch.com/2026/02/10/former-github-ceo-raises-record-60m-dev-tool-seed-round-at-300m-valuation/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Spotify hits a record 751M monthly users thanks to Wrapped, new free features",
+      "link": "https://techcrunch.com/2026/02/10/spotify-hits-a-record-751m-monthly-users-thanks-to-wrapped-new-free-features/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Primary Ventures raises healthy $625M Fund V to focus on seed investing",
+      "link": "https://techcrunch.com/2026/02/10/primary-ventures-raises-massive-625m-fund-v-to-focus-on-seed-investing/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Proptech startup Smart Bricks raises $5 million pre-seed led by a16z",
+      "link": "https://techcrunch.com/2026/02/10/proptech-startup-smart-bricks-raises-5-million-pre-seed-in-round-led-by-a16z/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "AI video startup Runway raises $315M at $5.3B valuation, eyes more capable world models",
+      "link": "https://techcrunch.com/2026/02/10/ai-video-startup-runway-raises-315m-at-5-3b-valuation-eyes-more-capable-world-models/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
