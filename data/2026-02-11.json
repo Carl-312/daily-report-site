@@ -1,0 +1,140 @@
+{
+  "date": "2026-02-11",
+  "articles": [
+    {
+      "title": "AI日报：蚂蚁开源大模型Ming-flash-omni 2.0；智谱GLM-5意外泄露；京东正式入局AI支付",
+      "link": "https://news.aibase.com/zh/daily/25465",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、蚂蚁集团开源全模态大模型Ming-flash-omni 2.0：多模态理解、图像编辑与语音生成全面提升 蚂蚁集团开源全模态大模型Ming-flash-omni 2.0，在多项公开基准测试中表现优异，成为开源全模态大模型性能新标杆。该模型在视觉语言理解、语音可控生成、图像生成与编辑等核心领域达到领先水准，并具备音频统一生成能力，为多模态应用开发提供统一入口。 🧠 Ming-flash-omni 2.0在视觉语言理解、语音可控生成和图像生成与编辑等关键能力表现突出，部分指标超越Gemini2.5Pro。 🔊 作为业界首个全场景音频统一生成模型，Ming-fla…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：蚂蚁开源大模型Ming-flash-omni 2.0；智谱GLM-5意外泄露；京东正式入局AI支付\n发布于最新AI日报\n发布时间 :\n2026年2月11号 16:41\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、蚂蚁集团开源全模态大模型Ming-flash-omni 2.0：多模态理解、图像编辑与语音生成全面提升\n蚂蚁集团开源全模态大模型Ming-flash-omni 2.0，在多项公开基准测试中表现优异，成为开源全模态大模型性能新标杆。该模型在视觉语言理解、语音可控生成、图像生成与编辑等核心领域达到领先水准，并具备音频统一生成能力，为多模态应用开发提供统一入口。\n【AiBase提要:】\n🧠 Ming-flash-omni 2.0在视觉语言理解、语音可控生成和图像生成与编辑等关键能力表现突出，部分指标超越Gemini2.5Pro。\n🔊 作为业界首个全场景音频统一生成模型，Ming-flash-omni 2.0可在同一条音轨中同时生成语音、环境音效与音乐，支持自然语言精细控制参数。\n🚀 在推理效率与成本控制上保持领先，实现分钟级长音频的实时高保真生成，显著提升多模态应用开发效率。\n2、智谱 GLM-5 意外“泄露”？复用 DeepSeek 架构性能炸裂，市值狂飙 200%\n智谱AI的新一代大模型GLM-5在2026年春节期间引发关注，其性能和技术创新受到市场高度认可，股价大涨200%。\n【AiBase提要:】\n🧠 GLM-5采用与DeepSeek-V3相同的稀疏注意力架构（DSA），性能显著提升。\n🧮 参数量达到745B，是前代GLM-4.7的两倍，计算效率高。\n🎥 强化视频理解等多模态能力，弥补了DeepSeek纯文本架构的短板。\n3、算力不再受制于人！科大讯飞正式发布星火 X2 大模型：全国产算力训练，深耕四大专业场景\n科大讯飞发布星火 X2 大模型，基于全国产算力训练，深耕四大专业场景，推动国产替代进程，为行业提供更安全可靠的技术支持。\n【AiBase提要:】\n🧠 星火 X2 大模型基于全国产算力训练，实现自主可控。\n📚 深耕教育、医疗、汽车和智能体四大专业场景，提升行业应用价值。\n🔒 国产替代迈入深水区，为国内重点行业提供更安全可靠的大模型落地选择。\n4、京东正式入局 AI 支付！推出“京东 AI 付”：动动嘴就能买，支付安全再加码\n京东科技正式推出创新支付产品“京东 AI 付”，基于JoyAI大模型，通过语音指令完成支付，提升便捷性与安全性。同时，该产品在智能眼镜等设备上应用，展现了巨大的场景潜力。\n【AiBase提要:】\n🤖 语音即支付，实现“所见即所购”\n🔒 双重验证技术，守护资金安全\n📈 行业观察:巨头角逐 AI 支付新赛道\n5、免费可用:DuckDuckGo AI 语音聊天上线，承诺不存储音频\nDuckDuckGo 通过其 AI 聊天机器人平台 Duck.ai 新增了实时语音聊天功能，强调隐私保护。该功能采用“隐私优先”的架构设计，用户通过加密通道与大语言模型进行自然对话，确保语音数据不被监听或二次利用。DuckDuckGo 在用户与 OpenAI 之间建立了一道防火墙，双方均受严格合同限制，确保数据安全。此外，Duck.ai 提供免注册使用和付费订阅服务，满足不同用户需求。\n【AiBase提要:】\n🔒 隐私承诺: 官方明确表示不会存储任何聊天音频，所有会话数据在结束后即刻销毁。\n🛡️ 数据零训练: 用户的语音和 AI 的回复均不会被用于任何算法模型的迭代训练。\n🆓 灵活使用: 支持免注册直接使用语音功能，同时提供付费订阅以满足更高频率的商业或个人需求。\n6、智驾座舱双进化！阿维塔 AVATR.OS 5.0 正式推送：MoLA 大模型上车，首批直达华为 ADS 4.1\n阿维塔正式推送AVATR.OS 5.0系统，融合AI大模型和华为ADS4.1智驾系统，带来更智能的车载助手、更安全的驾驶辅助以及更个性化的座舱体验。\n【AiBase提要:】\n🧠 MoLA大模型提升语义理解与交互体验\n🚗 华为ADS4.1智驾系统优化城区领航与安全防御\n📱 鸿蒙座舱实现个性化定制与便捷互联\n7、车险中介天塌了！ChatGPT 上线“比价神器”：1.9 亿条数据加持，保费透明时代来了\n文章探讨了AI技术对传统保险中介行业的冲击，特别是Insurify推出的ChatGPT专属保险比价应用如何改变车险购买体验。\n【AiBase提要:】\n🚗 个性化保费估算：用户输入位置、车型等信息，ChatGPT即时生成定制化保费估算。\n📊 海量数据支撑：应用接入1.96亿条汽车保险报价数据库和7万条客户评价。\n💬 对话式选购体验：用户可通过通俗语言提问，系统对比价格、折扣等关键信息。\n8、GPT-5.2 强力驱动！OpenAI 深度研究工具大升级，解锁全屏报告交互新体验\nOpenAI 对 ChatGPT 的深度研究工具进行了重磅更新，引入了 GPT-5.2 模型驱动的核心引擎，并新增了全屏查看器功能，提升了复杂信息的处理效率和可读性。用户现在可以指定数据源抓取，并在生成报告过程中实时干预，同时支持多种格式下载。\n【AiBase提要:】\n🖥️ 全屏交互升级: 新增全屏查看器，支持目录跳转与引用源对照，大幅优化长篇深度报告的阅读体验。\n⚙️ 模型引擎更替: 深度研究工具现已全面接入 GPT-5.2模型，提供更精准的逻辑推理与\n全网\n信息检索能力。\n🔍 深度定制权限: 支持指定数据源抓取，并允许用户在生成报告的过程中实时监控进度并动态修正研究范围。\n相关推荐\n蚂蚁集团开源全模态大模型Ming-flash-omni 2.0：多模态理解、图像编辑与语音生成全面提升\n蚂蚁集团开源全模态大模型Ming-Flash-Omni2.0，在视觉语言理解、语音生成、图像处理等多项基准测试中表现优异，部分指标超越Gemini2.5Pro。该模型首创全场景音频统一生成能力，支持在同一条音轨中生成语音、音效和音乐，用户通过自然语言指令即可调整音色、语速等参数。\n2026年2月11号 11:18\n190.1k\nAI日报：Anthropic发布Claude Opus 4.6；千问“春节大免单”首日火爆；腾讯推出“火龙漫剧”\n微信被指限制阿里千问及腾讯元宝的口令复制功能，疑因阿里千问“春节30亿免单”活动火爆，其分享口令在微信内受限，腾讯自家元宝App也面临同样问题。\n2026年2月6号 16:20\n237.0k\n拒绝“小胜即安”，蚂蚁集团推“AI Credit”方案激励全员AI化\n蚂蚁集团推出“AI Credit”激励方案，旨在奖励在AI领域有开创性贡献的团队和个人，通过额外激励推动AI战略发展。该方案针对取得市场认可的贡献者，在原有绩效基础上提供奖励，若相关业务在未来两年内提升公司价值，激励可兑换为经济受益。\n2026年2月2号 16:12\n201.3k\n蚂蚁集团发布 LingBot-VLA：双臂机器人操控步入“大模型时代”\n蚂蚁集团发布LingBot-VLA模型，专注于机器人复杂操控，通过海量数据训练实现跨形态通用能力。研发团队在9种主流双臂机器人上采集约2万小时真实数据，涵盖丰富动作序列，推动具身智能领域进展。\n2026年1月30号 10:54\n180.7k\n蚂蚁灵波开源具身大模型LingBot-VLA，后训练代码全面开放，让开源真正可用\n蚂蚁集团旗下灵波科技开源具身大模型LingBot-VLA，作为机器人操作的“智能基座”，具备跨本体和跨任务泛化能力，显著降低后训练成本，推动“一脑多机”工程化落地。在GM-100评测基准中，该模型在三个真实机器人平台上表现优异。\n2026年1月28号 9:49\n189.1k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "With co-founders leaving and an IPO looming, Elon Musk turns talk to the moon",
+      "link": "https://techcrunch.com/2026/02/10/with-co-founders-leaving-and-an-ipo-looming-elon-musk-turns-talk-to-the-moon/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Okay, now exactly half of xAI’s founding team has left the company",
+      "link": "https://techcrunch.com/2026/02/10/nearly-half-of-xais-founding-team-has-now-left-the-company/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "An ice dance duo skated to AI music at the Olympics",
+      "link": "https://techcrunch.com/2026/02/10/olympics-czech-ice-dancers-duo-ai-music/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Here’s how Rivian changed the rear door manual release on the R2",
+      "link": "https://techcrunch.com/2026/02/10/heres-how-rivian-changed-the-rear-door-manual-release-on-the-r2/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon may launch a marketplace where media sites can sell their content to AI companies",
+      "link": "https://techcrunch.com/2026/02/10/amazon-may-launch-a-marketplace-where-media-sites-can-sell-their-content-to-ai-companies/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "VC Masha Bucher, Epstein associate and Day One founder, explains herself",
+      "link": "https://techcrunch.com/2026/02/10/vc-masha-bucher-epstein-associate-and-day-one-founder-explains-herself/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google sent personal and financial information of student journalist to ICE",
+      "link": "https://techcrunch.com/2026/02/10/google-sent-personal-and-financial-information-of-student-journalist-to-ice/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Vega raises $120M Series B to rethink how enterprises detect cyber threats",
+      "link": "https://techcrunch.com/2026/02/10/vega-raises-120m-series-b-to-rethink-how-enterprises-detect-cyber-threats/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok launches an opt-in Local Feed in the U.S. leveraging users’ precise location",
+      "link": "https://techcrunch.com/2026/02/11/tiktok-launches-an-opt-in-local-feed-in-the-u-s-leveraging-users-precise-location/",
+      "description": "",
+      "publish_time": "2026-02-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Integrate raises $17M to move defense project management into the 21st century",
+      "link": "https://techcrunch.com/2026/02/11/integrate-raises-17m-to-move-defense-project-management-into-the-21st-century/",
+      "description": "",
+      "publish_time": "2026-02-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Complyance raises $20M to help companies manage risk and compliance",
+      "link": "https://techcrunch.com/2026/02/11/complyance-raises-20m-to-help-companies-manage-risk-and-compliance/",
+      "description": "",
+      "publish_time": "2026-02-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Humanoid robot startup Apptronik has now raised $935M at a $5B+ valuation",
+      "link": "https://techcrunch.com/2026/02/11/humanoid-robot-startup-apptronik-has-now-raised-935m-at-a-5b-valuation/",
+      "description": "",
+      "publish_time": "2026-02-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Meridian raises $17 million to remake the agentic spreadsheet",
+      "link": "https://techcrunch.com/2026/02/11/meridian-ai-raises-17-million-to-remake-the-agentic-spreadsheet/",
+      "description": "",
+      "publish_time": "2026-02-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Samsung to hold its Galaxy S26 event on February 25",
+      "link": "https://techcrunch.com/2026/02/10/samsung-to-hold-its-galaxy-s26-event-on-february-25/",
+      "description": "",
+      "publish_time": "2026-02-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
