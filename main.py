@@ -44,9 +44,10 @@ def cmd_run(args):
     
     # 4. Summarize
     print("\n🤖 Generating summary...")
-    if args.offline or not cfg.api_key:
-        if not cfg.api_key:
-            print("   ⚠️  No API key, using offline mode")
+    if args.offline:
+        content = offline_summary(articles_dict)
+    elif not cfg.api_key and not cfg.fallback_api_key:
+        print("   ⚠️  No API key, using offline mode")
         content = offline_summary(articles_dict)
     else:
         content = summarize(articles_dict, stream=True)
@@ -109,7 +110,10 @@ def cmd_summarize(args):
     articles = data.get("articles", [])
     print(f"🤖 Summarizing {len(articles)} articles...")
     
-    if args.offline or not cfg.api_key:
+    if args.offline:
+        content = offline_summary(articles)
+    elif not cfg.api_key and not cfg.fallback_api_key:
+        print("   ⚠️  No API key, using offline mode")
         content = offline_summary(articles)
     else:
         content = summarize(articles, stream=True)
