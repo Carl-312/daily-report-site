@@ -6,7 +6,7 @@
 
 ## ✨ 核心特性
 
-- 🤖 **AI 摘要生成**: 集成 ModelScope API (GLM-4.7) 智能提炼新闻要点
+- 🤖 **AI 摘要生成**: 集成 ModelScope API (Kimi-K2.5) 智能提炼新闻要点
 - 🌐 **多源聚合**: 支持 AIBase、TechCrunch、The Verge 等科技媒体
 - 📅 **自动更新**: GitHub Actions 每日定时生成并部署到 GitHub Pages
 - 🔌 **离线模式**: 无 API Key 时可使用本地摘要算法
@@ -78,7 +78,7 @@ daily-report-site/
 ## 🔧 技术栈
 
 - **Python 3.10+**: 核心逻辑
-- **ModelScope API**: GLM-4.7 摘要生成
+- **ModelScope API**: Kimi-K2.5 摘要生成
 - **Markdown + HTML/CSS**: 静态站点
 - **GitHub Actions**: CI/CD 自动化
 - **GitHub Pages**: 免费托管

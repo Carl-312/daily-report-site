@@ -99,7 +99,7 @@ jobs:
       - name: Run daily report
         env:
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
-          MODELSCOPE_MODEL: ZhipuAI/GLM-4.7
+          MODELSCOPE_MODEL: moonshotai/Kimi-K2.5
         run: python main.py run
       
       - name: Commit changes

@@ -47,7 +47,7 @@ copy .env.example .env  # Windows
 ```bash
 # ModelScope API Key (可选，用于 AI 摘要)
 MODELSCOPE_API_KEY=sk-your-api-key-here
-MODELSCOPE_MODEL=ZhipuAI/GLM-4.7
+MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
 ```
 
 > 💡 **提示**: 如果没有 API Key，可以使用 **离线模式** (见下文)
