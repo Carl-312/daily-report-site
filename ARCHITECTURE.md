@@ -17,7 +17,7 @@ graph TB
         C --> D[Deduplication]
         D --> E[JSON Storage]
         E --> F{Summarizer}
-        F -->|API Mode| G[ModelScope GLM-4.7]
+        F -->|API Mode| G[ModelScope GLM-5]
         F -->|Offline Mode| H[Local Algorithm]
     end
     
@@ -118,7 +118,7 @@ response = requests.post(
     "https://api.modelscope.cn/v1/chat/completions",
     headers={"Authorization": f"Bearer {api_key}"},
     json={
-        "model": "ZhipuAI/GLM-4.7",
+        "model": "ZhipuAI/GLM-5",
         "messages": messages,
         "stream": True  # 流式输出
     }
@@ -257,7 +257,7 @@ def get_config() -> Config:
     
     return Config(
         api_key=os.getenv("MODELSCOPE_API_KEY", ""),
-        model=os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-4.7"),
+        model=os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-5"),
         sources=yaml_cfg["sources"],
         max_articles=yaml_cfg["limits"]["max_articles"],
         # ...
