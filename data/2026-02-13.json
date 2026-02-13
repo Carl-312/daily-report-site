@@ -2,6 +2,78 @@
   "date": "2026-02-13",
   "articles": [
     {
+      "title": "AI日报：字节发布Seedream5.0Lite；小红书不标AI将限流；美图开拍首批接入Seedance 2.0大模型",
+      "link": "https://news.aibase.com/zh/daily/25530",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、字节跳动发布 Seedream5.0Lite:具备“视觉推理”与“实时联网”能力的图像创作新标杆 字节跳动Seed团队推出了Seedream5.0Lite智能图像创作模型，该模型通过多模态统一架构实现了从执行指令到深度理解意图的跨越，具有更强的视觉推理和实时联网能力，提升了图像生成的专业性和准确性。 🧠 多步视觉推理：模型能够理解物理规律并生成合理结果。 🌐 实时检索增强（RAG）：引入联网能力，精准生成时效性内容。 📊 深厚的世界知识：内置多领域知识库，提升专业信息图谱的准确性。 2、重拳治理 AI 假脸！小红书：AI 合成内容须显著标识，违规将扣除流量…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：字节发布Seedream5.0Lite；小红书不标AI将限流；美图开拍首批接入Seedance 2.0大模型\n发布于最新AI日报\n发布时间 :\n2026年2月13号 15:30\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、字节跳动发布 Seedream5.0Lite:具备“视觉推理”与“实时联网”能力的图像创作新标杆\n字节跳动Seed团队推出了Seedream5.0Lite智能图像创作模型，该模型通过多模态统一架构实现了从执行指令到深度理解意图的跨越，具有更强的视觉推理和实时联网能力，提升了图像生成的专业性和准确性。\n【AiBase提要:】\n🧠 多步视觉推理：模型能够理解物理规律并生成合理结果。\n🌐 实时检索增强（RAG）：引入联网能力，精准生成时效性内容。\n📊 深厚的世界知识：内置多领域知识库，提升专业信息图谱的准确性。\n2、重拳治理 AI 假脸！小红书：AI 合成内容须显著标识，违规将扣除流量\n小红书针对AI技术滥用乱象，要求创作者对AI生成及合成内容进行主动标识，以维护社区内容的真实性与合规性。\n【AiBase提要:】\n⚖️ 强制标识AI生成内容，以确保透明度和真实性。\n🔍 平台将通过算法检测AI内容，并对未声明的内容进行限流处理。\n🚫 严厉打击制作虚假信息、恶意“魔改”作品等行为，维护社区信任。\n3、美图开拍首批接入 Seedance 2.0 大模型\n美图公司旗下的口播视频制作工具“开拍”正式接入Seedance 2.0大模型，旨在提升用户的视频创作效率和专业性。该功能预计于2月底上线，将AI生成能力深度融入用户的日常工作流，为创作者提供更顺畅、专业的视频生产链路。\n【AiBase提要:】\n🧠 AI技术提升口播短视频创作效率\n📊 Seedance 2.0大模型接入开拍，优化用户工作流\n📈 美图公司坚持“模型容器”策略，提升用户体验\n4、为了活下去，OpenAI 终究活成了自己“最讨厌”的样子：ChatGPT 本周正式上线广告\nOpenAI 终于在 ChatGPT 中上线广告业务，这一决定与其创始人山姆·奥特曼两年前的言论形成鲜明对比。随着 AI 算力成本的激增，公司面临巨额财务压力，不得不寻求新的收入来源。然而，广告商业化带来的用户体验和客观性问题仍需解决。\n【AiBase提要:】\n🤖 OpenAI 在 ChatGPT 中上线广告业务，打破此前对广告的抵制立场。\n💰 由于 AI 算力成本激增，OpenAI 面临巨大的财务压力，需通过广告创收。\n⚖️ 广告商业化与用户体验之间的平衡成为 OpenAI 必须面对的挑战。\n5、每秒千词！OpenAI 联手 Cerebras 发布 GPT-5.3-Codex-Spark：为实时编程而生\nOpenAI 与 Cerebras 合作推出 GPT-5.3-Codex-Spark，专为实时编程优化，提升代码生成速度和开发者控制感。\n【AiBase提要:】\n🧠 超高速推理：Codex-Spark 推动 AI 编程的实时反馈能力。\n🛠 开发者主导：Codex-Spark 作为协作工具，增强开发者掌控感。\n⚙ 小而精的架构：Codex-Spark 在软件工程任务中表现更优。\n6、蚂蚁集团开源Ring-2.5-1T，全球首个混合线性架构万亿参数思考模型来了\n蚂蚁集团发布全球首个基于混合线性架构的万亿参数思考模型Ring-2.5-1T，在数学推理、代码生成和智能体任务执行方面表现出色，为智能体时代的复杂任务处理提供了高性能基础支撑。\n【AiBase提要:】\n🧠 Ring-2.5-1T在数学推理和代码生成任务中达到开源领先水平。\n🚀 该模型在长文本生成场景中显著提升生成效率。\n🌐 支持多步规划与工具调用，适配多种智能体框架。\n7、全球仅 7 人能赢它！全新 Gemini 3 Deep Think 发布：血洗编程与科研榜单\nGoogle 旗下的 Gemini3Deep Think 在编程、科研和工程领域实现了重大突破，展现了强大的推理能力，成为 AI 领域的里程碑式进展。\n【AiBase提要:】\n🧠 编程封神：在算法竞赛平台 Codeforces 上取得 3455Elo 的惊人高分，全球仅 7 人能击败它。\n🔬 科研“\n最强\n大脑”：发现高深物理数学论文中的细微漏洞，并成功证明了“Erdős 猜想”中的多个难题。\n🛠️ 从草图到实物：可将手绘草图分析并渲染成高保真的3D模型文件，提升建模效率 10 倍。\n8、旅游+AI 再进化！同程旅行全面接入腾讯元宝：从“搜”到“订”只需秒级响应\n同程旅行与腾讯元宝的深度合作，标志着旅游行业在AI技术应用上的重大进展。通过实时数据引用和一键交易功能，用户能够更高效地规划旅行并完成预订。同时，AI春晚总动员活动也增强了用户的互动体验，推动了旅游市场的智能化发展。\n【AiBase提要:】\n🧩 AI导购上线，告别“选择困难症”\n🎉 营造“跟着AI过大年”的节日氛围\n🚀 同程旅行全面接入腾讯元宝，提升旅游决策效率\n相关推荐\n国风漫剧迈入 AI 时代！横店影视《九州牧云录》今日上线，开启东方美学“智”造新范式\n国产影视巨头横店影视进军AI短剧赛道，推出国风漫剧《九州牧云录》。该剧改编自管平潮同名小说，以九州大陆为背景，讲述少年冒险故事，是“AI+影视”工业化的重要尝试，旨在通过AI技术赋能经典IP，实现东方美学的创新呈现。\n2026年2月13号 15:47\n145.2k\n白领“裁员潮”将至？华尔街正在搜寻下一个受 AI 威胁的职业\n华尔街投资者正从AI硬件红利转向关注其带来的“生存危机”，金融界开始排查可能因AI普及而衰退的行业。目前，AI已对初级分析师、数据录入员等职业产生替代作用。分析师指出，涉及大量数据处理和基础逻辑归纳的岗位均面临风险。\n2026年2月13号 15:43\n144.1k\n春节订单预计破5000单！擎天租GMV环比增长80%\n春节期间，机器人租赁平台擎天租订单激增，预计假期订单突破5000单，整体GMV环比增长约80%。节前订单增速持续加快，节后仍保持高位增长。首次租赁用户占比约30%，显示市场渗透率提升。\n2026年2月13号 15:14\n142.3k\nAI 社交“破圈”！京东 Joyinside 上线智能硬件社交网：跨品牌互联，让 AI 玩具成为孩子的第一部“社交手机”\n京东推出“欢乐星球社交玩法”，实现跨品牌AI设备互联，打破智能硬件孤岛，构建家庭社交网络，推动亲子互动与家庭消费市场革新。\n2026年2月13号 14:41\n143.2k\n全球仅 7 人能赢它！全新 Gemini 3 Deep Think 发布：血洗编程与科研榜单\nGoogle旗下Gemini3Deep Think模型迎来重大升级，在编程、科研和工程领域表现卓越。其核心亮点是在Codeforces平台获得3455分的高分，已超越绝大多数人类选手，全球仅7人能击败它，标志着AI推理能力迈入新阶段。\n2026年2月13号 14:06\n160.1k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Musk needed a new vision for SpaceX and xAI. He landed on Moonbase Alpha.",
+      "link": "https://techcrunch.com/2026/02/12/musk-needed-a-new-vision-for-spacex-and-xai-he-landed-on-moonbase-alpha/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amid disappointing earnings, Pinterest claims it sees more searches than ChatGPT",
+      "link": "https://techcrunch.com/2026/02/12/amid-disappointing-earnings-pinterest-claims-it-sees-more-searches-than-chatgpt/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Rivian was saved by software in 2025",
+      "link": "https://techcrunch.com/2026/02/12/rivian-was-saved-by-software-in-2025/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Didero lands $30M to put manufacturing procurement on ‘agentic’ autopilot",
+      "link": "https://techcrunch.com/2026/02/12/didero-lands-30m-to-put-manufacturing-procurement-on-agentic-autopilot/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Automattic planned to target 10 competitors with royalty fees, WP Engine claims in new filing",
+      "link": "https://techcrunch.com/2026/02/12/automattic-planned-to-target-10-competitors-with-royalty-fees-wp-engine-claims-in-new-filing/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Aurora’s driverless trucks can now travel farther distances faster than human drivers",
+      "link": "https://techcrunch.com/2026/02/12/auroras-driverless-trucks-can-now-travel-farther-distances-faster-than-human-drivers/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Hacker linked to Epstein removed from Black Hat cyber conference website",
+      "link": "https://techcrunch.com/2026/02/12/hacker-linked-to-epstein-removed-from-black-hat-cyber-conference-website/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "US FTC airs concerns over allegations that Apple News suppresses right-wing content",
       "link": "https://techcrunch.com/2026/02/12/us-ftc-airs-concerns-over-allegations-that-apple-suppresses-right-wing-content-on-apple-news/",
       "description": "",
@@ -11,8 +83,17 @@
       "source": "techcrunch"
     },
     {
-      "title": "Eclipse backs all-EV marketplace Ever in $31M funding round",
-      "link": "https://techcrunch.com/2026/02/12/eclipse-backs-all-ev-marketplace-ever-in-31m-funding-round/",
+      "title": "Fusion startup Helion hits blistering temps as it races toward 2028 deadline",
+      "link": "https://techcrunch.com/2026/02/13/fusion-startup-helion-hits-blistering-temps-as-it-races-toward-2028-deadline/",
+      "description": "",
+      "publish_time": "2026-02-13",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo is asking DoorDash drivers to shut the doors of its self-driving cars",
+      "link": "https://techcrunch.com/2026/02/12/waymo-is-asking-doordash-drivers-to-shut-the-doors-of-its-self-driving-cars/",
       "description": "",
       "publish_time": "2026-02-12",
       "content": "",
@@ -20,8 +101,35 @@
       "source": "techcrunch"
     },
     {
-      "title": "Apple acquires all rights to ‘Severance,’ will produce future seasons in-house",
-      "link": "https://techcrunch.com/2026/02/12/apple-acquires-all-rights-to-severance-will-produce-future-seasons-in-house/",
+      "title": "For $1M, you can pay Bryan Johnson (or BryanAI?) to teach you how to live longer",
+      "link": "https://techcrunch.com/2026/02/12/for-1-million-you-can-pay-bryan-johnson-or-bryanai-to-teach-you-how-to-live-longer/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "IBM will hire your entry-level talent in the age of AI",
+      "link": "https://techcrunch.com/2026/02/12/ibm-will-hire-your-entry-level-talent-in-the-age-of-ai/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic raises another $30B in Series G, with a new value of $380B",
+      "link": "https://techcrunch.com/2026/02/12/anthropic-raises-another-30-billion-in-series-g-with-a-new-value-of-380-billion/",
+      "description": "",
+      "publish_time": "2026-02-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "YouTube finally launches a dedicated app for Apple Vision Pro",
+      "link": "https://techcrunch.com/2026/02/12/youtube-finally-launches-a-dedicated-app-for-apple-vision-pro/",
       "description": "",
       "publish_time": "2026-02-12",
       "content": "",
