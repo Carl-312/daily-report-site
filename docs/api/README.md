@@ -116,7 +116,7 @@ def summarize(
         
     Environment:
         MODELSCOPE_API_KEY: ModelScope API 密钥 (必需)
-        MODELSCOPE_MODEL: 模型名称 (可选，默认 ZhipuAI/GLM-5)
+        MODELSCOPE_MODEL: 模型名称 (可选，默认 moonshotai/Kimi-K2.5)
     """
 ```
 
@@ -136,7 +136,7 @@ print(content)
 **API 请求格式**:
 ```json
 {
-  "model": "ZhipuAI/GLM-5",
+  "model": "moonshotai/Kimi-K2.5",
   "messages": [
     {
       "role": "system",

@@ -207,7 +207,7 @@ posts/
 ```bash
 # ModelScope API Configuration
 MODELSCOPE_API_KEY=sk-1234567890abcdef
-MODELSCOPE_MODEL=ZhipuAI/GLM-5
+MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
 
 # Syft Configuration (Optional)
 SYFT_WEB_APP_URL=https://syft.example.com
@@ -239,7 +239,7 @@ MODELSCOPE_API_KEY=sk-1234567890abcdef
 ### 2. MODELSCOPE_MODEL (可选)
 
 ```bash
-MODELSCOPE_MODEL=ZhipuAI/GLM-5
+MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
 ```
 
 **作用**: 指定使用的 LLM 模型
@@ -247,7 +247,7 @@ MODELSCOPE_MODEL=ZhipuAI/GLM-5
 **支持的模型** (兼容 OpenAI API):
 ```bash
 # 智谱 AI
-MODELSCOPE_MODEL=ZhipuAI/GLM-5
+MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
 MODELSCOPE_MODEL=ZhipuAI/GLM-4
 
 # Qwen 系列
@@ -258,7 +258,7 @@ MODELSCOPE_MODEL=qwen/Qwen-Max
 MODELSCOPE_MODEL=deepseek-ai/DeepSeek-V2
 ```
 
-**默认值**: `ZhipuAI/GLM-5`
+**默认值**: `moonshotai/Kimi-K2.5`
 
 ### 3. SYFT_* (可选)
 
@@ -434,7 +434,7 @@ python main.py run --offline
 ```bash
 # Required for API Mode
 MODELSCOPE_API_KEY=sk-your-api-key-here
-MODELSCOPE_MODEL=ZhipuAI/GLM-5
+MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
 
 # Optional: Syft Integration
 # SYFT_WEB_APP_URL=https://syft.example.com
