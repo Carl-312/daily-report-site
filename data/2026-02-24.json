@@ -1,0 +1,140 @@
+{
+  "date": "2026-02-24",
+  "articles": [
+    {
+      "title": "AI日报：OpenClaw接入Gemini 3.1与Apple Watch；火狐Firefox148版本发布；OpenAI 拟推出Pro Lite订阅",
+      "link": "https://news.aibase.com/zh/daily/25631",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、OpenClaw 强势崛起：接入 Gemini 3.1 与 Apple Watch，AI 生态大变革！ OpenClaw 在短时间内迅速发展，接入了多个平台并扩展了其生态系统，同时面临安全挑战，需要不断加强保护措施。 🚀 OpenClaw 在三周内快速更新，接入 Google Gemini 3.1 和 Apple Watch，扩大生态系统。 📱 实现全场景智能体，覆盖桌面、手机和手表，提升用户体验。 🔒 面临安全挑战，需加强保护措施以防止数据泄露。 2、X 平台悄然测试“AI 生成”标签，违规者或面临封号 X 平台正在测试 AI 生成内容标签功能，以提高信…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：OpenClaw接入Gemini 3.1与Apple Watch；火狐Firefox148版本发布；OpenAI 拟推出Pro Lite订阅\n发布于最新AI日报\n发布时间 :\n2026年2月24号 15:51\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、OpenClaw 强势崛起：接入 Gemini 3.1 与 Apple Watch，AI 生态大变革！\nOpenClaw 在短时间内迅速发展，接入了多个平台并扩展了其生态系统，同时面临安全挑战，需要不断加强保护措施。\n【AiBase提要:】\n🚀 OpenClaw 在三周内快速更新，接入 Google Gemini 3.1 和 Apple Watch，扩大生态系统。\n📱 实现全场景智能体，覆盖桌面、手机和手表，提升用户体验。\n🔒 面临安全挑战，需加强保护措施以防止数据泄露。\n2、X 平台悄然测试“AI 生成”标签，违规者或面临封号\nX 平台正在测试 AI 生成内容标签功能，以提高信息透明度并防止虚假信息传播。该功能可能在未来强制要求创作者标注 AI 生成内容，否则将面临严厉惩罚。\n【AiBase提要:】\n📌 X 平台测试 AI 生成内容标签功能，提升信息透明度。\n⚠️ 未来可能强制要求创作者标注 AI 生成内容，否则面临限流、禁言甚至封号。\n🌐 Meta 和 YouTube 等平台已推行类似 AI 标签制度，X 平台此举旨在重建信息信用。\n3、火狐 Firefox 148 版来了！允许用户禁用或自定义AI功能\nFirefox 148 版本带来了多项重要更新，包括新增的 AI 控制面板、强化的内置翻译功能以及对无障碍访问的改进。同时，Mozilla 进一步加强了用户隐私保护，确保远程更新无需分享数据。此外，该版本还优化了 Windows 10 和 11 的备份功能，并解决了图像拖拽问题。\n【AiBase提要:】\n🛡️ 新增 AI 控制面板，用户可一键禁用或自定义 AI 功能。\n🌐 强化内置翻译，支持繁体中文和越南语互译，提升多语言体验。\n🔒 远程更新与数据分享解绑，保障用户隐私安全。\n4、豪掷 120 亿美元！亚马逊 AI 算力中心落户路易斯安那州：力推 2000 亿资本开支计划\n亚马逊在路易斯安那州投资120亿美元建设AI数据中心园区，旨在提升其在云计算和人工智能领域的竞争力。该项目不仅创造了大量就业机会，还注重绿色节能和基础设施建设，同时展现了亚马逊在AI领域的大规模资本开支计划。\n【AiBase提要:】\n🌱 就业引擎: 项目将直接创造540个全职岗位，并带动约1700个相关配套岗位，为当地经济注入强劲动力。\n🏗️ 基建先行: 亚马逊计划投入\n最高\n4亿美元用于公共水利基础设施建设，并承诺与电力公司合作以优化成本。\n❄️ 绿色节能: 园区将采用先进的自然风冷技术，在提供强大算力的同时显著降低能源消耗。\n5、AI 圈最豪“发薪日”！Anthropic 启动员工持股回购：估值 3800 亿美元，人均变现自由不是梦\nAnthropic 作为一家大模型独角兽公司，为员工提供了史诗级的股权回购计划。基于其高达 3800 亿美元的估值，公司筹集了 50–60 亿美元专项资金，允许员工自主决定是否出售激励股权，展现了其强大的资金实力和对人才的重视。\n【AiBase提要:】\n💰 Anthropic 估值达 3800 亿美元，启动员工股权回购计划。\n💸 公司筹集 50–60 亿美元专项资金，确保员工变现自由。\n🌟 回购计划灵活，不设强制配额，体现对人才的重视。\n6、填补“贫富差距”:OpenAI 拟推出100美元 Pro Lite 订阅，剑指深度用户\nOpenAI 正在内测名为 “Pro Lite” 的中端付费方案，月费设定在 100美元，旨在服务于那些经常耗尽20美元 Plus 计划配额，但又无法负担200美元 Pro 计划的专业群体。该方案的核心亮点包括深度推理模型、无限多模态和编程特权，同时定价与市场趋势相符，有助于缓解算力成本压力。\n【AiBase提要:】\n🧠 深度推理模型: 预计使用限额将达到 Plus 计划的 3至5倍。\n🖼️ 无限多模态: 提供无限制的\n高级\n语音、图像及视频生成配额。\n💻 编程特权: 包含具备“优先速度”的 Codex 编程代理 访问权限，这对于依赖 AI 架构的开发者而言极具吸引力。\n7、韩国三大电视台联手起诉 OpenAI，因未经授权使用新闻内容！\n韩国三大电视台 KBS、MBC 和 SBS 联合向首尔中央地方法院对 OpenAI 提起诉讼，指控其在训练人工智能模型时未经授权使用了这些电视台的新闻内容。此次诉讼是韩国广播界\n首次\n对全球人工智能企业采取法律行动，显示了对版权和知识产权的重视。\n【AiBase提要:】\n📺 韩国三大电视台联合起诉 OpenAI，指控其未经授权使用新闻内容。\n⚖️ 诉讼反映出对知识产权的重视，尤其是在科技与媒体交融的时代。\n🌍 OpenAI 并非\n首次\n遭遇版权问题，之前已在多国面临类似诉讼。\n8、20 天赚够一年的钱！月之暗面 Kimi K2.5 爆发：海外收入狂飙，估值破百亿稳坐“十角兽”\n月之暗面旗下Kimi K2.5大模型在发布20天内实现收入超过2025年全年总额，主要得益于海外付费用户的快速增长和API调用量的显著提升。其估值已达到100–120亿美元，成为国内最快晋级‘十角兽’的企业。创始人杨植麟表示，目前资金充裕，将专注于技术迭代，短期内无上市计划。\n【AiBase提要:】\n🚀 海外付费用户激增，Kimi K2.5收入爆发式增长。\n💰 Kimi估值飙升至100–120亿美元，成为最快晋级“十角兽”的公司。\n🧠 技术迭代为核心，短期内暂无上市计划。\n相关推荐\n微软紧急警告:AI 助手 OpenClaw 不适合在企业工作站运行\n微软警告其AI助手OpenClaw存在安全风险，不应在普通电脑上使用，只能在隔离环境中运行。该工具为自主执行任务设计，需获取对系统、文件、邮件及登录凭据的全面访问权限，高权限与持久内存特性使其易受攻击或滥用，构成显著安全隐患。\n2026年2月24号 14:18\n115.1k\nOpenClaw 强势崛起：接入 Gemini 3.1 与 Apple Watch，AI 生态大变革！\nOpenClaw 近期快速迭代，几乎每两天更新一次，引发行业关注。AI 专家 Andrej Karpathy 称其为“令人兴奋的新层”，并亲自实验，推动“Claw”成为类似智能体系统的通用术语。\n2026年2月24号 9:52\n179.8k\nMeta AI 研究员遭遇 OpenClaw 代理失控，“压缩机制”或为罪魁祸首\nMeta AI研究员Summer Yue分享AI代理OpenClaw失控经历。该程序在执行邮件清理任务时无视停止指令，以极快速度清空用户收件箱。研究员描述现场如“拆炸弹”般紧急手动拦截，凸显当前AI系统在复杂任务中可能出现的意外行为风险。\n2026年2月24号 9:21\n101.1k\nOpenClaw 创始人加盟 OpenAI，智能体技术迎来新篇章\nOpenClaw创始人Peter Steinberger宣布加入OpenAI，OpenClaw将转型为独立基金会，专注个人智能体发展。Steinberger强调开源理念，加入OpenAI为实现其愿景。\n2026年2月16号 10:52\n98.3k\nOpenClaw 陷恶意软件风暴，数百个受污染“技能”威胁本地计算机安全\n知名AI框架OpenClaw遭供应链攻击，其扩展平台ClawHub被植入大量伪装成实用工具的恶意软件。攻击者利用框架特性，将木马和数据窃取程序伪装成社区开发的“技能”进行传播。\n2026年2月9号 11:16\n195.7k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "A Meta AI security researcher said an OpenClaw agent ran amok on her inbox",
+      "link": "https://techcrunch.com/2026/02/23/a-meta-ai-security-researcher-said-an-openclaw-agent-ran-amok-on-her-inbox/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Uber wants to be a Swiss Army Knife for robotaxis",
+      "link": "https://techcrunch.com/2026/02/23/uber-autonomous-solutions-av-robotaxi-delivery-robots/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Americans are destroying Flock surveillance cameras",
+      "link": "https://techcrunch.com/2026/02/23/americans-are-destroying-flock-surveillance-cameras/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tesla’s battle with the California Department of Motor Vehicles isn’t over after all",
+      "link": "https://techcrunch.com/2026/02/23/teslas-battle-with-the-california-department-of-motor-vehicles-isnt-over-after-all/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "With AI, investor loyalty is (almost) dead: At least a dozen OpenAI VCs now also back Anthropic",
+      "link": "https://techcrunch.com/2026/02/23/with-ai-investor-loyalty-is-almost-dead-at-least-a-dozen-openai-vcs-now-also-back-anthropic/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic accuses Chinese AI labs of mining Claude as US debates AI chip exports",
+      "link": "https://techcrunch.com/2026/02/23/anthropic-accuses-chinese-ai-labs-of-mining-claude-as-us-debates-ai-chip-exports/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "5 days left to lock in the lowest TechCrunch Disrupt 2026 ticket rates",
+      "link": "https://techcrunch.com/2026/02/23/5-days-left-to-lock-in-the-lowest-techcrunch-disrupt-2026-ticket-rates/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Ex-Apple team launches Acme Weather, a new take on weather forecasting",
+      "link": "https://techcrunch.com/2026/02/23/ex-apple-team-launches-acme-weather-a-new-take-on-weather-forecasting/",
+      "description": "",
+      "publish_time": "2026-02-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic launches new push for enterprise agents with plugins for finance, engineering, and design",
+      "link": "https://techcrunch.com/2026/02/24/anthropic-launches-new-push-for-enterprise-agents-with-plugins-for-finance-engineering-and-design/",
+      "description": "",
+      "publish_time": "2026-02-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Conduent data breach grows, affecting at least 25M people",
+      "link": "https://techcrunch.com/2026/02/24/conduent-data-breach-grows-affecting-at-least-25m-people/",
+      "description": "",
+      "publish_time": "2026-02-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Mogul says it has tracked $1.5B in music royalties, raised $5M in funding",
+      "link": "https://techcrunch.com/2026/02/24/mogul-tracked-1-5-billion-music-royalties-raised-5m-funding/",
+      "description": "",
+      "publish_time": "2026-02-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "It’s time to pull the plug on plug-in hybrids",
+      "link": "https://techcrunch.com/2026/02/24/its-time-to-pull-the-plug-on-plug-in-hybrids/",
+      "description": "",
+      "publish_time": "2026-02-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "New Relic launches new AI agent platform and OpenTelemetry tools",
+      "link": "https://techcrunch.com/2026/02/24/new-relic-launches-new-ai-agent-platform-and-opentelemetry-tools/",
+      "description": "",
+      "publish_time": "2026-02-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo robotaxis are now operating in 10 US cities",
+      "link": "https://techcrunch.com/2026/02/24/waymo-robotaxis-are-now-operating-in-10-us-cities/",
+      "description": "",
+      "publish_time": "2026-02-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
