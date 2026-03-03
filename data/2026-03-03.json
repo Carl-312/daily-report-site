@@ -1,0 +1,140 @@
+{
+  "date": "2026-03-03",
+  "articles": [
+    {
+      "title": "AI日报：MiniMax公布上市后首份财报；千问开源 Qwen3.5小型模型系列；Claude Code官方语音模式上线",
+      "link": "https://news.aibase.com/zh/daily/25889",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh MiniMax公布了上市后的首份年度财报，展示了其在AI平台战略上的显著进展和财务表现。尽管面临版权诉讼等风险，但其全球市场布局和成本优势为其带来了巨大的增长潜力。 🚀 MiniMax 2025年总收入达7904万美元，同比增长158.9% 📉 年内亏损18.72亿美元，主要源于金融负债公允价值重估 🌍 海外收入占比超70%，Talkie在200多个国家拥有2.36亿用户 2、阿里通义千问开源 Qwen3.5小型模型系列：边缘设备也能跑多模态Agent 阿里通义千问团队推出Qwen3.5小型模型系列，包括0.8B、2B、4B和9B四款轻量级模型，支持多模态处理…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：MiniMax公布上市后首份财报；千问开源 Qwen3.5小型模型系列；Claude Code官方语音模式上线\n发布于最新AI日报\n发布时间 :\n2026年3月3号 15:32\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、MiniMax公布上市后首份财报\nMiniMax公布了上市后的首份年度财报，展示了其在AI平台战略上的显著进展和财务表现。尽管面临版权诉讼等风险，但其全球市场布局和成本优势为其带来了巨大的增长潜力。\n【AiBase提要:】\n🚀 MiniMax 2025年总收入达7904万美元，同比增长158.9%\n📉 年内亏损18.72亿美元，主要源于金融负债公允价值重估\n🌍 海外收入占比超70%，Talkie在200多个国家拥有2.36亿用户\n2、阿里通义千问开源 Qwen3.5小型模型系列：边缘设备也能跑多模态Agent\n阿里通义千问团队推出Qwen3.5小型模型系列，包括0.8B、2B、4B和9B四款轻量级模型，支持多模态处理，适用于边缘设备和实时交互场景。该系列覆盖从0.8B到397B-A17B的完整尺寸梯度，进一步完善了开源生态。\n【AiBase提要:】\n🚀 Qwen3.5小型模型系列包含0.8B、2B、4B和9B四款轻量级模型，专为边缘设备优化。\n🧠 支持多模态能力，具备改进的模型结构和可扩展的强化学习训练。\n🌐 模型已在Hugging Face和ModelScope上线，开发者可立即下载体验。\n详情链接:https://huggingface.co/collections/Qwen/qwen35\n3、Google NotebookLM 信息图自定义样式功能正式上线\nGoogle NotebookLM正式上线信息图自定义样式功能，提供10种预设样式选项并支持自定义编辑，用户可轻松调整视觉呈现方式。该功能通过单击操作将复杂源素材快速转换为高质量信息图，极大降低了制作门槛，适用于学习总结、知识分享和教学演示等场景。\n【AiBase提要:】\n🎨 10种预设样式选项，支持完全自定义编辑。\n🔄 单击一下即可将复杂源素材转换为信息图。\n💡 提升创作趣味性和实用性，适合学习总结、知识分享等场景。\n4、Claude Code官方语音模式上线：输入/voice，按住空格说话，AI编程效率直接起飞\nClaude Code推出了语音模式功能，使开发者能够通过自然语音快速下达指令，提升编程协作效率。该功能已逐步向用户推送，并具有实时语音转录、解放双手高效协作和原生集成稳定可靠等亮点。\n【AiBase提要:】\n✅ 实时语音转录：语音内容瞬间转化为可编辑文本，便于即时修正或补充细节。\n✅ 解放双手高效协作：适合描述复杂逻辑、汇报Bug、重构代码或规划项目等场景，开发者可专注思考而非机械打字。\n✅ 原生集成稳定可靠：作为Claude Code官方原生功能，与现有CLI/终端工作流无缝衔接，兼容性优于第三方语音方案。\n5、GPT-5.4 意外“炸场”！GitHub 源码泄露 OpenAI\n王牌\n：200 万超长上下文+状态化 AI，彻底终结“金鱼记忆”时代？\n文章揭示了OpenAI可能即将发布的GPT-5.4模型的潜在更新，包括200万上下文窗口、状态化AI以及像素级图像处理能力，预示着AI技术的重大突破。\n【AiBase提要:】\n🧠 GPT-5.4引入状态化AI，实现跨会话记忆和工作流保持。\n🖼️ 支持全分辨率原始字节读取，提升图像识别精度。\n🤖 强调全自动代理执行，推动AI从聊天助手向数字员工转型。\n6、一句话变爆款短剧！Zopia重磅亮相：多Agent协作一键交付电影级成片，24小时无人值守自动化生产\nZopia作为全球首个端到端AI视频导演Agent，通过多智能体协作实现了电影级制作流程的自动化，显著提升了视频内容的质量与效率，为短剧创作带来了革命性变化。\n【AiBase提要:】\n🎬 Zopia通过多智能体协作，实现从剧本到成片的全流程自动化制作。\n🎥 针对Kling3和Vidu Q3进行深度优化，提升真人场景与角色一致性。\n🔄 支持自然语言交互，用户可随时调整剧情或风格，实现“边聊边改”。\n详情链接:https://zopia.ai/\n7、QM发布2025年AI应用榜：豆包、DeepSeek、元宝、阿福、千问排前五\nQuest Mobile发布的《2025年AI应用层发展核心报告》显示，截至2025年12月，全市场AI原生App中，月活跃用户排名前五的是豆包、DeepSeek、元宝、蚂蚁阿福和阿里千问，蚂蚁集团的灵光也进入\n前十\n。报告分析称，2025年国内AI应用呈现从“通用覆盖”到“场景穿透”的趋势，\n前十\nAI App中有6个通用AI，4个垂类场景的专业AI。字节系和阿里系AI应用占据了\n前十\n中的六个席位。\n【AiBase提要:】\n🧠 AI原生App月活跃用户排名前五为豆包、DeepSeek、元宝、蚂蚁阿福和阿里千问。\n📊 2025年国内AI应用呈现从“通用覆盖”到“场景穿透”的趋势，\n前十\nAI App中有6个通用AI，4个垂类场景的专业AI。\n👥 字节系和阿里系AI应用占据\n前十\n中的六个席位，分别有3个应用上榜。\n8、DeepSeek V4 Lite 悄然进化： 2000 亿参数小模型性能惊艳，直逼海外顶流\nDeepSeek V4 Lite凭借2000亿参数规模，在持续迭代后展现出媲美\n顶级\n闭源模型的性能，成为国产大模型的新标杆，其正式版发布可能对全球AI竞争格局产生重大影响。\n【AiBase提要:】\n🚀 参数小能量大 :仅用约2000亿参数实现了对标海外顶流闭源模型（如 Sonnet4.6）的性能表现。\n📈 悄然进化 :经过2月底及3月初的多次迭代，模型在编程、前端开发及审美能力上大幅提升。\n🏁 国产新标杆 :在多项非官方评测中已达到国产大模型的最\n顶尖\n水平（SOTA），引发完整版 V4的\n全网\n期待。\n相关推荐\nMiniMax公布上市后首份财报 全年收入7903.8万美元\n2026年3月2日，MiniMax发布上市后首份年报，展现“AI平台型公司”发展路径。2025年总收入达7904万美元，同比增长158.9%，超70%来自海外。毛利率提升至25.4%，规模效应显现。年内亏损18.72亿美元，主要因金融负债公允价值重估；经调整净亏损为2亿美元。报告凸显高增长与财务结构挑战并存。\n2026年3月3号 15:17\n143.3k\nMiniMax App 全球上线 MaxClaw，开启全新付费体验！\nMiniMax 于 3 月 3 日全球上线移动应用 MaxClaw，用户可通过 iOS 和安卓版 MiniMax App 体验。该应用不仅方便用户使用 OpenClaw，还引入了新的 Coding Plan 计费方式，为用户提供 Agent 积分之外的付费选择。\n2026年3月3号 8:52\n153.6k\n出海赚翻了！MiniMax 2025 年报出炉：海外贡献超七成营收，增速达 159%，国产大模型“反向输出”全球\n国产AI公司MiniMax发布2025年财报，显示其全球市场营收增长迅猛，全年总收入达7900万美元。财报同时揭示，尽管海外市场成为主要收入来源，AI行业整体仍处于高投入、高亏损的长期发展阶段。\n2026年3月2号 17:58\n173.3k\nOpenRouter ：​中国 AI 模型全球用量首超美国，MiniMax 等国产力量霸榜\n中国AI模型在全球使用量上首次超越美国。OpenRouter数据显示，2月9日至15日，以MiniMax、月之暗面等为代表的中国开源模型周调用量达4.1亿，标志着全球AI竞争格局发生重大变化。\n2026年2月27号 9:18\n194.8k\n​大模型“会聊”更“会干”！MiniMax 发布 Expert 2.0 与云端助手 MaxClaw\n国产AI公司MiniMax推出Expert 2.0和MaxClaw，旨在降低专业AI智能体开发门槛，推动AI向具备实操能力的“数字专家”演进。用户无需编程，通过自然语言描述即可自动完成知识注入和工作流配置，简化了专业Agent的创建过程。\n2026年2月26号 14:44\n228.5k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "ChatGPT uninstalls surged by 295% after DoD deal",
+      "link": "https://techcrunch.com/2026/03/02/chatgpt-uninstalls-surged-by-295-after-dod-deal/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "No one has a good plan for how AI companies should work with the government",
+      "link": "https://techcrunch.com/2026/03/02/openai-anthropic-department-of-defense-war-hegseth-ai-companies-work-with-us-government/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Stripe wants to turn your AI costs into a profit center",
+      "link": "https://techcrunch.com/2026/03/02/stripe-wants-to-turn-your-ai-costs-into-a-profit-center/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A new app alerts you if someone nearby is wearing smart glasses",
+      "link": "https://techcrunch.com/2026/03/02/nearby-glasses-new-app-alerts-you-wearing-smart-glasses-surveillance-meta-snap-bluetooth/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Users are ditching ChatGPT for Claude — here’s how to make the switch",
+      "link": "https://techcrunch.com/2026/03/02/users-are-ditching-chatgpt-for-claude-heres-how-to-make-the-switch/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Geopolitical drama reportedly stalls IPO of SoftBank-backed PayPay",
+      "link": "https://techcrunch.com/2026/03/02/geopolitical-drama-reportedly-stalls-ipo-of-softbank-backed-paypay/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tech workers urge DOD, Congress to withdraw Anthropic label as a supply-chain risk",
+      "link": "https://techcrunch.com/2026/03/02/tech-workers-urge-dod-congress-to-withdraw-anthropic-label-as-a-supply-chain-risk/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "MyFitnessPal has acquired Cal AI, the viral calorie app built by teens",
+      "link": "https://techcrunch.com/2026/03/02/myfitnesspal-has-acquired-cal-ai-the-viral-calorie-app-built-by-teens/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The candidate that Silicon Valley built is now the one they want to tear down",
+      "link": "https://techcrunch.com/2026/03/03/the-candidate-that-silicon-valley-built-is-now-the-one-they-want-to-tear-down/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cursor has reportedly surpassed $2B in annualized revenue",
+      "link": "https://techcrunch.com/2026/03/02/cursor-has-reportedly-surpassed-2b-in-annualized-revenue/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "India’s Pronto formalizes house help as its valuation jumps 8x in under a year",
+      "link": "https://techcrunch.com/2026/03/02/indias-pronto-formalizes-house-help-as-its-valuation-jumps-8x-in-under-a-year/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Instagram tracked growing usage while targeting teens, lawyers argue",
+      "link": "https://techcrunch.com/2026/03/02/instagram-tracked-growing-usage-while-targeting-teens-lawyers-argue/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A married founder duo’s company, 14.ai, is replacing customer support teams at startups",
+      "link": "https://techcrunch.com/2026/03/02/a-married-founder-duos-company-14-ai-is-replacing-customer-support-teams-at-startups/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Hacktivists claim to have hacked Homeland Security to release ICE contract data",
+      "link": "https://techcrunch.com/2026/03/02/hacktivists-claim-to-have-hacked-homeland-security-to-release-ice-contract-data/",
+      "description": "",
+      "publish_time": "2026-03-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
