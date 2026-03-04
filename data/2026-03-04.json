@@ -1,0 +1,140 @@
+{
+  "date": "2026-03-04",
+  "articles": [
+    {
+      "title": "AI日报：OpenAI上线 GPT-5.3 Instant；通义千问负责人林俊旸宣布离职；谷歌发布 Gemini 3.1 Flash-Lite",
+      "link": "https://news.aibase.com/zh/daily/25928",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、拒尽“爹味”说教：OpenAI 紧急上线 GPT-5.3 Instant，GPT-5.4已在路上 OpenAI 推出 GPT-5.3Instant，重点解决 ChatGPT 的“爹味”说教问题，并在幻觉率和创意写作方面取得突破。 🧠 GPT-5.3Instant 优化了用户体验，减少了“爹味”说教，更加自然平等。 📊 幻觉率显著降低，提升了在医学、法律等领域的可靠性。 🎨 创意写作能力增强，更擅长通过细节刻画触动人心。 2、传 Windows 12 今年发布：全面转向模块化架构，AI 成为系统“跳动的心脏” 微软下一代操作系统 Windows 12 的 最…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：OpenAI上线 GPT-5.3 Instant；通义千问负责人林俊旸宣布离职；谷歌发布 Gemini 3.1 Flash-Lite\n发布于最新AI日报\n发布时间 :\n2026年3月4号 15:56\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、拒尽“爹味”说教：OpenAI 紧急上线 GPT-5.3 Instant，GPT-5.4已在路上\nOpenAI 推出 GPT-5.3Instant，重点解决 ChatGPT 的“爹味”说教问题，并在幻觉率和创意写作方面取得突破。\n【AiBase提要:】\n🧠 GPT-5.3Instant 优化了用户体验，减少了“爹味”说教，更加自然平等。\n📊 幻觉率显著降低，提升了在医学、法律等领域的可靠性。\n🎨 创意写作能力增强，更擅长通过细节刻画触动人心。\n2、传 Windows 12 今年发布：全面转向模块化架构，AI 成为系统“跳动的心脏”\n微软下一代操作系统 Windows 12 的\n最新\n动态，包括其基于 CorePC 架构的彻底模块化设计、AI 成为核心组件以及对硬件的新要求。这些变化不仅提升了系统的自适应能力，也推动了全球 PC 市场向“AI PC”的转型。\n【AiBase提要:】\n🧩 彻底模块化：基于 CorePC 架构，系统功能可像积木一样增减，大幅提升不同设备的适配效率。\n🤖 AI 即内核：Copilot 不再是插件，而是系统的运行中枢，部分高端 AI 功能或将推行订阅制。\n💻 硬件新门槛：强制要求 NPU 处理器，Windows 12 将成为定义“AI PC”标准的关键一代操作系统。\n3、阿里蚂蚁核心层罕见齐聚！马云重返云谷学校：AI 冲击超乎想象\n马云带领阿里巴巴与蚂蚁集团核心管理层访问杭州云谷学校，探讨AI浪潮下的教育变革，强调教育需从知识驱动转向智慧驱动，注重创造力、独立思考和责任感的培养，同时呼吁教育界迅速适应AI带来的变化。\n【AiBase提要:】\n🧠 AI时代的到来速度远超预期，对社会的冲击力极强。\n💡 教育应从“知识驱动”转向“智慧驱动”，注重创造力与想象力的培养。\n🤝 马云呼吁教育界迅速适应AI变化，教会孩子如何利用AI工具。\n4、OpenClaw能“边用边训”了：智能体强化学习训练框架AReaL v1.0稳定版发布\nAReaL v1.0稳定版发布，解决了智能体接入训练成本高和缺乏持续进化能力的问题。该框架通过Proxy Worker中转层实现零改造接入RL训练，并推出原生训练引擎Archon，支持5D并行，降低开发门槛。\n【AiBase提要:】\n🧠 AReaL v1.0让智能体无需修改代码即可接入强化学习训练\n🚀 通过Proxy Worker中转层实现零改造接入RL训练\n🛠️ 原生训练引擎Archon支持5D并行，降低开发门槛\n详情链接:https://github.com/inclusionAI/AReaL\n5、阶跃星辰Step3.5Flash全链路开源:1960亿参数MoE架构，调用量跃升OpenClaw前二\n阶跃星辰宣布开源Step3.5Flash模型，该模型采用稀疏MoE架构，拥有1960亿参数，并在推理时仅激活约110亿参数，实现高能效比。其在代码任务中推理速度\n最高\n可达350TPS，具备挑战\n顶级\n闭源模型的实力。目前，该模型在开源社区表现活跃，下载量突破30万次，并在OpenClaw中调用量全球排名第二。\n【AiBase提要:】\n🚀 阶跃星辰正式开源Step3.5Flash模型，提升开发者构建高性能Agent的能力。\n🧠 Step3.5Flash采用稀疏MoE架构，总参数达1960亿，推理时仅激活约110亿参数。\n📈 该模型在OpenClaw中调用量跃升至全球前二，展现强大性能与稳定性。\n6、阿里通义千问负责人林俊旸宣布离职，曾主导Qwen开源生态\n林俊旸作为阿里巴巴通义千问的核心人物，其离职对阿里大模型战略和人才留存带来挑战，同时反映出大模型赛道核心人才流动的高频化趋势。\n【AiBase提要:】\n🧠 林俊旸是阿里巴巴最年轻的P10级技术\n领袖\n，主导了Qwen开源生态的构建。\n🔄 其离职引发AI学术界及开发者社区强烈反应，类比Sam Altman离开OpenAI。\n🚀 林俊旸在团队内部组建了机器人与具身智能小组，推动AI走向物理世界。\n7、响应快如闪电！谷歌发布 Gemini 3.1 Flash-Lite：首字提速 2.5 倍，算力成本再创新低\n谷歌推出的Gemini3.1Flash-Lite模型在响应速度和性价比方面表现出色，为开发者提供了更高效的实时交互体验。其首字响应速度提升了2.5倍，整体输出速度提高了45%，同时每百万输入Token仅需0.25美元，极大降低了AI部署成本。\n【AiBase提要:】\n⚡ 首字响应速度提升2.5倍，显著优化实时交互体验。\n💰 输入价格低至0.25美元/百万Token，降低大规模AI部署门槛。\n🧠 新增“思考层级”调节功能，支持效率与深度推理的灵活切换。\n8、40 克轻如蝉翼！讯飞 AI 眼镜 MWC 2026 全球首秀：首创“看唇语”降噪，跨国交流翻译官就在眼前\n讯飞AI眼镜在MWC2026上发布，以40克的\n极致\n轻量化设计和创新的唇动识别多模态降噪技术，解决了传统AI翻译设备在嘈杂环境中的识别难题，为跨国交流提供了更自然、高效的解决方案。\n【AiBase提要:】\n🧠 40克超轻设计，解决AR/AI眼镜佩戴沉重问题。\n👄 唇动识别多模态降噪技术，提升语音识别准确率50%以上。\n🗣️ 实现多模态同传翻译，支持实时字幕与译文同步播放。\n相关推荐\n​“电子废料”骂不得？微软强推 AI 引众怒，官方社区禁言“Microslop”词条\n微软因在Windows 11中强推AI功能引发用户不满，被讽刺为“Microslop”。近期，微软在官方Discord服务器屏蔽该词，反而激起用户更强烈反弹，凸显了用户对系统稳定性问题的持续抱怨与公司应对方式之间的冲突。\n2026年3月4号 17:47\n100.1k\nOpenAI 官宣联手美国国防部，ChatGPT 遭全美用户疯狂卸载：卸载量狂飙 295%\nOpenAI与美国国防部合作，将AI模型用于军事网络，引发用户强烈抵制。消息公布当天，ChatGPT应用在美国市场出现大规模卸载潮。\n2026年3月4号 15:46\n149.9k\n新闻集团与 Meta 达成新协议，助力人工智能发展\n新闻集团CEO称，与Meta达成1.5亿美元协议后，公司已成为AI“输入公司”，为人工智能提供内容基石。\n2026年3月4号 15:41\n144.1k\nQWEN核心负责人林俊旸回应离职:称“真的需要休息”，此前已深耕大模型多年\n阿里通义千问大模型核心负责人林俊旸于3月4日宣布卸任，其社交媒体告别引发科技圈关注。作为团队关键人物，他的离职可能对阿里大模型研发产生影响。\n2026年3月4号 15:19\n166.7k\nOpenClaw官方社交账号上线，国内主流大模型厂商集体入场互动\n3月3日，开源项目OpenClaw官方微博上线，首条动态引发国内多家大模型厂商互动。该项目近期在全球AI领域表现突出，在GitHub热榜势头强劲，并在MWC2026期间受到关注。\n2026年3月4号 15:03\n185.4k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Why AI startups are selling the same equity at two different prices",
+      "link": "https://techcrunch.com/2026/03/03/why-ai-startups-are-selling-the-same-equity-at-two-different-prices/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Claude Code rolls out a voice mode capability",
+      "link": "https://techcrunch.com/2026/03/03/claude-code-rolls-out-a-voice-mode-capability/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A suite of government hacking tools targeting iPhones is now being used by cybercriminals",
+      "link": "https://techcrunch.com/2026/03/03/a-suite-of-government-hacking-tools-targeting-iphones-is-now-being-used-by-cybercriminals/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Alibaba’s Qwen tech lead steps down after major AI push",
+      "link": "https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Hacked traffic cams and hijacked TVs: How cyber operations supported the war against Iran",
+      "link": "https://techcrunch.com/2026/03/03/hacked-traffic-cams-and-hijacked-tvs-how-cyber-operations-supported-the-war-against-iran/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "X says it will suspend creators from revenue-sharing program for unlabeled AI posts of ‘armed conflict’",
+      "link": "https://techcrunch.com/2026/03/03/x-says-it-will-suspend-creators-from-revenue-sharing-program-for-unlabeled-ai-posts-of-armed-conflict/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The candidate that Silicon Valley built is now the one they want to tear down",
+      "link": "https://techcrunch.com/2026/03/03/the-candidate-that-silicon-valley-built-is-now-the-one-they-want-to-tear-down/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple unveils new MacBook Air and MacBook Pro with M5",
+      "link": "https://techcrunch.com/2026/03/03/apple-unveils-new-macbook-air-and-macbook-pro-with-m5/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "One startup’s pitch to provide more reliable AI answers: crowdsource the chatbots",
+      "link": "https://techcrunch.com/2026/03/04/one-startups-pitch-to-provide-more-reliable-ai-answers-crowdsource-the-chatbots/",
+      "description": "",
+      "publish_time": "2026-03-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Who needs data centers in space when they can float offshore?",
+      "link": "https://techcrunch.com/2026/03/04/who-needs-data-centers-in-space-when-they-can-float-offshore/",
+      "description": "",
+      "publish_time": "2026-03-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Eight Sleep raises $50M at $1.5B valuation",
+      "link": "https://techcrunch.com/2026/03/04/eight-sleep-raises-50m-at-1-5b-valuation/",
+      "description": "",
+      "publish_time": "2026-03-04",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Just three companies dominated the $189B in VC investments last month",
+      "link": "https://techcrunch.com/2026/03/03/openai-anthropic-waymo-dominated-189-billion-vc-investments-february-crunchbase-report/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok down for some in US, thanks to second Oracle outage since sale",
+      "link": "https://techcrunch.com/2026/03/03/tiktok-down-for-some-in-u-s-thanks-to-second-oracle-outage-since-sale/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "AI companies are spending millions to thwart this former tech exec’s congressional bid",
+      "link": "https://techcrunch.com/2026/03/03/ai-companies-are-spending-millions-to-thwart-this-former-tech-execs-congressional-bid/",
+      "description": "",
+      "publish_time": "2026-03-03",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
