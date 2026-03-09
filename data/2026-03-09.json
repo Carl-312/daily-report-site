@@ -1,0 +1,86 @@
+{
+  "date": "2026-03-09",
+  "articles": [
+    {
+      "title": "AI日报：腾讯内测QClaw一键启动包；小红书新款AI编辑模型开源；OpenClaw正式支持 GPT-5.4",
+      "link": "https://news.aibase.com/zh/daily/26047",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、消息称腾讯内测QClaw一键启动包:支持微信QQ双端接入OpenClaw智能体 腾讯正在内测QClaw一键启动包，旨在通过产品化封装降低AI开源智能体的使用门槛，并支持微信、QQ双端接入OpenClaw。该产品基于OpenClaw进行二次封装与优化，展现出较强的开放性，不仅深度集成Kimi、MiniMax等主流国产大模型，也支持用户自定义模型接入。 📦 QClaw产品实现本地电脑快速部署，降低AI开源智能体使用门槛。 📱 支持微信、QQ双端接入OpenClaw，解决用户技术痛点。 🧠 QClaw深度集成主流国产大模型，支持自定义模型接入。 2、火山引擎发布…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：腾讯内测QClaw一键启动包；小红书新款AI编辑模型开源；OpenClaw正式支持 GPT-5.4\n发布于最新AI日报\n发布时间 :\n2026年3月9号 15:58\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、消息称腾讯内测QClaw一键启动包:支持微信QQ双端接入OpenClaw智能体\n腾讯正在内测QClaw一键启动包，旨在通过产品化封装降低AI开源智能体的使用门槛，并支持微信、QQ双端接入OpenClaw。该产品基于OpenClaw进行二次封装与优化，展现出较强的开放性，不仅深度集成Kimi、MiniMax等主流国产大模型，也支持用户自定义模型接入。\n【AiBase提要:】\n📦 QClaw产品实现本地电脑快速部署，降低AI开源智能体使用门槛。\n📱 支持微信、QQ双端接入OpenClaw，解决用户技术痛点。\n🧠 QClaw深度集成主流国产大模型，支持自定义模型接入。\n2、火山引擎发布 ArkClaw:云端 SaaS 版 OpenClaw 正式上线，集成豆包大模型\n火山引擎发布 ArkClaw，这是一款云端 SaaS 版 OpenClaw 平台，旨在解决 AI Agent 在实际应用中面临的环境配置复杂、Token 消耗过高以及会话状态不稳等核心痛点。ArkClaw 深度整合了“火山方舟”模型平台，并支持飞书办公套件，同时具备数据安全机制。目前，火山引擎已针对“Coding Plan”订阅用户开放抢先体验。\n【AiBase提要:】\n🧠 ArkClaw 是一款云端 SaaS 版 OpenClaw 平台，解决 AI Agent 的环境配置复杂问题。\n🚀 集成主流大模型，如 Doubao-Seed-2.0Pro，提升任务逻辑一致性。\n🔒 内置 Skills 安全扫描机制，确保企业级应用的可靠性。\n3、小红书新款AI编辑模型FireRed-Image-Edit v1.1开源，攻克ID一致性与复杂融合难题\n小红书Super Intelligence团队发布的FireRed-Image-Edit v1.1模型，在ID一致性编辑、多元素融合和人像美妆等复杂场景中实现了显著优化，同时支持训练与部署的全流程优化，推理耗时缩短至4.5秒，显存占用控制在30GB以内。此外，该项目的代码、技术报告、模型参数及训练框架已全面开源，为行业提供了更强大的图像编辑工具支持。\n【AiBase提要:】\n🧠 FireRed-Image-Edit v1.1在ID一致性编辑方面进行了深度优化\n🎨 支持多元素融合与人像美妆等复杂场景的图像编辑\n📦 项目代码、技术报告及模型参数已全面开源\n4、从0到大师：用这个AI Skill，一句描述就能生成惊艳海报\n本文介绍了名为qiaomu-mondo-poster-design的AI技能，它能够根据用户描述的需求自动生成大师级海报、书籍封面等设计作品，无需用户具备专业设计知识。文章详细说明了该技能的核心亮点、使用场景以及安装方式，并提供了GitHub链接供进一步了解。\n【AiBase提要:】\n🎨 通过描述需求，AI自动选择传奇设计师风格并生成海报\n🖼️ 支持多种设计场景，如书籍封面、专辑封面和社交媒体配图\n🔧 内置AI提示词优化功能，提升出图准确度\n详情链接:https://github.com/joeseesun/qiaomu-mondo-poster-design\n5、阿里达摩院发布 MAOSS 模型：利用 AI 筛查脂肪肝，高风险检出率翻倍\n阿里达摩院联合多家机构研发出 MAOSS 脂肪肝筛查 AI 模型，该模型利用平扫 CT 和 AI 技术，能够精准判断肝脂肪变程度和肝纤维化分期，诊断精度远超医生水平，并显著提高高风险患者的检出率，为慢性肝病管理提供了新的解决方案。\n【AiBase提要:】\n🧠 MAOSS 模型通过平扫 CT 和 AI 技术，实现肝脂肪变和肝纤维化的同步判断。\n📊 MAOSS 在肝脂肪分期的 AUC 达到 0.904-0.917，显著高于医生水平。\n⚠️ MAOSS 能识别出 52.4% 的高风险患者，检出率是传统方法的 2 倍以上。\n6、Star 量破 28 万：OpenClaw 发布重大更新，正式支持 GPT-5.4 与“记忆热插拔”\nOpenClaw 发布了 2026.3.7 核心版本，引入了上下文引擎插件、分布式频道绑定等重磅功能，并全面支持 OpenAI\n最新\n旗舰模型 GPT-5.4。该版本还优化了本地模型体验，提升了性能表现，应用范围扩展至多个领域。\n【AiBase提要:】\n上下文引擎插件化：新增 Context Engine 接口，支持开发者自由挂载 RAG 或无损压缩算法。\nGPT-5.4与 Gemini 原生支持：同步接入 GPT-5.4，并在 OOLONG 基准测试中展现出优于官方原生工具的性能。\n持久化频道绑定：通过 ACP 协议，智能体可以与 Discord 或 Telegram 频道进行深度绑定。\n7、ChatGPT“成人模式”又跳票！奥特曼：先把智商搞上去，搞颜色再等等\nOpenAI再次推迟了原定于2026年\n第一\n季度上线的“成人模式”，将资源优先用于提升AI的智能水平和个性化交互体验。尽管如此，OpenAI并未完全放弃这一功能，并在新版本中发现了名为“Naughty Chats”的设置。同时，为了保护未成年人，公司还推出了年龄预测工具。\n【AiBase提要:】\n🧠 OpenAI推迟“成人模式”上线，优先提升AI智能水平和对话体验。\n🔒 为防止未成年人接触，OpenAI推出年龄预测工具并要求身份核验。\n⚖️ 企业面临商业利益与伦理底线之间的艰难抉择。\n8、AI编码Agent真实战力大比拼！OpenClaw“小龙虾”排行榜出炉\n文章详细介绍了OpenClaw AI Agent“小龙虾”能力排行榜的\n最新\n评测结果，分析了各大主流大模型在真实编码任务中的表现，并强调了框架适配和任务执行效率的重要性。\n【AiBase提要:】\n🧪 标准化测试方法确保评测结果客观、可复现且零人工干预。\n🏆 前三强模型在复杂编码任务中表现出色，成功率\n遥遥领先\n。\n🤖 GPT-5.2与DeepSeek表现意外，说明参数规模与实际能力并非完全正相关。\n相关推荐\n零成本启动AI创业:深圳龙岗重磅扶持OpenClaw，最高200万奖金\n近日，开源智能体项目OpenClaw走红，引发“养龙虾”热潮。深圳龙岗区迅速跟进，发布“龙虾十条”政策，以“零成本启动”吸引全球开发者和一人公司入驻，并提供全生命周期服务支持智能体发展。\n2026年3月9号 17:37\n157.4k\n​腾讯电脑管家 QClaw内测码如何获取？附QClaw内测码链接\n腾讯电脑管家推出本地AI助手QClaw，已开放内测申请。该产品基于OpenClaw开发，主打数据本地处理，保障用户隐私安全。支持Mac和Windows双平台，适应多样办公场景。\n2026年3月9号 16:17\n285.8k\n云上版本“OpenClaw”！字节火山引擎上线ArkClaw，无需配置、开箱即用\n火山引擎发布ArkClaw，解决AI Agent部署难题。它作为云上SaaS版OpenClaw，将顶级开源Agent框架能力网页化，用户无需配置环境、购买算力或管理API，打开网页即可获得24小时在线的AI自动机，简化了强大AI功能的使用流程。\n2026年3月9号 16:13\n156.4k\n腾讯内测QClaw：实现一键安装部署OpenClaw，接入微信QQ\n腾讯推出内测产品QClaw，旨在降低AI使用门槛，将AI功能集成到微信中，回应开源AI工具OpenClaw的火爆现象。\n2026年3月9号 15:18\n182.7k\nOpenClaw 2026.3.7 版本更新：支持GPT-5.4，彻底解决智能体“断片”难题\nOpenClaw开源智能体项目发布重大更新，支持GPT-5.4，性能超越Claude Code，GitHub Star量突破28万，标志着其向“Agent操作系统”迈进。\n2026年3月9号 14:20\n152.7k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Ring’s Jamie Siminoff is still trying to calm privacy fears, but his answers may not help",
+      "link": "https://techcrunch.com/2026/03/08/rings-jamie-siminoff-has-been-trying-to-calm-privacy-fears-since-the-super-bowl-but-his-answers-may-not-help/",
+      "description": "",
+      "publish_time": "2026-03-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Will the Pentagon’s Anthropic controversy scare startups away from defense work?",
+      "link": "https://techcrunch.com/2026/03/08/will-the-pentagons-anthropic-controversy-scare-startups-away-from-defense-work/",
+      "description": "",
+      "publish_time": "2026-03-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: Rivian’s R2 gambit",
+      "link": "https://techcrunch.com/2026/03/08/techcrunch-mobility-rivians-r2-gambit/",
+      "description": "",
+      "publish_time": "2026-03-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Owner of ICE detention facility sees big opportunity in AI man camps",
+      "link": "https://techcrunch.com/2026/03/08/owner-of-ice-detention-facility-sees-big-opportunity-in-ai-man-camps/",
+      "description": "",
+      "publish_time": "2026-03-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Zoox starts mapping Dallas and Phoenix for its robotaxis",
+      "link": "https://techcrunch.com/2026/03/09/zoox-starts-mapping-dallas-and-phoenix-for-its-robotaxis/",
+      "description": "",
+      "publish_time": "2026-03-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The 2027 Chevy Bolt is the McRib of the automotive world",
+      "link": "https://techcrunch.com/2026/03/09/the-2027-chevy-bolt-is-the-mcrib-of-the-automotive-world/",
+      "description": "",
+      "publish_time": "2026-03-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Flipkart moves its headquarters back to India ahead of IPO",
+      "link": "https://techcrunch.com/2026/03/09/flipkart-moves-its-headquarters-back-to-india-ahead-of-ipo/",
+      "description": "",
+      "publish_time": "2026-03-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Palmer Luckey’s retro gaming startup ModRetro reportedly seeks funding at $1B valuation",
+      "link": "https://techcrunch.com/2026/03/08/palmer-luckeys-retro-gaming-startup-modretro-reportedly-seeks-funding-at-1b-valuation/",
+      "description": "",
+      "publish_time": "2026-03-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
