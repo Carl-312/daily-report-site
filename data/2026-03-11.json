@@ -1,0 +1,140 @@
+{
+  "date": "2026-03-11",
+  "articles": [
+    {
+      "title": "AI日报：微信秘密研发AI Agent；Fish Audio发布S2；荣耀Magic V6首发端侧AI智能体内测",
+      "link": "https://news.aibase.com/zh/daily/26134",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、微信秘密研发AI Agent:拟打通数百万小程序，将于2026年中开启测试 微信正秘密研发一款高优先级AI Agent产品，旨在全面接入微信生态内的数百万小程序。该项目由微信技术负责人周颢负责，直接向张小龙汇报，并于2025年上半年启动。该Agent计划于2026年中开启灰度测试，并争取在第三季度逐步放量。在技术选型上，微信团队保持了审慎的开放态度，同步测试了多个外部大模型及自研小模型，以确保在复杂多步骤任务处理中的稳定性。 🤖 微信正在秘密研发一款高优先级AI Agent产品，旨在全面接入微信生态内的数百万小程序。 🔄 该Agent计划于2026年中开启…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：微信秘密研发AI Agent；Fish Audio发布S2；荣耀Magic V6首发端侧AI智能体内测\n发布于最新AI日报\n发布时间 :\n2026年3月11号 16:43\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、微信秘密研发AI Agent:拟打通数百万小程序，将于2026年中开启测试\n微信正秘密研发一款高优先级AI Agent产品，旨在全面接入微信生态内的数百万小程序。该项目由微信技术负责人周颢负责，直接向张小龙汇报，并于2025年上半年启动。该Agent计划于2026年中开启灰度测试，并争取在第三季度逐步放量。在技术选型上，微信团队保持了审慎的开放态度，同步测试了多个外部大模型及自研小模型，以确保在复杂多步骤任务处理中的稳定性。\n【AiBase提要:】\n🤖 微信正在秘密研发一款高优先级AI Agent产品，旨在全面接入微信生态内的数百万小程序。\n🔄 该Agent计划于2026年中开启灰度测试，并争取在第三季度逐步放量。\n🌐 微信团队在技术选型上保持了审慎的开放态度，同步测试了多个外部大模型及自研小模型。\n2、真正的情感自由！Fish Audio发布S2：多说话人、词级情绪控制、完全开源\nFish Audio 发布新一代文本转语音（TTS）模型 S2，其在情感可控性和表现力方面实现了重大突破，支持词级或短语级的情绪调节，并且完全开源，适合实时应用场景如对话机器人和虚拟主播。\n【AiBase提要:】\n🎭 强大的情感可控性，支持自然语言指令调节语音韵律与情绪。\n🌐 完全开源，包含模型权重、微调代码及流式推理引擎。\n🗣️ 原生多说话人支持，实现对话轮转与音色一致性。\n详情链接:https://github.com/fishaudio/fish-speech/ HuggingFace:https://huggingface.co/fishaudio/s2-pro/\n3、从手机到“龙虾宇宙”:荣耀Magic V6首发端侧AI智能体内测\n荣耀在新品发布会上推出新一代折叠旗舰Magic V6，并同步揭晓了其在AI生态领域的重磅布局——“荣耀龙虾宇宙”。这一动作标志着荣耀正式将端侧AI智能体能力深度整合进多设备协同体系。\n【AiBase提要:】\n🧠 荣耀Magic V6发布，标志着端侧AI智能体能力深度整合进多设备协同体系。\n🔒 OpenClaw框架提供决策建议并可直接接管终端进行自动化任务处理。\n⚠️ 国家互联网应急中心已针对OpenClaw的安全应用发布风险提示。\n4、AI 时代品牌如何“上桌”？知乎发布行业首个品牌 AI 竞争力指数\n文章探讨了生成式 AI 对品牌可见性的影响，提出了品牌 AI 竞争力指数的核心公式，并分析了内容可信度的重要性。同时，文章指出知乎在 AI 营销中的信源价值以及多领域 AI 竞争力榜单的发布。\n【AiBase提要:】\n✨ 品牌 AI 竞争力指数 = AI 可见度 × 综合提及排名 × 内容可信度\n🔍 引入“内容可信度”指标，强调\n权威\n平台背书和高质量内容的重要性\n📊 知乎引用率位居内容社区首位，成为 AI 模型的重要语料库\n5、百度智能云发布零部署AI服务DuClaw，进一步降低智能体应用门槛\n百度智能云发布零部署AI服务DuClaw，进一步降低智能体应用门槛，通过免除镜像选择、服务器部署及API Key配置等繁琐环节，实现AI智能体的“即开即用”。\n【AiBase提要:】\n🧠 DuClaw通过零部署模式简化AI智能体的使用流程，提升用户体验。\n🌐 该服务集成了百度搜索、百科及学术搜索等核心能力，支持多款主流大模型的灵活选配。\n🚀 百度通过DuClaw推动AI助理在企业级协同场景中的渗透，加速AI向“数字员工”转型。\n6、谷歌Gemini Embedding 2重磅发布！\n首款\n全多模态嵌入模型来了\n谷歌Gemini Embedding 2的发布标志着其在多模态AI领域的重大突破。该模型能够将文本、图片、视频、音频和文档等多种数据类型映射到同一个统一的嵌入向量空间中，实现跨模态检索与分类，并支持超过100种语言。此外，它还具备混合输入能力和音频原生处理功能，显著简化了多模态数据处理流程。\n【AiBase提要:】\n🧠 统一嵌入空间，打破模态壁垒\n🔄 混合输入能力，精准捕捉语义关联\n🔊 音频原生处理，无需ASR转录\n7、OpenAI 升级 Atlas 浏览器:支持多账号登录，实现工作与生活数据分离\nOpenAI升级Atlas浏览器，支持多账号登录，实现工作与生活数据分离，进一步提升隐私安全性和用户体验。\n【AiBase提要:】\n🧠 支持多ChatGPT账号登录，解决用户多重身份使用痛点。\n🔒 实现工作与生活数据分离，提升隐私安全性。\n🔄 从实验性AI工具向成熟生产力浏览器转型，增强基础易用性。\n8、抢跑骁龙 8 Gen6！小米 18 系列曝光：新增 AI 实体键，或于 9 月提前登场\n小米 18 系列爆料显示，将引入 AI 多功能按键和 AI 手写笔，提升用户交互体验。同时搭载\n最新\n2nm 骁龙 8 Elite Gen6 芯片，影像系统也将升级。发布时间预计在 9 月，以抢占高端市场先机。\n【AiBase提要:】\n🧠 AI 多功能按键将根据场景动态调整快捷操作\n🚀 首发 2nm 骁龙 8 Elite Gen6，提升算力和性能\n📅 小米 18 系列或于 9 月提前发布，抢占市场\n相关推荐\nAI日报：Anthropic发布Claude Opus 4.6；千问“春节大免单”首日火爆；腾讯推出“火龙漫剧”\n微信被指限制阿里千问及腾讯元宝的口令复制功能，疑因阿里千问“春节30亿免单”活动火爆，其分享口令在微信内受限，腾讯自家元宝App也面临同样问题。\n2026年2月6号 16:20\n251.1k\n「6月30日AI日报」百度开源文心大模型4.5系列；通义千问多模态生成模型Qwen VLo\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.百度重磅开源文心大模型4.5系列，十款新模型亮相!百度正式发布文心大模型4.5系列并完全开源，包含多种参数配置的十款新模型，使用飞桨框架训练推理，FLOPs利用率47%，在文本多模态基准测试中表现优异，提供一站式使用指南和工具，方便开发者精调部署，已上传至Hugging Face、GitHub等平台。体验地址:https://yiyan.baidu.com Hugging Face:https://huggingface.co/baidu）Gi\n2025年6月30号 16:33\n160.1k\n「6月27日AI日报」腾讯开源轻量级混元-A13B模型；可灵AI推“视频音效”功能\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1、腾讯开源轻量级混元-A13B模型1张中低端GPU卡即可部署腾讯发布混元大模型家族的新成员混元-A13B模型，采用专家混合（MoE）架构，总参数规模达800亿，激活参数为130亿，大幅降低推理延迟与计算开销，为个人开发者和中小企业提供更具性价比的AI解决方案。该模型在数学、科学和逻辑推理任务中表现出色，支持调用工具生成复杂指令响应。体验入口:https:/\n2025年6月27号 16:32\n208.8k\n「6月26日AI日报」可灵AI推全球首部AIGC单元剧；谷歌开源AI智能体Gemini CLI\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.豆包AI编程重磅升级!零代码小白也能轻松打造专属网页，实时编辑超省心!豆包AI编程升级到“应用创作1.0”，有可视化编辑、实时预览和多版本管理功能，降低网页和应用开发门槛。零基础用户可像编辑PPT一样设计网页，专业开发者也能在对话窗口调用AI编程功能，提升创作效率。2.谷歌放大招!Gemini CLI开源发布，免费提供AI编程助手挑战Cursor谷歌发布开源\n2025年6月26号 16:45\n197.7k\n​谷歌 YouTube TV 引入 AI 精准投放：30 秒强制广告全面上线\n谷歌旗下YouTube TV在全球推出30秒不可跳过广告，通过AI系统智能调度，优化广告变现效率，标志着智能电视商业模式向传统广播模式靠拢。\n2026年3月11号 18:01\n116.0k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Google and Tesla think we’re managing the electrical grid all wrong",
+      "link": "https://techcrunch.com/2026/03/10/google-and-tesla-think-were-managing-the-electrical-grid-all-wrong/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "AI-powered apps struggle with long-term retention, new report shows",
+      "link": "https://techcrunch.com/2026/03/10/ai-powered-apps-struggle-with-long-term-retention-new-report-shows/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "DOGE employee stole Social Security data and put it on a thumb drive, report says",
+      "link": "https://techcrunch.com/2026/03/10/doge-employee-stole-social-security-data-and-put-it-on-a-thumb-drive-report-says/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Mandiant’s founder just raised $190M for his autonomous AI agent security startup",
+      "link": "https://techcrunch.com/2026/03/10/mandiants-founder-just-raised-190m-for-his-autonomous-ai-agent-security-startup/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "YouTube surpasses Disney, Paramount, WBD in 2025 ad revenue",
+      "link": "https://techcrunch.com/2026/03/10/youtube-surpasses-disney-paramount-wbd-in-2025-ad-revenue/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "‘Pokémon Pokopia’ is a game about rehabilitating a broken world — and I love it",
+      "link": "https://techcrunch.com/2026/03/10/pokemon-pokopia-review-animal-crossing-ditto-nintendo-switch/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "This SpaceX veteran says the next big thing in space is satellites that return to Earth",
+      "link": "https://techcrunch.com/2026/03/10/lux-aeterna-raises-10-million-for-reusable-satellite-mission/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Meta acquired Moltbook, the AI agent social network that went viral because of fake posts",
+      "link": "https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/",
+      "description": "",
+      "publish_time": "2026-03-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Meta rolls out new scam detection tools to Facebook, WhatsApp, and Messenger",
+      "link": "https://techcrunch.com/2026/03/11/meta-rolls-out-new-scam-detection-tools-to-facebook-whatsapp-and-messenger/",
+      "description": "",
+      "publish_time": "2026-03-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Lucid Motors ships Apple CarPlay and Android Auto to Gravity SUV owners",
+      "link": "https://techcrunch.com/2026/03/11/lucid-motors-ships-apple-carplay-and-android-auto-to-gravity-suv-owners/",
+      "description": "",
+      "publish_time": "2026-03-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Former Apple engineer raises $5M for a note-taking pendant that only records your voice",
+      "link": "https://techcrunch.com/2026/03/11/former-apple-engineer-raises-5m-for-a-note-taking-pendant-that-only-records-your-voice/",
+      "description": "",
+      "publish_time": "2026-03-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Canopii looks to succeed where past indoor farms have not",
+      "link": "https://techcrunch.com/2026/03/11/canopii-looks-to-succeed-where-past-indoor-farms-have-not/",
+      "description": "",
+      "publish_time": "2026-03-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok now lets Apple Music subscribers play full songs without leaving the app",
+      "link": "https://techcrunch.com/2026/03/11/tiktok-now-lets-apple-music-subscribers-play-full-songs-without-leaving-the-app/",
+      "description": "",
+      "publish_time": "2026-03-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google wraps up $32B acquisition of cloud cybersecurity startup Wiz",
+      "link": "https://techcrunch.com/2026/03/11/google-completes-32b-acquisition-of-wiz/",
+      "description": "",
+      "publish_time": "2026-03-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
