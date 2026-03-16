@@ -1,0 +1,122 @@
+{
+  "date": "2026-03-16",
+  "articles": [
+    {
+      "title": "AI日报：腾讯发布“龙虾管家”；抖音处置AI擦边违规账号1.4万个；有赞回应315AI投毒传闻",
+      "link": "https://news.aibase.com/zh/daily/26257",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、行业首个！腾讯发布“龙虾管家”，为本地 AI Agent 打造安全沙箱 腾讯电脑管家推出的“龙虾管家·AI安全沙箱”功能，为本地AI Agent提供了全面的安全防护，包括权限管控、恶意注入拦截和隐私保护等，同时支持多种主流AI框架，推动AI时代个人电脑防护标准的建立。 🛡️ 通过沙箱隔离技术严格管控AI对底层资源的访问权限，拦截异常行为。 🔐 引入可视化管理机制，让用户清晰查看AI应用对敏感权限的调用记录。 🌐 支持多种主流本地AI框架，定义AI时代的个人电脑防护标准。 2、打击“AI 擦边”不手软：抖音今年已处置 1.4 万个违规账号 抖音平台近期加强了…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：腾讯发布“龙虾管家”；抖音处置AI擦边违规账号1.4万个；有赞回应315AI投毒传闻\n发布于最新AI日报\n发布时间 :\n2026年3月16号 16:36\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、行业首个！腾讯发布“龙虾管家”，为本地 AI Agent 打造安全沙箱\n腾讯电脑管家推出的“龙虾管家·AI安全沙箱”功能，为本地AI Agent提供了全面的安全防护，包括权限管控、恶意注入拦截和隐私保护等，同时支持多种主流AI框架，推动AI时代个人电脑防护标准的建立。\n【AiBase提要:】\n🛡️ 通过沙箱隔离技术严格管控AI对底层资源的访问权限，拦截异常行为。\n🔐 引入可视化管理机制，让用户清晰查看AI应用对敏感权限的调用记录。\n🌐 支持多种主流本地AI框架，定义AI时代的个人电脑防护标准。\n2、打击“AI 擦边”不手软：抖音今年已处置 1.4 万个违规账号\n抖音平台近期加强了对利用AI技术生成色情低俗内容的治理力度，已处理大量违规内容并处罚相关账号，同时将违法线索移交公安机关，以维护网络环境的清朗。\n【AiBase提要:】\n🛡️ 抖音针对AI生成的色情低俗内容展开专项治理，已处置4.2万条违规内容。\n🔐 平台对1.4万个违规账号进行梯次处罚，包括禁言和封禁。\n👮‍♂️ 339个相关账号被无限期回收直播权限，涉案团伙被刑事拘留。\n3、有赞回应315“AI投毒”传闻:GEO涉事产品非旗下投资公司开发\n有赞回应315“AI投毒”传闻，强调其投资企业与涉事产品无关联，并明确AI营销业务的安全合规边界。\n【AiBase提要:】\n✅ 有赞澄清其投资企业与央视3·15晚会曝光的“AI投毒”事件无关。\n🚫 有赞明确表示其AI营销业务遵循安全合规边界，反对“投毒式”营销。\n🔍 事件揭示了GEO概念在非法产业链中的异化，需建立行业标准以区分合规与恶意内容。\n4、字节跳动暂停Seedance2.0全球发布，法律合规挑战迫使AI视频模型延期\n文章指出，字节跳动因法律合规压力暂停了其新一代AI视频生成模型Seedance2.0的全球发布计划。尽管该模型在中国市场已亮相，但面临好莱坞制片方的版权侵权指责，导致其全球化进程受阻。这反映了生成式AI在技术爆发与现行法律框架之间的冲突，也预示着AI视频行业正从“算力博弈”向“合规竞争”转型。\n【AiBase提要:】\n🌱 Seedance2.0因法律合规问题暂停全球发布，凸显AI技术与法律监管的矛盾。\n🎬 模型生成的高逼真度视频引发影视行业防御机制，迪士尼等制片方发出侵权通知函。\n💡 字节跳动需优先解决全球监管环境下的合规性挑战，版权问题成为多模态大模型落地的关键门槛。\n5、百万 Token 时代开启！Claude 一夜拆掉 AI 编程\n天花板\n：代码库、哈利波特都能一次吞下？\n文章介绍了 Anthropic 推出的 Claude 100万 Token 上下文窗口，标志着 AI 编程进入新纪元。该功能不仅提升了 AI 的工作记忆能力，还通过合理的定价策略降低了使用门槛。同时，Claude 在细节检索测试中表现出色，展现了强大的信息处理能力。\n【AiBase提要:】\n🧠 100万 Token 上下文窗口上线，AI 拥有“超长工作记忆”\n💰 定价策略“降维打击”，长上下文不再是\n奢侈\n品\n🚀 Opus4.6 在细节检索测试中表现优异，稳居同类模型\n第一\n6、智谱发布GLM-5-Turbo：\n首款\n龙虾场景原生模型，自研基准稳居国产\n第一\n智谱发布了针对复杂Agent场景深度优化的基座模型GLM-5-Turbo，解决了通用大模型在长链路任务中易失速的问题。该模型强化了工具调用、复杂指令拆解等核心能力，并在自研基准测试中位居国产模型首位。同时，智谱推出了“龙虾套餐”订阅体系及企业级安全管理体系，推动大模型向企业数字劳动力跃迁。\n【AiBase提要:】\n✨ GLM-5-Turbo是专为复杂Agent场景优化的基座模型，提升了执行效率。\n📊 在自研基准测试ZClawBench中，GLM-5-Turbo位居国产模型首位。\n🔒 智谱推出“龙虾套餐”和企业级安全管理体系，实现多Agent协同的可视化管理。\n详情链接:https://autoglm.zhipuai.cn/autoclaw\n7、清华重磅开源！OpenMAIC打造AI多智能体虚拟课堂，一键把任何主题变身沉浸式互动教室\n清华大学研究团队开源了OpenMAIC，这是一个由大语言模型驱动的多智能体互动课堂平台。该项目将任意主题或文档转化为完整的沉浸式学习体验，标志着在线教育进入“与AI共同上课”的新阶段。\n【AiBase提要:】\n🧠 AI老师：负责系统讲解、语音授课、在白板上实时画图写公式\n👩‍🏫 AI助教：提供个性化辅导、补充细节\n💬 AI同学：模拟真实学生，主动参与讨论、提问、举手发言，甚至展开圆桌辩论\n详情链接:https://open.maic.chat/\n8、影视配音进入AI时代:通义实验室开源Fun-CineForge，首克多人对话难题\n通义实验室发布并开源了首个影视级多场景配音多模态大模型——Fun-CineForge，解决了传统AI配音在复杂情绪爆发和精准口型匹配上的瓶颈问题。该模型通过引入“时间模态”和四模态融合架构，实现了对多人对话场景的精准支持，显著提升了词错率、唇部同步度及音色相似度的表现。\n【AiBase提要:】\n🎬 口型同步: 实现合成语音与画面唇部运动的高度一致。\n🎭 情绪表达: 结合面部形象与指令描述，赋予声音拟人化的情感深度。\n🔊 音色一致性: 在复杂的多角色对话中保持特定人物的音色稳定。\n详情链接:\nhttps://github.com/FunAudioLLM/FunCineForge\nHuggingFace :https://huggingface.co/FunAudioLLM/Fun-CineForge\nModelScope :https://www.modelscope.cn/models/FunAudioLLM/Fun-CineForge/\n相关推荐\n打击“AI 垃圾视频”：谷歌首次直接投资儿童动画工作室 Animaj\n谷歌投资AI动画工作室Animaj，被视为YouTube首次直接投资儿童内容工作室，旨在对抗平台上的“AI垃圾内容”——即利用生成式AI批量制造、缺乏教育价值的低质视频，保护婴幼儿用户免受不良影响。\n2026年3月16号 16:45\n146.9k\n​阿里通义发布 Fun-CineForge：开源影视级配音大模型，攻克音画同步难题\n阿里通义实验室发布并开源了Fun-CineForge模型，旨在解决AI配音中的口型不同步、情感缺失及多角色音色不一致等问题。该模型创新引入“时间模态”概念，通过精准时间戳控制，确保语音与画面同步，并同步开放高质量数据集构建方法。\n2026年3月16号 16:42\n155.4k\n香港用户终于等到你！谷歌逐步解锁 Gemini 网页版：生成图像、音乐全开放\n谷歌Gemini AI助手网页版正式向香港用户开放，提供文字、图像、语音及数据处理等多模态功能，结束了此前无法直接登录的局面。\n2026年3月16号 15:56\n141.5k\n​拒绝“套壳”：谷歌与 Accel 印度加速器从 4000 份申请中选出 5 家硬核初创公司\n谷歌与Accel从4000多份申请中选出5家印度AI初创企业。值得注意的是，尽管多数申请为“AI封装器”类项目，但最终入选者均非此类简单套壳应用。Accel合伙人指出，约70%被拒申请仅是在现有模型上添加聊天界面，缺乏深度创新。\n2026年3月16号 15:41\n89.9k\n​高效轻量化：IBM 发布 Granite 4.0 1B Speech 多模态语音大模型\nIBM推出Granite4.01B Speech语音模型，专为边缘计算和企业部署设计。该模型参数量减半，但性能显著提升，支持多语种自动语音识别和双向翻译，新增日语识别和关键词偏置功能，并大幅提高英文转录准确率。\n2026年3月16号 15:29\n144.2k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Apple quietly launches AirPods Max 2",
+      "link": "https://techcrunch.com/2026/03/16/apple-quietly-launches-airpods-max-2/",
+      "description": "",
+      "publish_time": "2026-03-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The billionaires made a promise — now some want out",
+      "link": "https://techcrunch.com/2026/03/15/the-billionaires-made-a-promise-now-some-want-out/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Lawyer behind AI psychosis cases warns of mass casualty risks",
+      "link": "https://techcrunch.com/2026/03/15/lawyer-behind-ai-psychosis-cases-warns-of-mass-casualty-risks/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Rivian’s RJ Scaringe thinks we’re doing robots all wrong",
+      "link": "https://techcrunch.com/2026/03/15/rivians-rj-scaringe-thinks-were-doing-robots-all-wrong/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Wiz investor unpacks Google’s $32B acquisition",
+      "link": "https://techcrunch.com/2026/03/15/wiz-investor-unpacks-googles-32b-acquisition/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "ByteDance reportedly pauses global launch of its Seedance 2.0 video generator",
+      "link": "https://techcrunch.com/2026/03/15/bytedance-reportedly-pauses-global-launch-of-its-seedance-2-0-video-generator/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Unacademy to be acquired by upGrad in share-swap deal as India’s edtech sector consolidates",
+      "link": "https://techcrunch.com/2026/03/15/unacademy-to-be-acquired-by-upgrad-in-share-swap-deal-as-indias-edtech-sector-consolidates/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "How to watch Jensen Huang’s Nvidia GTC 2026 keynote — and what to expect",
+      "link": "https://techcrunch.com/2026/03/16/nvidia-gtc-how-to-watch-jensen-huang-2026-keynote/",
+      "description": "",
+      "publish_time": "2026-03-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Walmart-backed PhonePe shelves IPO as global tensions rattle markets",
+      "link": "https://techcrunch.com/2026/03/16/walmart-backed-phonepe-shelves-ipo-as-global-tensions-rattle-markets/",
+      "description": "",
+      "publish_time": "2026-03-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Netflix’s ‘Frankenstein’ wins three Oscars, ‘KPop Demon Hunters’ wins two",
+      "link": "https://techcrunch.com/2026/03/15/netflixs-frankenstein-wins-three-oscars-kpop-demon-hunters-wins-two/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google, Accel India accelerator chooses 5 startups and none are ‘AI wrappers’",
+      "link": "https://techcrunch.com/2026/03/15/google-and-accel-cut-through-wrappers-in-4000-ai-startup-pitches-to-pick-five-tied-to-india/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: Travis Kalanick’s return proves it really is 2016 again",
+      "link": "https://techcrunch.com/2026/03/15/techcrunch-mobility-travis-kalanicks-return-proves-it-really-is-2016-again/",
+      "description": "",
+      "publish_time": "2026-03-15",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
