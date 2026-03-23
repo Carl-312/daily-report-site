@@ -1,0 +1,86 @@
+{
+  "date": "2026-03-23",
+  "articles": [
+    {
+      "title": "AI日报：MiniMax发布全模态订阅计划；千问上线打车skill；腾讯推出微信ClawBot插件",
+      "link": "https://news.aibase.com/zh/daily/26470",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、腾讯推出微信ClawBot插件，个人AI助手“龙虾”可直连微信聊天 腾讯推出微信ClawBot插件，使个人AI助手“龙虾”能够直接连接微信聊天界面，为用户提供更便捷的交互方式，同时确保了私密性和安全性。此外，腾讯还提供了企业协同场景的接入方案，进一步降低了技术门槛。 📱 微信ClawBot插件允许用户将个人AI助手“龙虾”与微信连接，提升交互便捷性。 🔒 该通道为个人专用，保障私密性和安全性，不支持群聊和自动化操作。 💼 腾讯还提供企业协同场景的接入方案，降低企业集成AI助手的技术门槛。 2、MiniMax发布Token Plan:全球首个全模态订阅计划支…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：MiniMax发布全模态订阅计划；千问上线打车skill；腾讯推出微信ClawBot插件\n发布于最新AI日报\n发布时间 :\n2026年3月23号 16:27\n阅读 :\n1\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、腾讯推出微信ClawBot插件，个人AI助手“龙虾”可直连微信聊天\n腾讯推出微信ClawBot插件，使个人AI助手“龙虾”能够直接连接微信聊天界面，为用户提供更便捷的交互方式，同时确保了私密性和安全性。此外，腾讯还提供了企业协同场景的接入方案，进一步降低了技术门槛。\n【AiBase提要:】\n📱 微信ClawBot插件允许用户将个人AI助手“龙虾”与微信连接，提升交互便捷性。\n🔒 该通道为个人专用，保障私密性和安全性，不支持群聊和自动化操作。\n💼 腾讯还提供企业协同场景的接入方案，降低企业集成AI助手的技术门槛。\n2、MiniMax发布Token Plan:全球首个全模态订阅计划支持M2.7及视频语音模型\nMiniMax发布Token Plan，全球首个全模态订阅计划，支持M2.7及视频语音模型，降低开发者构建复杂Agent的门槛，推动AI技术向生产力工具转化。\n【AiBase提要:】\n🧠 全模态订阅计划支持文、图、音、视全维度创作需求。\n🚀 支持M2.7编程模型及视频语音模型，提升开发效率。\n💰 提供多种付费模式，满足不同用户需求。\n3、Seedance 2.0 全球上线，登顶 Artificial Analysis 视频排行榜\nSeedance 2.0是字节跳动推出的\n最新\nAI视频生成模型，具有多模态统一架构，支持文本、图像、音频及视频输入，能够生成\n最高\n1080p分辨率的高保真视频，并实现原生音视频同步生成。该模型在Artificial Analysis排行榜中位居首位，适用于短视频创作、广告营销、影视预览等场景。用户可通过Dreamina或CapCut平台体验，未来API开放将进一步赋能开发者与企业级场景。\n【AiBase提要:】\n🧠 Seedance 2.0支持多模态输入，生成高质量视频。\n🏆 在Text-to-Video和Image-to-Video领域表现优异。\n🚀 提供网页端和移动端访问，降低内容生产门槛。\n4、网易云音乐全面接入 OpenClaw，业内首个 AI Agent 音乐服务接口上线\n网易云音乐全面接入 OpenClaw 生态，成为业内首个向 AI Agent 深度开放核心服务能力的音乐平台，标志着音乐流媒体服务正从独立 App 向泛在化的 AI 插件转型。\n【AiBase提要:】\n网易云音乐接入 OpenClaw 生态，提供标准化 CLI 和自动化 Skill。\n用户可通过自然语言对话远程调用网易云音乐服务。\n音乐平台向 AI 插件转型，优化音乐服务触达效率。\n5、千问上线打车skill，可告诉AI“我要空气清新的车”\n千问上线打车技能，用户可通过自然语言表达复杂需求，系统能自动理解并完成车辆匹配，同时支持与其他生态服务结合，提升出行效率和体验。\n【AiBase提要:】\n🚗 通过自然语言直接完成打车操作，支持个性化需求如车型、价格、驾驶风格等。\n🔄 支持跨服务串联执行，如订酒店、打车、推荐美食等，提升用户体验。\n🧠 具备记忆与预约能力，可自动匹配家庭和公司地址，实现智能出行安排。\n6、蚂蚁集团入股跃然创新：AI 玩具赛道迎来“大厂”重量级玩家\n蚂蚁集团入股跃然创新，标志着AI玩具赛道迎来大厂重量级玩家，推动传统玩具向智能化转型，并借助生态资源加速技术商业化落地。\n【AiBase提要:】\n🧠 蚂蚁集团通过旗下子公司入股跃然创新，布局AI玩具领域。\n🤖 AI玩具从“死板复读”转向“智能陪伴”，实现深度逻辑对话和情感互动。\n🤝 蚂蚁集团的生态资源为跃然创新提供算力、支付及安全支持，推动技术商业化落地。\n7、打破社交壁垒！MiniMax 宣布 MaxClaw 接入个人微信：AI 智能体开启“全渠道”时代\nMiniMax 的 MaxClaw AI Agent 已实现对个人微信端的接入支持，标志着其全面覆盖主流即时通讯工具。这一举措降低了普通用户使用 AI 的门槛，并为小型创业团队提供了更灵活的自动化办公方案。\n【AiBase提要:】\n✅ MaxClaw 全面接入个人微信，打通主流即时通讯工具的最后一道关卡。\n💡 降低用户使用 AI 的门槛，推动智能体从“工具”向“伙伴”转变。\n🔒 国家机构发布安全指南，规范开发者接入社交平台时的 AI 插件使用。\n8、腾讯内测“AI问股”小程序:大模型全面接入证券咨询服务\n腾讯正式开启‘腾讯AI问股’小程序的限量内测，标志着其在大模型驱动的证券投资服务领域迈出关键一步。该产品旨在利用底层AI大模型能力，为投资者提供专业咨询服务，并与腾讯现有理财生态形成战略协同。腾讯的加入将加剧市场竞争，推动AI技术在财富管理中的应用升级。\n【AiBase提要:】\n🤖 腾讯推出“AI问股”小程序，通过大模型提供证券投资咨询服务。\n💼 该产品与腾讯现有理财生态形成战略协同，降低投资决策门槛。\n📈 腾讯入局将加剧互联网券商竞争，推动AI技术在财富管理中的应用升级。\n相关推荐\n腾讯财报现“肌肉”：2026 年 AI 投入将超 360 亿，混元元宝成头号功臣\n腾讯2025年财报显示，全年总收入7518亿元，同比增长14%，经营利润增长18%。AI业务已成为核心引擎，投入强度显著，进入“翻倍模式”，持续加码技术护城河。\n2026年3月23号 17:59\n133.9k\n微博上线首个 AI 社交超话：开启 AI “居民”的平行宇宙\n微博推出国内首个AI专属社区“硅基茶水间”，为AI打造独立社交空间。该社区支持AI入驻、生活和互动，被视为一个AI的平行宇宙，旨在探索AI社交生态，而非传统工具模式。\n2026年3月23号 17:43\n159.1k\nAI “僵尸乐迷”薅羊毛：美国男子利用 AI 创作并刷榜诈骗千万美元\n美国男子利用AI批量生成歌曲，配合机器人水军刷榜，七年骗取超千万美元版税。此案凸显AI技术被滥用于新型音乐流媒体犯罪。\n2026年3月23号 17:13\n111.3k\n打车只需“一句话”！阿里千问上线 AI 办事：本地生活流量迎来大洗牌\n阿里旗下千问AI助手推出“AI打车”功能，用户通过自然语言对话即可完成叫车和行程规划。此举不仅是技术升级，更是阿里以AI原生服务重塑本地生活流量入口的关键布局，展现其向“全能助理”进化的战略加速。\n2026年3月23号 15:59\n99.2k\nOpenAI “安全承诺”遭质疑：是监管还是全方位监控？\nOpenAI在加拿大枪击案后采取补偿措施，但专家批评其以企业监控替代民主监管。枪手作案前数月，其ChatGPT账号因涉暴力内容被标记并封禁，但问题未得到根本解决。\n2026年3月23号 15:07\n112.4k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "The SEC drops its four-year-old investigation into EV startup Faraday Future",
+      "link": "https://techcrunch.com/2026/03/22/the-sec-drops-its-four-year-old-investigation-into-ev-startup-faraday-future/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "An exclusive tour of Amazon’s Trainium lab, the chip that’s won over Anthropic, OpenAI, even Apple",
+      "link": "https://techcrunch.com/2026/03/22/an-exclusive-tour-of-amazons-trainium-lab-the-chip-thats-won-over-anthropic-openai-even-apple/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cursor admits its new coding model was built on top of Moonshot AI’s Kimi",
+      "link": "https://techcrunch.com/2026/03/22/cursor-admits-its-new-coding-model-was-built-on-top-of-moonshot-ais-kimi/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Delve accused of misleading customers with ‘fake compliance’",
+      "link": "https://techcrunch.com/2026/03/22/delve-accused-of-misleading-customers-with-fake-compliance/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Elon Musk unveils chip manufacturing plans for SpaceX and Tesla",
+      "link": "https://techcrunch.com/2026/03/22/elon-musk-unveils-chip-manufacturing-plans-for-spacex-and-tesla/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Federal immigration agents filmed making airport arrests as Trump calls in ICE to ease security line delays",
+      "link": "https://techcrunch.com/2026/03/23/federal-immigration-agents-filmed-making-airport-arrests-as-trump-calls-in-ice-to-ease-security-line-delays/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Do you want to build a robot snowman?",
+      "link": "https://techcrunch.com/2026/03/22/do-you-want-to-build-a-robot-snowman/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: Uber everywhere, all at once",
+      "link": "https://techcrunch.com/2026/03/22/techcrunch-mobility-uber-everywhere-all-at-once/",
+      "description": "",
+      "publish_time": "2026-03-22",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
