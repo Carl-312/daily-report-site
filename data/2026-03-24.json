@@ -1,0 +1,140 @@
+{
+  "date": "2026-03-24",
+  "articles": [
+    {
+      "title": "AI日报：Luma AI发布Uni-1图像模型；阿里达摩院发布玄铁C950；美团龙猫发布开源数学定理证明模型",
+      "link": "https://news.aibase.com/zh/daily/26515",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、Luma AI 发布 Uni-1 图像模型，采用自回归架构同步生成文本与像素 Luma AI 发布了基于自回归架构的图像生成模型 Uni-1，支持文本与图像同步生成，并提供多种视觉风格。该模型在基准测试中表现优异，API定价合理，适合企业使用。 🎨 支持76种视觉风格，涵盖写实摄影、漫画等 2、美团龙猫发布开源数学定理证明模型 LongCat-Flash-Prover 美团龙猫团队发布了名为 LongCat-Flash-Prover 的开源深度学习模型，专门用于数学形式化与定理证明。该模型通过自动形式化、草稿生成和证明生成三大能力，实现了从概率预测答案到严…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：Luma AI发布Uni-1图像模型；阿里达摩院发布玄铁C950；美团龙猫发布开源数学定理证明模型\n发布于最新AI日报\n发布时间 :\n2026年3月24号 15:55\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、Luma AI 发布 Uni-1 图像模型，采用自回归架构同步生成文本与像素\nLuma AI 发布了基于自回归架构的图像生成模型 Uni-1，支持文本与图像同步生成，并提供多种视觉风格。该模型在基准测试中表现优异，API定价合理，适合企业使用。\n【AiBase提要:】\n🧠 自回归架构实现文本与图像同步生成\n🎨 支持76种视觉风格，涵盖写实摄影、漫画等\n💰 API按token计费，成本低于竞品\n2、美团龙猫发布开源数学定理证明模型 LongCat-Flash-Prover\n美团龙猫团队发布了名为 LongCat-Flash-Prover 的开源深度学习模型，专门用于数学形式化与定理证明。该模型通过自动形式化、草稿生成和证明生成三大能力，实现了从概率预测答案到严谨逻辑证明的范式转变，并在多个基准测试中取得了优异成绩。\n【AiBase提要:】\n🧠 该模型通过自动形式化、草稿生成和证明生成三大能力，实现逻辑推理的范式转变。\n📊 在 MiniF2F-Test 基准测试中，仅需72次推理预算即可达到97.1%的通过率，刷新了开源 Prover 模型的 SOTA 纪录。\n🔒 采用基于 TIR 的“混合专家迭代”框架，有效解决逻辑漏洞与代码欺骗问题。\n详情链接:https://github.com/meituan-longcat/LongCat-Flash-Prover\n3、阿里达摩院发布玄铁C950：单核性能突破 70 分，刷新全球RISC-V纪录\n阿里达摩院发布的玄铁C950处理器在性能、安全性及AI能力方面实现了重大突破，标志着RISC-V架构在高性能计算领域的实力提升。\n【AiBase提要:】\n🚀 单核性能突破70分，刷新全球RISC-V纪录\n🧬 原生支持机密计算安全隔离与数据保护\n🧠 集成自研AI加速引擎，支持千亿参数大模型\n4、4000 亿参数“生啃”成功！iPhone 17 Pro 挑战本地运行超大模型，但速度只有 0.6 token\n文章探讨了iPhone 17 Pro成功运行4000亿参数大语言模型的技术挑战与意义，尽管速度较慢，但展示了本地运行超大模型的可能性。\n【AiBase提要:】\n🧠 通过SSD流式传输数据，突破内存限制\n⚡ 每两秒生成一个词，速度较慢\n🔒 本地运行提升隐私保护和离线可行性\n5、Claude 助手升级！Anthropic 推出电脑控制新功能\nClaude 助手的升级标志着 AI 从‘动口’到‘动手’的转变，其直接控制用户电脑的功能引发了对安全性和效率的讨论。\n【AiBase提要:】\n🧠 Claude 助手升级，具备直接控制用户电脑的能力。\n🔒 安全性方面，Anthropic 强调权限确认和主动防御机制。\n🚀 2026 年 AI 智能体全面爆发，巨头争夺用户桌面定义权。\n6、西湖大学发布“泰坦 o1”：全球首个机器人“通用小脑”诞生\n西湖大学发布的泰坦 o1 人形机器人搭载了全球首个动作泛化大模型 GAE 系统，实现了毫秒级动作复刻、动作泛化和远程同步操控，标志着人形机器人从玩具向生产力工具的转变。\n【AiBase提要:】\n🤖 毫秒级复刻：泰坦 o1 能精准同步人类动作，实现一人操控百台机器人。\n🧠 动作泛化：GAE 系统让机器人具备像人类一样的动作适应能力，无需死板编程。\n🚀 时空突破：支持远程同步操控，可同时指挥成百上千个机器人完成高难度协同作业。\n7、搜索规则生变?OpenAI 申请入驻安卓“选择界面”，ChatGPT 或成 Chrome 默认新宠\nOpenAI向英国竞争与市场管理局提交申请，希望将ChatGPT纳入谷歌安卓系统及Chrome浏览器的可选默认搜索引擎名单。此举标志着AI原生应用对传统搜索入口的介入，并可能重塑移动端的搜索生态。\n【AiBase提要:】\n✅ OpenAI申请将ChatGPT作为安卓和Chrome的默认搜索引擎，挑战传统搜索入口。\n💡 OpenAI认为生成式AI平台应被纳入搜索资格标准，而非仅限于传统引擎。\n🔄 若获批，将打破谷歌在核心流量入口的长期主导地位，推动搜索市场的去中心化趋势。\n8、国家数据局定调:Token官方中文名正式确认为“词元”\n国家数据局正式将大模型基础计量单位‘Token’定名为‘词元’，这一命名终结了学术界与产业界关于Token中文译名的争议，标志着大模型技术标准语境在国家层面的进一步规范化。\n【AiBase提要:】\n🧠 词元作为AI理解人类语言的最小单位，其切分粒度介于字与词之间。\n📊 我国人工智能行业日均词元调用量已突破140万亿次。\n🌐 统一术语规范有助于降低行业沟通成本，为后续AI基础设施的统计量化与政策制定夯实基础。\n相关推荐\n告别“声画两张皮”：通义实验室发布 PrismAudio，让 AI 听懂视频再配音\n阿里通义实验室推出PrismAudio框架，解决AI视频生成中音画不同步问题。该技术引入“思维链”机制，先分析视频内容再生成匹配音效，提升沉浸感。研究已被ICLR2026收录。\n2026年3月24号 15:49\n131.2k\nOpenClaw危！Claude 重磅更新：AI 真的可以操控你的电脑了\nAI助手Claude实现重大升级，能直接操控电脑执行任务，无需接口即可模拟人类操作，标志着AI从对话转向实际执行，进入“真实执行”时代。\n2026年3月24号 15:35\n181.7k\n欧洲 AI 投行“孤狼”出击：Air Street 募资 2.32 亿美元，专投早期硬核科技\nAir Street Capital完成2.32亿美元第三期基金募集，成为欧洲规模最大的单人风投之一。该基金由Nathan Benaich执掌，专注于人工智能领域，以精准投资AI独角兽著称，展现了单人风投模式在欧洲风险投资市场中的强大影响力。\n2026年3月24号 15:19\n112.3k\n7 天狂飙2. 3 万Star！GitHub“外包公司”项目走红：戳破大模型的全能幻觉\n开源项目agency-agents以“拼装专家”模式走红，不追求大模型参数，而是通过分工协作打造“即插即用”的数字外包团队。截至2026年3月24日，该项目GitHub星标突破6万，一周内净增2.3万，登顶全球周增长榜首，迅速席卷开发者社区。\n2026年3月24号 14:20\n189.1k\nClaude 助手升级！Anthropic 推出电脑控制新功能\nAnthropic宣布Claude大模型助手获得直接控制用户电脑的能力，标志着AI从“聊天”转向“行动”的实战阶段。这一功能被视为对开源框架OpenClaw的反击，推动“代理型AI”进入新竞争。\n2026年3月24号 14:13\n162.0k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Insight Partners scrubs investment post about Delve amid ‘fake compliance’ allegations",
+      "link": "https://techcrunch.com/2026/03/23/insight-partners-scrubs-investment-post-amid-fake-compliance-allegations/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Emil Michael, now a senior Pentagon official, says he’ll never forgive Uber investors who ousted him and Kalanick",
+      "link": "https://techcrunch.com/2026/03/23/emil-michael-now-a-senior-pentagon-official-says-hell-never-forgive-uber-investors-who-ousted-him-and-kalanick/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Someone has publicly leaked an exploit kit that can hack millions of iPhones",
+      "link": "https://techcrunch.com/2026/03/23/someone-has-publicly-leaked-an-exploit-kit-that-can-hack-millions-of-iphones/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Bernie Sanders’ AI ‘gotcha’ video flops, but the memes are great",
+      "link": "https://techcrunch.com/2026/03/23/bernie-sanders-ai-gotcha-video-flops-but-the-memes-are-great/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Bipartisan bill seeks to ban sports betting on Kalshi and Polymarket",
+      "link": "https://techcrunch.com/2026/03/23/bipartisan-bill-seeks-to-ban-sports-betting-on-kalshi-and-polymarket/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "DoorDash introduces relief payments for drivers as the Iran-US war drives up gas prices",
+      "link": "https://techcrunch.com/2026/03/23/doordash-introduces-relief-payments-for-drivers-as-the-iran-us-war-drives-up-gas-prices/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "FBI says Iranian hackers are using Telegram to steal data in malware attacks",
+      "link": "https://techcrunch.com/2026/03/23/fbi-says-iranian-hackers-are-using-telegram-to-steal-data-in-malware-attacks/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Sam Altman-backed fusion startup Helion in talks to sell power to OpenAI",
+      "link": "https://techcrunch.com/2026/03/23/sam-altman-openai-fusion-energy-board-helion/",
+      "description": "",
+      "publish_time": "2026-03-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Roku’s $3 Howdy subscription service launches on Prime Video",
+      "link": "https://techcrunch.com/2026/03/24/rokus-3-howdy-subscription-service-launches-on-prime-video/",
+      "description": "",
+      "publish_time": "2026-03-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "FCC bans import of new consumer routers made overseas, citing security risks",
+      "link": "https://techcrunch.com/2026/03/24/fcc-bans-import-of-new-consumer-routers-made-overseas-citing-security-risks/",
+      "description": "",
+      "publish_time": "2026-03-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok ads are about to get a tad more disruptive",
+      "link": "https://techcrunch.com/2026/03/24/tiktok-ads-are-about-to-get-a-tad-more-disruptive/",
+      "description": "",
+      "publish_time": "2026-03-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Mirage raises $75M to continue building models for its AI video editing app Captions",
+      "link": "https://techcrunch.com/2026/03/24/mirage-raises-75m-to-continue-building-models-for-its-ai-video-editing-app-captions/",
+      "description": "",
+      "publish_time": "2026-03-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Spotify’s new SongDNA feature maps how your favorite songs are connected",
+      "link": "https://techcrunch.com/2026/03/24/spotifys-songdna-feature-lets-you-explore-the-connections-behind-your-favorite-songs/",
+      "description": "",
+      "publish_time": "2026-03-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Snapchat’s new ‘AI Clips’ Lens format turns photos into five-second videos",
+      "link": "https://techcrunch.com/2026/03/24/snapchats-new-ai-clips-lens-format-turns-photos-into-five-second-videos/",
+      "description": "",
+      "publish_time": "2026-03-24",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
