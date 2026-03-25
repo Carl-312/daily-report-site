@@ -8,8 +8,14 @@ env:
 
 on:
   workflow_dispatch:
+    inputs:
+      skip_generate:
+        description: "Rebuild and deploy from current retained content without generating today's report"
+        required: false
+        default: false
+        type: boolean
   schedule:
-    - cron: "0 14 * * *"
+    - cron: "0 2 * * *"
 
 permissions:
   contents: write
@@ -43,6 +49,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Generate daily report
+        if: ${{ !inputs.skip_generate }}
         env:
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
         run: |
@@ -53,6 +60,10 @@ jobs:
             echo "Using AI summarization"
             python main.py run
           fi
+
+      - name: Build site from retained content
+        if: ${{ inputs.skip_generate }}
+        run: python main.py build
 
       - name: Prepare release archive assets
         if: github.ref == 'refs/heads/main'
