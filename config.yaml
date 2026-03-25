@@ -17,3 +17,4 @@ summarize:
 output:
   json_dir: data
   md_dir: content
+  site_dir: dist

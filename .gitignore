@@ -1,6 +1,9 @@
 # Python
 __pycache__/
 *.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
 .venv/
 venv/
 
@@ -14,3 +17,8 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# Build output and local archive staging
+dist/
+.archive-staging/
+archive/

@@ -1,24 +1,18 @@
-# Daily Report - Automated Generator & Deployment
-name: Daily Report Generator
+# Daily Report generation, retention and Pages deployment
+name: Daily Report Deploy
 
 env:
-  # 提前切换到 Node.js 24，避免 2026-06-02 后默认切换带来的兼容风险
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  ARCHIVE_TAG: daily-report-archive
+  RETENTION_DAYS: "7"
 
 on:
-  # 手动触发
   workflow_dispatch:
-  
-  # 代码推送触发
-  push:
-    branches: [main]
-  
-  # 每天定时触发 (北京时间 22:00 = UTC 14:00)
   schedule:
-    - cron: '0 14 * * *'
+    - cron: "0 14 * * *"
 
 permissions:
-  contents: write  # 需要写入权限以提交生成的内容
+  contents: write
   pages: write
   id-token: write
 
@@ -31,50 +25,79 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pages_enabled: ${{ steps.pages-check.outputs.enabled }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 完整历史记录
-      
+          fetch-depth: 0
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
-      
-      - name: Install dependencies
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install runtime dependencies
         run: pip install -r requirements.txt
-      
+
       - name: Generate daily report
         env:
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
         run: |
           if [ -z "$MODELSCOPE_API_KEY" ]; then
-            echo "⚠️  Warning: MODELSCOPE_API_KEY not set, using offline mode"
+            echo "Warning: MODELSCOPE_API_KEY not set, using offline mode"
             python main.py run --offline
           else
-            echo "🤖 Using AI summarization"
+            echo "Using AI summarization"
             python main.py run
           fi
-      
-      - name: Commit and push changes
+
+      - name: Prepare release archive assets
+        if: github.ref == 'refs/heads/main'
+        run: python scripts/manage_retention.py bundle --keep-days "$RETENTION_DAYS" --staging-dir .archive-staging
+
+      - name: Ensure archive release exists
+        if: github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view "$ARCHIVE_TAG" >/dev/null 2>&1 || \
+            gh release create "$ARCHIVE_TAG" \
+              --title "Daily Report Archive" \
+              --notes "Long-term archive for generated data/ and content/ artifacts."
+
+      - name: Upload archive assets to GitHub Release
+        if: github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload "$ARCHIVE_TAG" .archive-staging/*.tar.gz --clobber
+          gh release upload "$ARCHIVE_TAG" .archive-staging/archive-manifest.json --clobber
+
+      - name: Prune generated content outside retention window
+        if: github.ref == 'refs/heads/main'
+        run: python scripts/manage_retention.py prune --keep-days "$RETENTION_DAYS"
+
+      - name: Commit and push retained generated content
+        if: github.ref == 'refs/heads/main'
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
-          git add content/ data/ docs/
-          
-          # 仅在有变更时提交
+          git add -A content/ data/
+
           if ! git diff --cached --quiet; then
-            git commit -m "🤖 Daily report: $(date +'%Y-%m-%d')"
+            git commit -m "Daily report: $(date +'%Y-%m-%d')"
             git push
-            echo "✅ Changes committed and pushed"
+            echo "Changes committed and pushed"
           else
-            echo "ℹ️  No changes to commit"
+            echo "No changes to commit"
           fi
 
       - name: Check whether GitHub Pages is enabled
         id: pages-check
+        if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -88,21 +111,21 @@ jobs:
 
           if [ "$status_code" = "200" ]; then
             echo "enabled=true" >> "$GITHUB_OUTPUT"
-            echo "✅ GitHub Pages is enabled for $REPO"
+            echo "GitHub Pages is enabled for $REPO"
           else
             echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "⚠️ GitHub Pages is not enabled (HTTP $status_code), skip deploy-related steps"
+            echo "GitHub Pages is not enabled (HTTP $status_code), skip deploy-related steps"
           fi
-      
+
       - name: Setup Pages
         if: steps.pages-check.outputs.enabled == 'true'
         uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
+
+      - name: Upload Pages artifact
         if: steps.pages-check.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: docs
+          path: dist
 
       - name: Upload run logs (optional)
         if: always()
@@ -112,6 +135,7 @@ jobs:
           path: |
             daily_update.log
             *.log
+            .archive-staging/archive-manifest.json
           if-no-files-found: ignore
 
   deploy:
@@ -121,6 +145,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: generate-and-deploy
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

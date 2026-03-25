@@ -115,7 +115,7 @@ if (-not $NoCommit) {
         $CommitMessage = "Daily report: $Date"
         
         try {
-            git add content/ data/ docs/
+            git add -A content/ data/
             git commit -m $CommitMessage
             Write-Success "已提交: $CommitMessage"
             
@@ -148,6 +148,6 @@ Write-ColorOutput "========================================`n" "Magenta"
 
 # 提示本地预览
 Write-ColorOutput "💡 本地预览:" "Yellow"
-Write-ColorOutput "   cd docs" "Gray"
+Write-ColorOutput "   cd dist" "Gray"
 Write-ColorOutput "   python -m http.server 8000" "Gray"
 Write-ColorOutput "   访问 http://localhost:8000`n" "Gray"

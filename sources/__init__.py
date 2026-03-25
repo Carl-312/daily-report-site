@@ -2,6 +2,7 @@
 Sources Registry
 Provides centralized access to all news sources
 """
+
 from __future__ import annotations
 from typing import Dict, Type, List
 
@@ -36,36 +37,36 @@ def fetch_all(
 ) -> List[Article]:
     """
     Fetch articles from all enabled sources
-    
+
     Args:
         enabled_sources: Dict mapping source name to enabled status
         max_articles: Max articles per source
         syft_url: Syft API URL (for syft source)
         syft_key: Syft API key (for syft source)
-    
+
     Returns:
         Combined list of articles from all sources
     """
     all_articles: List[Article] = []
-    
+
     for name, enabled in enabled_sources.items():
         if not enabled or name not in REGISTRY:
             continue
-        
+
         try:
             # Special handling for Syft source
             if name == "syft":
                 source = SyftSource(web_app_url=syft_url, secret_key=syft_key)
             else:
                 source = REGISTRY[name]()
-            
+
             articles = source.fetch(max_articles=max_articles)
             all_articles.extend(articles)
             print(f"✅ {name}: fetched {len(articles)} articles")
-            
+
         except Exception as e:
             print(f"❌ {name}: failed - {e}")
-    
+
     return all_articles
 
 

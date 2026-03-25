@@ -2,98 +2,116 @@
 Configuration Management using Pydantic
 Loads settings from .env and config.yaml
 """
+
 from __future__ import annotations
 import os
 from pathlib import Path
-from typing import Dict, Any
+from typing import Dict
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 import yaml
 
 # Load .env file
-load_dotenv(encoding='utf-8', override=True)
+load_dotenv(encoding="utf-8", override=True)
 
 
 class Settings(BaseModel):
     """Application settings with validation"""
-    
+
     # Primary provider: ModelScope API
     api_key: str = Field(default="", description="ModelScope API Key")
     api_base_url: str = Field(
         default="https://api-inference.modelscope.cn/v1",
-        description="ModelScope API Base URL"
+        description="ModelScope API Base URL",
     )
-    model: str = Field(default="moonshotai/Kimi-K2.5", description="ModelScope model ID")
+    model: str = Field(
+        default="moonshotai/Kimi-K2.5", description="ModelScope model ID"
+    )
 
     # Fallback provider: SiliconFlow (OpenAI-compatible)
     fallback_api_key: str = Field(default="", description="SiliconFlow API Key")
     fallback_api_base_url: str = Field(
-        default="https://api.siliconflow.cn/v1",
-        description="SiliconFlow API Base URL"
+        default="https://api.siliconflow.cn/v1", description="SiliconFlow API Base URL"
     )
-    fallback_model: str = Field(default="Pro/zai-org/GLM-4.6", description="SiliconFlow model ID")
+    fallback_model: str = Field(
+        default="Pro/zai-org/GLM-4.6", description="SiliconFlow model ID"
+    )
 
     max_output: int = Field(default=2000, description="Max output tokens")
-    
+
     # Timezone
     timezone: str = Field(default="Asia/Shanghai")
-    
+
     # Sources config
     sources: Dict[str, bool] = Field(default_factory=dict)
-    
+
     # Limits
     max_articles: int = Field(default=14)
-    
+
     # Compress settings
     title_max: int = Field(default=150)
     desc_max: int = Field(default=300)
-    
+
     # Paths
     prompt_path: str = Field(default="prompts/daily.md")
     data_dir: str = Field(default="data")
     content_dir: str = Field(default="content")
-    docs_dir: str = Field(default="docs")
-    
+    site_dir: str = Field(default="dist")
+
     # Syft (optional)
     syft_web_app_url: str = Field(default="")
     syft_secret_key: str = Field(default="")
-    
+
     class Config:
         extra = "ignore"
 
 
 def load_config(config_path: str = "config.yaml") -> Settings:
     """Load configuration from environment and YAML file"""
-    
+
     # Load from environment
     env_settings = {
         "api_key": os.getenv("MODELSCOPE_API_KEY", ""),
-        "api_base_url": os.getenv("MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1"),
+        "api_base_url": os.getenv(
+            "MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1"
+        ),
         "model": os.getenv("MODELSCOPE_MODEL", "moonshotai/Kimi-K2.5"),
         "fallback_api_key": os.getenv("SILICONFLOW_API_KEY", ""),
-        "fallback_api_base_url": os.getenv("SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1"),
+        "fallback_api_base_url": os.getenv(
+            "SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1"
+        ),
         "fallback_model": os.getenv("SILICONFLOW_MODEL", "Pro/zai-org/GLM-4.6"),
         "max_output": int(os.getenv("MODELSCOPE_MAX_OUTPUT", "2000")),
         "timezone": os.getenv("TIMEZONE", "Asia/Shanghai"),
         "syft_web_app_url": os.getenv("SYFT_WEB_APP_URL", ""),
         "syft_secret_key": os.getenv("SYFT_SECRET_KEY", ""),
     }
-    
+
     # Load from YAML if exists
     yaml_settings = {}
     if Path(config_path).exists():
-        with open(config_path, 'r', encoding='utf-8') as f:
+        with open(config_path, "r", encoding="utf-8") as f:
             cfg = yaml.safe_load(f) or {}
+            output_cfg = cfg.get("output", {})
             yaml_settings = {
                 "sources": cfg.get("sources", {}),
                 "max_articles": cfg.get("limits", {}).get("max_articles", 14),
-                "title_max": cfg.get("summarize", {}).get("compress", {}).get("title_max", 150),
-                "desc_max": cfg.get("summarize", {}).get("compress", {}).get("desc_max", 300),
-                "prompt_path": cfg.get("summarize", {}).get("prompt_path", "prompts/daily.md"),
-                "data_dir": cfg.get("output", {}).get("json_dir", "data"),
-                "content_dir": cfg.get("output", {}).get("md_dir", "content"),
+                "title_max": cfg.get("summarize", {})
+                .get("compress", {})
+                .get("title_max", 150),
+                "desc_max": cfg.get("summarize", {})
+                .get("compress", {})
+                .get("desc_max", 300),
+                "prompt_path": cfg.get("summarize", {}).get(
+                    "prompt_path", "prompts/daily.md"
+                ),
+                "data_dir": output_cfg.get("json_dir", "data"),
+                "content_dir": output_cfg.get("md_dir", "content"),
+                "site_dir": output_cfg.get(
+                    "site_dir", output_cfg.get("docs_dir", "dist")
+                ),
             }
-    
+
     # Merge settings (env takes precedence for secrets)
     return Settings(**{**yaml_settings, **env_settings})
 

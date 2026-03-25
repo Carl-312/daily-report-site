@@ -2,6 +2,7 @@
 LLM Summarizer using ModelScope API with SiliconFlow fallback.
 Summarizes news articles into daily reports.
 """
+
 from __future__ import annotations
 import json
 from pathlib import Path
@@ -20,7 +21,7 @@ def load_prompt(path: str = None) -> str:
     cfg = get_config()
     prompt_path = Path(path or cfg.prompt_path)
     if prompt_path.exists():
-        return prompt_path.read_text(encoding='utf-8')
+        return prompt_path.read_text(encoding="utf-8")
     return "你是一个专业的AI资讯编辑，请将新闻整理成简洁的中文日报。"
 
 
@@ -29,13 +30,15 @@ def compress_articles(articles: list[dict]) -> list[dict]:
     cfg = get_config()
     compressed = []
     for a in articles:
-        compressed.append({
-            'title': (a.get('title') or '')[:cfg.title_max],
-            'link': a.get('link') or '',
-            'publish_time': a.get('publish_time') or '',
-            'description': (a.get('description') or '')[:cfg.desc_max],
-            'priority': a.get('priority', 0),
-        })
+        compressed.append(
+            {
+                "title": (a.get("title") or "")[: cfg.title_max],
+                "link": a.get("link") or "",
+                "publish_time": a.get("publish_time") or "",
+                "description": (a.get("description") or "")[: cfg.desc_max],
+                "priority": a.get("priority", 0),
+            }
+        )
     return compressed
 
 
@@ -45,20 +48,24 @@ def _provider_candidates() -> list[dict[str, str]]:
     providers: list[dict[str, str]] = []
 
     if cfg.api_key:
-        providers.append({
-            "name": "ModelScope",
-            "base_url": cfg.api_base_url,
-            "api_key": cfg.api_key,
-            "model": cfg.model,
-        })
+        providers.append(
+            {
+                "name": "ModelScope",
+                "base_url": cfg.api_base_url,
+                "api_key": cfg.api_key,
+                "model": cfg.model,
+            }
+        )
 
     if cfg.fallback_api_key:
-        providers.append({
-            "name": "SiliconFlow",
-            "base_url": cfg.fallback_api_base_url,
-            "api_key": cfg.fallback_api_key,
-            "model": cfg.fallback_model,
-        })
+        providers.append(
+            {
+                "name": "SiliconFlow",
+                "base_url": cfg.fallback_api_base_url,
+                "api_key": cfg.fallback_api_key,
+                "model": cfg.fallback_model,
+            }
+        )
 
     return providers
 
@@ -85,7 +92,7 @@ def summarize(articles: list[dict], stream: bool = True) -> str:
         )
 
     compressed = compress_articles(articles)
-    user_input = json.dumps({'articles': compressed}, ensure_ascii=False, indent=2)
+    user_input = json.dumps({"articles": compressed}, ensure_ascii=False, indent=2)
     system_prompt = load_prompt()
 
     errors: list[str] = []
@@ -104,7 +111,9 @@ def summarize(articles: list[dict], stream: bool = True) -> str:
 
         try:
             if idx > 0:
-                print(f"\n   🔁 Trying fallback provider: {provider['name']} ({provider['model']})")
+                print(
+                    f"\n   🔁 Trying fallback provider: {provider['name']} ({provider['model']})"
+                )
 
             if stream:
                 return _summarize_stream(client, params)
@@ -141,12 +150,12 @@ def _summarize_stream(client: OpenAI, params: dict) -> str:
 
 def offline_summary(articles: list[dict], limit: int = 10) -> str:
     """Offline fallback: simple bullet list without LLM"""
-    sorted_arts = sorted(articles, key=lambda x: x.get('priority', 0), reverse=True)
+    sorted_arts = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
 
     lines = []
     for i, a in enumerate(sorted_arts[:limit], 1):
-        title = (a.get('title') or '').replace('\n', '').strip()
-        marker = "🔥" if a.get('priority', 0) > 0 else ""
+        title = (a.get("title") or "").replace("\n", "").strip()
+        marker = "🔥" if a.get("priority", 0) > 0 else ""
         lines.append(f"{i}. {marker}{title[:40]}")
         lines.append("")
 
@@ -156,7 +165,6 @@ def offline_summary(articles: list[dict], limit: int = 10) -> str:
 
 def test_connection() -> bool:
     """Test API connection (primary first, then fallback)."""
-    cfg = get_config()
     providers = _provider_candidates()
 
     if not providers:

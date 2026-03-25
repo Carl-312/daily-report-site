@@ -43,6 +43,12 @@ graph TB
 
 ## 📦 核心组件
 
+当前落地策略采用“近期热数据 + Release 冷归档”两层结构：
+
+- `main` 仅保留最近 7 天的 `data/` 与 `content/`
+- GitHub Pages 只构建仓库保留窗口内的近期日报
+- 更早历史通过 GitHub Release `daily-report-archive` 保存
+
 ### 1. 数据获取层 (`sources/`)
 
 **职责**: 从多个新闻源抓取文章数据
@@ -135,7 +141,7 @@ response = requests.post(
 ### 3. 静态站点生成 (`build.py`)
 
 **输入**: `content/*.md` (Markdown 文件)  
-**输出**: `docs/*.html` (静态网页)
+**输出**: `dist/*.html` (静态网页)
 
 **模板系统**:
 ```python
@@ -199,7 +205,9 @@ sequenceDiagram
     CLI->>BLD: build_site()
     BLD->>FS: Read content/*.md
     BLD->>BLD: Parse + Render
-    BLD->>FS: Write docs/*.html
+    BLD->>FS: Write dist/*.html
+
+说明：当前站点不直接回读完整历史归档，因此 `archive.html` 只覆盖仓库保留窗口内的近期内容。
 ```
 
 ### 分步执行
@@ -221,7 +229,7 @@ python main.py summarize
 ```bash
 python main.py build
 # 输入: content/*.md
-# 输出: docs/*.html
+# 输出: dist/*.html
 ```
 
 ---
@@ -385,7 +393,7 @@ summarizer.py
 ```bash
 # 离线模式完整流程
 python main.py run --offline
-# 验证: docs/index.html 生成成功
+# 验证: dist/index.html 生成成功
 ```
 
 **API 连接测试**:
@@ -401,7 +409,7 @@ python main.py test
 ### 1. 添加新闻源
 
 **接口**: `sources/new_source.py`  
-**文档**: [docs/guides/extending-sources.md](docs/guides/extending-sources.md)
+**文档**: [handbook/guides/extending-sources.md](handbook/guides/extending-sources.md)
 
 ### 2. 自定义摘要模型
 

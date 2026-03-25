@@ -1,244 +1,113 @@
 # 开发贡献指南
 
-本文档规定了 Daily Report Site 项目的开发规范和最佳实践。
+## 开发环境
 
----
-
-## 🌳 分支策略
-
-- **main**: 生产分支，所有 Release 从此分支发布
-- **feature/***: 功能开发分支，命名格式 `feature/add-xxx-source`
-- **fix/***: Bug 修复分支，命名格式 `fix/issue-123`
-
-**合并流程**: Feature/Fix → main (Pull Request + Code Review)
-
----
-
-## 📝 代码规范
-
-### Python 风格 (PEP 8)
-
-```python
-# ✅ 推荐
-def fetch_articles(source: str, max_count: int = 10) -> list[dict]:
-    """
-    从指定来源获取文章列表
-    
-    Args:
-        source: 新闻源名称
-        max_count: 最大文章数量
-    
-    Returns:
-        文章字典列表
-    """
-    pass
-
-# ❌ 避免
-def get_data(s,n=10):  # 缺少类型提示和文档
-    pass
-```
-
-**强制要求**:
-- 使用 Type Hints (`from __future__ import annotations`)
-- 函数/类必须有 Docstring
-- 变量命名使用 `snake_case`
-- 类名使用 `PascalCase`
-
-### Linting 工具
-
-项目使用 **Ruff** 作为统一的 Linter 和 Formatter:
+项目开发、文档示例和 CI 统一使用 `Python 3.12`。
 
 ```bash
-# 安装 (已包含在 requirements.txt)
-pip install ruff
+mise install
+mise use -g python@3.12
+pip install -r requirements-dev.txt
+```
 
-# 检查代码
+依赖分层约定：
+
+- `requirements.txt`：运行时依赖
+- `requirements-dev.txt`：开发依赖入口，包含 Ruff、pytest、pytest-cov
+
+## 分支与提交流程
+
+- `main`：生产分支
+- `feature/*`：功能分支
+- `fix/*`：修复分支
+
+建议流程：`feature/*` 或 `fix/*` -> Pull Request -> `main`
+
+如果这轮治理改造需要分批提交，优先按 [`handbook/project-rollout.md`](handbook/project-rollout.md) 中的 4 个 PR 边界切分。
+
+## 代码规范
+
+- 使用 `from __future__ import annotations`
+- 新增函数和类应带有清晰的类型标注
+- 复杂逻辑补简短注释，避免无意义注释
+- 变量命名使用 `snake_case`，类名使用 `PascalCase`
+
+本地提交前至少执行：
+
+```bash
 ruff check .
+ruff format --check .
+pytest
+```
 
-# 自动修复
+如果需要自动修复格式或部分 lint：
+
+```bash
 ruff check --fix .
-
-# 格式化代码
 ruff format .
 ```
 
-**CI 检查**: Pull Request 会自动运行 Ruff 检查，不通过无法合并
+## CI 约定
 
----
+仓库已接入独立 `CI` workflow：
 
-## 📁 文件组织
+- 触发：`push`、`pull_request`
+- Python：固定 `3.12`
+- 安装：`pip install -r requirements-dev.txt`
+- 检查：`ruff check .`
+- 格式：`ruff format --check .`
+- 测试：`pytest`
 
-### 添加新的新闻源
+本地通过不代表 CI 一定通过；提交前请尽量按 CI 顺序跑一遍。
 
-1. 在 `sources/` 创建新模块:
+## 测试要求
 
-```python
-# sources/example_source.py
-"""
-Example Source Scraper
-"""
-from typing import List, Dict
-
-def fetch() -> List[Dict[str, str]]:
-    """
-    从 ExampleSource 获取文章
-    
-    Returns:
-        文章列表，格式: [{"title": "", "link": "", "desc": ""}]
-    """
-    return []
-```
-
-2. 在 `sources/__init__.py` 注册:
-
-```python
-from .example_source import fetch as fetch_example
-
-SOURCE_REGISTRY = {
-    # ...
-    "example": fetch_example,
-}
-```
-
-3. 在 `config.yaml` 启用:
-
-```yaml
-sources:
-  example: true
-```
-
-### 目录规范
-
-```
-sources/
-├── __init__.py        # Registry 注册表
-├── base.py            # 基础类和工具函数
-├── aibase.py          # AIBase 爬虫
-└── techcrunch.py      # TechCrunch 爬虫
-
-utils/
-├── __init__.py
-├── fileops.py         # 文件操作
-├── dedupe.py          # 去重逻辑
-└── datetime.py        # 日期工具
-```
-
----
-
-## 🧪 测试规范
-
-### 单元测试 (推荐使用 pytest)
+- 新增功能应补最小可运行测试
+- 涉及构建、归档、路径或日期逻辑时，优先补单元测试
+- 集成验证可用：
 
 ```bash
-# 运行所有测试
-pytest
-
-# 运行单个模块
-pytest tests/test_sources.py
-
-# 查看覆盖率
-pytest --cov=sources --cov-report=html
-```
-
-**测试覆盖要求**:
-- 新增功能必须包含测试
-- 核心模块 (`sources/`, `summarizer.py`) 覆盖率 > 80%
-
-### 集成测试
-
-```bash
-# 测试完整流程 (离线模式)
 python main.py run --offline
-
-# 测试 API 连接
-python main.py test
+python main.py build
 ```
 
----
+## 目录约定
 
-## 📦 依赖管理
-
-**添加新依赖**:
-1. 安装: `pip install package-name`
-2. 更新 `requirements.txt`: `pip freeze > requirements.txt`
-3. 在 PR 中说明依赖用途
-
-**生产依赖 vs 开发依赖**:
-- 生产: `requirements.txt` (必需)
-- 开发: `requirements-dev.txt` (可选) - Linters, 测试工具等
-
----
-
-## 🔐 安全规范
-
-### 敏感信息处理
-
-**✅ 正确做法**:
-```python
-from config import get_config
-
-cfg = get_config()
-api_key = cfg.api_key  # 从环境变量读取
+```text
+handbook/   手写工程文档
+content/    最近 7 天 Markdown 产物
+data/       最近 7 天 JSON 产物
+dist/       构建输出，Git 忽略
+scripts/    自动化脚本
+tests/      pytest 测试
 ```
 
-**❌ 错误做法**:
-```python
-api_key = "sk-1234567890"  # 硬编码密钥
-```
+注意：
 
-**环境变量规范**:
-- 敏感信息仅存储在 `.env` (已在 `.gitignore`)
-- 提供 `.env.example` 作为模板
-- 在文档中说明必需的环境变量
+- `dist/` 是纯构建输出，不进入 Git
+- `data/` 和 `content/` 仅保留最近 7 天
+- 历史产物通过 GitHub Release assets 归档
 
----
+## 添加新闻源
 
-## 📖 文档规范
+1. 在 `sources/` 下新增抓取模块。
+2. 在 `sources/__init__.py` 注册。
+3. 在 `config.yaml` 的 `sources` 中启用。
+4. 补对应测试或离线验证步骤。
 
-### Markdown 文档
+更详细示例见 [handbook/guides/extending-sources.md](handbook/guides/extending-sources.md)。
 
-- 使用中文编写用户面向文档
-- 代码注释使用英文
-- 文件名使用小写+连字符: `extending-sources.md`
+## 安全与配置
 
-### Docstring 格式 (Google Style)
+- API Key 只放 `.env`
+- 不要在代码和测试里硬编码密钥
+- 修改输出路径时，同时更新 `config.py` / `config.yaml` / 文档
 
-```python
-def summarize(articles: list[dict], stream: bool = False) -> str:
-    """
-    使用 LLM 生成新闻摘要
-    
-    Args:
-        articles: 文章列表，每个文章包含 title, link, desc
-        stream: 是否启用流式输出
-    
-    Returns:
-        生成的 Markdown 格式摘要
-    
-    Raises:
-        ConnectionError: API 连接失败时
-    """
-    pass
-```
+## 文档规范
 
----
-
-## 🚀 发布流程
-
-1. **版本号规范** (Semantic Versioning):
-   - `v1.0.0`: 主版本.次版本.补丁版本
-   - 示例: `v1.2.3`
-
-2. **发布步骤**:
-   ```bash
-   # 更新 CHANGELOG.md
-   git tag v1.2.3
-   git push origin v1.2.3
-   ```
-
-3. **GitHub Release**: 
-   - 自动触发 `.github/workflows/release.yml`
-   - 生成 Release Notes
+- 面向使用者的文档统一放在 `handbook/`
+- 生成站点统一输出到 `dist/`
+- 修改 workflow、目录结构或保留策略时，必须同步更新 README 和 handbook
 
 ---
 
