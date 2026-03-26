@@ -1,0 +1,140 @@
+{
+  "date": "2026-03-26",
+  "articles": [
+    {
+      "title": "AI日报：字节开源智能体编排框架DeerFlow2.0；CapCut上线两大AI功能；快手AIGC素材单季消耗达40亿元",
+      "link": "https://news.aibase.com/zh/daily/26587",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、CapCut 上线两大 AI 重磅功能：画布式 AI 制片工作台 Video Studio + 嵌入式 AI Video CapCut上线两大AI功能，Video Studio和AI Video，结合Dreamina Seedance2.0模型，提升视频创作效率与质量。 🎥 Video Studio: 采用无限画布式工作流，简化视频创作流程。 📹 AI Video: 嵌入传统编辑器，提供即时素材生成功能。 🎬 Dreamina Seedance2.0: 多模态生成技术，支持高质量视频输出。 2、单季狂撒 40 亿！快手 Q4 财报亮眼：AIGC 营销素材消…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\n模型广场\nMCP服务\nAI服务\n算力市场\nAI应用指南\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：字节开源智能体编排框架DeerFlow2.0；CapCut上线两大AI功能；快手AIGC素材单季消耗达40亿元\n发布于最新AI日报\n发布时间 :\n2026年3月26号 15:45\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、CapCut 上线两大 AI 重磅功能：画布式 AI 制片工作台 Video Studio + 嵌入式 AI Video\nCapCut上线两大AI功能，Video Studio和AI Video，结合Dreamina Seedance2.0模型，提升视频创作效率与质量。\n【AiBase提要:】\n🎥 Video Studio: 采用无限画布式工作流，简化视频创作流程。\n📹 AI Video: 嵌入传统编辑器，提供即时素材生成功能。\n🎬 Dreamina Seedance2.0: 多模态生成技术，支持高质量视频输出。\n2、单季狂撒 40 亿！快手 Q4 财报亮眼：AIGC 营销素材消耗占大头，AI 彻底重塑商业链路\n快手Q4财报显示，AI技术对商业收入的直接贡献显著，AIGC营销素材消耗占大头，AI彻底重塑商业链路。\n【AiBase提要:】\n🧠 模型红利：生成式推荐大模型与智能出价模型优化，提升国内线上营销收入约5%。\n🎨 内容生产力：AIGC营销素材单季消耗达40亿元，显示广告主对AI内容的高度认可。\n⚙️ 自动化渗透：UAX全自动投放产品在非电商营销服务中渗透率接近80%。\n3、字节跳动重磅开源 DeerFlow2.0:打造“中国版”\n超级\n智能体编排框架\n字节跳动开源了其\n超级\n智能体编排框架 DeerFlow2.0，该项目在GitHub上迅速走红，获得了大量关注。DeerFlow2.0具备多维能力的深度整合、广泛兼容性以及安全沙盒文件系统等核心特性，能够满足企业级复杂任务和个人多步创作的需求。\n【AiBase提要:】\n🧠 多维能力的深度整合：DeerFlow2.0是一个集成了多种能力的SuperAgent调度中心，支持复杂任务拆解和高效协作。\n🔧 广泛兼容，即开即用：该框架支持主流多模型，并能无缝接入MCP协议与主流IM渠道，适用于企业级复杂任务和个人多步创作。\n🔒 安全沙盒文件系统：提供隔离运行环境，支持安全的代码生成、批量文件重构及结果留存。\n详情链接:https://github.com/bytedance/deer-flow\n4、音乐人要“失业”？谷歌 DeepMind 发布 Lyria 3 Pro：AI 已能独立编排完整长金曲\n文章介绍了谷歌 DeepMind 推出的 Lyria 3 Pro，该模型在音频领域实现了从‘短乐句’到‘全曲创作’的突破。它具备结构意识，能够生成完整的歌曲架构，并支持高保真输出和多模态交互，标志着 AI 正在从辅助工具向独立制作人进化。\n【AiBase提要:】\n🎼 Lyria 3 Pro 能够编排完整的歌曲架构，包括前奏、主歌、副歌和桥段。\n🔊 支持 24-bit 高音质输出，满足专业音频制作需求。\n🧠 多模态交互使用户可通过文字描述快速生成符合情绪和风格的音乐。\n5、OpenAI内测新模型“Spud”:将关停Sora以整合算力，转型桌面级“\n超级\n应用”\nOpenAI宣布代号为“Spud”的新一代AI模型已完成预训练，性能强大，预计将在数周内发布。同时，公司正经历战略收缩与组织重组，关停Sora以整合算力，并计划打造一款整合ChatGPT、Codex及Atlas的桌面级“\n超级\n应用”，以应对市场挑战。\n【AiBase提要:】\n🧠 新一代AI模型“Spud”已完成预训练，性能强大，即将发布。\n🔄 OpenAI战略收缩，关停Sora以整合算力，转型桌面级“\n超级\n应用”。\n💼 为应对Anthropic挑战，OpenAI计划打造整合ChatGPT、Codex及Atlas的统一交互中心。\n6、横扫 11 项榜单冠军！蚂蚁集团发布 F2LLM-v2：全尺寸、多语种的“六边形”嵌入模型\n蚂蚁集团与上海交通大学联合发布的 F2LLM-v2 系列 Embedding 模型，在 MTEB 评测中展现了卓越性能，覆盖多种语言和代码领域，同时以全开源方式为开发者提供高效解决方案。\n【AiBase提要:】\n🚀 F2LLM-v2 在 MTEB 评测中横扫 11 项榜单冠军，展现强大性能。\n🌐 支持 282 种自然语言和 40+ 种编程语言，实现全球化覆盖。\n🔧 提供从 80M 到 14B 的全尺寸模型家族，适配多种场景需求。\n7、钉钉悟空 AI 正式发布：双击即用的企业级“数字员工”\n钉钉悟空 AI 的发布标志着企业级 AI 应用进入了一个更加便捷和安全的新时代，其简单易用的特性重新定义了办公 AI 的标准。\n【AiBase提要:】\n🧠 悟空 AI 通过简单操作实现企业级 AI 部署，降低技术门槛。\n🔒 强调数据安全与隐私保护，解决企业对 AI 的顾虑。\n💡 提供直观的“算粒”计数器，让用户更清楚 AI 资源消耗。\n8、性能反杀 10 倍体量对手：苹果发布 RubiCap 图像描述框架\n苹果公司联合威斯康星大学麦迪逊分校发布 RubiCap AI 训练框架，旨在实现更精确的图像描述，解决传统图像标注中的幻觉问题，并在性能上超越大型模型。\n【AiBase提要:】\n🍎 RubiCap 框架专为“密集图像描述”设计，精准捕捉图像细节。\n🧠 通过强化学习机制，利用 Qwen2.5 担任裁判提升模型准确度。\n🚀 RubiCap 模型在参数规模较小的情况下，表现超越千亿大模型。\n相关推荐\nCapCut 国际版上线两大 AI 重磅功能：画布式 AI 制片工作台 Video Studio + 嵌入式 AI Video\n字节跳动旗下CapCut近日上线Video Studio和AI Video两大AI功能，集成Dreamina Seedance2.0模型，简化视频创作流程。Video Studio采用无限画布设计，用户可自由布局素材，AI自动生成视频；AI Video则支持文本生成视频，并允许用户通过涂鸦、图片等引导生成。\n2026年3月26号 11:10\n196.6k\nCapCut推出用于AI视频生成的“Dreamina Seedance 2.0”模型\n字节跳动旗下视频编辑应用CapCut正式推出Dreamina Seedance2.0模型，已在移动、桌面及网页端同步上线。该模型率先在印尼、菲律宾、泰国、越南、马来西亚、巴西和墨西哥推出，未来将扩展至更多地区。Dreamina Seedance2.0旨在通过CapCut解锁视觉叙事新可能，支持在单一流畅工作流中实现行业领先的视频生成与编辑，其核心亮点包括最高级别的长视频生成能力。\n2026年3月24号 10:32\n217.3k\nAI日报：Anthropic发布Claude Opus 4.6；千问“春节大免单”首日火爆；腾讯推出“火龙漫剧”\n微信被指限制阿里千问及腾讯元宝的口令复制功能，疑因阿里千问“春节30亿免单”活动火爆，其分享口令在微信内受限，腾讯自家元宝App也面临同样问题。\n2026年2月6号 16:20\n256.7k\n「6月30日AI日报」百度开源文心大模型4.5系列；通义千问多模态生成模型Qwen VLo\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.百度重磅开源文心大模型4.5系列，十款新模型亮相!百度正式发布文心大模型4.5系列并完全开源，包含多种参数配置的十款新模型，使用飞桨框架训练推理，FLOPs利用率47%，在文本多模态基准测试中表现优异，提供一站式使用指南和工具，方便开发者精调部署，已上传至Hugging Face、GitHub等平台。体验地址:https://yiyan.baidu.com Hugging Face:https://huggingface.co/baidu）Gi\n2025年6月30号 16:33\n146.1k\n「6月27日AI日报」腾讯开源轻量级混元-A13B模型；可灵AI推“视频音效”功能\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1、腾讯开源轻量级混元-A13B模型1张中低端GPU卡即可部署腾讯发布混元大模型家族的新成员混元-A13B模型，采用专家混合（MoE）架构，总参数规模达800亿，激活参数为130亿，大幅降低推理延迟与计算开销，为个人开发者和中小企业提供更具性价比的AI解决方案。该模型在数学、科学和逻辑推理任务中表现出色，支持调用工具生成复杂指令响应。体验入口:https:/\n2025年6月27号 16:32\n211.7k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "The AI skills gap is here, says AI company, and power users are pulling ahead",
+      "link": "https://techcrunch.com/2026/03/25/the-ai-skills-gap-is-here-says-ai-company-and-power-users-are-pulling-ahead/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google unveils TurboQuant, a new AI memory compression algorithm — and yes, the internet is calling it ‘Pied Piper’",
+      "link": "https://techcrunch.com/2026/03/25/google-turboquant-ai-memory-compression-silicon-valley-pied-piper/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The least surprising chapter of the Manus story is what’s happening right now",
+      "link": "https://techcrunch.com/2026/03/25/the-least-surprising-chapter-of-the-manus-story-is-whats-happening-right-now/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Convicted spyware chief hints that Greece’s government was behind dozens of phone hacks",
+      "link": "https://techcrunch.com/2026/03/25/convicted-spyware-chief-hints-that-greeces-government-was-behind-dozens-of-phone-hacks/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple overhauls its app developer platform with 100 new metrics, more tools",
+      "link": "https://techcrunch.com/2026/03/25/apple-overhauls-its-app-developer-platform-with-100-new-metrics-more-tools/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Who’s driving Waymo’s self-driving cars? Sometimes, the police.",
+      "link": "https://techcrunch.com/2026/03/25/waymo-robotaxi-roadside-assistance-emergency-first-responders/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Riding the GLP-1 boom, VITL lands $7.5M to overhaul cash-pay clinic prescribing",
+      "link": "https://techcrunch.com/2026/03/25/riding-the-glp-1-boom-vitl-lands-7-5m-to-overhaul-cash-pay-clinic-prescribing/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "With Sift, two ex-SpaceX engineers are bringing the software that helped launch rockets to the factory floor",
+      "link": "https://techcrunch.com/2026/03/25/with-sift-stack-two-ex-spacex-engineers-are-bringing-the-software-that-helped-launch-rockets-to-the-factory-floor/",
+      "description": "",
+      "publish_time": "2026-03-25",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Why hiring the weirdos works",
+      "link": "https://techcrunch.com/2026/03/26/why-hiring-the-weirdos-works/",
+      "description": "",
+      "publish_time": "2026-03-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A major hacking tool has leaked online, putting millions of iPhones at risk. Here’s what you need to know",
+      "link": "https://techcrunch.com/2026/03/26/a-major-hacking-tool-has-leaked-online-putting-millions-of-iphones-at-risk-heres-what-you-need-to-know/",
+      "description": "",
+      "publish_time": "2026-03-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Conntour raises $7M from General Catalyst, YC to build an AI search engine for security video systems",
+      "link": "https://techcrunch.com/2026/03/26/conntour-raises-7m-from-general-catalyst-yc-to-build-an-ai-search-engine-for-security-video-systems/",
+      "description": "",
+      "publish_time": "2026-03-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cohere launches an open-source voice model specifically for transcription",
+      "link": "https://techcrunch.com/2026/03/26/cohere-launches-an-open-source-voice-model-specifically-for-transcription/",
+      "description": "",
+      "publish_time": "2026-03-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "WhatsApp can now draft AI-generated responses based on your conversations",
+      "link": "https://techcrunch.com/2026/03/26/whatsapp-can-now-draft-ai-generated-responses-based-on-your-conversations/",
+      "description": "",
+      "publish_time": "2026-03-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A ‘pound of flesh’ from data centers: one senator’s answer to AI job losses",
+      "link": "https://techcrunch.com/2026/03/26/a-pound-of-flesh-from-data-centers-one-senators-answer-to-ai-job-losses/",
+      "description": "",
+      "publish_time": "2026-03-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
