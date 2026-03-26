@@ -56,6 +56,7 @@ Windows PowerShell 也可以直接使用：
   - 运行 `pytest`
 - `Daily Report Deploy`: `.github/workflows/deploy.yml`
   - 手动、定时触发
+  - 定时任务使用 UTC，当前配置为 `0 14 * * *`，对应北京时间 `22:00`
   - 生成日报并构建 `dist/`
   - 仅在 `main` 分支上执行归档、裁剪、回写与 Pages 发布
   - 将超过 7 天的 `data/` / `content/` 打包上传到 GitHub Release assets

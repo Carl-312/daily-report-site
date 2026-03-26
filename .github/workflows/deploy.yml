@@ -15,7 +15,8 @@ on:
         default: false
         type: boolean
   schedule:
-    - cron: "0 2 * * *"
+    # GitHub Actions cron uses UTC. 14:00 UTC = 22:00 Asia/Shanghai (Beijing time).
+    - cron: "0 14 * * *"
 
 permissions:
   contents: write
