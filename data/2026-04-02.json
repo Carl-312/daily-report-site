@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-02",
+  "articles": [
+    {
+      "title": "AI日报：智谱发布GLM-5V-Turbo多模态Coding大模型；Seedance 2.0 API正式全量开放；美团 LongCat-AudioDiT 开源",
+      "link": "https://news.aibase.com/zh/daily/26808",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、智谱发布 GLM-5V-Turbo 多模态 Coding 大模型 智谱发布的GLM-5V-Turbo多模态Coding大模型，实现了视觉与编程能力的深度融合，支持多种视觉工具调用，并在多个核心基准测试中表现出色。该模型的应用场景包括前端复刻、GUI自主探索和交互式编辑，显著提升了开发效率。同时，其接入AutoClaw智能体后，使该智能体具备了真正的视觉能力，能够解读复杂图表并输出专业分析报告。 🧠 多模态基座模型GLM-5V-Turbo发布，实现视觉与编程能力的深度融合。 💻 支持前端复刻、GUI自主探索和交互式编辑，提升开发效率。 📊 AutoClaw智…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：智谱发布GLM-5V-Turbo多模态Coding大模型；Seedance 2.0 API正式全量开放；美团 LongCat-AudioDiT 开源\n发布于最新AI日报\n发布时间 :\n2026年4月2号 16:47\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、智谱发布 GLM-5V-Turbo 多模态 Coding 大模型\n智谱发布的GLM-5V-Turbo多模态Coding大模型，实现了视觉与编程能力的深度融合，支持多种视觉工具调用，并在多个核心基准测试中表现出色。该模型的应用场景包括前端复刻、GUI自主探索和交互式编辑，显著提升了开发效率。同时，其接入AutoClaw智能体后，使该智能体具备了真正的视觉能力，能够解读复杂图表并输出专业分析报告。\n【AiBase提要:】\n🧠 多模态基座模型GLM-5V-Turbo发布，实现视觉与编程能力的深度融合。\n💻 支持前端复刻、GUI自主探索和交互式编辑，提升开发效率。\n📊 AutoClaw智能体接入后，具备真正的视觉能力，可解读复杂图表并输出分析报告。\n2、字节火山引擎Seedance 2.0正式面向普通API客户开放申请\n字节跳动火山引擎正式开放Seedance 2.0 API服务，标志着其多模态视频生成模型从封闭体验向开放生态转型，为开发者和企业提供更强大的视频创作工具。\n【AiBase提要:】\n🎥 Seedance 2.0支持文字、图片、音频和视频四种模态输入，提升视频生成的可控性。\n💡 提供电影质感视频生成，适用于短剧制作、电商营销等场景。\n🔒 强调版权保护，开放API需通过企业认证并接受内容审核。\n3、美团 LongCat-AudioDiT 开源:首创波形潜空间建模，刷新音色克隆 SOTA\n美团 LongCat-AudioDiT 开源项目通过波形潜空间建模，实现了语音克隆性能的突破，其创新架构和优化技术显著提升了语音生成的质量与稳定性。\n【AiBase提要:】\n🧠 创新性地采用波形潜空间建模，摆脱传统梅尔频谱中间表征的限制。\n🚀 通过 Wav-VAE 和 DiT 构建极简架构，提升语音生成效率与质量。\n🔧 引入双重约束机制和自适应投影引导技术，解决音色漂移问题并优化生成效果。\n详情链接:https://github.com/meituan-longcat/LongCat-AudioDiT\n4、日均消耗破 120 万亿！字节跳动豆包大模型成“流量王”：两年狂涨 1000 倍\n文章报道了字节跳动豆包大模型在 AI 应用方面的显著进展，其日均 Token 使用量突破 120 万亿，展现了强大的 AI 渗透力。同时，国产大模型的调用量也在持续增长，并在部分领域超越了海外主流模型。云厂商正在重新评估 Token 的商业价值，TokenHub 成为新的竞争焦点。\n【AiBase提要:】\n🔥 豆包大模型日均 Token 使用量突破 120 万亿，展现强大的 AI 应用能力。\n📈 国产大模型调用量持续增长，部分领域已超越海外主流模型。\n🔄 云厂商重估 Token 商业价值，TokenHub 成为新战场。\n5、蚂蚁数科DTClaw开启内测:定位专业级AI智能体赛道\n蚂蚁数科正式宣布旗下专业级龙虾产品DTClaw开启内测，标志着该公司正式进军专业AI智能体赛道。DTClaw精准定位为“专业型”AI，旨在为金融专家、理财顾问及数据分析师等深度专业人群提供全天候在线的专属AI智能体服务。技术层面，DTClaw强调“原生专家”属性，集成了上百种专业技能，并预置了大量成熟的“熟虾”模板，应用场景精准覆盖投资理财、复杂数据分析、软件研发及自动化测试等高价值领域。在AI智能体从“助理”向“专家”进化的行业趋势下，蚂蚁数科此举显示了其深耕垂直行业、实现AI生产力闭环的战略意图。\n【AiBase提要:】\n🧠 DTClaw定位为专业级AI智能体，面向金融专家、理财顾问及数据分析师等深度专业人群提供服务。\n🔧 DTClaw集成上百种专业技能，预置大量“熟虾”模板，覆盖投资理财、复杂数据分析等高价值领域。\n🚀 蚂蚁数科通过DTClaw进军专业AI智能体赛道，显示其深耕垂直行业、实现AI生产力闭环的战略意图。\n6、Anthropic 测试“龙虾” Conway：支持独立 UI、Webhook 唤醒与自定义扩展标准\nAnthropic正在开发名为Conway的常驻代理解决方案，旨在为Claude打造一个始终在线、独立运行的智能环境。Conway将拥有独立的UI实例，支持浏览器操作、外部连接器连接以及Claude Code功能，同时通过Webhook实现自动化响应，并推出CNW ZIP标准以增强扩展性。\n【AiBase提要:】\n📱 独立UI实例，突破传统聊天界面限制\n⚙️ 支持Webhook唤醒与外部服务连接\n📦 推出CNW ZIP标准，构建自定义扩展生态\n7、谷歌开源大模型 Gemma 4 官宣在即：参数量翻 4 倍\n谷歌开源大模型Gemma 4即将发布，其参数量达到120B，是上一代的4倍，并采用MoE架构以优化性能与效率。同时，谷歌通过开源项目保持在开发者社区的影响力，试图在本地化服务中与中国公司竞争。\n【AiBase提要:】\n🧠 参数量翻4倍，Gemma 4将挑战本地运行极限\n🔄 采用MoE架构，兼顾性能与效率\n🌍 开源赛道进入“参数与效率”双拼时代\n8、AI 编程进入“靠谱”时代：通义实验室正式发布 Qwen3.6-Plus\n通义实验室发布 Qwen3.6-Plus，聚焦 Coding Agent 与长上下文，提升智能体编程的稳定性与执行效率，同时实现生态兼容与视觉智能体闭环。\n【AiBase提要:】\n🧠 编码能力飞跃：在前端页面生成、代码修复及终端自动化场景中表现卓越。\n🌐 百万级上下文：默认支持 100万 字符上下文窗口，大幅提升长文档解析与多轮对话的信息提取精度。\n🛠️ 生态兼容：无缝集成主流开发工具，支持多种第三方编程助手的深度适配。\n相关推荐\n智谱发布 GLM-5V-Turbo：给 AI 智能体安上“火眼金睛”\n智谱发布多模态编程模型GLM-5V-Turbo，具备视觉理解能力，可将设计稿、网页界面等视觉信息转化为代码，实现AI Agent从字符到视觉的感知延伸。\n2026年4月2号 16:37\n158.3k\n智谱推出 GLM-5V-Turbo：为 AI 编程安上“眼睛”，设计稿秒变代码\n智谱AI发布GLM-5V-Turbo大模型，专为视觉编程设计。该模型突破纯文本局限，具备原生多模态能力，可直接理解设计稿和网页截图。开发者上传草图或界面截图后，模型能自动生成可运行的前端代码。其视觉感知能力实现了从“读文档”到“看界面”的转变，并支持200k超长上下文窗口。\n2026年4月2号 9:05\n153.6k\n智谱发布 GLM-5V-Turbo 多模态 Coding 大模型\n智谱发布多模态基座模型GLM-5V-Turbo，专为视觉编程设计。该模型不仅能写代码，还能理解图像、视频、设计稿和文档版面，实现视觉与编程能力的深度融合，将AI Agent的感知范围从文字扩展到视觉界面。\n2026年4月2号 8:48\n159.2k\nAI日报：Anthropic发布Claude Opus 4.6；千问“春节大免单”首日火爆；腾讯推出“火龙漫剧”\n微信被指限制阿里千问及腾讯元宝的口令复制功能，疑因阿里千问“春节30亿免单”活动火爆，其分享口令在微信内受限，腾讯自家元宝App也面临同样问题。\n2026年2月6号 16:20\n259.5k\n「6月30日AI日报」百度开源文心大模型4.5系列；通义千问多模态生成模型Qwen VLo\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.百度重磅开源文心大模型4.5系列，十款新模型亮相!百度正式发布文心大模型4.5系列并完全开源，包含多种参数配置的十款新模型，使用飞桨框架训练推理，FLOPs利用率47%，在文本多模态基准测试中表现优异，提供一站式使用指南和工具，方便开发者精调部署，已上传至Hugging Face、GitHub等平台。体验地址:https://yiyan.baidu.com Hugging Face:https://huggingface.co/baidu）Gi\n2025年6月30号 16:33\n148.0k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "The reputation of troubled YC startup Delve has gotten even worse",
+      "link": "https://techcrunch.com/2026/04/01/the-reputation-of-troubled-yc-startup-delve-has-gotten-even-worse/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A new connections app, Sonder, has a deliberately tedious sign-up process (and it’s working)",
+      "link": "https://techcrunch.com/2026/04/01/a-new-dating-app-sonder-has-a-deliberately-annoying-sign-up-process-and-its-working/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "SpaceX files confidentially for IPO in mega listing potentially valued at $1.75 trillion, report says",
+      "link": "https://techcrunch.com/2026/04/01/spacex-files-confidentially-for-ipo-in-mega-listing-potentially-valued-at-1-75-trillion-report-says/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic took down thousands of GitHub repos trying to yank its leaked source code — a move the company says was an accident",
+      "link": "https://techcrunch.com/2026/04/01/anthropic-took-down-thousands-of-github-repos-trying-to-yank-its-leaked-source-code-a-move-the-company-says-was-an-accident/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "De-fi platform Drift suspends deposits and withdrawals after millions in crypto stolen in hack",
+      "link": "https://techcrunch.com/2026/04/01/de-fi-platform-drift-suspends-deposits-and-withdrawals-after-millions-in-crypto-stolen-in-hack/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cognichip wants AI to design the chips that power AI, and just raised $60M to try",
+      "link": "https://techcrunch.com/2026/04/01/cognichip-wants-ai-to-design-the-chips-that-power-ai-and-just-raised-60m-to-try/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cameo partners with TikTok to boost popularity",
+      "link": "https://techcrunch.com/2026/04/01/cameo-partners-with-tiktok-to-boost-popularity/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "WhatsApp notifies hundreds of users who installed a fake app made by government spyware maker",
+      "link": "https://techcrunch.com/2026/04/01/whatsapp-notifies-hundreds-of-users-who-installed-a-fake-app-that-was-actually-government-spyware/",
+      "description": "",
+      "publish_time": "2026-04-01",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "United’s mobile app now shows TSA wait times at select airports",
+      "link": "https://techcrunch.com/2026/04/02/uniteds-mobile-app-now-shows-tsa-wait-times-at-select-airports/",
+      "description": "",
+      "publish_time": "2026-04-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tesla’s cheaper vehicles aren’t helping its declining sales",
+      "link": "https://techcrunch.com/2026/04/02/tesla-deliveries-cheaper-vehicles-model-y-3-sales/",
+      "description": "",
+      "publish_time": "2026-04-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Commonwealth Fusion Systems leans on magnets for near-term revenue",
+      "link": "https://techcrunch.com/2026/04/02/commonwealth-fusion-systems-leans-on-magnets-for-near-term-revenue/",
+      "description": "",
+      "publish_time": "2026-04-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Diverse teams start with diverse VCs",
+      "link": "https://techcrunch.com/2026/04/02/diverse-teams-start-with-diverse-vcs/",
+      "description": "",
+      "publish_time": "2026-04-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Exclusive: Beehiiv expands into podcasting, taking aim at Patreon",
+      "link": "https://techcrunch.com/2026/04/02/beehiiv-expands-into-podcasts-taking-aim-at-patreon-substack-newsletters/",
+      "description": "",
+      "publish_time": "2026-04-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cash App launches ‘pay later’ feature for P2P pay transfers",
+      "link": "https://techcrunch.com/2026/04/02/cash-app-launches-buy-now-pay-later-feature-for-p2p-pay-transfers/",
+      "description": "",
+      "publish_time": "2026-04-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
