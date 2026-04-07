@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-07",
+  "articles": [
+    {
+      "title": "AI日报：腾讯研发新AI产品探梦DreamNow；MiniMax 2.7 确认本周开源；千问3.6Plus登顶OpenRouter 全球大模型调用榜",
+      "link": "https://news.aibase.com/zh/daily/26890",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、腾讯 AI 新平台“探梦 DreamNow”曝光：人人都可创作 AI 大剧 腾讯正在研发名为“探梦 DreamNow”的全新AI产品，旨在为用户提供一个集创作、社交和互动于一体的平台，尤其在互动影游方面具有显著亮点，如沉浸式体验和低门槛创作。 🎮 互动影游支持：用户可参与创作多分支剧情的互动作品。 🎨 AI视觉美学：《魏晋风骨》展现国风美学与古朴字体的结合。 👥 社交功能布局：支持点赞、收藏、评论及转发，打造AI版社交社区。 2、首个单日破万亿！阿里千问 3.6 Plus 登顶 OpenRouter 全球大模型调用榜 阿里千问3.6-Plus凭借 极高 的…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：腾讯研发新AI产品探梦DreamNow；MiniMax 2.7 确认本周开源；千问3.6Plus登顶OpenRouter 全球大模型调用榜\n发布于最新AI日报\n发布时间 :\n2026年4月7号 16:00\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、腾讯 AI 新平台“探梦 DreamNow”曝光：人人都可创作 AI 大剧\n腾讯正在研发名为“探梦 DreamNow”的全新AI产品，旨在为用户提供一个集创作、社交和互动于一体的平台，尤其在互动影游方面具有显著亮点，如沉浸式体验和低门槛创作。\n【AiBase提要:】\n🎮 互动影游支持：用户可参与创作多分支剧情的互动作品。\n🎨 AI视觉美学：《魏晋风骨》展现国风美学与古朴字体的结合。\n👥 社交功能布局：支持点赞、收藏、评论及转发，打造AI版社交社区。\n2、首个单日破万亿！阿里千问 3.6 Plus 登顶 OpenRouter 全球大模型调用榜\n阿里千问3.6-Plus凭借\n极高\n的开发者活跃度，成功登顶OpenRouter全球大模型调用榜，并创下单日调用量突破1万亿Token的里程碑纪录。这不仅体现了其在全球AI生态中的强大影响力，也反映了国产大模型在国际市场的崛起。\n【AiBase提要:】\n🧠 单日调用量突破1万亿Token，标志着阿里千问3.6-Plus在技术应用上的重大突破。\n🌍 国产大模型通过高性价比和快速迭代，正在改变全球AI市场格局。\n💰 资本市场对AI算力板块高度关注，显示出对AI技术的强烈信心。\n3、谷歌发布\n首款\n离线 AI 听写应用 Eloquent：手机秒变专业速录员\n谷歌发布\n首款\n离线 AI 听写应用 Eloquent：手机秒变专业速录员。该应用基于谷歌轻量化模型 Gema 构建，实现 100% 离线工作，有效解决数据泄露问题，并具备自动剔除语气词和文本润色功能，满足专业用户需求。\n【AiBase提要:】\n📱 离线运行，隐私与效率兼得\n📝 智能“去水”与文本润色\n💼 生产力工具:深度适配专业场景\n4、国产大模型 MiniMax 2.7 确认本周开源：Token 成本将进一步下探\n国产大模型MiniMax2.7确认本周开源，其在软件工程和办公场景中的表现突出，同时支持跨平台使用，为开发者带来更低的Token成本和更高的可用性。\n【AiBase提要:】\n🧠 MiniMax2.7在软件工程领域表现优异，接近\n顶尖\n模型Opus的水平。\n💼 在办公场景中，MiniMax2.7展现出强大的Excel、PPT和Word处理能力。\n🤝 MiniMax2.7支持跨平台使用，降低开发者成本并提升可用性。\n5、宇树科技移动机器人专利获授权:王兴兴团队通过半椭圆机身实现单雷达全景感知\n宇树科技的移动机器人专利通过创新的半椭圆机身和单雷达设计，实现了感知架构的简化与成本的降低，展现了其在工程极简主义上的战略意图。\n【AiBase提要:】\n🤖 采用半椭圆形机身设计，简化移动机器人感知架构。\n📡 单体广角激光雷达实现大范围精准感知，降低硬件成本。\n💡 工程极简主义战略，提升产品性价比。\n6、要做“AI 时代的皮克斯”！专业动画 Agent 工具 OiiOii 正式上线\n文章介绍了全球首个专业级动画创作 Agent 工具 OiiOii 正式上线，并分析了其核心亮点、市场表现和行业观察。该工具通过 AI 技术降低动画制作门槛，吸引大量用户关注，同时展现了其在技术驱动内容生产方面的潜力。\n【AiBase提要:】\n🧠 OiiOii 采用多智能体协作模式，简化动画创作流程。\n🎬 覆盖分镜、角色连贯性到视频生成的全链路工具。\n🌍 全球化布局，日本用户对镜头打磨表现出\n极高\n热情。\n7、通义千问“深度研究”上线财经分析模块，接入万只股票实时行情与百万份财报\n通义千问“深度研究”功能上线财经分析模块，接入万只股票实时行情与百万份财报，通过先进的Agentic架构实现深度分析，显著提升了研报的时效性与可靠性，降低了普通投资者获取深度财经分析的门槛。\n【AiBase提要:】\n🧠 通义千问升级，接入全球约1.3万只股票的分钟级行情及近百万份财报、公告与\n权威\n研报。\n📊 引入Agentic架构，实现从需求解析到数据调取的全链路自主执行，生成专业深度研报。\n🔍 系统支持关键结论原始出处追溯，提升研报时效性与可靠性，并展示清晰分析框架。\n8、前迪士尼工程师联手Midjourney 要打造会“呼吸”的仿生机器人\n文章介绍了由前迪士尼工程师朱圣杰与Midjourney联合创始人John Jiang共同打造的仿生机器人Éloi，其核心在于突破传统机器人的定义，赋予机器人情感与个性，同时通过技术手段提升人机交互的真实感和自然度。\n【AiBase提要:】\n🤖 Éloi 是一款具有“前世记忆”的数字生命，用户可自由定制外观并实现个性化互动。\n🌬️ 通过“呼吸感”概念，Éloi 在待机状态下也能表现出生物般的细微动作，增强真实感。\n🧠 与传统机器人不同，Éloi 不仅具备本能反应系统，还能在互动中展现独立人格和情绪。\n相关推荐\n《生化危机》女主角米拉·乔沃维奇逆袭 AI 圈！GitHub 开源 MemPalace 记忆宫殿系统，行业基准测试史上首获满分\n好莱坞女星米拉·乔沃维奇以《生化危机》角色“爱丽丝”为灵感，在GitHub开源AI记忆系统MemPalace，并在基准测试中获首个满分。该系统旨在解决AI长期对话中的“失忆”问题，提升记忆连贯性。\n2026年4月7号 17:43\n148.0k\n​阿里通义实验室推出 FIPO 算法，助力大模型推理能力大幅提升\n阿里通义实验室Qwen Pilot团队推出FIPO算法，通过引入Future-KL机制，精准识别推理链中的关键Token，以优化大模型推理能力，突破传统强化学习方法在区分重要Token上的瓶颈。\n2026年4月7号 17:42\n141.3k\n《生化危机》女主角米拉·乔沃维奇开源AI记忆系统MemPalace，斩获行业基准首个满分\n《生化危机》女主角米拉·乔沃维奇开源AI记忆系统MemPalace，在行业基准测试LongMemEval中获史上首个满分，并在ConvoMem和LoCoMo等测试中表现优异，超越众多付费产品。\n2026年4月7号 17:32\n156.3k\n美图RoboNeo接入Seedance2.0，实现AI视频全流程工作流闭环\n美图公司AI Agent产品RoboNeo接入Seedance2.0大模型，实现从“单点生成”到“系统化工作流”的升级。用户可直接调用文生视频、图生视频、首尾帧控制及视频参考生成等能力，支持自由组合创作逻辑，提升AI短视频创作效率与灵活性。\n2026年4月7号 16:45\n89.0k\n​贝索斯新实验室招募前 OpenAI 联合创始人\n亚马逊创始人贝索斯新成立的神秘实验室Project Prometheus，近期吸引了前OpenAI联合创始人Kyle Kosic加入。该实验室致力于开发能理解物理世界的先进人工智能系统，旨在突破现有技术限制，创造更智能自主的系统，标志着贝索斯在AI领域的深入探索。\n2026年4月7号 16:15\n130.1k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Hermeus raises $350M to build unmanned hypersonic fighters",
+      "link": "https://techcrunch.com/2026/04/07/hermeus-raises-350m-to-build-unmanned-hypersonic-fighters/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "AI startup Rocket offers vibe McKinsey-style reports at a fraction of the cost",
+      "link": "https://techcrunch.com/2026/04/06/indian-startup-rocket-wants-its-ai-to-do-mckinsey-style-consulting-at-a-fraction-of-the-cost/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Picsart now lets creators make money from their designs",
+      "link": "https://techcrunch.com/2026/04/06/ai-design-platform-picsart-launches-a-creator-monetization-program/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "OpenAI alums have been quietly investing from a new, potentially $100M fund",
+      "link": "https://techcrunch.com/2026/04/06/openai-alums-have-been-quietly-investing-from-a-new-potentially-100m-fund/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "North Korea’s hijack of one of the web’s most used open source projects was likely weeks in the making",
+      "link": "https://techcrunch.com/2026/04/06/north-koreas-hijack-of-one-of-the-webs-most-used-open-source-projects-was-likely-weeks-in-the-making/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google quietly launched an AI dictation app that works offline",
+      "link": "https://techcrunch.com/2026/04/06/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Gas prices aren’t the only factor fueling used EV sales",
+      "link": "https://techcrunch.com/2026/04/06/gas-prices-arent-the-only-factor-fueling-used-ev-sales/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Apple moves to take its App Store fight back to the Supreme Court",
+      "link": "https://techcrunch.com/2026/04/06/apple-epic-games-lawsuit-supreme-court-appeal-app-store-commission/",
+      "description": "",
+      "publish_time": "2026-04-06",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A teenage Minecraft YouTuber raised $1,234,567 for a meme prediction market called Giggles. It broke me.",
+      "link": "https://techcrunch.com/2026/04/07/a-teenage-minecraft-youtuber-raised-1234567-for-a-meme-prediction-market-called-giggles-it-broke-me/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "4 days left to save close to $500 on TechCrunch Disrupt 2026 passes",
+      "link": "https://techcrunch.com/2026/04/07/4-days-left-to-save-close-to-500-on-techcrunch-disrupt-2026-passes/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Trump administration plans to cut cybersecurity agency’s budget by $700 million",
+      "link": "https://techcrunch.com/2026/04/07/cisa-budget-cuts-700-million-cybersecurity-agency-trump/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Why a former AirPods engineer is now building heat pumps",
+      "link": "https://techcrunch.com/2026/04/07/why-a-former-airpods-engineer-is-now-building-heat-pumps/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The AI gold rush is pulling private wealth into riskier, earlier bets",
+      "link": "https://techcrunch.com/2026/04/07/the-ai-gold-rush-is-pulling-private-wealth-into-riskier-earlier-bets/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Adobe launches Acrobat-based Student Spaces, a free AI-powered study tool for students",
+      "link": "https://techcrunch.com/2026/04/07/adobe-launches-acrobat-spaces-a-free-ai-powered-study-tool-for-students/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
