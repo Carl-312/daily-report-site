@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-08",
+  "articles": [
+    {
+      "title": "AI日报：AI视频神秘黑马Happy Horse亮相；爱诗科技 PixVerse C1 发布；360 打造“虾书”APP",
+      "link": "https://news.aibase.com/zh/daily/26940",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、超越 Seedance 2.0 ！AI 视频赛道神秘黑马 Happy Horse 横空出世 文章报道了AI视频生成领域的新模型Happy Horse的崛起，其性能全面超越现有领先模型Seedance2.0，并具备多模态视频创作能力。该模型的出现引发了全球AI社区的热议，被认为是行业技术迭代的重要标志。 🎥 Happy Horse模型在文本到视频生成方面表现出色，画面一致性、细节还原度和运动自然度领先 🔊 模型支持音频生成，实现真正的多模态视频创作能力 🔍 该模型起源成谜，可能来自亚洲AI实验室，被业内视为Seedance的潜在杀手 2、15 秒 1080P…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：AI视频神秘黑马Happy Horse亮相；爱诗科技 PixVerse C1 发布；360 打造“虾书”APP\n发布于最新AI日报\n发布时间 :\n2026年4月8号 15:46\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、超越 Seedance 2.0 ！AI 视频赛道神秘黑马 Happy Horse 横空出世\n文章报道了AI视频生成领域的新模型Happy Horse的崛起，其性能全面超越现有领先模型Seedance2.0，并具备多模态视频创作能力。该模型的出现引发了全球AI社区的热议，被认为是行业技术迭代的重要标志。\n【AiBase提要:】\n🎥 Happy Horse模型在文本到视频生成方面表现出色，画面一致性、细节还原度和运动自然度领先\n🔊 模型支持音频生成，实现真正的多模态视频创作能力\n🔍 该模型起源成谜，可能来自亚洲AI实验室，被业内视为Seedance的潜在杀手\n2、15 秒 1080P 音画同步！爱诗科技 PixVerse C1 发布：影视级大模型正式“炸场”\n爱诗科技发布了面向影视行业的专业大模型PixVerse C1，该模型不仅支持15秒的1080P高清视频生成，还具备自动分镜、首尾帧控场和原生音画同步等核心能力，为影视制作提供了全新的解决方案。\n【AiBase提要:】\n🎥 从“单镜头”到“自动分镜”的飞跃\n🎬 超长高清出片：\n最高\n支持15秒的1080P高清视频生成\n🎙️ 原生音画同步：出片即自带音效，实现真正意义上的音画一体\n3、腾讯正式发布“龙虾”QBotClaw:国内首个支持主流大模型API自由配置的AI浏览器\n腾讯正式发布国内首个支持主流大模型API自由配置的AI浏览器‘龙虾’QBotClaw，标志着浏览器从单纯的网页访问工具演变为具备全场景感知与复杂任务执行能力的AI助理。该产品核心亮点在于其\n极高\n开放性，支持用户自由配置国内各大主流大模型的API Key，打破了以往AI浏览器与单一模型深度绑定的局限。\n🧠 支持用户自由配置国内主流大模型的API Key，打破AI浏览器与单一模型绑定的局限。\n💻 首期上线Mac版本并深度集成QQ浏览器Skill，Windows版本即将推出，降低大模型使用门槛。\n🔄 打通移动端与桌面端壁垒，通过微信扫码绑定Clawbot实现远程操作。\n4、360 打造“虾书”APP：围观智能体互怼的数字社区\n360集团推出的“虾书”APP，以 AI 智能体为核心，提供一种全新的社交体验，让用户从“使用者”转变为“观察者”，并尝试构建一个完整的 AI 原生应用集群。\n【AiBase提要:】\n🧠 基于 OpenClaw 生态打造的 AI 小龙虾具备独立思考与自主意识。\n👀 用户以观察者身份参与 AI 智能体之间的互动，体验社交修罗场。\n🌐 360 集团通过“虾书”布局 AI 智能体生态，构建完整的 AI 原生应用集群。\n5、DeepSeek V4 灰度测试曝光：全新视觉版与“专家模式”现身\nDeepSeek V4 正在进行灰度测试，其新功能架构包括快速版、专家版和视觉版，同时强调对国产芯片的适配，展现出强大的技术实力和市场竞争力。\n【AiBase提要:】\n🧠 新一代模型在底层架构、交互逻辑和多模态能力上实现重大升级。\n💻 DeepSeek V4 优先适配国产 AI 芯片，拒绝依赖海外芯片商。\n🚀 预计推出 AI 编程特别版，挑战 Anthropic 和 OpenAI 的产品。\n6、Anthropic 推出强大 AI 模型 Mythos 仅限安全伙伴试用\nAnthropic 推出了新一代 AI 模型 Mythos，该模型具有强大的编程和推理能力，能够发现数千个零日漏洞，尤其在挖掘历史漏洞方面表现出色。然而，由于潜在的安全风险，该模型仅限于特定的安全合作伙伴使用，并且公司正与美国联邦官员探讨其在\n国家级\n关键系统中的应用。\n【AiBase提要:】\n🌟 Mythos 是 Anthropic 推出的\n最新\nAI 模型，目前仅限少数安全合作伙伴试用。\n🔍 该模型在测试中发现了数千个零日漏洞，展示了在挖掘历史漏洞上的潜力。\n⚠️ 公司与美国联邦官员讨论其在\n国家级\n关键系统中的应用，同时面临法律纠纷。\n7、数字家人上车！豆包大模型首发别克至境 E7：智能座舱开启“类人”时代\n文章介绍了上汽通用将豆包大模型应用于别克至境E7，标志着智能座舱从“指令交互”迈向“语义理解”的新阶段。\n【AiBase提要:】\n🧠 情绪识别：系统支持20+种情绪表达，能通过语调、语速识别用户的喜怒哀乐。\n🔄 上下文记忆：具备连续对话能力，可自动过滤出满足特定需求的地点并规划路线。\n🔒 安全隔离：构建了严密的三层安全隔离墙，保障AI交互的安全性。\n8、智谱发布GLM-5.1:SWE-bench评分全球领跑，模型单价上调10%\n智谱发布全新大模型GLM-5.1，在SWE-bench Pro基准测试中表现优异，同时在价格上实现与国际\n顶尖\n厂商的对齐，标志着行业竞争重心转向性能溢价。\n【AiBase提要:】\n🧠 GLM-5.1在SWE-bench Pro基准测试中刷新世界纪录，超越Claude4.6Opus，位居国产及开源模型首位。\n💰 智谱GLM全线提价10%，在Coding等核心场景的缓存命中Token价格已基本锚定Anthropic旗下Claude3.5Sonnet。\n🚀 GLM-5.1具备极强的自主工程能力，能够在单次任务中持续工作长达8小时，独立完成规划、执行与测试。\n相关推荐\n全球首个！中国发布“磐石·禹衡”碳核算大模型：精准刻画全球“碳足迹”\n中国科学院上海高等研究院发布全球首个全景式碳排放核算系统“磐石·禹衡碳核算大模型”，实现从“跟跑”到“重构范式”的技术突破。该系统通过数据、算法、算力三位一体，破解传统碳核算知识壁垒高、数据更新慢、分辨率低等瓶颈，构建坚实底层支撑体系。\n2026年4月8号 17:43\n75.8k\n阿里 AI 架构大调整！李飞飞出任阿里云 CTO，通义实验室晋升“大模型事业部”\n阿里巴巴宣布组织架构调整，核心是加速AI建设。CEO吴泳铭通过内部信宣布，设立集团技术委员会并升级业务部门，开启AI全面加速期。最受关注的是全球顶尖科学家李飞飞加盟，出任阿里云CTO，全面负责阿里云技术及AI云基础设施建设。\n2026年4月8号 17:25\n146.2k\n​英国国家数据图书馆计划面临挑战，数据可用性亟待改善\n英国政府计划通过国家数据图书馆推动人工智能发展，但开放数据研究所的研究指出，当前公共数据集存在标题误导、元数据缺失等问题，可能影响计划实施。政府已在2024年秋季预算案中确认该计划，承诺为研究与企业提供支持。\n2026年4月8号 17:06\n108.7k\n马斯克对 OpenAI 提起诉讼，要求罢免 CEO 奥尔特曼职务\n马斯克起诉OpenAI高管，指控其存在欺诈行为，要求恢复公司非营利性质。案件将于4月27日在加州联邦法院审理。\n2026年4月8号 16:59\n122.7k\n美团李树斌：餐饮商家拥抱 AI 的第一步是“信息线上化”\n在2026中国餐饮连锁峰会上，美团李树斌强调，餐饮业拥抱AI应先夯实“本地生活信息基建”，而非盲目追求技术升级。他指出，AI并不真正理解物理世界，而消费者需求正从简单搜索转向复杂多意图表达。\n2026年4月8号 15:19\n133.9k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "How nuclear batteries could speed the race to fusion power",
+      "link": "https://techcrunch.com/2026/04/08/how-nuclear-batteries-could-speed-the-race-to-fusion-power/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google quietly launched an AI dictation app that works offline",
+      "link": "https://techcrunch.com/2026/04/07/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "I can’t help rooting for tiny open source AI model maker Arcee",
+      "link": "https://techcrunch.com/2026/04/07/i-cant-help-rooting-for-tiny-open-source-ai-model-maker-arcee/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "VC Eclipse has a new $1.3B fund to back — and build — ‘physical AI’ startups",
+      "link": "https://techcrunch.com/2026/04/07/vc-eclipse-has-a-new-1-3b-to-back-and-build-physical-ai-startups/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Iranian hackers are targeting American critical infrastructure, US agencies warn",
+      "link": "https://techcrunch.com/2026/04/07/iranian-hackers-are-targeting-american-critical-infrastructure-u-s-agencies-warn/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic debuts preview of powerful new AI model Mythos in new cybersecurity initiative",
+      "link": "https://techcrunch.com/2026/04/07/anthropic-mythos-ai-model-preview-security/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Russian government hackers broke into thousands of home routers to steal passwords",
+      "link": "https://techcrunch.com/2026/04/07/russian-government-hackers-broke-into-thousands-of-home-routers-to-steal-passwords/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Firmus, the ‘Southgate’ AI data center builder backed by Nvidia, hits $5.5B valuation",
+      "link": "https://techcrunch.com/2026/04/07/firmus-the-southgate-ai-datacenter-builder-backed-by-nvidia-hits-5-5b-valuation/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Databricks co-founder wins prestigious ACM award, says ‘AGI is here already’",
+      "link": "https://techcrunch.com/2026/04/08/databricks-matei-zaharia-wins-acm-computing-prize-agi/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "As YouTube grows on TV, it eyes more interactive video across formats",
+      "link": "https://techcrunch.com/2026/04/08/as-youtube-grows-on-tv-it-eyes-more-interactive-video-across-formats/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Final 3 days to save up to $500 on your TechCrunch Disrupt 2026 pass",
+      "link": "https://techcrunch.com/2026/04/08/final-3-days-to-save-up-to-500-on-your-techcrunch-disrupt-2026-pass/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Atlassian launches visual AI tools and third-party agents in Confluence",
+      "link": "https://techcrunch.com/2026/04/08/atlassian-confluence-visual-ai-tools-agents/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "X is rolling out automatic translation and photo editing powered by Grok",
+      "link": "https://techcrunch.com/2026/04/08/x-is-rolling-out-automatic-translation-and-photo-editing-powered-by-grok/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Trump administration plans to cut cybersecurity agency’s budget by $700 million",
+      "link": "https://techcrunch.com/2026/04/07/cisa-budget-cuts-700-million-cybersecurity-agency-trump/",
+      "description": "",
+      "publish_time": "2026-04-07",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
