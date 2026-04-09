@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-09",
+  "articles": [
+    {
+      "title": "AI日报：即梦AI发布协作型叙事工具Octo；公众号打击AI自动化写作;MiniMax 发布 MMX-CLI",
+      "link": "https://news.aibase.com/zh/daily/26981",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、即梦AI发布协作型叙事工具“小章鱼”Octo，首推VibeCreate创作模式 即梦AI发布协作型叙事工具“小章鱼”Octo，首推VibeCreate创作模式，标志着AI创作从单向指令向同屏共创演进，通过智能Agent和多模态混合支持，构建了全流程制作闭环，并拓展了AI在创意产业的边界。 🧠 Octo支持“对话+多模态混合”的同屏共创，实现与创作者的异步并行创意碰撞。 🎬 构建了从故事大纲梳理到短片成片输出的全流程制作闭环，深度联动即梦 最新 底层模型。 🤝 VibeCreate模式将AI定位为“创意合伙人”，推动AI视频创作向工作流集成与交互体验革新。 …",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：即梦AI发布协作型叙事工具Octo；公众号打击AI自动化写作;MiniMax 发布 MMX-CLI\n发布于最新AI日报\n发布时间 :\n2026年4月9号 15:47\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、即梦AI发布协作型叙事工具“小章鱼”Octo，首推VibeCreate创作模式\n即梦AI发布协作型叙事工具“小章鱼”Octo，首推VibeCreate创作模式，标志着AI创作从单向指令向同屏共创演进，通过智能Agent和多模态混合支持，构建了全流程制作闭环，并拓展了AI在创意产业的边界。\n【AiBase提要:】\n🧠 Octo支持“对话+多模态混合”的同屏共创，实现与创作者的异步并行创意碰撞。\n🎬 构建了从故事大纲梳理到短片成片输出的全流程制作闭环，深度联动即梦\n最新\n底层模型。\n🤝 VibeCreate模式将AI定位为“创意合伙人”，推动AI视频创作向工作流集成与交互体验革新。\n2、拒绝“套壳”AI：微信公众号重拳打击非真人自动化写作\n微信公众平台发布了针对‘非真人自动化创作行为’的\n最新\n管理规则，旨在维护内容生态的原创性。新规明确禁止利用AI、脚本或接口替代真人完成创作与发布，并对违规行为进行严厉处罚，包括流量限制、文章删除甚至账号封禁。\n【AiBase提要:】\n🤖 禁止利用AI、脚本或接口替代真人完成创作与发布。\n🚫 传播自动化创作的教程与服务将被严格禁止。\n🔒 对违规账号采取分级处罚，严重者可能被\n永久\n封禁。\n3、MiniMax 发布 MMX-CLI：一行代码原生接入全模态模型\nMiniMax 发布 MMX-CLI 工具，显著提升了 AI Agent 在复杂环境中的能力，同时推动了 AI 在商业场景的落地应用。\n【AiBase提要:】\n✅ 原生调用，告别 MCP Server：MMX-CLI 简化了 Agent 与大模型的交互逻辑，实现零适配门槛。\n🛒 商业场景落地提速：淘宝闪购 AI 店铺助手上线语音搜索功能，实现复杂操作闭环。\n🚀 AI Agent 接管“执行权”：AI 正从辅助者变为真正的协同伙伴，深入编程、经营和创作环节。\n4、Meta发布\n首款\nAI模型Muse Spark，千亿美金预算加速\n超级\n智能布局\nMeta正式发布\n首款\n自研高性能AI模型Muse Spark，标志着扎克伯格在千亿级投入下的“\n超级\n智能”版图迈出实质性一步。该模型由Scale AI创始人Alexandr Wang领衔研发，目前已集成至Meta AI服务中，技术层面采用多子智能体协同机制，能够同步处理旅行规划、目的地对比等复杂长链任务，并在视觉理解方面表现卓越。\n【AiBase提要:】\n🧠 Meta发布\n首款\n自研高性能AI模型Muse Spark，标志着其在\n超级\n智能领域的实质性进展。\n💰 2026年Meta AI相关支出预计达1150亿至1350亿美元，远超2025年的722亿美元。\n🌐 Muse Spark具备多模态感知与复杂推理能力，全面对标Gemini Deep Think与GPT Pro。\n5、淘宝闪购商家端上线AI语音搜索，复杂操作实现“一问即办”\n淘宝闪购升级其餐饮商家侧的AI Agent入口“AI店铺助手”，并全量上线语音搜索功能。这一技术突破使得商家可以通过语音直接调起执行窗口、完成复杂业务操作闭环，从而实现降本增效。\n【AiBase提要:】\n🛒 高效订单查询: 快速定位特定订单状态。\n🛍️ 灵活商品管理: 实时调整库存或修改商品信息。\n🛡️ 店铺安全维护: 一键屏蔽恶意顾客，净化经营环境。\n6、Anthropic 上线 Claude Managed Agents 公测版，一站式解决 AI 代理生产部署\nAnthropic 推出 Claude Managed Agents 公测版，为开发者提供一站式 AI 代理构建和部署解决方案，显著缩短开发周期并提升生产效率。\n【AiBase提要:】\n✅ 一体化集成：无需自行搭建复杂基础设施，即可快速构建高性能 AI 代理。\n🚀 高效开发流程：从原型设计到正式发布，整个过程可在几天内完成。\n📦 生产就绪：内置经过优化的代理框架，支持大规模部署需求。\n详情链接:https://claude.com/customers/rakuten\n7、腾讯云宣布5月9日起上调AI算力及容器服务价格，涨幅达5%\n腾讯云宣布将于2026年5月9日起正式上调多项核心AI业务价格，涨幅达5%，这是继阿里云与百度云之后，国内又一头部云服务商完成算力资源的结构性调价。\n【AiBase提要:】\n🔥 腾讯云将于2026年5月9日起上调AI算力相关产品服务价格，涨幅为5%。\n📦 此次调价涵盖AI算力、容器服务TKE-原生节点及弹性MapReduce（EMR）相关产品。\n💡 调价原因在于全球AI算力需求激增及核心硬件供应链成本上涨，旨在保障服务质量及算力资源的持续供给。\n8、字节跳动发布原生全双工语音大模型 Seeduplex：懂倾听、抗干扰\n字节跳动发布原生全双工语音大模型 Seeduplex，标志着 AI 语音交互从传统的“回合制”向更贴近人类直觉的“实时自然交互”演进。该模型通过语音与语义的联合建模，显著提升了模型在复杂声学环境下的抗干扰能力，并引入动态判停技术，优化对话节奏控制，提升用户体验。\n【AiBase提要:】\n🎙️ Seeduplex 实现了“边听边说”的同步处理框架，提升了语音交互的自然感。\n🔊 通过语音与语义的联合建模，显著提升了模型在复杂声学环境下的抗干扰能力。\n🧠 引入动态判停技术，优化对话节奏控制，提升用户体验。\n详情链接:https://seed.bytedance.com/seeduplex\n相关推荐\n游戏巨头 V 社秘密自研 SteamGPT：旨在提升客服与任务效率\nV社被曝正开发内部AI工具“SteamGPT”，包含核心模块SteamGPT和SteamGPTSummary，主要用于平台支持和内部管理。该工具旨在协助客服团队高效处理支持任务，可快速调取并汇总玩家账户详情，如注册时长、信用分等，以提升协作效率。\n2026年4月9号 17:18\n282.0k\n​腾讯云 QClaw V2 发布，开启多 Agent 协同新时代\n腾讯云AI助手QClaw升级至V2版本，核心突破在于引入多Agent协同与跨应用直连技术，构建“数字工作团队”，显著提升复杂任务处理效率。新版本支持最多3个Agent并行工作，用户可自定义其角色或选用内置专家。\n2026年4月9号 16:26\n302.6k\n即梦AI发布协作型叙事工具“小章鱼”Octo，首推VibeCreate创作模式\n即梦AI推出首个协作型叙事创作工具“小章鱼”Octo，引入VibeCreate（氛围创作）模式，旨在改变AI内容生成方式，从单向指令转向同屏共创的合伙人模式。目前该工具仅开放Web端内测，支持对话与多模态交互，标志着AI创作交互范式的重要演进。\n2026年4月9号 15:02\n314.8k\n谷歌发布 Gemini「notebooks」功能：跨平台深度管理项目实战\n谷歌推出\"notebooks\"功能，让Gemini成为私人知识助理。该功能通过集中管理特定主题内容，赋予AI\"长效记忆\"能力。用户可将分散的文件、历史对话记录和自定义指令整合到特定笔记本中，实现信息的高度整合与复用，提升上下文精准度。\n2026年4月9号 14:31\n153.6k\n拒绝“套壳”AI：微信公众号重拳打击非真人自动化写作\n微信公众平台发布新规，严管“非真人自动化创作”，明确禁止利用AI、脚本或接口替代真人创作与发布。违规场景包括完全由AI生成或改写内容、程序托管发布等。平台已开始批量删除被判定为自动化生成的文章，标志着对AI滥用行为的监管进入实操阶段，旨在维护内容生态的原创性。\n2026年4月9号 14:26\n134.0k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "This founder helped build SpaceX’s most powerful rocket engine. Now he’s building a ‘fighter jet for orbit’",
+      "link": "https://techcrunch.com/2026/04/09/portal-raises-50-million-to-build-a-new-kind-of-high-power-rocket-engine/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Collide Capital raises $95M fund to back fintech, future-of-work startups",
+      "link": "https://techcrunch.com/2026/04/09/collide-capital-raises-95m-fund-to-back-fintech-future-of-work-startups/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo robotaxis are tracking potholes and sharing that data with Waze users",
+      "link": "https://techcrunch.com/2026/04/09/waymo-robotaxis-are-tracking-potholes-and-sharing-that-data-with-waze-users/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Poke makes using AI agents as easy as sending a text",
+      "link": "https://techcrunch.com/2026/04/08/poke-makes-ai-agents-as-easy-as-sending-a-text/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "AWS boss explains why investing billions in both Anthropic and OpenAI is an OK conflict",
+      "link": "https://techcrunch.com/2026/04/08/aws-boss-explains-why-investing-billions-in-both-anthropic-and-openai-is-an-ok-conflict/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Canva doubles down on AI and marketing automation with Simtheory, Ortto acquisitions",
+      "link": "https://techcrunch.com/2026/04/08/canva-doubles-down-on-ai-and-marketing-automation-with-simtheory-ortto-acquisitions/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "A self-driving car in Texas hit and killed a mother duck, sparking neighborhood outrage",
+      "link": "https://techcrunch.com/2026/04/08/avride-self-driving-car-austin-kills-duck-mueller/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Hack-for-hire group caught targeting Android devices and iCloud backups",
+      "link": "https://techcrunch.com/2026/04/08/hack-for-hire-group-caught-targeting-android-devices-and-icloud-backups/",
+      "description": "",
+      "publish_time": "2026-04-08",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon CEO takes aim at Nvidia, Intel, Starlink, more in annual shareholder letter",
+      "link": "https://techcrunch.com/2026/04/09/amazon-ceo-takes-aim-at-nvidia-intel-starlink-more-in-annual-shareholder-letter/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Final 2 days to save up to $500 on your TechCrunch Disrupt 2026 ticket",
+      "link": "https://techcrunch.com/2026/04/09/final-2-days-to-save-up-to-500-on-your-techcrunch-disrupt-2026-ticket/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Spotify now lets everyone turn off videos in its app",
+      "link": "https://techcrunch.com/2026/04/09/spotify-now-lets-everyone-turn-off-all-videos-in-its-app/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Instagram expands its movie inspired content restrictions for teens internationally",
+      "link": "https://techcrunch.com/2026/04/09/instagram-expands-its-movie-inspired-content-restriction-for-teens-internationally/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Radify’s sci-fi plasma reactors could break China’s dominance of rare earth elements",
+      "link": "https://techcrunch.com/2026/04/09/radifys-sci-fi-plasma-reactors-could-break-chinas-dominance-of-rare-earth-elements/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Ex-Tesla engineer’s startup taps Pronto to help automate a copper mine",
+      "link": "https://techcrunch.com/2026/04/09/mariana-minerals-taps-pronto-to-help-automate-a-copper-mine/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
