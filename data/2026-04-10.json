@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-10",
+  "articles": [
+    {
+      "title": "AI日报：MiniMax 发布 Music 2.6；扣子2.5重磅升级；AI人格测试产品SBTI走红网络",
+      "link": "https://news.aibase.com/zh/daily/27029",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、AI人格测试产品SBTI走红网络:主打抽象标签与AI合成技术 AI人格测试产品SBTI凭借其荒诞的“抽象标签”与解构式表达迅速走红网络，其核心在于利用AI合成技术进行内容生成，而非严谨的心理学量表。尽管缺乏学术支撑，但其轻量化交互设计和娱乐化探索成功吸引了大量用户关注，同时也引发了关于AI测评工具在伦理和严谨性方面的讨论。 🧠 SBTI应用通过AI合成技术生成抽象标签，挑战传统人格测试工具MBTI。 🎭 产品以自嘲标签如“尤物”、“吗喽”吸引互联网亚文化群体，实现娱乐化探索。 ⚠️ 开发者强调SBTI不适用于科学评估，引发对非专业背景AI测评工具伦理问题的…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：MiniMax 发布 Music 2.6；扣子2.5重磅升级；AI人格测试产品SBTI走红网络\n发布于最新AI日报\n发布时间 :\n2026年4月10号 16:00\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、AI人格测试产品SBTI走红网络:主打抽象标签与AI合成技术\nAI人格测试产品SBTI凭借其荒诞的“抽象标签”与解构式表达迅速走红网络，其核心在于利用AI合成技术进行内容生成，而非严谨的心理学量表。尽管缺乏学术支撑，但其轻量化交互设计和娱乐化探索成功吸引了大量用户关注，同时也引发了关于AI测评工具在伦理和严谨性方面的讨论。\n【AiBase提要:】\n🧠 SBTI应用通过AI合成技术生成抽象标签，挑战传统人格测试工具MBTI。\n🎭 产品以自嘲标签如“尤物”、“吗喽”吸引互联网亚文化群体，实现娱乐化探索。\n⚠️ 开发者强调SBTI不适用于科学评估，引发对非专业背景AI测评工具伦理问题的讨论。\n2、阿里黑科技炸场！0.6B 小模型“魔改”成 17B MoE，激活参数仅 5%，CPU 直接跑 30token/s！\n阿里国际数字商业团队推出Marco-Mini-Instruct模型，通过Upcycling技术将小模型升级为MoE架构，激活参数仅0.86B，推理效率高，甚至可在普通CPU上运行，极大降低了本地部署门槛，并在性能上超越了4B级Dense模型，展现了MoE架构的潜力。\n【AiBase提要:】\n🧠 通过Upcycling技术将Qwen3-0.6B-Base模型升级为MoE架构，实现高效训练。\n⚡ Marco-Mini-Instruct在CPU上可实现30token/s的推理速度，降低部署门槛。\n🚀 激活参数仅0.86B却超越4B级Dense模型，验证MoE架构潜力。\n3、AI 音乐进入“翻唱”时代！MiniMax 发布 Music 2.6：推出全新 Cover 功能与 Agent 技能\nMiniMax 发布的 Music 2.6 模型在技术底层进行了大幅优化，解决了 AI 音乐生成过程中的痛点，并引入了全新的交互功能，如“Cover”创作和 AI Agent 技能，进一步提升了 AI 在音乐创作中的可控性和实用性。\n【AiBase提要:】\n🧠 核心升级：更聪明、更顺滑、更好听\n🎧 创新功能：上线“Cover”与 AI Agent 技能\n🔄 创作者福利：全球免费内测开启\n4、扣子 2.5 重磅升级！给 AI Agent 配云电脑 + 云手机 + 独立邮箱，还建了个“平行世界”\n扣子2.5版本通过推出 Agent World 平台，将 AI Agent 从执行工具转变为独立数字伙伴，提供云电脑、云手机和独立邮箱等基础设施，同时构建开放的 Agent 协作与进化平台，推动 AI 从辅助执行走向自主伙伴的行业转型。\n【AiBase提要:】\n🧠 Agent World 平台为 AI Agent 提供独立身份、长期记忆和专属虚拟世界，使其能够自主生存、学习与协作。\n💻 云电脑和云手机的引入，让 AI Agent 能够运行代码脚本、浏览网页、处理文件，并支持下载安装各类原生 APP。\n📧 Agent 获得独立邮箱身份（@coze.email），可与其他 Agent 或外部系统进行沟通协作，拓展了应用边界。\n5、字节跳动Seed团队核心人才流失:一年内70人离职，腾讯阿里成主要去向\n文章指出，字节跳动旗下AI核心部门Seed团队面临剧烈的人才流失，过去一年已有近70名技术人才离职，主要流向腾讯和阿里等大厂。同时，人才外溢也催生了“字节系”创业潮，已有30余家由前字节员工创立的AI公司获得融资。尽管字节跳动推出了高额期权津贴以留住人才，但依然难以阻挡人才在行业风口下的主动迁徙。\n【AiBase提要:】\n🧠 字节跳动Seed团队一年内有近70名技术人才离职，主要流向腾讯和阿里等大厂。\n💼 人才外溢催生了“字节系”创业潮，已有30余家AI公司获得融资。\n💰 字节跳动为留住核心人才推出高额期权津贴，但未能阻止人才流动。\n6、Google Gemini 推出交互式模拟功能：让复杂概念“动”起来\nGoogle Gemini 推出了一项新功能，能够生成可交互的3D模型与物理模拟场景，使AI从内容生成器转变为直观教学工具。该功能提升了用户对物理过程和三维空间的理解能力，并在教育、工程及科研领域具有重要意义。\n【AiBase提要:】\n✨ 新功能允许用户通过交互式3D模型理解复杂概念，提升学习效率。\n🔄 用户可以实时调整参数并观察物理模拟的变化，增强直观体验。\n🚀 Google Gemini 在多模态交互领域进一步巩固了其领先地位。\n7、DeepSeek V4将于4月下旬发布:万亿参数规模并深度适配国产芯片\nDeepSeek V4的发布标志着国产大模型在万亿级参数赛道上的关键突破，同时实现了与国产芯片的深度适配，为构建自主算力底座提供了重要支持。\n【AiBase提要:】\n🧠 DeepSeek V4将实现万亿级参数规模及百万级上下文窗口的升级。\n⚙️\n首次\n实现与华为昇腾等国产芯片的深度适配，标志着中国AI产业脱离CUDA生态依赖。\n💰 国内科技巨头已提前预订大量新一代AI芯片，推动相关芯片价格上涨约20%。\n8、iOS 26 重磅更新！短信应用引入 AI 智能搜索功能\n苹果公司正式发布了 iOS 26 系统，并对短信应用进行了重大优化。这次更新不仅提升了群聊功能和垃圾信息防护，还将核心的搜索功能进行了全面升级，利用人工智能技术实现了质的飞跃。随着 iOS 26 的推出，短信搜索功能迎来了全新的变化。用户现在可以使用自然语言输入他们的搜索需求，比如输入 “六月份去海滩旅行时妈妈的照片”，系统能够准确识别其语义并匹配相应的结果。\n【AiBase提要:】\n📱 iOS 26 系统对短信应用进行重大优化，引入 AI 智能搜索功能。\n🧠 用户可通过自然语言输入进行搜索，提升信息查找效率。\n📲 该功能支持特定机型，用户无需额外设置，自动适配升级。\n相关推荐\n火爆全网的 SBTI 测试背后：作者用 AI 做的，初衷是劝朋友戒酒\n近日，SBTI人格测试在社交媒体爆火。它以传统MBTI为基础，通过一系列幽默创意的自我标签吸引用户参与。测试结果会给出“尤物”“吗喽”等奇特定义，令人捧腹。其界面直接宣称“MBTI已过时，SBTI来了”，以调侃风格引发热议。\n2026年4月10号 10:48\n202.4k\nAI人格测试产品SBTI走红网络:主打抽象标签与AI合成技术\n一款名为“SBTI”的AI人格测试应用近日走红网络，它以“MBTI已过时”为口号，用“尤物”“吗喽”等自嘲式标签取代传统人格分类，迎合了当下互联网亚文化审美。开发者表示，该应用并非基于心理学专业背景。\n2026年4月10号 9:18\n215.4k\n网信办整治自媒体发布不实信息 平台需优化AI生成内容标识\n​中央网信办宣布自2025年7月24日起开展为期两个月的专项整治行动，重点打击“自媒体”发布不实信息行为。此次行动覆盖全国各省、自治区、直辖市及新疆生产建设兵团，旨在通过技术治理与平台责任双轨并行，破解恶意蹭炒、数据造假、资质造假等突出问题。\n\n行动明确剑指四大领域:一是恶意蹭炒行为，包括假冒热点事件当事人或知情人士编造虚假信息，以及在财经、军事等领域伪造“权威数据”误导公众;二是数据造假手段，如利用AI合成技术伪造新闻、通过拼凑剪辑制造虚假事件，或借助刷榜操纵热搜榜单;三是信息标注乱象，部分账号以模糊来源、隐蔽标注等方式传播无依据内容，甚至通过矩阵账号互相引用掩盖真实出处;四是专业领域信息失实，未认证或伪造资质者冒充专家发布违背常识的言论，或通过虚假摆拍打造“网红人设”引流带货。\n2025年7月29号 11:47\n173.4k\n短剧行业巨震！红果合并真人与 AI 榜单：AI 仿真人剧热度首超实拍剧\n红果短剧平台将真人短剧与AI短剧合并排名，AI短剧《菩提临世真人AI版》首次登顶热播榜榜首，标志着AI生成内容在热度上实现重要突破。\n2026年4月10号 17:43\n146.9k\n联想新财年将发布“AI 主机”：从天禧生态走向全场景智能\n联想在2026/2027财年誓师大会上宣布推出全新品类“AI主机”，旨在加速AI在企业与个人场景的规模化应用。核心战略是将AI从软件应用转向硬件原生深度融合，推出面向不同规模客户的AI主机，推动AI技术更广泛落地。\n2026年4月10号 16:57\n114.1k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Is Anthropic limiting the release of Mythos to protect the internet — or Anthropic?",
+      "link": "https://techcrunch.com/2026/04/09/is-anthropic-limiting-the-release-of-mythos-to-protect-the-internet-or-anthropic/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Sierra’s Bret Taylor says the era of clicking buttons is over",
+      "link": "https://techcrunch.com/2026/04/09/sierras-bret-taylor-says-the-era-of-clicking-buttons-is-over/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "This founder helped build SpaceX’s most powerful rocket engine. Now he’s building a ‘fighter jet for orbit.’",
+      "link": "https://techcrunch.com/2026/04/09/portal-raises-50-million-to-build-a-new-kind-of-high-power-rocket-engine/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Collide Capital raises $95M fund to back fintech, future-of-work startups",
+      "link": "https://techcrunch.com/2026/04/09/collide-capital-raises-95m-fund-to-back-fintech-future-of-work-startups/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Waymo robotaxis are tracking potholes and sharing that data with Waze users",
+      "link": "https://techcrunch.com/2026/04/09/waymo-robotaxis-are-tracking-potholes-and-sharing-that-data-with-waze-users/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "France to ditch Windows for Linux to reduce reliance on US tech",
+      "link": "https://techcrunch.com/2026/04/10/france-to-ditch-windows-for-linux-to-reduce-reliance-on-us-tech/",
+      "description": "",
+      "publish_time": "2026-04-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "YouTube Premium and YouTube Music are getting more expensive",
+      "link": "https://techcrunch.com/2026/04/10/youtube-premium-youtube-music-subscription-price-increase/",
+      "description": "",
+      "publish_time": "2026-04-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Every fusion startup that has raised over $100M",
+      "link": "https://techcrunch.com/2026/04/10/every-fusion-startup-that-has-raised-over-100m/",
+      "description": "",
+      "publish_time": "2026-04-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Last 24 hours: Save up to $500 on your TechCrunch Disrupt 2026 pass",
+      "link": "https://techcrunch.com/2026/04/10/final-24-hours-save-up-to-500-on-your-techcrunch-disrupt-2026-pass/",
+      "description": "",
+      "publish_time": "2026-04-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "PSA: If you use the Meta AI app, your friends will find out and it will be embarrassing",
+      "link": "https://techcrunch.com/2026/04/10/psa-if-you-use-the-meta-ai-app-your-friends-will-find-out-and-it-will-be-embarrassing/",
+      "description": "",
+      "publish_time": "2026-04-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Snap gets closer to releasing new AI glasses after years-long hiatus",
+      "link": "https://techcrunch.com/2026/04/10/snap-gets-closer-to-releasing-new-ai-glasses-after-years-long-hiatus/",
+      "description": "",
+      "publish_time": "2026-04-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Florida AG to probe OpenAI, alleging possible connection to FSU shooting",
+      "link": "https://techcrunch.com/2026/04/09/florida-ag-to-probe-openai-alleging-possible-connection-to-fsu-shooting/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "ChatGPT finally offers $100/month Pro plan",
+      "link": "https://techcrunch.com/2026/04/09/chatgpt-pro-plan-100-month-codex/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "EFF is the latest organization to leave X",
+      "link": "https://techcrunch.com/2026/04/09/eff-is-the-latest-organization-to-leave-x/",
+      "description": "",
+      "publish_time": "2026-04-09",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
