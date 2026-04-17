@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-17",
+  "articles": [
+    {
+      "title": "AI日报：Claude Opus 4. 7发布；阿里开源 Qwen3.6-35B-A3B；Perplexity推出Mac端AI助手",
+      "link": "https://news.aibase.com/zh/daily/27234",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、Claude Opus 4.7 正式发布：比聪明更重要的，是靠谱 Claude Opus 4.7的发布标志着Anthropic在AI模型可靠性上的重大突破，其在多个基准测试中表现出色，同时在任务执行的稳定性和准确性上有了显著提升。 🧠 Claude Opus 4.7在编程基准测试中表现优异，超越GPT-5.4和Gemini 3.1 Pro。 💡 新增的2576像素长边识别能力提升了视觉推理表现。 🔒 4.7在任务韧性方面显著提升，能自主绕过工具链崩溃障碍。 2、阿里开源 Qwen3.6-35B-A3B:30亿激活参数实现编程能力跨越式升级 阿里巴巴千问大模…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：Claude Opus 4. 7发布；阿里开源 Qwen3.6-35B-A3B；Perplexity推出Mac端AI助手\n发布于最新AI日报\n发布时间 :\n2026年4月17号 16:28\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、Claude Opus 4.7 正式发布：比聪明更重要的，是靠谱\nClaude Opus 4.7的发布标志着Anthropic在AI模型可靠性上的重大突破，其在多个基准测试中表现出色，同时在任务执行的稳定性和准确性上有了显著提升。\n【AiBase提要:】\n🧠 Claude Opus 4.7在编程基准测试中表现优异，超越GPT-5.4和Gemini 3.1 Pro。\n💡 新增的2576像素长边识别能力提升了视觉推理表现。\n🔒 4.7在任务韧性方面显著提升，能自主绕过工具链崩溃障碍。\n2、阿里开源 Qwen3.6-35B-A3B:30亿激活参数实现编程能力跨越式升级\n阿里巴巴千问大模型团队于2026年4月16日开源了稀疏混合专家（MoE）模型Qwen3.6-35B-A3B，标志着轻量级模型在智能体编程领域的关键突破。该模型总参数量为350亿，但运行时的激活参数仅为30亿，在性能上超越了270亿参数的稠密模型，并展现出与大体量模型比肩的能力。作为全模态开源模型，其在空间智能与视觉感知方面表现优异，已集成至Qwen Studio并通过阿里云百炼平台提供API服务，支持思维链保留功能，适配主流AI编程助手。\n【AiBase提要:】\n🧠 Qwen3.6-35B-A3B模型以30亿激活参数实现编程能力的跨越式升级。\n🚀 该模型在多项核心编程基准测试中超越了270亿参数的稠密模型。\n🌐 模型已集成至Qwen Studio，并通过阿里云百炼平台提供API服务。\n3、OpenAI更新Codex：支持Mac桌面操控、多智能体并行与长期任务执行\nOpenAI对Codex进行了重大更新，增强了其在Mac桌面应用操控、多智能体并行运行以及长期任务执行方面的能力，同时优化了浏览器体验和插件生态，进一步提升了开发效率和任务处理的灵活性。\n【AiBase提要:】\n💻 Codex新增Mac桌面应用操控能力，可自主操作界面元素并执行任务。\n🔄 支持多智能体并行运行，提升开发效率与任务处理能力。\n📅 引入记忆功能，实现长期任务执行与工作流的无缝恢复。\n4、Opera 推出浏览器连接器功能 让 AI 聊天机器人无缝集成\nOpera 推出了名为“浏览器连接器”的新功能，允许用户在其浏览器中集成更多的 AI 聊天机器人，如 OpenAI 的 ChatGPT 和 Anthropic 的 Claude。该功能基于 MCP 协议，旨在建立 AI 模型、外部数据源和搜索引擎之间的安全双向连接。用户可以通过简单的设置步骤安装并连接这些 AI 工具，从而提升浏览体验和灵活性。\n【AiBase提要:】\n🤖 Opera 推出浏览器连接器，允许用户在浏览器中集成更多 AI 聊天工具。\n🔗 用户只需在设置中安装并连接即可使用，提升浏览体验与灵活性。\n🌟 该功能适用于 Opera One 和 Opera GX，支持 ChatGPT 和 Claude 等 AI 工具。\n5、英伟达发布 Lyra2.0:单照生成90米3D 环境，多项指标超越竞争对手\n英伟达发布的Lyra2.0技术通过单张照片构建大规模、高连贯性的虚拟环境，解决了长距离相机路径下的图像失真难题，标志着AI在3D空间理解与实时环境模拟领域取得重大突破。\n【AiBase提要:】\n🧠 通过单张照片生成90米范围的3D环境，提升AI对空间的理解能力。\n🔄 引入双重创新策略，解决传统视频模型的空间失真与误差累积问题。\n🚀 实现与物理引擎无缝衔接，为机器人仿真训练提供高效环境支持。\n6、谷歌Gemini接入个人相册，AI生成图像迈向真正个性化\n谷歌Gemini接入个人相册，AI生成图像迈向真正个性化。\n【AiBase提要:】\n📱 谷歌Gemini接入个人相册，实现AI图像生成的个性化体验。\n🎨 通过Nano Banana工具，Gemini可直接调取Google Photos中的私人相片，无需手动上传。\n💡 此次更新打通了私人影像与AI生成能力之间的壁垒，推动图像生成向真正意义上的个人化发展。\n7、Perplexity推出Mac端AI助手：7× 24 小时运行，可代用户操作电脑\nPerplexity推出了Mac端AI助手Personal Computer，这款工具不仅能够理解指令，还能直接访问文件系统和原生应用，标志着AI交互从“对话框”向“操作系统”深度迈进。\n【AiBase提要:】\n🧠 人工智能搜索领军者Perplexity发布了Mac端AI助手Personal Computer，具备直接访问文件系统和原生应用的能力。\n💻 该工具支持文本与语音交互，并能实时感知用户当前的活跃窗口，主动提供操作建议。\n🔒 Perplexity为助手设计了严密的防御机制，所有操作都在隔离的安全沙箱中完成，保障用户隐私。\n8、拍照即录入、标签自动起名!iOS27四大 AI 升级曝光，重塑 iPhone 交互日常\n苹果在iOS 27 Beta版本中揭示了多项Apple Intelligence新功能，包括营养标签解析、纸面信息识别、实体卡券数字化扫描以及智能标签组命名。这些功能展示了苹果在AI技术上的进一步深化，并为未来的可穿戴设备生态奠定了基础。\n【AiBase提要:】\n🍎 营养标签解析：系统可自动扫描食品包装数据并同步至健康应用。\n📄 纸面信息识别：支持从印刷品中提取电话号码或地址并一键添加至通讯录。\n📱 实体卡券数字化扫描：通过AI图像识别将活动门票、会员卡等转化为数字通行证。\n相关推荐\n​Anthropic 发布全新 Claude Opus 4.7，功能显著提升\nAnthropic发布Claude Opus 4.7模型，在高级软件工程任务处理和执行指令方面显著优于前代。新模型具备自我验证能力，提升结果准确性；视觉处理支持识别边长高达2,576像素的图像，增强了专业任务的创造力和质量。\n2026年4月17号 10:56\n269.9k\n​OpenAI 全新升级 Codex 挑战 Claude Code，AI 编程工具大战再度升级\nOpenAI与Anthropic在AI编程工具领域竞争加剧。Anthropic的Claude Code被多家企业视为首选，但OpenAI不甘示弱，全面升级Codex，新增后台运行等功能，提升实用性与灵活性，允许用户边操作电脑边执行编程任务。\n2026年4月17号 9:34\n172.4k\nClaude Opus 4. 7 正式发布：比聪明更重要的，是靠谱\nAnthropic发布Claude Opus4.7模型，虽非最强版本，但重点提升可靠性而非单纯追求智能。该模型在编程基准测试中表现优异，引发广泛关注。\n2026年4月17号 9:27\n264.1k\nAnthropic 首席产品官辞任 Figma 董事会，下一代模型 Opus 4.7 或涉足设计工具\nAnthropic首席产品官Mike Krieger辞去Figma董事职务，此举紧随Anthropic下一代模型将集成设计工具的报道，预示其将从Figma合作伙伴转变为直接竞争对手。\n2026年4月17号 9:22\n158.2k\nAnthropic洽谈向美国政府开放新模型Mythos使用权限\nAI公司Anthropic正与美国政府就新模型Mythos授权展开磋商，涉及财政部等多个机构。美国政府官员正积极推动白宫测试该模型，Anthropic则强调其在网络安全领域的优势。\n2026年4月17号 8:59\n151.6k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "With US spy laws set to expire, lawmakers are split over protecting Americans from warrantless surveillance",
+      "link": "https://techcrunch.com/2026/04/17/with-us-spy-laws-set-to-expire-lawmakers-are-split-over-protecting-americans-from-warrantless-surveillance/",
+      "description": "",
+      "publish_time": "2026-04-17",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Bluesky confirms DDoS attack is cause of continued app outages",
+      "link": "https://techcrunch.com/2026/04/17/its-not-just-you-bluesky-is-sorta-down/",
+      "description": "",
+      "publish_time": "2026-04-17",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "SaySo is a new short-form video app that aims to restore users’ trust in news",
+      "link": "https://techcrunch.com/2026/04/17/sayso-is-a-new-short-form-video-app-that-aims-to-restore-users-trust-in-news/",
+      "description": "",
+      "publish_time": "2026-04-17",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Netflix plans to add a vertical video feed, use AI for recommendations",
+      "link": "https://techcrunch.com/2026/04/17/netflix-plans-to-add-a-vertical-video-feed-use-ai-for-recommendations/",
+      "description": "",
+      "publish_time": "2026-04-17",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Everything we like is a psyop",
+      "link": "https://techcrunch.com/2026/04/16/everything-we-like-is-a-psyop/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Slash, a Ramp competitor founded by teenagers, raises $100M at $1.4B valuation",
+      "link": "https://techcrunch.com/2026/04/16/slash-a-ramp-competitor-founded-by-teenagers-raises-100m-at-1-4b-valuation/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "This simulation startup wants to be the Cursor for physical AI",
+      "link": "https://techcrunch.com/2026/04/16/this-simulation-startup-wants-to-be-the-cursor-for-physical-ai/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "DeepL, known for text translation, now wants to translate your voice",
+      "link": "https://techcrunch.com/2026/04/16/deepl-known-for-text-translation-now-wants-to-translate-your-voice/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google’s AI Mode can now help you find products in stock nearby",
+      "link": "https://techcrunch.com/2026/04/17/googles-ai-mode-can-now-help-you-find-products-in-stock-nearby/",
+      "description": "",
+      "publish_time": "2026-04-17",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Loop raises $95M to build supply chain AI that predicts disruptions",
+      "link": "https://techcrunch.com/2026/04/17/loop-raises-95m-to-build-supply-chain-ai-that-predicts-disruptions/",
+      "description": "",
+      "publish_time": "2026-04-17",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "New leaders, new fund: Sequoia has raised $7B to expand its AI bets",
+      "link": "https://techcrunch.com/2026/04/16/new-leaders-new-fund-sequoia-has-raised-7b-to-expand-its-ai-bets/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Factory hits $1.5B valuation to build AI coding for enterprises",
+      "link": "https://techcrunch.com/2026/04/16/factory-hits-1-5b-valuation-to-build-ai-coding-for-enterprises/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Luma launches AI-powered production studio with faith-focused Wonder Project",
+      "link": "https://techcrunch.com/2026/04/16/luma-launches-ai-powered-production-studio-with-faith-focused-wonder-project/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Netflix co-founder and chair Reed Hastings to leave board",
+      "link": "https://techcrunch.com/2026/04/16/netflix-co-founder-and-chair-reed-hastings-to-leave-board/",
+      "description": "",
+      "publish_time": "2026-04-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
