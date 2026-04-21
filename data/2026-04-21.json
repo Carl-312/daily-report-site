@@ -1,0 +1,140 @@
+{
+  "date": "2026-04-21",
+  "articles": [
+    {
+      "title": "AI日报：Kimi K2.6模型发布；腾讯QClaw海外版上线；爱奇艺回应“签约AI演员”",
+      "link": "https://news.aibase.com/zh/daily/27316",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、月之暗面正式发布Kimi K2.6 模型，多项指标对标全球 顶尖 大模型 月之暗面发布Kimi K2.6模型，其在编程能力、长程任务处理及多Agent协作方面取得重大突破，并在多项 权威 测试中表现优异，性能可与国际 顶尖 闭源模型竞争。 🧠 Kimi K2.6在编程能力、长程任务处理和多Agent协作方面实现显著提升。 🚀 在多项 权威 测试中，Kimi K2.6表现已进入行业 第一 梯队。 🌐 支持本地部署，推理效率比行业主流工具高出约20%。 2、腾讯 QClaw 海外版上线！一键安装独立客户端，支持全球主流模型，还能“领养”他人训练好的 AI Ag…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：Kimi K2.6模型发布；腾讯QClaw海外版上线；爱奇艺回应“签约AI演员”\n发布于最新AI日报\n发布时间 :\n2026年4月21号 15:20\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、月之暗面正式发布Kimi K2.6 模型，多项指标对标全球\n顶尖\n大模型\n月之暗面发布Kimi K2.6模型，其在编程能力、长程任务处理及多Agent协作方面取得重大突破，并在多项\n权威\n测试中表现优异，性能可与国际\n顶尖\n闭源模型竞争。\n【AiBase提要:】\n🧠 Kimi K2.6在编程能力、长程任务处理和多Agent协作方面实现显著提升。\n🚀 在多项\n权威\n测试中，Kimi K2.6表现已进入行业\n第一\n梯队。\n🌐 支持本地部署，推理效率比行业主流工具高出约20%。\n2、腾讯 QClaw 海外版上线！一键安装独立客户端，支持全球主流模型，还能“领养”他人训练好的 AI Agent\n腾讯QClaw海外版正式开放测试，以“零配置、下载即用”的\n极致\n体验，向全球普通用户推出。其核心亮点包括一键安装、支持全球主流大模型、以及创新的“Agent领养”机制，极大降低了AI技术门槛，推动AI Agent从开发者玩具走向大众生产力工具。\n【AiBase提要:】\n✅ 一键安装独立客户端，无需技术背景，实现AI Agent大众化。\n🔄 支持全球主流大模型，用户可自由切换并实时监控AI操作安全。\n🧪 创新“Agent领养”机制，用户可零配置使用他人训练好的个性化AI助手。\n3、王炸更新！OpenAI Codex 推出“数字记忆”功能，屏幕录制成核心生产力\nOpenAI 为 Codex 引入了名为 “Chronicle” 的功能，通过后台记录用户的屏幕操作，构建 AI 的“数字记忆库”，从而提升协作效率。然而，该功能涉及高频的数据处理，会加速消耗用户的调用额度，并且由于记忆内容在本地以未加密形式存储，存在安全风险，需警惕潜在的提示词注入攻击。目前，该功能仅向 macOS 平台的 ChatGPT Pro 用户开放预览，受限于隐私法律，暂不支持欧盟、英国及瑞士地区。\n【AiBase提要:】\n🧠 Chronicle 功能通过记录用户屏幕操作，构建 AI 的“数字记忆库”，提升协作效率。\n🔒 该功能在本地以未加密形式存储数据，存在安全风险，需警惕提示词注入攻击。\n⚙️ 目前仅向 macOS 平台的 ChatGPT Pro 用户开放预览，受限于隐私法律，暂不支持欧盟、英国及瑞士地区。\n4、爱奇艺回应“签约AI演员”争议：入驻库不代表直接授权\n爱奇艺回应‘签约AI演员’争议，强调入驻库不代表直接授权，同时指出AI技术与影视表演的边界问题仍需探讨。\n【AiBase提要:】\n📢 爱奇艺“纳逗Pro”艺人库旨在为AIGC创作者提供规范化合作渠道。\n💡 公开名单仅代表合作意向，具体项目需经过详细谈判。\n⚖️ AI技术与影视表演的边界问题仍需行业探索。\n5、Chrome 浏览器 Gemini 功能扩展至更多亚太地区国家\n谷歌 Chrome 浏览器的 Gemini 功能正式扩展至更多亚太地区国家，为当地用户提供更智能的浏览体验。该功能支持个性化浏览助手、深度集成 Google 服务以及图像处理新能力，同时注重安全性。\n【AiBase提要:】\n🧠 个性化浏览助手：用户可在地址栏直接与 Gemini 对话，快速总结长网页内容、跨多个标签页比较信息。\n🌐 深度集成 Google 服务：无需切换页面，即可通过 Gemini 安排 Google Calendar 会议、查询 Google Maps 位置信息等。\n🖼️ 图像处理新能力：借助新的 Nano Banana2功能，用户可在 Gemini 侧边栏输入文本提示，直接转换或编辑网页上的图像。\n详情链接:https://blog.google/products-and-platforms/products/chrome/chrome-expands-APAC/\n6、突发福利！AI Studio 彻底免费开放，Pro/Ultra 会员可畅玩Gemini Pro等\n顶级\n模型\n谷歌 AI Studio 正式向 Pro/Ultra 会员免费开放，用户可直接使用 Gemini Pro 等前沿大模型，无需额外付费或繁琐步骤，大幅降低了 AI 工具的使用门槛，提升了用户体验。\n【AiBase提要:】\n🧠 谷歌 AI Studio 免费开放，Pro/Ultra 会员可直接使用 Gemini Pro 等模型。\n💻 用户无需绑定信用卡或生成 API Key，即可立即开始实验和开发。\n📈 谷歌此举提升了 AI 工具的亲民度，降低了入门门槛。\n详情链接:https://aistudio.google.com/prompts/new_chat\n7、天猫超市 15 周年放大招：首个AI超市智能体“超喵”正式上岗\n天猫超市在15周年商家大会上发布了首个AI超市智能体“超喵1.0”，标志着线上零售进入智能调度时代。该智能体通过数据驱动决策，提升了新品成功率，并实现了全链路智能调度，大幅提高了零售效率。\n【AiBase提要:】\n🛒 AI超市智能体“超喵1.0”全面覆盖商品规划到供应链管理的全链路。\n📈 通过AI技术模拟销售场景，提升新品成功率至30%。\n🔄 实现全链路智能调度，显著提高零售效率和审核速度。\n8、Miclaw 多端互联重磅升级！手机、PC、Mac、小爱音箱无缝协同，共享记忆 + 远程控制一键搞定\nMiclaw 在2026年4月21日推送多终端支持更新，实现从单一设备到全场景跨端互联的跨越式升级。无论你是PC、Mac还是手机用户，现在都能让Miclaw在不同设备间实时共享记忆、协同工作；更惊喜的是，它已深度适配小爱音箱，通过语音就能远程操控手机和电脑，支持自然流畅的连续多轮对话，让AI助手真正融入你的全生态设备链。\n【AiBase提要:】\n📱 PC/Mac 与手机跨端连通，记忆共享零延迟\n🎙️ 小爱音箱语音操控，连续多轮对话更智能\n📁 手机远程调取电脑文件，解放双手\n相关推荐\n​NSA 竟然获得 Anthropic Mythos 的访问权，尽管被列为供应链风险\n美国国家安全局（NSA）获准使用Anthropic公司的AI产品Mythos，用于识别自身网络漏洞。尽管五角大楼曾警告该公司构成国家安全威胁，但NSA仍是约40个获得该技术使用权的组织之一。此举引发了对供应链风险的担忧。\n2026年4月21号 17:17\n124.6k\n算力被“特工”耗尽？GitHub Copilot 紧急叫停个人账户注册\nGitHub因AI计算资源压力暂停新个人订阅，AI代理工作流导致算力需求远超预期，引发服务与预算矛盾。\n2026年4月21号 16:00\n155.4k\n萤石发布EZVIZ AI Core X智能大模型主机：64Tops算力开启家居“大脑”时代\n萤石发布AI Core X智能大模型主机，集高性能主机、NAS和智能家居中控于一体，搭载64Tops算力AI单元，旨在成为家庭数字化大脑。\n2026年4月21号 15:57\n145.2k\nUU跑腿发布全新的“跑腿Skill” 开启AI跑腿服务\n4月21日，UU跑腿宣布进军AI领域，发布“跑腿Skill”插件，将传统配送服务升级为智能自动化操作。该插件适配主流AI工具，让开发者和用户在编程或对话中可直接调用同城配送服务，标志着即时配送行业深度融入AI智能体生态。\n2026年4月21号 13:53\n165.7k\n​亚马逊 50 亿美元加码Anthropic，千亿级“云端赌约”震撼AI圈\n亚马逊向AI初创公司Anthropic追加投资5亿美元，总投资达130亿美元。作为回报，Anthropic承诺未来十年向亚马逊云服务投入超1000亿美元，用于获取5吉瓦计算能力，支持其核心模型Claude开发。合作核心在于深度绑定亚马逊自研定制硬件。\n2026年4月21号 13:51\n146.1k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Who is John Ternus, the incoming Apple CEO?",
+      "link": "https://techcrunch.com/2026/04/20/who-is-john-ternus-the-incoming-apple-ceo/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Tim Cook stepping down as Apple CEO, John Ternus taking over",
+      "link": "https://techcrunch.com/2026/04/20/tim-cook-stepping-down-as-apple-ceo-john-ternus-taking-over/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "FAA orders investigation into Blue Origin’s New Glenn mishap",
+      "link": "https://techcrunch.com/2026/04/20/faa-orders-investigation-into-blue-origins-new-glenn-mishap/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic takes $5B from Amazon and pledges $100B in cloud spending in return",
+      "link": "https://techcrunch.com/2026/04/20/anthropic-takes-5b-from-amazon-and-pledges-100b-in-cloud-spending-in-return/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "North Korean hackers blamed for $290M crypto theft",
+      "link": "https://techcrunch.com/2026/04/20/north-korea-hackers-blamed-for-290m-crypto-theft/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google Photos adds new touch-up tools for ‘quick’ fixes",
+      "link": "https://techcrunch.com/2026/04/20/google-photos-adds-new-touch-up-tools-for-quick-fixes/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "WhatsApp is testing a premium subscription, but it is mainly cosmetic",
+      "link": "https://techcrunch.com/2026/04/20/whatsapp-is-testing-a-premium-subscription-put-it-is-mainly-cosmetic/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Deezer says 44% of songs uploaded to its platform daily are AI-generated",
+      "link": "https://techcrunch.com/2026/04/20/deezer-says-44-of-songs-uploaded-to-its-platform-daily-are-ai-generated/",
+      "description": "",
+      "publish_time": "2026-04-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon taps Sweden’s Einride for its electric big rigs",
+      "link": "https://techcrunch.com/2026/04/21/amazon-taps-swedens-einride-for-its-electric-big-rigs/",
+      "description": "",
+      "publish_time": "2026-04-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Revolut eyes valuation of up to $200B in eventual IPO",
+      "link": "https://techcrunch.com/2026/04/21/revolut-eyes-valuation-of-up-to-200b-in-eventual-ipo/",
+      "description": "",
+      "publish_time": "2026-04-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "With US spy laws set to expire, lawmakers are split over protecting Americans from warrantless surveillance",
+      "link": "https://techcrunch.com/2026/04/21/with-us-spy-laws-set-to-expire-lawmakers-are-split-over-protecting-americans-from-warrantless-surveillance/",
+      "description": "",
+      "publish_time": "2026-04-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "What’s the key to better vegan cheese? Microbreweries, one startup says",
+      "link": "https://techcrunch.com/2026/04/21/whats-the-key-to-better-vegan-cheese-microbreweries-one-startup-says/",
+      "description": "",
+      "publish_time": "2026-04-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Cash App is targeting a new kind of customer: 6-12 year olds",
+      "link": "https://techcrunch.com/2026/04/21/cash-app-is-targeting-a-new-kind-of-customer-6-12-year-olds/",
+      "description": "",
+      "publish_time": "2026-04-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "GRAI believes AI can make music more social, not replace artists",
+      "link": "https://techcrunch.com/2026/04/21/grai-believes-ai-can-make-music-more-social-not-replace-artists/",
+      "description": "",
+      "publish_time": "2026-04-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
