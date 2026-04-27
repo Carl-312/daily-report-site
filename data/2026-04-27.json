@@ -1,0 +1,122 @@
+{
+  "date": "2026-04-27",
+  "articles": [
+    {
+      "title": "AI日报：小红书首次公布AI治理主张；荣耀YOYO率先接入DeepSeek-V4；灵光App率先将世界模型搬上移动端",
+      "link": "https://news.aibase.com/zh/daily/27502",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、小红书 首次 公布「AI 治理主张」：抵制AI侵权、AI造假、AI仿冒等行为 小红书 首次 公布「AI 治理主张」，强调 AI 在创作中的积极作用，同时明确反对 AI 造假、侵权等不良行为，致力于维护社区的真实性与安全。 🤖 小红书强调 AI 在创作中的重要作用，同时明确反对不良 AI 行为。 📌 平台呼吁用户如实标识 AI 相关内容，确保信息的真实性和透明度。 🚫 小红书坚决抵制 AI 造假、侵权等行为，并持续建设对 AI 内容的识别与治理能力。 2、安卓首发：荣耀 YOYO 率先接入 DeepSeek-V4 大模型 荣耀 YOYO 智能助理正式接入 D…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：小红书首次公布AI治理主张；荣耀YOYO率先接入DeepSeek-V4；灵光App率先将世界模型搬上移动端\n发布于最新AI日报\n发布时间 :\n2026年4月27号 16:13\n阅读 :\n1\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、小红书\n首次\n公布「AI 治理主张」：抵制AI侵权、AI造假、AI仿冒等行为\n小红书\n首次\n公布「AI 治理主张」，强调 AI 在创作中的积极作用，同时明确反对 AI 造假、侵权等不良行为，致力于维护社区的真实性与安全。\n【AiBase提要:】\n🤖 小红书强调 AI 在创作中的重要作用，同时明确反对不良 AI 行为。\n📌 平台呼吁用户如实标识 AI 相关内容，确保信息的真实性和透明度。\n🚫 小红书坚决抵制 AI 造假、侵权等行为，并持续建设对 AI 内容的识别与治理能力。\n2、安卓首发：荣耀 YOYO 率先接入 DeepSeek-V4 大模型\n荣耀 YOYO 智能助理正式接入 DeepSeek-V4 大模型，标志着安卓阵营在 AI 领域的进一步突破。通过性能、上下文理解和推理效率的提升，YOYO 能够更精准地处理复杂任务，为用户提供更流畅的交互体验。\n【AiBase提要:】\n🧠 深度接入 DeepSeek-V4 大模型，提升智能助理的逻辑性和响应速度。\n🔄 优化底层算法，增强处理复杂指令和长文本对话的能力。\n📱 用户需满足特定版本要求，才能体验新一代大模型带来的交互变革。\n3、网易有道云笔记发布“LLM Wiki”套件，重新定义AI时代知识管理\n网易有道云笔记推出的“LLM Wiki”技能套件，标志着知识管理进入AI时代的新阶段，通过大语言模型实现知识的主动编译，提升了信息处理效率，并为个人和企业提供了智能化的第二大脑技术底座。\n【AiBase提要:】\n🧠 通过大语言模型（LLM）对碎片化知识进行深度关联与加工，实现知识的结构化梳理。\n🔄 从“被动检索”转向“主动编译”，提升信息处理效率和知识价值。\n💡 AI能力下沉，软件形态将更注重后台逻辑重塑，打造智能化的第二大脑。\n4、上传一张图片即时生成一个3D世界，灵光App率先将世界模型搬上移动端\n灵光App通过“体验世界模型”功能，让用户仅需上传一张图片即可在手机上探索3D世界，同时采用手游摇杆操控方式，实现零门槛沉浸体验。该功能是业界首个可在移动端体验世界模型的AGI产品，标志着AI技术在移动领域的进一步突破。\n【AiBase提要:】\n📱 上传一张图片即可生成3D世界，实现移动端探索\n🕹️ 引入手游摇杆操控方式，提供零门槛沉浸体验\n🚀 灵光App率先实现世界模型在移动端的部署\n5、小米开源VLA大模型后训练全流程，机器人亚毫米级操作成现实\n小米在机器人技术领域取得了重大突破，通过开源VLA大模型Xiaomi-Robotics-0的后训练全流程，解决了机器人从实验室到实际生产的难题。该模型展现了出色的亚毫米级操作能力，为智能机器人在复杂场景下的应用提供了强有力的支持。\n【AiBase提要:】\n🧠 Xiaomi-Robotics-0模型通过后训练流程，显著提升了机器人在复杂任务中的表现。\n🔧 该模型成功实现了亚毫米级的精细操作能力，展示了强大的空间感知和实时反馈能力。\n🌐 小米开源了技术报告、模型权重和源代码，推动了开发者生态建设，降低了高性能机器人开发门槛。\n详情链接:https://robotics.xiaomi.com/xiaomi-robotics-0.html#pack-earbuds\n6、OpenClaw发布新版本:DeepSeek V4Flash正式成为系统默认模型\nOpenClaw发布新版本，DeepSeek V4Flash正式成为系统默认模型，强化多模态协作与长链路任务稳定性，并完成从对话产品向系统级工作流平台的转型。\n【AiBase提要:】\n🧠 DeepSeek V4Flash成为OpenClaw系统默认模型，提升推理速度与逻辑能力。\n🔄 强化多模态协作与长链路任务稳定性，实现全流程自动化。\n🔧 重构模型加载逻辑与SDK接口，完成从对话产品向系统级工作流平台的转型。\n7、爆火！美团“小团”AI突降首页：五一出游的“懒人神器”来了\n文章介绍了美团升级其人工智能助手“小团”，将其入口迁移至 App 首页，以更好地服务消费者在五一长假期间的需求。通过自然语言处理和动态核验数据，“小团”能够提供个性化推荐和精准信息，提升用户的假期消费体验。\n【AiBase提要:】\n✨ 升级后的“小团”实现全量上线，用户可直接从首页访问。\n💡 “小团”能理解模糊意图，提供个性化推荐方案。\n🔒 实时动态核验商家信息，确保推荐真实可靠。\n8、OpenAI 战略重心调整：编程模型 Codex 正式并入 GPT-5.5 架构\nOpenAI的战略重心调整，将Codex编程模型正式并入GPT-5.5架构，体现了其从专用插件式向内生全能式的转变，同时提升了模型的效率和性能。\n【AiBase提要:】\n✅ OpenAI宣布将Codex编程模型整合进GPT-5.5主模型，标志着其研发思路从“专用插件式”向“内生全能式”转变。\n💡 整合后的GPT-5.5在处理复杂编程任务时资源利用率显著优化，开发者使用成本与效率得到提升。\n🚀 Codex的并入预示着AI编程不再需要独立维护，而是成为通用大模型智能水平的基石级指标。\n相关推荐\n智能向善!《全球人工智能治理科技社团倡议》今日发布\n中国16家学术机构联合发布《全球人工智能治理科技社团倡议》，强调AI发展应聚焦“有益民生”与“安全受控”，以增进人类共同福祉为目标，确保技术服务于全人类利益。\n2026年4月13号 14:39\n211.7k\n中国广电联合会演员委员会发布声明:严禁未经授权的AI换脸与影视素材魔改\n中国广播电视社会组织联合会演员委员会发布声明，针对AI换脸、声纹克隆及未经授权抓取数据训练模型等七类AI侵权行为明确禁止，强调即使标注“非商用”等字样也不能免责，侵权主体需承担全部法律责任。\n2026年4月2号 16:30\n271.8k\n大众点评发布透明度报告：2025 年清理 1161 万条 AI 假评价\n大众点评发布《2025年评价透明度报告》，显示过去一年收到近4.5亿条用户评价，覆盖全球约902.9万家商户。为应对AIGC技术带来的非原创内容泛滥，平台首次披露治理数据，成功拦截1161万条违规“机写评论”，致力于维护评价体系的真实性与可信度。\n2026年3月24号 9:00\n175.1k\n小红书发布社区公告:严厉打击AI托管类账号及虚假互动行为\n小红书将全面治理“AI托管账号”，打击利用AI技术模拟真人创作内容、进行虚假互动的行为，以维护社区真实分享环境。\n2026年3月10号 17:32\n208.9k\n“龙虾”OpenClaw走红两会 周鸿祎拟推OpenClaw一键安装\n2026年全国两会期间，开源AI智能体“龙虾”（OpenClaw）因强大任务能力引发关注。360集团创始人周鸿祎表示，将推出“一键安装”版本，降低配置门槛，使其成为个人电脑助手。中国工程院院士王坚预测，该技术成本将随迭代显著下降。\n2026年3月9号 14:00\n214.5k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "The Stanford freshmen who want to rule the world . . . will probably read this book and try even harder",
+      "link": "https://techcrunch.com/2026/04/26/the-stanford-freshmen-who-want-to-rule-the-world-will-probably-read-this-book-and-try-even-harder/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: Elon’s admission",
+      "link": "https://techcrunch.com/2026/04/26/techcrunch-mobility-elons-admission/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "SpeakOn’s dictation device is a good idea marred by platform limitations",
+      "link": "https://techcrunch.com/2026/04/26/speakons-dictation-device-is-a-good-idea-marred-by-platform-limitations/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "What Tim Cook built",
+      "link": "https://techcrunch.com/2026/04/26/what-tim-cook-built/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "To buy this Bay Area home, you’ll need Anthropic equity",
+      "link": "https://techcrunch.com/2026/04/26/to-buy-this-bay-area-home-youll-need-anthropic-equity/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "China vetoes Meta’s $2B Manus deal after months-long probe",
+      "link": "https://techcrunch.com/2026/04/27/china-vetoes-metas-2b-manus-deal-after-months-long-probe/",
+      "description": "",
+      "publish_time": "2026-04-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "OpenAI could be making a phone with AI agents replacing apps",
+      "link": "https://techcrunch.com/2026/04/27/openai-could-be-making-a-phone-with-ai-agents-replacing-apps/",
+      "description": "",
+      "publish_time": "2026-04-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Critical infrastructure giant Itron says it was hacked",
+      "link": "https://techcrunch.com/2026/04/27/critical-infrastructure-giant-itron-says-it-was-hacked/",
+      "description": "",
+      "publish_time": "2026-04-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Spotify’s next frontier: fitness content",
+      "link": "https://techcrunch.com/2026/04/27/spotifys-next-frontier-fitness-content/",
+      "description": "",
+      "publish_time": "2026-04-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Meta inks deal for solar power at night, beamed from space",
+      "link": "https://techcrunch.com/2026/04/27/meta-inks-deal-for-solar-power-at-night-beamed-from-space/",
+      "description": "",
+      "publish_time": "2026-04-27",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Truecaller faces mounting pressures as its growth matures",
+      "link": "https://techcrunch.com/2026/04/26/truecaller-faces-mounting-pressures-as-its-growth-matures/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Amazon’s new podcast strategy: Monetize everything",
+      "link": "https://techcrunch.com/2026/04/26/amazons-new-podcast-strategy-monetize-everything/",
+      "description": "",
+      "publish_time": "2026-04-26",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}
