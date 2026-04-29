@@ -9,6 +9,7 @@
 - GitHub Pages：`deployment/github-pages.md`
 - 配置说明：`guides/configuration.md`
 - 扩展新闻源：`guides/extending-sources.md`
+- Tavily 校验与补全：`guides/tavily-news-enrichment.md`
 - 故障排查：`guides/troubleshooting.md`
 - API 参考：`api/README.md`
 - 分 PR 落地建议：`project-rollout.md`

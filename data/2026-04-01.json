@@ -1,0 +1,131 @@
+{
+  "date": "2026-04-01",
+  "articles": [],
+  "enrichment": {
+    "report_date": "2026-04-01",
+    "reference_dt": "2026-04-01T19:05:00.929451+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 0,
+    "prefiltered_count": 0,
+    "prefilter_stats": {
+      "total_articles": 0,
+      "eligible_candidates": 0,
+      "excluded_missing_title": 0,
+      "excluded_missing_link": 0,
+      "excluded_aggregate_like": 0,
+      "excluded_non_ai_relevant": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 2,
+    "fallback_calls": 0,
+    "total_calls": 2,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "verified_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 0,
+    "stop_reason": "official_fallback_disabled",
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false
+    },
+    "notes": [
+      "Local prefilter completed before any Tavily refill attempt.",
+      "Exact verify and staged refill completed."
+    ],
+    "prefilter_candidates": [],
+    "excluded_prefilter_candidates": [],
+    "cluster_skipped_prefilter_candidates": [],
+    "cluster_diagnostics": [],
+    "verify_budget": 6,
+    "verify_skipped_due_budget": 0,
+    "verify_runs": [],
+    "verified_candidates": [],
+    "rejected_candidates": [],
+    "priority_refill_runs": [
+      {
+        "stage": "priority_refill",
+        "round": 1,
+        "query": "OpenAI Anthropic AI model launch startup funding developer tools",
+        "search_depth": "advanced",
+        "max_results": 8,
+        "include_domains": [
+          "thenextweb.com",
+          "venturebeat.com"
+        ],
+        "start_date": "2026-03-31",
+        "end_date": "2026-04-01",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_count": 0,
+        "near_duplicate_rejected_count": 0,
+        "story_cluster_rejected_count": 0,
+        "duplicate_slip_count": 0,
+        "candidate_results": [],
+        "error": "HTTPSConnectionPool(host='api.tavily.com', port=443): Read timed out. (read timeout=45)"
+      }
+    ],
+    "priority_refilled_candidates": [],
+    "secondary_refill_runs": [
+      {
+        "stage": "secondary_refill",
+        "round": 1,
+        "query": "OpenAI Anthropic AI model launch startup funding developer tools",
+        "search_depth": "advanced",
+        "max_results": 8,
+        "include_domains": [
+          "reuters.com",
+          "arstechnica.com"
+        ],
+        "start_date": "2026-03-31",
+        "end_date": "2026-04-01",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_count": 0,
+        "near_duplicate_rejected_count": 0,
+        "story_cluster_rejected_count": 0,
+        "duplicate_slip_count": 0,
+        "candidate_results": [],
+        "error": "HTTPSConnectionPool(host='api.tavily.com', port=443): Read timed out. (read timeout=45)"
+      }
+    ],
+    "secondary_refilled_candidates": []
+  }
+}

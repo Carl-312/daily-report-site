@@ -6,7 +6,7 @@ Loads settings from .env and config.yaml
 from __future__ import annotations
 import os
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 import yaml
@@ -62,8 +62,64 @@ class Settings(BaseModel):
     syft_web_app_url: str = Field(default="")
     syft_secret_key: str = Field(default="")
 
+    # Tavily (optional)
+    tavily_api_key: str = Field(default="", description="Tavily API Key")
+
+    # Enrichment
+    enrichment: "EnrichmentSettings" = Field(default_factory=lambda: EnrichmentSettings())
+
     class Config:
         extra = "ignore"
+
+
+class EnrichmentTrustedDomains(BaseModel):
+    """Trusted domains for staged Tavily refill"""
+
+    priority_refill_media_whitelist: List[str] = Field(
+        default_factory=lambda: [
+            "thenextweb.com",
+            "venturebeat.com",
+        ]
+    )
+    secondary_refill_candidate_domains: List[str] = Field(
+        default_factory=lambda: [
+            "reuters.com",
+            "arstechnica.com",
+        ]
+    )
+    official_fallback_domains: List[str] = Field(
+        default_factory=lambda: [
+            "openai.com",
+            "anthropic.com",
+        ]
+    )
+
+
+class EnrichmentSettings(BaseModel):
+    """Post-fetch Tavily enrichment settings"""
+
+    enabled: bool = Field(default=False)
+    min_articles: int = Field(default=10)
+    strict_hours: int = Field(default=24)
+    max_total_calls: int = Field(default=7)
+    max_verify_calls: int = Field(default=6)
+    max_refill_rounds: int = Field(default=1)
+    refill_max_results: int = Field(default=8)
+    verify_search_depth: str = Field(default="basic")
+    enable_fuzzy_second_pass: bool = Field(default=False)
+    enable_official_fallback: bool = Field(default=False)
+    priority_refill_query: str = Field(
+        default="OpenAI Anthropic AI model launch startup funding developer tools"
+    )
+    official_fallback_query: str = Field(
+        default="OpenAI Anthropic AI model launch startup funding developer tools"
+    )
+    trusted_domains: EnrichmentTrustedDomains = Field(
+        default_factory=EnrichmentTrustedDomains
+    )
+
+
+Settings.model_rebuild()
 
 
 def load_config(config_path: str = "config.yaml") -> Settings:
@@ -85,6 +141,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "timezone": os.getenv("TIMEZONE", "Asia/Shanghai"),
         "syft_web_app_url": os.getenv("SYFT_WEB_APP_URL", ""),
         "syft_secret_key": os.getenv("SYFT_SECRET_KEY", ""),
+        "tavily_api_key": os.getenv("TAVILY_API_KEY", ""),
     }
 
     # Load from YAML if exists
@@ -110,6 +167,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 "site_dir": output_cfg.get(
                     "site_dir", output_cfg.get("docs_dir", "dist")
                 ),
+                "enrichment": cfg.get("enrichment", {}),
             }
 
     # Merge settings (env takes precedence for secrets)

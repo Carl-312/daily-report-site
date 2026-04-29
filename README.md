@@ -46,7 +46,8 @@ python -m http.server 8000 --directory dist
 - 执行：Ruff 代码检查 + pytest 测试
 
 **每日发布**（`.github/workflows/deploy.yml`）：
-- 触发：每天 14:00 UTC（北京时间 22:00）或手动触发
+- 触发：每天 13:19 UTC（北京时间 21:19）或手动触发
+- 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - 流程：抓取新闻 → AI 摘要 → 构建站点 → 归档历史 → 部署 Pages
 - 数据保留：main 分支保留最近 7 天，超期数据归档至 GitHub Release
 

@@ -18,3 +18,27 @@ output:
   json_dir: data
   md_dir: content
   site_dir: dist
+
+enrichment:
+  enabled: false
+  min_articles: 10
+  strict_hours: 24
+  max_total_calls: 7
+  max_verify_calls: 6
+  max_refill_rounds: 1
+  refill_max_results: 8
+  verify_search_depth: basic
+  enable_fuzzy_second_pass: false
+  enable_official_fallback: false
+  priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  trusted_domains:
+    priority_refill_media_whitelist:
+      - thenextweb.com
+      - venturebeat.com
+    secondary_refill_candidate_domains:
+      - reuters.com
+      - arstechnica.com
+    official_fallback_domains:
+      - openai.com
+      - anthropic.com
