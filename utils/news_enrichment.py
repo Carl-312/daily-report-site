@@ -445,6 +445,20 @@ def search_tavily(
     }
 
 
+def classify_request_outcome(error: Exception | None) -> str:
+    if error is None:
+        return "success"
+    if isinstance(error, requests.Timeout):
+        return "timeout"
+    if isinstance(error, requests.HTTPError):
+        return "http_error"
+    if isinstance(error, requests.ConnectionError):
+        return "connection_error"
+    if isinstance(error, requests.RequestException):
+        return "request_error"
+    return "unexpected_error"
+
+
 def pick_best_match(
     results: list[dict[str, Any]],
     *,
@@ -595,6 +609,7 @@ def build_initial_report(
         "cluster_potential_verify_saved_calls": 0,
         "verify_saved_calls": 0,
         "verified_count": 0,
+        "preserved_error_count": 0,
         "priority_refilled_count": 0,
         "secondary_refilled_count": 0,
         "media_refilled_count": 0,
@@ -608,6 +623,7 @@ def build_initial_report(
         "parameters": {
             "min_articles": settings.min_articles,
             "strict_hours": settings.strict_hours,
+            "trust_env": settings.trust_env,
             "max_total_calls": settings.max_total_calls,
             "max_verify_calls": settings.max_verify_calls,
             "max_refill_rounds": settings.max_refill_rounds,
@@ -653,6 +669,7 @@ def run_verify_stage(
     verify_budget = max(0, min(settings.max_verify_calls, settings.max_total_calls))
     verify_runs: list[dict[str, Any]] = []
     verified_articles: list[dict[str, Any]] = []
+    preserved_error_articles: list[dict[str, Any]] = []
     verified_candidates: list[dict[str, Any]] = []
     rejected_candidates: list[dict[str, Any]] = []
 
@@ -678,6 +695,7 @@ def run_verify_stage(
         title_similarity_value = None
         within_window = None
         error = None
+        error_obj: Exception | None = None
         latency_ms = None
         results: list[dict[str, Any]] = []
 
@@ -707,8 +725,20 @@ def run_verify_stage(
                 )
         except Exception as exc:
             error = str(exc)
+            error_obj = exc
 
         accepted = bool(matched) and within_window is True
+        request_outcome = classify_request_outcome(error_obj)
+        if request_outcome != "success":
+            validation_outcome = "not_evaluated"
+        elif accepted:
+            validation_outcome = "accepted"
+        elif not matched:
+            validation_outcome = "no_match"
+        elif within_window is False:
+            validation_outcome = "outside_24h"
+        else:
+            validation_outcome = "missing_published_date"
         verify_runs.append(
             {
                 "sample_id": f"{reference_dt.date().isoformat()}::prefilter::{index}",
@@ -723,6 +753,8 @@ def run_verify_stage(
                 "matched_published_date": matched_published_date,
                 "title_similarity": title_similarity_value,
                 "accepted": accepted,
+                "request_outcome": request_outcome,
+                "validation_outcome": validation_outcome,
                 "error": error,
             }
         )
@@ -738,15 +770,16 @@ def run_verify_stage(
             "cluster_id": candidate.get("cluster_id"),
             "cluster_role": candidate.get("cluster_role"),
             "cluster_representative_title": candidate.get("cluster_representative_title"),
+            "request_outcome": request_outcome,
+            "validation_outcome": validation_outcome,
+            "transport_error": error,
             "rejection_reason": None,
         }
-        if error:
-            candidate_summary["rejection_reason"] = "request_error"
-        elif not matched:
+        if request_outcome == "success" and not matched:
             candidate_summary["rejection_reason"] = "no_match"
-        elif within_window is False:
+        elif request_outcome == "success" and within_window is False:
             candidate_summary["rejection_reason"] = "outside_24h"
-        elif within_window is None:
+        elif request_outcome == "success" and within_window is None:
             candidate_summary["rejection_reason"] = "missing_published_date"
 
         if accepted:
@@ -757,6 +790,8 @@ def run_verify_stage(
             verified_candidates.append(candidate_summary)
         else:
             rejected_candidates.append(candidate_summary)
+            if error:
+                preserved_error_articles.append(dict(candidate["article"]))
 
     return {
         "verify_budget": verify_budget,
@@ -764,6 +799,7 @@ def run_verify_stage(
         "verify_skipped_due_budget": max(0, len(candidates) - verify_budget),
         "verify_runs": verify_runs,
         "verified_articles": verified_articles,
+        "preserved_error_articles": preserved_error_articles,
         "verified_candidates": verified_candidates,
         "rejected_candidates": rejected_candidates,
     }
@@ -817,6 +853,7 @@ def run_domain_refill_stage(
         }
         latency_ms = None
         error = None
+        error_obj: Exception | None = None
         results: list[dict[str, Any]] = []
         try:
             response = search_tavily(session, api_key, payload)
@@ -824,6 +861,7 @@ def run_domain_refill_stage(
             results = response["response"].get("results", []) or []
         except Exception as exc:
             error = str(exc)
+            error_obj = exc
 
         existing = build_dynamic_existing_index(
             base_articles,
@@ -920,6 +958,7 @@ def run_domain_refill_stage(
                 "latency_ms": latency_ms,
                 "result_count": len(results),
                 "accepted_count": len(round_accepted),
+                "request_outcome": classify_request_outcome(error_obj),
                 "near_duplicate_rejected_count": round_near_duplicate_rejected,
                 "story_cluster_rejected_count": round_story_cluster_rejected,
                 "duplicate_slip_count": 0,
@@ -989,7 +1028,7 @@ def enrich_articles_with_tavily(
         return {"articles": article_dicts, "report": report}
 
     session = requests.Session()
-    session.trust_env = False
+    session.trust_env = settings.trust_env
 
     try:
         prefilter = build_prefilter_summary(article_dicts)
@@ -1027,6 +1066,7 @@ def enrich_articles_with_tavily(
         report["verify_calls"] = verify["verify_calls"]
         report["total_calls"] = verify["verify_calls"]
         report["verified_count"] = len(verify["verified_articles"])
+        report["preserved_error_count"] = len(verify["preserved_error_articles"])
         report["verify_budget"] = verify["verify_budget"]
         report["verify_skipped_due_budget"] = verify["verify_skipped_due_budget"]
         report["verify_runs"] = verify["verify_runs"]
@@ -1140,13 +1180,15 @@ def enrich_articles_with_tavily(
             remaining_budget = official["remaining_budget_after_refill"]
 
         final_articles = (
-            verify["verified_articles"]
+            verify["preserved_error_articles"]
+            + verify["verified_articles"]
             + priority_refill["accepted_candidates"]
             + secondary_candidates
             + official_candidates
         )
         report["final_count"] = len(final_articles)
         report["accepted_by_stage_preview"] = {
+            "preserved_errors": sample_titles(verify["preserved_error_articles"]),
             "verify": sample_titles(verify["verified_articles"]),
             "priority_refill": sample_titles(priority_refill["accepted_candidates"]),
             "secondary_refill": sample_titles(secondary_candidates),
@@ -1171,6 +1213,10 @@ def enrich_articles_with_tavily(
                 if secondary_refill_executed
                 else "priority_refill_complete"
             )
+        if verify["preserved_error_articles"]:
+            report["notes"].append(
+                "Verify request errors preserved the original deduped articles to keep fail-open behavior."
+            )
         report["notes"].append("Exact verify and staged refill completed.")
         return {"articles": final_articles, "report": report}
     except Exception as exc:
@@ -1186,4 +1232,3 @@ def enrich_articles_with_tavily(
             "official_fallback": [],
         }
         return {"articles": article_dicts, "report": report}
-

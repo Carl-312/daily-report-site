@@ -4,7 +4,10 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import requests
+
 from config import load_config
+from utils import news_enrichment
 from utils.news_enrichment import enrich_articles_with_tavily
 
 
@@ -68,6 +71,7 @@ sources:
   techcrunch: true
 enrichment:
   enabled: true
+  trust_env: false
   max_total_calls: 9
   trusted_domains:
     priority_refill_media_whitelist:
@@ -81,7 +85,65 @@ enrichment:
 
     assert cfg.tavily_api_key == "test-key"
     assert cfg.enrichment.enabled is True
+    assert cfg.enrichment.trust_env is False
     assert cfg.enrichment.max_total_calls == 9
     assert cfg.enrichment.trusted_domains.priority_refill_media_whitelist == [
         "thenextweb.com"
     ]
+
+
+def test_enrichment_timeout_preserves_original_articles(monkeypatch) -> None:
+    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+
+    def raise_timeout(*args, **kwargs):
+        raise requests.Timeout("simulated timeout")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", raise_timeout)
+
+    result = enrich_articles_with_tavily(
+        sample_articles(),
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(update={"enabled": True}),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert result["articles"] == sample_articles()
+    assert result["report"]["applied"] is True
+    assert result["report"]["skip_reason"] is None
+    assert result["report"]["verify_calls"] == 1
+    assert result["report"]["preserved_error_count"] == 1
+    assert result["report"]["final_count"] == 1
+    assert result["report"]["parameters"]["trust_env"] is True
+    assert result["report"]["verify_runs"][0]["request_outcome"] == "timeout"
+    assert result["report"]["verify_runs"][0]["validation_outcome"] == "not_evaluated"
+    assert result["report"]["accepted_by_stage_preview"]["preserved_errors"] == [
+        "OpenAI releases new developer tools"
+    ]
+    assert result["report"]["rejected_candidates"][0]["request_outcome"] == "timeout"
+    assert result["report"]["rejected_candidates"][0]["validation_outcome"] == "not_evaluated"
+    assert result["report"]["rejected_candidates"][0]["rejection_reason"] is None
+
+
+def test_enrichment_session_trust_env_follows_settings(monkeypatch) -> None:
+    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    seen: list[bool] = []
+
+    def capture_session(session, api_key, payload):
+        seen.append(session.trust_env)
+        raise requests.Timeout("simulated timeout")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", capture_session)
+
+    enrich_articles_with_tavily(
+        sample_articles(),
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(update={"enabled": True, "trust_env": False}),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert seen
+    assert all(value is False for value in seen)

@@ -99,6 +99,7 @@ class EnrichmentSettings(BaseModel):
     """Post-fetch Tavily enrichment settings"""
 
     enabled: bool = Field(default=False)
+    trust_env: bool = Field(default=True)
     min_articles: int = Field(default=10)
     strict_hours: int = Field(default=24)
     max_total_calls: int = Field(default=7)

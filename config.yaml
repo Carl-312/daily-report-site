@@ -21,6 +21,7 @@ output:
 
 enrichment:
   enabled: false
+  trust_env: true
   min_articles: 10
   strict_hours: 24
   max_total_calls: 7
