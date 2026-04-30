@@ -6,7 +6,7 @@
       "link": "https://news.aibase.com/zh/daily/27658",
       "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、DeepSeek 开启识图模式灰度测试，多模态视觉理解能力正式落地 DeepSeek 在发布 DeepSeek-V4 后迅速开启多模态识图功能的灰度测试，标志着其多模态能力进入实质性阶段。该功能在移动端与网页版新增了“识图模式”入口，并在基础视觉理解、画面描述及逻辑推理方面表现出色，但仍有优化空间。 ✨ DeepSeek 开启多模态识图功能灰度测试，推动视觉交互发展。 🔍 模型在基础视觉理解与逻辑推理方面表现优异，具备较高还原度。 ⚠️ 面对极端视觉挑战时识别率受限，需进一步优化提升准确率。 2、文心一言5.1预览版上线 LMSYS 竞技场，目前位列全球第…",
       "publish_time": "未知时间",
-      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：DeepSeek识图模式灰测；小红书成立AI一级部门；阿里发布程序员“数字分身”QoderWake\n发布于最新AI日报\n发布时间 :\n2026年4月30号 16:27\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、DeepSeek 开启识图模式灰度测试，多模态视觉理解能力正式落地\nDeepSeek 在发布 DeepSeek-V4 后迅速开启多模态识图功能的灰度测试，标志着其多模态能力进入实质性阶段。该功能在移动端与网页版新增了“识图模式”入口，并在基础视觉理解、画面描述及逻辑推理方面表现出色，但仍有优化空间。\n【AiBase提要:】\n✨ DeepSeek 开启多模态识图功能灰度测试，推动视觉交互发展。\n🔍 模型在基础视觉理解与逻辑推理方面表现优异，具备较高还原度。\n⚠️ 面对极端视觉挑战时识别率受限，需进一步优化提升准确率。\n2、文心一言5.1预览版上线 LMSYS 竞技场，目前位列全球第13位\n文心一言5.1预览版低调上线国际大模型盲测平台LMSYS Chatbot Arena，位列全球第13位。这标志着百度核心模型进入新一轮快速迭代周期，并开始接受全球用户的直接质量检验与基准对标。\n【AiBase提要:】\n🚀 文心一言5.1预览版低调上线国际大模型盲测平台LMSYS Chatbot Arena。\n📊 该版本在总榜中位列第13位，展现强大的技术实力。\n🌐 百度通过公开的国际主流评价体系验证其实战能力，加速全球化布局。\n3、小红书成立 AI 一级部门 “Dots”\n小红书宣布成立AI一级部门“Dots”和企业智能部，以增强对人工智能的技术投入，并设立海外部门“Rednote”和Lab 1327团队，推动国际化业务和新产品孵化。\n【AiBase提要:】\n✅ 设立AI一级部门“Dots”，涵盖AI模型研发、基础设施、工程落地和产品应用等多个环节。\n✅ 企业智能部整合原有企业效率部和数据科学部，为AI时代发展提供组织架构和人才支撑。\n✅ 成立海外部门“Rednote”和Lab 1327团队，推动国际化业务和新产品孵化。\n4、Chrome 正式发布 Prompt API：浏览器原生 AI 时代来临，网页直接调用 Gemini Nano 本地模型\nChrome 推出 Prompt API，允许开发者通过 JavaScript 直接调用内置的 Gemini Nano 模型，实现本地 AI 能力。这一功能标志着浏览器 AI 能力的“民主化”，提升了隐私保护并降低了开发门槛。\n【AiBase提要:】\n🌍 Prompt API 是 Chrome 内置 AI 框架的一部分，允许网页应用调用 Gemini Nano 模型。\n🔒 模型在本地运行，数据不上传云端，提升隐私保护。\n🛠️ 开发者无需依赖外部 API，降低开发成本和复杂性。\n详情链接:https://developer.chrome.com/docs/ai/prompt-api\n5、程序员“数字分身”上岗:阿里发布 QoderWake，实现代码修复全流程无人值守\n阿里巴巴发布QoderWake和Qoder移动端，标志着其AI智能体生态实现全场景覆盖，提升了研发运维自动化水平，并推动AI向原生操作系统级转型。\n【AiBase提要:】\n💻 QoderWake作为生产级数字员工，能够自主执行代码变更简报整理、错误诊断等任务并生成修复代码。\n📱 Qoder移动端支持跨端协同与交互体验革新，用户可通过手机远程操控桌面端Agent执行复杂任务。\n🔄 阿里通过Qoder产品布局，推动AI从辅助工具演变为具备独立任务处理能力的生产要素。\n详情链接:https://qoder.com/qoderwake\n6、蚂蚁集团正式开源万亿级大模型Ling-2.6-1T\n蚂蚁集团正式开源万亿级大模型Ling-2.6-1T，该模型通过创新的混合架构优化了指令执行、工具适配及长上下文承接能力，提升了智效比。同时，它能够适配多工具、多约束的复杂业务场景，展现出强大的多步执行能力，在代码生成、缺陷修复以及噪声环境下的精准推理方面均达到了开源领域的\n顶尖\n水平。\n【AiBase提要:】\n🧠 Ling-2.6-1T采用混合架构，提升智效比\n🛠️ 支持多工具、多约束的复杂业务场景\n🚀 在代码生成和精准推理方面达到开源领域\n顶尖\n水平\n详情链接:https://huggingface.co/inclusionAI/Ling-2.6-1T\n7、巨日禄宣布与火山引擎达成深度合作 AI短剧进入“工业化”时代\n杭州巨日禄科技有限公司与火山引擎达成深度合作，接入豆包视频生成模型Seedance 2.0，标志着AI剧制作进入工业化时代。通过整合火山引擎的算力与算法优势，巨日禄实现了制作效率和画面可用性的双重突破，并构建了全栈式技术架构，推动国内AI影视产业向更成熟的工业化阶段迈进。\n【AiBase提要:】\n🚀 效率与质量的双重飞跃：AI剧制作效率提升近10倍，生产周期从15-30天压缩至1-3天。\n🖼️ 画面可用性显著提升：传统AI生成模式下画面合格率仅30%，新技术架构下已跃升至90%以上。\n🛠️ 全栈式技术架构：双方合作构建覆盖前期创作到最终交付的技术体系，降低AI剧生产门槛并确保内容高品质。\n8、彻底告别复制粘贴！Gemini 迎来史诗级更新，一键生成 Office 文档\nGemini通过新增直接生成和导出多种格式文件的功能，显著提升了其作为生产力工具的能力，同时增强了与办公软件的衔接性，为用户提供了更高效的办公体验。\n【AiBase提要:】\n✨Gemini新增直接生成并导出多种格式文件的功能，提升办公效率。\n📊支持Google Docs、Word、Excel等主流文档格式，兼容性强。\n🖼️引入图像识别功能，可将手写笔记转为排版规整的PDF文件。\n相关推荐\nDeepSeek 灰测 “识图模式”，实现多模态图片理解功能\nDeepSeek正在灰度测试“识图模式”，该模式具备多模态识别能力，能进行深度图像分析与描述，而不仅是OCR文字识别。用户上传图片后可获得快速响应，有网友形容速度如闪电般迅速。\n2026年4月29号 17:07\n229.4k\nDeepSeek核心专家加盟，元戎启行全面转向大模型技术路线\n北京车展上，前DeepSeek多模态技术核心研究员阮翀以元戎启行首席科学家身份亮相，标志该公司自动驾驶技术转向。CEO周光称，多模态大模型在2026年初取得突破，以大模型为基座的自动驾驶路线起点上优势显著，超越上一代技术。\n2026年4月27号 9:36\n166.7k\nDeepSeek API 输入缓存价格大幅降价:首发价格的1/10\nDeepSeek宣布全系API输入缓存价格大幅下调至首发价的1/10，其中V4-Pro缓存输入价格降至0.1元/百万Tokens，限时优惠后仅0.025元，远低于海外竞品GPT-5.5Pro。此举旨在通过极致性价比吸引更多开发者和企业接入，标志着国产AI成本控制进入新阶段。\n2026年4月27号 8:53\n231.4k\n独角兽人才保卫战升级:DeepSeek以200亿美元高估值融资应对大厂挖角\nAI独角兽DeepSeek近期启动首次对外融资，目标估值超200亿美元，腾讯与阿里均有意参与。尽管公司此前依赖创始人梁文锋的量化交易资金，并无急迫融资需求，但此举旨在通过股权激励留住核心人才，应对R1论文作者郭达雅、研究员Wang Bingxuan等关键成员近期流失的挑战。\n2026年4月24号 10:11\n182.7k\n阿里腾讯争投DeepSeek推动估值冲刺200亿美元，DeepSeek v4与混元3.0发布在即\n腾讯与阿里巴巴正竞相参与国产大模型公司DeepSeek的新一轮融资，推动其估值目标从100亿美元飙升至超过200亿美元。此前DeepSeek寻求以百亿美元估值融资3亿美元，市场对头部独立模型厂商的溢价预期显著提升。公司预计本月发布新一代模型DeepSeek v4。\n2026年4月23号 10:20\n244.5k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "content": "首页\nAI资讯\nAI产品库\nGEO平台\nMCP服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：DeepSeek识图模式灰测；小红书成立AI一级部门；阿里发布程序员“数字分身”QoderWake\n发布于最新AI日报\n发布时间 :\n2026年4月30号 16:27\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、DeepSeek 开启识图模式灰度测试，多模态视觉理解能力正式落地\nDeepSeek 在发布 DeepSeek-V4 后迅速开启多模态识图功能的灰度测试，标志着其多模态能力进入实质性阶段。该功能在移动端与网页版新增了“识图模式”入口，并在基础视觉理解、画面描述及逻辑推理方面表现出色，但仍有优化空间。\n【AiBase提要:】\n✨ DeepSeek 开启多模态识图功能灰度测试，推动视觉交互发展。\n🔍 模型在基础视觉理解与逻辑推理方面表现优异，具备较高还原度。\n⚠️ 面对极端视觉挑战时识别率受限，需进一步优化提升准确率。\n2、文心一言5.1预览版上线 LMSYS 竞技场，目前位列全球第13位\n文心一言5.1预览版低调上线国际大模型盲测平台LMSYS Chatbot Arena，位列全球第13位。这标志着百度核心模型进入新一轮快速迭代周期，并开始接受全球用户的直接质量检验与基准对标。\n【AiBase提要:】\n🚀 文心一言5.1预览版低调上线国际大模型盲测平台LMSYS Chatbot Arena。\n📊 该版本在总榜中位列第13位，展现强大的技术实力。\n🌐 百度通过公开的国际主流评价体系验证其实战能力，加速全球化布局。\n3、小红书成立 AI 一级部门 “Dots”\n小红书宣布成立AI一级部门“Dots”和企业智能部，以增强对人工智能的技术投入，并设立海外部门“Rednote”和Lab 1327团队，推动国际化业务和新产品孵化。\n【AiBase提要:】\n✅ 设立AI一级部门“Dots”，涵盖AI模型研发、基础设施、工程落地和产品应用等多个环节。\n✅ 企业智能部整合原有企业效率部和数据科学部，为AI时代发展提供组织架构和人才支撑。\n✅ 成立海外部门“Rednote”和Lab 1327团队，推动国际化业务和新产品孵化。\n4、Chrome 正式发布 Prompt API：浏览器原生 AI 时代来临，网页直接调用 Gemini Nano 本地模型\nChrome 推出 Prompt API，允许开发者通过 JavaScript 直接调用内置的 Gemini Nano 模型，实现本地 AI 能力。这一功能标志着浏览器 AI 能力的“民主化”，提升了隐私保护并降低了开发门槛。\n【AiBase提要:】\n🌍 Prompt API 是 Chrome 内置 AI 框架的一部分，允许网页应用调用 Gemini Nano 模型。\n🔒 模型在本地运行，数据不上传云端，提升隐私保护。\n🛠️ 开发者无需依赖外部 API，降低开发成本和复杂性。\n详情链接:https://developer.chrome.com/docs/ai/prompt-api\n5、程序员“数字分身”上岗:阿里发布 QoderWake，实现代码修复全流程无人值守\n阿里巴巴发布QoderWake和Qoder移动端，标志着其AI智能体生态实现全场景覆盖，提升了研发运维自动化水平，并推动AI向原生操作系统级转型。\n【AiBase提要:】\n💻 QoderWake作为生产级数字员工，能够自主执行代码变更简报整理、错误诊断等任务并生成修复代码。\n📱 Qoder移动端支持跨端协同与交互体验革新，用户可通过手机远程操控桌面端Agent执行复杂任务。\n🔄 阿里通过Qoder产品布局，推动AI从辅助工具演变为具备独立任务处理能力的生产要素。\n详情链接:https://qoder.com/qoderwake\n6、蚂蚁集团正式开源万亿级大模型Ling-2.6-1T\n蚂蚁集团正式开源万亿级大模型Ling-2.6-1T，该模型通过创新的混合架构优化了指令执行、工具适配及长上下文承接能力，提升了智效比。同时，它能够适配多工具、多约束的复杂业务场景，展现出强大的多步执行能力，在代码生成、缺陷修复以及噪声环境下的精准推理方面均达到了开源领域的\n顶尖\n水平。\n【AiBase提要:】\n🧠 Ling-2.6-1T采用混合架构，提升智效比\n🛠️ 支持多工具、多约束的复杂业务场景\n🚀 在代码生成和精准推理方面达到开源领域\n顶尖\n水平\n详情链接:https://huggingface.co/inclusionAI/Ling-2.6-1T\n7、巨日禄宣布与火山引擎达成深度合作 AI短剧进入“工业化”时代\n杭州巨日禄科技有限公司与火山引擎达成深度合作，接入豆包视频生成模型Seedance 2.0，标志着AI剧制作进入工业化时代。通过整合火山引擎的算力与算法优势，巨日禄实现了制作效率和画面可用性的双重突破，并构建了全栈式技术架构，推动国内AI影视产业向更成熟的工业化阶段迈进。\n【AiBase提要:】\n🚀 效率与质量的双重飞跃：AI剧制作效率提升近10倍，生产周期从15-30天压缩至1-3天。\n🖼️ 画面可用性显著提升：传统AI生成模式下画面合格率仅30%，新技术架构下已跃升至90%以上。\n🛠️ 全栈式技术架构：双方合作构建覆盖前期创作到最终交付的技术体系，降低AI剧生产门槛并确保内容高品质。\n8、彻底告别复制粘贴！Gemini 迎来史诗级更新，一键生成 Office 文档\nGemini通过新增直接生成和导出多种格式文件的功能，显著提升了其作为生产力工具的能力，同时增强了与办公软件的衔接性，为用户提供了更高效的办公体验。\n【AiBase提要:】\n✨Gemini新增直接生成并导出多种格式文件的功能，提升办公效率。\n📊支持Google Docs、Word、Excel等主流文档格式，兼容性强。\n🖼️引入图像识别功能，可将手写笔记转为排版规整的PDF文件。\n相关推荐\nDeepSeek 灰测 “识图模式”，实现多模态图片理解功能\nDeepSeek正在灰度测试“识图模式”，该模式具备多模态识别能力，能进行深度图像分析与描述，而不仅是OCR文字识别。用户上传图片后可获得快速响应，有网友形容速度如闪电般迅速。\n2026年4月29号 17:07\n231.3k\nDeepSeek核心专家加盟，元戎启行全面转向大模型技术路线\n北京车展上，前DeepSeek多模态技术核心研究员阮翀以元戎启行首席科学家身份亮相，标志该公司自动驾驶技术转向。CEO周光称，多模态大模型在2026年初取得突破，以大模型为基座的自动驾驶路线起点上优势显著，超越上一代技术。\n2026年4月27号 9:36\n151.8k\nDeepSeek API 输入缓存价格大幅降价:首发价格的1/10\nDeepSeek宣布全系API输入缓存价格大幅下调至首发价的1/10，其中V4-Pro缓存输入价格降至0.1元/百万Tokens，限时优惠后仅0.025元，远低于海外竞品GPT-5.5Pro。此举旨在通过极致性价比吸引更多开发者和企业接入，标志着国产AI成本控制进入新阶段。\n2026年4月27号 8:53\n231.4k\n独角兽人才保卫战升级:DeepSeek以200亿美元高估值融资应对大厂挖角\nAI独角兽DeepSeek近期启动首次对外融资，目标估值超200亿美元，腾讯与阿里均有意参与。尽管公司此前依赖创始人梁文锋的量化交易资金，并无急迫融资需求，但此举旨在通过股权激励留住核心人才，应对R1论文作者郭达雅、研究员Wang Bingxuan等关键成员近期流失的挑战。\n2026年4月24号 10:11\n182.7k\n阿里腾讯争投DeepSeek推动估值冲刺200亿美元，DeepSeek v4与混元3.0发布在即\n腾讯与阿里巴巴正竞相参与国产大模型公司DeepSeek的新一轮融资，推动其估值目标从100亿美元飙升至超过200亿美元。此前DeepSeek寻求以百亿美元估值融资3亿美元，市场对头部独立模型厂商的溢价预期显著提升。公司预计本月发布新一代模型DeepSeek v4。\n2026年4月23号 10:20\n244.5k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
       "priority": 1,
       "source": "aibase"
     },
@@ -83,6 +83,33 @@
       "source": "techcrunch"
     },
     {
+      "title": "SpaceX backer 137 Ventures raises $700M for two growth-stage funds",
+      "link": "https://techcrunch.com/2026/04/30/spacex-backer-137-ventures-raises-700m-for-two-growth-stage-funds/",
+      "description": "",
+      "publish_time": "2026-04-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Dental practice software maker fixes bug that exposed patients’ medical records",
+      "link": "https://techcrunch.com/2026/04/30/dental-practice-software-maker-fixes-bug-that-exposed-patients-medical-records/",
+      "description": "",
+      "publish_time": "2026-04-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "X announces a rebuilt ad platform powered by AI",
+      "link": "https://techcrunch.com/2026/04/30/x-announces-a-rebuilt-ad-platform-powered-by-ai/",
+      "description": "",
+      "publish_time": "2026-04-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "Spotify introduces verified artist badges to help distinguish humans from AI",
       "link": "https://techcrunch.com/2026/04/30/spotify-introduces-verified-artist-badges-to-help-distinguish-humans-from-ai/",
       "description": "",
@@ -105,33 +132,6 @@
       "link": "https://techcrunch.com/2026/04/30/meta-says-its-business-ai-now-facilitates-10-million-conversations-a-week/",
       "description": "",
       "publish_time": "2026-04-30",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Instagram cracks down on content aggregators",
-      "link": "https://techcrunch.com/2026/04/30/instagram-restricts-reach-of-content-aggregators-in-new-crackdown/",
-      "description": "",
-      "publish_time": "2026-04-30",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "SoftBank is creating a robotics company that builds data centers — and already eyeing a $100B IPO",
-      "link": "https://techcrunch.com/2026/04/29/softbank-is-creating-a-robotics-company-that-builds-data-centers-and-already-eyeing-a-100b-ipo/",
-      "description": "",
-      "publish_time": "2026-04-29",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Amazon, Meta join fight to end Google Pay, PhonePe dominance in India",
-      "link": "https://techcrunch.com/2026/04/29/amazon-meta-join-fight-to-end-google-pay-phonepe-dominance-in-india/",
-      "description": "",
-      "publish_time": "2026-04-29",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
