@@ -7,6 +7,7 @@ from .storage import (
     load_json,
     save_markdown,
 )
+from .news_enrichment import enrich_articles_with_tavily
 
 __all__ = [
     "dedupe",
@@ -17,4 +18,5 @@ __all__ = [
     "save_json",
     "load_json",
     "save_markdown",
+    "enrich_articles_with_tavily",
 ]

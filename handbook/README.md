@@ -9,6 +9,18 @@
 - GitHub Pages：`deployment/github-pages.md`
 - 配置说明：`guides/configuration.md`
 - 扩展新闻源：`guides/extending-sources.md`
+- Tavily 接入总览：`guides/tavily-integration.md`
+- Tavily multi-agent PR 指南：`guides/mutiagent/README.md`
+- Tavily 历史文档归档：`guides/history/README.md`
 - 故障排查：`guides/troubleshooting.md`
 - API 参考：`api/README.md`
 - 分 PR 落地建议：`project-rollout.md`
+
+## Tavily 快速入口
+
+Tavily 当前是默认关闭的 post-fetch enrichment 能力，不是默认 source。
+
+- 使用、诊断、默认开启门槛：`guides/tavily-integration.md`
+- 配置字段和本地开关：`guides/configuration.md`
+- GitHub Actions 手动灰度：`deployment/github-actions.md`
+- 失败排查和安全关闭：`guides/troubleshooting.md`

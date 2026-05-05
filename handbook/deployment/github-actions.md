@@ -29,7 +29,9 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 定时：GitHub Actions cron 使用 UTC，当前配置为 `0 14 * * *`，对应北京时间 `22:00`
+- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment
+- 定时：GitHub Actions cron 使用 UTC，当前配置为 `19 13 * * *`，对应北京时间 `21:19`
+- 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`
 - 关键步骤：
@@ -52,6 +54,14 @@
 | `MODELSCOPE_API_KEY` | ModelScope API Key |
 
 未配置时，部署 workflow 会自动退回离线模式。
+
+如果要手动灰度验证 Tavily enrichment，可额外配置：
+
+| Name | Value |
+| --- | --- |
+| `TAVILY_API_KEY` | Tavily Search API Key |
+
+该 secret 只在手动触发 `Daily Report Deploy` 且 `enable_tavily=true` 时注入。未配置时，手动开启 Tavily 的运行仍会完成，并在日志中提示回退到去重后的原始文章。不要把真实 secret 写进文档、测试、fixture 或示例提交。
 
 ### Workflow 权限
 
@@ -80,6 +90,23 @@
 
 `workflow_dispatch` 在非 `main` 分支上仍可用于手动验证生成流程，但不会回写仓库、上传归档或发布 Pages。
 
+手动触发时保持 `enable_tavily=false` 会沿用默认路径，不显式启用 Tavily；设为 `true` 时运行 `python main.py run --enrichment on`，用于验证生产 runner 的 Tavily 接线。
+
+Tavily 灰度限制：
+
+- 定时任务不会因为存在 `TAVILY_API_KEY` secret 就自动启用 Tavily。
+- `skip_generate=true` 只执行 `python main.py build`，不会验证 enrichment。
+- 非 `main` 分支可用于手动验证命令和日志，但不会回写生成的 `data/` / `content/`，也不会发布 Pages。
+- 单次 live 结果只能作为接线样本，不作为默认开启或修改 `trusted_domains` 的稳定证据。
+- 如果 Tavily timeout、HTTP error、connection error 或 key 缺失，预期行为是 fail-open：主流程继续完成，已有 deduped articles 尽量保留，失败原因写入 JSON 诊断。
+
+手动灰度后检查当天 `data/YYYY-MM-DD.json` 的 `enrichment` 字段：
+
+- `enabled` / `applied` / `skip_reason` / `error`
+- `verify_calls` / `refill_calls` / `fallback_calls` / `total_calls`
+- `preserved_error_count` / `final_count` / `stop_reason`
+- `verify_runs[*].request_outcome` 与 refill runs 的 `request_outcome`
+
 ## 手动验证建议
 
 合并前建议分别手动触发一次：
@@ -92,8 +119,11 @@
 - `dist/` 是否成功上传为 Pages artifact
 - Release `daily-report-archive` 是否出现 tar.gz 资产
 - `main` 上是否只保留最近 7 天的 `data/` / `content/`
+- 手动设置 `enable_tavily=true` 时，日志是否显示 `--enrichment on`
+- `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
 
 ## 相关文档
 
 - GitHub Pages：[`github-pages.md`](github-pages.md)
 - 本地运行：[`local.md`](local.md)
+- Tavily 接入总览：[`../guides/tavily-integration.md`](../guides/tavily-integration.md)
