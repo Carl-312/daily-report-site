@@ -10,12 +10,17 @@ on:
   workflow_dispatch:
     inputs:
       skip_generate:
-        description: "Rebuild and deploy from current retained content without generating today's report"
+        description: "Rebuild from current retained content without generating today's report"
         required: false
         default: false
         type: boolean
       enable_tavily:
         description: "Manually enable Tavily enrichment for this run"
+        required: false
+        default: false
+        type: boolean
+      publish:
+        description: "Commit generated content and deploy to the production Pages site"
         required: false
         default: false
         type: boolean
@@ -38,12 +43,27 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       pages_enabled: ${{ steps.pages-check.outputs.enabled }}
+      publish: ${{ steps.publish-mode.outputs.publish }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Resolve publish mode
+        id: publish-mode
+        shell: bash
+        env:
+          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.publish) }}
+        run: |
+          if [ "$SHOULD_PUBLISH" = "true" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            echo "Publishing generated content and GitHub Pages deployment is enabled"
+          else
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "Preview mode: generated files will only be uploaded as workflow artifacts"
+          fi
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -85,12 +105,26 @@ jobs:
         if: ${{ inputs.skip_generate }}
         run: python main.py build
 
+      - name: Upload generated preview artifact
+        if: steps.publish-mode.outputs.publish != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-report-preview-${{ github.run_id }}
+          path: |
+            data/
+            content/
+            dist/
+            daily_update.log
+            *.log
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Prepare release archive assets
-        if: github.ref == 'refs/heads/main'
+        if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         run: python scripts/manage_retention.py bundle --keep-days "$RETENTION_DAYS" --staging-dir .archive-staging
 
       - name: Ensure archive release exists
-        if: github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
+        if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -100,7 +134,7 @@ jobs:
               --notes "Long-term archive for generated data/ and content/ artifacts."
 
       - name: Upload archive assets to GitHub Release
-        if: github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
+        if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -108,11 +142,11 @@ jobs:
           gh release upload "$ARCHIVE_TAG" .archive-staging/archive-manifest.json --clobber
 
       - name: Prune generated content outside retention window
-        if: github.ref == 'refs/heads/main'
+        if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         run: python scripts/manage_retention.py prune --keep-days "$RETENTION_DAYS"
 
       - name: Commit and push retained generated content
-        if: github.ref == 'refs/heads/main'
+        if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
@@ -128,7 +162,7 @@ jobs:
 
       - name: Check whether GitHub Pages is enabled
         id: pages-check
-        if: github.ref == 'refs/heads/main'
+        if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -149,11 +183,11 @@ jobs:
           fi
 
       - name: Setup Pages
-        if: steps.pages-check.outputs.enabled == 'true'
+        if: steps.publish-mode.outputs.publish == 'true' && steps.pages-check.outputs.enabled == 'true'
         uses: actions/configure-pages@v4
 
       - name: Upload Pages artifact
-        if: steps.pages-check.outputs.enabled == 'true'
+        if: steps.publish-mode.outputs.publish == 'true' && steps.pages-check.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
@@ -170,7 +204,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    if: github.ref == 'refs/heads/main' && needs.generate-and-deploy.outputs.pages_enabled == 'true'
+    if: github.ref == 'refs/heads/main' && needs.generate-and-deploy.outputs.publish == 'true' && needs.generate-and-deploy.outputs.pages_enabled == 'true'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
