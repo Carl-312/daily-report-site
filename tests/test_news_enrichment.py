@@ -147,3 +147,50 @@ def test_enrichment_session_trust_env_follows_settings(monkeypatch) -> None:
 
     assert seen
     assert all(value is False for value in seen)
+
+
+def test_enrichment_below_min_stop_reason_when_official_fallback_disabled(monkeypatch) -> None:
+    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+
+    def fake_search(session, api_key, payload):
+        include_domains = payload.get("include_domains") or []
+        if "thenextweb.com" in include_domains or "venturebeat.com" in include_domains:
+            return {"latency_ms": 10.0, "response": {"results": []}}
+        if "reuters.com" in include_domains or "arstechnica.com" in include_domains:
+            return {
+                "latency_ms": 12.0,
+                "response": {
+                    "results": [
+                        {
+                            "title": "Anthropic expands enterprise AI revenue",
+                            "url": "https://www.reuters.com/business/anthropic-expands-enterprise-ai-revenue-2026-04-01/",
+                            "published_date": "2026-04-01T04:00:00Z",
+                            "content": "Example content",
+                            "score": 0.9,
+                        }
+                    ]
+                },
+            }
+        raise AssertionError(f"Unexpected payload: {payload}")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(update={"enabled": True}),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert result["report"]["input_count"] == 0
+    assert result["report"]["secondary_refilled_count"] == 1
+    assert (
+        result["report"]["stop_reason"]
+        == "below_min_articles_after_secondary_refill_official_fallback_disabled"
+    )
+    assert (
+        "Upstream sources returned zero deduped articles, so any final output must come from Tavily refill."
+        in result["report"]["notes"]
+    )

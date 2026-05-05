@@ -1,5 +1,7 @@
 # Tavily trusted_domains 实验性草案
 
+> 统一入口：当前 trusted domains 分层、接入进度和生产状态已经合并到 `handbook/guides/tavily-integration.md`。本文保留为白名单实验草案和原始论证记录。
+
 ## 状态与边界
 
 本文档只用于实验性设计，不用于正式集成。
@@ -10,7 +12,7 @@
 
 证据来源：
 
-- `handbook/guides/tavily-news-enrichment.md`
+- `handbook/guides/history/tavily-news-enrichment.md`
 - `data/benchmarks/tavily-baseline-2026-04-01.md`
 - `data/benchmarks/tavily-baseline-2026-04-01.json`
 - `data/benchmarks/tavily-whitelist-2026-04-01.md`

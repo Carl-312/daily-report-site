@@ -657,6 +657,12 @@ def sample_titles(candidates: list[dict[str, Any]], limit: int = 3) -> list[str]
     return titles
 
 
+def below_min_stop_reason(*, secondary_refill_executed: bool) -> str:
+    if secondary_refill_executed:
+        return "below_min_articles_after_secondary_refill_official_fallback_disabled"
+    return "below_min_articles_after_priority_refill_official_fallback_disabled"
+
+
 def run_verify_stage(
     *,
     candidates: list[dict[str, Any]],
@@ -1050,6 +1056,10 @@ def enrich_articles_with_tavily(
         report["cluster_skipped_prefilter_candidates"] = verify_view["skipped_candidates"]
         report["cluster_diagnostics"] = prefilter_clusters["cluster_diagnostics"]
         report["notes"].append("Local prefilter completed before any Tavily refill attempt.")
+        if not article_dicts:
+            report["notes"].append(
+                "Upstream sources returned zero deduped articles, so any final output must come from Tavily refill."
+            )
 
         verify = run_verify_stage(
             candidates=verify_view["verify_candidates"],
@@ -1206,7 +1216,9 @@ def enrich_articles_with_tavily(
                 else "budget_exhausted_after_priority_refill"
             )
         elif report["final_count"] < settings.min_articles:
-            report["stop_reason"] = "official_fallback_disabled"
+            report["stop_reason"] = below_min_stop_reason(
+                secondary_refill_executed=secondary_refill_executed
+            )
         else:
             report["stop_reason"] = (
                 "secondary_refill_complete"

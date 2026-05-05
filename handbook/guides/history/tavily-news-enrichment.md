@@ -1,5 +1,7 @@
 # Tavily 新闻时效校验与补全方案
 
+> 统一入口：当前 Tavily 接入状态、进度、风险和下一步已经合并到 `handbook/guides/tavily-integration.md`。本文保留为历史方案与实验记录，不再作为当前状态的唯一依据。
+
 ## 目标
 
 在现有日报流水线中新增一个统一增强层，用 Tavily 完成两件事：
@@ -225,7 +227,7 @@ fetch_all
 - deferred 池挑战赛结论：`data/benchmarks/tavily-whitelist-deferred-2026-04-01-round3.md`
 - dry run / replay harness 结果：`data/benchmarks/tavily-enrichment-dryrun-2026-04-01.json`
 - dry run / replay harness 结论：`data/benchmarks/tavily-enrichment-dryrun-2026-04-01.md`
-- 分层 trusted domains 草案：`handbook/guides/tavily-trusted-domains-draft.md`
+- 分层 trusted domains 草案：`handbook/guides/history/tavily-trusted-domains-draft.md`
 
 ## 最新 experimental 结论概览
 
