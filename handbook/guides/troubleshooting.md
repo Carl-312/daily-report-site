@@ -53,6 +53,51 @@ MODELSCOPE_API_KEY=sk-your-key
 python main.py run --offline
 ```
 
+### Tavily 没有启用
+
+Tavily 默认关闭。确认 `config.yaml` 中仍是：
+
+```yaml
+enrichment.enabled: false
+```
+
+本地显式启用需要同时提供 key 和 CLI 开关：
+
+```bash
+TAVILY_API_KEY=... python3 main.py fetch --enrichment on
+TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
+```
+
+安全关闭或回滚到默认抓取路径：
+
+```bash
+python3 main.py fetch --enrichment off
+python3 main.py run --offline --enrichment off
+```
+
+`--enrichment auto` 跟随配置；在默认 `enrichment.enabled: false` 下不会启用 Tavily。
+
+### Tavily 失败或结果为 0
+
+先看当天 `data/YYYY-MM-DD.json` 顶层的 `enrichment` 字段：
+
+- `enabled=false` 或 `skip_reason=disabled`：本次没有启用 Tavily。
+- `skip_reason=missing_api_key`：缺少 `TAVILY_API_KEY`，主流程应继续使用去重后的文章。
+- `request_outcome=timeout/http_error/connection_error/request_error`：这是请求失败，不应当被解释为新闻验证失败。
+- `preserved_error_count` 大于 0：verify 请求失败时保留了原始 deduped articles，符合 fail-open 预期。
+- `final_count=0` 且 `input_count=0`：source 没有候选，Tavily 只能尝试受控 refill；这不是 verify 成熟度证明，也不说明可以放弃 source 层。
+
+不要为了单次 `final_count` 不足而放宽 `strict_hours: 24`，也不要临时把 `trusted_domains` 当作热修名单扩张。
+
+### GitHub Actions 手动 Tavily 灰度没有效果
+
+检查 `Daily Report Deploy` 的手动输入：
+
+- `enable_tavily` 必须设为 `true`，否则不会追加 `--enrichment on`。
+- `skip_generate=true` 只重建站点，不运行抓取和 Tavily。
+- 仓库 secret 需要配置 `TAVILY_API_KEY`；缺失时 workflow 仍应完成，但 JSON 会记录安全降级。
+- 非 `main` 分支运行不会回写 `data/` / `content/` 或发布 Pages，只适合看日志。
+
 ### 构建输出不对
 
 当前站点输出目录是 `dist/`，不是 `docs/`。
@@ -88,3 +133,4 @@ python -m http.server 8000 --directory dist
 
 - 本地运行：[`../deployment/local.md`](../deployment/local.md)
 - GitHub Actions：[`../deployment/github-actions.md`](../deployment/github-actions.md)
+- Tavily 接入总览：[`tavily-integration.md`](tavily-integration.md)

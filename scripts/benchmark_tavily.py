@@ -30,7 +30,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-import config  # noqa: E402  # Reuse project .env loading behavior.
+import config  # noqa: E402,F401  # Reuse project .env loading behavior.
 
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
 OUTPUT_DATE_FORMAT = "%Y-%m-%d"
@@ -88,7 +88,9 @@ def normalize_title(title: str) -> str:
 
 
 def title_similarity(left: str, right: str) -> float:
-    return round(SequenceMatcher(None, normalize_title(left), normalize_title(right)).ratio(), 4)
+    return round(
+        SequenceMatcher(None, normalize_title(left), normalize_title(right)).ratio(), 4
+    )
 
 
 def domain_of(url: str) -> str:
@@ -251,7 +253,10 @@ def select_verify_samples(
 
 def build_refill_queries(verify_samples: list[dict[str, Any]]) -> list[dict[str, Any]]:
     report_dates = sorted(
-        {datetime.strptime(sample["report_date"], OUTPUT_DATE_FORMAT).date() for sample in verify_samples},
+        {
+            datetime.strptime(sample["report_date"], OUTPUT_DATE_FORMAT).date()
+            for sample in verify_samples
+        },
         reverse=True,
     )
     latest_date = report_dates[0]
@@ -282,9 +287,18 @@ def build_refill_queries(verify_samples: list[dict[str, Any]]) -> list[dict[str,
 
 
 def build_existing_report_index(report_payload: dict[str, Any]) -> dict[str, set[str]]:
-    titles = {normalize_title(article.get("title", "")) for article in report_payload.get("articles", [])}
-    urls = {canonical_url(article.get("link", "")) for article in report_payload.get("articles", [])}
-    domains = {domain_of(article.get("link", "")) for article in report_payload.get("articles", [])}
+    titles = {
+        normalize_title(article.get("title", ""))
+        for article in report_payload.get("articles", [])
+    }
+    urls = {
+        canonical_url(article.get("link", ""))
+        for article in report_payload.get("articles", [])
+    }
+    domains = {
+        domain_of(article.get("link", ""))
+        for article in report_payload.get("articles", [])
+    }
     return {"titles": titles, "urls": urls, "domains": domains}
 
 
@@ -309,7 +323,9 @@ def search_tavily(
     }
 
 
-def pick_best_match(results: list[dict[str, Any]], expected_title: str, expected_url: str) -> dict[str, Any] | None:
+def pick_best_match(
+    results: list[dict[str, Any]], expected_title: str, expected_url: str
+) -> dict[str, Any] | None:
     expected_canonical = canonical_url(expected_url)
     expected_domain = domain_of(expected_url)
     ranked: list[tuple[float, dict[str, Any]]] = []
@@ -320,7 +336,12 @@ def pick_best_match(results: list[dict[str, Any]], expected_title: str, expected
         exact_url = expected_canonical == result_canonical and bool(expected_canonical)
         same_domain = domain_of(result_url) == expected_domain and bool(expected_domain)
         similarity = title_similarity(expected_title, result_title)
-        score = (10 if exact_url else 0) + (2 if same_domain else 0) + similarity - (index * 0.01)
+        score = (
+            (10 if exact_url else 0)
+            + (2 if same_domain else 0)
+            + similarity
+            - (index * 0.01)
+        )
         ranked.append(
             (
                 score,
@@ -357,7 +378,9 @@ def evaluate_verify_case(
         datetime.strptime(sample["report_date"], OUTPUT_DATE_FORMAT).date()
     )
     best_match = pick_best_match(results, sample["title"], sample["link"])
-    published_with_values = [result for result in results if result.get("published_date")]
+    published_with_values = [
+        result for result in results if result.get("published_date")
+    ]
     matched = None
     same_domain = None
     matched_within_24h = None
@@ -416,9 +439,11 @@ def evaluate_verify_case(
                 "domain": domain_of(result.get("url", "")),
                 "published_date": result.get("published_date"),
                 "score": result.get("score"),
-                "title_similarity": title_similarity(sample["title"], result.get("title", "")),
+                "title_similarity": title_similarity(
+                    sample["title"], result.get("title", "")
+                ),
             }
-            for index, result in enumerate(results[: max_results])
+            for index, result in enumerate(results[:max_results])
         ],
         "error": None,
     }
@@ -434,7 +459,9 @@ def evaluate_refill_case(
     started_payload: dict[str, Any],
 ) -> dict[str, Any]:
     results = response_payload.get("results", []) or []
-    report_date = datetime.strptime(refill_query["report_date"], OUTPUT_DATE_FORMAT).date()
+    report_date = datetime.strptime(
+        refill_query["report_date"], OUTPUT_DATE_FORMAT
+    ).date()
     reference_dt = report_reference_dt(report_date)
     existing = build_existing_report_index(report_payload)
     seen_returned_titles: set[str] = set()
@@ -447,7 +474,9 @@ def evaluate_refill_case(
         url = result.get("url", "")
         normalized = normalize_title(title)
         result_url = canonical_url(url)
-        duplicate_existing = normalized in existing["titles"] or result_url in existing["urls"]
+        duplicate_existing = (
+            normalized in existing["titles"] or result_url in existing["urls"]
+        )
         duplicate_within_results = normalized in seen_returned_titles
         seen_returned_titles.add(normalized)
         duplicate = duplicate_existing or duplicate_within_results
@@ -475,7 +504,9 @@ def evaluate_refill_case(
             }
         )
 
-    published_with_values = [result for result in results if result.get("published_date")]
+    published_with_values = [
+        result for result in results if result.get("published_date")
+    ]
     return {
         "scenario": "refill_topic",
         "sample_id": refill_query["sample_id"],
@@ -560,7 +591,11 @@ def summarize_runs(runs: list[dict[str, Any]]) -> dict[str, Any]:
     summary_groups: dict[str, Any] = {}
     for key, items in grouped.items():
         successful = [item for item in items if not item.get("error")]
-        latencies = [item["latency_ms"] for item in successful if item.get("latency_ms") is not None]
+        latencies = [
+            item["latency_ms"]
+            for item in successful
+            if item.get("latency_ms") is not None
+        ]
         title_sim_values = [
             item["title_similarity"]
             for item in successful
@@ -625,8 +660,7 @@ def summarize_runs(runs: list[dict[str, Any]]) -> dict[str, Any]:
         if not fuzzy or fuzzy.get("error"):
             continue
         rescued = bool(fuzzy.get("matched")) and not any(
-            run and run.get("matched")
-            for run in (basic, advanced)
+            run and run.get("matched") for run in (basic, advanced)
         )
         if rescued:
             fuzzy_rescues.append(sample_id)
@@ -649,10 +683,12 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
     runs: list[dict[str, Any]] = []
 
     for sample in verify_samples:
-        report_date = datetime.strptime(sample["report_date"], OUTPUT_DATE_FORMAT).date()
+        report_date = datetime.strptime(
+            sample["report_date"], OUTPUT_DATE_FORMAT
+        ).date()
         start_date, end_date = report_window(report_date)
-        exact_query = f"\"{sample['title']}\""
-        fuzzy_query = f"\"{sample['title']}\" AI"
+        exact_query = f'"{sample["title"]}"'
+        fuzzy_query = f'"{sample["title"]}" AI'
         verify_matrix = [
             ("verify_exact", exact_query, "exact_title", "basic", 3),
             ("verify_exact", exact_query, "exact_title", "advanced", 3),
@@ -706,7 +742,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
                 )
 
     for refill_query in refill_queries:
-        report_date = datetime.strptime(refill_query["report_date"], OUTPUT_DATE_FORMAT).date()
+        report_date = datetime.strptime(
+            refill_query["report_date"], OUTPUT_DATE_FORMAT
+        ).date()
         start_date, end_date = report_window(report_date)
         payload = {
             "query": refill_query["query"],
@@ -782,7 +820,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
         "sample_selection": {
             "verify_samples": verify_samples,
             "refill_queries": refill_queries,
-            "available_report_dates": [report_date.isoformat() for report_date in sorted(reports)],
+            "available_report_dates": [
+                report_date.isoformat() for report_date in sorted(reports)
+            ],
             "source_counts": dict(
                 Counter(
                     article.get("source", "")
@@ -799,7 +839,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
 def default_output_path(explicit_output: str) -> Path:
     if explicit_output:
         return Path(explicit_output).resolve()
-    filename = f"tavily-baseline-{datetime.now(tz=REPORT_TIMEZONE).date().isoformat()}.json"
+    filename = (
+        f"tavily-baseline-{datetime.now(tz=REPORT_TIMEZONE).date().isoformat()}.json"
+    )
     return (REPO_ROOT / "data" / "benchmarks" / filename).resolve()
 
 

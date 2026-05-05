@@ -27,10 +27,11 @@ VERIFY_MAX_RESULTS = 3
 TITLE_SIMILARITY_MATCH_THRESHOLD = 0.82
 REQUEST_TIMEOUT_SECONDS = 45
 
-AI_KEYWORD_RE = re.compile(
-    r"\b(ai|openai|anthropic|claude|chatgpt|llm|model|models|agent|agents|robot|"
-    r"robotics|startup|startups|copilot|sora)\b|"
-    r"(人工智能|大模型|模型|智能体|机器人|融资|开源|发布|日报)",
+AI_NEIGHBOR_TITLE_RE = re.compile(
+    r"\b(autonomous|autonomy|self-driving|self driving|automation|"
+    r"semiconductor|semiconductors|chip|chips|gpu|gpus|accelerator|"
+    r"accelerators|nvidia|data center|datacenter)\b|"
+    r"(自动驾驶|无人驾驶|自动化|芯片|半导体|算力|数据中心)",
     re.IGNORECASE,
 )
 STRICT_AI_TITLE_RE = re.compile(
@@ -50,6 +51,8 @@ AGGREGATE_TITLE_PREFIXES = ("ai日报",)
 NEAR_DUPLICATE_SIMILARITY_THRESHOLD = 0.82
 STORY_CLUSTER_MIN_SHARED_TOKENS = 3
 STORY_CLUSTER_MIN_OVERLAP_RATIO = 0.35
+PREFILTER_BUCKETS = ("core_ai", "ai_neighbor", "generic_or_low_signal")
+PREFILTER_BUCKET_RANK = {bucket: rank for rank, bucket in enumerate(PREFILTER_BUCKETS)}
 
 STORY_TOKEN_STOPWORDS = {
     "a",
@@ -118,7 +121,9 @@ def normalize_title(title: str) -> str:
 
 
 def title_similarity(left: str, right: str) -> float:
-    return round(SequenceMatcher(None, normalize_title(left), normalize_title(right)).ratio(), 4)
+    return round(
+        SequenceMatcher(None, normalize_title(left), normalize_title(right)).ratio(), 4
+    )
 
 
 def domain_of(url: str) -> str:
@@ -190,6 +195,33 @@ def ai_title_relevant(title: str) -> bool:
     return bool(STRICT_AI_TITLE_RE.search(title or ""))
 
 
+def classify_prefilter_bucket(title: str) -> str:
+    if ai_title_relevant(title):
+        return "core_ai"
+    if AI_NEIGHBOR_TITLE_RE.search(title or ""):
+        return "ai_neighbor"
+    return "generic_or_low_signal"
+
+
+def empty_prefilter_bucket_counts() -> dict[str, int]:
+    return {bucket: 0 for bucket in PREFILTER_BUCKETS}
+
+
+def sort_candidates_by_prefilter_bucket(
+    candidates: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    return sorted(
+        candidates,
+        key=lambda candidate: (
+            PREFILTER_BUCKET_RANK.get(
+                candidate.get("prefilter_bucket", "generic_or_low_signal"),
+                len(PREFILTER_BUCKETS),
+            ),
+            candidate.get("index", 0),
+        ),
+    )
+
+
 def strip_trailing_source_suffix(title: str) -> str:
     cleaned = (title or "").strip()
     if " - " not in cleaned:
@@ -219,7 +251,9 @@ def story_token_weight(token: str) -> float:
     return 0.5
 
 
-def classify_story_relation(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
+def classify_story_relation(
+    left: dict[str, Any], right: dict[str, Any]
+) -> dict[str, Any]:
     left_title = left.get("title", "")
     right_title = right.get("title", "")
     similarity = title_similarity(left_title, right_title)
@@ -228,7 +262,9 @@ def classify_story_relation(left: dict[str, Any], right: dict[str, Any]) -> dict
     shared_tokens = sorted(left_tokens & right_tokens)
     overlap_ratio = 0.0
     if left_tokens and right_tokens:
-        overlap_ratio = round(len(shared_tokens) / min(len(left_tokens), len(right_tokens)), 4)
+        overlap_ratio = round(
+            len(shared_tokens) / min(len(left_tokens), len(right_tokens)), 4
+        )
     shared_weight = round(sum(story_token_weight(token) for token in shared_tokens), 4)
     near_duplicate = similarity >= NEAR_DUPLICATE_SIMILARITY_THRESHOLD
     story_cluster = near_duplicate or (
@@ -279,7 +315,9 @@ def annotate_story_clusters(candidates: list[dict[str, Any]]) -> dict[str, Any]:
 
     for left_index, left_candidate in enumerate(annotated_candidates):
         for right_index in range(left_index + 1, len(annotated_candidates)):
-            relation = classify_story_relation(left_candidate, annotated_candidates[right_index])
+            relation = classify_story_relation(
+                left_candidate, annotated_candidates[right_index]
+            )
             if not relation["is_story_cluster"]:
                 continue
             relation_pairs.append(
@@ -389,8 +427,11 @@ def collapse_prefilter_candidates_for_verify(
                 "title": candidate.get("title", ""),
                 "source": candidate.get("source", ""),
                 "link": candidate.get("link", ""),
+                "prefilter_bucket": candidate.get("prefilter_bucket"),
                 "cluster_id": cluster_id,
-                "cluster_representative_title": candidate.get("cluster_representative_title", ""),
+                "cluster_representative_title": candidate.get(
+                    "cluster_representative_title", ""
+                ),
             }
         )
     return {
@@ -471,10 +512,17 @@ def pick_best_match(
     for index, result in enumerate(results):
         result_url = result.get("url", "")
         result_title = result.get("title", "")
-        exact_url = expected_canonical == canonical_url(result_url) and bool(expected_canonical)
+        exact_url = expected_canonical == canonical_url(result_url) and bool(
+            expected_canonical
+        )
         same_domain = domain_of(result_url) == expected_domain and bool(expected_domain)
         similarity = title_similarity(expected_title, result_title)
-        score = (10 if exact_url else 0) + (2 if same_domain else 0) + similarity - (index * 0.01)
+        score = (
+            (10 if exact_url else 0)
+            + (2 if same_domain else 0)
+            + similarity
+            - (index * 0.01)
+        )
         ranked.append(
             (
                 score,
@@ -518,7 +566,8 @@ def find_story_cluster_match(
             "relation_type": relation["relation_type"],
             "matched_title": accepted_candidate.get("title", ""),
             "matched_source": accepted_candidate.get("source", ""),
-            "matched_link": accepted_candidate.get("link", "") or accepted_candidate.get("url", ""),
+            "matched_link": accepted_candidate.get("link", "")
+            or accepted_candidate.get("url", ""),
             "shared_tokens": relation["shared_tokens"],
             "shared_weight": relation["shared_weight"],
             "overlap_ratio": relation["overlap_ratio"],
@@ -530,6 +579,7 @@ def find_story_cluster_match(
 def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
     included_candidates: list[dict[str, Any]] = []
     excluded_candidates: list[dict[str, Any]] = []
+    bucket_counts = empty_prefilter_bucket_counts()
     stats = {
         "total_articles": len(articles),
         "eligible_candidates": 0,
@@ -537,12 +587,15 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
         "excluded_missing_link": 0,
         "excluded_aggregate_like": 0,
         "excluded_non_ai_relevant": 0,
+        "soft_non_ai_relevant": 0,
     }
     for index, article in enumerate(articles, start=1):
         title = (article.get("title", "") or "").strip()
         link = (article.get("link", "") or "").strip()
         aggregate_like = is_aggregate_like(article)
-        ai_relevant = bool(AI_KEYWORD_RE.search(title))
+        core_ai_relevant = ai_title_relevant(title)
+        prefilter_bucket = classify_prefilter_bucket(title)
+        ai_relevant = prefilter_bucket != "generic_or_low_signal"
         reasons: list[str] = []
         if not title:
             stats["excluded_missing_title"] += 1
@@ -553,9 +606,6 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
         if aggregate_like:
             stats["excluded_aggregate_like"] += 1
             reasons.append("aggregate_like")
-        if title and not ai_relevant:
-            stats["excluded_non_ai_relevant"] += 1
-            reasons.append("non_ai_relevant")
 
         candidate = {
             "index": index,
@@ -565,6 +615,8 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
             "publish_time": article.get("publish_time", ""),
             "aggregate_like": aggregate_like,
             "ai_relevant": ai_relevant,
+            "core_ai_relevant": core_ai_relevant,
+            "prefilter_bucket": prefilter_bucket,
             "exclude_reasons": reasons,
             "article": dict(article),
         }
@@ -572,11 +624,16 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
             excluded_candidates.append(candidate)
             continue
         stats["eligible_candidates"] += 1
+        if not ai_relevant:
+            stats["soft_non_ai_relevant"] += 1
+        bucket_counts[prefilter_bucket] += 1
         included_candidates.append(candidate)
 
+    included_candidates = sort_candidates_by_prefilter_bucket(included_candidates)
     return {
         "prefiltered_count": len(included_candidates),
         "prefilter_stats": stats,
+        "prefilter_bucket_counts": bucket_counts,
         "prefilter_candidates": included_candidates,
         "excluded_prefilter_candidates": excluded_candidates,
     }
@@ -600,6 +657,7 @@ def build_initial_report(
         "input_count": len(articles),
         "prefiltered_count": len(articles),
         "prefilter_stats": {},
+        "prefilter_bucket_counts": empty_prefilter_bucket_counts(),
         "verify_calls": 0,
         "refill_calls": 0,
         "fallback_calls": 0,
@@ -609,6 +667,9 @@ def build_initial_report(
         "cluster_potential_verify_saved_calls": 0,
         "verify_saved_calls": 0,
         "verified_count": 0,
+        "neighbor_candidates_verified_count": 0,
+        "neighbor_candidates_outside_24h_count": 0,
+        "neighbor_candidates_no_match_count": 0,
         "preserved_error_count": 0,
         "priority_refilled_count": 0,
         "secondary_refilled_count": 0,
@@ -680,7 +741,8 @@ def run_verify_stage(
     rejected_candidates: list[dict[str, Any]] = []
 
     for index, candidate in enumerate(candidates[:verify_budget], start=1):
-        query = f"\"{candidate['title']}\""
+        prefilter_bucket = candidate.get("prefilter_bucket", "generic_or_low_signal")
+        query = f'"{candidate["title"]}"'
         payload = {
             "query": query,
             "topic": "news",
@@ -749,6 +811,7 @@ def run_verify_stage(
             {
                 "sample_id": f"{reference_dt.date().isoformat()}::prefilter::{index}",
                 "query": query,
+                "prefilter_bucket": prefilter_bucket,
                 "search_depth": settings.verify_search_depth,
                 "latency_ms": latency_ms,
                 "result_count": len(results),
@@ -769,13 +832,16 @@ def run_verify_stage(
             "title": candidate.get("title", ""),
             "source": candidate.get("source", ""),
             "link": candidate.get("link", ""),
+            "prefilter_bucket": prefilter_bucket,
             "matched_url": matched_url,
             "matched_title": matched_title,
             "within_24h": within_window,
             "title_similarity": title_similarity_value,
             "cluster_id": candidate.get("cluster_id"),
             "cluster_role": candidate.get("cluster_role"),
-            "cluster_representative_title": candidate.get("cluster_representative_title"),
+            "cluster_representative_title": candidate.get(
+                "cluster_representative_title"
+            ),
             "request_outcome": request_outcome,
             "validation_outcome": validation_outcome,
             "transport_error": error,
@@ -897,10 +963,12 @@ def run_domain_refill_stage(
                 prior_candidates + accepted_candidates + round_accepted,
             )
             near_duplicate_existing = (
-                cluster_match is not None and cluster_match["relation_type"] == "near_duplicate"
+                cluster_match is not None
+                and cluster_match["relation_type"] == "near_duplicate"
             )
             story_cluster_existing = (
-                cluster_match is not None and cluster_match["relation_type"] == "story_cluster"
+                cluster_match is not None
+                and cluster_match["relation_type"] == "story_cluster"
             )
             within_window = within_strict_hours(
                 result_item.get("published_date"),
@@ -1024,7 +1092,9 @@ def enrich_articles_with_tavily(
     if not tavily_api_key:
         report["skip_reason"] = "missing_api_key"
         report["stop_reason"] = "missing_api_key"
-        report["notes"].append("TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles.")
+        report["notes"].append(
+            "TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles."
+        )
         report["accepted_by_stage_preview"] = {
             "verify": [],
             "priority_refill": [],
@@ -1046,16 +1116,25 @@ def enrich_articles_with_tavily(
         report["applied"] = True
         report["prefiltered_count"] = prefilter["prefiltered_count"]
         report["prefilter_stats"] = prefilter["prefilter_stats"]
+        report["prefilter_bucket_counts"] = prefilter["prefilter_bucket_counts"]
         report["prefilter_candidates"] = prefilter_clusters["annotated_candidates"]
-        report["excluded_prefilter_candidates"] = prefilter["excluded_prefilter_candidates"]
+        report["excluded_prefilter_candidates"] = prefilter[
+            "excluded_prefilter_candidates"
+        ]
         report["cluster_count"] = prefilter_clusters["cluster_count"]
-        report["clustered_prefilter_count"] = prefilter_clusters["clustered_candidate_count"]
+        report["clustered_prefilter_count"] = prefilter_clusters[
+            "clustered_candidate_count"
+        ]
         report["cluster_potential_verify_saved_calls"] = prefilter_clusters[
             "cluster_potential_verify_saved_calls"
         ]
-        report["cluster_skipped_prefilter_candidates"] = verify_view["skipped_candidates"]
+        report["cluster_skipped_prefilter_candidates"] = verify_view[
+            "skipped_candidates"
+        ]
         report["cluster_diagnostics"] = prefilter_clusters["cluster_diagnostics"]
-        report["notes"].append("Local prefilter completed before any Tavily refill attempt.")
+        report["notes"].append(
+            "Local prefilter completed before any Tavily refill attempt."
+        )
         if not article_dicts:
             report["notes"].append(
                 "Upstream sources returned zero deduped articles, so any final output must come from Tavily refill."
@@ -1072,7 +1151,9 @@ def enrich_articles_with_tavily(
             len(prefilter_clusters["annotated_candidates"]),
             max(0, min(settings.max_verify_calls, settings.max_total_calls)),
         )
-        report["verify_saved_calls"] = max(0, baseline_verify_calls - verify["verify_calls"])
+        report["verify_saved_calls"] = max(
+            0, baseline_verify_calls - verify["verify_calls"]
+        )
         report["verify_calls"] = verify["verify_calls"]
         report["total_calls"] = verify["verify_calls"]
         report["verified_count"] = len(verify["verified_articles"])
@@ -1082,12 +1163,31 @@ def enrich_articles_with_tavily(
         report["verify_runs"] = verify["verify_runs"]
         report["verified_candidates"] = verify["verified_candidates"]
         report["rejected_candidates"] = verify["rejected_candidates"]
+        report["neighbor_candidates_verified_count"] = sum(
+            1
+            for candidate in verify["verified_candidates"]
+            if candidate.get("prefilter_bucket") == "ai_neighbor"
+        )
+        report["neighbor_candidates_outside_24h_count"] = sum(
+            1
+            for candidate in verify["rejected_candidates"]
+            if candidate.get("prefilter_bucket") == "ai_neighbor"
+            and candidate.get("validation_outcome") == "outside_24h"
+        )
+        report["neighbor_candidates_no_match_count"] = sum(
+            1
+            for candidate in verify["rejected_candidates"]
+            if candidate.get("prefilter_bucket") == "ai_neighbor"
+            and candidate.get("validation_outcome") == "no_match"
+        )
 
         remaining_budget = max(0, settings.max_total_calls - report["total_calls"])
         priority_refill = run_domain_refill_stage(
             base_articles=article_dicts,
             prior_candidates=verify["verified_articles"],
-            include_domains=list(settings.trusted_domains.priority_refill_media_whitelist),
+            include_domains=list(
+                settings.trusted_domains.priority_refill_media_whitelist
+            ),
             query=settings.priority_refill_query,
             stage_name="priority_refill",
             settings=settings,
@@ -1112,15 +1212,22 @@ def enrich_articles_with_tavily(
 
         secondary_refill_executed = False
         secondary_candidates: list[dict[str, Any]] = []
-        if remaining_budget > 0 and (
-            len(verify["verified_articles"]) + len(priority_refill["accepted_candidates"])
-        ) < settings.min_articles:
+        if (
+            remaining_budget > 0
+            and (
+                len(verify["verified_articles"])
+                + len(priority_refill["accepted_candidates"])
+            )
+            < settings.min_articles
+        ):
             secondary_refill = run_domain_refill_stage(
                 base_articles=article_dicts,
                 prior_candidates=(
                     verify["verified_articles"] + priority_refill["accepted_candidates"]
                 ),
-                include_domains=list(settings.trusted_domains.secondary_refill_candidate_domains),
+                include_domains=list(
+                    settings.trusted_domains.secondary_refill_candidate_domains
+                ),
                 query=settings.priority_refill_query,
                 stage_name="secondary_refill",
                 settings=settings,
@@ -1133,7 +1240,9 @@ def enrich_articles_with_tavily(
             secondary_candidates = secondary_refill["accepted_candidates"]
             report["refill_calls"] += secondary_refill["refill_calls"]
             report["total_calls"] += secondary_refill["refill_calls"]
-            report["secondary_refilled_count"] = secondary_refill["media_refilled_count"]
+            report["secondary_refilled_count"] = secondary_refill[
+                "media_refilled_count"
+            ]
             report["media_refilled_count"] += report["secondary_refilled_count"]
             report["near_duplicate_rejected_count"] += secondary_refill[
                 "near_duplicate_rejected_count"
@@ -1166,7 +1275,9 @@ def enrich_articles_with_tavily(
                     + priority_refill["accepted_candidates"]
                     + secondary_candidates
                 ),
-                include_domains=list(settings.trusted_domains.official_fallback_domains),
+                include_domains=list(
+                    settings.trusted_domains.official_fallback_domains
+                ),
                 query=settings.official_fallback_query,
                 stage_name="official_fallback",
                 settings=settings,
@@ -1236,7 +1347,9 @@ def enrich_articles_with_tavily(
         report["skip_reason"] = "enrichment_error"
         report["error"] = str(exc)
         report["stop_reason"] = "enrichment_error"
-        report["notes"].append("The pipeline fell back to the deduped articles after an enrichment error.")
+        report["notes"].append(
+            "The pipeline fell back to the deduped articles after an enrichment error."
+        )
         report["accepted_by_stage_preview"] = {
             "verify": [],
             "priority_refill": [],

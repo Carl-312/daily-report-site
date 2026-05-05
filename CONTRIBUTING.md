@@ -102,12 +102,37 @@ tests/      pytest 测试
 - API Key 只放 `.env`
 - 不要在代码和测试里硬编码密钥
 - 修改输出路径时，同时更新 `config.py` / `config.yaml` / 文档
+- Tavily key 使用 `TAVILY_API_KEY`，不要把真实 token 写进 README、handbook、测试或 benchmark 产物
+
+## Tavily 变更边界
+
+Tavily 相关 PR 必须保持以下语义：
+
+- Tavily 是 post-fetch enrichment，不是默认 source 替代品。
+- 默认配置保持 `enrichment.enabled: false`，除非已有多日证据和维护者明确决定默认开启。
+- `verify` 只验证已有 source 候选；`refill` 只在不足时按可信域名补量。
+- `official_fallback` 是官方站点补量，默认不启用。
+- `strict_hours` 当前目标是 24 小时，不为凑数量放宽。
+- `trusted_domains` 是策略层，不是单日故障的热修名单。
+- Tavily timeout、HTTP error、connection error 或 key 缺失时必须 fail-open：主流程完成，已有 deduped articles 尽量保留，JSON 诊断记录失败。
+
+本地验证建议：
+
+```bash
+python3 main.py fetch --enrichment off
+TAVILY_API_KEY=... python3 main.py fetch --enrichment on
+TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
+python3 main.py run --offline --enrichment off
+```
+
+检查 `data/YYYY-MM-DD.json` 中的 `enrichment` 字段，重点看 `enabled`、`applied`、`skip_reason`、`error`、`verify_calls`、`refill_calls`、`fallback_calls`、`preserved_error_count`、`final_count`、`stop_reason` 和各 stage 的 `request_outcome`。
 
 ## 文档规范
 
 - 面向使用者的文档统一放在 `handbook/`
 - 生成站点统一输出到 `dist/`
 - 修改 workflow、目录结构或保留策略时，必须同步更新 README 和 handbook
+- 修改 Tavily CLI、诊断字段、Actions 灰度入口或默认策略时，必须同步更新 `handbook/guides/tavily-integration.md`
 
 ---
 

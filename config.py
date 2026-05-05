@@ -66,7 +66,9 @@ class Settings(BaseModel):
     tavily_api_key: str = Field(default="", description="Tavily API Key")
 
     # Enrichment
-    enrichment: "EnrichmentSettings" = Field(default_factory=lambda: EnrichmentSettings())
+    enrichment: "EnrichmentSettings" = Field(
+        default_factory=lambda: EnrichmentSettings()
+    )
 
     class Config:
         extra = "ignore"

@@ -49,7 +49,9 @@ DEFAULT_REFILL_MAX_RESULTS = 8
 DEFAULT_VERIFY_SEARCH_DEPTH = "basic"
 DEFAULT_VERIFY_MAX_RESULTS = 3
 DEFAULT_REFILL_SEARCH_DEPTH = "advanced"
-DEFAULT_MEDIA_REFILL_QUERY = "OpenAI Anthropic AI model launch startup funding developer tools"
+DEFAULT_MEDIA_REFILL_QUERY = (
+    "OpenAI Anthropic AI model launch startup funding developer tools"
+)
 DEFAULT_OFFICIAL_FALLBACK_QUERY = DEFAULT_MEDIA_REFILL_QUERY
 DEFAULT_PRIORITY_REFILL_MEDIA_WHITELIST = [
     "thenextweb.com",
@@ -203,9 +205,7 @@ def parse_args() -> argparse.Namespace:
 def default_output_path(explicit_output: str) -> Path:
     if explicit_output:
         return Path(explicit_output).resolve()
-    filename = (
-        f"tavily-enrichment-dryrun-{datetime.now(tz=REPORT_TIMEZONE).date().isoformat()}.json"
-    )
+    filename = f"tavily-enrichment-dryrun-{datetime.now(tz=REPORT_TIMEZONE).date().isoformat()}.json"
     return (REPO_ROOT / "data" / "benchmarks" / filename).resolve()
 
 
@@ -231,7 +231,11 @@ def select_report_dates(
 ) -> list[date]:
     if not requested_dates:
         return [max(reports)]
-    missing = [report_date.isoformat() for report_date in requested_dates if report_date not in reports]
+    missing = [
+        report_date.isoformat()
+        for report_date in requested_dates
+        if report_date not in reports
+    ]
     if missing:
         raise RuntimeError(
             "Missing historical report JSON for date(s): " + ", ".join(missing)
@@ -239,7 +243,9 @@ def select_report_dates(
     return requested_dates
 
 
-def build_report_stub(report_date: date, report_payload: dict[str, Any]) -> dict[str, Any]:
+def build_report_stub(
+    report_date: date, report_payload: dict[str, Any]
+) -> dict[str, Any]:
     article_count = len(report_payload.get("articles", []))
     return {
         "report_date": report_date.isoformat(),
@@ -317,7 +323,9 @@ def story_token_weight(token: str) -> float:
     return 0.5
 
 
-def classify_story_relation(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
+def classify_story_relation(
+    left: dict[str, Any], right: dict[str, Any]
+) -> dict[str, Any]:
     left_title = left.get("title", "")
     right_title = right.get("title", "")
     similarity = title_similarity(left_title, right_title)
@@ -326,15 +334,14 @@ def classify_story_relation(left: dict[str, Any], right: dict[str, Any]) -> dict
     shared_tokens = sorted(left_tokens & right_tokens)
     overlap_ratio = 0.0
     if left_tokens and right_tokens:
-        overlap_ratio = round(len(shared_tokens) / min(len(left_tokens), len(right_tokens)), 4)
+        overlap_ratio = round(
+            len(shared_tokens) / min(len(left_tokens), len(right_tokens)), 4
+        )
     shared_weight = round(sum(story_token_weight(token) for token in shared_tokens), 4)
     near_duplicate = similarity >= NEAR_DUPLICATE_SIMILARITY_THRESHOLD
-    story_cluster = (
-        near_duplicate
-        or (
-            len(shared_tokens) >= STORY_CLUSTER_MIN_SHARED_TOKENS
-            and overlap_ratio >= STORY_CLUSTER_MIN_OVERLAP_RATIO
-        )
+    story_cluster = near_duplicate or (
+        len(shared_tokens) >= STORY_CLUSTER_MIN_SHARED_TOKENS
+        and overlap_ratio >= STORY_CLUSTER_MIN_OVERLAP_RATIO
     )
     relation_type = None
     if near_duplicate:
@@ -382,7 +389,9 @@ def annotate_story_clusters(candidates: list[dict[str, Any]]) -> dict[str, Any]:
 
     for left_index, left_candidate in enumerate(annotated_candidates):
         for right_index in range(left_index + 1, len(annotated_candidates)):
-            relation = classify_story_relation(left_candidate, annotated_candidates[right_index])
+            relation = classify_story_relation(
+                left_candidate, annotated_candidates[right_index]
+            )
             if not relation["is_story_cluster"]:
                 continue
             relation_pairs.append(
@@ -448,7 +457,8 @@ def annotate_story_clusters(candidates: list[dict[str, Any]]) -> dict[str, Any]:
                 "cluster_representative": {
                     "title": representative_title,
                     "source": representative.get("source", ""),
-                    "link": representative.get("link", "") or representative.get("url", ""),
+                    "link": representative.get("link", "")
+                    or representative.get("url", ""),
                 },
                 "alternates": alternates,
                 "relation_preview": relation_preview,
@@ -620,7 +630,7 @@ def run_exact_verify_stage(
     rejected_candidates: list[dict[str, Any]] = []
 
     for index, candidate in enumerate(prefilter_candidates[:verify_budget], start=1):
-        query = f"\"{candidate['title']}\""
+        query = f'"{candidate["title"]}"'
         payload = {
             "query": query,
             "topic": "news",
@@ -803,7 +813,8 @@ def run_domain_refill_stage(
             normalized_title = normalize_title(title)
             canonical = canonical_url(url)
             duplicate_existing = (
-                normalized_title in existing_index["titles"] or canonical in existing_index["urls"]
+                normalized_title in existing_index["titles"]
+                or canonical in existing_index["urls"]
             )
             duplicate_within_results = normalized_title in seen_titles
             seen_titles.add(normalized_title)
@@ -815,10 +826,12 @@ def run_domain_refill_stage(
                 prior_candidates + accepted_candidates + round_accepted,
             )
             near_duplicate_existing = (
-                cluster_match is not None and cluster_match["relation_type"] == "near_duplicate"
+                cluster_match is not None
+                and cluster_match["relation_type"] == "near_duplicate"
             )
             story_cluster_existing = (
-                cluster_match is not None and cluster_match["relation_type"] == "story_cluster"
+                cluster_match is not None
+                and cluster_match["relation_type"] == "story_cluster"
             )
             is_within = within_24h(result_item.get("published_date"), reference_dt)
             is_ai_relevant = ai_title_relevant(title)
@@ -987,9 +1000,13 @@ def build_scaffold_payload(
         report_stub["prefiltered_count"] = prefilter["prefiltered_count"]
         report_stub["prefilter_stats"] = prefilter["prefilter_stats"]
         report_stub["prefilter_candidates"] = prefilter_clusters["annotated_candidates"]
-        report_stub["excluded_prefilter_candidates"] = prefilter["excluded_prefilter_candidates"]
+        report_stub["excluded_prefilter_candidates"] = prefilter[
+            "excluded_prefilter_candidates"
+        ]
         report_stub["cluster_count"] = prefilter_clusters["cluster_count"]
-        report_stub["clustered_prefilter_count"] = prefilter_clusters["clustered_candidate_count"]
+        report_stub["clustered_prefilter_count"] = prefilter_clusters[
+            "clustered_candidate_count"
+        ]
         report_stub["cluster_potential_verify_saved_calls"] = prefilter_clusters[
             "cluster_potential_verify_saved_calls"
         ]
@@ -997,7 +1014,9 @@ def build_scaffold_payload(
             "skipped_candidates"
         ]
         report_stub["cluster_diagnostics"] = prefilter_clusters["cluster_diagnostics"]
-        report_stub["notes"].append("Local prefilter completed before any Tavily refill attempt.")
+        report_stub["notes"].append(
+            "Local prefilter completed before any Tavily refill attempt."
+        )
         if api_key and session is not None:
             verify = run_exact_verify_stage(
                 args=args,
@@ -1010,13 +1029,17 @@ def build_scaffold_payload(
                 len(prefilter_clusters["annotated_candidates"]),
                 max(0, min(args.max_verify_calls, args.max_total_calls)),
             )
-            report_stub["verify_saved_calls"] = max(0, baseline_verify_calls - verify["verify_calls"])
+            report_stub["verify_saved_calls"] = max(
+                0, baseline_verify_calls - verify["verify_calls"]
+            )
             report_stub["verify_calls"] = verify["verify_calls"]
             report_stub["total_calls"] = verify["verify_calls"]
             report_stub["verified_count"] = verify["verified_count"]
             report_stub["final_count"] = verify["verified_count"]
             report_stub["verify_budget"] = verify["verify_budget"]
-            report_stub["verify_skipped_due_budget"] = verify["verify_skipped_due_budget"]
+            report_stub["verify_skipped_due_budget"] = verify[
+                "verify_skipped_due_budget"
+            ]
             report_stub["verify_runs"] = verify["verify_runs"]
             report_stub["verified_candidates"] = verify["verified_candidates"]
             report_stub["rejected_candidates"] = verify["rejected_candidates"]
@@ -1032,8 +1055,12 @@ def build_scaffold_payload(
             )
             report_stub["refill_calls"] = priority_refill["refill_calls"]
             report_stub["total_calls"] += priority_refill["refill_calls"]
-            report_stub["priority_refilled_count"] = priority_refill["media_refilled_count"]
-            report_stub["media_refilled_count"] = priority_refill["media_refilled_count"]
+            report_stub["priority_refilled_count"] = priority_refill[
+                "media_refilled_count"
+            ]
+            report_stub["media_refilled_count"] = priority_refill[
+                "media_refilled_count"
+            ]
             report_stub["near_duplicate_rejected_count"] = priority_refill[
                 "near_duplicate_rejected_count"
             ]
@@ -1044,9 +1071,13 @@ def build_scaffold_payload(
                 report_stub["verified_count"] + report_stub["priority_refilled_count"]
             )
             report_stub["priority_refill_runs"] = priority_refill["refill_runs"]
-            report_stub["priority_refilled_candidates"] = priority_refill["accepted_candidates"]
+            report_stub["priority_refilled_candidates"] = priority_refill[
+                "accepted_candidates"
+            ]
             report_stub["media_refill_runs"] = priority_refill["refill_runs"]
-            report_stub["media_refilled_candidates"] = priority_refill["accepted_candidates"]
+            report_stub["media_refilled_candidates"] = priority_refill[
+                "accepted_candidates"
+            ]
             remaining_budget = priority_refill["remaining_budget_after_refill"]
             secondary_refill_executed = False
             if remaining_budget > 0 and report_stub["final_count"] < args.min_articles:
@@ -1057,14 +1088,17 @@ def build_scaffold_payload(
                     report_payload=reports[report_date],
                     session=session,
                     prior_candidates=(
-                        verify["verified_candidates"] + priority_refill["accepted_candidates"]
+                        verify["verified_candidates"]
+                        + priority_refill["accepted_candidates"]
                     ),
                     remaining_budget=remaining_budget,
                 )
                 secondary_refill_executed = secondary_refill["refill_calls"] > 0
                 report_stub["refill_calls"] += secondary_refill["refill_calls"]
                 report_stub["total_calls"] += secondary_refill["refill_calls"]
-                report_stub["secondary_refilled_count"] = secondary_refill["media_refilled_count"]
+                report_stub["secondary_refilled_count"] = secondary_refill[
+                    "media_refilled_count"
+                ]
                 report_stub["near_duplicate_rejected_count"] += secondary_refill[
                     "near_duplicate_rejected_count"
                 ]
@@ -1074,7 +1108,9 @@ def build_scaffold_payload(
                 report_stub["secondary_duplicate_slip_count"] = secondary_refill[
                     "duplicate_slip_count"
                 ]
-                report_stub["media_refilled_count"] += report_stub["secondary_refilled_count"]
+                report_stub["media_refilled_count"] += report_stub[
+                    "secondary_refilled_count"
+                ]
                 report_stub["final_count"] += report_stub["secondary_refilled_count"]
                 report_stub["secondary_refill_runs"] = secondary_refill["refill_runs"]
                 report_stub["secondary_refilled_candidates"] = secondary_refill[
@@ -1101,7 +1137,9 @@ def build_scaffold_payload(
                 )
                 report_stub["fallback_calls"] = official["refill_calls"]
                 report_stub["total_calls"] += official["refill_calls"]
-                report_stub["official_refilled_count"] = official["media_refilled_count"]
+                report_stub["official_refilled_count"] = official[
+                    "media_refilled_count"
+                ]
                 report_stub["near_duplicate_rejected_count"] += official[
                     "near_duplicate_rejected_count"
                 ]
@@ -1110,19 +1148,31 @@ def build_scaffold_payload(
                 ]
                 report_stub["final_count"] += report_stub["official_refilled_count"]
                 report_stub["official_fallback_runs"] = official["refill_runs"]
-                report_stub["official_refilled_candidates"] = official["accepted_candidates"]
+                report_stub["official_refilled_candidates"] = official[
+                    "accepted_candidates"
+                ]
                 remaining_budget = official["remaining_budget_after_refill"]
-                if remaining_budget <= 0 and report_stub["final_count"] < args.min_articles:
-                    report_stub["stop_reason"] = "budget_exhausted_after_official_fallback"
+                if (
+                    remaining_budget <= 0
+                    and report_stub["final_count"] < args.min_articles
+                ):
+                    report_stub["stop_reason"] = (
+                        "budget_exhausted_after_official_fallback"
+                    )
                 else:
                     report_stub["stop_reason"] = "official_fallback_complete"
-            elif remaining_budget <= 0 and report_stub["final_count"] < args.min_articles:
+            elif (
+                remaining_budget <= 0 and report_stub["final_count"] < args.min_articles
+            ):
                 report_stub["stop_reason"] = (
                     "budget_exhausted_after_secondary_refill"
                     if secondary_refill_executed
                     else "budget_exhausted_after_priority_refill"
                 )
-            elif not args.enable_official_fallback and report_stub["final_count"] < args.min_articles:
+            elif (
+                not args.enable_official_fallback
+                and report_stub["final_count"] < args.min_articles
+            ):
                 report_stub["stop_reason"] = "official_fallback_disabled"
             else:
                 report_stub["stop_reason"] = (
@@ -1130,9 +1180,7 @@ def build_scaffold_payload(
                     if secondary_refill_executed
                     else "priority_refill_complete"
                 )
-            report_stub["notes"].append(
-                "Exact verify and staged refill completed."
-            )
+            report_stub["notes"].append("Exact verify and staged refill completed.")
             if args.enable_official_fallback:
                 report_stub["notes"].append(
                     "Official fallback was allowed for this run when budget remained."
@@ -1143,12 +1191,20 @@ def build_scaffold_payload(
                 )
         else:
             report_stub["stop_reason"] = "prefilter_only"
-            report_stub["notes"].append("No Tavily API key available, so verify/refill stages were skipped.")
+            report_stub["notes"].append(
+                "No Tavily API key available, so verify/refill stages were skipped."
+            )
         report_stub["accepted_by_stage_preview"] = {
             "verify": sample_titles(report_stub.get("verified_candidates", [])),
-            "priority_refill": sample_titles(report_stub.get("priority_refilled_candidates", [])),
-            "secondary_refill": sample_titles(report_stub.get("secondary_refilled_candidates", [])),
-            "official_fallback": sample_titles(report_stub.get("official_refilled_candidates", [])),
+            "priority_refill": sample_titles(
+                report_stub.get("priority_refilled_candidates", [])
+            ),
+            "secondary_refill": sample_titles(
+                report_stub.get("secondary_refilled_candidates", [])
+            ),
+            "official_fallback": sample_titles(
+                report_stub.get("official_refilled_candidates", [])
+            ),
         }
         report_results.append(report_stub)
 
@@ -1175,7 +1231,9 @@ def build_scaffold_payload(
             "secondary_refill_candidate_domains": DEFAULT_SECONDARY_REFILL_CANDIDATE_DOMAINS,
             "official_fallback_domains": DEFAULT_OFFICIAL_FALLBACK_DOMAINS,
         },
-        "selected_report_dates": [report_date.isoformat() for report_date in selected_dates],
+        "selected_report_dates": [
+            report_date.isoformat() for report_date in selected_dates
+        ],
         "report_results": report_results,
     }
 
@@ -1246,7 +1304,9 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
         )
         verified_titles = sample_titles(result.get("verified_candidates", []))
         priority_titles = sample_titles(result.get("priority_refilled_candidates", []))
-        secondary_titles = sample_titles(result.get("secondary_refilled_candidates", []))
+        secondary_titles = sample_titles(
+            result.get("secondary_refilled_candidates", [])
+        )
         official_titles = sample_titles(result.get("official_refilled_candidates", []))
         if verified_titles:
             lines.append(f"- Verified samples: {'; '.join(verified_titles)}")
@@ -1272,7 +1332,9 @@ def build_markdown_report(payload: dict[str, Any]) -> str:
                     for alternate in cluster.get("alternates", [])
                     if alternate.get("title")
                 ]
-                alternates_preview = "; ".join(alternate_titles) if alternate_titles else "(none)"
+                alternates_preview = (
+                    "; ".join(alternate_titles) if alternate_titles else "(none)"
+                )
                 lines.append(
                     f"- {cluster['cluster_id']}: representative="
                     f"{cluster['cluster_representative'].get('title', '')}; "

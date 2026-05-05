@@ -159,7 +159,9 @@ CANDIDATE_DOMAINS = [
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Benchmark Tavily trusted domain candidates")
+    parser = argparse.ArgumentParser(
+        description="Benchmark Tavily trusted domain candidates"
+    )
     parser.add_argument("--data-dir", default="data")
     parser.add_argument("--config-path", default="config.yaml")
     parser.add_argument("--max-results", type=int, default=5)
@@ -176,7 +178,9 @@ def parse_args() -> argparse.Namespace:
 def default_output_path(explicit_output: str) -> Path:
     if explicit_output:
         return Path(explicit_output).resolve()
-    filename = f"tavily-whitelist-{datetime.now(tz=REPORT_TIMEZONE).date().isoformat()}.json"
+    filename = (
+        f"tavily-whitelist-{datetime.now(tz=REPORT_TIMEZONE).date().isoformat()}.json"
+    )
     return (REPO_ROOT / "data" / "benchmarks" / filename).resolve()
 
 
@@ -198,7 +202,11 @@ def select_candidate_domains(domain_filters: list[str]) -> list[dict[str, Any]]:
     if not domain_filters:
         return CANDIDATE_DOMAINS
     domain_filter_set = set(domain_filters)
-    selected = [meta for meta in CANDIDATE_DOMAINS if meta["domain"].lower() in domain_filter_set]
+    selected = [
+        meta
+        for meta in CANDIDATE_DOMAINS
+        if meta["domain"].lower() in domain_filter_set
+    ]
     selected_domains = {meta["domain"].lower() for meta in selected}
     unknown = [domain for domain in domain_filters if domain not in selected_domains]
     if unknown:
@@ -213,7 +221,9 @@ def load_enabled_sources(config_path: Path) -> dict[str, bool]:
     return payload.get("sources", {}) or {}
 
 
-def observed_source_counts(reports: dict[datetime.date, dict[str, Any]]) -> Counter[str]:
+def observed_source_counts(
+    reports: dict[datetime.date, dict[str, Any]],
+) -> Counter[str]:
     counter: Counter[str] = Counter()
     for payload in reports.values():
         for article in payload.get("articles", []):
@@ -228,9 +238,14 @@ def load_phase0_valid_domains() -> set[str]:
     if not path.exists():
         return set()
     payload = json.loads(path.read_text(encoding="utf-8"))
-    domains = payload.get("summary", {}).get("groups", {}).get("refill_topic::advanced", {}).get(
-        "valid_domain_frequency",
-        {},
+    domains = (
+        payload.get("summary", {})
+        .get("groups", {})
+        .get("refill_topic::advanced", {})
+        .get(
+            "valid_domain_frequency",
+            {},
+        )
     )
     return {domain.lower() for domain in domains}
 
@@ -294,7 +309,12 @@ def evaluate_case(
         if duplicate_existing:
             duplicate_existing_count += 1
 
-        unique_valid = bool(is_within) and ai_relevant and not duplicate_existing and not duplicate_within_results
+        unique_valid = (
+            bool(is_within)
+            and ai_relevant
+            and not duplicate_existing
+            and not duplicate_within_results
+        )
         if unique_valid:
             unique_valid_count += 1
 
@@ -330,15 +350,25 @@ def evaluate_case(
         "tavily_response_time": response_payload.get("response_time"),
         "request_id": response_payload.get("request_id"),
         "result_count": len(results),
-        "published_date_availability": safe_round((published_count / len(results)) if results else None),
+        "published_date_availability": safe_round(
+            (published_count / len(results)) if results else None
+        ),
         "within_24h_count": within_count,
-        "within_24h_rate": safe_round((within_count / len(results)) if results else None),
+        "within_24h_rate": safe_round(
+            (within_count / len(results)) if results else None
+        ),
         "ai_title_count": ai_title_count,
-        "ai_title_rate": safe_round((ai_title_count / len(results)) if results else None),
+        "ai_title_rate": safe_round(
+            (ai_title_count / len(results)) if results else None
+        ),
         "duplicate_existing_count": duplicate_existing_count,
-        "duplicate_existing_rate": safe_round((duplicate_existing_count / len(results)) if results else None),
+        "duplicate_existing_rate": safe_round(
+            (duplicate_existing_count / len(results)) if results else None
+        ),
         "unique_valid_count": unique_valid_count,
-        "unique_valid_rate": safe_round((unique_valid_count / len(results)) if results else None),
+        "unique_valid_rate": safe_round(
+            (unique_valid_count / len(results)) if results else None
+        ),
         "candidate_results": candidates,
         "error": None,
     }
@@ -389,7 +419,9 @@ def summarize_domain(
     phase0_valid_domains: set[str],
 ) -> dict[str, Any]:
     successful = [run for run in runs if not run.get("error")]
-    latencies = [run["latency_ms"] for run in successful if run.get("latency_ms") is not None]
+    latencies = [
+        run["latency_ms"] for run in successful if run.get("latency_ms") is not None
+    ]
     result_counts = [run["result_count"] for run in successful]
     published = [
         run["published_date_availability"]
@@ -397,9 +429,15 @@ def summarize_domain(
         if run.get("published_date_availability") is not None
     ]
     within_rates = [
-        run["within_24h_rate"] for run in successful if run.get("within_24h_rate") is not None
+        run["within_24h_rate"]
+        for run in successful
+        if run.get("within_24h_rate") is not None
     ]
-    ai_rates = [run["ai_title_rate"] for run in successful if run.get("ai_title_rate") is not None]
+    ai_rates = [
+        run["ai_title_rate"]
+        for run in successful
+        if run.get("ai_title_rate") is not None
+    ]
     duplicate_counts = [run["duplicate_existing_count"] for run in successful]
     unique_valid_counts = [run["unique_valid_count"] for run in successful]
     unique_titles: list[str] = []
@@ -416,9 +454,14 @@ def summarize_domain(
         "label": domain_meta["label"],
         "family": domain_meta["family"],
         "source_key": source_key,
-        "configured_source_enabled": enabled_sources.get(source_key, False) if source_key else False,
-        "observed_recent_articles": recent_source_counts.get(source_key, 0) if source_key else 0,
-        "appeared_in_phase0_ungated_valid_domains": domain_meta["domain"].lower() in phase0_valid_domains,
+        "configured_source_enabled": enabled_sources.get(source_key, False)
+        if source_key
+        else False,
+        "observed_recent_articles": recent_source_counts.get(source_key, 0)
+        if source_key
+        else 0,
+        "appeared_in_phase0_ungated_valid_domains": domain_meta["domain"].lower()
+        in phase0_valid_domains,
         "run_count": len(runs),
         "success_count": len(successful),
         "failure_count": len(runs) - len(successful),
@@ -450,11 +493,11 @@ def build_markdown_summary(payload: dict[str, Any]) -> str:
         )
     lines.extend(
         [
-        "",
-        "## Domain Summary",
-        "",
-        "| Domain | Family | Configured Source | Observed Recent Articles | Avg Unique Valid / Run | Avg Published Date Availability | Avg AI Title Rate | Avg Duplicate Existing / Run |",
-        "|---|---|---:|---:|---:|---:|---:|---:|",
+            "",
+            "## Domain Summary",
+            "",
+            "| Domain | Family | Configured Source | Observed Recent Articles | Avg Unique Valid / Run | Avg Published Date Availability | Avg AI Title Rate | Avg Duplicate Existing / Run |",
+            "|---|---|---:|---:|---:|---:|---:|---:|",
         ]
     )
     for summary in payload["domain_summaries"]:
@@ -488,7 +531,9 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
 
     for domain_meta in candidate_domains:
         for case in applicable_cases(domain_meta["case_group"]):
-            report_date = datetime.strptime(case["report_date"], OUTPUT_DATE_FORMAT).date()
+            report_date = datetime.strptime(
+                case["report_date"], OUTPUT_DATE_FORMAT
+            ).date()
             start_date, end_date = report_window(report_date)
             payload = {
                 "query": case["query"],
@@ -540,8 +585,12 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
 
     domain_summaries.sort(
         key=lambda item: (
-            item["avg_unique_valid_count"] if item["avg_unique_valid_count"] is not None else -1,
-            item["avg_published_date_availability"] if item["avg_published_date_availability"] is not None else -1,
+            item["avg_unique_valid_count"]
+            if item["avg_unique_valid_count"] is not None
+            else -1,
+            item["avg_published_date_availability"]
+            if item["avg_published_date_availability"] is not None
+            else -1,
         ),
         reverse=True,
     )
@@ -590,9 +639,13 @@ def main() -> None:
                 {
                     "family": summary["family"],
                     "avg_unique_valid_count": summary["avg_unique_valid_count"],
-                    "avg_published_date_availability": summary["avg_published_date_availability"],
+                    "avg_published_date_availability": summary[
+                        "avg_published_date_availability"
+                    ],
                     "avg_ai_title_rate": summary["avg_ai_title_rate"],
-                    "avg_duplicate_existing_count": summary["avg_duplicate_existing_count"],
+                    "avg_duplicate_existing_count": summary[
+                        "avg_duplicate_existing_count"
+                    ],
                     "observed_recent_articles": summary["observed_recent_articles"],
                 },
                 ensure_ascii=False,
