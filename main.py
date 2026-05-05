@@ -9,8 +9,54 @@ import sys
 
 from config import get_config
 from sources import fetch_all, Article
-from utils import dedupe, today_ymd, today_cn, save_json, save_markdown, load_json
+from utils import (
+    dedupe,
+    enrich_articles_with_tavily,
+    today_ymd,
+    today_cn,
+    save_json,
+    save_markdown,
+    load_json,
+)
 from summarizer import summarize, offline_summary, test_connection
+
+
+def resolve_enrichment_enabled(cfg, mode: str) -> bool:
+    if mode == "on":
+        return True
+    if mode == "off":
+        return False
+    return bool(cfg.enrichment.enabled)
+
+
+def apply_enrichment(cfg, args, articles, date_str: str):
+    enabled = resolve_enrichment_enabled(cfg, args.enrichment)
+    print(
+        "\n🧪 Tavily enrichment..."
+        f" ({'enabled' if enabled else 'disabled'}, mode={args.enrichment})"
+    )
+    result = enrich_articles_with_tavily(
+        articles,
+        report_date=date_str,
+        settings=cfg.enrichment,
+        tavily_api_key=cfg.tavily_api_key,
+        enabled=enabled,
+    )
+    report = result["report"]
+    print(
+        f"   Applied: {report.get('applied')} | "
+        f"Skip: {report.get('skip_reason') or '-'} | "
+        f"Final articles: {len(result['articles'])}"
+    )
+    if report.get("applied"):
+        print(
+            "   Calls:"
+            f" verify={report.get('verify_calls', 0)},"
+            f" refill={report.get('refill_calls', 0)},"
+            f" fallback={report.get('fallback_calls', 0)},"
+            f" total={report.get('total_calls', 0)}"
+        )
+    return result
 
 
 def cmd_run(args):
@@ -35,14 +81,18 @@ def cmd_run(args):
     articles = dedupe(articles)
     print(f"   Remaining: {len(articles)} unique articles")
 
-    # 3. Save JSON
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
+    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str)
+    articles_dict = enrichment_result["articles"]
+
+    # 3. Save JSON
     json_path = save_json(
         cfg.data_dir,
         date_str,
         {
             "date": date_str,
             "articles": articles_dict,
+            "enrichment": enrichment_result["report"],
         },
     )
     print(f"\n💾 Saved JSON: {json_path}")
@@ -94,6 +144,8 @@ def cmd_fetch(args):
 
     articles = dedupe(articles)
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
+    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str)
+    articles_dict = enrichment_result["articles"]
 
     json_path = save_json(
         cfg.data_dir,
@@ -101,10 +153,11 @@ def cmd_fetch(args):
         {
             "date": date_str,
             "articles": articles_dict,
+            "enrichment": enrichment_result["report"],
         },
     )
 
-    print(f"✅ Saved {len(articles)} articles to {json_path}")
+    print(f"✅ Saved {len(articles_dict)} articles to {json_path}")
 
 
 def cmd_summarize(args):
@@ -163,10 +216,22 @@ def main():
     p_run.add_argument(
         "--offline", action="store_true", help="Use offline summarization"
     )
+    p_run.add_argument(
+        "--enrichment",
+        choices=("auto", "on", "off"),
+        default="auto",
+        help="Enable, disable, or follow config for Tavily enrichment",
+    )
     p_run.set_defaults(func=cmd_run)
 
     # fetch command
     p_fetch = subparsers.add_parser("fetch", help="Fetch news only")
+    p_fetch.add_argument(
+        "--enrichment",
+        choices=("auto", "on", "off"),
+        default="auto",
+        help="Enable, disable, or follow config for Tavily enrichment",
+    )
     p_fetch.set_defaults(func=cmd_fetch)
 
     # summarize command

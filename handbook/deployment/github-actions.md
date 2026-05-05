@@ -29,7 +29,8 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 定时：GitHub Actions cron 使用 UTC，当前配置为 `0 14 * * *`，对应北京时间 `22:00`
+- 定时：GitHub Actions cron 使用 UTC，当前配置为 `19 13 * * *`，对应北京时间 `21:19`
+- 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`
 - 关键步骤：

@@ -1,0 +1,675 @@
+# Tavily 接入总览与进度状态
+
+## 文档定位
+
+本文是日报项目 Tavily 接入工作的统一入口，合并并校准以下分散材料：
+
+- `handbook/guides/history/tavily-news-enrichment.md`
+- `handbook/guides/history/tavily-trusted-domains-draft.md`
+- `handbook/guides/history/tavily-prefilter-relaxation-plan.md`
+- `data/benchmarks/tavily-*.md`
+- `data/2026-04-01.json`
+- 当前代码中的 `main.py`、`config.py`、`config.yaml`、`utils/news_enrichment.py`
+- 当前测试中的 `tests/test_news_enrichment.py`
+
+旧文档仍作为历史设计和实验记录保留；后续判断当前状态时，以本文为准。
+
+本文状态基准：`2026-05-05`，基于当前工作区代码与文档。
+
+## 一句话结论
+
+Tavily 已经完成 Phase 0 研究、trusted domains 实验、replay harness、正式模块第一版和 `main.py` 接线；但它仍是默认关闭的灰度能力，还没有进入 GitHub Actions 生产默认路径，也还没有达到可长期默认开启的稳定度。
+
+当前更准确的成熟度判断：
+
+| 层级 | 状态 | 完成度判断 |
+|---|---|---:|
+| API 可用性验证 | 已验证 | 80% |
+| Benchmark 与域名研究 | 已完成首轮收敛 | 85% |
+| Replay / dry run harness | 已完成并产出结论 | 75% |
+| 正式模块接入 | 第一版已落地 | 65% |
+| 诊断与 fail-open | 已有基础，仍在加固 | 60% |
+| 生产 GitHub Actions 接线 | 尚未接入 Tavily key 与显式开关 | 20% |
+| 默认开启 | 不建议开启 | 0% |
+
+当前决策：继续保持 `enrichment.enabled: false`，用 `--enrichment on` 做本地或手动灰度验证。不要把 Tavily 改成常驻 source，也不要因为单日结果差就扩大白名单。
+
+## 当前代码状态
+
+### 已接入的正式链路
+
+`main.py` 当前已经把 Tavily enrichment 放在 `dedupe` 之后、保存 JSON 之前：
+
+```text
+fetch_all
+-> dedupe
+-> enrich_articles_with_tavily
+-> save_json
+-> summarize
+-> build
+```
+
+具体行为：
+
+- `run` 会执行抓取、去重、Tavily 增强、保存 JSON、摘要、构建。
+- `fetch` 会执行抓取、去重、Tavily 增强、保存 JSON。
+- `summarize` 只读取既有 JSON，不会再次调用 Tavily。
+- JSON 顶层会写入 `enrichment` 诊断字段。
+
+入口函数：
+
+- `main.py`: `resolve_enrichment_enabled()`
+- `main.py`: `apply_enrichment()`
+- `utils/news_enrichment.py`: `enrich_articles_with_tavily()`
+
+### 正式模块职责
+
+`utils/news_enrichment.py` 是当前正式模块。它不是新闻源适配器，而是 post-fetch enrichment layer。
+
+已经具备：
+
+- 输入 `Article` 或 `dict` 的统一转换。
+- 本地 prefilter。
+- exact verify。
+- priority refill。
+- secondary refill。
+- optional official fallback。
+- 24 小时严格时间窗判断。
+- exact URL / same-domain + title similarity 匹配。
+- refill 合并阶段 near-duplicate / story-cluster 拦截。
+- request timeout / HTTP error / connection error 分类。
+- `preserved_error_articles` fail-open 路径。
+- `accepted_by_stage_preview`、`verify_runs`、`rejected_candidates` 等诊断字段。
+
+当前仍没有：
+
+- retry 策略。
+- stage-specific timeout 配置。
+- 生产 runner 下的 Tavily secret 注入验证。
+- prefilter 分层放宽实现。
+- official fallback 默认启用依据。
+
+### Tavily 调用方式
+
+当前项目没有引入 Tavily Python SDK，直接使用 `requests.Session.post()` 调：
+
+```text
+https://api.tavily.com/search
+```
+
+请求体中包含 `api_key` 与搜索参数。
+
+当前 Context7 对 Tavily 官方文档的校验结果显示，项目正在使用的这些能力仍是当前 Search API 支持的能力：
+
+- `query`
+- `topic: news`
+- `search_depth`
+- `max_results`
+- `include_domains`
+- `start_date`
+- `end_date`
+- `include_answer`
+- `include_raw_content`
+- 结果字段 `published_date`
+
+注意：项目当前代码把 `auto_parameters` 固定为 `False`，目的是避免 Tavily 自动扩大搜索深度或改变成本特征。
+
+## 配置状态
+
+### 环境变量
+
+代码已经读取：
+
+```bash
+TAVILY_API_KEY
+```
+
+位置：
+
+- `config.py`: `tavily_api_key = os.getenv("TAVILY_API_KEY", "")`
+
+当前缺口：
+
+- `.env.example` 还没有 `TAVILY_API_KEY=` 示例。
+- GitHub Actions 还没有注入 `TAVILY_API_KEY`。
+
+### `config.yaml`
+
+当前默认配置：
+
+```yaml
+enrichment:
+  enabled: false
+  trust_env: true
+  min_articles: 10
+  strict_hours: 24
+  max_total_calls: 7
+  max_verify_calls: 6
+  max_refill_rounds: 1
+  refill_max_results: 8
+  verify_search_depth: basic
+  enable_fuzzy_second_pass: false
+  enable_official_fallback: false
+  priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  trusted_domains:
+    priority_refill_media_whitelist:
+      - thenextweb.com
+      - venturebeat.com
+    secondary_refill_candidate_domains:
+      - reuters.com
+      - arstechnica.com
+    official_fallback_domains:
+      - openai.com
+      - anthropic.com
+```
+
+含义：
+
+- `enabled: false`: 日常默认不启用 Tavily。
+- `trust_env: true`: `requests.Session` 继承系统代理环境。
+- `min_articles: 10`: 目标新闻数，但不强行凑数。
+- `strict_hours: 24`: 严格时间窗。
+- `max_total_calls: 7`: 单次运行 Tavily 总预算。
+- `max_verify_calls: 6`: exact verify 预算。
+- `max_refill_rounds: 1`: 每个 refill stage 默认 1 轮。
+- `verify_search_depth: basic`: verify 用低成本路径。
+- `enable_fuzzy_second_pass: false`: Phase 0 没证明 fuzzy 有收益。
+- `enable_official_fallback: false`: 官方域名补充仍需显式开启。
+
+### CLI 开关
+
+当前支持：
+
+```bash
+python3 main.py run --enrichment auto
+python3 main.py run --enrichment on
+python3 main.py run --enrichment off
+python3 main.py fetch --enrichment auto
+python3 main.py fetch --enrichment on
+python3 main.py fetch --enrichment off
+```
+
+开关语义：
+
+- `auto`: 跟随 `config.yaml` 的 `enrichment.enabled`。
+- `on`: 本次命令强制启用。
+- `off`: 本次命令强制关闭。
+
+## 实验与证据进度
+
+### Phase 0 benchmark
+
+产物：
+
+- `scripts/benchmark_tavily.py`
+- `data/benchmarks/tavily-baseline-2026-04-01.json`
+- `data/benchmarks/tavily-baseline-2026-04-01.md`
+
+已确认：
+
+- `verify_exact` + `basic` + `max_results=3`: `3/4` 命中，平均延迟约 `546 ms`，`published_date` 可用率 `100%`。
+- `verify_exact` + `advanced` 没有提升命中率。
+- `verify_fuzzy` + `advanced` 没有 rescue case。
+- 英文 refill query 有效，新增有效新闻 `4` 条。
+- 中文泛 AI refill query 在该窗口新增有效新闻 `0` 条。
+
+落地结论：
+
+- verify 默认用 `basic`。
+- 不保留 fuzzy second pass。
+- 聚合标题不直接进入 article-level verify。
+- refill query 优先使用英文主题 query。
+
+### trusted domains 首轮研究
+
+产物：
+
+- `scripts/benchmark_tavily_whitelist.py`
+- `data/benchmarks/tavily-whitelist-2026-04-01.json`
+- `data/benchmarks/tavily-whitelist-2026-04-01.md`
+- `handbook/guides/history/tavily-trusted-domains-draft.md`
+
+首轮结论：
+
+| Domain | 当前分层 | 核心理由 |
+|---|---|---|
+| `thenextweb.com` | priority refill | 非重合、平均新增有效候选 `3`、`published_date` 稳定 |
+| `venturebeat.com` | priority refill | AI 相关性高、重复低、平均新增有效候选 `1.3333` |
+| `techcrunch.com` | high-overlap 对照 | 已是 configured source，重复已有结果偏高 |
+| `openai.com` | official fallback | 少量但可信，不适合主媒体 refill |
+| `anthropic.com` | official fallback | 少量但可信，不适合主媒体 refill |
+| `reuters.com` | secondary/deferred | metadata 稳定但 AI 主题拟合较弱 |
+| `arstechnica.com` | secondary/deferred | metadata 稳定但 AI 主题拟合较弱 |
+| `www.theverge.com` | excluded | `published_date` 不稳定 |
+| `blog.google` | excluded | `published_date` 不稳定、有效新增不足 |
+| `news.aibase.com` | excluded | 聚合源，不适合 article-level verify/refill |
+
+### whitelist 保留性复测
+
+产物：
+
+- `data/benchmarks/tavily-whitelist-retention-2026-04-01-round12.json`
+- `data/benchmarks/tavily-whitelist-retention-2026-04-01-round12.md`
+
+已确认：
+
+- `thenextweb.com` 继续满足 priority refill 保留条件。
+- `venturebeat.com` 继续满足 priority refill 下界。
+- `techcrunch.com` 继续只适合作为高重合对照。
+- `openai.com`、`anthropic.com` 继续适合作为 official fallback。
+- `blog.google` 继续不应进入默认名单。
+- 本轮 18 个请求全部成功。
+
+### deferred 池挑战赛
+
+产物：
+
+- `data/benchmarks/tavily-whitelist-deferred-2026-04-01-round3.json`
+- `data/benchmarks/tavily-whitelist-deferred-2026-04-01-round3.md`
+
+已确认：
+
+- `reuters.com`: `published_date` 稳定、重复低，但平均新增有效候选 `1`，低于 `venturebeat.com` 下界。
+- `arstechnica.com`: 与 `reuters.com` 类似，继续留在 deferred。
+- `www.theverge.com`: 平均 `published_date` 可用率只有 `0.3333`，继续排除。
+- 本轮 9 个请求全部成功。
+
+当前决策：
+
+- 不扩展 priority whitelist。
+- `reuters.com` 与 `arstechnica.com` 只作为 secondary refill 候选。
+- `www.theverge.com` 不进入默认路径。
+
+### dry run / replay harness
+
+产物：
+
+- `scripts/experiment_news_enrichment.py`
+- `data/benchmarks/tavily-enrichment-dryrun-2026-04-01.json`
+- `data/benchmarks/tavily-enrichment-dryrun-2026-04-01.md`
+- `data/benchmarks/tavily-enrichment-dryrun-2026-04-01-step*.json`
+- `data/benchmarks/tavily-enrichment-dryrun-2026-04-01-step6.md`
+
+最终 dry run 摘要：
+
+| Report Date | Raw | Deduped | Prefiltered | Verify Calls | Refill Calls | Verified | Media Refilled | Final | Stop Reason |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| 2026-03-24 | 15 | 15 | 4 | 4 | 2 | 2 | 3 | 5 | `official_fallback_disabled` |
+| 2026-03-25 | 14 | 14 | 9 | 6 | 1 | 4 | 4 | 8 | `budget_exhausted_after_priority_refill` |
+
+已确认：
+
+- default budget 下有机会接近 10 条，但不能稳定达到 10 条。
+- cluster 在 refill 合并阶段有价值，至少拦住过同 story 不同 URL 的补全结果。
+- prefilter 候选自身尚未形成可用 cluster，因此 verify 预算节省只有实现，没有实测收益。
+- official fallback 可以手动开启并单独统计，但证据不足以默认开启。
+
+## 正式真实运行结果
+
+产物：
+
+- `data/2026-04-01.json`
+- `content/2026-04-01.md`
+
+命令：
+
+```bash
+python3 main.py run --enrichment on
+```
+
+结果：
+
+- 上游 `aibase`、`techcrunch`、`theverge` live 请求全部超时。
+- `input_count = 0`。
+- Tavily enrichment 被触发：`enabled = true`、`applied = true`。
+- `verify_calls = 0`。
+- `refill_calls = 2`。
+- `fallback_calls = 0`。
+- `total_calls = 2`。
+- priority refill 与 secondary refill 都在 `45` 秒超时。
+- `final_count = 0`。
+- 主流程仍完成 JSON、Markdown、HTML 构建。
+
+这个结果说明：
+
+- 正式控制面已跑通。
+- Tavily 请求失败不会中断主流程。
+- 但在 source 为空且 Tavily 超时时，当前结果仍可能为 `0` 条。
+- 这不是可以默认开启的状态。
+
+## 当前诊断字段
+
+JSON 的 `enrichment` 字段是复盘入口。
+
+关键字段：
+
+| 字段 | 含义 |
+|---|---|
+| `enabled` | 本次是否启用 Tavily 逻辑 |
+| `applied` | 是否实际进入增强流程 |
+| `skip_reason` | 未执行或降级原因 |
+| `error` | 顶层异常 |
+| `input_count` | dedupe 后输入文章数 |
+| `prefiltered_count` | 进入 verify 的本地候选数 |
+| `prefilter_stats` | 本地预筛统计 |
+| `verify_calls` | exact verify 调用数 |
+| `refill_calls` | media refill 调用数 |
+| `fallback_calls` | official fallback 调用数 |
+| `total_calls` | Tavily 总调用数 |
+| `verified_count` | verify 接受数 |
+| `preserved_error_count` | verify 请求失败但保留的原始文章数 |
+| `priority_refilled_count` | priority refill 接受数 |
+| `secondary_refilled_count` | secondary refill 接受数 |
+| `official_refilled_count` | official fallback 接受数 |
+| `near_duplicate_rejected_count` | 近重复拦截数 |
+| `story_cluster_rejected_count` | 同 story 拦截数 |
+| `final_count` | 最终进入 JSON / summary 的文章数 |
+| `stop_reason` | 阶段停止原因 |
+| `accepted_by_stage_preview` | 各阶段接受标题预览 |
+| `verify_runs` | verify 请求与判定明细 |
+| `rejected_candidates` | verify 拒绝或请求失败明细 |
+| `priority_refill_runs` | priority refill 请求明细 |
+| `secondary_refill_runs` | secondary refill 请求明细 |
+| `official_fallback_runs` | official fallback 请求明细，仅启用时出现 |
+
+当前仍需要加固：
+
+- refill stage 的 `request_outcome` 已在单轮 run 里有返回，但历史 `data/2026-04-01.json` 中主要通过 `error` 字段体现 timeout，诊断语义仍可继续统一。
+- source 为空时的 `stop_reason` 需要比旧的 `official_fallback_disabled` 更精确。当前工作区已有未提交修改，把它细化为 `below_min_articles_after_*_official_fallback_disabled`。
+
+## 当前测试状态
+
+`tests/test_news_enrichment.py` 当前覆盖：
+
+- enrichment 关闭时直通。
+- 启用但缺 `TAVILY_API_KEY` 时安全降级。
+- `config.yaml` enrichment 配置解析。
+- verify timeout 时保留原始文章。
+- `session.trust_env` 跟随配置。
+- source 为 0 且 official fallback 关闭时的 stop reason 语义。
+
+本轮文档整理使用的验证命令：
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. pytest -q -p no:cacheprovider tests/test_news_enrichment.py tests/test_build.py tests/test_manage_retention.py
+```
+
+结果：
+
+```text
+10 passed, 1 warning
+```
+
+warning 是 Pydantic V2 class-based `Config` deprecation，与 Tavily 行为无直接关系。
+
+## GitHub Actions 状态
+
+当前 `.github/workflows/deploy.yml` 仍未真正接入 Tavily。
+
+当前生成步骤只注入：
+
+```yaml
+MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+```
+
+并运行：
+
+```bash
+python main.py run
+```
+
+缺口：
+
+- 没有注入 `TAVILY_API_KEY`。
+- 没有提供 `--enrichment on`。
+- 没有 workflow input 用于手动打开 Tavily。
+- 没有归档或突出展示 `data/YYYY-MM-DD.json` 中的 enrichment 诊断。
+
+因此，当前 GitHub Actions 每日任务不会验证 Tavily 生产表现。
+
+## 当前工作区状态说明
+
+当前工作区在本文整理前已经存在 Tavily 相关未提交改动：
+
+- `AGENT_ITERATION_WORKFLOW.md`
+- `tests/test_news_enrichment.py`
+- `utils/news_enrichment.py`
+- `data/benchmarks/fixtures/tavily-replay-fixture-2026-04-29-curated.json`
+- `handbook/guides/history/tavily-prefilter-relaxation-plan.md`
+
+这些改动表示 Tavily 迭代正在继续，尤其集中在：
+
+- 更精确的 stop reason。
+- source 为 0 条时的诊断说明。
+- curated replay fixture。
+- prefilter 从硬 AI 标题门禁改成时效优先、相关性分层的下一步计划。
+
+本文不会把这些未提交改动视为已经合并到远端生产，只记录为当前工作区事实。
+
+## 未完成事项与风险
+
+### P0: 不适合默认开启
+
+原因：
+
+- 已有真实运行证明 source 超时 + Tavily 超时时可得到 0 条。
+- GitHub Actions 还没接 Tavily secret。
+- 还没有多日稳定样本证明默认路径可靠。
+
+退出条件：
+
+- 连续多日或多组 replay/live 样本证明 source 非空与 source 为空都可解释。
+- request timeout 不会清空已有候选。
+- GitHub Actions 手动启用路径可复盘。
+
+### P1: prefilter 过硬
+
+当前 `build_prefilter_summary()` 中，标题不命中 `AI_KEYWORD_RE` 会被标记为 `non_ai_relevant` 并排除。
+
+风险：
+
+- AI 邻近新闻可能在 verify 前被挡掉。
+- `outside_24h` 判定没有机会执行。
+
+计划：
+
+- 先只放宽 verify，不放宽 refill。
+- 将候选分为 `core_ai`、`ai_neighbor`、`generic_or_low_signal`。
+- 先加 `prefilter_bucket_counts`、`neighbor_candidates_verified_count`、`neighbor_candidates_outside_24h_count` 等观测。
+
+### P1: 生产接线缺失
+
+当前 Actions 未传 `TAVILY_API_KEY`，也未显式启用 enrichment。
+
+计划：
+
+- 先加手动 workflow input，不直接改每日默认。
+- 手动路径使用 `python main.py run --enrichment on`。
+- 每次手动验证后检查 JSON 的 `enrichment` 字段。
+
+### P1: refill 超时策略不足
+
+当前 timeout 是模块级常量：
+
+```python
+REQUEST_TIMEOUT_SECONDS = 45
+```
+
+风险：
+
+- live 网络波动下，priority 和 secondary refill 都可能阻塞到 45 秒后失败。
+- 不同 stage 没有差异化 timeout 或 retry。
+
+计划：
+
+- 先补更清晰的 stage-level `request_outcome` 和 `stop_reason`。
+- 再决定是否加短 timeout、retry、或 stage-specific budget。
+
+### P2: `.env.example` 未同步
+
+当前 `.env.example` 没有：
+
+```bash
+TAVILY_API_KEY=
+```
+
+这会让新环境不知道需要配置 Tavily key。
+
+### P2: 旧文档分散且语义冲突
+
+旧文档有些段落仍写着“只用于实验、不改正式链路”，但代码已经有正式模块第一版。
+
+当前处理方式：
+
+- 本文作为统一入口。
+- 旧文档顶部加归档/来源说明。
+- 后续若继续修改 Tavily 行为，优先更新本文。
+
+## 下一步建议
+
+### 下一步 1: 固化当前诊断语义
+
+优先把未提交的 stop reason 与 source 空输入说明收敛进正式测试。
+
+验收：
+
+- `pytest -q tests/test_news_enrichment.py` 通过。
+- source 为空时 JSON notes 明确写出这是受控补量场景。
+- below-min 与 official fallback disabled 的 stop reason 不再混成一个泛化值。
+
+### 下一步 2: 实施 prefilter 第一轮放宽
+
+只动 verify 候选分层，不动 refill。
+
+验收：
+
+- `non_ai_relevant` 不再直接硬拒绝。
+- verify 消费顺序为 `core_ai -> ai_neighbor -> generic_or_low_signal`。
+- 新增分层诊断计数。
+- curated fixture 能观察 Otter、autonomous vehicles、Palantir 等边界样本。
+
+### 下一步 3: 增加 Actions 手动灰度入口
+
+只加手动入口，不改每日默认。
+
+建议形态：
+
+```yaml
+workflow_dispatch:
+  inputs:
+    enable_tavily:
+      type: boolean
+      default: false
+```
+
+执行策略：
+
+- `enable_tavily=false`: 维持当前 `python main.py run`。
+- `enable_tavily=true`: 注入 `TAVILY_API_KEY` 并执行 `python main.py run --enrichment on`。
+
+### 下一步 4: 多日样本评估默认开启
+
+只有在下面条件满足后，才考虑把 `config.yaml` 改成 `enabled: true`：
+
+- source 非空时 verify 不误伤主要真值。
+- source 为空时 refill 结果可解释。
+- Tavily timeout 不会让已有文章丢失。
+- Actions 手动路径至少多次成功。
+- JSON 诊断足够支撑复盘。
+
+## 操作速查
+
+### 本地验证默认关闭路径
+
+```bash
+python3 main.py fetch --enrichment off
+```
+
+看点：
+
+- 主流程是否正常抓取和保存。
+- JSON `enrichment.skip_reason` 是否为 `disabled`。
+
+### 本地显式启用 Tavily
+
+```bash
+TAVILY_API_KEY=... python3 main.py fetch --enrichment on
+```
+
+看点：
+
+- `enrichment.enabled`
+- `enrichment.applied`
+- `verify_calls`
+- `refill_calls`
+- `fallback_calls`
+- `total_calls`
+- `final_count`
+- `stop_reason`
+- `verify_runs[*].request_outcome`
+- `verify_runs[*].validation_outcome`
+
+### 离线完整链路验证
+
+```bash
+TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
+```
+
+用途：
+
+- 隔离摘要模型 API 干扰。
+- 验证抓取、Tavily、保存、Markdown、HTML 构建是否能串起来。
+
+### 单元测试
+
+```bash
+PYTHONPATH=. pytest -q tests/test_news_enrichment.py
+```
+
+### 当前推荐的文档更新规则
+
+后续 Tavily 相关变更优先更新本文。
+
+只有在需要保留原始实验过程时，才补充：
+
+- `history/tavily-trusted-domains-draft.md`
+- `history/tavily-prefilter-relaxation-plan.md`
+- benchmark 结果文件
+
+## 源材料索引
+
+### 代码
+
+- `main.py`
+- `config.py`
+- `config.yaml`
+- `utils/news_enrichment.py`
+- `utils/__init__.py`
+- `tests/test_news_enrichment.py`
+
+### 实验脚本
+
+- `scripts/benchmark_tavily.py`
+- `scripts/benchmark_tavily_whitelist.py`
+- `scripts/experiment_news_enrichment.py`
+
+### benchmark 产物
+
+- `data/benchmarks/tavily-baseline-2026-04-01.json`
+- `data/benchmarks/tavily-baseline-2026-04-01.md`
+- `data/benchmarks/tavily-whitelist-2026-04-01.json`
+- `data/benchmarks/tavily-whitelist-2026-04-01.md`
+- `data/benchmarks/tavily-whitelist-retention-2026-04-01-round12.json`
+- `data/benchmarks/tavily-whitelist-retention-2026-04-01-round12.md`
+- `data/benchmarks/tavily-whitelist-deferred-2026-04-01-round3.json`
+- `data/benchmarks/tavily-whitelist-deferred-2026-04-01-round3.md`
+- `data/benchmarks/tavily-enrichment-dryrun-2026-04-01.json`
+- `data/benchmarks/tavily-enrichment-dryrun-2026-04-01.md`
+- `data/benchmarks/fixtures/tavily-replay-fixture-2026-04-29-curated.json`
+
+### 旧文档
+
+- `handbook/guides/history/tavily-news-enrichment.md`
+- `handbook/guides/history/tavily-trusted-domains-draft.md`
+- `handbook/guides/history/tavily-prefilter-relaxation-plan.md`
