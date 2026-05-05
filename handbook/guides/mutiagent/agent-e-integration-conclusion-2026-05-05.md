@@ -401,40 +401,66 @@ refill_calls: 0
 fallback_calls: 0
 ```
 
-## 未跑项目
+## 补跑项目
 
-未跑：
+### 命令级验收：offline run 开启 Tavily
 
-```bash
-python3 main.py run --offline --enrichment on
-```
-
-原因：
-
-- 当前本地环境没有 `TAVILY_API_KEY`。
-- live Tavily 成功不是本 PR 的阻塞条件。
-- missing-key 安全降级已由单元测试覆盖。
-
-后续如果要补跑：
+命令：
 
 ```bash
-TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
+PYTHONPATH=. python3 main.py run --offline --enrichment on
 ```
 
-跑完后必须复盘：
+结果：
 
-- `enabled`
-- `applied`
-- `skip_reason`
-- `verify_calls`
-- `refill_calls`
-- `fallback_calls`
-- `total_calls`
-- `preserved_error_count`
-- `final_count`
-- `stop_reason`
-- `verify_runs[*].request_outcome`
-- refill runs 的 `request_outcome`
+- `aibase` timeout。
+- `techcrunch` timeout。
+- `theverge` timeout。
+- Tavily enrichment enabled。
+- `data/2026-05-05.json` 成功保存。
+- `content/2026-05-05.md` 成功保存。
+- HTML 站点成功构建到 `dist/`。
+
+关键诊断：
+
+```text
+Applied: True
+Skip: -
+Final articles: 4
+verify=0
+refill=2
+fallback=0
+total=2
+```
+
+生成 JSON 复核：
+
+```text
+date: 2026-05-05
+article_count: 4
+enabled: True
+applied: True
+skip_reason: None
+stop_reason: below_min_articles_after_secondary_refill_official_fallback_disabled
+input_count: 0
+final_count: 4
+verify_calls: 0
+refill_calls: 2
+fallback_calls: 0
+total_calls: 2
+preserved_error_count: 0
+priority_refilled_count: 0
+secondary_refilled_count: 4
+priority_refill_runs request_outcome: success
+secondary_refill_runs request_outcome: success
+```
+
+解读：
+
+- 这证明本地显式 `--enrichment on` 路径在当前 `.env` 有 `TAVILY_API_KEY` 时可以执行 Tavily refill。
+- 这不是默认开启证据，因为本轮 live 样本仍是 source 为 0 的受控补量场景。
+- 这不是 verify 成熟度证据，因为本轮 `verify_calls=0`。
+- 生成的 `data/2026-05-05.json` 和 `content/2026-05-05.md` 仍是本地验收产物，不建议作为 PR 内容提交。
 
 ## PR 风险
 
@@ -443,7 +469,8 @@ TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
 原因：
 
 - 上游 source 在本地验收中全部 timeout。
-- 当 source 为 0 且 Tavily 未启用或 Tavily 也失败时，最终结果可能为 0 条。
+- 当 source 为 0 且 Tavily 未启用或 Tavily 失败时，最终结果可能为 0 条。
+- 本地补跑 `--enrichment on` 虽然通过 refill 得到 4 条，但这是单次 source=0 样本，不能支撑默认开启。
 - GitHub Actions 手动 Tavily 灰度入口尚未在生产 runner 上实跑。
 - 还没有多日稳定样本证明默认路径可靠。
 
@@ -489,7 +516,7 @@ TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
 - `data/2026-05-05.json`
 - `content/2026-05-05.md`
 
-这两个文件反映的是本地 source timeout 后的 0 条结果。它们可作为本地验收痕迹，但不建议作为 PR 内容提交。
+这两个文件反映的是本地 source timeout 后的验收产物；关闭 Tavily 时为 0 条，补跑 `--enrichment on` 后被刷新为 4 条 Tavily refill 结果。它们可作为本地验收痕迹，但不建议作为 PR 内容提交。
 
 ## 建议 PR 描述
 
@@ -516,13 +543,13 @@ TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
 - [x] `python3 main.py fetch --enrichment off`
 - [x] `python3 main.py run --offline --enrichment off`
 - [x] Actions static release-safety marker check
-- [ ] Optional with key: `python3 main.py run --offline --enrichment on`
+- [x] Optional with key: `PYTHONPATH=. python3 main.py run --offline --enrichment on`
 
 ## Notes
 
 - Tavily remains a post-fetch enrichment layer, not a replacement source.
 - Source=0 runs are controlled refill scenarios, not proof that verify is mature.
-- Local source requests timed out during final validation, so generated 2026-05-05 artifacts contain 0 articles and should not be treated as quality evidence.
+- Local source requests timed out during final validation. The off-path produced 0 articles; the explicit Tavily on-path refilled 4 articles from a source=0 scenario, so generated 2026-05-05 artifacts should not be treated as quality evidence.
 ```
 
 ## 后续推进建议
@@ -580,4 +607,4 @@ TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
 理由：
 
 - `.env` 可能包含 secret。
-- 2026-05-05 生成产物来自 source timeout 下的 0 条本地验收，不适合作为 PR 内容。
+- 2026-05-05 生成产物来自 source timeout 下的本地验收；补跑 `--enrichment on` 后包含 4 条 Tavily refill 结果，但仍不适合作为 PR 内容。

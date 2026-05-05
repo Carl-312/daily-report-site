@@ -12,6 +12,12 @@ from utils.news_enrichment import enrich_articles_with_tavily
 
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+CONFIG_PATH = REPO_ROOT / "config.yaml"
+
+
+def load_project_config():
+    return load_config(str(CONFIG_PATH))
 
 
 def sample_articles() -> list[dict]:
@@ -41,7 +47,7 @@ def make_article(title: str, link: str = "https://example.com/story") -> dict:
 
 
 def test_enrichment_disabled_returns_original_articles() -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
 
     result = enrich_articles_with_tavily(
         sample_articles(),
@@ -58,7 +64,7 @@ def test_enrichment_disabled_returns_original_articles() -> None:
 
 
 def test_enrichment_missing_api_key_falls_back_safely() -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
 
     result = enrich_articles_with_tavily(
         sample_articles(),
@@ -105,7 +111,7 @@ enrichment:
 
 
 def test_enrichment_timeout_preserves_original_articles(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
 
     def raise_timeout(*args, **kwargs):
         raise requests.Timeout("simulated timeout")
@@ -142,7 +148,7 @@ def test_enrichment_timeout_preserves_original_articles(monkeypatch) -> None:
 
 
 def test_enrichment_session_trust_env_follows_settings(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
     seen: list[bool] = []
 
     def capture_session(session, api_key, payload):
@@ -169,7 +175,7 @@ def test_enrichment_session_trust_env_follows_settings(monkeypatch) -> None:
 def test_enrichment_below_min_stop_reason_when_official_fallback_disabled(
     monkeypatch,
 ) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
 
     def fake_search(session, api_key, payload):
         include_domains = payload.get("include_domains") or []
@@ -216,7 +222,7 @@ def test_enrichment_below_min_stop_reason_when_official_fallback_disabled(
 
 
 def test_verify_rejects_matched_article_outside_24h(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
     article = sample_articles()[0]
 
     def fake_search(session, api_key, payload):
@@ -266,7 +272,7 @@ def test_verify_rejects_matched_article_outside_24h(monkeypatch) -> None:
 
 
 def test_verify_rejects_matched_article_missing_published_date(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
     article = sample_articles()[0]
 
     def fake_search(session, api_key, payload):
@@ -320,7 +326,7 @@ def test_verify_rejects_matched_article_missing_published_date(monkeypatch) -> N
 
 
 def test_prefilter_keeps_ai_neighbor_in_lower_priority_bucket(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
     neighbor_title = (
         "California adopts new rules allowing manufacturers to test and deploy "
         "heavy-duty autonomous vehicles"
@@ -361,7 +367,7 @@ def test_prefilter_keeps_ai_neighbor_in_lower_priority_bucket(monkeypatch) -> No
 def test_verify_order_prioritizes_core_ai_then_neighbors_then_low_signal(
     monkeypatch,
 ) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
     low_signal_title = "Startup funding round reshapes enterprise software market"
     neighbor_title = (
         "California adopts new rules allowing manufacturers to test and deploy "
@@ -419,7 +425,7 @@ def test_verify_order_prioritizes_core_ai_then_neighbors_then_low_signal(
 
 
 def test_aggregate_like_article_is_hard_rejected_before_verify(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
     aggregate_article = {
         **make_article(
             "AI日报：OpenAI 发布新模型；Anthropic 获融资；Google 推出 AI 功能",
@@ -459,7 +465,7 @@ def test_aggregate_like_article_is_hard_rejected_before_verify(monkeypatch) -> N
 
 
 def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
-    cfg = load_config("/home/carl/daily-report-site/config.yaml")
+    cfg = load_project_config()
 
     def fake_search(session, api_key, payload):
         assert payload.get("include_domains") == ["thenextweb.com", "venturebeat.com"]
