@@ -30,7 +30,7 @@
 
 - 触发：`workflow_dispatch`、定时任务
 - 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment
-- 定时：GitHub Actions cron 使用 UTC，当前配置为 `19 13 * * *`，对应北京时间 `21:19`
+- 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`

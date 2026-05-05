@@ -279,7 +279,7 @@ def get_config() -> Config:
 ### GitHub Actions 工作流
 
 **触发条件**:
-- `schedule`: 每天 13:19 UTC（21:19 北京时间，避开整点以降低调度延迟概率）
+- `schedule`: 每天 00:36 UTC（08:36 北京时间，避开整点以降低调度延迟概率）
 - `workflow_dispatch`: 手动触发
 
 **作业流程**:

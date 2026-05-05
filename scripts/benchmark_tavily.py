@@ -34,8 +34,8 @@ import config  # noqa: E402,F401  # Reuse project .env loading behavior.
 
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
 OUTPUT_DATE_FORMAT = "%Y-%m-%d"
-DEPLOY_HOUR = 21
-DEPLOY_MINUTE = 19
+DEPLOY_HOUR = 8
+DEPLOY_MINUTE = 36
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
 TITLE_SIMILARITY_MATCH_THRESHOLD = 0.82
 AI_KEYWORD_RE = re.compile(
@@ -813,7 +813,7 @@ def run_benchmark(args: argparse.Namespace) -> dict[str, Any]:
             ],
             "runtime_observations": [
                 "Current API response exposed response_time/request_id/results; time_taken/query_analysis were not present in this environment",
-                "Historical replay uses the repo's documented deploy time (21:19 Asia/Shanghai) as the report reference timestamp",
+                "Historical replay uses the repo's documented deploy time (08:36 Asia/Shanghai) as the report reference timestamp",
                 "Benchmark requests inherit HTTP(S)_PROXY because direct DNS resolution failed when proxy env inheritance was disabled",
             ],
         },
