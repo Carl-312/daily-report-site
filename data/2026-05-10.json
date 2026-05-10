@@ -58,7 +58,7 @@
   ],
   "enrichment": {
     "report_date": "2026-05-10",
-    "reference_dt": "2026-05-10T12:33:01.252889+08:00",
+    "reference_dt": "2026-05-10T21:52:42.850652+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
