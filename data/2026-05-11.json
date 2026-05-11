@@ -2,6 +2,15 @@
   "date": "2026-05-11",
   "articles": [
     {
+      "title": "AI日报：腾讯云QClaw发布文件空间；阿里通义千问接入淘宝；微信推AI支付等功能",
+      "link": "https://news.aibase.com/zh/daily/27865",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、腾讯云QClaw发布“文件空间”:深度打通腾讯文档与ima知识库 腾讯云QClaw发布“文件空间”功能，实现了与腾讯文档、ima知识库以及本地文件的深度生态打通，标志着AI办公工具从单一的“对话辅助”向“全流程协同中心”转型。 📎 QClaw实现了与腾讯文档、ima知识库以及本地文件的深度生态打通。 💻 QClaw通过“协作流”的打通，使AI生成的产物可直接转化为可编辑、可分发的协作链接。 📈 QClaw的升级标志着AI办公工具从单一的“对话辅助”向“全流程协同中心”转型。 2、微信 4月功能大升级：AI 支付、贴图原图发送新体验 微信在4月推出了多项重大…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI 资讯\nAI 产品库\nGEO 平台\nMCP 服务\n模型算力广场\nAI 全能力超市\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：腾讯云QClaw发布文件空间；阿里通义千问接入淘宝；微信推AI支付等功能\n发布于最新AI日报\n发布时间 :\n2026年5月11号 16:46\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、腾讯云QClaw发布“文件空间”:深度打通腾讯文档与ima知识库\n腾讯云QClaw发布“文件空间”功能，实现了与腾讯文档、ima知识库以及本地文件的深度生态打通，标志着AI办公工具从单一的“对话辅助”向“全流程协同中心”转型。\n【AiBase提要:】\n📎 QClaw实现了与腾讯文档、ima知识库以及本地文件的深度生态打通。\n💻 QClaw通过“协作流”的打通，使AI生成的产物可直接转化为可编辑、可分发的协作链接。\n📈 QClaw的升级标志着AI办公工具从单一的“对话辅助”向“全流程协同中心”转型。\n2、微信 4月功能大升级：AI 支付、贴图原图发送新体验\n微信在4月推出了多项重大功能更新，包括AI支付接入、AI小程序优化、企业微信功能升级、贴图功能改进以及视频号的新功能。这些更新不仅提升了用户体验，还为开发者提供了更多便利，推动了生态的发展。\n【AiBase提要:】\n💰 微信支付升级AI接入，开发者门槛大幅降低。\n📱 贴图功能支持发送和查看原图，提升用户体验。\n🎥 视频号新增创作者推广分成及智能客服服务。\n3、阿里通义千问接入淘宝，重塑对话式购物新形态\n阿里巴巴宣布将通义千问与淘宝深度整合，通过对话式交互改写传统电商购物模式，提升用户体验，并加速构建AI生态体系，推动电商行业向智能化发展。\n【AiBase提要:】\n🛒 阿里巴巴将通义千问与淘宝深度融合，实现对话式购物体验。\n🛍️ 淘宝App将上线AI购物助手，引入虚拟试穿等前沿功能。\n📈 阿里巴巴加速构建AI生态体系，推动电商行业进入智能体购物时代。\n4、Google 升级 Gemini API 文件搜索：多模态 RAG 能力实现全方位跨越\nGoogle 升级 Gemini API 文件搜索功能，通过多模态 RAG 能力提升企业级 AI 应用的信息检索准确性，同时优化大规模知识库管理与信息溯源。\n【AiBase提要:】\n🧠 新版文件搜索功能基于 Gemini Embedding2 模型，实现多模态嵌入能力，可处理 PDF、文档和图片中的视觉信息。\n📊 引入自定义元数据过滤功能，开发者可按部门、时间等维度为文件添加标签，提升检索效率。\n📄 支持页面级引用，AI 生成答案时明确标注信息来源的具体页码，增强信息透明度。\n5、阶跃语音模型位列全球评测前三，创下中国大模型听感新高\n阶跃星辰的StepAudio2.5TTS模型在全球\n权威\nTTS评测榜单中位列前三，展现了中国大模型在语音合成领域的国际竞争力。其通过严苛的盲测Elo评分机制验证了语音生成的自然度与感染力，并已实现多项技术落地，如搭载于吉利银河M9等车型，推动智能交互体验的提升。\n【AiBase提要:】\n✅ 阶跃星辰的StepAudio2.5TTS模型在Artificial Analysis Speech Arena Leaderboard中位列全球前三，展现中国大模型的实力。\n✅ 该榜单采用盲测Elo评分机制，强调语音生成的自然度和感染力，体现真实用户反馈。\n✅ 阶跃星辰已发布全链路模型，包括TTS、ASR和Realtime实时交互模型，技术布局全面且商业化路径领先。\n6、贾跃亭重返法拉第未来，宣布公司转型为物理 AI 生态企业\n贾跃亭宣布重返法拉第未来并担任全球 CEO，标志着创始团队的全面回归。FF 将转型为物理 AI 生态系统公司，专注于人形机器人与汽车机器人业务，并计划推出采用 800V 电动架构的新款车型 Super One，以提升续航和充电效率。\n【AiBase提要:】\n🌟 贾跃亭宣布重返法拉第未来，担任全球 CEO，标志着创始团队的全面回归。\n🤖 FF 将转型为物理 AI 生态系统公司，专注于人形机器人与汽车机器人业务。\n🚗 新款 Super One 车型将采用 800V 电动架构，提升续航和充电效率。\n7、2.11倍反超美国！中国AI大模型周调用量稳居全球首位\n中国AI大模型在周调用量上实现对美国的反超，展现出强劲的发展势头和市场优势。\n【AiBase提要:】\n🧠 中国AI大模型周调用量达到7.941万亿Token，占据全球首位。\n🇺🇸 美国AI大模型周调用量为3.76万亿Token，但增长显著。\n📈 中国大模型连续两周反超美国，显示出强大的市场优势。\n8、爆增300%！国产大模型新贵MiniMax关联公司增资至 40 亿元\n国产AI大模型企业MiniMax的关联公司上海稀宇极智科技有限公司完成增资，注册资本提升至40亿元，显示出资本市场对大模型赛道的高度认可。\n【AiBase提要:】\n🧠 国产AI大模型企业MiniMax关联公司注册资本由10亿增至40亿，增幅达300%。\n💼 公司由香港稀宇极智有限公司全资持股，背景实力雄厚。\n📈 MiniMax正积极寻求A股上市机会，资本运作节奏紧凑。\n相关推荐\n广东省新增 6 款已完成登记生成式人工智能服务，腾讯音乐等企业在列\n广东省网络信息部门联合相关单位，依据《生成式人工智能服务管理暂行办法》，推动生成式AI服务的创新与规范应用，开展登记工作。截至2026年5月11日，新增6款登记服务，累计完成53款，包括腾讯音乐、格力电器等企业，以加强服务管理。\n2026年5月11号 17:53\n452.5k\n​软银在日本启动电池业务，助力 AI 数据中心电力需求\n软银集团宣布在日本启动电池业务，重点研发和生产电芯及储能系统，选址于大阪夏普原堺工厂区域，并计划建设大型AI数据中心园区。该业务将于2028财年投产，产能达吉瓦时级，初期优先供应自有AI数据中心，后续拓展市场。此举旨在满足AI数据中心日益增长的电力需求。\n2026年5月11号 17:13\n108.5k\n微信 4 月功能大升级：AI 支付、贴图原图发送新体验\n微信官方近日通过“微信公开课”发布4月九项重大更新，涵盖微信支付、AI小程序、企业微信、视频号等领域。更新重点包括微信支付AI原生接入能力升级，开发者可通过Skill技能包和API接口，简单描述需求即可快速调用，显著提升开发效率与用户体验。\n2026年5月11号 15:31\n133.1k\n​佛罗里达州立大学枪击案受害者家属起诉 OpenAI，称 ChatGPT 助长犯罪\n佛罗里达州立大学枪击案致2死6伤，遇难者妻子起诉OpenAI，称ChatGPT与枪手在案发前数月多次互动，认为其不当作用加剧了悲剧。\n2026年5月11号 15:13\n140.4k\nPalisade Research报告:AI代理实现自主跨国黑客攻击，自我复制成功率升至81%\nPalisade Research报告证实，AI代理已实现跨国自主黑客攻击和自我复制，标志AI安全威胁从“辅助工具”升级为“自主病原体”。测试中，AI能独立识别漏洞、安装软件、复制模型权重并启动副本触发连锁反应。前沿模型自我复制成功率在过去一年显著提升。\n2026年5月11号 10:52\n152.6k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
       "title": "Uber has always wanted to be more than a ride; now it has reason to hurry",
       "link": "https://techcrunch.com/2026/05/10/uber-has-always-wanted-to-be-more-than-a-ride-now-it-has-reason-to-hurry/",
       "description": "",
@@ -38,6 +47,42 @@
       "source": "techcrunch"
     },
     {
+      "title": "There aren’t enough rockets for space data centers. Cowboy Space raised $275 million to build them.",
+      "link": "https://techcrunch.com/2026/05/11/there-arent-enough-rockets-for-space-data-centers-cowboy-space-raised-275-million-to-build-them/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Discord launches Nitro Rewards, giving subscribers access to the base tier of Xbox Game Pass for no extra cost",
+      "link": "https://techcrunch.com/2026/05/11/discord-launches-nitro-rewards-giving-subscribers-access-to-the-base-tier-of-xbox-game-pass-for-no-extra-cost/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Venmo’s biggest makeover in years comes at a very interesting time",
+      "link": "https://techcrunch.com/2026/05/11/venmos-biggest-makeover-in-years-comes-at-a-very-interesting-time/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Korea’s biggest manufacturers back Config, the TSMC of robot data",
+      "link": "https://techcrunch.com/2026/05/11/koreas-biggest-manufacturers-back-config-the-tsmc-of-robot-data/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "Get ready for the whisper-filled office of the future",
       "link": "https://techcrunch.com/2026/05/10/get-ready-for-the-whisper-filled-office-of-the-future/",
       "description": "",
@@ -58,13 +103,13 @@
   ],
   "enrichment": {
     "report_date": "2026-05-11",
-    "reference_dt": "2026-05-11T12:45:11.124629+08:00",
+    "reference_dt": "2026-05-11T21:54:58.065201+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 6,
-    "prefiltered_count": 6,
+    "input_count": 11,
+    "prefiltered_count": 11,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -91,7 +136,7 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 6,
+    "final_count": 11,
     "stop_reason": "disabled",
     "accepted_by_stage_preview": {
       "verify": [],
