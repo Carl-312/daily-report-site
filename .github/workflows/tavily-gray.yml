@@ -1,0 +1,173 @@
+# Isolated Tavily gray validation. This workflow never commits, publishes, or deploys.
+name: Tavily Gray Daily
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  TZ: Asia/Shanghai
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub Actions cron uses UTC. 12:56 UTC = 20:56 Asia/Shanghai.
+    - cron: "56 12 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tavily-gray
+  cancel-in-progress: false
+
+jobs:
+  tavily-gray:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve gray artifact paths
+        id: paths
+        shell: bash
+        run: |
+          run_date="$(TZ=Asia/Shanghai date +'%Y-%m-%d')"
+          artifact_root="gray-artifact"
+          gray_dir="$artifact_root/gray/tavily/$run_date"
+
+          mkdir -p "$gray_dir/logs"
+          cat > "$gray_dir/manifest.json" <<EOF
+          {
+            "date": "$run_date",
+            "artifact_path": "gray/tavily/$run_date/",
+            "purpose": "tavily_gray_validation"
+          }
+          EOF
+
+          {
+            echo "run_date=$run_date"
+            echo "artifact_root=$artifact_root"
+            echo "gray_dir=$gray_dir"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install runtime dependencies
+        run: pip install -r requirements.txt
+
+      - name: Require Tavily API key
+        shell: bash
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+        run: |
+          log_file="$GRAY_DIR/logs/run.log"
+          if [ -z "$TAVILY_API_KEY" ]; then
+            echo "::error::TAVILY_API_KEY is required for the Tavily gray workflow." | tee -a "$log_file"
+            exit 1
+          fi
+
+      - name: Run Tavily-on gray report
+        shell: bash
+        env:
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+        run: |
+          set -o pipefail
+          log_file="$GRAY_DIR/logs/run.log"
+
+          {
+            echo "Tavily gray run date: ${{ steps.paths.outputs.run_date }}"
+            echo "Command: python3 main.py run --offline --enrichment on"
+            echo
+          } | tee -a "$log_file"
+
+          python3 main.py run --offline --enrichment on 2>&1 | tee -a "$log_file"
+
+      - name: Collect gray outputs
+        if: always()
+        shell: bash
+        env:
+          RUN_DATE: ${{ steps.paths.outputs.run_date }}
+          GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+        run: |
+          mkdir -p "$GRAY_DIR/logs"
+
+          if [ -f "data/$RUN_DATE.json" ]; then
+            cp "data/$RUN_DATE.json" "$GRAY_DIR/report.json"
+          fi
+
+          if [ -f "content/$RUN_DATE.md" ]; then
+            cp "content/$RUN_DATE.md" "$GRAY_DIR/report.md"
+          fi
+
+          git status --short --ignored=no > "$GRAY_DIR/logs/git-status-after-run.txt" || true
+
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          run_date = os.environ["RUN_DATE"]
+          gray_dir = Path(os.environ["GRAY_DIR"])
+          report_path = gray_dir / "report.json"
+          markdown_path = gray_dir / "report.md"
+          summary_path = gray_dir / "enrichment-summary.json"
+          summary_md_path = gray_dir / "enrichment-summary.md"
+
+          payload = {}
+          if report_path.exists():
+              payload = json.loads(report_path.read_text(encoding="utf-8"))
+
+          enrichment = payload.get("enrichment") or {}
+          if not enrichment:
+              enrichment = {
+                  "applied": False,
+                  "skip_reason": "report_json_missing",
+                  "notes": ["No report.json was available for enrichment summary extraction."],
+              }
+
+          summary = {
+              "date": run_date,
+              "artifact_path": f"gray/tavily/{run_date}/",
+              "report_json_present": report_path.exists(),
+              "report_markdown_present": markdown_path.exists(),
+              "article_count": len(payload.get("articles", [])) if payload else 0,
+              "enrichment": enrichment,
+          }
+
+          summary_path.write_text(
+              json.dumps(summary, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+          lines = [
+              f"# Tavily Gray Summary - {run_date}",
+              "",
+              f"- Artifact path: `gray/tavily/{run_date}/`",
+              f"- Report JSON present: {str(summary['report_json_present']).lower()}",
+              f"- Report Markdown present: {str(summary['report_markdown_present']).lower()}",
+              f"- Article count: {summary['article_count']}",
+              f"- Enrichment applied: {str(enrichment.get('applied', False)).lower()}",
+              f"- Skip reason: {enrichment.get('skip_reason') or '-'}",
+              f"- Verify calls: {enrichment.get('verify_calls', 0)}",
+              f"- Refill calls: {enrichment.get('refill_calls', 0)}",
+              f"- Fallback calls: {enrichment.get('fallback_calls', 0)}",
+              f"- Total calls: {enrichment.get('total_calls', 0)}",
+              "",
+          ]
+          summary_md_path.write_text("\n".join(lines), encoding="utf-8")
+          PY
+
+      - name: Upload Tavily gray artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tavily-gray-${{ steps.paths.outputs.run_date }}-${{ github.run_id }}
+          path: ${{ steps.paths.outputs.artifact_root }}/
+          if-no-files-found: error
+          retention-days: 7
