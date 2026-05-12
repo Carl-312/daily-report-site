@@ -1,0 +1,162 @@
+{
+  "budget": {
+    "max_total_calls": 7,
+    "max_verify_calls": 6,
+    "official_fallback_enabled": false,
+    "reserved_refill_calls": 2,
+    "secondary_entered": true,
+    "total_calls": 7,
+    "verify_budget": 5,
+    "verify_skipped_due_budget": 9
+  },
+  "diagnosis": {
+    "cannot_prove": [
+      "This artifact is a single live run, not evidence for default enablement.",
+      "It does not prove Tavily result stability across days or runner environments.",
+      "It does not prove broader domain, query, timeout, or official fallback changes are safe."
+    ],
+    "contributing_factors": [
+      "budget_exhausted",
+      "published_date_missing"
+    ],
+    "final_count_explanation": "8 final articles = 0 preserved + 3 verify + 0 priority refill + 5 secondary refill + 0 official fallback; 2 below min_articles=10.",
+    "needs_fixture": true,
+    "primary_limiter": "budget_exhausted",
+    "stage_counts": {
+      "official_fallback": 0,
+      "preserved_errors": 0,
+      "priority_refill": 0,
+      "secondary_refill": 5,
+      "verify": 3
+    }
+  },
+  "input_quality": {
+    "aggregate_title_count": 0,
+    "input_count": 14,
+    "prefilter_bucket_counts": {
+      "ai_neighbor": 0,
+      "core_ai": 5,
+      "generic_or_low_signal": 9
+    },
+    "prefiltered_count": 14,
+    "source_distribution": {
+      "techcrunch": 14
+    }
+  },
+  "metadata": {
+    "artifact_path": "gray/tavily/2026-05-12/",
+    "command": "python3 main.py run --offline --enrichment on",
+    "date": "2026-05-12",
+    "new_commit": "4cf4ce981a87f92eb7717a0575943f904cf1e505",
+    "old_commit": "",
+    "report_json_present": true,
+    "report_markdown_present": true,
+    "run_id": "25716080642"
+  },
+  "output": {
+    "accepted_by_stage_preview": {
+      "official_fallback": [],
+      "preserved_errors": [],
+      "priority_refill": [],
+      "secondary_refill": [
+        "OpenAI creates new unit with $4 billion investment to aid corporate AI push - Reuters",
+        "Former OpenAI executive Sutskever discloses nearly $7 billion stake in AI firm - Reuters",
+        "EU Commission in talks with OpenAI and Anthropic over AI models - Reuters"
+      ],
+      "verify": [
+        "GM just laid off hundreds of IT workers to hire those with stronger AI skills",
+        "Digg tries again, this time as an AI news aggregator",
+        "Korea’s biggest manufacturers back Config, the TSMC of robot data"
+      ]
+    },
+    "article_count": 8,
+    "final_count": 8,
+    "min_articles": 10,
+    "refill_remaining_count": 2,
+    "stop_reason": "budget_exhausted_after_secondary_refill"
+  },
+  "refill": {
+    "official_fallback": {
+      "accepted_count": 0,
+      "accepted_preview": [],
+      "calls": 0,
+      "duplicate_rejected_count": 0,
+      "near_duplicate_rejected_count": 0,
+      "non_ai_rejected_count": 0,
+      "outside_window_rejected_count": 0,
+      "published_date_missing_count": 0,
+      "published_date_missing_rate": null,
+      "rejected_preview": [],
+      "request_outcomes": {},
+      "result_count": 0,
+      "story_cluster_rejected_count": 0
+    },
+    "priority_refill": {
+      "accepted_count": 0,
+      "accepted_preview": [],
+      "calls": 1,
+      "duplicate_rejected_count": 0,
+      "near_duplicate_rejected_count": 0,
+      "non_ai_rejected_count": 0,
+      "outside_window_rejected_count": 0,
+      "published_date_missing_count": 8,
+      "published_date_missing_rate": 1.0,
+      "rejected_preview": [
+        "Anthropic's $30B raise is about more than money - TNW",
+        "Anthropic launches marketplace for Claude-powered software - TNW",
+        "Anthropic says it hit a $30 billion revenue run rate after 'crazy' 80x ..."
+      ],
+      "request_outcomes": {
+        "success": 1
+      },
+      "result_count": 8,
+      "story_cluster_rejected_count": 0
+    },
+    "secondary_refill": {
+      "accepted_count": 5,
+      "accepted_preview": [
+        "OpenAI creates new unit with $4 billion investment to aid corporate AI push - Reuters",
+        "Former OpenAI executive Sutskever discloses nearly $7 billion stake in AI firm - Reuters",
+        "EU Commission in talks with OpenAI and Anthropic over AI models - Reuters"
+      ],
+      "calls": 1,
+      "duplicate_rejected_count": 0,
+      "near_duplicate_rejected_count": 0,
+      "non_ai_rejected_count": 0,
+      "outside_window_rejected_count": 0,
+      "published_date_missing_count": 0,
+      "published_date_missing_rate": 0.0,
+      "rejected_preview": [],
+      "request_outcomes": {
+        "success": 1
+      },
+      "result_count": 5,
+      "story_cluster_rejected_count": 0
+    }
+  },
+  "trend_metrics": {
+    "final_count": 8,
+    "priority_refilled_count": 0,
+    "published_date_missing_rate": 0.6154,
+    "secondary_refilled_count": 5,
+    "stop_reason": "budget_exhausted_after_secondary_refill",
+    "total_calls": 7,
+    "verified_count": 3
+  },
+  "verify": {
+    "calls": 5,
+    "preserved_error_count": 0,
+    "rejected_preview": [
+      "Riding an AI rally, Robinhood preps second retail venture IPO",
+      "Thinking Machines wants to build an AI that actually listens while it talks"
+    ],
+    "request_outcomes": {
+      "success": 5
+    },
+    "validation_outcomes": {
+      "accepted": 3,
+      "no_match": 2
+    },
+    "verified_count": 3
+  }
+}
