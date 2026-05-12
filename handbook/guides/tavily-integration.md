@@ -315,6 +315,9 @@ python3 main.py fetch --enrichment off
 - 本地 artifact：
   `tmp/github-artifacts/tavily-gray-2026-05-11-25680995172/gray/tavily/2026-05-11/`
 - 评估结论：`data/benchmarks/tavily-gray-2026-05-11-evaluation.md`
+- 标准 scorecard：
+  - `data/benchmarks/tavily-gray-2026-05-11-scorecard.json`
+  - `data/benchmarks/tavily-gray-2026-05-11-scorecard.md`
 - 最小回归 fixture：
   `tests/fixtures/tavily-gray-2026-05-11/report-minimal.json`
 - 回归测试：`tests/test_tavily_gray_regression.py`
@@ -330,6 +333,15 @@ python3 main.py fetch --enrichment off
 | `total_calls` | `7` |
 | `final_count` | `3` |
 | `stop_reason` | `budget_exhausted_after_priority_refill` |
+
+scorecard 归一化结论：
+
+- `primary_limiter`: `budget_exhausted`
+- `contributing_factors`: `budget_exhausted`, `published_date_missing`
+- `published_date_missing_rate`: `1.0`
+- `secondary_entered`: `false`
+- `refill_remaining_count`: `7`
+- stage 分解：`3 final articles = 0 preserved + 3 verify + 0 priority refill + 0 secondary refill + 0 official fallback`
 
 这个 artifact 的 `article_count` / `final_count` 实际是 `3`，不是 `6`。旧逻辑在
 默认 `max_total_calls=7`、`max_verify_calls=6` 下让 verify 用掉 6 次预算，只剩
@@ -347,6 +359,43 @@ python3 main.py fetch --enrichment off
 verify 不能再把全部默认预算挤占到 secondary refill 无法运行。真实 Tavily 返回仍可能因
 `published_date` 缺失、网络波动或候选质量不足而补不满 `10` 条；official fallback
 仍保持默认关闭。
+
+### Tavily gray scorecard 工具
+
+新增离线 parser：
+
+- `scripts/tavily_gray_scorecard.py`
+- 测试：`tests/test_tavily_gray_scorecard.py`
+
+用途：
+
+- 从灰度 artifact 目录读取 `report.json`、`enrichment-summary.json`、`manifest.json`
+  和 `logs/run.log`。
+- 输出 `scorecard.json` 与 `scorecard.md`。
+- 固定归一化核心指标、stage accepted / rejected preview、预算字段、趋势字段和
+  `final_count < min_articles` 的主因诊断。
+- 不调用 Tavily，不依赖当前日期，不依赖外部网络。
+
+本地复盘示例：
+
+```bash
+PYTHONPATH=. python3 scripts/tavily_gray_scorecard.py \
+  tmp/github-artifacts/tavily-gray-2026-05-11-25680995172/gray/tavily/2026-05-11 \
+  --output-json data/benchmarks/tavily-gray-2026-05-11-scorecard.json \
+  --output-md data/benchmarks/tavily-gray-2026-05-11-scorecard.md
+```
+
+`.github/workflows/tavily-gray.yml` 现在会在收集灰度产物后自动调用该脚本，并把
+`scorecard.json`、`scorecard.md` 一并上传到 Tavily gray artifact。后续连续灰度可直接
+汇总这些 `trend_metrics` 字段：
+
+- `final_count`
+- `verified_count`
+- `priority_refilled_count`
+- `secondary_refilled_count`
+- `published_date_missing_rate`
+- `total_calls`
+- `stop_reason`
 
 ## 正式真实运行结果
 

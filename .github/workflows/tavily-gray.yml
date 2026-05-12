@@ -94,6 +94,8 @@ jobs:
         env:
           RUN_DATE: ${{ steps.paths.outputs.run_date }}
           GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+          GITHUB_RUN_ID_VALUE: ${{ github.run_id }}
+          GITHUB_SHA_VALUE: ${{ github.sha }}
         run: |
           mkdir -p "$GRAY_DIR/logs"
 
@@ -162,6 +164,11 @@ jobs:
           ]
           summary_md_path.write_text("\n".join(lines), encoding="utf-8")
           PY
+
+          python3 scripts/tavily_gray_scorecard.py "$GRAY_DIR" \
+            --run-id "$GITHUB_RUN_ID_VALUE" \
+            --command "python3 main.py run --offline --enrichment on" \
+            --new-commit "$GITHUB_SHA_VALUE"
 
       - name: Upload Tavily gray artifact
         if: always()

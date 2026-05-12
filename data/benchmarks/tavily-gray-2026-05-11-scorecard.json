@@ -1,0 +1,155 @@
+{
+  "budget": {
+    "max_total_calls": 7,
+    "max_verify_calls": 6,
+    "official_fallback_enabled": false,
+    "reserved_refill_calls": null,
+    "secondary_entered": false,
+    "total_calls": 7,
+    "verify_budget": 6,
+    "verify_skipped_due_budget": 6
+  },
+  "diagnosis": {
+    "cannot_prove": [
+      "This artifact is a single live run, not evidence for default enablement.",
+      "It does not prove Tavily result stability across days or runner environments.",
+      "It does not prove broader domain, query, timeout, or official fallback changes are safe."
+    ],
+    "contributing_factors": [
+      "budget_exhausted",
+      "published_date_missing"
+    ],
+    "final_count_explanation": "3 final articles = 0 preserved + 3 verify + 0 priority refill + 0 secondary refill + 0 official fallback; 7 below min_articles=10.",
+    "needs_fixture": true,
+    "primary_limiter": "budget_exhausted",
+    "stage_counts": {
+      "official_fallback": 0,
+      "preserved_errors": 0,
+      "priority_refill": 0,
+      "secondary_refill": 0,
+      "verify": 3
+    }
+  },
+  "input_quality": {
+    "aggregate_title_count": 1,
+    "input_count": 13,
+    "prefilter_bucket_counts": {
+      "ai_neighbor": 0,
+      "core_ai": 3,
+      "generic_or_low_signal": 9
+    },
+    "prefiltered_count": 12,
+    "source_distribution": {
+      "aibase": 1,
+      "techcrunch": 12
+    }
+  },
+  "metadata": {
+    "artifact_path": "gray/tavily/2026-05-11/",
+    "command": "python3 main.py run --offline --enrichment on",
+    "date": "2026-05-11",
+    "new_commit": "",
+    "old_commit": "",
+    "report_json_present": true,
+    "report_markdown_present": true,
+    "run_id": "25680995172"
+  },
+  "output": {
+    "accepted_by_stage_preview": {
+      "official_fallback": [],
+      "preserved_errors": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "verify": [
+        "Anthropic says ‘evil’ portrayals of AI were responsible for Claude’s blackmail attempts",
+        "Uber has always wanted to be more than a ride; now it has reason to hurry",
+        "TechCrunch Mobility: Lime’s IPO gamble"
+      ]
+    },
+    "article_count": 3,
+    "final_count": 3,
+    "min_articles": 10,
+    "refill_remaining_count": 7,
+    "stop_reason": "budget_exhausted_after_priority_refill"
+  },
+  "refill": {
+    "official_fallback": {
+      "accepted_count": 0,
+      "accepted_preview": [],
+      "calls": 0,
+      "duplicate_rejected_count": 0,
+      "near_duplicate_rejected_count": 0,
+      "non_ai_rejected_count": 0,
+      "outside_window_rejected_count": 0,
+      "published_date_missing_count": 0,
+      "published_date_missing_rate": null,
+      "rejected_preview": [],
+      "request_outcomes": {},
+      "result_count": 0,
+      "story_cluster_rejected_count": 0
+    },
+    "priority_refill": {
+      "accepted_count": 0,
+      "accepted_preview": [],
+      "calls": 1,
+      "duplicate_rejected_count": 0,
+      "near_duplicate_rejected_count": 0,
+      "non_ai_rejected_count": 0,
+      "outside_window_rejected_count": 0,
+      "published_date_missing_count": 8,
+      "published_date_missing_rate": 1.0,
+      "rejected_preview": [
+        "Anthropic’s $30B raise is about more than money",
+        "OpenAI turns its sold-out GPT-5.5 party into a monthlong Codex giveaway for 8,000 developers | VentureBeat",
+        "Anthropic launches marketplace for Claude-powered software"
+      ],
+      "request_outcomes": {
+        "success": 1
+      },
+      "result_count": 8,
+      "story_cluster_rejected_count": 0
+    },
+    "secondary_refill": {
+      "accepted_count": 0,
+      "accepted_preview": [],
+      "calls": 0,
+      "duplicate_rejected_count": 0,
+      "near_duplicate_rejected_count": 0,
+      "non_ai_rejected_count": 0,
+      "outside_window_rejected_count": 0,
+      "published_date_missing_count": 0,
+      "published_date_missing_rate": null,
+      "rejected_preview": [],
+      "request_outcomes": {},
+      "result_count": 0,
+      "story_cluster_rejected_count": 0
+    }
+  },
+  "trend_metrics": {
+    "final_count": 3,
+    "priority_refilled_count": 0,
+    "published_date_missing_rate": 1.0,
+    "secondary_refilled_count": 0,
+    "stop_reason": "budget_exhausted_after_priority_refill",
+    "total_calls": 7,
+    "verified_count": 3
+  },
+  "verify": {
+    "calls": 6,
+    "preserved_error_count": 0,
+    "rejected_preview": [
+      "Korea’s biggest manufacturers back Config, the TSMC of robot data",
+      "We’re feeling cynical about xAI’s big deal with Anthropic",
+      "The hottest place for startups to strike a deal? The F1 paddock"
+    ],
+    "request_outcomes": {
+      "success": 6
+    },
+    "validation_outcomes": {
+      "accepted": 3,
+      "no_match": 1,
+      "outside_24h": 2
+    },
+    "verified_count": 3
+  }
+}
