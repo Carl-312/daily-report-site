@@ -666,6 +666,7 @@ def build_initial_report(
         "clustered_prefilter_count": 0,
         "cluster_potential_verify_saved_calls": 0,
         "verify_saved_calls": 0,
+        "reserved_refill_calls": 0,
         "verified_count": 0,
         "neighbor_candidates_verified_count": 0,
         "neighbor_candidates_outside_24h_count": 0,
@@ -745,6 +746,27 @@ def empty_refill_result(remaining_budget: int) -> dict[str, Any]:
     }
 
 
+def planned_refill_stage_count(settings: Any) -> int:
+    stage_count = 2  # priority_refill + secondary_refill
+    if settings.enable_official_fallback:
+        stage_count += 1
+    return stage_count
+
+
+def reserved_refill_call_budget(settings: Any) -> int:
+    if settings.max_refill_rounds <= 0 or settings.min_articles <= 1:
+        return 0
+    desired_refill_calls = settings.max_refill_rounds * planned_refill_stage_count(
+        settings
+    )
+    max_total_calls = max(0, settings.max_total_calls)
+    if settings.max_verify_calls > 0:
+        max_reservable_calls = max(0, max_total_calls - 1)
+    else:
+        max_reservable_calls = max_total_calls
+    return min(desired_refill_calls, max_reservable_calls)
+
+
 def run_verify_stage(
     *,
     candidates: list[dict[str, Any]],
@@ -754,7 +776,14 @@ def run_verify_stage(
     reference_dt: datetime,
 ) -> dict[str, Any]:
     start_date, end_date = report_window(reference_dt)
-    verify_budget = max(0, min(settings.max_verify_calls, settings.max_total_calls))
+    reserved_refill_calls = reserved_refill_call_budget(settings)
+    verify_budget = max(
+        0,
+        min(
+            settings.max_verify_calls,
+            max(0, settings.max_total_calls - reserved_refill_calls),
+        ),
+    )
     verify_runs: list[dict[str, Any]] = []
     verified_articles: list[dict[str, Any]] = []
     preserved_error_articles: list[dict[str, Any]] = []
@@ -888,6 +917,7 @@ def run_verify_stage(
 
     return {
         "verify_budget": verify_budget,
+        "reserved_refill_calls": reserved_refill_calls,
         "verify_calls": len(verify_runs),
         "verify_skipped_due_budget": max(0, len(candidates) - verify_budget),
         "verify_runs": verify_runs,
@@ -1186,6 +1216,7 @@ def enrich_articles_with_tavily(
         report["verified_count"] = len(verify["verified_articles"])
         report["preserved_error_count"] = len(verify["preserved_error_articles"])
         report["verify_budget"] = verify["verify_budget"]
+        report["reserved_refill_calls"] = verify["reserved_refill_calls"]
         report["verify_skipped_due_budget"] = verify["verify_skipped_due_budget"]
         report["verify_runs"] = verify["verify_runs"]
         report["verified_candidates"] = verify["verified_candidates"]

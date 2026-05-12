@@ -97,7 +97,7 @@ enrichment.enabled: false
 - `enabled`：默认是否启用 Tavily。当前 PR 不默认开启。
 - `min_articles`：目标文章数，不代表一定补满。
 - `strict_hours`：严格时间窗，当前目标是 24 小时，不为凑数量放宽。
-- `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：调用预算，避免单次运行不可控；refill 只在 verify / preserved 后不足 `min_articles` 时按剩余缺口触发。
+- `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：调用预算，避免单次运行不可控；默认会从总预算中为 priority + secondary refill 预留调用空间。
 - `verify_search_depth`：verify 使用的 Tavily search depth，当前默认 `basic`。
 - `enable_official_fallback`：是否启用官方站点补量，默认不启用。
 - `trusted_domains`：策略层域名集合，不是线上热修名单。
@@ -105,7 +105,7 @@ enrichment.enabled: false
 术语约定：
 
 - `verify`：验证已有 source 候选。
-- `refill`：在不足时按可信域名补量；priority 不足时再进入 secondary，达到 `min_articles` 后停止。
+- `refill`：在 verify / preserved 后不足时按可信域名补量；priority 不足时再进入 secondary，达到 `min_articles` 后停止。
 - `official_fallback`：官方站点补量，默认不启用。
 - `fail-open`：Tavily 出错时保住现有抓取和落盘。
 

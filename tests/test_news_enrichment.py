@@ -699,3 +699,88 @@ def test_refill_uses_staged_tavily_calls_until_minimum_is_met(
     assert result["report"]["secondary_refill_runs"][0]["needed_before"] == 6
     assert result["report"]["secondary_refill_runs"][0]["remaining_needed_after"] == 0
     assert len(result["report"]["secondary_refill_runs"][0]["candidate_results"]) == 6
+
+
+def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    source_titles = [
+        "OpenAI debuts AI agent workspace for finance teams",
+        "Anthropic expands Claude tools for legal research",
+        "Google DeepMind updates Gemini robotics controller",
+        "Microsoft ships Copilot assistant for security teams",
+        "Meta releases Llama model tuning toolkit",
+        "Mistral launches AI inference service for developers",
+        "Cohere adds enterprise retrieval agents",
+        "Perplexity unveils AI shopping assistant",
+        "Databricks upgrades machine learning governance",
+        "Nvidia introduces robotics foundation model",
+        "Amazon tests warehouse AI robot fleet",
+        "Hugging Face publishes dataset quality tools",
+    ]
+    articles = [
+        make_article(title, f"https://example.com/story-{index}")
+        for index, title in enumerate(source_titles)
+    ]
+    secondary_titles = [
+        "Anthropic launches Claude memory controls",
+        "OpenAI releases Codex browser automation",
+        "Google ships Gemini data analysis agents",
+        "Microsoft adds Copilot model routing",
+        "Mistral debuts enterprise AI search",
+        "Nvidia updates robotics AI simulation",
+    ]
+    secondary_results = [
+        make_tavily_result(
+            title,
+            "reuters.com" if index % 2 else "arstechnica.com",
+            f"secondary-ai-story-{index}",
+        )
+        for index, title in enumerate(secondary_titles)
+    ]
+    for result in secondary_results:
+        result["published_date"] = "2026-05-11T12:00:00Z"
+    seen_domain_groups: list[list[str]] = []
+
+    def fake_search(session, api_key, payload):
+        include_domains = payload.get("include_domains")
+        if not include_domains:
+            return {"latency_ms": 5.0, "response": {"results": []}}
+        seen_domain_groups.append(include_domains)
+        if include_domains == ["thenextweb.com", "venturebeat.com"]:
+            return {"latency_ms": 10.0, "response": {"results": []}}
+        if include_domains == ["reuters.com", "arstechnica.com"]:
+            return {"latency_ms": 12.0, "response": {"results": secondary_results}}
+        raise AssertionError(f"Unexpected payload: {payload}")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        articles,
+        report_date="2026-05-11",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 7,
+                "max_verify_calls": 6,
+                "max_refill_rounds": 1,
+                "min_articles": 10,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 5, 11, 21, 54, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert result["report"]["reserved_refill_calls"] == 2
+    assert result["report"]["verify_budget"] == 5
+    assert result["report"]["verify_calls"] == 5
+    assert result["report"]["refill_calls"] == 2
+    assert seen_domain_groups == [
+        ["thenextweb.com", "venturebeat.com"],
+        ["reuters.com", "arstechnica.com"],
+    ]
+    assert result["report"]["secondary_refilled_count"] == 6
+    assert result["report"]["final_count"] == 6
+    assert result["report"]["stop_reason"] == "budget_exhausted_after_secondary_refill"

@@ -73,6 +73,7 @@ fetch_all
 - exact verify。
 - verify / preserved 后不足 `min_articles` 时触发 priority refill。
 - priority 仍不足时触发 secondary refill。
+- 默认从 `max_total_calls` 中为 priority + secondary refill 预留调用预算，避免 verify 消耗完补量空间。
 - optional official fallback。
 - 24 小时严格时间窗判断。
 - exact URL / same-domain + title similarity 匹配。
@@ -171,7 +172,7 @@ enrichment:
 - `min_articles: 10`: 目标新闻数，但不强行凑数。
 - `strict_hours: 24`: 严格时间窗。
 - `max_total_calls: 7`: 单次运行 Tavily 总预算。
-- `max_verify_calls: 6`: exact verify 预算。
+- `max_verify_calls: 6`: exact verify 上限；实际 verify budget 会扣除预留 refill 调用。
 - `max_refill_rounds: 1`: 每个 refill stage 默认 1 轮；仅在最终候选仍不足 `min_articles` 时触发。
 - `verify_search_depth: basic`: verify 用低成本路径。
 - `enable_fuzzy_second_pass: false`: Phase 0 没证明 fuzzy 有收益。
@@ -357,6 +358,7 @@ JSON 的 `enrichment` 字段是复盘入口。
 | `refill_calls` | media refill 调用数 |
 | `fallback_calls` | official fallback 调用数 |
 | `total_calls` | Tavily 总调用数 |
+| `reserved_refill_calls` | 本轮从总预算中预留给 refill/fallback 的调用数 |
 | `verified_count` | verify 接受数 |
 | `preserved_error_count` | verify 请求失败但保留的原始文章数 |
 | `priority_refilled_count` | priority refill 接受数 |
@@ -392,6 +394,7 @@ JSON 的 `enrichment` 字段是复盘入口。
 - source 为 0 且 official fallback 关闭时的 stop reason 语义。
 - verify / preserved 已达到 `min_articles` 时不再触发 refill。
 - priority refill 不足时继续调用 secondary refill，并只接收剩余缺口需要的候选。
+- 默认预算会保留 secondary refill 机会，避免 verify 用满 `max_total_calls`。
 - verify 命中但超出 24 小时或缺少 `published_date` 时拒绝。
 - prefilter 分层为 `core_ai`、`ai_neighbor`、`generic_or_low_signal`，并按该顺序消耗 verify 预算。
 - 聚合型标题在 verify 前硬拒绝。
@@ -406,7 +409,7 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. pytest -q -p no:cacheprovider tests/test_
 结果：
 
 ```text
-14 passed, 1 warning
+15 passed, 1 warning
 ```
 
 warning 是 Pydantic V2 class-based `Config` deprecation，与 Tavily 行为无直接关系。
