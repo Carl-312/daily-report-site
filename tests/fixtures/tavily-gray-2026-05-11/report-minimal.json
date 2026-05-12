@@ -1,0 +1,136 @@
+{
+  "source": "tmp/github-artifacts/tavily-gray-2026-05-11-25680995172/gray/tavily/2026-05-11/",
+  "run_id": "25680995172",
+  "report_date": "2026-05-11",
+  "old_metrics": {
+    "input_count": 13,
+    "prefiltered_count": 12,
+    "verify_calls": 6,
+    "refill_calls": 1,
+    "total_calls": 7,
+    "final_count": 3,
+    "stop_reason": "budget_exhausted_after_priority_refill",
+    "verify_budget": 6,
+    "reserved_refill_calls": null,
+    "secondary_refill_runs": 0
+  },
+  "articles": [
+    {
+      "title": "AI日报：腾讯云QClaw发布文件空间；阿里通义千问接入淘宝；微信推AI支付等功能",
+      "link": "https://news.aibase.com/zh/daily/27865",
+      "description": "",
+      "publish_time": "未知时间",
+      "content": "",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "Anthropic says ‘evil’ portrayals of AI were responsible for Claude’s blackmail attempts",
+      "link": "https://techcrunch.com/2026/05/10/anthropic-says-evil-portrayals-of-ai-were-responsible-for-claudes-blackmail-attempts/",
+      "description": "",
+      "publish_time": "2026-05-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Korea’s biggest manufacturers back Config, the TSMC of robot data",
+      "link": "https://techcrunch.com/2026/05/11/koreas-biggest-manufacturers-back-config-the-tsmc-of-robot-data/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "We’re feeling cynical about xAI’s big deal with Anthropic",
+      "link": "https://techcrunch.com/2026/05/10/were-feeling-cynical-about-xais-big-deal-with-anthropic/",
+      "description": "",
+      "publish_time": "2026-05-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Uber has always wanted to be more than a ride; now it has reason to hurry",
+      "link": "https://techcrunch.com/2026/05/10/uber-has-always-wanted-to-be-more-than-a-ride-now-it-has-reason-to-hurry/",
+      "description": "",
+      "publish_time": "2026-05-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The hottest place for startups to strike a deal? The F1 paddock",
+      "link": "https://techcrunch.com/2026/05/10/the-hottest-place-for-startups-to-strike-a-deal-the-f1-paddock/",
+      "description": "",
+      "publish_time": "2026-05-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TechCrunch Mobility: Lime’s IPO gamble",
+      "link": "https://techcrunch.com/2026/05/10/techcrunch-mobility-limes-ipo-gamble/",
+      "description": "",
+      "publish_time": "2026-05-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "NYT’s Wordle to become a TV game show",
+      "link": "https://techcrunch.com/2026/05/11/nyts-wordle-to-become-a-tv-game-show/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok launches an ad-free subscription plan in the UK",
+      "link": "https://techcrunch.com/2026/05/11/tiktok-launches-an-ad-free-subscription-plan-in-the-uk/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "There aren’t enough rockets for space data centers. Cowboy Space raised $275 million to build them.",
+      "link": "https://techcrunch.com/2026/05/11/there-arent-enough-rockets-for-space-data-centers-cowboy-space-raised-275-million-to-build-them/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Discord launches Nitro Rewards, giving subscribers access to the base tier of Xbox Game Pass for no extra cost",
+      "link": "https://techcrunch.com/2026/05/11/discord-launches-nitro-rewards-giving-subscribers-access-to-the-base-tier-of-xbox-game-pass-for-no-extra-cost/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Venmo’s biggest makeover in years comes at a very interesting time",
+      "link": "https://techcrunch.com/2026/05/11/venmos-biggest-makeover-in-years-comes-at-a-very-interesting-time/",
+      "description": "",
+      "publish_time": "2026-05-11",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Get ready for the whisper-filled office of the future",
+      "link": "https://techcrunch.com/2026/05/10/get-ready-for-the-whisper-filled-office-of-the-future/",
+      "description": "",
+      "publish_time": "2026-05-10",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ]
+}

@@ -14,7 +14,8 @@
 
 旧文档仍作为历史设计和实验记录保留；后续判断当前状态时，以本文为准。
 
-本文状态基准：`2026-05-05`，基于当前工作区代码与文档。
+本文状态基准：`2026-05-12`，基于当前工作区代码、文档和
+`2026-05-11` Tavily GitHub Actions 灰度 artifact。
 
 ## 一句话结论
 
@@ -172,7 +173,8 @@ enrichment:
 - `min_articles: 10`: 目标新闻数，但不强行凑数。
 - `strict_hours: 24`: 严格时间窗。
 - `max_total_calls: 7`: 单次运行 Tavily 总预算。
-- `max_verify_calls: 6`: exact verify 上限；实际 verify budget 会扣除预留 refill 调用。
+- `max_verify_calls: 6`: exact verify 上限；实际 verify budget 会先从
+  `max_total_calls` 扣除 priority + secondary refill 预留调用。
 - `max_refill_rounds: 1`: 每个 refill stage 默认 1 轮；仅在最终候选仍不足 `min_articles` 时触发。
 - `verify_search_depth: basic`: verify 用低成本路径。
 - `enable_fuzzy_second_pass: false`: Phase 0 没证明 fuzzy 有收益。
@@ -306,6 +308,46 @@ python3 main.py fetch --enrichment off
 - prefilter 候选自身尚未形成可用 cluster，因此 verify 预算节省只有实现，没有实测收益。
 - official fallback 可以手动开启并单独统计，但证据不足以默认开启。
 
+### 2026-05-11 GitHub Actions Tavily 灰度样本
+
+产物：
+
+- 本地 artifact：
+  `tmp/github-artifacts/tavily-gray-2026-05-11-25680995172/gray/tavily/2026-05-11/`
+- 评估结论：`data/benchmarks/tavily-gray-2026-05-11-evaluation.md`
+- 最小回归 fixture：
+  `tests/fixtures/tavily-gray-2026-05-11/report-minimal.json`
+- 回归测试：`tests/test_tavily_gray_regression.py`
+
+事实摘要：
+
+| Metric | Old gray value |
+|---|---:|
+| `input_count` | `13` |
+| `prefiltered_count` | `12` |
+| `verify_calls` | `6` |
+| `refill_calls` | `1` |
+| `total_calls` | `7` |
+| `final_count` | `3` |
+| `stop_reason` | `budget_exhausted_after_priority_refill` |
+
+这个 artifact 的 `article_count` / `final_count` 实际是 `3`，不是 `6`。旧逻辑在
+默认 `max_total_calls=7`、`max_verify_calls=6` 下让 verify 用掉 6 次预算，只剩
+1 次 priority refill；priority 返回的候选缺少可用 `published_date`，因此接受数为
+0，且没有预算进入 secondary refill。
+
+当前修复：
+
+- 默认会从 `max_total_calls` 中预留 priority + secondary refill 调用空间。
+- 默认配置下 `reserved_refill_calls=2`，`verify_budget=5`，不再是 `6`。
+- `reserved_refill_calls` 和 `verify_budget` 都写入 enrichment 诊断字段，便于复盘。
+- priority refill 仍不足 `min_articles` 时，secondary refill 会有机会执行。
+
+这不是 Tavily 默认开启的证据。它只能证明一个具体预算冲突已经被转成可回归的样本：
+verify 不能再把全部默认预算挤占到 secondary refill 无法运行。真实 Tavily 返回仍可能因
+`published_date` 缺失、网络波动或候选质量不足而补不满 `10` 条；official fallback
+仍保持默认关闭。
+
 ## 正式真实运行结果
 
 产物：
@@ -400,16 +442,26 @@ JSON 的 `enrichment` 字段是复盘入口。
 - 聚合型标题在 verify 前硬拒绝。
 - refill 仍保持严格 AI 标题相关性门禁。
 
+`tests/test_tavily_gray_regression.py` 额外覆盖：
+
+- 从 `2026-05-11` 灰度样本重建 13 条输入。
+- mock verify / priority refill / secondary refill Tavily responses，单元测试不真实调用 Tavily 网络。
+- 断言旧灰度事实：`final_count=3`、`verify_calls=6`、`refill_calls=1`、没有 secondary refill。
+- 断言当前默认预算：`reserved_refill_calls=2`，`verify_budget=5`。
+- 断言不足 `min_articles` 时 priority refill 之后继续 secondary refill。
+- 断言 Tavily refill articles 会进入 JSON，并进入后续 `offline_summary` 输入。
+- 断言 verify request error 被 preserved 后如果已满足 `min_articles`，不会触发 refill。
+
 本轮集成验收使用的验证命令：
 
 ```bash
-PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. pytest -q -p no:cacheprovider tests/test_news_enrichment.py
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. pytest -q -p no:cacheprovider
 ```
 
 结果：
 
 ```text
-15 passed, 1 warning
+22 passed, 1 warning
 ```
 
 warning 是 Pydantic V2 class-based `Config` deprecation，与 Tavily 行为无直接关系。
