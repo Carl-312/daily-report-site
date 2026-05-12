@@ -46,6 +46,16 @@ def make_article(title: str, link: str = "https://example.com/story") -> dict:
     }
 
 
+def make_tavily_result(title: str, domain: str, slug: str) -> dict:
+    return {
+        "title": title,
+        "url": f"https://{domain}/news/{slug}",
+        "published_date": "2026-04-01T03:00:00Z",
+        "content": f"{title} content",
+        "score": 0.9,
+    }
+
+
 def test_enrichment_disabled_returns_original_articles() -> None:
     cfg = load_project_config()
 
@@ -509,3 +519,183 @@ def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
     assert candidate["within_24h"] is True
     assert candidate["ai_title_relevant"] is False
     assert candidate["accepted"] is False
+
+
+def test_refill_is_skipped_when_verify_already_satisfies_minimum(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    articles = [
+        make_article(
+            "OpenAI launches AI coding workspace",
+            "https://example.com/openai-workspace",
+        ),
+        make_article(
+            "Anthropic releases Claude enterprise console",
+            "https://example.com/anthropic-console",
+        ),
+    ]
+    seen_payloads: list[dict] = []
+
+    def fake_search(session, api_key, payload):
+        seen_payloads.append(payload)
+        title = payload["query"].strip('"')
+        matching_article = next(
+            article for article in articles if article["title"] == title
+        )
+        return {
+            "latency_ms": 10.0,
+            "response": {
+                "results": [
+                    {
+                        "title": matching_article["title"],
+                        "url": matching_article["link"],
+                        "published_date": "2026-04-01T03:00:00Z",
+                        "content": "Verified source article.",
+                        "score": 0.99,
+                    }
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        articles,
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 4,
+                "max_verify_calls": 4,
+                "max_refill_rounds": 1,
+                "min_articles": 2,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert result["report"]["verified_count"] == 2
+    assert result["report"]["refill_needed_count"] == 0
+    assert result["report"]["refill_calls"] == 0
+    assert result["report"]["priority_refill_runs"] == []
+    assert result["report"]["final_count"] == 2
+    assert result["report"]["stop_reason"] == "min_articles_satisfied_after_verify"
+    assert all("include_domains" not in payload for payload in seen_payloads)
+
+
+def test_refill_uses_staged_tavily_calls_until_minimum_is_met(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    priority_results = [
+        make_tavily_result(
+            "OpenAI launches AI coding workspace",
+            "thenextweb.com",
+            "openai-coding-workspace",
+        ),
+        make_tavily_result(
+            "Anthropic releases Claude enterprise console",
+            "venturebeat.com",
+            "claude-enterprise-console",
+        ),
+        make_tavily_result(
+            "Mistral debuts AI inference platform",
+            "thenextweb.com",
+            "mistral-inference-platform",
+        ),
+        make_tavily_result(
+            "Nvidia introduces robotics foundation model",
+            "venturebeat.com",
+            "nvidia-robotics-foundation",
+        ),
+    ]
+    secondary_results = [
+        make_tavily_result(
+            "Hugging Face ships AI dataset tools",
+            "reuters.com",
+            "hugging-face-dataset-tools",
+        ),
+        make_tavily_result(
+            "Perplexity launches AI shopping assistant",
+            "arstechnica.com",
+            "perplexity-shopping-assistant",
+        ),
+        make_tavily_result(
+            "Microsoft unveils Copilot security agent",
+            "reuters.com",
+            "copilot-security-agent",
+        ),
+        make_tavily_result(
+            "Google DeepMind updates Gemini robotics system",
+            "arstechnica.com",
+            "gemini-robotics-system",
+        ),
+        make_tavily_result(
+            "Databricks adds machine learning governance",
+            "reuters.com",
+            "databricks-ml-governance",
+        ),
+        make_tavily_result(
+            "Meta releases Llama developer assistant",
+            "arstechnica.com",
+            "llama-developer-assistant",
+        ),
+        make_tavily_result(
+            "Amazon launches AI warehouse robot",
+            "reuters.com",
+            "amazon-warehouse-robot",
+        ),
+        make_tavily_result(
+            "Cohere ships enterprise LLM connectors",
+            "arstechnica.com",
+            "cohere-llm-connectors",
+        ),
+    ]
+    seen_domain_groups: list[list[str]] = []
+
+    def fake_search(session, api_key, payload):
+        include_domains = payload.get("include_domains") or []
+        seen_domain_groups.append(include_domains)
+        if include_domains == ["thenextweb.com", "venturebeat.com"]:
+            return {"latency_ms": 10.0, "response": {"results": priority_results}}
+        if include_domains == ["reuters.com", "arstechnica.com"]:
+            return {"latency_ms": 12.0, "response": {"results": secondary_results}}
+        raise AssertionError(f"Unexpected payload: {payload}")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 3,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 1,
+                "min_articles": 10,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert seen_domain_groups == [
+        ["thenextweb.com", "venturebeat.com"],
+        ["reuters.com", "arstechnica.com"],
+    ]
+    assert result["report"]["refill_needed_count"] == 10
+    assert result["report"]["priority_refilled_count"] == 4
+    assert result["report"]["secondary_refilled_count"] == 6
+    assert result["report"]["refill_calls"] == 2
+    assert result["report"]["total_calls"] == 2
+    assert result["report"]["final_count"] == 10
+    assert result["report"]["refill_remaining_count"] == 0
+    assert result["report"]["stop_reason"] == "secondary_refill_complete"
+    assert result["report"]["secondary_refill_runs"][0]["needed_before"] == 6
+    assert result["report"]["secondary_refill_runs"][0]["remaining_needed_after"] == 0
+    assert len(result["report"]["secondary_refill_runs"][0]["candidate_results"]) == 6

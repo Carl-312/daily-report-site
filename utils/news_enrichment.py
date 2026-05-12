@@ -675,11 +675,19 @@ def build_initial_report(
         "secondary_refilled_count": 0,
         "media_refilled_count": 0,
         "official_refilled_count": 0,
+        "refill_needed_count": 0,
+        "refill_remaining_count": 0,
         "near_duplicate_rejected_count": 0,
         "story_cluster_rejected_count": 0,
         "secondary_duplicate_slip_count": 0,
         "final_count": len(articles),
         "stop_reason": "not_started",
+        "priority_refill_runs": [],
+        "secondary_refill_runs": [],
+        "official_fallback_runs": [],
+        "priority_refilled_candidates": [],
+        "secondary_refilled_candidates": [],
+        "official_refilled_candidates": [],
         "accepted_by_stage_preview": {},
         "parameters": {
             "min_articles": settings.min_articles,
@@ -722,6 +730,19 @@ def below_min_stop_reason(*, secondary_refill_executed: bool) -> str:
     if secondary_refill_executed:
         return "below_min_articles_after_secondary_refill_official_fallback_disabled"
     return "below_min_articles_after_priority_refill_official_fallback_disabled"
+
+
+def empty_refill_result(remaining_budget: int) -> dict[str, Any]:
+    return {
+        "refill_calls": 0,
+        "accepted_candidates": [],
+        "refill_runs": [],
+        "media_refilled_count": 0,
+        "near_duplicate_rejected_count": 0,
+        "story_cluster_rejected_count": 0,
+        "duplicate_slip_count": 0,
+        "remaining_budget_after_refill": remaining_budget,
+    }
 
 
 def run_verify_stage(
@@ -889,27 +910,27 @@ def run_domain_refill_stage(
     api_key: str,
     reference_dt: datetime,
     remaining_budget: int,
+    needed_count: int,
 ) -> dict[str, Any]:
     accepted_candidates: list[dict[str, Any]] = []
     refill_runs: list[dict[str, Any]] = []
     near_duplicate_rejected_count = 0
     story_cluster_rejected_count = 0
 
-    if settings.max_refill_rounds <= 0 or remaining_budget <= 0:
-        return {
-            "refill_calls": 0,
-            "accepted_candidates": accepted_candidates,
-            "refill_runs": refill_runs,
-            "media_refilled_count": 0,
-            "near_duplicate_rejected_count": 0,
-            "story_cluster_rejected_count": 0,
-            "duplicate_slip_count": 0,
-            "remaining_budget_after_refill": remaining_budget,
-        }
+    if (
+        settings.max_refill_rounds <= 0
+        or remaining_budget <= 0
+        or needed_count <= 0
+        or not include_domains
+    ):
+        return empty_refill_result(remaining_budget)
 
     start_date, end_date = report_window(reference_dt)
     rounds_budget = min(settings.max_refill_rounds, remaining_budget)
     for round_index in range(rounds_budget):
+        needed_before_round = max(0, needed_count - len(accepted_candidates))
+        if needed_before_round <= 0:
+            break
         payload = {
             "query": query,
             "topic": "news",
@@ -946,6 +967,8 @@ def run_domain_refill_stage(
         round_story_cluster_rejected = 0
 
         for index, result_item in enumerate(results, start=1):
+            if len(accepted_candidates) + len(round_accepted) >= needed_count:
+                break
             title = result_item.get("title", "")
             url = result_item.get("url", "")
             normalized_title = normalize_title(title)
@@ -1031,7 +1054,11 @@ def run_domain_refill_stage(
                 "end_date": end_date,
                 "latency_ms": latency_ms,
                 "result_count": len(results),
+                "needed_before": needed_before_round,
                 "accepted_count": len(round_accepted),
+                "remaining_needed_after": max(
+                    0, needed_count - len(accepted_candidates) - len(round_accepted)
+                ),
                 "request_outcome": classify_request_outcome(error_obj),
                 "near_duplicate_rejected_count": round_near_duplicate_rejected,
                 "story_cluster_rejected_count": round_story_cluster_rejected,
@@ -1043,7 +1070,7 @@ def run_domain_refill_stage(
         accepted_candidates.extend(round_accepted)
         near_duplicate_rejected_count += round_near_duplicate_rejected
         story_cluster_rejected_count += round_story_cluster_rejected
-        if error:
+        if error or len(accepted_candidates) >= needed_count or not round_accepted:
             break
 
     return {
@@ -1181,21 +1208,31 @@ def enrich_articles_with_tavily(
             and candidate.get("validation_outcome") == "no_match"
         )
 
-        remaining_budget = max(0, settings.max_total_calls - report["total_calls"])
-        priority_refill = run_domain_refill_stage(
-            base_articles=article_dicts,
-            prior_candidates=verify["verified_articles"],
-            include_domains=list(
-                settings.trusted_domains.priority_refill_media_whitelist
-            ),
-            query=settings.priority_refill_query,
-            stage_name="priority_refill",
-            settings=settings,
-            session=session,
-            api_key=tavily_api_key,
-            reference_dt=reference_dt,
-            remaining_budget=remaining_budget,
+        verified_output_articles = (
+            verify["preserved_error_articles"] + verify["verified_articles"]
         )
+        report["refill_needed_count"] = max(
+            0, settings.min_articles - len(verified_output_articles)
+        )
+
+        remaining_budget = max(0, settings.max_total_calls - report["total_calls"])
+        priority_refill = empty_refill_result(remaining_budget)
+        if report["refill_needed_count"] > 0:
+            priority_refill = run_domain_refill_stage(
+                base_articles=article_dicts,
+                prior_candidates=verified_output_articles,
+                include_domains=list(
+                    settings.trusted_domains.priority_refill_media_whitelist
+                ),
+                query=settings.priority_refill_query,
+                stage_name="priority_refill",
+                settings=settings,
+                session=session,
+                api_key=tavily_api_key,
+                reference_dt=reference_dt,
+                remaining_budget=remaining_budget,
+                needed_count=report["refill_needed_count"],
+            )
         report["refill_calls"] = priority_refill["refill_calls"]
         report["total_calls"] += priority_refill["refill_calls"]
         report["priority_refilled_count"] = priority_refill["media_refilled_count"]
@@ -1212,18 +1249,17 @@ def enrich_articles_with_tavily(
 
         secondary_refill_executed = False
         secondary_candidates: list[dict[str, Any]] = []
-        if (
-            remaining_budget > 0
-            and (
-                len(verify["verified_articles"])
-                + len(priority_refill["accepted_candidates"])
-            )
-            < settings.min_articles
-        ):
+        secondary_needed_count = max(
+            0,
+            settings.min_articles
+            - len(verified_output_articles)
+            - len(priority_refill["accepted_candidates"]),
+        )
+        if remaining_budget > 0 and secondary_needed_count > 0:
             secondary_refill = run_domain_refill_stage(
                 base_articles=article_dicts,
                 prior_candidates=(
-                    verify["verified_articles"] + priority_refill["accepted_candidates"]
+                    verified_output_articles + priority_refill["accepted_candidates"]
                 ),
                 include_domains=list(
                     settings.trusted_domains.secondary_refill_candidate_domains
@@ -1235,6 +1271,7 @@ def enrich_articles_with_tavily(
                 api_key=tavily_api_key,
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
+                needed_count=secondary_needed_count,
             )
             secondary_refill_executed = secondary_refill["refill_calls"] > 0
             secondary_candidates = secondary_refill["accepted_candidates"]
@@ -1258,20 +1295,22 @@ def enrich_articles_with_tavily(
             remaining_budget = secondary_refill["remaining_budget_after_refill"]
 
         official_candidates: list[dict[str, Any]] = []
+        official_needed_count = max(
+            0,
+            settings.min_articles
+            - len(verified_output_articles)
+            - len(priority_refill["accepted_candidates"])
+            - len(secondary_candidates),
+        )
         if (
             settings.enable_official_fallback
             and remaining_budget > 0
-            and (
-                len(verify["verified_articles"])
-                + len(priority_refill["accepted_candidates"])
-                + len(secondary_candidates)
-            )
-            < settings.min_articles
+            and official_needed_count > 0
         ):
             official = run_domain_refill_stage(
                 base_articles=article_dicts,
                 prior_candidates=(
-                    verify["verified_articles"]
+                    verified_output_articles
                     + priority_refill["accepted_candidates"]
                     + secondary_candidates
                 ),
@@ -1285,6 +1324,7 @@ def enrich_articles_with_tavily(
                 api_key=tavily_api_key,
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
+                needed_count=official_needed_count,
             )
             official_candidates = official["accepted_candidates"]
             report["fallback_calls"] = official["refill_calls"]
@@ -1301,13 +1341,15 @@ def enrich_articles_with_tavily(
             remaining_budget = official["remaining_budget_after_refill"]
 
         final_articles = (
-            verify["preserved_error_articles"]
-            + verify["verified_articles"]
+            verified_output_articles
             + priority_refill["accepted_candidates"]
             + secondary_candidates
             + official_candidates
         )
         report["final_count"] = len(final_articles)
+        report["refill_remaining_count"] = max(
+            0, settings.min_articles - report["final_count"]
+        )
         report["accepted_by_stage_preview"] = {
             "preserved_errors": sample_titles(verify["preserved_error_articles"]),
             "verify": sample_titles(verify["verified_articles"]),
@@ -1315,11 +1357,20 @@ def enrich_articles_with_tavily(
             "secondary_refill": sample_titles(secondary_candidates),
             "official_fallback": sample_titles(official_candidates),
         }
-        if settings.enable_official_fallback:
-            if remaining_budget <= 0 and report["final_count"] < settings.min_articles:
+        if report["refill_needed_count"] == 0:
+            report["stop_reason"] = "min_articles_satisfied_after_verify"
+        elif report["final_count"] >= settings.min_articles:
+            if report["fallback_calls"] > 0:
+                report["stop_reason"] = "official_fallback_complete"
+            elif secondary_refill_executed:
+                report["stop_reason"] = "secondary_refill_complete"
+            else:
+                report["stop_reason"] = "priority_refill_complete"
+        elif settings.enable_official_fallback:
+            if remaining_budget <= 0:
                 report["stop_reason"] = "budget_exhausted_after_official_fallback"
             else:
-                report["stop_reason"] = "official_fallback_complete"
+                report["stop_reason"] = "below_min_articles_after_official_fallback"
         elif remaining_budget <= 0 and report["final_count"] < settings.min_articles:
             report["stop_reason"] = (
                 "budget_exhausted_after_secondary_refill"
@@ -1329,12 +1380,6 @@ def enrich_articles_with_tavily(
         elif report["final_count"] < settings.min_articles:
             report["stop_reason"] = below_min_stop_reason(
                 secondary_refill_executed=secondary_refill_executed
-            )
-        else:
-            report["stop_reason"] = (
-                "secondary_refill_complete"
-                if secondary_refill_executed
-                else "priority_refill_complete"
             )
         if verify["preserved_error_articles"]:
             report["notes"].append(

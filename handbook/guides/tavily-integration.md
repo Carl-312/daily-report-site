@@ -71,12 +71,12 @@ fetch_all
 - 输入 `Article` 或 `dict` 的统一转换。
 - 本地 prefilter。
 - exact verify。
-- priority refill。
-- secondary refill。
+- verify / preserved 后不足 `min_articles` 时触发 priority refill。
+- priority 仍不足时触发 secondary refill。
 - optional official fallback。
 - 24 小时严格时间窗判断。
 - exact URL / same-domain + title similarity 匹配。
-- refill 合并阶段 near-duplicate / story-cluster 拦截。
+- refill 合并阶段 near-duplicate / story-cluster 拦截，并按剩余缺口停止接收候选，避免补过量。
 - request timeout / HTTP error / connection error 分类。
 - `preserved_error_articles` fail-open 路径。
 - `accepted_by_stage_preview`、`verify_runs`、`rejected_candidates` 等诊断字段。
@@ -172,7 +172,7 @@ enrichment:
 - `strict_hours: 24`: 严格时间窗。
 - `max_total_calls: 7`: 单次运行 Tavily 总预算。
 - `max_verify_calls: 6`: exact verify 预算。
-- `max_refill_rounds: 1`: 每个 refill stage 默认 1 轮。
+- `max_refill_rounds: 1`: 每个 refill stage 默认 1 轮；仅在最终候选仍不足 `min_articles` 时触发。
 - `verify_search_depth: basic`: verify 用低成本路径。
 - `enable_fuzzy_second_pass: false`: Phase 0 没证明 fuzzy 有收益。
 - `enable_official_fallback: false`: 官方域名补充仍需显式开启。
@@ -362,6 +362,8 @@ JSON 的 `enrichment` 字段是复盘入口。
 | `priority_refilled_count` | priority refill 接受数 |
 | `secondary_refilled_count` | secondary refill 接受数 |
 | `official_refilled_count` | official fallback 接受数 |
+| `refill_needed_count` | verify / preserved 后距离 `min_articles` 的初始缺口 |
+| `refill_remaining_count` | 所有 refill / fallback 后仍缺的条数 |
 | `near_duplicate_rejected_count` | 近重复拦截数 |
 | `story_cluster_rejected_count` | 同 story 拦截数 |
 | `final_count` | 最终进入 JSON / summary 的文章数 |
@@ -388,6 +390,8 @@ JSON 的 `enrichment` 字段是复盘入口。
 - verify timeout 时保留原始文章。
 - `session.trust_env` 跟随配置。
 - source 为 0 且 official fallback 关闭时的 stop reason 语义。
+- verify / preserved 已达到 `min_articles` 时不再触发 refill。
+- priority refill 不足时继续调用 secondary refill，并只接收剩余缺口需要的候选。
 - verify 命中但超出 24 小时或缺少 `published_date` 时拒绝。
 - prefilter 分层为 `core_ai`、`ai_neighbor`、`generic_or_low_signal`，并按该顺序消耗 verify 预算。
 - 聚合型标题在 verify 前硬拒绝。
@@ -402,7 +406,7 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. pytest -q -p no:cacheprovider tests/test_
 结果：
 
 ```text
-12 passed, 1 warning
+14 passed, 1 warning
 ```
 
 warning 是 Pydantic V2 class-based `Config` deprecation，与 Tavily 行为无直接关系。
