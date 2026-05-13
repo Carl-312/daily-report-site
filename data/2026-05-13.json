@@ -1,0 +1,212 @@
+{
+  "date": "2026-05-13",
+  "articles": [
+    {
+      "title": "Former Tesla exec and Heron Power CEO Drew Baglino has founded a heat pump startup",
+      "link": "https://techcrunch.com/2026/05/12/former-tesla-exec-and-heron-power-ceo-drew-baglino-has-founded-a-heat-pump-startup/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Medicare’s new payment model is built for AI, and most of the tech world has no idea",
+      "link": "https://techcrunch.com/2026/05/12/medicares-new-payment-model-is-built-for-ai-and-most-of-the-tech-world-has-no-idea/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Musk mulled handing OpenAI to his children, Altman testifies",
+      "link": "https://techcrunch.com/2026/05/12/musk-mulled-handing-openai-to-his-children-altman-testifies/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The AI legal services industry is heating up — Anthropic is getting in on the action",
+      "link": "https://techcrunch.com/2026/05/12/the-ai-legal-services-industry-is-heating-up-anthropic-is-getting-in-on-the-action/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Anthropic warns investors against secondary platforms offering access to its shares",
+      "link": "https://techcrunch.com/2026/05/12/anthropic-warns-investors-against-secondary-platforms-offering-access-to-its-shares/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Report: Google and SpaceX in talks to put data centers into orbit",
+      "link": "https://techcrunch.com/2026/05/12/report-google-and-spacex-in-talks-to-put-data-centers-into-orbit/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Instructure strikes deal with hackers who breached it twice",
+      "link": "https://techcrunch.com/2026/05/12/instructure-strikes-deal-with-hackers-who-breached-it-twice/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok now wants to be the place you book the trip you just saw on TikTok",
+      "link": "https://techcrunch.com/2026/05/12/tiktok-now-wants-to-be-the-place-you-book-the-trip-you-just-saw-on-tiktok/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Kevin Hartz’s A* just closed its third fund with $450M",
+      "link": "https://techcrunch.com/2026/05/12/kevin-hartzs-a-just-closed-its-third-fund-with-450-million/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Potholes cost cities millions: This company is using AI and trucks to fix them",
+      "link": "https://techcrunch.com/2026/05/12/potholes-cost-cities-millions-samsara-using-ai-trucks-fix/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Everything Google announced at its Android Show, from Googlebooks to vibe-coded widgets",
+      "link": "https://techcrunch.com/2026/05/12/everything-google-announced-at-its-android-show-from-googlebooks-to-vibe-coded-widgets/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google adds Gemini-powered dictation to Gboard, which could be bad news for dictation startups",
+      "link": "https://techcrunch.com/2026/05/12/google-adds-gemini-powered-dictation-to-gboard-which-could-be-bad-news-for-dictation-startups/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Google launches new Android security feature to help uncover spyware attacks",
+      "link": "https://techcrunch.com/2026/05/12/google-launches-new-android-security-feature-to-help-uncover-spyware-attacks/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "US bank discloses security lapse after sharing customer data with AI app",
+      "link": "https://techcrunch.com/2026/05/12/us-bank-discloses-security-lapse-after-sharing-customer-data-with-ai-app/",
+      "description": "",
+      "publish_time": "2026-05-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-05-13",
+    "reference_dt": "2026-05-13T12:31:00.570508+08:00",
+    "enabled": false,
+    "applied": false,
+    "skip_reason": "disabled",
+    "error": null,
+    "input_count": 14,
+    "prefiltered_count": 14,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 0,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 14,
+    "stop_reason": "disabled",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false
+    },
+    "notes": [
+      "Tavily enrichment is disabled for this run."
+    ]
+  }
+}
