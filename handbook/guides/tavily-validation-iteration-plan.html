@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tavily 灰度与 main workflow 关系流水线</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --ink: #111827;
+      --muted: #5d6675;
+      --line: #cfd6df;
+      --panel: #ffffff;
+      --main: #1d4ed8;
+      --main-soft: #e7efff;
+      --gray: #6b7280;
+      --gray-soft: #eef1f5;
+      --tavily: #0f766e;
+      --tavily-soft: #dcf5f1;
+      --warn: #9a5b00;
+      --warn-soft: #fff1d3;
+      --stop: #b42318;
+      --stop-soft: #ffe5df;
+      --shadow: 0 10px 26px rgba(17, 24, 39, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 42px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 920px;
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: 21px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 15px;
+      line-height: 1.25;
+      letter-spacing: 0;
+      margin-bottom: 6px;
+    }
+
+    code {
+      padding: 1px 5px;
+      border: 1px solid #d6e4f4;
+      border-radius: 5px;
+      background: #f0f7ff;
+      color: #0f3d67;
+      font-size: 0.92em;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 22px;
+    }
+
+    .hero-copy,
+    .legend {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .hero-copy p {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 16px;
+      margin-top: 12px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 30px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      flex: 0 0 auto;
+    }
+
+    .swatch.main {
+      background: var(--main-soft);
+      border-color: #b8ccff;
+    }
+
+    .swatch.tavily {
+      background: var(--tavily-soft);
+      border-color: #9bd7d0;
+    }
+
+    .swatch.gray {
+      background: var(--gray-soft);
+      border-color: #cbd5e1;
+    }
+
+    .swatch.stop {
+      background: var(--stop-soft);
+      border-color: #ffb8ac;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .pipeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .rail {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+
+    .rail-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+
+    .rail-head p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .flow {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(142px, 1fr);
+      gap: 24px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding: 2px 4px 8px;
+    }
+
+    .step {
+      position: relative;
+      min-height: 120px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .step::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -24px;
+      width: 24px;
+      height: 2px;
+      background: var(--line);
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 5px);
+      right: -27px;
+      border-left: 8px solid var(--line);
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+    }
+
+    .step:last-child::before,
+    .step:last-child::after {
+      display: none;
+    }
+
+    .step p,
+    .step li {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .step ul {
+      margin: 7px 0 0;
+      padding-left: 18px;
+    }
+
+    .main-step {
+      background: var(--main-soft);
+      border-color: #b8ccff;
+    }
+
+    .tavily-step {
+      background: var(--tavily-soft);
+      border-color: #9bd7d0;
+    }
+
+    .gray-step {
+      background: var(--gray-soft);
+      border-color: #cbd5e1;
+    }
+
+    .warn-step {
+      background: var(--warn-soft);
+      border-color: #efcc84;
+    }
+
+    .stop-step {
+      background: var(--stop-soft);
+      border-color: #ffb8ac;
+    }
+
+    .fork {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .branch {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .branch h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 2px 7px;
+      border-radius: 7px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .tag.main {
+      color: var(--main);
+      background: var(--main-soft);
+      border-color: #b8ccff;
+    }
+
+    .tag.tavily {
+      color: var(--tavily);
+      background: var(--tavily-soft);
+      border-color: #9bd7d0;
+    }
+
+    .tag.stop {
+      color: var(--stop);
+      background: var(--stop-soft);
+      border-color: #ffb8ac;
+    }
+
+    .inside {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(118px, 1fr));
+      gap: 22px;
+      align-items: stretch;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 14px;
+    }
+
+    .note p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .metrics {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      font-size: 14px;
+    }
+
+    .metrics th,
+    .metrics td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .metrics th {
+      color: #334155;
+      background: #edf1f5;
+    }
+
+    .metrics tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .caption {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .fork,
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rail-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: min(100% - 20px, 1240px);
+        padding-top: 14px;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .hero-copy,
+      .legend,
+      .rail {
+        padding: 14px;
+      }
+
+      .flow,
+      .inside {
+        grid-auto-flow: row;
+        grid-auto-columns: unset;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        overflow-x: visible;
+      }
+
+      .step::before,
+      .step::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <h1 id="title">Tavily 在最新灰度里的位置</h1>
+        <p>
+          Tavily 当前不是 main 生产流水线的默认新闻源。它在 <code>main.py run</code> 内部只承担一个可开关的 post-fetch enrichment 阶段：在已有 source 抓取和去重之后，验证部分候选是否仍在 24 小时窗口内，并在数量不足时按受控域名补量。灰度 workflow 跑的是同一个 <code>main.py run</code>，但强制带上 <code>--offline --enrichment on</code>，只用于观察和产出证据。
+        </p>
+      </div>
+      <div class="legend" aria-label="图例">
+        <div class="legend-item"><span class="swatch main"></span> main 生产/发布路径</div>
+        <div class="legend-item"><span class="swatch tavily"></span> Tavily 被启用后的增强路径</div>
+        <div class="legend-item"><span class="swatch gray"></span> 隔离灰度与证据收集路径</div>
+        <div class="legend-item"><span class="swatch stop"></span> 不默认开启、只作决策门</div>
+      </div>
+    </section>
+
+    <section class="section pipeline" aria-labelledby="workflow-relation">
+      <h2 id="workflow-relation">两条 GitHub Actions 流水线的关系</h2>
+
+      <div class="rail">
+        <div class="rail-head">
+          <div>
+            <h3>main 生产 workflow: <code>.github/workflows/deploy.yml</code></h3>
+            <p>负责生成日报、预览 artifact、归档、提交保留窗口内容，并在允许时部署 GitHub Pages。</p>
+          </div>
+          <span class="tag main">默认 Tavily off</span>
+        </div>
+
+        <div class="flow" aria-label="main workflow">
+          <div class="step main-step">
+            <h3>触发</h3>
+            <ul>
+              <li>定时任务</li>
+              <li>手动 workflow_dispatch</li>
+            </ul>
+          </div>
+          <div class="step main-step">
+            <h3>解析发布模式</h3>
+            <p><code>publish=true</code> 才会提交内容和部署 Pages；否则只上传预览 artifact。</p>
+          </div>
+          <div class="step main-step">
+            <h3>安装运行环境</h3>
+            <p>Checkout、Python 3.12、<code>requirements.txt</code>。</p>
+          </div>
+          <div class="step warn-step">
+            <h3>生成命令分叉</h3>
+            <p>只有手动 <code>enable_tavily=true</code> 才追加 <code>--enrichment on</code> 并注入 <code>TAVILY_API_KEY</code>。</p>
+          </div>
+          <div class="step main-step">
+            <h3>执行 main.py</h3>
+            <p><code>python main.py run</code> 或 <code>python main.py run --offline</code>。</p>
+          </div>
+          <div class="step main-step">
+            <h3>输出主产物</h3>
+            <p><code>data/</code>、<code>content/</code>、<code>dist/</code>。</p>
+          </div>
+          <div class="step main-step">
+            <h3>发布后段</h3>
+            <p>预览 artifact，或归档、prune、commit、Pages deploy。</p>
+          </div>
+        </div>
+
+        <div class="fork" aria-label="main workflow 中 Tavily 开关">
+          <div class="branch">
+            <h3><span class="tag main">默认/定时</span> 不启用 Tavily</h3>
+            <p>不传 <code>--enrichment on</code>，<code>TAVILY_API_KEY</code> 也不会被注入。<code>main.py</code> 会进入 enrichment gate，但结果是 disabled，主流程照常继续。</p>
+          </div>
+          <div class="branch">
+            <h3><span class="tag tavily">手动灰度</span> 生产 workflow 内临时启用</h3>
+            <p>维护者手动设置 <code>enable_tavily=true</code> 时，生产 workflow 会把 Tavily 打开，但是否发布仍由 <code>publish</code> 控制。这是“同一条生产流水线上的显式灰度”。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rail">
+        <div class="rail-head">
+          <div>
+            <h3>Tavily 隔离灰度 workflow: <code>.github/workflows/tavily-gray.yml</code></h3>
+            <p>专门观察 Tavily 行为。它跑同一个应用入口，但不提交、不发布、不部署。</p>
+          </div>
+          <span class="tag tavily">强制 Tavily on</span>
+        </div>
+
+        <div class="flow" aria-label="tavily gray workflow">
+          <div class="step gray-step">
+            <h3>触发</h3>
+            <ul>
+              <li>手动</li>
+              <li>灰度定时</li>
+            </ul>
+          </div>
+          <div class="step gray-step">
+            <h3>创建灰度目录</h3>
+            <p><code>gray/tavily/YYYY-MM-DD/</code>，写入 manifest 和 logs。</p>
+          </div>
+          <div class="step stop-step">
+            <h3>要求 API key</h3>
+            <p>缺少 <code>TAVILY_API_KEY</code> 时 workflow 直接失败，这和 main 生产 workflow 的安全降级不同。</p>
+          </div>
+          <div class="step tavily-step">
+            <h3>执行同一入口</h3>
+            <p><code>python3 main.py run --offline --enrichment on</code>。</p>
+          </div>
+          <div class="step gray-step">
+            <h3>收集输出</h3>
+            <p>复制 <code>report.json</code>、<code>report.md</code>、运行日志、git status。</p>
+          </div>
+          <div class="step gray-step">
+            <h3>生成 scorecard</h3>
+            <p>离线归一化 input、verify、refill、budget、stop reason。</p>
+          </div>
+          <div class="step gray-step">
+            <h3>上传 artifact</h3>
+            <p><code>tavily-gray-日期-run_id</code>，保留 7 天。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="inside-main">
+      <h2 id="inside-main">同一个 <code>main.py run</code> 内部，Tavily 插在哪里</h2>
+      <div class="rail">
+        <div class="inside" aria-label="main.py run internal pipeline">
+          <div class="step main-step">
+            <h3>1. fetch_all</h3>
+            <p>从 configured sources 抓取原始新闻。Tavily 不在 <code>sources/</code> 里。</p>
+          </div>
+          <div class="step main-step">
+            <h3>2. dedupe</h3>
+            <p>先对 source 结果去重，得到 Tavily 的输入候选。</p>
+          </div>
+          <div class="step tavily-step">
+            <h3>3. enrichment gate</h3>
+            <p><code>auto/on/off</code> 在这里生效。默认配置是 off。</p>
+          </div>
+          <div class="step tavily-step">
+            <h3>4. Tavily active</h3>
+            <p>启用时执行 prefilter、verify、priority refill、secondary refill；official fallback 默认关闭。</p>
+          </div>
+          <div class="step main-step">
+            <h3>5. save_json</h3>
+            <p>保存最终 <code>articles</code>，并把 <code>enrichment</code> 诊断写进 JSON。</p>
+          </div>
+          <div class="step main-step">
+            <h3>6. summarize</h3>
+            <p>摘要只消费 JSON 中的最终文章，不会再次调用 Tavily。</p>
+          </div>
+          <div class="step main-step">
+            <h3>7. build</h3>
+            <p><code>build.py</code> 把 <code>content/</code> 生成 <code>dist/</code>。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="role">
+      <h2 id="role">Tavily 在最新灰度中承担的具体作用</h2>
+      <div class="note-grid">
+        <div class="note">
+          <h3>不是主 source</h3>
+          <p>它不替代 <code>aibase</code>、<code>techcrunch</code>、<code>theverge</code>。source 为空时可以尝试补量，但这不证明 source 层可以废弃。</p>
+        </div>
+        <div class="note">
+          <h3>是验证器</h3>
+          <p>对去重后的候选做 exact verify：匹配 URL 或同域高相似标题，并要求 <code>published_date</code> 落在 24 小时窗口内。</p>
+        </div>
+        <div class="note">
+          <h3>是受控补量器</h3>
+          <p>不足 <code>min_articles=10</code> 时按域名分层补量。当前 Gray Test 2 证明 secondary refill 能进入，但仍没有证明默认开启安全。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="latest-gray">
+      <h2 id="latest-gray">Gray Test 2 说明了什么</h2>
+      <table class="metrics">
+        <thead>
+          <tr>
+            <th>观察点</th>
+            <th>最新灰度事实</th>
+            <th>工程解释</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>入口</td>
+            <td><code>python3 main.py run --offline --enrichment on</code></td>
+            <td>灰度没有绕过业务入口，而是强制打开同一个 enrichment gate。</td>
+          </tr>
+          <tr>
+            <td>预算</td>
+            <td><code>reserved_refill_calls=2</code>，<code>verify_budget=5</code>，<code>total_calls=7</code></td>
+            <td>修复点是让 verify 不再吃掉全部预算，给 priority 和 secondary refill 留机会。</td>
+          </tr>
+          <tr>
+            <td>阶段结果</td>
+            <td>verify 接受 3 条，priority 接受 0 条，secondary 接受 5 条</td>
+            <td>Tavily 的有效价值目前主要出现在 secondary refill；priority 存在 metadata 质量问题。</td>
+          </tr>
+          <tr>
+            <td>最终产出</td>
+            <td><code>final_count=8</code>，低于 <code>min_articles=10</code></td>
+            <td>这证明灰度链路和预算修复有效，但不能证明 Tavily 可以默认开启。</td>
+          </tr>
+          <tr>
+            <td>决策</td>
+            <td>继续 <code>enrichment.enabled=false</code></td>
+            <td>下一步应该先研究 priority refill 的 <code>published_date</code> 缺失，而不是直接扩大默认预算或开启 fallback。</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="caption">
+        读这张图时先看两条外层 workflow：main 生产线默认绕过 Tavily，gray 观察线强制打开 Tavily。再看内部 <code>main.py run</code>：Tavily 只位于 dedupe 和 save_json 之间。
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="gray-3">
+      <h2 id="gray-3">Gray Test 3 小实验</h2>
+      <div class="note-grid">
+        <div class="note">
+          <h3>域名分层</h3>
+          <p>把 <code>reuters.com</code>、<code>arstechnica.com</code>、<code>techcrunch.com</code> 放到 priority refill，把 <code>thenextweb.com</code> 和 <code>venturebeat.com</code> 降到 secondary。</p>
+        </div>
+        <div class="note">
+          <h3>时间窗</h3>
+          <p>只在 gray workflow 中把 <code>strict_hours</code> 临时放宽到 <code>30</code>，验证北京时间晚间运行造成的 24h 边界误杀。</p>
+        </div>
+        <div class="note">
+          <h3>单次结果深度</h3>
+          <p>只在 gray workflow 中把 <code>refill_max_results</code> 临时提高到 <code>12</code>。Tavily 当前允许 <code>max_results</code> 到 <code>20</code>，本轮不改变生产默认值。</p>
+        </div>
+      </div>
+      <p class="caption">
+        验收看 priority + secondary 的 <code>accepted_count / result_count</code> 是否接近 50%，以及 <code>final_count</code> 是否稳定高于 Gray Test 2 之后的 5-9 区间；不以默认开启 Tavily 作为本轮结论。
+      </p>
+    </section>
+  </main>
+</body>
+</html>

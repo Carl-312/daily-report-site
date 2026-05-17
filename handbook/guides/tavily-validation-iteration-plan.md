@@ -1,5 +1,7 @@
 # Tavily 验证迭代计划与执行记录
 
+配套 HTML 架构图：[`tavily-validation-iteration-plan.html`](tavily-validation-iteration-plan.html)
+
 ## 当前状态
 
 本文记录 Tavily enrichment 的验证计划和最新执行结果。实现细节、配置说明和历史分析仍以
@@ -16,6 +18,7 @@
 - 2026-05-12 本地 live run 因 source timeout / DNS 问题得到 `input_count=0`，只能证明 Tavily secondary refill 能补 5 条，不能作为正式灰度质量证据。
 - 2026-05-12 Actions Gray Test 2 已完成：run `25716080642` 跑在 commit `4cf4ce981a87f92eb7717a0575943f904cf1e505`，artifact 为 `tavily-gray-2026-05-12-25716080642`。
 - Gray Test 2 已产生 workflow 自动生成的 `scorecard.json` 和 `scorecard.md`，本地规范化副本和人工判断已保存到 `data/benchmarks/tavily-gray-2026-05-12-*`。
+- 2026-05-11 至 2026-05-16 的 7 次灰度 artifact 显示：Tavily 请求基本成功，但 `final_count` 多数停在 5-9，主要限制从“是否进入 secondary refill”转为“refill 候选质量和 24h 边界效率”。
 
 ## 当前结论
 
@@ -32,6 +35,19 @@ Gray Test 2 的主要结论：
 - priority refill 返回 `8` 条但接受 `0` 条，`published_date_missing_rate=1.0`。
 
 因此推荐决策是：继续保持 Tavily 默认关闭。Gray Test 2 证明预算修复和 scorecard workflow 有效，但不能证明 Tavily 已适合默认开启，也不能证明扩大预算或 official fallback 可以直接进入默认路径。
+
+Gray Test 3 用一个最多 3 项的小实验覆盖 Gray Test 2 之后暴露的问题，只在隔离灰度 workflow 中临时覆盖配置，不修改 `config.yaml` 的生产默认值：
+
+1. `priority_refill_media_whitelist` 改为 `reuters.com`、`arstechnica.com`、`techcrunch.com`，把 `thenextweb.com`、`venturebeat.com` 降到 secondary。预期减少 priority 阶段的 `missing_published_date`，提高首轮 refill yield。
+2. `strict_hours` 从 24 临时放宽到 30。预期减少北京时间晚间执行时对前一日 UTC 下午新闻的边界误杀。
+3. `refill_max_results` 从 8 临时提高到 12。Tavily 当前 Search API 允许 `max_results` 到 20；本轮只小幅提高单次结果深度，不增加默认启用范围。
+
+验收口径：
+
+- `enrichment.enabled` 和 `enable_official_fallback` 仍保持 false 的默认语义；gray workflow 仍只通过 `--enrichment on` 显式打开 Tavily。
+- priority + secondary 的 `accepted_count / result_count` 目标达到或接近 50%。
+- `final_count` 中位数较 Gray Test 2 之后的 5-9 区间上移，且不能以大量非 AI 或明显过期候选作为代价。
+- artifact 必须能看到 `gray-experiment-overrides.json` 和 `gray-config-diff.patch`，说明本轮只是灰度覆盖，不是生产默认配置变更。
 
 ## 已执行：Gray Test 2
 
