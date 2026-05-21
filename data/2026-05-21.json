@@ -2,6 +2,15 @@
   "date": "2026-05-21",
   "articles": [
     {
+      "title": "AI日报：腾讯上线AI助手Marvis；智谱AI推AutoClaw移动端APP；Photoshop 27.7 重磅更新",
+      "link": "https://news.aibase.com/zh/daily/28221",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、腾讯上线操作系统层级AI助手Marvis，支持跨端操控与本地隐私模式 腾讯推出的Marvis AI助手在操作系统层级实现深度整合，提供智能系统管理、安全隐私保护和跨端协同功能，降低用户使用门槛并提升效率。 📱 Marvis作为操作系统层级AI助手，实现电脑智能化操作与任务自动化。 🔒 提供隐私模式与安全机制，确保数据不出电脑且敏感操作需用户确认。 🔄 支持跨端可视化操控，实现手机与电脑的实时交互与远程控制。 2、智谱AI正式推出AutoClaw移动端APP，支持云端双模式执行 智谱AI推出AutoClaw移动端APP，支持云端双模式执行，进一步拓展AI A…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI 资讯\nAI 产品库\nGEO 平台\nMCP 服务\n模型算力广场\nAI 全能力超市\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：腾讯上线AI助手Marvis；智谱AI推AutoClaw移动端APP；Photoshop 27.7 重磅更新\n发布于最新AI日报\n发布时间 :\n2026年5月21号 16:18\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、腾讯上线操作系统层级AI助手Marvis，支持跨端操控与本地隐私模式\n腾讯推出的Marvis AI助手在操作系统层级实现深度整合，提供智能系统管理、安全隐私保护和跨端协同功能，降低用户使用门槛并提升效率。\n【AiBase提要:】\n📱 Marvis作为操作系统层级AI助手，实现电脑智能化操作与任务自动化。\n🔒 提供隐私模式与安全机制，确保数据不出电脑且敏感操作需用户确认。\n🔄 支持跨端可视化操控，实现手机与电脑的实时交互与远程控制。\n2、智谱AI正式推出AutoClaw移动端APP，支持云端双模式执行\n智谱AI推出AutoClaw移动端APP，支持云端双模式执行，进一步拓展AI Agent的使用场景，降低用户触达门槛，并为后续功能扩展和生态完善奠定基础。\n【AiBase提要:】\n📱 AutoClaw移动端APP上线，拓宽AI Agent使用场景。\n⚙️ 支持本地和云端双模式运行，提升任务执行灵活性。\n🔄 后续功能将逐步扩充，完善多端协同生态闭环。\n3、Photoshop 27.7 重磅更新：移除工具支持本地 AI，生成式积分福利翻倍\nPhotoshop 27.7 版本更新带来了移除工具的本地化支持，提升了隐私安全性，并优化了生成式 AI 的使用权益和工作流程。\n【AiBase提要:】\n🖼️ 移除工具引入端侧 AI 模型，提升隐私安全并减少对云端依赖。\n💡 生成式 AI 权益升级，积分从 25 提升至 100，优化工作流体验。\n⚙️ 工作流更人性化，界面焕新，性能提升并修复关键漏洞。\n4、亚马逊 SageMaker AI 推出兼容 OpenAI API 的实时推理端点\n亚马逊 SageMaker AI 推出了兼容 OpenAI API 的实时推理端点，使得用户可以轻松调用 SageMaker 上的模型，无需额外的客户端定制或代码重写。该功能支持多模型托管，并简化了认证流程，为用户提供更高效、灵活的推理解决方案。\n【AiBase提要:】\n🌟 新增 OpenAI 兼容 API：SageMaker AI 实时推理端点现支持 OpenAI API，只需更改 URL 即可调用模型。\n🛠️ 多模型托管：用户可在同一端点上托管多个模型，使用相同的 OpenAI SDK 进行访问。\n🔑 简化认证流程：支持 Bearer Token 认证，方便用户安全地访问 SageMaker AI 端点。\n5、SpaceX招股书首揭家底：卫星互联网独撑盈利，航天与AI仍巨亏\nSpaceX的招股书揭示了公司从火箭发射企业转型为卫星互联网和AI基础设施巨头的财务状况。卫星互联网业务是当前的主要收入来源，而航天和AI业务仍面临亏损压力。\n【AiBase提要:】\n🚀 卫星互联网业务成为SpaceX的主要收入来源，2026年\n第一\n季度收入达32.6亿美元。\n📉 航天业务和AI业务仍处于亏损状态，分别亏损6.62亿美元和24.69亿美元。\n🌐 SpaceX计划整合火箭、卫星互联网与AI算力，目标在2028年部署轨道数据中心。\n6、阿里平头哥真武M890重磅亮相：性能跃升3倍，开启“芯-云-模型-推理”全栈Agent化时代\n阿里云在2026年5月20日的峰会上宣布完成面向“Agentic（智能体）时代”的全栈技术体系升级，标志着从“服务人类用户”的云转向打造支撑海量智能体工作的“AI工厂”。\n【AiBase提要:】\n🧠 核心底座：平头哥真武M890芯片性能跃升3倍，适配Agent场景下的高精度训练与低精度推理需求。\n💻 核心入口：重构“千问云”实现AI原生交互，通过标准化Skills和CLI工具快速调用云平台能力。\n🚀 技术战略：“芯-云-模型-推理”全栈融合，解决Agent负载的无规律弹性、短生命周期等挑战，提升任务目标对齐效率。\n7、打击虚假图片！OpenAI引入 Google SynthID 图像水印\nOpenAI 与 Google 合作推出双重防护机制，通过元数据和隐形水印提升 AI 图像的真实性验证能力，旨在建立行业新标准。\n【AiBase提要:】\n🧠 元数据与隐形水印的双重保险机制确保图像真实性验证\n🛡️ C2PA 标准提供透明的生成记录，SynthID 水印抵抗常规处理\n🌐 行业合作推动 AI 图像检测技术发展\n8、阿里云百炼重磅升级：全栈开放接入，打造模型“\n超级\n市场”\n阿里云百炼平台升级，接入多家第三方\n顶尖\n模型，打造AI模型\n超级\n市场，为企业用户提供一站式模型选型与集成解决方案，推动中国AI生态发展。\n【AiBase提要:】\n🧠 接入多家行业领先的第三方\n顶尖\n模型，涵盖文本、图像、视频及多模态生成等多个维度。\n🛠️ 提供极简集成方案，通过统一API接口调用主流模型，降低研发与维护成本。\n🌐 打造AI模型\n超级\n市场，推动中国AI模型生态向更高效、协作的方向演进。\n相关推荐\n赴港IPO前奏：月之暗面正式启动VIE架构拆除，冲刺 200 亿美元资本市场\n月之暗面（Moonshot AI）在完成20亿美元融资后，启动架构重组，拆除VIE及红筹架构，以扫清赴港IPO的监管障碍。重组核心是将离岸实体转为境内合资，确保符合中国科技公司海外上市的合规要求，为香港上市铺平道路。\n2026年5月21号 16:59\n148.0k\n广告即服务：谷歌搜索的“AI式重塑”，将付费推荐精准嵌入对话流\n在2026年I/O大会上，谷歌宣布对搜索业务进行25年来最重大重构，将Gemini 3.5 Flash全面植入，推出AI驱动的新型广告格式。这些广告打破传统搜索广告与结果的界限，从被动展示进化为主动对话式服务。通过Gemini的推理能力，商业信息被深度整合，实现更智能、更自然的交互体验。\n2026年5月21号 15:53\n139.5k\n掘金2000亿AI编程市场:DeepSeek入局Coding Agent加剧全球生态竞争\nDeepSeek（深度求索）启动全新代码智能体业务，组建“Harness”团队，打造对标Anthropic旗下Claude Code的桌面端编程产品。北京总部已上线产品经理与研发工程师岗位，要求应聘者深度使用过Claude Code、Cursor等工具。\n2026年5月21号 15:36\n163.9k\nOpenAI 推理模型突破性进展：AI 成功反驳 Erdős 单位距离猜想\n2026年5月20日，OpenAI的推理模型成功推翻数学大师保罗·Erdős于1946年提出的“单位距离猜想”，解决了离散几何领域近80年的核心难题。与以往不同，该成果获学术界广泛认可，标志着AI从“检索”到“原创”的关键突破。\n2026年5月21号 15:01\n161.1k\n​腾讯 AI 助手 “马维斯” 正式上线 支持 Windows/Mac/ 安卓平台\n腾讯发布跨平台AI助手“马维斯”，支持Windows、Mac和Android系统，将电脑变为智能对话助手。其核心创新在于整合终端系统、文件、应用和算力，内置6个协同Agent组成“AI团队”，由主Agent统筹调度，专项Agent分工协作，旨在提升用户工作与生活效率。\n2026年5月21号 14:59\n157.3k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
       "title": "Jensen Huang says he’s found a ‘brand new’ $200B market for Nvidia",
       "link": "https://techcrunch.com/2026/05/20/jensen-huang-says-hes-found-a-brand-new-200b-market-for-nvidia/",
       "description": "",
@@ -74,53 +83,53 @@
       "source": "techcrunch"
     },
     {
+      "title": "Flipper unveils a Linux-powered networking gadget built for hackers and tinkerers",
+      "link": "https://techcrunch.com/2026/05/21/flipper-unveils-a-linux-powered-networking-gadget-built-for-hackers-and-tinkerers/",
+      "description": "",
+      "publish_time": "2026-05-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Scammers are abusing an internal Microsoft account to send spam links",
+      "link": "https://techcrunch.com/2026/05/21/scammers-are-abusing-an-internal-microsoft-account-to-send-spam/",
+      "description": "",
+      "publish_time": "2026-05-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Beauty booking startup Fresha hits $1 billion valuation with KKR backing",
+      "link": "https://techcrunch.com/2026/05/21/booking-platform-fresha-announces-80m-investment-unicorn-valuation/",
+      "description": "",
+      "publish_time": "2026-05-21",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Truecaller gets into the eSIM business to diversify its revenue streams",
+      "link": "https://techcrunch.com/2026/05/20/truecaller-gets-into-the-esim-business-to-diversify-its-revenue-streams/",
+      "description": "",
+      "publish_time": "2026-05-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "General Catalyst just led a $63M bet on India’s travel payments market",
+      "link": "https://techcrunch.com/2026/05/20/indian-travel-fintech-scapia-more-than-doubles-valuation-to-over-500m-in-a-year/",
+      "description": "",
+      "publish_time": "2026-05-20",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "Imperagen raises £5 million to use quantum physics, AI on enzyme engineering",
       "link": "https://techcrunch.com/2026/05/20/imperagen-raises-5-million-to-redefine-enzyme-engineering/",
-      "description": "",
-      "publish_time": "2026-05-20",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Clouted wants to take the guesswork out of making short videos go viral",
-      "link": "https://techcrunch.com/2026/05/20/clouted-wants-to-take-the-guesswork-out-of-making-short-videos-go-viral/",
-      "description": "",
-      "publish_time": "2026-05-20",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Musk’s xAI is being sued over its data center generators — now it’s buying $2.8B more",
-      "link": "https://techcrunch.com/2026/05/20/musks-xai-is-being-sued-over-its-data-center-generators-now-its-buying-2-8b-more/",
-      "description": "",
-      "publish_time": "2026-05-20",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "OpenAI barrels toward IPO that may happen in September",
-      "link": "https://techcrunch.com/2026/05/20/openai-barrels-toward-ipo-that-may-happen-in-september/",
-      "description": "",
-      "publish_time": "2026-05-20",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Customers say Trump Mobile is leaking their personal information",
-      "link": "https://techcrunch.com/2026/05/20/customers-say-trump-mobile-is-leaking-their-personal-information/",
-      "description": "",
-      "publish_time": "2026-05-20",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "GitHub says hackers stole data from thousands of internal repositories",
-      "link": "https://techcrunch.com/2026/05/20/github-says-hackers-stole-data-from-thousands-of-internal-repositories/",
       "description": "",
       "publish_time": "2026-05-20",
       "content": "",
@@ -130,13 +139,13 @@
   ],
   "enrichment": {
     "report_date": "2026-05-21",
-    "reference_dt": "2026-05-21T12:54:21.672285+08:00",
+    "reference_dt": "2026-05-21T21:34:08.758963+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 14,
-    "prefiltered_count": 14,
+    "input_count": 15,
+    "prefiltered_count": 15,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -166,7 +175,7 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 14,
+    "final_count": 15,
     "stop_reason": "disabled",
     "priority_refill_runs": [],
     "secondary_refill_runs": [],
