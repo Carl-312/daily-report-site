@@ -74,6 +74,24 @@
       "source": "techcrunch"
     },
     {
+      "title": "Elon Musk has given up on solar power (on Earth)",
+      "link": "https://techcrunch.com/2026/05/23/elon-musk-has-given-up-on-solar-power-on-earth/",
+      "description": "",
+      "publish_time": "2026-05-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Peec, one of Berlin’s rising startups, more than doubled annualized revenue in months to $10M, sources say",
+      "link": "https://techcrunch.com/2026/05/23/peec-one-of-berlins-rising-startups-more-than-doubled-annualized-revenue-in-months-to-10m-sources-say/",
+      "description": "",
+      "publish_time": "2026-05-23",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "Kash Patel’s clothing brand website shut down after reports it was hacked",
       "link": "https://techcrunch.com/2026/05/22/kash-patels-clothing-brand-website-shut-down-after-reports-it-was-hacked/",
       "description": "",
@@ -85,15 +103,6 @@
     {
       "title": "Apple says Epic lawsuit shouldn’t reshape App Store rules for all developers",
       "link": "https://techcrunch.com/2026/05/22/apple-says-epic-lawsuit-shouldnt-reshape-app-store-rules-for-all-developers/",
-      "description": "",
-      "publish_time": "2026-05-22",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "We tried Google’s AI glasses and they’re almost there",
-      "link": "https://techcrunch.com/2026/05/22/we-tried-googles-ai-glasses-and-theyre-almost-there/",
       "description": "",
       "publish_time": "2026-05-22",
       "content": "",
@@ -117,20 +126,11 @@
       "content": "",
       "priority": 1,
       "source": "techcrunch"
-    },
-    {
-      "title": "Audio-generation app Huxe, founded by former NotebookLM developers, shuts down",
-      "link": "https://techcrunch.com/2026/05/22/audio-generation-app-huxe-founded-by-former-notebooklm-developers-shuts-down/",
-      "description": "",
-      "publish_time": "2026-05-22",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
     }
   ],
   "enrichment": {
     "report_date": "2026-05-23",
-    "reference_dt": "2026-05-23T12:26:21.081923+08:00",
+    "reference_dt": "2026-05-23T21:44:46.412575+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
