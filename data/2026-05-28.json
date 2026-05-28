@@ -2,6 +2,15 @@
   "date": "2026-05-28",
   "articles": [
     {
+      "title": "AI日报：小米上线招聘Agent；腾讯发布AI创作平台Craft；抖音严打AIGC违规带货",
+      "link": "https://news.aibase.com/zh/daily/28434",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、小米上线招聘Agent:基于xiaomimimo大模型，支持简历精准匹配与校招咨询 小米招聘Agent的上线标志着其在AI技术应用上的重要进展，通过智能求职助手提升校园招聘效率，并展示了大模型在企业服务场景中的潜力。 🧠 小米招聘Agent通过AI技术实现简历精准匹配与校招政策解答。 🚀 基于xiaomimimo大模型，支持复杂任务处理和跨会话记忆能力。 📊 展示了垂直领域大模型从技术框架开源到业务落地的范式。 2、腾讯发布 AI 创作平台“代号 Craft”：自然语言即可“一键生成”游戏世界 腾讯发布全新AI游戏创作平台‘代号 Craft’，通过自然语言…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI 资讯\nAI 产品库\nGEO 平台\nMCP 服务\n模型算力广场\nAI 全能力超市\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：小米上线招聘Agent；腾讯发布AI创作平台Craft；抖音严打AIGC违规带货\n发布于最新AI日报\n发布时间 :\n2026年5月28号 16:32\n阅读 :\n1\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、小米上线招聘Agent:基于xiaomimimo大模型，支持简历精准匹配与校招咨询\n小米招聘Agent的上线标志着其在AI技术应用上的重要进展，通过智能求职助手提升校园招聘效率，并展示了大模型在企业服务场景中的潜力。\n【AiBase提要:】\n🧠 小米招聘Agent通过AI技术实现简历精准匹配与校招政策解答。\n🚀 基于xiaomimimo大模型，支持复杂任务处理和跨会话记忆能力。\n📊 展示了垂直领域大模型从技术框架开源到业务落地的范式。\n2、腾讯发布 AI 创作平台“代号 Craft”：自然语言即可“一键生成”游戏世界\n腾讯发布全新AI游戏创作平台‘代号 Craft’，通过自然语言驱动和AIGC工具链，大幅降低游戏开发门槛，实现从创意到落地的快速转化。该平台不仅提供丰富的美术资源，还支持多类型游戏开发，标志着游戏行业向AI原生时代的转型。\n【AiBase提要:】\n🎮 自然语言驱动游戏开发，简化流程\n🎨 提供万种预制美术资源，降低门槛\n🔄 推动游戏开发模式变革，进入AI原生时代\n3、科大讯飞发布讯飞AI眼镜:内置GlassClaw助理，售价4299元\n科大讯飞发布讯飞AI眼镜，内置GlassClaw AI助理，支持多场景实时翻译与独立工作流处理，标志着端侧AI向消费级硬件的深度延伸。\n【AiBase提要:】\n🧠 内置“龙虾助手”GlassClaw AI助理，支持独立完成复杂工作流。\n📶 支持122种语言实时翻译，覆盖通话、面对面及视觉场景。\n🚀 超轻机身集成强劲端侧AI算力，推动端侧AI向独立算力平台演进。\n4、抖音生活服务交出“消保”成绩单：先行赔付 2.4 亿元，严打 AIGC 违规带货\n文章详细介绍了抖音生活服务在过去一年在消费者权益保护和平台体验提升方面的显著成果，包括低质内容治理、先行赔付机制以及针对AIGC技术的专项治理。这些举措展现了平台从“流量扩张”向“品质深耕”的战略转型，并为行业树立了技术合规的标杆。\n【AiBase提要:】\n📉 低质内容违规率下降82%\n💰 先行赔付金额达2.4亿元\n🤖 严打AIGC违规带货\n5、国产具身大模型 Wall-OSS-0.5 重磅开源：预训练即可“零样本”部署\n国产具身智能领域迎来重大突破，自变量机器人开源了VLA模型Wall-OSS-0.5，实现了无需任务特定微调即可在真实机器人上进行‘零样本’部署。该模型在多个任务中表现出色，展现了强大的泛化能力和技术优势。\n【AiBase提要:】\n🧩 零样本部署能力：Wall-OSS-0.5在未经微调的情况下，成功完成多项任务。\n🚀 微调效率提升：相比行业标杆，Wall-OSS-0.5在同等数据预算下表现更优。\n🧠 能力重塑：高强度动作训练后，模型的多模态感知能力得到提升。\n6、阿里语音大模型霸榜国际\n权威\n榜单，夺得国产语音 AI“三冠王”\n阿里巴巴凭借语音大模型 Fun-Realtime-TTS-Preview 在全球语音排行榜中斩获第五、国产\n第一\n的佳绩，展现了其在语音AI领域的强大实力。\n【AiBase提要:】\n🧠 阿里语音大模型在ASR、Chat和TTS三大核心赛道中均登顶国内榜首。\n⚡ Fun-Realtime-TTS-Preview 实现了实时化跨越，具备毫秒级延迟下的高自然度语音效果。\n🚀 阿里语音技术的突破标志着国产语音AI迈向“深度智能”时代。\n7、ElevenLabs 发布 Music v2：支持“一曲多变”与商业版权全授权\nElevenLabs 发布了其音乐生成模型 Music v2，该模型在音乐编排复杂度、歌唱表达和曲风切换能力上实现了质的飞跃。Music v2 提供了动态曲风切换、分段式创作与编辑以及专业级音效支持等功能，同时确保了全程合规和商业自由。此外，Music v2 已集成至 ElevenCreative 工具及 ElevenMusic 创作平台中，标志着 AI 音乐创作工具正从“猎奇的玩具”转向“生产力工具”。\n【AiBase提要:】\n🎨 动态曲风切换：模型支持在同一轨道内无缝切换曲风，例如从华丽的歌剧瞬间过渡到重金属摇滚，并能维持稳定的节奏与连贯性。\n🔒 版权合规：Music v2 完全构建于合法的授权数据之上，所有生成的音乐均已取得商业使用许可。\n🚀 行业竞速：ElevenLabs 的 Music v2 直接对标 Google 的 Flow Music、Stability AI 及 Suno 等主流玩家，展现其向“专业化商业音乐创作工具”转型的决心。\n8、OpenAI扩大广告平台访问权限，向更多广告主发出邀请，针对免费ChatGPT用户推出精准投放机会\nOpenAI正在加速推进其广告业务商业化进程，向更多潜在广告主发送广告平台邀请，允许他们在特定地区的免费ChatGPT用户中进行针对性投放。这一举措标志着OpenAI从早期有限测试转向更广泛的自助服务模式，进一步探索如何在保持用户体验的同时实现可持续变现。\n【AiBase提要:】\n📢 OpenAI扩大广告平台访问权限，向更多广告主发出邀请\n💰 广告投放针对美国、加拿大、澳大利亚和新西兰的免费ChatGPT用户\n📊 平台设置\n最低\n每日预算25美元，CPC建议为3.5美元左右\n相关推荐\n小米上线招聘Agent:基于xiaomimimo大模型，支持简历精准匹配与校招咨询\n小米官方招聘系统于5月28日上线“小米招聘Agent”，通过AI智能助手实现全流程辅助招聘，赋能校园招聘。该Agent能自动解析简历中的教育背景、项目经历和技能，精准匹配在招岗位，并支持实时解答面试轮次、offer发放周期等校招政策问题，提升求职效率。\n2026年5月28号 14:18\n162.9k\nAI日报：Anthropic发布Claude Opus 4.6；千问“春节大免单”首日火爆；腾讯推出“火龙漫剧”\n微信被指限制阿里千问及腾讯元宝的口令复制功能，疑因阿里千问“春节30亿免单”活动火爆，其分享口令在微信内受限，腾讯自家元宝App也面临同样问题。\n2026年2月6号 16:20\n278.3k\n「6月30日AI日报」百度开源文心大模型4.5系列；通义千问多模态生成模型Qwen VLo\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.百度重磅开源文心大模型4.5系列，十款新模型亮相!百度正式发布文心大模型4.5系列并完全开源，包含多种参数配置的十款新模型，使用飞桨框架训练推理，FLOPs利用率47%，在文本多模态基准测试中表现优异，提供一站式使用指南和工具，方便开发者精调部署，已上传至Hugging Face、GitHub等平台。体验地址:https://yiyan.baidu.com Hugging Face:https://huggingface.co/baidu）Gi\n2025年6月30号 16:33\n176.0k\n「6月27日AI日报」腾讯开源轻量级混元-A13B模型；可灵AI推“视频音效”功能\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1、腾讯开源轻量级混元-A13B模型1张中低端GPU卡即可部署腾讯发布混元大模型家族的新成员混元-A13B模型，采用专家混合（MoE）架构，总参数规模达800亿，激活参数为130亿，大幅降低推理延迟与计算开销，为个人开发者和中小企业提供更具性价比的AI解决方案。该模型在数学、科学和逻辑推理任务中表现出色，支持调用工具生成复杂指令响应。体验入口:https:/\n2025年6月27号 16:32\n231.3k\n「6月26日AI日报」可灵AI推全球首部AIGC单元剧；谷歌开源AI智能体Gemini CLI\n欢迎来到AIbase【AI日报】栏目!每天三分钟了解当日AI大事件，助你洞悉AI行业趋势、创新AI产品应用。更多AI资讯访问:https://www.aibase.com/zh1.豆包AI编程重磅升级!零代码小白也能轻松打造专属网页，实时编辑超省心!豆包AI编程升级到“应用创作1.0”，有可视化编辑、实时预览和多版本管理功能，降低网页和应用开发门槛。零基础用户可像编辑PPT一样设计网页，专业开发者也能在对话窗口调用AI编程功能，提升创作效率。2.谷歌放大招!Gemini CLI开源发布，免费提供AI编程助手挑战Cursor谷歌发布开源\n2025年6月26号 16:45\n231.3k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
       "title": "Google engineer charged with insider trading after making $1.2M on Polymarket",
       "link": "https://techcrunch.com/2026/05/27/google-engineer-charged-with-insider-trading-after-making-1-2m-on-polymarket/",
       "description": "",
@@ -74,6 +83,33 @@
       "source": "techcrunch"
     },
     {
+      "title": "Has the hunt for AI compute uncovered the next Cerebras?",
+      "link": "https://techcrunch.com/2026/05/28/has-the-hunt-for-ai-compute-uncovered-the-next-cerebras/",
+      "description": "",
+      "publish_time": "2026-05-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Oura unveils its Ring 5 with a thinner, lighter design starting at $399",
+      "link": "https://techcrunch.com/2026/05/28/oura-unveils-its-ring-5-with-a-thinner-lighter-design-starting-at-399/",
+      "description": "",
+      "publish_time": "2026-05-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Vertu wants CEOs to run companies from an AI foldable starting at $6,880",
+      "link": "https://techcrunch.com/2026/05/28/vertu-wants-ceos-to-run-companies-from-an-ai-foldable-starting-at-6880/",
+      "description": "",
+      "publish_time": "2026-05-28",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "Triomics nabs $22M to bring oncology-specific AI to cancer centers",
       "link": "https://techcrunch.com/2026/05/27/triomics-nabs-22m-to-bring-oncology-specific-ai-to-cancer-centers/",
       "description": "",
@@ -92,35 +128,8 @@
       "source": "techcrunch"
     },
     {
-      "title": "With a new $100M raise, Princeton’s Thea Energy is now a top-funded fusion startup",
-      "link": "https://techcrunch.com/2026/05/27/with-a-new-100m-raise-princetons-thea-energy-is-now-a-top-funded-fusion-startup/",
-      "description": "",
-      "publish_time": "2026-05-27",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "CrowdStrike and Google take down botnet used by hackers to target open source software developers",
-      "link": "https://techcrunch.com/2026/05/27/crowdstrike-and-google-take-down-botnet-used-by-hackers-to-target-software-developers-in-supply-chain-attacks/",
-      "description": "",
-      "publish_time": "2026-05-27",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
       "title": "AI coding startup Cognition raises $1B at $25B pre-money valuation",
       "link": "https://techcrunch.com/2026/05/27/ai-coding-startup-cognition-raises-1b-at-25b-pre-money-valuation/",
-      "description": "",
-      "publish_time": "2026-05-27",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "TechCrunch Disrupt 2026 Early Bird ticket savings end in 3 days",
-      "link": "https://techcrunch.com/2026/05/27/techcrunch-disrupt-2026-early-bird-ticket-savings-end-in-3-days/",
       "description": "",
       "publish_time": "2026-05-27",
       "content": "",
@@ -130,13 +139,13 @@
   ],
   "enrichment": {
     "report_date": "2026-05-28",
-    "reference_dt": "2026-05-28T12:50:56.833545+08:00",
+    "reference_dt": "2026-05-28T21:33:22.789195+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 14,
-    "prefiltered_count": 14,
+    "input_count": 15,
+    "prefiltered_count": 15,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -166,7 +175,7 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 14,
+    "final_count": 15,
     "stop_reason": "disabled",
     "priority_refill_runs": [],
     "secondary_refill_runs": [],
