@@ -2,10 +2,46 @@
   "date": "2026-05-30",
   "articles": [
     {
+      "title": "I went to the so-called ‘steroid Olympics,’ to understand why Silicon Valley is obsessed with peptides",
+      "link": "https://techcrunch.com/2026/05/29/i-went-to-the-so-called-steroid-olympics-to-understand-why-silicon-valley-is-obsessed-with-peptides/",
+      "description": "",
+      "publish_time": "2026-05-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok’s road to becoming a super app",
+      "link": "https://techcrunch.com/2026/05/30/tiktoks-road-to-becoming-a-super-app/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Coders are refusing to work without AI — and that could come back to bite them",
+      "link": "https://techcrunch.com/2026/05/29/coders-are-refusing-to-work-without-ai-and-that-could-come-back-to-bite-them/",
+      "description": "",
+      "publish_time": "2026-05-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "Microsoft under fire for threatening security researcher with criminal investigation",
       "link": "https://techcrunch.com/2026/05/29/microsoft-under-fire-for-threatening-security-researcher-with-criminal-investigation/",
       "description": "",
       "publish_time": "2026-05-29",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "As the browser wars heat up, here are the hottest alternatives to Chrome and Safari in 2026",
+      "link": "https://techcrunch.com/2026/05/30/as-the-browser-wars-heat-up-here-are-the-hottest-alternatives-to-chrome-and-safari-in-2026/",
+      "description": "",
+      "publish_time": "2026-05-30",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
@@ -38,28 +74,10 @@
       "source": "techcrunch"
     },
     {
-      "title": "Today is the last day to apply to speak at TechCrunch Disrupt 2026",
-      "link": "https://techcrunch.com/2026/05/29/today-is-the-last-day-to-apply-to-speak-at-techcrunch-disrupt-2026/",
+      "title": "This $300 pizza oven can easily help elevate your summer pizza nights",
+      "link": "https://techcrunch.com/2026/05/30/this-300-pizza-oven-can-easily-help-elevate-your-summer-pizza-nights/",
       "description": "",
-      "publish_time": "2026-05-29",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Kiwibit’s AI-powered bird feeder is my new backyard buddy",
-      "link": "https://techcrunch.com/2026/05/29/kiwibits-ai-powered-bird-feeder-is-my-new-backyard-buddy/",
-      "description": "",
-      "publish_time": "2026-05-29",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "This chip startup just raised $135M on a bet that AI’s biggest bottleneck isn’t compute — it’s memory",
-      "link": "https://techcrunch.com/2026/05/29/xcena-secures-135m-at-570m-valuation-betting-on-memory-as-ais-real-bottleneck/",
-      "description": "",
-      "publish_time": "2026-05-29",
+      "publish_time": "2026-05-30",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
@@ -67,15 +85,6 @@
     {
       "title": "Founders seize on Indian court ruling to revive criticism of Google’s ad business",
       "link": "https://techcrunch.com/2026/05/29/founders-seize-on-indian-court-ruling-to-revive-criticism-of-googles-ad-business/",
-      "description": "",
-      "publish_time": "2026-05-29",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "I went to the so-called ‘steroid Olympics,’ to understand why Silicon Valley is obsessed with peptides",
-      "link": "https://techcrunch.com/2026/05/29/i-went-to-the-so-called-steroid-olympics-to-understand-why-silicon-valley-is-obsessed-with-peptides/",
       "description": "",
       "publish_time": "2026-05-29",
       "content": "",
@@ -92,8 +101,8 @@
       "source": "techcrunch"
     },
     {
-      "title": "Coders are refusing to work without AI — and that could come back to bite them",
-      "link": "https://techcrunch.com/2026/05/29/coders-are-refusing-to-work-without-ai-and-that-could-come-back-to-bite-them/",
+      "title": "So you’ve heard these AI terms and nodded along; let’s fix that",
+      "link": "https://techcrunch.com/2026/05/29/artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms/",
       "description": "",
       "publish_time": "2026-05-29",
       "content": "",
@@ -101,8 +110,8 @@
       "source": "techcrunch"
     },
     {
-      "title": "So you’ve heard these AI terms and nodded along; let’s fix that",
-      "link": "https://techcrunch.com/2026/05/29/artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms/",
+      "title": "Today is the last day to apply to speak at TechCrunch Disrupt 2026",
+      "link": "https://techcrunch.com/2026/05/29/today-is-the-last-day-to-apply-to-speak-at-techcrunch-disrupt-2026/",
       "description": "",
       "publish_time": "2026-05-29",
       "content": "",
@@ -112,13 +121,13 @@
   ],
   "enrichment": {
     "report_date": "2026-05-30",
-    "reference_dt": "2026-05-30T12:35:05.219940+08:00",
+    "reference_dt": "2026-05-30T22:06:29.483189+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 12,
-    "prefiltered_count": 12,
+    "input_count": 13,
+    "prefiltered_count": 13,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -148,7 +157,24 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 12,
+    "final_count": 13,
+    "strict_final_count": 13,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
     "stop_reason": "disabled",
     "priority_refill_runs": [],
     "secondary_refill_runs": [],
@@ -170,6 +196,7 @@
       "max_verify_calls": 6,
       "max_refill_rounds": 1,
       "refill_max_results": 8,
+      "refill_search_window_hours": 24,
       "verify_search_depth": "basic",
       "verify_max_results": 3,
       "priority_refill_media_whitelist": [
@@ -185,7 +212,9 @@
         "anthropic.com"
       ],
       "enable_fuzzy_second_pass": false,
-      "enable_official_fallback": false
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
     },
     "notes": [
       "Tavily enrichment is disabled for this run."
