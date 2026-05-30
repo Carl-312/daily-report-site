@@ -145,6 +145,9 @@ def stage_candidates(runs: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, Any]:
     runs = stage_runs(enrichment, stage)
     candidates = stage_candidates(runs)
+    lenient_candidates = [
+        candidate for candidate in candidates if candidate.get("lenient_candidate")
+    ]
     missing_published = sum(
         1 for candidate in candidates if not candidate.get("published_date")
     )
@@ -181,6 +184,33 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
             for candidate in rejected_candidates
             if candidate.get("within_24h") is False
         ),
+        "lenient_candidate_count": len(lenient_candidates),
+        "proven_within_lenient_window_count": sum(
+            1
+            for candidate in lenient_candidates
+            if candidate.get("lenient_within_window") is True
+        ),
+        "missing_date_unproven_count": sum(
+            1 for candidate in lenient_candidates if not candidate.get("published_date")
+        ),
+        "outside_lenient_window_rejected_count": sum(
+            1
+            for candidate in candidates
+            if candidate.get("lenient_within_window") is False
+        ),
+        "lenient_non_ai_count": sum(
+            1
+            for candidate in lenient_candidates
+            if candidate.get("ai_title_relevant") is False
+        ),
+        "lenient_duplicate_or_cluster_count": sum(
+            1
+            for candidate in lenient_candidates
+            if candidate.get("duplicate_existing")
+            or candidate.get("duplicate_within_results")
+            or candidate.get("near_duplicate_existing")
+            or candidate.get("story_cluster_existing")
+        ),
         "accepted_preview": [
             candidate.get("title", "")
             for candidate in candidates
@@ -191,6 +221,91 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
             for candidate in rejected_candidates
             if candidate.get("title")
         ][:3],
+    }
+
+
+def summarize_lenient_diagnostics(
+    enrichment: dict[str, Any],
+    refill_summaries: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    diagnostic = enrichment.get("lenient_refill_diagnostics") or {}
+    selected_preview = enrichment.get("lenient_selected_preview")
+    if selected_preview is None:
+        selected_preview = []
+    return {
+        "enabled": bool(diagnostic.get("enabled")),
+        "window_hours": diagnostic.get("window_hours")
+        or (enrichment.get("parameters") or {}).get("lenient_refill_window_hours"),
+        "request_window_hours": diagnostic.get("request_window_hours")
+        or (enrichment.get("parameters") or {}).get("refill_search_window_hours"),
+        "start_date": diagnostic.get("start_date"),
+        "end_date": diagnostic.get("end_date"),
+        "strict_final_count": int(
+            enrichment.get("strict_final_count")
+            if enrichment.get("strict_final_count") is not None
+            else enrichment.get("final_count") or 0
+        ),
+        "strict_refill_accepted_count": int(
+            enrichment.get("strict_refill_accepted_count")
+            if enrichment.get("strict_refill_accepted_count") is not None
+            else sum(
+                int(enrichment.get(key) or 0)
+                for key in (
+                    "priority_refilled_count",
+                    "secondary_refilled_count",
+                    "official_refilled_count",
+                )
+            )
+        ),
+        "lenient_candidate_count": int(
+            enrichment.get("lenient_candidate_count")
+            if enrichment.get("lenient_candidate_count") is not None
+            else sum(
+                summary["lenient_candidate_count"]
+                for summary in refill_summaries.values()
+            )
+        ),
+        "proven_within_72h_count": int(
+            enrichment.get("proven_within_72h_count")
+            if enrichment.get("proven_within_72h_count") is not None
+            else sum(
+                summary["proven_within_lenient_window_count"]
+                for summary in refill_summaries.values()
+            )
+        ),
+        "missing_date_unproven_count": int(
+            enrichment.get("missing_date_unproven_count")
+            if enrichment.get("missing_date_unproven_count") is not None
+            else sum(
+                summary["missing_date_unproven_count"]
+                for summary in refill_summaries.values()
+            )
+        ),
+        "outside_72h_rejected_count": int(
+            enrichment.get("outside_72h_rejected_count")
+            if enrichment.get("outside_72h_rejected_count") is not None
+            else sum(
+                summary["outside_lenient_window_rejected_count"]
+                for summary in refill_summaries.values()
+            )
+        ),
+        "lenient_non_ai_count": int(
+            enrichment.get("lenient_non_ai_count")
+            if enrichment.get("lenient_non_ai_count") is not None
+            else sum(
+                summary["lenient_non_ai_count"] for summary in refill_summaries.values()
+            )
+        ),
+        "lenient_duplicate_or_cluster_count": int(
+            enrichment.get("lenient_duplicate_or_cluster_count")
+            if enrichment.get("lenient_duplicate_or_cluster_count") is not None
+            else sum(
+                summary["lenient_duplicate_or_cluster_count"]
+                for summary in refill_summaries.values()
+            )
+        ),
+        "lenient_selected_preview": selected_preview[:5],
+        "stages": diagnostic.get("stages") or {},
     }
 
 
@@ -373,6 +488,10 @@ def build_scorecard(
     refill_summaries = {
         stage: summarize_refill_stage(enrichment, stage) for stage in REFILL_STAGES
     }
+    lenient_diagnostics = summarize_lenient_diagnostics(
+        enrichment,
+        refill_summaries,
+    )
     parameters = enrichment.get("parameters") or {}
     final_count = int(enrichment.get("final_count") or 0)
     min_articles = parameters.get("min_articles")
@@ -422,12 +541,14 @@ def build_scorecard(
         "output": {
             "article_count": len(as_list(report_payload.get("articles"))),
             "final_count": final_count,
+            "strict_final_count": lenient_diagnostics["strict_final_count"],
             "min_articles": min_articles,
             "refill_remaining_count": refill_remaining_count,
             "stop_reason": enrichment.get("stop_reason") or UNKNOWN,
             "accepted_by_stage_preview": enrichment.get("accepted_by_stage_preview")
             or {},
         },
+        "lenient_diagnostics": lenient_diagnostics,
     }
     scorecard["diagnosis"] = build_diagnosis(
         report_json_present=report_json_present,
@@ -445,6 +566,11 @@ def build_scorecard(
         "published_date_missing_rate": aggregate_published_date_missing_rate(
             refill_summaries
         ),
+        "lenient_candidate_count": lenient_diagnostics["lenient_candidate_count"],
+        "proven_within_72h_count": lenient_diagnostics["proven_within_72h_count"],
+        "missing_date_unproven_count": lenient_diagnostics[
+            "missing_date_unproven_count"
+        ],
         "total_calls": scorecard["budget"]["total_calls"],
         "stop_reason": scorecard["output"]["stop_reason"],
     }
@@ -468,6 +594,7 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
     budget = scorecard["budget"]
     verify = scorecard["verify"]
     refill = scorecard["refill"]
+    lenient = scorecard["lenient_diagnostics"]
     diagnosis = scorecard["diagnosis"]
 
     lines = [
@@ -493,6 +620,7 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         f"| verified_count | {markdown_value(verify['verified_count'])} |",
         f"| preserved_error_count | {markdown_value(verify['preserved_error_count'])} |",
         f"| final_count | {markdown_value(output['final_count'])} |",
+        f"| strict_final_count | {markdown_value(output['strict_final_count'])} |",
         f"| min_articles | {markdown_value(output['min_articles'])} |",
         f"| refill_remaining_count | {markdown_value(output['refill_remaining_count'])} |",
         f"| total_calls | {markdown_value(budget['total_calls'])} |",
@@ -522,6 +650,25 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
 
     lines.extend(
         [
+            "",
+            "## Lenient Diagnostics",
+            "",
+            "| Metric | Value |",
+            "|---|---:|",
+            f"| enabled | {markdown_value(lenient['enabled'])} |",
+            f"| request_window_hours | {markdown_value(lenient['request_window_hours'])} |",
+            f"| window_hours | {markdown_value(lenient['window_hours'])} |",
+            f"| start_date | {markdown_value(lenient['start_date'])} |",
+            f"| end_date | {markdown_value(lenient['end_date'])} |",
+            f"| strict_refill_accepted_count | {markdown_value(lenient['strict_refill_accepted_count'])} |",
+            f"| lenient_candidate_count | {markdown_value(lenient['lenient_candidate_count'])} |",
+            f"| proven_within_72h_count | {markdown_value(lenient['proven_within_72h_count'])} |",
+            f"| missing_date_unproven_count | {markdown_value(lenient['missing_date_unproven_count'])} |",
+            f"| outside_72h_rejected_count | {markdown_value(lenient['outside_72h_rejected_count'])} |",
+            f"| lenient_non_ai_count | {markdown_value(lenient['lenient_non_ai_count'])} |",
+            f"| lenient_duplicate_or_cluster_count | {markdown_value(lenient['lenient_duplicate_or_cluster_count'])} |",
+            "",
+            f"- Lenient preview: {markdown_value(lenient['lenient_selected_preview'])}",
             "",
             "## Budget",
             "",

@@ -164,6 +164,9 @@ def test_scorecard_explains_budget_and_metadata_low_count(
         "priority_refilled_count": 0,
         "secondary_refilled_count": 0,
         "published_date_missing_rate": 1.0,
+        "lenient_candidate_count": 0,
+        "proven_within_72h_count": 0,
+        "missing_date_unproven_count": 0,
         "total_calls": 3,
         "stop_reason": "budget_exhausted_after_priority_refill",
     }
@@ -209,3 +212,102 @@ def test_scorecard_prioritizes_network_failure_diagnosis(tmp_path: Path) -> None
     assert scorecard["diagnosis"]["primary_limiter"] == "network_failure"
     assert "network_failures" in scorecard["diagnosis"]["contributing_factors"]
     assert scorecard["verify"]["request_outcomes"] == {"timeout": 1}
+
+
+def test_scorecard_surfaces_lenient_refill_diagnostics(tmp_path: Path) -> None:
+    artifact_dir = tmp_path / "gray" / "tavily" / "2026-05-30"
+    enrichment = {
+        "report_date": "2026-05-30",
+        "applied": True,
+        "input_count": 0,
+        "prefiltered_count": 0,
+        "verify_runs": [],
+        "verified_count": 0,
+        "preserved_error_count": 0,
+        "priority_refill_runs": [
+            {
+                "stage": "priority_refill",
+                "request_outcome": "success",
+                "result_count": 3,
+                "accepted_count": 0,
+                "candidate_results": [
+                    {
+                        "title": "OpenAI launches AI research agent",
+                        "published_date": "2026-05-30T08:00:00Z",
+                        "lenient_candidate": True,
+                        "lenient_within_window": True,
+                        "ai_title_relevant": True,
+                        "accepted": False,
+                    },
+                    {
+                        "title": "Anthropic updates Claude developer tools",
+                        "published_date": None,
+                        "lenient_candidate": True,
+                        "lenient_within_window": None,
+                        "ai_title_relevant": True,
+                        "accepted": False,
+                    },
+                    {
+                        "title": "Mistral debuts AI inference platform",
+                        "published_date": "2026-05-25T08:00:00Z",
+                        "lenient_candidate": False,
+                        "lenient_within_window": False,
+                        "ai_title_relevant": True,
+                        "accepted": False,
+                    },
+                ],
+            }
+        ],
+        "secondary_refill_runs": [],
+        "official_fallback_runs": [],
+        "priority_refilled_count": 0,
+        "secondary_refilled_count": 0,
+        "official_refilled_count": 0,
+        "total_calls": 1,
+        "final_count": 0,
+        "strict_final_count": 0,
+        "strict_refill_accepted_count": 0,
+        "lenient_candidate_count": 2,
+        "proven_within_72h_count": 1,
+        "missing_date_unproven_count": 1,
+        "outside_72h_rejected_count": 1,
+        "lenient_non_ai_count": 0,
+        "lenient_duplicate_or_cluster_count": 0,
+        "lenient_selected_preview": [
+            {"title": "OpenAI launches AI research agent"},
+            {"title": "Anthropic updates Claude developer tools"},
+        ],
+        "lenient_refill_diagnostics": {
+            "enabled": True,
+            "window_hours": 72,
+            "request_window_hours": 72,
+            "start_date": "2026-05-27",
+            "end_date": "2026-05-30",
+            "stages": {},
+        },
+        "stop_reason": "budget_exhausted_after_priority_refill",
+        "parameters": {
+            "min_articles": 10,
+            "max_total_calls": 7,
+            "refill_search_window_hours": 72,
+            "lenient_refill_window_hours": 72,
+            "enable_official_fallback": False,
+        },
+    }
+    write_json(
+        artifact_dir / "report.json",
+        {"date": "2026-05-30", "articles": [], "enrichment": enrichment},
+    )
+
+    scorecard = build_scorecard(artifact_dir)
+    markdown = render_scorecard_markdown(scorecard)
+
+    assert scorecard["output"]["strict_final_count"] == 0
+    assert scorecard["lenient_diagnostics"]["enabled"] is True
+    assert scorecard["lenient_diagnostics"]["request_window_hours"] == 72
+    assert scorecard["lenient_diagnostics"]["lenient_candidate_count"] == 2
+    assert scorecard["lenient_diagnostics"]["proven_within_72h_count"] == 1
+    assert scorecard["lenient_diagnostics"]["missing_date_unproven_count"] == 1
+    assert scorecard["lenient_diagnostics"]["outside_72h_rejected_count"] == 1
+    assert scorecard["trend_metrics"]["lenient_candidate_count"] == 2
+    assert "## Lenient Diagnostics" in markdown

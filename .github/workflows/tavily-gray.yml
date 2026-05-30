@@ -80,11 +80,14 @@ jobs:
           trusted_domains = enrichment.setdefault("trusted_domains", {})
 
           overrides = {
-              "experiment": "gray_3_refill_domain_window_depth",
-              "reason": "Validate higher-yield refill domains, a small freshness grace window, and more per-call refill candidates without changing production defaults.",
+              "experiment": "gray_3_lenient_3day_diagnostic",
+              "reason": "Diagnose 3-day Tavily refill recall separately from strict freshness acceptance without changing production defaults.",
               "enrichment": {
-                  "strict_hours": 30,
-                  "refill_max_results": 12,
+                  "strict_hours": 24,
+                  "refill_max_results": 8,
+                  "refill_search_window_hours": 72,
+                  "lenient_refill_diagnostics_enabled": True,
+                  "lenient_refill_window_hours": 72,
                   "trusted_domains": {
                       "priority_refill_media_whitelist": [
                           "reuters.com",
@@ -108,6 +111,15 @@ jobs:
           enrichment["strict_hours"] = overrides["enrichment"]["strict_hours"]
           enrichment["refill_max_results"] = overrides["enrichment"][
               "refill_max_results"
+          ]
+          enrichment["refill_search_window_hours"] = overrides["enrichment"][
+              "refill_search_window_hours"
+          ]
+          enrichment["lenient_refill_diagnostics_enabled"] = overrides[
+              "enrichment"
+          ]["lenient_refill_diagnostics_enabled"]
+          enrichment["lenient_refill_window_hours"] = overrides["enrichment"][
+              "lenient_refill_window_hours"
           ]
           trusted_domains["priority_refill_media_whitelist"] = overrides[
               "enrichment"

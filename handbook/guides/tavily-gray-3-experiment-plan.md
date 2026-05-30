@@ -1,67 +1,62 @@
 # Tavily Gray Test 3 实施准备
 
-本文为下一轮实际执行 Gray Test 3 做准备。目标是在隔离的 GitHub Actions 灰度 workflow 中验证 3 个小改动，不改变生产默认配置，不提交 `.env`，不把 Tavily 默认开启。
+最后修改：2026-05-30
 
-## 结论先行
+本文最初为执行 Gray Test 3 做准备。目标是在隔离的 GitHub Actions 灰度 workflow 中验证 Tavily enrichment，不改变生产默认配置，不提交 `.env`，不把 Tavily 默认开启。
 
-本轮建议只做这 3 项：
+2026-05-30 修订：Gray Test 3 已在 GitHub Actions 上出现连续低质量结果。2026-05-28、2026-05-29、2026-05-30 三次 run 均为 `final_count=0`，`stop_reason=budget_exhausted_after_secondary_refill`，priority + secondary refill accepted/result 分别为 `0/23`、`0/23`、`0/24`。后续不再把原 Gray Test 3 的域名/window/depth 组合视为上线候选；当前改造目标是把 gray workflow 改成一个宽松 3 天诊断实验，用来判断 Tavily 是召回不足，还是主要卡在 `published_date` 元数据缺失与严格 freshness 证明。
 
-1. 调整 refill 域名分层：把 `reuters.com`、`arstechnica.com`、`techcrunch.com` 放入 priority refill，把 `thenextweb.com`、`venturebeat.com` 降到 secondary。
-2. 将灰度实验的 `strict_hours` 从 `24` 临时放宽到 `30`。
-3. 将灰度实验的 `refill_max_results` 从 `8` 临时提高到 `12`。
+## 当前方案：宽松 3 天诊断灰度
 
-这些改动只应在 `.github/workflows/tavily-gray.yml` 中以 runner 工作区临时覆盖方式执行。`config.yaml` 仍保持生产默认值：
+### 修改目的
 
-```yaml
-enrichment:
-  enabled: false
-  strict_hours: 24
-  max_total_calls: 7
-  refill_max_results: 8
-  enable_official_fallback: false
+本次改造不是为了提高正式 `final_count`，也不是为了证明 Tavily 可以默认开启，而是把 Gray Test 3 改成一个诊断实验：
+
+1. 验证 Tavily 在 3 天窗口内是否能召回足够多的 AI/科技新闻候选。
+2. 区分“没有候选”和“有候选但缺少 `published_date`，无法通过严格 freshness 证明”。
+3. 量化严格规则与宽松规则之间的差距，避免继续盲目调整域名、预算或 `refill_max_results`。
+4. 为下一轮判断提供证据：如果宽松候选充足但严格候选仍为 0，下一步应优先研究 Tavily 日期元数据和 query 命中，而不是把这组配置上线。
+
+### 诊断规则
+
+宽松诊断规则只用于 artifact 观察，不改变生产默认路径：
+
+- `config.yaml` 仍保持 `enrichment.enabled: false`、`strict_hours: 24`、`refill_max_results: 8`。
+- `.github/workflows/tavily-gray.yml` 继续是隔离灰度 workflow，不提交、不发布、不部署。
+- Gray workflow 只在 runner 工作区临时开启 `lenient_refill_diagnostics_enabled`。
+- Tavily refill 请求窗口从 1 天扩大到 3 天，artifact 必须记录实际 `start_date`、`end_date`、`request_window_hours` 和诊断窗口小时数。
+- 宽松候选池只排除“明确可判定超过 72 小时”的结果。
+- 缺少 `published_date` 的结果不得算作严格通过，但可进入 `missing_date_unproven` 诊断桶。
+- 标题 AI 相关性、重复、near duplicate、story cluster 等规则不阻断宽松候选计数，但必须继续作为诊断字段记录。
+- 严格产物计数与宽松诊断计数必须分开：宽松候选不能静默写入正式 `final_count`，也不能作为默认开启依据。
+
+Artifact 必须能看到这些字段：
+
+```text
+strict_final_count
+strict_refill_accepted_count
+lenient_candidate_count
+proven_within_72h_count
+missing_date_unproven_count
+outside_72h_rejected_count
+lenient_non_ai_count
+lenient_duplicate_or_cluster_count
+lenient_selected_preview
 ```
 
-## 为什么选这 3 项
+### 当前实施要求
 
-最近 7 次 `tavily-gray.yml` artifact 的核心问题不是 Tavily 请求失败，而是 budget 被低效消耗：
-
-| 问题 | artifact 证据 | 对应改动 |
-|---|---|---|
-| priority refill 经常产出低效 | `thenextweb.com`/`venturebeat.com` 在 2026-05-11、2026-05-12 出现大量 `missing_published_date`，priority 24 个 result 只接受 5 个 | 将 Reuters/Ars/TechCrunch 提到 priority，TNW/VB 降级 |
-| 24h 边界过紧 | scheduled run 多在 Asia/Shanghai 晚间执行，前一日 UTC 下午新闻容易被判 `outside_24h` | 灰度临时 `strict_hours=30` |
-| 单次 refill 候选不够深 | secondary 在部分日期可接受率不错，但单轮最多只看 8 条；05-16 有较多非 AI 混入，需要更多候选供过滤 | 灰度临时 `refill_max_results=12` |
-
-Context7 已核对 Tavily Search API：`include_domains`、`start_date`、`end_date`、`topic=news`、`search_depth` 和 `max_results` 是当前支持参数；`max_results` 上限为 `20`，所以 `12` 是保守灰度值。
-
-## 不纳入本轮的项
-
-这些项先不做，避免一次实验变量过多：
-
-- 不提高 `max_total_calls`。先看候选质量提升能不能改善 accepted/result；否则无法区分“预算不足”和“候选质量差”。
-- 不开启 `enable_official_fallback`。官方站点适合作为稀疏补充，不适合在当前问题未收敛时混入实验。
-- 不改 `verify_search_depth`。verify 的 `no_match` 是另一个问题，本轮聚焦 refill。
-- 不把 Tavily 默认开启。单轮灰度达标也不能作为默认启用依据。
-
-## 目标改动位置
-
-### `.github/workflows/tavily-gray.yml`
-
-在 `Install runtime dependencies` 之后、`Require Tavily API key` 之前添加灰度覆盖步骤。
-
-原因：
-
-- `pip install -r requirements.txt` 后 runner 已有 `pyyaml`，可以安全读写 `config.yaml`。
-- 覆盖发生在 Actions 工作区，不会提交回仓库。
-- `main.py run --offline --enrichment on` 会读取覆盖后的工作区配置。
-
-覆盖内容：
+`.github/workflows/tavily-gray.yml` 的灰度覆盖步骤应写出 `gray-experiment-overrides.json` 和 `gray-config-diff.patch`，并临时覆盖：
 
 ```json
 {
-  "experiment": "gray_3_refill_domain_window_depth",
+  "experiment": "gray_3_lenient_3day_diagnostic",
   "enrichment": {
-    "strict_hours": 30,
-    "refill_max_results": 12,
+    "strict_hours": 24,
+    "refill_max_results": 8,
+    "refill_search_window_hours": 72,
+    "lenient_refill_diagnostics_enabled": true,
+    "lenient_refill_window_hours": 72,
     "trusted_domains": {
       "priority_refill_media_whitelist": [
         "reuters.com",
@@ -81,36 +76,36 @@ Context7 已核对 Tavily Search API：`include_domains`、`start_date`、`end_d
 }
 ```
 
-artifact 必须写出两个观测文件：
+`utils/news_enrichment.py` 必须保持严格输出路径不变：
 
-- `gray/tavily/YYYY-MM-DD/logs/gray-experiment-overrides.json`
-- `gray/tavily/YYYY-MM-DD/logs/gray-config-diff.patch`
+- `final_count` 只来自严格 verify/refill/fallback 接受结果。
+- 缺少 `published_date` 的结果不能进入严格 accepted candidates。
+- 72h 宽松候选只进入诊断字段。
+- 当诊断开启时，refill `candidate_results` 应保留所有 Tavily 返回项，便于统计非 AI、重复、cluster、缺日期和明确超过 72h 的候选。
 
-### `utils/news_enrichment.py`
+`scripts/tavily_gray_scorecard.py` 必须把 strict/lenient 指标写入 `scorecard.json` 和 `scorecard.md`，避免只靠原始 `report.json` 排查。
 
-本轮不需要改这里，但验收时要知道配置如何被消费：
+### 验收标准
 
-- `within_strict_hours()` 使用 `settings.strict_hours` 判定 24h/30h 窗口。
-- `run_domain_refill_stage()` 使用 `settings.refill_max_results` 作为 Tavily `max_results`。
-- `run_domain_refill_stage()` 使用 `include_domains` 限定 priority/secondary 域名。
-- `enable_official_fallback` 仍为 false 时，不进入 official fallback。
+单次 run 只能作为样本。宽松诊断至少观察 3 次 scheduled run，或 1 次手动 run 加后续 2 次 scheduled run。
 
-### `scripts/tavily_gray_scorecard.py`
+| 指标 | 通过 | 需复核 | 失败 |
+|---|---:|---:|---:|
+| artifact 写出宽松诊断字段 | 全部存在 | 缺少 preview 或分阶段字段 | 缺少 strict/lenient 分离 |
+| `lenient_candidate_count` | `>= 10` | `5-9` | `< 5` |
+| `proven_within_72h_count` | `>= 8` | `3-7` | `< 3` |
+| `missing_date_unproven_count / lenient_candidate_count` | `< 0.30` | `0.30-0.70` | `> 0.70` |
+| `outside_72h_rejected_count / result_count` | `< 0.20` | `0.20-0.40` | `> 0.40` |
+| `strict_final_count` | 不低于原严格规则 | 下降但原因可解释 | 因宽松改造污染严格计数 |
 
-本轮不需要改这里。验收使用现有字段：
+多 run 决策：
 
-- `refill.priority_refill.result_count`
-- `refill.priority_refill.accepted_count`
-- `refill.priority_refill.published_date_missing_count`
-- `refill.priority_refill.outside_window_rejected_count`
-- `refill.priority_refill.non_ai_rejected_count`
-- secondary 的同名字段
-- `output.final_count`
-- `output.refill_remaining_count`
-- `budget.total_calls`
-- `budget.official_fallback_enabled`
+- PASS：3 次中至少 2 次 `lenient_candidate_count >= 10`，且 `proven_within_72h_count >= 8`。这只证明 3 天召回有潜力，仍不能默认开启 Tavily。
+- METADATA-FAIL：`lenient_candidate_count >= 10`，但 `missing_date_unproven_count / lenient_candidate_count > 0.70`。这说明主要问题是 Tavily 返回缺少 `published_date`，下一步应做 metadata probe 或解析策略验证。
+- RECALL-FAIL：`lenient_candidate_count < 5`。这说明当前 query/domain 组合召回不足，继续扩大窗口或预算价值不高。
+- CONTAMINATION-FAIL：宽松候选进入正式 `final_count`，或 artifact 无法区分 strict 与 lenient。该 run 不能用于策略判断。
 
-## 实施检查清单
+### 实施检查清单
 
 执行前：
 
@@ -123,15 +118,10 @@ git log --oneline -3
 
 - 工作区没有未确认的 `.env` 或生成日报文件。
 - `config.yaml` 仍是 `enrichment.enabled: false`。
+- `config.yaml` 仍是 `strict_hours: 24`、`refill_max_results: 8`。
 - `enable_official_fallback` 仍是 false。
 
-如果当前分支已经包含 `ci: add Tavily gray 3 experiment overrides`，只需要检查 workflow 中的覆盖步骤是否存在：
-
-```bash
-rg -n "gray_3_refill_domain_window_depth|gray-experiment-overrides|refill_max_results" .github/workflows/tavily-gray.yml
-```
-
-如果需要重新实现，按“目标改动位置”添加 workflow 覆盖步骤，然后运行：
+本地验证：
 
 ```bash
 .venv/bin/python - <<'PY'
@@ -144,10 +134,13 @@ for path in [".github/workflows/tavily-gray.yml", "config.yaml"]:
     print(f"YAML OK: {path}")
 PY
 
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. pytest -q -p no:cacheprovider
+ruff check .
+ruff format --check .
 git diff --check
 ```
 
-## 运行 Gray Test 3
+## 运行 Gray Test 3 诊断
 
 推送包含 workflow 改动的 commit 后触发：
 
@@ -165,20 +158,17 @@ gh run download RUN_ID --dir "$artifact_dir"
 find "$artifact_dir" -maxdepth 6 -type f | sort
 ```
 
-GitHub CLI 用法已用 Context7 核对：`gh workflow run` 可指定 workflow 和 `--ref`，`gh run list` 可用 `--workflow` 和 `--limit`，`gh run watch` 接 run id，`gh run download RUN_ID --dir DIR` 可下载 artifact。
-
-## Artifact 必查项
-
-artifact 中必须有：
+Artifact 必须有：
 
 ```text
 gray/tavily/YYYY-MM-DD/enrichment-summary.json
 gray/tavily/YYYY-MM-DD/scorecard.json
+gray/tavily/YYYY-MM-DD/scorecard.md
 gray/tavily/YYYY-MM-DD/logs/gray-experiment-overrides.json
 gray/tavily/YYYY-MM-DD/logs/gray-config-diff.patch
 ```
 
-用 Python 快速检查参数确实生效：
+快速检查：
 
 ```bash
 python3 - <<'PY'
@@ -187,60 +177,32 @@ import json
 from pathlib import Path
 
 base = Path("ARTIFACT_DIR")
-summary_path = next(base.glob("**/enrichment-summary.json"))
-override_path = next(base.glob("**/gray-experiment-overrides.json"))
-scorecard_path = next(base.glob("**/scorecard.json"))
-
-summary = json.loads(summary_path.read_text(encoding="utf-8"))
-overrides = json.loads(override_path.read_text(encoding="utf-8"))
-scorecard = json.loads(scorecard_path.read_text(encoding="utf-8"))
+summary = json.loads(next(base.glob("**/enrichment-summary.json")).read_text(encoding="utf-8"))
+overrides = json.loads(next(base.glob("**/gray-experiment-overrides.json")).read_text(encoding="utf-8"))
+scorecard = json.loads(next(base.glob("**/scorecard.json")).read_text(encoding="utf-8"))
 params = summary["enrichment"]["parameters"]
+diag = scorecard["lenient_diagnostics"]
 
-print("override experiment:", overrides["experiment"])
+print("experiment:", overrides["experiment"])
 print("strict_hours:", params["strict_hours"])
 print("refill_max_results:", params["refill_max_results"])
-print("priority domains:", params["priority_refill_media_whitelist"])
-print("secondary domains:", params["secondary_refill_candidate_domains"])
-print("official fallback:", params["enable_official_fallback"])
-print("final_count:", scorecard["output"]["final_count"])
-print("stop_reason:", scorecard["output"]["stop_reason"])
+print("refill_search_window_hours:", params["refill_search_window_hours"])
+print("lenient enabled:", params["lenient_refill_diagnostics_enabled"])
+print("diagnostic window:", diag["window_hours"])
+print("strict_final_count:", diag["strict_final_count"])
+print("lenient_candidate_count:", diag["lenient_candidate_count"])
+print("proven_within_72h_count:", diag["proven_within_72h_count"])
+print("missing_date_unproven_count:", diag["missing_date_unproven_count"])
+print("outside_72h_rejected_count:", diag["outside_72h_rejected_count"])
 PY
 ```
-
-期望输出：
-
-- `strict_hours: 30`
-- `refill_max_results: 12`
-- priority domains 为 `reuters.com`、`arstechnica.com`、`techcrunch.com`
-- secondary domains 为 `thenextweb.com`、`venturebeat.com`
-- `official fallback: False`
-
-## 验收指标
-
-单次 run 只能作为样本。建议至少观察 3 次 scheduled run，或 1 次手动 run + 后续 2 次 scheduled run。
-
-核心指标：
-
-| 指标 | 通过 | 需复核 | 失败 |
-|---|---:|---:|---:|
-| priority + secondary accepted/result | `>= 0.50` | `0.35-0.49` | `< 0.35` |
-| `final_count` | `>= 10` | `8-9` | `< 8` |
-| `published_date_missing_rate` | `< 0.10` | `0.10-0.25` | `> 0.25` |
-| `non_ai_rejected_count / result_count` | `< 0.20` | `0.20-0.35` | `> 0.35` |
-| `official_fallback_enabled` | false | false | true |
-
-多 run 决策：
-
-- PASS：3 次中至少 2 次 `final_count >= 10`，且 refill accepted/result 中位数 `>= 0.50`。
-- FLAG：`final_count` 有改善但仍常在 8-9，需要再分离预算实验或 verify 实验。
-- FAIL：priority 仍大量 `missing_published_date`，或 Reuters/Ars/TechCrunch priority 混入非 AI 过多。
 
 ## 结果记录模板
 
 把每次 run 追加到 `handbook/guides/tavily-validation-iteration-plan.md`：
 
 ```markdown
-### Gray Test 3 Run - YYYY-MM-DD
+### Gray Test 3 Diagnostic Run - YYYY-MM-DD
 
 - run id:
 - commit:
@@ -249,29 +211,31 @@ PY
 - config diff present: yes/no
 - input_count:
 - verify: calls / accepted / rejected / skipped
-- priority refill: result_count / accepted_count / missing_date / outside_24h / non_ai
-- secondary refill: result_count / accepted_count / missing_date / outside_24h / non_ai
-- final_count / min_articles:
+- priority refill: result_count / accepted_count / missing_date / outside_strict / non_ai
+- secondary refill: result_count / accepted_count / missing_date / outside_strict / non_ai
+- strict_final_count / min_articles:
+- lenient_candidate_count:
+- proven_within_72h_count:
+- missing_date_unproven_count:
+- outside_72h_rejected_count:
+- lenient_non_ai_count:
+- lenient_duplicate_or_cluster_count:
 - stop_reason:
-- decision: PASS / FLAG / FAIL
+- decision: PASS / METADATA-FAIL / RECALL-FAIL / CONTAMINATION-FAIL / NEEDS-MORE-RUNS
 - notes:
 ```
 
-## 回滚方式
+## 原 Gray Test 3 方案（归档）
 
-如果 Gray Test 3 质量变差，回滚只需要移除 workflow 中的 `Apply gray experiment overrides` 步骤，或直接 revert 对应 commit：
+以下内容仅保留为 2026-05-17 原始方案和回滚上下文。2026-05-30 之后不再把这组域名/window/depth 组合视为上线候选。
 
-```bash
-git revert COMMIT_SHA
-```
+原方案只做 3 项：
 
-回滚后确认：
+1. 调整 refill 域名分层：把 `reuters.com`、`arstechnica.com`、`techcrunch.com` 放入 priority refill，把 `thenextweb.com`、`venturebeat.com` 降到 secondary。
+2. 将灰度实验的 `strict_hours` 从 `24` 临时放宽到 `30`。
+3. 将灰度实验的 `refill_max_results` 从 `8` 临时提高到 `12`。
 
-```bash
-rg -n "gray_3_refill_domain_window_depth|gray-experiment-overrides" .github/workflows/tavily-gray.yml
-```
-
-应无匹配。
+该方案在后续 run 中没有改善正式 `final_count`，因此当前只保留域名分层作为诊断变量，不再保留 `strict_hours=30` 和 `refill_max_results=12` 作为当前灰度目标。
 
 ## 不做事项
 

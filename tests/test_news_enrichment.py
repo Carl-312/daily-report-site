@@ -521,6 +521,102 @@ def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
     assert candidate["accepted"] is False
 
 
+def test_refill_lenient_diagnostics_do_not_pollute_strict_output(monkeypatch) -> None:
+    cfg = load_project_config()
+    seen_payloads: list[dict] = []
+
+    def fake_search(session, api_key, payload):
+        seen_payloads.append(payload)
+        return {
+            "latency_ms": 10.0,
+            "response": {
+                "results": [
+                    {
+                        "title": "OpenAI launches AI coding workspace",
+                        "url": "https://thenextweb.com/news/openai-coding-workspace",
+                        "published_date": "2026-04-01T03:00:00Z",
+                        "content": "Strictly valid AI item.",
+                        "score": 0.98,
+                    },
+                    {
+                        "title": "Anthropic releases Claude developer console",
+                        "url": "https://venturebeat.com/news/claude-developer-console",
+                        "published_date": None,
+                        "content": "Missing date metadata.",
+                        "score": 0.94,
+                    },
+                    {
+                        "title": "Startup funding round reshapes enterprise software market",
+                        "url": "https://thenextweb.com/news/startup-funding-enterprise-software",
+                        "published_date": "2026-03-30T04:00:00Z",
+                        "content": "Inside 72h but not an AI title.",
+                        "score": 0.9,
+                    },
+                    {
+                        "title": "OpenAI launches AI coding workspace",
+                        "url": "https://thenextweb.com/news/openai-coding-workspace-copy",
+                        "published_date": "2026-04-01T04:00:00Z",
+                        "content": "Duplicate title inside 72h.",
+                        "score": 0.89,
+                    },
+                    {
+                        "title": "Mistral debuts AI inference platform",
+                        "url": "https://venturebeat.com/news/mistral-inference-platform",
+                        "published_date": "2026-03-28T03:00:00Z",
+                        "content": "Explicitly outside 72h.",
+                        "score": 0.88,
+                    },
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 1,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 1,
+                "min_articles": 1,
+                "refill_search_window_hours": 72,
+                "lenient_refill_diagnostics_enabled": True,
+                "lenient_refill_window_hours": 72,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    report = result["report"]
+    candidates = report["priority_refill_runs"][0]["candidate_results"]
+
+    assert seen_payloads[0]["start_date"] == "2026-03-29"
+    assert seen_payloads[0]["end_date"] == "2026-04-01"
+    assert report["final_count"] == 1
+    assert report["strict_final_count"] == 1
+    assert report["strict_refill_accepted_count"] == 1
+    assert len(candidates) == 5
+    assert candidates[1]["lenient_candidate"] is True
+    assert candidates[1]["accepted"] is False
+    assert candidates[4]["lenient_candidate"] is False
+    assert candidates[4]["lenient_rejection_reason"] == "outside_72h"
+    assert report["lenient_refill_diagnostics"]["enabled"] is True
+    assert report["lenient_refill_diagnostics"]["request_window_hours"] == 72
+    assert report["lenient_refill_diagnostics"]["start_date"] == "2026-03-29"
+    assert report["lenient_candidate_count"] == 4
+    assert report["proven_within_72h_count"] == 3
+    assert report["missing_date_unproven_count"] == 1
+    assert report["outside_72h_rejected_count"] == 1
+    assert report["lenient_non_ai_count"] == 1
+    assert report["lenient_duplicate_or_cluster_count"] == 1
+    assert len(report["lenient_selected_preview"]) == 4
+
+
 def test_refill_is_skipped_when_verify_already_satisfies_minimum(
     monkeypatch,
 ) -> None:

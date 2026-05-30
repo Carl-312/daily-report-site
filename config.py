@@ -108,9 +108,12 @@ class EnrichmentSettings(BaseModel):
     max_verify_calls: int = Field(default=6)
     max_refill_rounds: int = Field(default=1)
     refill_max_results: int = Field(default=8)
+    refill_search_window_hours: int = Field(default=24)
     verify_search_depth: str = Field(default="basic")
     enable_fuzzy_second_pass: bool = Field(default=False)
     enable_official_fallback: bool = Field(default=False)
+    lenient_refill_diagnostics_enabled: bool = Field(default=False)
+    lenient_refill_window_hours: int = Field(default=72)
     priority_refill_query: str = Field(
         default="OpenAI Anthropic AI model launch startup funding developer tools"
     )

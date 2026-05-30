@@ -26,6 +26,11 @@ REFILL_SEARCH_DEPTH = "advanced"
 VERIFY_MAX_RESULTS = 3
 TITLE_SIMILARITY_MATCH_THRESHOLD = 0.82
 REQUEST_TIMEOUT_SECONDS = 45
+REFILL_STAGE_NAMES = (
+    "priority_refill",
+    "secondary_refill",
+    "official_fallback",
+)
 
 AI_NEIGHBOR_TITLE_RE = re.compile(
     r"\b(autonomous|autonomy|self-driving|self driving|automation|"
@@ -174,11 +179,22 @@ def within_strict_hours(
     return earliest <= published_dt <= reference_dt
 
 
-def report_window(reference_dt: datetime) -> tuple[str, str]:
+def report_window(reference_dt: datetime, *, window_hours: int = 24) -> tuple[str, str]:
+    window_hours = max(1, int(window_hours or 24))
     return (
-        (reference_dt - timedelta(days=1)).date().isoformat(),
+        (reference_dt - timedelta(hours=window_hours)).date().isoformat(),
         reference_dt.date().isoformat(),
     )
+
+
+def refill_request_window_hours(settings: Any) -> int:
+    configured_hours = int(getattr(settings, "refill_search_window_hours", 24) or 24)
+    if getattr(settings, "lenient_refill_diagnostics_enabled", False):
+        diagnostic_hours = int(
+            getattr(settings, "lenient_refill_window_hours", 72) or 72
+        )
+        return max(configured_hours, diagnostic_hours)
+    return configured_hours
 
 
 def is_aggregate_like(article: dict[str, Any]) -> bool:
@@ -682,6 +698,27 @@ def build_initial_report(
         "story_cluster_rejected_count": 0,
         "secondary_duplicate_slip_count": 0,
         "final_count": len(articles),
+        "strict_final_count": len(articles),
+        "strict_refill_accepted_count": 0,
+        "lenient_candidate_count": 0,
+        "proven_within_72h_count": 0,
+        "missing_date_unproven_count": 0,
+        "outside_72h_rejected_count": 0,
+        "lenient_non_ai_count": 0,
+        "lenient_duplicate_or_cluster_count": 0,
+        "lenient_selected_preview": [],
+        "lenient_refill_diagnostics": {
+            "enabled": bool(
+                getattr(settings, "lenient_refill_diagnostics_enabled", False)
+            ),
+            "window_hours": int(
+                getattr(settings, "lenient_refill_window_hours", 72) or 72
+            ),
+            "request_window_hours": refill_request_window_hours(settings),
+            "start_date": None,
+            "end_date": None,
+            "stages": {},
+        },
         "stop_reason": "not_started",
         "priority_refill_runs": [],
         "secondary_refill_runs": [],
@@ -698,6 +735,9 @@ def build_initial_report(
             "max_verify_calls": settings.max_verify_calls,
             "max_refill_rounds": settings.max_refill_rounds,
             "refill_max_results": settings.refill_max_results,
+            "refill_search_window_hours": getattr(
+                settings, "refill_search_window_hours", 24
+            ),
             "verify_search_depth": settings.verify_search_depth,
             "verify_max_results": VERIFY_MAX_RESULTS,
             "priority_refill_media_whitelist": list(
@@ -711,6 +751,12 @@ def build_initial_report(
             ),
             "enable_fuzzy_second_pass": settings.enable_fuzzy_second_pass,
             "enable_official_fallback": settings.enable_official_fallback,
+            "lenient_refill_diagnostics_enabled": bool(
+                getattr(settings, "lenient_refill_diagnostics_enabled", False)
+            ),
+            "lenient_refill_window_hours": int(
+                getattr(settings, "lenient_refill_window_hours", 72) or 72
+            ),
         },
         "notes": [],
     }
@@ -743,6 +789,151 @@ def empty_refill_result(remaining_budget: int) -> dict[str, Any]:
         "story_cluster_rejected_count": 0,
         "duplicate_slip_count": 0,
         "remaining_budget_after_refill": remaining_budget,
+    }
+
+
+def stage_candidate_results(
+    report: dict[str, Any], stage_name: str
+) -> list[dict[str, Any]]:
+    candidates: list[dict[str, Any]] = []
+    for run in report.get(f"{stage_name}_runs", []) or []:
+        candidates.extend(run.get("candidate_results") or [])
+    return candidates
+
+
+def summarize_lenient_stage(
+    report: dict[str, Any],
+    stage_name: str,
+    *,
+    window_hours: int,
+) -> dict[str, Any]:
+    runs = report.get(f"{stage_name}_runs", []) or []
+    candidates = stage_candidate_results(report, stage_name)
+    lenient_candidates = [
+        candidate for candidate in candidates if candidate.get("lenient_candidate")
+    ]
+    duplicate_or_cluster = [
+        candidate
+        for candidate in lenient_candidates
+        if candidate.get("duplicate_existing")
+        or candidate.get("duplicate_within_results")
+        or candidate.get("near_duplicate_existing")
+        or candidate.get("story_cluster_existing")
+    ]
+    return {
+        "window_hours": window_hours,
+        "start_date": next(
+            (run.get("start_date") for run in runs if run.get("start_date")),
+            None,
+        ),
+        "end_date": next(
+            (run.get("end_date") for run in runs if run.get("end_date")),
+            None,
+        ),
+        "result_count": sum(int(run.get("result_count") or 0) for run in runs),
+        "lenient_candidate_count": len(lenient_candidates),
+        "proven_within_window_count": sum(
+            1
+            for candidate in lenient_candidates
+            if candidate.get("lenient_within_window") is True
+        ),
+        "missing_date_unproven_count": sum(
+            1 for candidate in lenient_candidates if not candidate.get("published_date")
+        ),
+        "outside_window_rejected_count": sum(
+            1
+            for candidate in candidates
+            if candidate.get("lenient_within_window") is False
+        ),
+        "lenient_non_ai_count": sum(
+            1
+            for candidate in lenient_candidates
+            if candidate.get("ai_title_relevant") is False
+        ),
+        "lenient_duplicate_or_cluster_count": len(duplicate_or_cluster),
+        "lenient_selected_preview": [
+            {
+                "title": candidate.get("title", ""),
+                "domain": candidate.get("domain", ""),
+                "published_date": candidate.get("published_date"),
+                "proven_within_window": candidate.get("lenient_within_window"),
+                "ai_title_relevant": candidate.get("ai_title_relevant"),
+                "duplicate_or_cluster": candidate in duplicate_or_cluster,
+            }
+            for candidate in lenient_candidates
+            if candidate.get("title")
+        ][:5],
+    }
+
+
+def apply_lenient_refill_diagnostics(
+    report: dict[str, Any],
+    settings: Any,
+) -> None:
+    window_hours = int(getattr(settings, "lenient_refill_window_hours", 72) or 72)
+    enabled = bool(getattr(settings, "lenient_refill_diagnostics_enabled", False))
+    stage_summaries = {
+        stage_name: summarize_lenient_stage(
+            report,
+            stage_name,
+            window_hours=window_hours,
+        )
+        for stage_name in REFILL_STAGE_NAMES
+    }
+    start_date = next(
+        (
+            summary.get("start_date")
+            for summary in stage_summaries.values()
+            if summary.get("start_date")
+        ),
+        None,
+    )
+    end_date = next(
+        (
+            summary.get("end_date")
+            for summary in stage_summaries.values()
+            if summary.get("end_date")
+        ),
+        None,
+    )
+    selected_preview = [
+        item
+        for summary in stage_summaries.values()
+        for item in summary["lenient_selected_preview"]
+    ][:5]
+    report["strict_final_count"] = report.get("final_count", 0)
+    report["strict_refill_accepted_count"] = (
+        int(report.get("priority_refilled_count") or 0)
+        + int(report.get("secondary_refilled_count") or 0)
+        + int(report.get("official_refilled_count") or 0)
+    )
+    report["lenient_candidate_count"] = sum(
+        summary["lenient_candidate_count"] for summary in stage_summaries.values()
+    )
+    report["proven_within_72h_count"] = sum(
+        summary["proven_within_window_count"] for summary in stage_summaries.values()
+    )
+    report["missing_date_unproven_count"] = sum(
+        summary["missing_date_unproven_count"] for summary in stage_summaries.values()
+    )
+    report["outside_72h_rejected_count"] = sum(
+        summary["outside_window_rejected_count"] for summary in stage_summaries.values()
+    )
+    report["lenient_non_ai_count"] = sum(
+        summary["lenient_non_ai_count"] for summary in stage_summaries.values()
+    )
+    report["lenient_duplicate_or_cluster_count"] = sum(
+        summary["lenient_duplicate_or_cluster_count"]
+        for summary in stage_summaries.values()
+    )
+    report["lenient_selected_preview"] = selected_preview
+    report["lenient_refill_diagnostics"] = {
+        "enabled": enabled,
+        "window_hours": window_hours,
+        "request_window_hours": refill_request_window_hours(settings),
+        "start_date": start_date,
+        "end_date": end_date,
+        "stages": stage_summaries,
     }
 
 
@@ -955,7 +1146,17 @@ def run_domain_refill_stage(
     ):
         return empty_refill_result(remaining_budget)
 
-    start_date, end_date = report_window(reference_dt)
+    request_window_hours = refill_request_window_hours(settings)
+    lenient_window_hours = int(
+        getattr(settings, "lenient_refill_window_hours", 72) or 72
+    )
+    lenient_diagnostics_enabled = bool(
+        getattr(settings, "lenient_refill_diagnostics_enabled", False)
+    )
+    start_date, end_date = report_window(
+        reference_dt,
+        window_hours=request_window_hours,
+    )
     rounds_budget = min(settings.max_refill_rounds, remaining_budget)
     for round_index in range(rounds_budget):
         needed_before_round = max(0, needed_count - len(accepted_candidates))
@@ -997,7 +1198,10 @@ def run_domain_refill_stage(
         round_story_cluster_rejected = 0
 
         for index, result_item in enumerate(results, start=1):
-            if len(accepted_candidates) + len(round_accepted) >= needed_count:
+            strict_slot_available = (
+                len(accepted_candidates) + len(round_accepted) < needed_count
+            )
+            if not lenient_diagnostics_enabled and not strict_slot_available:
                 break
             title = result_item.get("title", "")
             url = result_item.get("url", "")
@@ -1028,9 +1232,21 @@ def run_domain_refill_stage(
                 reference_dt=reference_dt,
                 strict_hours=settings.strict_hours,
             )
+            lenient_within_window = within_strict_hours(
+                result_item.get("published_date"),
+                reference_dt=reference_dt,
+                strict_hours=lenient_window_hours,
+            )
             title_is_ai_relevant = ai_title_relevant(title)
+            duplicate_or_cluster = (
+                duplicate_existing
+                or duplicate_within_results
+                or near_duplicate_existing
+                or story_cluster_existing
+            )
             accepted = (
-                bool(within_window)
+                strict_slot_available
+                and bool(within_window)
                 and title_is_ai_relevant
                 and not duplicate_existing
                 and not duplicate_within_results
@@ -1059,11 +1275,24 @@ def run_domain_refill_stage(
                 "domain": domain_of(url),
                 "published_date": result_item.get("published_date"),
                 "within_24h": within_window,
+                "within_strict_window": within_window,
+                "strict_window_hours": settings.strict_hours,
+                "lenient_within_window": lenient_within_window,
+                "lenient_window_hours": lenient_window_hours,
+                "lenient_candidate": (
+                    lenient_diagnostics_enabled and lenient_within_window is not False
+                ),
+                "lenient_rejection_reason": (
+                    f"outside_{lenient_window_hours}h"
+                    if lenient_within_window is False
+                    else None
+                ),
                 "ai_title_relevant": title_is_ai_relevant,
                 "duplicate_existing": duplicate_existing,
                 "duplicate_within_results": duplicate_within_results,
                 "near_duplicate_existing": near_duplicate_existing,
                 "story_cluster_existing": story_cluster_existing,
+                "duplicate_or_cluster": duplicate_or_cluster,
                 "cluster_match": cluster_match,
                 "accepted": accepted,
                 "score": result_item.get("score"),
@@ -1082,6 +1311,8 @@ def run_domain_refill_stage(
                 "include_domains": include_domains,
                 "start_date": start_date,
                 "end_date": end_date,
+                "request_window_hours": request_window_hours,
+                "lenient_diagnostic_window_hours": lenient_window_hours,
                 "latency_ms": latency_ms,
                 "result_count": len(results),
                 "needed_before": needed_before_round,
@@ -1388,6 +1619,7 @@ def enrich_articles_with_tavily(
             "secondary_refill": sample_titles(secondary_candidates),
             "official_fallback": sample_titles(official_candidates),
         }
+        apply_lenient_refill_diagnostics(report, settings)
         if report["refill_needed_count"] == 0:
             report["stop_reason"] = "min_articles_satisfied_after_verify"
         elif report["final_count"] >= settings.min_articles:
