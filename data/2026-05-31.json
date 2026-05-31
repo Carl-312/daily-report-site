@@ -1,0 +1,196 @@
+{
+  "date": "2026-05-31",
+  "articles": [
+    {
+      "title": "I put Google’s 24/7 AI assistant Gemini Spark to work, and it’s actually pretty useful",
+      "link": "https://techcrunch.com/2026/05/30/i-put-googles-24-7-ai-assistant-gemini-spark-to-work-and-its-actually-pretty-useful/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "This weekend’s two biggest movies were both directed by YouTubers",
+      "link": "https://techcrunch.com/2026/05/30/this-weekends-two-biggest-movies-were-both-directed-by-youtubers/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "‘What a joke’: Github Copilot’s new token-based billing spurs consternation among devs",
+      "link": "https://techcrunch.com/2026/05/30/what-a-joke-github-copilots-new-token-based-billing-spurs-consternation-among-devs/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Meta is reportedly developing an AI pendant",
+      "link": "https://techcrunch.com/2026/05/30/meta-is-reportedly-developing-an-ai-pendant/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The groupthink boom: what three top VCs really think about the AI frenzy",
+      "link": "https://techcrunch.com/2026/05/30/the-groupthink-boom-what-three-top-vcs-really-think-about-the-ai-frenzy/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "TikTok’s road to becoming a super app",
+      "link": "https://techcrunch.com/2026/05/30/tiktoks-road-to-becoming-a-super-app/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "SoftBank says it will invest up to €75 billion to build French data centers",
+      "link": "https://techcrunch.com/2026/05/30/softbank-says-it-will-invest-up-to-e75-billion-to-build-french-data-centers/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Snap alums unveil Ghost Angels fund",
+      "link": "https://techcrunch.com/2026/05/30/snap-alums-unveil-ghost-angels-fund/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "As the browser wars heat up, here are the hottest alternatives to Chrome and Safari in 2026",
+      "link": "https://techcrunch.com/2026/05/30/as-the-browser-wars-heat-up-here-are-the-hottest-alternatives-to-chrome-and-safari-in-2026/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "This $300 pizza oven can easily help elevate your summer pizza nights",
+      "link": "https://techcrunch.com/2026/05/30/this-300-pizza-oven-can-easily-help-elevate-your-summer-pizza-nights/",
+      "description": "",
+      "publish_time": "2026-05-30",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-05-31",
+    "reference_dt": "2026-05-31T13:04:53.994617+08:00",
+    "enabled": false,
+    "applied": false,
+    "skip_reason": "disabled",
+    "error": null,
+    "input_count": 10,
+    "prefiltered_count": 10,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 0,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 10,
+    "strict_final_count": 10,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "disabled",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Tavily enrichment is disabled for this run."
+    ]
+  }
+}
