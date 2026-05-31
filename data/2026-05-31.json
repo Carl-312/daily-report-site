@@ -47,6 +47,15 @@
       "source": "techcrunch"
     },
     {
+      "title": "What happens in Vega$: steroids, swimmers, and a billion-dollar hustle",
+      "link": "https://techcrunch.com/2026/05/31/i-went-to-the-so-called-steroid-olympics-to-understand-why-silicon-valley-is-obsessed-with-peptides/",
+      "description": "",
+      "publish_time": "2026-05-31",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "TikTok’s road to becoming a super app",
       "link": "https://techcrunch.com/2026/05/30/tiktoks-road-to-becoming-a-super-app/",
       "description": "",
@@ -94,13 +103,13 @@
   ],
   "enrichment": {
     "report_date": "2026-05-31",
-    "reference_dt": "2026-05-31T13:04:53.994617+08:00",
+    "reference_dt": "2026-05-31T21:39:25.373925+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 10,
-    "prefiltered_count": 10,
+    "input_count": 11,
+    "prefiltered_count": 11,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -130,8 +139,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 10,
-    "strict_final_count": 10,
+    "final_count": 11,
+    "strict_final_count": 11,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
