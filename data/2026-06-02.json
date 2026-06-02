@@ -2,6 +2,15 @@
   "date": "2026-06-02",
   "articles": [
     {
+      "title": "AI日报：扣子3.0正式上线；豆包预计6月下旬上线付费版本；Krea 2 LoRA 全面开放",
+      "link": "https://news.aibase.com/zh/daily/28568",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、豆包预计6月下旬上线付费版本:三档订阅价格曝光，三季度将联动电商引流 豆包计划在6月下旬正式上线付费内容，并在Force大会上同步更新功能，标志着国内用户量 最大 的大模型迎来商业化实质性进展。豆包将在第三季度结合电商功能完善付费场景，并通过定向补贴为抖音商城引流，第四季度全面进入稳定运行期。此外，豆包在2026年暂不会将付费用户渗透率作为核心考核指标。 📅 豆包计划于6月下旬上线付费内容并同步更新功能。 🛒 第三季度将结合电商功能完善付费场景，通过定向补贴为抖音商城引流。 📈 豆包在2026年暂不以付费用户渗透率为核心考核指标。 2、扣子 3.0 正式上…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI 资讯\nAI 产品库\nGEO 平台\nMCP 服务\n模型算力广场\nAI 全能力超市\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：扣子3.0正式上线；豆包预计6月下旬上线付费版本；Krea 2 LoRA 全面开放\n发布于最新AI日报\n发布时间 :\n2026年6月2号 15:59\n阅读 :\n2\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、豆包预计6月下旬上线付费版本:三档订阅价格曝光，三季度将联动电商引流\n豆包计划在6月下旬正式上线付费内容，并在Force大会上同步更新功能，标志着国内用户量\n最大\n的大模型迎来商业化实质性进展。豆包将在第三季度结合电商功能完善付费场景，并通过定向补贴为抖音商城引流，第四季度全面进入稳定运行期。此外，豆包在2026年暂不会将付费用户渗透率作为核心考核指标。\n【AiBase提要:】\n📅 豆包计划于6月下旬上线付费内容并同步更新功能。\n🛒 第三季度将结合电商功能完善付费场景，通过定向补贴为抖音商城引流。\n📈 豆包在2026年暂不以付费用户渗透率为核心考核指标。\n2、扣子 3.0 正式上线，支持多人多 Agent 协同作业\n字节跳动推出的扣子3.0版本在团队协作和生态接入方面实现了显著突破，不仅支持灵活的Agent组合模式，还加强了跨端同步和本地生态融合，同时为多个垂直行业提供了定制化解决方案。\n【AiBase提要:】\n🧠 新版本支持“一人 + 多 Agent”以及“多人 + 多 Agent”的灵活组合模式。\n🔄 实现与主流环境的无缝切换，支持多种本地 Agent 接入。\n💼 提供多行业核心场景的精品模板，助力用户快速打造专家级智能体。\n3、Krea 2 LoRA 全面开放！AI 图像创作个性化时代来临\nKrea 2 LoRA 的全面开放标志着 AI 图像创作进入个性化时代，用户无需高端订阅即可训练并使用自定义风格、角色或对象 LoRA，极大降低了 AI 图像创作的门槛。\n【AiBase提要:】\n🎨 Krea2LoRA 训练功能全面开放，用户可自定义风格、角色或对象 LoRA。\n⚡ Krea2 模型以高性能图像生成引擎为核心，支持快速响应模糊提示并产出高质量图像。\n🚀 Krea2LoRA 在精度、质量和创意表现上显著优于其他模型，提升 AI 图像创作的个性化能力。\n4、OpenAI大幅调整ChatGPT，支持提前锁死算力档位\nOpenAI对ChatGPT进行了系统性升级，包括手势交互逻辑、长对话目录功能以及底层模型优化，提升了用户体验和生产力工具的执行效率。\n【AiBase提要:】\n引入高阶手势，允许用户选择不同的响应档位以适应不同任务需求。\n推出长对话目录导航功能，方便用户快速跳转至特定讨论主题。\n优化GPT-5.5Instant模型，提升文本调性和可读性，减少机械化回复。\n5、编程与GUI双向通吃!Qwen3.7-Plus 登场，11小时自主闭环开发真实APP\n阿里正式发布了全新多模态大模型 Qwen3.7-Plus，该模型在文本能力基础上全面升级了视觉-语言能力，并将其统一为一体化的智能体基座。Qwen3.7-Plus 能够无缝融合 GUI 与 CLI 交互，实现了从前端原型到复杂软件工程的端到端自动化。在\n权威\n视觉模型榜单 Vision Arena 中，阿里已成功跻身全球前五、中国\n第一\n。\n【AiBase提要:】\n🧠 纯文本与推理 Agent：在复杂软件工程与科学编程任务上表现强劲。\n🖼️ 多模态推理与视觉编程：支持将图像、视频、UI 截图一键转化为可执行代码。\n📹 真实世界感知与视频理解：涵盖文档解析、\n高级\nOCR、长短视频事件流理解。\n6、微信AI智能体曝光:主打应用内任务处理，分阶段上线在即\n腾讯正在测试一款AI智能体原型产品，旨在帮助用户在微信内部高效完成多项任务。该智能体的推出将激活微信作为\n超级\nApp的生态潜力，并可能重塑微信内部的服务连接机制。\n【AiBase提要:】\n📱 微信正在测试AI智能体原型，以提升用户任务处理效率。\n🔄 该智能体将分阶段上线，首先进行封闭测试，随后逐步扩大范围。\n🌐 腾讯此举将全面激活微信生态潜力，推动移动互联网向AI Agent即入口转型。\n7、颠覆传统交互！OpenAI现场演示“无App”手机，所有界面全靠AI实时生成\n文章介绍了OpenAI在活动中展示的“Agentic操作系统”原型，其通过语音指令实时生成界面，无需安装第三方应用，重推理任务由云端GPT大模型处理，展现了未来智能手机交互方式的颠覆性变革。\n【AiBase提要:】\n📱 该系统通过语音指令实时生成界面，无需安装任何第三方应用。\n☁️ 重推理任务由云端GPT大模型处理，实现高效操作。\n📅 OpenAI计划在2027年上半年量产AI智能体手机，推动产业化进程。\n8、GitHub Copilot正式上线按量计费模式\nGitHub Copilot正式上线按量计费模式，推出AI点数扣费机制，标志着其从单一代码补全工具向智能体平台的转型。\n【AiBase提要:】\n💡 GitHub Copilot正式采用按使用量计费模式，用户需消耗AI点数以支付服务费用。\n🔄 该模式改变了以往的低价无限包月方式，将成本转移至用户端。\n💰 高价值任务如代码审查和云端智能体任务将计入点数消耗，影响重度用户预算。\n相关推荐\n最高狂降97.5%！腾讯云大模型全面降价，彻底持平官方原厂价\n腾讯云智能体开发平台宣布自6月3日起，对DeepSeek V4系列大模型进行大幅降价，其中主力模型DeepSeek-V4-Pro的推理输入和输出价格均降低75%，旨在降低企业与开发者的创新门槛，减少日常调用成本。\n2026年6月2号 17:37\n137.7k\n时薪超 300 元还能居家办公！马斯克旗下xAI全球招募中文AI导师\n马斯克旗下AI公司xAI正加速多语言与语音交互技术研发，近日发布全球招聘启事，公开招募中文AI导师。该岗位支持远程办公，主要职责是优化大模型Grok的语音互动及多语言处理能力，薪酬方面，美国本地入职时薪为35至45美元，极具竞争力。\n2026年6月2号 17:15\n162.0k\n英伟达联合清华推出 Gamma-World，打破多智能体虚拟仿真天花板\n英伟达联合清华、多伦多大学及Vector Institute发布Gamma-World多智能体世界模型，突破传统单智能体假设瓶颈。该模型能处理多个玩家在虚拟世界中同时操作、互相观察的复杂场景，核心难点在于同步维护时间与跨视角信息，实现视频世界模型从单人向多人协作的底层变革。\n2026年6月2号 16:56\n138.7k\n腾讯云智能体开发平台DeepSeek-V4降价：最高降幅97.5%，全面持平官网\n腾讯云宣布自2026年6月3日起大幅下调DeepSeek-V4系列模型调用价格，全面与官方售价持平。其中，DeepSeek-V4-Pro缓存命中价格降幅最高达97.5%，推理输入和输出价格均下调75%；DeepSeek-V4-Flash缓存命中价格也下调90%。\n2026年6月2号 16:50\n150.8k\n积极拥抱 AI 的公司更爱招人？奥特曼反驳“技术致裁员”说法\nOpenAI CEO奥特曼反驳“企业用AI就会裁员”的观点，指出实际采用AI最多的企业反而招聘投入最大。他认为，裁员常是管理层借AI为借口，而非技术直接导致。\n2026年6月2号 16:09\n179.8k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
       "title": "Nvidia chases $200B CPU market with AI agent PCs from Microsoft, Dell, and HP",
       "link": "https://techcrunch.com/2026/06/01/nvidia-chases-200b-cpu-market-with-ai-agent-pcs-from-microsoft-dell-and-hp/",
       "description": "",
@@ -74,6 +83,33 @@
       "source": "techcrunch"
     },
     {
+      "title": "ZeroDrift raises $10 million to protect AI models from themselves",
+      "link": "https://techcrunch.com/2026/06/02/zerodrift-raises-10-million-to-protect-ai-models-from-themselves/",
+      "description": "",
+      "publish_time": "2026-06-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Rocket engine startup Impulse raises $500 million to hire people, not AI",
+      "link": "https://techcrunch.com/2026/06/02/rocket-engine-startup-impulse-raises-500-million-to-hire-people-not-ai/",
+      "description": "",
+      "publish_time": "2026-06-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Pacific Fusion’s latest prototype packs 440 gigawatts into an 80-nanosecond burst",
+      "link": "https://techcrunch.com/2026/06/02/pacific-fusions-latest-prototype-packs-440-gigawatts-into-an-80-nanosecond-burst/",
+      "description": "",
+      "publish_time": "2026-06-02",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
       "title": "How to make the Startup Battlefield Top 20 — and what every company gets regardless",
       "link": "https://techcrunch.com/2026/06/01/how-to-make-the-startup-battlefield-top-20-and-what-every-company-gets-regardless/",
       "description": "",
@@ -92,35 +128,8 @@
       "source": "techcrunch"
     },
     {
-      "title": "A new app, The Mall, is building a universal feed for online shopping",
-      "link": "https://techcrunch.com/2026/06/01/a-new-app-the-mall-is-building-a-universal-feed-for-online-shopping/",
-      "description": "",
-      "publish_time": "2026-06-01",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Grand Theft Auto V cheat service gets hacked, exposing thousands of gamers",
-      "link": "https://techcrunch.com/2026/06/01/grand-theft-auto-v-cheat-service-gets-hacked-exposing-thousands-of-gamers/",
-      "description": "",
-      "publish_time": "2026-06-01",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
       "title": "Revolut rolls out services to thousands of users in India ahead of broader launch",
       "link": "https://techcrunch.com/2026/06/01/revolut-rolls-out-services-to-thousands-of-users-in-india-ahead-of-broader-launch/",
-      "description": "",
-      "publish_time": "2026-06-01",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Unastella, a South Korean rocket startup that launched from home, raises $24M",
-      "link": "https://techcrunch.com/2026/06/01/unastella-a-south-korean-rocket-startup-that-launched-from-home-raises-24m/",
       "description": "",
       "publish_time": "2026-06-01",
       "content": "",
@@ -130,13 +139,13 @@
   ],
   "enrichment": {
     "report_date": "2026-06-02",
-    "reference_dt": "2026-06-02T13:12:13.267923+08:00",
+    "reference_dt": "2026-06-02T21:03:21.374744+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 14,
-    "prefiltered_count": 14,
+    "input_count": 15,
+    "prefiltered_count": 15,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -166,8 +175,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 14,
-    "strict_final_count": 14,
+    "final_count": 15,
+    "strict_final_count": 15,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
