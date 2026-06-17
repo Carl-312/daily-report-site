@@ -53,7 +53,9 @@ def build_experiment_overrides(
 ) -> dict[str, Any]:
     if experiment not in EXPERIMENT_NAMES:
         allowed = ", ".join(EXPERIMENT_NAMES)
-        raise ValueError(f"Unsupported Tavily gray experiment: {experiment}. Allowed: {allowed}")
+        raise ValueError(
+            f"Unsupported Tavily gray experiment: {experiment}. Allowed: {allowed}"
+        )
 
     enrichment = baseline_enrichment()
     changed_variable = "none"
@@ -106,7 +108,9 @@ def build_experiment_overrides(
                 "enable_official_fallback", False
             ),
             "priority_refill_query": enrichment_defaults.get("priority_refill_query"),
-            "official_fallback_query": enrichment_defaults.get("official_fallback_query"),
+            "official_fallback_query": enrichment_defaults.get(
+                "official_fallback_query"
+            ),
         },
     }
 

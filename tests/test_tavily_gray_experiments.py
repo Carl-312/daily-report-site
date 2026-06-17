@@ -63,7 +63,9 @@ def changed_paths(left: Any, right: Any, prefix: str = "") -> list[str]:
 
 
 def test_workflow_dispatch_exposes_only_controlled_experiment_choices() -> None:
-    workflow = yaml.load(WORKFLOW_PATH.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
+    workflow = yaml.load(
+        WORKFLOW_PATH.read_text(encoding="utf-8"), Loader=yaml.BaseLoader
+    )
 
     dispatch_inputs = workflow["on"]["workflow_dispatch"]["inputs"]
     assert list(dispatch_inputs) == ["experiment"]
@@ -108,8 +110,7 @@ def test_experiment_mapping_changes_only_the_declared_variable() -> None:
     ]
 
     assert (
-        domain["changed_variable"]
-        == "trusted_domains.priority_refill_media_whitelist"
+        domain["changed_variable"] == "trusted_domains.priority_refill_media_whitelist"
     )
     assert domain["exact_override"] == {
         "trusted_domains.priority_refill_media_whitelist": {
@@ -151,18 +152,18 @@ def test_apply_experiment_writes_artifact_and_preserves_safety_defaults(
         "enabled": False,
         "enable_official_fallback": False,
         "priority_refill_query": BASE_ENRICHMENT_DEFAULTS["priority_refill_query"],
-        "official_fallback_query": BASE_ENRICHMENT_DEFAULTS[
-            "official_fallback_query"
-        ],
+        "official_fallback_query": BASE_ENRICHMENT_DEFAULTS["official_fallback_query"],
     }
     assert enrichment["enabled"] is False
     assert enrichment["enable_official_fallback"] is False
-    assert enrichment["priority_refill_query"] == BASE_ENRICHMENT_DEFAULTS[
-        "priority_refill_query"
-    ]
-    assert enrichment["official_fallback_query"] == BASE_ENRICHMENT_DEFAULTS[
-        "official_fallback_query"
-    ]
+    assert (
+        enrichment["priority_refill_query"]
+        == BASE_ENRICHMENT_DEFAULTS["priority_refill_query"]
+    )
+    assert (
+        enrichment["official_fallback_query"]
+        == BASE_ENRICHMENT_DEFAULTS["official_fallback_query"]
+    )
     assert enrichment["max_total_calls"] == 9
     assert enrichment["trusted_domains"]["priority_refill_media_whitelist"] == (
         BASELINE_PRIORITY_DOMAINS
