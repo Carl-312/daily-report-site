@@ -12,7 +12,7 @@ Gray Test 3 实施准备：[`tavily-gray-3-experiment-plan.md`](tavily-gray-3-ex
 截至 2026-05-12：
 
 - Tavily 默认仍关闭：`config.yaml` 保持 `enrichment.enabled: false`。
-- 生产 deploy 只在手动 `enable_tavily=true` 时传入 `secrets.TAVILY_API_KEY`；定时任务不默认开启 Tavily。
+- 生产 deploy 不再传入 `secrets.TAVILY_API_KEY`，也不再提供 `enable_tavily` 手动灰度；Tavily 只通过独立 `Tavily Gray Daily` 验证。
 - `origin/main` 已包含 Tavily refill budget 修复、scorecard 工具、scorecard 测试、`2026-05-11` 规范化 scorecard artifact，以及 gray workflow 的自动 scorecard 生成步骤。
 - 旧 Actions 灰度 run `25680995172` 是真实样本，commit 为 `0417775ecfffd202a59cb6ce61101e5b33b8730a`，runner 能拉取 source 并使用 masked `TAVILY_API_KEY`。
 - `2026-05-11` 旧灰度 artifact 已被规范化为 `data/benchmarks/tavily-gray-2026-05-11-scorecard.json` 和 `.md`。

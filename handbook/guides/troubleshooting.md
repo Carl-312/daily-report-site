@@ -89,14 +89,14 @@ python3 main.py run --offline --enrichment off
 
 不要为了单次 `final_count` 不足而放宽 `strict_hours: 24`，也不要临时把 `trusted_domains` 当作热修名单扩张。
 
-### GitHub Actions 手动 Tavily 灰度没有效果
+### GitHub Actions Tavily Gray Daily 没有效果
 
-检查 `Daily Report Deploy` 的手动输入：
+检查独立的 `Tavily Gray Daily` workflow：
 
-- `enable_tavily` 必须设为 `true`，否则不会追加 `--enrichment on`。
-- `skip_generate=true` 只重建站点，不运行抓取和 Tavily。
-- 仓库 secret 需要配置 `TAVILY_API_KEY`；缺失时 workflow 仍应完成，但 JSON 会记录安全降级。
-- 非 `main` 分支运行不会回写 `data/` / `content/` 或发布 Pages，只适合看日志。
+- 确认运行的是 `.github/workflows/tavily-gray.yml`，不是 `Daily Report Deploy`。
+- 仓库 secret 需要配置 `TAVILY_API_KEY`；缺失时 gray workflow 会失败。
+- 检查 artifact 中的 `scorecard.md`、`enrichment-summary.json` 和 `logs/run.log`。
+- `Daily Report Deploy` 不再提供 `enable_tavily` 输入，也不会追加 `--enrichment on`。
 
 ### 构建输出不对
 

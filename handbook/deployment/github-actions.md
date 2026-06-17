@@ -1,13 +1,14 @@
 # GitHub Actions 自动化配置
 
-当前仓库将质量检查与部署拆成两个独立 workflow。
+当前仓库将质量检查、生产部署和 Tavily 隔离灰度拆成三个 workflow。
 
 ## 工作流概览
 
 ```text
 .github/workflows/
 ├── ci.yml
-└── deploy.yml
+├── deploy.yml
+└── tavily-gray.yml
 ```
 
 ## `CI`
@@ -29,7 +30,7 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment
+- 手动输入：`skip_generate` 可只重建站点；`publish` 可控制是否提交生成内容并发布 Pages
 - 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
@@ -55,13 +56,13 @@
 
 未配置时，部署 workflow 会自动退回离线模式。
 
-如果要手动灰度验证 Tavily enrichment，可额外配置：
+如果要运行独立的 `Tavily Gray Daily`，需额外配置：
 
 | Name | Value |
 | --- | --- |
 | `TAVILY_API_KEY` | Tavily Search API Key |
 
-该 secret 只在手动触发 `Daily Report Deploy` 且 `enable_tavily=true` 时注入。未配置时，手动开启 Tavily 的运行仍会完成，并在日志中提示回退到去重后的原始文章。不要把真实 secret 写进文档、测试、fixture 或示例提交。
+该 secret 只由独立的 `.github/workflows/tavily-gray.yml` 使用。`Daily Report Deploy` 不再注入 `TAVILY_API_KEY`，也不再提供 Tavily 手动灰度开关。不要把真实 secret 写进文档、测试、fixture 或示例提交。
 
 ### Workflow 权限
 
@@ -90,22 +91,27 @@
 
 `workflow_dispatch` 在非 `main` 分支上仍可用于手动验证生成流程，但不会回写仓库、上传归档或发布 Pages。
 
-手动触发时保持 `enable_tavily=false` 会沿用默认路径，不显式启用 Tavily；设为 `true` 时运行 `python main.py run --enrichment on`，用于验证生产 runner 的 Tavily 接线。
+手动触发 `Daily Report Deploy` 时只验证生成、归档和发布路径，不会显式启用 Tavily。
 
-Tavily 灰度限制：
+## `Tavily Gray Daily`
 
-- 定时任务不会因为存在 `TAVILY_API_KEY` secret 就自动启用 Tavily。
-- `skip_generate=true` 只执行 `python main.py build`，不会验证 enrichment。
-- 非 `main` 分支可用于手动验证命令和日志，但不会回写生成的 `data/` / `content/`，也不会发布 Pages。
-- 单次 live 结果只能作为接线样本，不作为默认开启或修改 `trusted_domains` 的稳定证据。
-- 如果 Tavily timeout、HTTP error、connection error 或 key 缺失，预期行为是 fail-open：主流程继续完成，已有 deduped articles 尽量保留，失败原因写入 JSON 诊断。
+用途：唯一保留的 GitHub Actions Tavily 灰度入口。
 
-手动灰度后检查当天 `data/YYYY-MM-DD.json` 的 `enrichment` 字段：
+- Workflow：`.github/workflows/tavily-gray.yml`
+- 触发：`workflow_dispatch`、定时任务
+- 命令：`python3 main.py run --offline --enrichment on`
+- 行为：不提交、不发布、不部署，只上传 `gray/tavily/YYYY-MM-DD/` artifact
+- Key：缺少 `TAVILY_API_KEY` 时 workflow 直接失败，避免把无 key 样本误判为策略质量
+
+灰度 artifact 重点检查：
 
 - `enabled` / `applied` / `skip_reason` / `error`
 - `verify_calls` / `refill_calls` / `fallback_calls` / `total_calls`
 - `preserved_error_count` / `final_count` / `stop_reason`
 - `verify_runs[*].request_outcome` 与 refill runs 的 `request_outcome`
+- `scorecard.json` / `scorecard.md`
+- `logs/gray-experiment-overrides.json`
+- `logs/gray-config-diff.patch`
 
 ## 手动验证建议
 
@@ -119,8 +125,8 @@ Tavily 灰度限制：
 - `dist/` 是否成功上传为 Pages artifact
 - Release `daily-report-archive` 是否出现 tar.gz 资产
 - `main` 上是否只保留最近 7 天的 `data/` / `content/`
-- 手动设置 `enable_tavily=true` 时，日志是否显示 `--enrichment on`
-- `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
+- `Daily Report Deploy` 日志中不应出现 `--enrichment on`
+- Tavily 验证只通过 `Tavily Gray Daily` artifact 复盘
 
 ## 相关文档
 

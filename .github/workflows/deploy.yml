@@ -14,11 +14,6 @@ on:
         required: false
         default: false
         type: boolean
-      enable_tavily:
-        description: "Manually enable Tavily enrichment for this run"
-        required: false
-        default: false
-        type: boolean
       publish:
         description: "Commit generated content and deploy to the production Pages site"
         required: false
@@ -79,26 +74,14 @@ jobs:
         if: ${{ !inputs.skip_generate }}
         shell: bash
         env:
-          ENABLE_TAVILY: ${{ inputs.enable_tavily || false }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
-          TAVILY_API_KEY: ${{ inputs.enable_tavily && secrets.TAVILY_API_KEY || '' }}
         run: |
-          ENRICHMENT_ARGS=()
-          if [ "$ENABLE_TAVILY" = "true" ]; then
-            ENRICHMENT_ARGS=(--enrichment on)
-            if [ -z "$TAVILY_API_KEY" ]; then
-              echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
-            else
-              echo "Tavily enrichment explicitly enabled for this manual run"
-            fi
-          fi
-
           if [ -z "$MODELSCOPE_API_KEY" ]; then
             echo "Warning: MODELSCOPE_API_KEY not set, using offline mode"
-            python main.py run --offline "${ENRICHMENT_ARGS[@]}"
+            python main.py run --offline
           else
             echo "Using AI summarization"
-            python main.py run "${ENRICHMENT_ARGS[@]}"
+            python main.py run
           fi
 
       - name: Build site from retained content
