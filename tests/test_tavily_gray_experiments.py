@@ -50,6 +50,14 @@ BASE_ENRICHMENT_DEFAULTS = {
 }
 
 
+def workflow_step(workflow: dict[str, Any], name: str) -> dict[str, Any]:
+    return next(
+        step
+        for step in workflow["jobs"]["tavily-gray"]["steps"]
+        if step["name"] == name
+    )
+
+
 def changed_paths(left: Any, right: Any, prefix: str = "") -> list[str]:
     if isinstance(left, dict) and isinstance(right, dict):
         paths: list[str] = []
@@ -75,16 +83,36 @@ def test_workflow_dispatch_exposes_only_controlled_experiment_choices() -> None:
     assert experiment["default"] == "baseline"
     assert experiment["options"] == list(EXPERIMENT_NAMES)
 
-    apply_step = next(
-        step
-        for step in workflow["jobs"]["tavily-gray"]["steps"]
-        if step["name"] == "Apply gray experiment overrides"
-    )
+    apply_step = workflow_step(workflow, "Apply gray experiment overrides")
     assert (
         apply_step["env"]["GRAY_EXPERIMENT"]
         == "${{ github.event_name == 'workflow_dispatch' && inputs.experiment || 'baseline' }}"
     )
     assert "schedule" in workflow["on"]
+
+
+def test_scheduled_gray_report_publish_is_main_only_and_retained() -> None:
+    workflow = yaml.load(
+        WORKFLOW_PATH.read_text(encoding="utf-8"), Loader=yaml.BaseLoader
+    )
+
+    assert workflow["env"]["RETENTION_DAYS"] == "7"
+    assert workflow["permissions"]["contents"] == "write"
+
+    checkout_step = workflow_step(workflow, "Checkout repository")
+    assert checkout_step["with"]["fetch-depth"] == "0"
+
+    prune_step = workflow_step(workflow, "Prune retained final report window")
+    commit_step = workflow_step(workflow, "Commit and push gray final report")
+    publish_condition = "github.event_name == 'schedule' && github.ref == 'refs/heads/main'"
+
+    assert prune_step["if"] == publish_condition
+    assert prune_step["run"] == (
+        'python scripts/manage_retention.py prune --keep-days "$RETENTION_DAYS"'
+    )
+    assert commit_step["if"] == publish_condition
+    assert "git add -A content/ data/" in commit_step["run"]
+    assert "Tavily gray final report:" in commit_step["run"]
 
 
 def test_experiment_mapping_changes_only_the_declared_variable() -> None:

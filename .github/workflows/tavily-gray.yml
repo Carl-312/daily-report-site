@@ -1,8 +1,9 @@
-# Isolated Tavily gray validation. This workflow never commits, publishes, or deploys.
+# Tavily gray validation. Scheduled main runs can commit the generated final report.
 name: Tavily Gray Daily
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  RETENTION_DAYS: "7"
   TZ: Asia/Shanghai
 
 on:
@@ -22,7 +23,7 @@ on:
     - cron: "56 12 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: tavily-gray
@@ -35,6 +36,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Resolve gray artifact paths
         id: paths
@@ -192,6 +195,26 @@ jobs:
             --run-id "$GITHUB_RUN_ID_VALUE" \
             --command "python3 main.py run --offline --enrichment on" \
             --new-commit "$GITHUB_SHA_VALUE"
+
+      - name: Prune retained final report window
+        if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+        run: python scripts/manage_retention.py prune --keep-days "$RETENTION_DAYS"
+
+      - name: Commit and push gray final report
+        if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add -A content/ data/
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Tavily gray final report: ${{ steps.paths.outputs.run_date }}"
+            git push
+            echo "Gray final report committed and pushed"
+          else
+            echo "No gray final report changes to commit"
+          fi
 
       - name: Upload Tavily gray artifact
         if: always()

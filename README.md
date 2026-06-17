@@ -59,7 +59,13 @@ python -m http.server 8000 --directory dist
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - 流程：抓取新闻 → AI 摘要 → 构建站点 → 归档历史 → 部署 Pages
 - 数据保留：main 分支保留最近 7 天，超期数据归档至 GitHub Release
-- Tavily：只通过手动 `enable_tavily=true` 灰度启用，定时任务不默认开启
+- Tavily：该生产发布 workflow 的定时任务不默认开启 Tavily；手动 `enable_tavily=true` 可临时启用
+
+**Tavily 灰度日报**（`.github/workflows/tavily-gray.yml`）：
+- 触发：每天 12:56 UTC（北京时间 20:56）或手动选择受控实验
+- 定时 main 运行：强制 `--enrichment on`，把生成的 `data/` / `content/` 作为最终报告回写仓库
+- 手动实验运行：只上传 7 天 artifact，不回写仓库
+- 数据保留：回写前复用保留脚本，main 分支仍只保留最近 7 天
 
 详见 [handbook/deployment/](handbook/deployment/) 目录。
 

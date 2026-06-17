@@ -7,7 +7,8 @@
 ```text
 .github/workflows/
 ├── ci.yml
-└── deploy.yml
+├── deploy.yml
+└── tavily-gray.yml
 ```
 
 ## `CI`
@@ -43,6 +44,29 @@
   6. 仅在 `main` 分支上提交保留后的 `data/` / `content/`
   7. 仅在 `main` 分支上上传 `dist/` 为 Pages artifact 并发布
 
+该 workflow 的定时任务仍不显式启用 Tavily；只有手动触发且设置
+`enable_tavily=true` 时才会追加 `--enrichment on`。
+
+## `Tavily Gray Daily`
+
+用途：每天运行受控 Tavily 灰度，上传诊断 artifact，并在 `main` 的定时运行中把灰度生成的
+`data/YYYY-MM-DD.json` 与 `content/YYYY-MM-DD.md` 保存为仓库内最终报告。
+
+- 触发：`workflow_dispatch`、定时任务
+- 手动输入：`experiment` 只允许 `baseline`、`budget_9`、`domain_priority_media`
+- 定时：GitHub Actions cron 使用 UTC，当前配置为 `56 12 * * *`，对应北京时间 `20:56`
+- Python：`3.12`
+- 安装：`pip install -r requirements.txt`
+- 关键步骤：
+  1. 写入受控灰度实验 override
+  2. 执行 `python3 main.py run --offline --enrichment on`
+  3. 收集 `report.json`、`report.md`、summary、scorecard 和日志
+  4. 上传 Tavily gray artifact，保留 7 天
+  5. 仅在 `main` 分支的定时运行中执行 `python scripts/manage_retention.py prune --keep-days 7`
+  6. 仅在 `main` 分支的定时运行中提交保留后的 `data/` / `content/`
+
+手动灰度实验不会回写仓库，避免 `budget_9` 或 `domain_priority_media` 的单次实验结果被误保存为最终报告。
+
 ## 必要配置
 
 ### Secret
@@ -61,7 +85,12 @@
 | --- | --- |
 | `TAVILY_API_KEY` | Tavily Search API Key |
 
-该 secret 只在手动触发 `Daily Report Deploy` 且 `enable_tavily=true` 时注入。未配置时，手动开启 Tavily 的运行仍会完成，并在日志中提示回退到去重后的原始文章。不要把真实 secret 写进文档、测试、fixture 或示例提交。
+该 secret 有两个用途：
+
+- 手动触发 `Daily Report Deploy` 且 `enable_tavily=true` 时注入；未配置时，手动开启 Tavily 的运行仍会完成，并在日志中提示回退到去重后的原始文章。
+- `Tavily Gray Daily` 每日灰度需要该 secret；缺失时灰度 workflow 会失败，避免把未验证的灰度结果保存为最终报告。
+
+不要把真实 secret 写进文档、测试、fixture 或示例提交。
 
 ### Workflow 权限
 
@@ -74,6 +103,8 @@
 - 推送清理后的 `data/` / `content/`
 - 创建或更新 GitHub Release assets
 - 部署 GitHub Pages
+
+`Tavily Gray Daily` 的 `main` 定时运行也需要推送清理后的 `data/` / `content/`。
 
 ### GitHub Pages
 
@@ -94,7 +125,9 @@
 
 Tavily 灰度限制：
 
-- 定时任务不会因为存在 `TAVILY_API_KEY` secret 就自动启用 Tavily。
+- `Daily Report Deploy` 定时任务不会因为存在 `TAVILY_API_KEY` secret 就自动启用 Tavily。
+- `Tavily Gray Daily` 定时任务会显式运行 `--enrichment on`，但只有 `main` 的定时运行会回写最终报告。
+- `Tavily Gray Daily` 手动实验只上传 artifact，不回写生成的 `data/` / `content/`。
 - `skip_generate=true` 只执行 `python main.py build`，不会验证 enrichment。
 - 非 `main` 分支可用于手动验证命令和日志，但不会回写生成的 `data/` / `content/`，也不会发布 Pages。
 - 单次 live 结果只能作为接线样本，不作为默认开启或修改 `trusted_domains` 的稳定证据。
