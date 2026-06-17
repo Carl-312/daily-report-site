@@ -80,10 +80,13 @@ jobs:
           trusted_domains = enrichment.setdefault("trusted_domains", {})
 
           overrides = {
-              "experiment": "gray_3_lenient_3day_diagnostic",
-              "reason": "Diagnose 3-day Tavily refill recall separately from strict freshness acceptance without changing production defaults.",
+              "experiment": "gray_1_3a_budget_only_max_total_calls_9",
+              "changed_variable": "max_total_calls",
+              "exact_override": "7 -> 9",
+              "reason": "Test whether increasing only the Tavily gray total-call budget closes the 8/10 strict final-count gap without changing domains, query, fallback, or production defaults.",
               "enrichment": {
                   "strict_hours": 24,
+                  "max_total_calls": 9,
                   "refill_max_results": 8,
                   "refill_search_window_hours": 72,
                   "lenient_refill_diagnostics_enabled": True,
@@ -109,6 +112,9 @@ jobs:
           }
 
           enrichment["strict_hours"] = overrides["enrichment"]["strict_hours"]
+          enrichment["max_total_calls"] = overrides["enrichment"][
+              "max_total_calls"
+          ]
           enrichment["refill_max_results"] = overrides["enrichment"][
               "refill_max_results"
           ]
