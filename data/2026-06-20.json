@@ -1,0 +1,178 @@
+{
+  "date": "2026-06-20",
+  "articles": [
+    {
+      "title": "Aura’s impressive e-ink photo frame doesn’t even look digital",
+      "link": "https://techcrunch.com/2026/06/19/auras-impressive-e-ink-photo-frame-doesnt-even-look-digital/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The CEO of Allbirds’ new AI biz has a plan, but no team",
+      "link": "https://techcrunch.com/2026/06/19/the-ceo-of-allbirds-new-ai-biz-has-a-plan-but-no-employees/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Billionaire Ambani wants AI in every call, app, and home",
+      "link": "https://techcrunch.com/2026/06/19/billionaire-ambani-wants-ai-in-every-call-app-and-home/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "The US says ASML’s top chip tool may be in China, but how?",
+      "link": "https://techcrunch.com/2026/06/19/the-us-says-asmls-top-chip-tool-may-be-in-china-asml-says-it-isnt/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Every fusion startup that has raised over $100M",
+      "link": "https://techcrunch.com/2026/06/19/every-fusion-startup-that-has-raised-over-100m/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "He made your free video player run smoothly. Now he’s doing that for robots.",
+      "link": "https://techcrunch.com/2026/06/19/he-made-your-free-video-player-run-smoothly-now-hes-doing-that-for-robots/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "From PGP to Mythos: a brief history of export controls that didn’t stop anyone",
+      "link": "https://techcrunch.com/2026/06/19/encryption-spyware-and-now-mythos-history-shows-why-cyber-export-control-doesnt-work/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    },
+    {
+      "title": "Go eyes robotaxis and acquisitions after Japan’s biggest IPO of 2026. Here’s why it matters",
+      "link": "https://techcrunch.com/2026/06/19/go-eyes-robotaxis-and-acquisitions-after-japans-biggest-ipo-of-2026-heres-why-it-matters/",
+      "description": "",
+      "publish_time": "2026-06-19",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-06-20",
+    "reference_dt": "2026-06-20T12:53:27.570586+08:00",
+    "enabled": false,
+    "applied": false,
+    "skip_reason": "disabled",
+    "error": null,
+    "input_count": 8,
+    "prefiltered_count": 8,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 0,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 8,
+    "strict_final_count": 8,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "disabled",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Tavily enrichment is disabled for this run."
+    ]
+  }
+}
