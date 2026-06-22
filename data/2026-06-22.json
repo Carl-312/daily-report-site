@@ -1,64 +1,64 @@
 {
-  "date": "2026-06-15",
+  "date": "2026-06-22",
   "articles": [
     {
-      "title": "UK may ban social media for children under 16",
-      "link": "https://techcrunch.com/2026/06/14/uk-may-ban-social-media-for-children-under-16/",
+      "title": "Beyond Siri: Here are the practical AI features coming to your iPhone in iOS 27",
+      "link": "https://techcrunch.com/2026/06/21/beyond-siri-here-are-the-practical-ai-features-coming-to-your-iphone-in-ios-27/",
       "description": "",
-      "publish_time": "2026-06-14",
+      "publish_time": "2026-06-21",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "As AI companies race to go public, who else is along for the ride?",
-      "link": "https://techcrunch.com/2026/06/14/as-ai-companies-race-to-go-public-who-else-is-along-for-the-ride/",
+      "title": "TechCrunch Mobility: A new robotaxi scorecard shows China’s dominance",
+      "link": "https://techcrunch.com/2026/06/21/techcrunch-mobility-a-new-robotaxi-scorecard-shows-chinas-dominance/",
       "description": "",
-      "publish_time": "2026-06-14",
+      "publish_time": "2026-06-21",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "TechCrunch Mobility: SpaceX rockets past Tesla",
-      "link": "https://techcrunch.com/2026/06/14/techcrunch-mobility-spacex-rockets-past-tesla/",
+      "title": "When the Trump administration cracks down on Anthropic, who benefits?",
+      "link": "https://techcrunch.com/2026/06/21/when-the-trump-administration-cracks-down-on-anthropic-who-benefits/",
       "description": "",
-      "publish_time": "2026-06-14",
+      "publish_time": "2026-06-21",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Orbio raises $21 million to automate hiring and onboarding for frontline workers",
-      "link": "https://techcrunch.com/2026/06/14/orbio-raises-21-million-to-automate-hiring-and-onboarding-for-frontline-workers/",
+      "title": "Ubisoft co-founder Claude Guillemot dies in plane crash",
+      "link": "https://techcrunch.com/2026/06/21/ubisoft-co-founder-claude-guillemot-dies-in-plane-crash/",
       "description": "",
-      "publish_time": "2026-06-14",
+      "publish_time": "2026-06-21",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Startup CEO Charlie Javice is reportedly angling for a Trump pardon",
-      "link": "https://techcrunch.com/2026/06/14/startup-ceo-charlie-javice-is-reportedly-angling-for-a-trump-pardon/",
+      "title": "Ethan Thornton is trying to do everything all at once",
+      "link": "https://techcrunch.com/2026/06/21/ethan-thornton-is-trying-to-do-everything-all-at-once/",
       "description": "",
-      "publish_time": "2026-06-14",
+      "publish_time": "2026-06-21",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "The new Sonos Play has become my go-to desk and kitchen speaker",
-      "link": "https://techcrunch.com/2026/06/14/the-new-sonos-play-has-become-my-go-to-desk-and-kitchen-speaker/",
+      "title": "Polymarket reportedly paid creators to post deceptive videos about fake bets",
+      "link": "https://techcrunch.com/2026/06/21/polymarket-reportedly-paid-creators-to-post-deceptive-videos-about-fake-bets/",
       "description": "",
-      "publish_time": "2026-06-14",
+      "publish_time": "2026-06-21",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     }
   ],
   "enrichment": {
-    "report_date": "2026-06-15",
-    "reference_dt": "2026-06-15T13:38:56.521081+08:00",
+    "report_date": "2026-06-22",
+    "reference_dt": "2026-06-22T13:42:27.394053+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
