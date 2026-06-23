@@ -1,12 +1,14 @@
 # Tavily Gray 1.3 下一轮测试计划
 
-最后更新：2026-06-17
+最后更新：2026-06-23
+
+> 历史计划说明：本文记录的是 2026-06-17 的 AI-only Gray 1.3 实验判断。当前策略已经转向 `tech_news` source-preserve 与科技新闻补全。新的实施依据见 [`tech-news-refill-relaxation-plan.md`](tech-news-refill-relaxation-plan.md)，当前状态见 [`tavily-integration.md`](tavily-integration.md)。
 
 ## 定位
 
-本文综合 `gray1.1.md`、`gray1.2.md` 和 2026-06-17 三次 Tavily Gray Actions artifact，重新判断下一轮应该如何测试。
+本文综合 `gray1.1.md`、`gray1.2.md` 和 2026-06-17 三次 Tavily Gray Actions artifact，重新判断当时下一轮应该如何测试。
 
-Gray 1.3 只解决一个决策问题：现在应该继续开分支、合并已有分支，还是换一种受控实验方式。
+Gray 1.3 只解决一个历史决策问题：当时应该继续开分支、合并已有分支，还是换一种受控实验方式。它不再代表当前 Tavily 策略边界。
 
 结论先行：
 

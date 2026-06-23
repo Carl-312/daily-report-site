@@ -203,7 +203,27 @@ jobs:
       - name: Commit and push gray final report
         if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
         shell: bash
+        env:
+          GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
         run: |
+          safe_to_commit="$(python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from pathlib import Path
+
+          safety_path = Path(os.environ["GRAY_DIR"]) / "safety-gate.json"
+          payload = json.loads(safety_path.read_text(encoding="utf-8"))
+          print(str(payload.get("safe_to_commit", False)).lower())
+          if not payload.get("safe_to_commit", False):
+              print(f"reason={payload.get('reason')}", file=sys.stderr)
+          PY
+          )"
+          if [ "$safe_to_commit" != "true" ]; then
+            echo "::error::Tavily gray safety gate blocked final report commit. See safety-gate.json in the uploaded artifact."
+            exit 1
+          fi
+
           git config user.name "GitHub Actions Bot"
           git config user.email "actions@github.com"
           git add -A content/ data/

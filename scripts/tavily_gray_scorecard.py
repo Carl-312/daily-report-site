@@ -155,13 +155,20 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
         candidate for candidate in candidates if candidate.get("accepted") is not True
     ]
     accepted_count = sum(int(run.get("accepted_count") or 0) for run in runs)
+    strict_accepted_count = sum(
+        int(run.get("strict_accepted_count") or 0) for run in runs
+    )
+    soft_accepted_count = sum(int(run.get("soft_accepted_count") or 0) for run in runs)
     return {
         "calls": len(runs),
         "result_count": sum(int(run.get("result_count") or 0) for run in runs),
         "accepted_count": accepted_count,
+        "strict_accepted_count": strict_accepted_count,
+        "soft_accepted_count": soft_accepted_count,
         "published_date_missing_count": missing_published,
         "published_date_missing_rate": rate(missing_published, len(candidates)),
         "request_outcomes": value_counts(runs, "request_outcome"),
+        "topic_bucket_counts": value_counts(candidates, "topic_bucket"),
         "near_duplicate_rejected_count": sum(
             int(run.get("near_duplicate_rejected_count") or 0) for run in runs
         ),
@@ -178,6 +185,12 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
             1
             for candidate in rejected_candidates
             if candidate.get("ai_title_relevant") is False
+        ),
+        "non_technology_rejected_count": sum(
+            1
+            for candidate in rejected_candidates
+            if candidate.get("technology_relevant") is False
+            or candidate.get("rejection_reason") == "non_technology"
         ),
         "outside_window_rejected_count": sum(
             1
@@ -312,11 +325,19 @@ def summarize_lenient_diagnostics(
 def summarize_verify(enrichment: dict[str, Any]) -> dict[str, Any]:
     runs = as_list(enrichment.get("verify_runs"))
     rejected = as_list(enrichment.get("rejected_candidates"))
+    preserved_unverified = as_list(enrichment.get("preserved_unverified_candidates"))
     return {
         "calls": len(runs),
         "verified_count": int(enrichment.get("verified_count") or 0),
         "preserved_error_count": int(enrichment.get("preserved_error_count") or 0),
+        "preserved_unverified_count": int(
+            enrichment.get("preserved_unverified_count") or len(preserved_unverified)
+        ),
         "validation_outcomes": value_counts(runs, "validation_outcome"),
+        "verification_statuses": value_counts(
+            as_list(enrichment.get("verify_diagnostics")) or runs,
+            "verification_status",
+        ),
         "request_outcomes": value_counts(runs, "request_outcome"),
         "rejected_preview": [
             candidate.get("title", "")
@@ -346,6 +367,7 @@ def quality_rejection_count(refill_summaries: dict[str, dict[str, Any]]) -> int:
         "story_cluster_rejected_count",
         "duplicate_rejected_count",
         "non_ai_rejected_count",
+        "non_technology_rejected_count",
         "outside_window_rejected_count",
     )
     return sum(
@@ -368,6 +390,35 @@ def aggregate_published_date_missing_rate(
     return rate(missing_count, result_count)
 
 
+def build_safety_gate(enrichment: dict[str, Any]) -> dict[str, Any]:
+    source_valid_count = int(
+        enrichment.get("source_preserved_count")
+        if enrichment.get("source_preserved_count") is not None
+        else enrichment.get("prefiltered_count") or 0
+    )
+    final_count = int(enrichment.get("final_count") or 0)
+    source_input_count = int(
+        enrichment.get("source_input_count") or enrichment.get("input_count") or 0
+    )
+    final_count_delta_vs_source = final_count - source_valid_count
+    safe_to_commit = not (
+        source_input_count > 0
+        and source_valid_count > 0
+        and final_count < source_valid_count
+    )
+    reason = "ok"
+    if not safe_to_commit:
+        reason = "final_count_below_source_valid_count"
+    return {
+        "safe_to_commit": safe_to_commit,
+        "source_input_count": source_input_count,
+        "source_valid_count": source_valid_count,
+        "final_count": final_count,
+        "final_count_delta_vs_source": final_count_delta_vs_source,
+        "reason": reason,
+    }
+
+
 def build_diagnosis(
     *,
     report_json_present: bool,
@@ -378,6 +429,12 @@ def build_diagnosis(
     parameters = enrichment.get("parameters") or {}
     min_articles = int(parameters.get("min_articles") or 0)
     final_count = int(enrichment.get("final_count") or 0)
+    source_valid_count = int(
+        enrichment.get("source_preserved_count")
+        if enrichment.get("source_preserved_count") is not None
+        else enrichment.get("prefiltered_count") or 0
+    )
+    final_count_delta_vs_source = final_count - source_valid_count
     total_calls = int(enrichment.get("total_calls") or 0)
     max_total_calls = parameters.get("max_total_calls")
     stop_reason = enrichment.get("stop_reason") or UNKNOWN
@@ -402,6 +459,8 @@ def build_diagnosis(
         factors.append("network_failures")
     if int(enrichment.get("input_count") or 0) == 0:
         factors.append("source_empty")
+    if source_valid_count > 0 and final_count < source_valid_count:
+        factors.append("final_count_below_source_valid_count")
     if enrichment.get("skip_reason"):
         factors.append(f"skip_reason:{enrichment['skip_reason']}")
 
@@ -411,6 +470,8 @@ def build_diagnosis(
         primary = "enrichment_missing"
     elif enrichment.get("applied") is not True:
         primary = f"enrichment_not_applied:{enrichment.get('skip_reason') or UNKNOWN}"
+    elif source_valid_count > 0 and final_count < source_valid_count:
+        primary = "source_count_reduced"
     elif min_articles and final_count >= min_articles:
         primary = "min_articles_satisfied"
     elif network_failures:
@@ -436,18 +497,22 @@ def build_diagnosis(
     remaining = max(0, min_articles - final_count) if min_articles else 0
     explanation = (
         f"{final_count} final articles = "
+        f"{source_valid_count} source preserved + "
         f"{stage_counts['preserved_errors']} preserved + "
         f"{stage_counts['verify']} verify + "
         f"{stage_counts['priority_refill']} priority refill + "
         f"{stage_counts['secondary_refill']} secondary refill + "
         f"{stage_counts['official_fallback']} official fallback; "
-        f"{remaining} below min_articles={min_articles or 'unknown'}."
+        f"{remaining} below min_articles={min_articles or 'unknown'}; "
+        f"delta_vs_source={final_count_delta_vs_source}."
     )
 
     return {
         "primary_limiter": primary,
         "contributing_factors": factors,
         "stage_counts": stage_counts,
+        "source_valid_count": source_valid_count,
+        "final_count_delta_vs_source": final_count_delta_vs_source,
         "final_count_explanation": explanation,
         "needs_fixture": primary
         not in {"min_articles_satisfied", "enrichment_not_applied:disabled"},
@@ -492,6 +557,7 @@ def build_scorecard(
         enrichment,
         refill_summaries,
     )
+    safety_gate = build_safety_gate(enrichment)
     parameters = enrichment.get("parameters") or {}
     final_count = int(enrichment.get("final_count") or 0)
     min_articles = parameters.get("min_articles")
@@ -519,10 +585,25 @@ def build_scorecard(
         },
         "input_quality": {
             "input_count": int(enrichment.get("input_count") or 0),
+            "source_input_count": int(
+                enrichment.get("source_input_count")
+                or enrichment.get("input_count")
+                or 0
+            ),
+            "source_preserved_count": int(
+                enrichment.get("source_preserved_count")
+                if enrichment.get("source_preserved_count") is not None
+                else enrichment.get("prefiltered_count") or 0
+            ),
+            "source_dropped_count": int(enrichment.get("source_dropped_count") or 0),
+            "hard_rejected_count": int(enrichment.get("hard_rejected_count") or 0),
             "prefiltered_count": int(enrichment.get("prefiltered_count") or 0),
             "source_distribution": source_distribution(report_payload, enrichment),
             "aggregate_title_count": aggregate_title_count(enrichment),
             "prefilter_bucket_counts": enrichment.get("prefilter_bucket_counts") or {},
+            "topic_bucket_counts": enrichment.get("topic_bucket_counts")
+            or enrichment.get("prefilter_bucket_counts")
+            or {},
         },
         "verify": verify_summary,
         "refill": refill_summaries,
@@ -544,11 +625,26 @@ def build_scorecard(
             "strict_final_count": lenient_diagnostics["strict_final_count"],
             "min_articles": min_articles,
             "refill_remaining_count": refill_remaining_count,
+            "added_by_tavily_count": int(enrichment.get("added_by_tavily_count") or 0),
+            "strict_refill_accepted_count": int(
+                enrichment.get("strict_refill_accepted_count")
+                or lenient_diagnostics["strict_refill_accepted_count"]
+                or 0
+            ),
+            "soft_refill_accepted_count": int(
+                enrichment.get("soft_refill_accepted_count") or 0
+            ),
+            "final_count_delta_vs_source": int(
+                enrichment.get("final_count_delta_vs_source")
+                if enrichment.get("final_count_delta_vs_source") is not None
+                else safety_gate["final_count_delta_vs_source"]
+            ),
             "stop_reason": enrichment.get("stop_reason") or UNKNOWN,
             "accepted_by_stage_preview": enrichment.get("accepted_by_stage_preview")
             or {},
         },
         "lenient_diagnostics": lenient_diagnostics,
+        "safety_gate": safety_gate,
     }
     scorecard["diagnosis"] = build_diagnosis(
         report_json_present=report_json_present,
@@ -566,6 +662,18 @@ def build_scorecard(
         "published_date_missing_rate": aggregate_published_date_missing_rate(
             refill_summaries
         ),
+        "source_preserved_count": scorecard["input_quality"]["source_preserved_count"],
+        "source_dropped_count": scorecard["input_quality"]["source_dropped_count"],
+        "hard_rejected_count": scorecard["input_quality"]["hard_rejected_count"],
+        "preserved_unverified_count": scorecard["verify"]["preserved_unverified_count"],
+        "added_by_tavily_count": scorecard["output"]["added_by_tavily_count"],
+        "strict_refill_accepted_count": scorecard["output"][
+            "strict_refill_accepted_count"
+        ],
+        "soft_refill_accepted_count": scorecard["output"]["soft_refill_accepted_count"],
+        "final_count_delta_vs_source": scorecard["output"][
+            "final_count_delta_vs_source"
+        ],
         "lenient_candidate_count": lenient_diagnostics["lenient_candidate_count"],
         "proven_within_72h_count": lenient_diagnostics["proven_within_72h_count"],
         "missing_date_unproven_count": lenient_diagnostics[
@@ -596,6 +704,7 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
     refill = scorecard["refill"]
     lenient = scorecard["lenient_diagnostics"]
     diagnosis = scorecard["diagnosis"]
+    safety_gate = scorecard["safety_gate"]
 
     lines = [
         f"# Tavily Gray Scorecard: {metadata['date'] or 'unknown'}",
@@ -615,16 +724,26 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         "| Metric | Value |",
         "|---|---:|",
         f"| input_count | {markdown_value(input_quality['input_count'])} |",
+        f"| source_preserved_count | {markdown_value(input_quality['source_preserved_count'])} |",
+        f"| source_dropped_count | {markdown_value(input_quality['source_dropped_count'])} |",
+        f"| hard_rejected_count | {markdown_value(input_quality['hard_rejected_count'])} |",
         f"| prefiltered_count | {markdown_value(input_quality['prefiltered_count'])} |",
         f"| aggregate_title_count | {markdown_value(input_quality['aggregate_title_count'])} |",
         f"| verified_count | {markdown_value(verify['verified_count'])} |",
+        f"| preserved_unverified_count | {markdown_value(verify['preserved_unverified_count'])} |",
         f"| preserved_error_count | {markdown_value(verify['preserved_error_count'])} |",
+        f"| added_by_tavily_count | {markdown_value(output['added_by_tavily_count'])} |",
+        f"| final_count_delta_vs_source | {markdown_value(output['final_count_delta_vs_source'])} |",
         f"| final_count | {markdown_value(output['final_count'])} |",
         f"| strict_final_count | {markdown_value(output['strict_final_count'])} |",
+        f"| strict_refill_accepted_count | {markdown_value(output['strict_refill_accepted_count'])} |",
+        f"| soft_refill_accepted_count | {markdown_value(output['soft_refill_accepted_count'])} |",
         f"| min_articles | {markdown_value(output['min_articles'])} |",
         f"| refill_remaining_count | {markdown_value(output['refill_remaining_count'])} |",
         f"| total_calls | {markdown_value(budget['total_calls'])} |",
         f"| stop_reason | {markdown_value(output['stop_reason'])} |",
+        f"| safe_to_commit | {markdown_value(safety_gate['safe_to_commit'])} |",
+        f"| safety_reason | {markdown_value(safety_gate['reason'])} |",
         "",
         "## Stage Outcomes",
         "",
@@ -724,6 +843,7 @@ def main() -> None:
     )
     output_json = Path(args.output_json or artifact_dir / "scorecard.json")
     output_md = Path(args.output_md or artifact_dir / "scorecard.md")
+    safety_gate_path = artifact_dir / "safety-gate.json"
     output_json.parent.mkdir(parents=True, exist_ok=True)
     output_md.parent.mkdir(parents=True, exist_ok=True)
     output_json.write_text(
@@ -731,8 +851,16 @@ def main() -> None:
         encoding="utf-8",
     )
     output_md.write_text(render_scorecard_markdown(scorecard), encoding="utf-8")
+    safety_gate_path.write_text(
+        json.dumps(
+            scorecard["safety_gate"], ensure_ascii=False, indent=2, sort_keys=True
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     print(f"Wrote Tavily gray scorecard JSON: {output_json}")
     print(f"Wrote Tavily gray scorecard Markdown: {output_md}")
+    print(f"Wrote Tavily gray safety gate: {safety_gate_path}")
 
 
 if __name__ == "__main__":

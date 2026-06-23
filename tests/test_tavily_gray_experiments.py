@@ -104,7 +104,9 @@ def test_scheduled_gray_report_publish_is_main_only_and_retained() -> None:
 
     prune_step = workflow_step(workflow, "Prune retained final report window")
     commit_step = workflow_step(workflow, "Commit and push gray final report")
-    publish_condition = "github.event_name == 'schedule' && github.ref == 'refs/heads/main'"
+    publish_condition = (
+        "github.event_name == 'schedule' && github.ref == 'refs/heads/main'"
+    )
 
     assert prune_step["if"] == publish_condition
     assert prune_step["run"] == (

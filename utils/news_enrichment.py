@@ -22,7 +22,6 @@ from sources.base import Article
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
-REFILL_SEARCH_DEPTH = "advanced"
 VERIFY_MAX_RESULTS = 3
 TITLE_SIMILARITY_MATCH_THRESHOLD = 0.82
 REQUEST_TIMEOUT_SECONDS = 45
@@ -32,20 +31,45 @@ REFILL_STAGE_NAMES = (
     "official_fallback",
 )
 
-AI_NEIGHBOR_TITLE_RE = re.compile(
-    r"\b(autonomous|autonomy|self-driving|self driving|automation|"
-    r"semiconductor|semiconductors|chip|chips|gpu|gpus|accelerator|"
-    r"accelerators|nvidia|data center|datacenter)\b|"
-    r"(自动驾驶|无人驾驶|自动化|芯片|半导体|算力|数据中心)",
-    re.IGNORECASE,
-)
-STRICT_AI_TITLE_RE = re.compile(
+AI_CORE_RE = re.compile(
     r"\b(ai|openai|anthropic|claude|chatgpt|llm|agent|agents|"
     r"assistant|copilot|sora|generative|inference|developer tools|"
     r"machine learning|deep learning|robot|robotics)\b|"
     r"(人工智能|大模型|模型|智能体|机器人|开发者工具|生成式AI|生成式人工智能)",
     re.IGNORECASE,
 )
+TECH_CORE_RE = re.compile(
+    r"\b(software|platform|app|apps|cloud|cybersecurity|security|"
+    r"chip|chips|semiconductor|semiconductors|hardware|device|devices|"
+    r"developer|developers|data center|datacenter|gpu|gpus|accelerator|"
+    r"accelerators|nvidia|amd|intel|quantum|database|api|saas)\b|"
+    r"(软件|平台|应用|云计算|网络安全|安全|芯片|半导体|硬件|"
+    r"开发者|数据中心|算力|数据库|量子)",
+    re.IGNORECASE,
+)
+TECH_BUSINESS_RE = re.compile(
+    r"\b(startup|startups|funding|ipo|acquisition|acquires|acquired|"
+    r"merger|layoffs|regulation|regulator|antitrust|enterprise|revenue|"
+    r"valuation|venture|capital|financing)\b|"
+    r"(创业|融资|上市|并购|收购|裁员|监管|反垄断|企业|营收|估值|风投)",
+    re.IGNORECASE,
+)
+TECH_ADJACENT_RE = re.compile(
+    r"\b(autonomous|autonomy|self-driving|self driving|automation|"
+    r"ev|electric vehicle|robotaxi|space|satellite|gaming|game|"
+    r"creator platform|social network|social app|streaming)\b|"
+    r"(自动驾驶|无人驾驶|自动化|电动车|机器人出租车|航天|卫星|"
+    r"游戏|创作者平台|社交平台)",
+    re.IGNORECASE,
+)
+NON_TECH_OR_MARKETING_RE = re.compile(
+    r"\b(sports|celebrity|movie|music|recipe|fashion|tourism|"
+    r"coupon|sale|discount|giveaway)\b|"
+    r"(体育|明星|电影|音乐|食谱|时尚|旅游|优惠券|打折|促销)",
+    re.IGNORECASE,
+)
+STRICT_AI_TITLE_RE = AI_CORE_RE
+AI_NEIGHBOR_TITLE_RE = TECH_ADJACENT_RE
 NON_WORD_RE = re.compile(r"[^\w\s]+", re.UNICODE)
 SPACE_RE = re.compile(r"\s+")
 TRAILING_SOURCE_SUFFIX_RE = re.compile(r"\s+-\s+[A-Za-z0-9&.' ]+$")
@@ -56,8 +80,21 @@ AGGREGATE_TITLE_PREFIXES = ("ai日报",)
 NEAR_DUPLICATE_SIMILARITY_THRESHOLD = 0.82
 STORY_CLUSTER_MIN_SHARED_TOKENS = 3
 STORY_CLUSTER_MIN_OVERLAP_RATIO = 0.35
-PREFILTER_BUCKETS = ("core_ai", "ai_neighbor", "generic_or_low_signal")
+PREFILTER_BUCKETS = (
+    "ai_core",
+    "tech_core",
+    "tech_business",
+    "tech_adjacent",
+    "generic_or_low_signal",
+    "hard_reject",
+)
 PREFILTER_BUCKET_RANK = {bucket: rank for rank, bucket in enumerate(PREFILTER_BUCKETS)}
+TECHNOLOGY_TOPIC_BUCKETS = {
+    "ai_core",
+    "tech_core",
+    "tech_business",
+    "tech_adjacent",
+}
 
 STORY_TOKEN_STOPWORDS = {
     "a",
@@ -207,16 +244,62 @@ def is_aggregate_like(article: dict[str, Any]) -> bool:
     return title.count("；") >= 2 or title.count(";") >= 2
 
 
-def ai_title_relevant(title: str) -> bool:
-    return bool(STRICT_AI_TITLE_RE.search(title or ""))
+def text_for_topic_classification(
+    title: str,
+    content: str = "",
+    domain: str = "",
+) -> str:
+    return " ".join(
+        part.strip()
+        for part in (title or "", content or "", domain or "")
+        if part and part.strip()
+    )
 
 
-def classify_prefilter_bucket(title: str) -> str:
-    if ai_title_relevant(title):
-        return "core_ai"
-    if AI_NEIGHBOR_TITLE_RE.search(title or ""):
-        return "ai_neighbor"
+def classify_topic_bucket(title: str, content: str = "", domain: str = "") -> str:
+    text = text_for_topic_classification(title, content, domain)
+    if AI_CORE_RE.search(text):
+        return "ai_core"
+    if TECH_BUSINESS_RE.search(text):
+        return "tech_business"
+    if TECH_CORE_RE.search(text):
+        return "tech_core"
+    if TECH_ADJACENT_RE.search(text):
+        return "tech_adjacent"
+    if NON_TECH_OR_MARKETING_RE.search(text):
+        return "hard_reject"
     return "generic_or_low_signal"
+
+
+def topic_confidence(topic_bucket: str) -> float:
+    return {
+        "ai_core": 0.95,
+        "tech_core": 0.85,
+        "tech_business": 0.7,
+        "tech_adjacent": 0.6,
+        "generic_or_low_signal": 0.25,
+        "hard_reject": 0.0,
+    }.get(topic_bucket, 0.0)
+
+
+def technology_relevant(
+    title: str,
+    content: str = "",
+    domain: str = "",
+    *,
+    accepted_buckets: list[str] | tuple[str, ...] | set[str] | None = None,
+) -> bool:
+    topic_bucket = classify_topic_bucket(title, content, domain)
+    allowed = set(accepted_buckets or TECHNOLOGY_TOPIC_BUCKETS)
+    return topic_bucket in allowed
+
+
+def ai_title_relevant(title: str) -> bool:
+    return classify_topic_bucket(title) == "ai_core"
+
+
+def classify_prefilter_bucket(title: str, content: str = "", domain: str = "") -> str:
+    return classify_topic_bucket(title, content, domain)
 
 
 def empty_prefilter_bucket_counts() -> dict[str, int]:
@@ -604,14 +687,25 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
         "excluded_aggregate_like": 0,
         "excluded_non_ai_relevant": 0,
         "soft_non_ai_relevant": 0,
+        "hard_rejected_count": 0,
+        "technology_relevant_count": 0,
+        "generic_or_low_signal_count": 0,
     }
     for index, article in enumerate(articles, start=1):
         title = (article.get("title", "") or "").strip()
         link = (article.get("link", "") or "").strip()
+        content = " ".join(
+            str(article.get(key, "") or "")
+            for key in ("description", "content")
+            if article.get(key)
+        )
+        domain = domain_of(link)
         aggregate_like = is_aggregate_like(article)
-        core_ai_relevant = ai_title_relevant(title)
-        prefilter_bucket = classify_prefilter_bucket(title)
-        ai_relevant = prefilter_bucket != "generic_or_low_signal"
+        topic_bucket = classify_topic_bucket(title, content, domain)
+        core_ai_relevant = topic_bucket == "ai_core"
+        prefilter_bucket = topic_bucket
+        topic_is_technology = topic_bucket in TECHNOLOGY_TOPIC_BUCKETS
+        ai_relevant = topic_is_technology
         reasons: list[str] = []
         if not title:
             stats["excluded_missing_title"] += 1
@@ -622,6 +716,8 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
         if aggregate_like:
             stats["excluded_aggregate_like"] += 1
             reasons.append("aggregate_like")
+        if topic_bucket == "hard_reject":
+            reasons.append("non_tech_or_marketing")
 
         candidate = {
             "index": index,
@@ -632,16 +728,33 @@ def build_prefilter_summary(articles: list[dict[str, Any]]) -> dict[str, Any]:
             "aggregate_like": aggregate_like,
             "ai_relevant": ai_relevant,
             "core_ai_relevant": core_ai_relevant,
+            "technology_relevant": topic_is_technology,
+            "topic_bucket": topic_bucket,
+            "topic_confidence": topic_confidence(topic_bucket),
+            "acceptance_reason": (
+                "source_valid_technology"
+                if topic_is_technology
+                else "source_preserved_low_signal"
+            ),
             "prefilter_bucket": prefilter_bucket,
             "exclude_reasons": reasons,
             "article": dict(article),
         }
         if reasons:
+            candidate["prefilter_bucket"] = "hard_reject"
+            candidate["topic_bucket"] = "hard_reject"
+            candidate["topic_confidence"] = 0.0
+            candidate["technology_relevant"] = False
+            candidate["acceptance_reason"] = "hard_reject"
+            stats["hard_rejected_count"] += 1
             excluded_candidates.append(candidate)
             continue
         stats["eligible_candidates"] += 1
-        if not ai_relevant:
+        if topic_is_technology:
+            stats["technology_relevant_count"] += 1
+        else:
             stats["soft_non_ai_relevant"] += 1
+            stats["generic_or_low_signal_count"] += 1
         bucket_counts[prefilter_bucket] += 1
         included_candidates.append(candidate)
 
@@ -671,9 +784,18 @@ def build_initial_report(
         "skip_reason": None,
         "error": None,
         "input_count": len(articles),
+        "source_input_count": len(articles),
+        "source_valid_count": len(articles),
+        "source_preserved_count": len(articles),
+        "source_dropped_count": 0,
+        "hard_rejected_count": 0,
+        "preserved_unverified_count": 0,
+        "added_by_tavily_count": 0,
+        "final_count_delta_vs_source": 0,
         "prefiltered_count": len(articles),
         "prefilter_stats": {},
         "prefilter_bucket_counts": empty_prefilter_bucket_counts(),
+        "topic_bucket_counts": empty_prefilter_bucket_counts(),
         "verify_calls": 0,
         "refill_calls": 0,
         "fallback_calls": 0,
@@ -688,6 +810,10 @@ def build_initial_report(
         "neighbor_candidates_outside_24h_count": 0,
         "neighbor_candidates_no_match_count": 0,
         "preserved_error_count": 0,
+        "source_preserved_candidates": [],
+        "hard_rejected_candidates": [],
+        "preserved_unverified_candidates": [],
+        "verify_diagnostics": [],
         "priority_refilled_count": 0,
         "secondary_refilled_count": 0,
         "media_refilled_count": 0,
@@ -700,6 +826,7 @@ def build_initial_report(
         "final_count": len(articles),
         "strict_final_count": len(articles),
         "strict_refill_accepted_count": 0,
+        "soft_refill_accepted_count": 0,
         "lenient_candidate_count": 0,
         "proven_within_72h_count": 0,
         "missing_date_unproven_count": 0,
@@ -728,7 +855,17 @@ def build_initial_report(
         "official_refilled_candidates": [],
         "accepted_by_stage_preview": {},
         "parameters": {
+            "boundary_mode": getattr(settings, "boundary_mode", "tech_news"),
+            "preserve_source_on_verify_failure": bool(
+                getattr(settings, "preserve_source_on_verify_failure", True)
+            ),
             "min_articles": settings.min_articles,
+            "max_articles_after_enrichment": int(
+                getattr(
+                    settings, "max_articles_after_enrichment", settings.min_articles
+                )
+                or settings.min_articles
+            ),
             "strict_hours": settings.strict_hours,
             "trust_env": settings.trust_env,
             "max_total_calls": settings.max_total_calls,
@@ -738,8 +875,33 @@ def build_initial_report(
             "refill_search_window_hours": getattr(
                 settings, "refill_search_window_hours", 24
             ),
+            "soft_date_window_hours": int(
+                getattr(settings, "soft_date_window_hours", 72) or 72
+            ),
+            "allow_soft_date_refill": bool(
+                getattr(settings, "allow_soft_date_refill", True)
+            ),
             "verify_search_depth": settings.verify_search_depth,
+            "refill_search_depth": getattr(settings, "refill_search_depth", "advanced"),
             "verify_max_results": VERIFY_MAX_RESULTS,
+            "refill_queries": list(getattr(settings, "refill_queries", []) or []),
+            "accept_refill_topic_buckets": list(
+                getattr(settings, "accept_refill_topic_buckets", [])
+                or sorted(TECHNOLOGY_TOPIC_BUCKETS)
+            ),
+            "source_overlap_domains": list(
+                getattr(settings.trusted_domains, "source_overlap_domains", [])
+            ),
+            "priority_tech_media_domains": list(
+                getattr(settings.trusted_domains, "priority_tech_media_domains", [])
+            ),
+            "secondary_business_tech_domains": list(
+                getattr(
+                    settings.trusted_domains,
+                    "secondary_business_tech_domains",
+                    [],
+                )
+            ),
             "priority_refill_media_whitelist": list(
                 settings.trusted_domains.priority_refill_media_whitelist
             ),
@@ -783,8 +945,12 @@ def empty_refill_result(remaining_budget: int) -> dict[str, Any]:
     return {
         "refill_calls": 0,
         "accepted_candidates": [],
+        "strict_accepted_candidates": [],
+        "soft_accepted_candidates": [],
         "refill_runs": [],
         "media_refilled_count": 0,
+        "strict_refill_accepted_count": 0,
+        "soft_refill_accepted_count": 0,
         "near_duplicate_rejected_count": 0,
         "story_cluster_rejected_count": 0,
         "duplicate_slip_count": 0,
@@ -901,11 +1067,15 @@ def apply_lenient_refill_diagnostics(
         for summary in stage_summaries.values()
         for item in summary["lenient_selected_preview"]
     ][:5]
-    report["strict_final_count"] = report.get("final_count", 0)
-    report["strict_refill_accepted_count"] = (
-        int(report.get("priority_refilled_count") or 0)
-        + int(report.get("secondary_refilled_count") or 0)
-        + int(report.get("official_refilled_count") or 0)
+    report["strict_refill_accepted_count"] = int(
+        report.get("strict_refill_accepted_count") or 0
+    )
+    report["soft_refill_accepted_count"] = int(
+        report.get("soft_refill_accepted_count") or 0
+    )
+    report["strict_final_count"] = (
+        int(report.get("source_preserved_count") or 0)
+        + report["strict_refill_accepted_count"]
     )
     report["lenient_candidate_count"] = sum(
         summary["lenient_candidate_count"] for summary in stage_summaries.values()
@@ -958,6 +1128,63 @@ def reserved_refill_call_budget(settings: Any) -> int:
     return min(desired_refill_calls, max_reservable_calls)
 
 
+def unique_domains(domains: list[str]) -> list[str]:
+    seen: set[str] = set()
+    unique: list[str] = []
+    for domain in domains:
+        cleaned = (domain or "").strip().lower()
+        if not cleaned or cleaned in seen:
+            continue
+        seen.add(cleaned)
+        unique.append(cleaned)
+    return unique
+
+
+def priority_refill_domains(settings: Any) -> list[str]:
+    trusted = settings.trusted_domains
+    modern_domains = unique_domains(
+        list(getattr(trusted, "source_overlap_domains", []) or [])
+        + list(getattr(trusted, "priority_tech_media_domains", []) or [])
+    )
+    if modern_domains:
+        return modern_domains
+    return unique_domains(list(trusted.priority_refill_media_whitelist))
+
+
+def secondary_refill_domains(settings: Any) -> list[str]:
+    trusted = settings.trusted_domains
+    modern_domains = unique_domains(
+        list(getattr(trusted, "secondary_business_tech_domains", []) or [])
+    )
+    if modern_domains:
+        return modern_domains
+    return unique_domains(list(trusted.secondary_refill_candidate_domains))
+
+
+def refill_queries(settings: Any, fallback_query: str) -> list[str]:
+    configured = [
+        query.strip()
+        for query in list(getattr(settings, "refill_queries", []) or [])
+        if query and query.strip()
+    ]
+    if configured:
+        return configured
+    return [fallback_query]
+
+
+def accepted_refill_buckets(settings: Any) -> set[str]:
+    configured = set(getattr(settings, "accept_refill_topic_buckets", []) or [])
+    return configured or set(TECHNOLOGY_TOPIC_BUCKETS)
+
+
+def final_article_cap(settings: Any, source_count: int) -> int:
+    configured = int(
+        getattr(settings, "max_articles_after_enrichment", settings.min_articles)
+        or settings.min_articles
+    )
+    return max(source_count, configured)
+
+
 def run_verify_stage(
     *,
     candidates: list[dict[str, Any]],
@@ -980,9 +1207,11 @@ def run_verify_stage(
     preserved_error_articles: list[dict[str, Any]] = []
     verified_candidates: list[dict[str, Any]] = []
     rejected_candidates: list[dict[str, Any]] = []
+    preserved_unverified_candidates: list[dict[str, Any]] = []
 
     for index, candidate in enumerate(candidates[:verify_budget], start=1):
         prefilter_bucket = candidate.get("prefilter_bucket", "generic_or_low_signal")
+        topic_bucket = candidate.get("topic_bucket", prefilter_bucket)
         query = f'"{candidate["title"]}"'
         payload = {
             "query": query,
@@ -1040,29 +1269,43 @@ def run_verify_stage(
         request_outcome = classify_request_outcome(error_obj)
         if request_outcome != "success":
             validation_outcome = "not_evaluated"
+            verification_status = "request_error_preserved"
+            date_confidence = "unverified"
         elif accepted:
             validation_outcome = "accepted"
+            verification_status = "verified"
+            date_confidence = "strict"
         elif not matched:
             validation_outcome = "no_match"
+            verification_status = "no_match_preserved"
+            date_confidence = "unverified"
         elif within_window is False:
             validation_outcome = "outside_24h"
+            verification_status = "matched_but_stale"
+            date_confidence = "outside_strict_window"
         else:
             validation_outcome = "missing_published_date"
+            verification_status = "matched_missing_date"
+            date_confidence = "missing"
         verify_runs.append(
             {
                 "sample_id": f"{reference_dt.date().isoformat()}::prefilter::{index}",
                 "query": query,
                 "prefilter_bucket": prefilter_bucket,
+                "topic_bucket": topic_bucket,
                 "search_depth": settings.verify_search_depth,
                 "latency_ms": latency_ms,
                 "result_count": len(results),
                 "matched": matched,
                 "within_24h": within_window,
+                "within_strict_window": within_window,
                 "matched_url": matched_url,
                 "matched_title": matched_title,
                 "matched_published_date": matched_published_date,
                 "title_similarity": title_similarity_value,
                 "accepted": accepted,
+                "verification_status": verification_status,
+                "date_confidence": date_confidence,
                 "request_outcome": request_outcome,
                 "validation_outcome": validation_outcome,
                 "error": error,
@@ -1074,9 +1317,13 @@ def run_verify_stage(
             "source": candidate.get("source", ""),
             "link": candidate.get("link", ""),
             "prefilter_bucket": prefilter_bucket,
+            "topic_bucket": topic_bucket,
+            "topic_confidence": candidate.get("topic_confidence"),
+            "technology_relevant": candidate.get("technology_relevant"),
             "matched_url": matched_url,
             "matched_title": matched_title,
             "within_24h": within_window,
+            "within_strict_window": within_window,
             "title_similarity": title_similarity_value,
             "cluster_id": candidate.get("cluster_id"),
             "cluster_role": candidate.get("cluster_role"),
@@ -1085,15 +1332,14 @@ def run_verify_stage(
             ),
             "request_outcome": request_outcome,
             "validation_outcome": validation_outcome,
+            "verification_status": verification_status,
+            "date_confidence": date_confidence,
             "transport_error": error,
             "rejection_reason": None,
+            "acceptance_reason": (
+                "verified_source" if accepted else "source_preserved_unverified"
+            ),
         }
-        if request_outcome == "success" and not matched:
-            candidate_summary["rejection_reason"] = "no_match"
-        elif request_outcome == "success" and within_window is False:
-            candidate_summary["rejection_reason"] = "outside_24h"
-        elif request_outcome == "success" and within_window is None:
-            candidate_summary["rejection_reason"] = "missing_published_date"
 
         if accepted:
             article = dict(candidate["article"])
@@ -1102,9 +1348,17 @@ def run_verify_stage(
             verified_articles.append(article)
             verified_candidates.append(candidate_summary)
         else:
-            rejected_candidates.append(candidate_summary)
+            preserved_unverified_candidates.append(candidate_summary)
             if error:
                 preserved_error_articles.append(dict(candidate["article"]))
+            if not getattr(settings, "preserve_source_on_verify_failure", True):
+                if request_outcome == "success" and not matched:
+                    candidate_summary["rejection_reason"] = "no_match"
+                elif request_outcome == "success" and within_window is False:
+                    candidate_summary["rejection_reason"] = "outside_24h"
+                elif request_outcome == "success" and within_window is None:
+                    candidate_summary["rejection_reason"] = "missing_published_date"
+                rejected_candidates.append(candidate_summary)
 
     return {
         "verify_budget": verify_budget,
@@ -1116,6 +1370,8 @@ def run_verify_stage(
         "preserved_error_articles": preserved_error_articles,
         "verified_candidates": verified_candidates,
         "rejected_candidates": rejected_candidates,
+        "preserved_unverified_candidates": preserved_unverified_candidates,
+        "verify_diagnostics": verified_candidates + preserved_unverified_candidates,
     }
 
 
@@ -1134,6 +1390,8 @@ def run_domain_refill_stage(
     needed_count: int,
 ) -> dict[str, Any]:
     accepted_candidates: list[dict[str, Any]] = []
+    strict_accepted_candidates: list[dict[str, Any]] = []
+    soft_accepted_candidates: list[dict[str, Any]] = []
     refill_runs: list[dict[str, Any]] = []
     near_duplicate_rejected_count = 0
     story_cluster_rejected_count = 0
@@ -1147,25 +1405,35 @@ def run_domain_refill_stage(
         return empty_refill_result(remaining_budget)
 
     request_window_hours = refill_request_window_hours(settings)
-    lenient_window_hours = int(
-        getattr(settings, "lenient_refill_window_hours", 72) or 72
+    soft_date_window_hours = int(
+        getattr(
+            settings,
+            "soft_date_window_hours",
+            getattr(settings, "lenient_refill_window_hours", 72),
+        )
+        or 72
     )
+    lenient_window_hours = soft_date_window_hours
     lenient_diagnostics_enabled = bool(
         getattr(settings, "lenient_refill_diagnostics_enabled", False)
     )
+    allow_soft_date_refill = bool(getattr(settings, "allow_soft_date_refill", True))
+    allowed_topic_buckets = accepted_refill_buckets(settings)
+    queries = refill_queries(settings, query)
     start_date, end_date = report_window(
         reference_dt,
         window_hours=request_window_hours,
     )
-    rounds_budget = min(settings.max_refill_rounds, remaining_budget)
+    rounds_budget = min(settings.max_refill_rounds, remaining_budget, len(queries))
     for round_index in range(rounds_budget):
+        round_query = queries[round_index]
         needed_before_round = max(0, needed_count - len(accepted_candidates))
         if needed_before_round <= 0:
             break
         payload = {
-            "query": query,
+            "query": round_query,
             "topic": "news",
-            "search_depth": REFILL_SEARCH_DEPTH,
+            "search_depth": getattr(settings, "refill_search_depth", "advanced"),
             "max_results": settings.refill_max_results,
             "include_answer": False,
             "include_images": False,
@@ -1192,19 +1460,28 @@ def run_domain_refill_stage(
             prior_candidates + accepted_candidates,
         )
         round_accepted: list[dict[str, Any]] = []
+        round_strict_accepted: list[dict[str, Any]] = []
+        round_soft_accepted: list[dict[str, Any]] = []
         run_candidates: list[dict[str, Any]] = []
         seen_titles: set[str] = set()
         round_near_duplicate_rejected = 0
         round_story_cluster_rejected = 0
+        soft_pool: list[tuple[dict[str, Any], dict[str, Any]]] = []
 
         for index, result_item in enumerate(results, start=1):
             strict_slot_available = (
                 len(accepted_candidates) + len(round_accepted) < needed_count
             )
-            if not lenient_diagnostics_enabled and not strict_slot_available:
+            if (
+                not lenient_diagnostics_enabled
+                and not allow_soft_date_refill
+                and not strict_slot_available
+            ):
                 break
             title = result_item.get("title", "")
             url = result_item.get("url", "")
+            content = result_item.get("content", "") or ""
+            domain = domain_of(url)
             normalized_title = normalize_title(title)
             canonical = canonical_url(url)
             duplicate_existing = (
@@ -1238,21 +1515,51 @@ def run_domain_refill_stage(
                 strict_hours=lenient_window_hours,
             )
             title_is_ai_relevant = ai_title_relevant(title)
+            topic_bucket = classify_topic_bucket(title, content, domain)
+            topic_is_technology = topic_bucket in allowed_topic_buckets
+            topic_confidence_value = topic_confidence(topic_bucket)
             duplicate_or_cluster = (
                 duplicate_existing
                 or duplicate_within_results
                 or near_duplicate_existing
                 or story_cluster_existing
             )
-            accepted = (
+            strict_eligible = (
                 strict_slot_available
-                and bool(within_window)
-                and title_is_ai_relevant
+                and within_window is True
+                and topic_is_technology
                 and not duplicate_existing
                 and not duplicate_within_results
                 and not near_duplicate_existing
                 and not story_cluster_existing
             )
+            soft_eligible = (
+                allow_soft_date_refill
+                and within_window is not True
+                and lenient_within_window is True
+                and topic_is_technology
+                and not duplicate_existing
+                and not duplicate_within_results
+                and not near_duplicate_existing
+                and not story_cluster_existing
+            )
+            accepted = False
+            acceptance_reason = None
+            refill_acceptance = None
+            rejection_reason = None
+            if not title or not url:
+                rejection_reason = "missing_title_or_url"
+            elif not topic_is_technology:
+                rejection_reason = "non_technology"
+            elif duplicate_or_cluster:
+                rejection_reason = "duplicate_or_story_cluster"
+            elif within_window is False and lenient_within_window is False:
+                rejection_reason = f"outside_{lenient_window_hours}h"
+            elif within_window is None:
+                rejection_reason = "missing_published_date"
+            elif not strict_slot_available:
+                rejection_reason = "acceptance_cap_reached"
+
             if near_duplicate_existing:
                 round_near_duplicate_rejected += 1
             elif story_cluster_existing:
@@ -1268,11 +1575,16 @@ def run_domain_refill_stage(
                 "source": domain_of(url),
                 "score": result_item.get("score"),
             }
+            source_type = (
+                "official" if stage_name == "official_fallback" else "independent_media"
+            )
+            accepted_article["source_type"] = source_type
+            accepted_article["topic_bucket"] = topic_bucket
             run_candidate = {
                 "rank": index,
                 "title": title,
                 "url": url,
-                "domain": domain_of(url),
+                "domain": domain,
                 "published_date": result_item.get("published_date"),
                 "within_24h": within_window,
                 "within_strict_window": within_window,
@@ -1288,6 +1600,9 @@ def run_domain_refill_stage(
                     else None
                 ),
                 "ai_title_relevant": title_is_ai_relevant,
+                "technology_relevant": topic_is_technology,
+                "topic_bucket": topic_bucket,
+                "topic_confidence": topic_confidence_value,
                 "duplicate_existing": duplicate_existing,
                 "duplicate_within_results": duplicate_within_results,
                 "near_duplicate_existing": near_duplicate_existing,
@@ -1295,18 +1610,41 @@ def run_domain_refill_stage(
                 "duplicate_or_cluster": duplicate_or_cluster,
                 "cluster_match": cluster_match,
                 "accepted": accepted,
+                "refill_acceptance": refill_acceptance,
+                "acceptance_reason": acceptance_reason,
+                "rejection_reason": rejection_reason,
                 "score": result_item.get("score"),
             }
             run_candidates.append(run_candidate)
-            if accepted:
+            if strict_eligible:
+                accepted = True
+                acceptance_reason = "strict_refill_technology_relevant"
+                refill_acceptance = "strict_refill"
+                run_candidate["accepted"] = True
+                run_candidate["acceptance_reason"] = acceptance_reason
+                run_candidate["refill_acceptance"] = refill_acceptance
+                run_candidate["rejection_reason"] = None
                 round_accepted.append(accepted_article)
+                round_strict_accepted.append(accepted_article)
+            elif soft_eligible:
+                soft_pool.append((accepted_article, run_candidate))
+
+        for accepted_article, run_candidate in soft_pool:
+            if len(accepted_candidates) + len(round_accepted) >= needed_count:
+                break
+            run_candidate["accepted"] = True
+            run_candidate["acceptance_reason"] = "soft_date_refill_technology_relevant"
+            run_candidate["refill_acceptance"] = "soft_refill"
+            run_candidate["rejection_reason"] = None
+            round_accepted.append(accepted_article)
+            round_soft_accepted.append(accepted_article)
 
         refill_runs.append(
             {
                 "stage": stage_name,
                 "round": round_index + 1,
-                "query": query,
-                "search_depth": REFILL_SEARCH_DEPTH,
+                "query": round_query,
+                "search_depth": getattr(settings, "refill_search_depth", "advanced"),
                 "max_results": settings.refill_max_results,
                 "include_domains": include_domains,
                 "start_date": start_date,
@@ -1317,6 +1655,8 @@ def run_domain_refill_stage(
                 "result_count": len(results),
                 "needed_before": needed_before_round,
                 "accepted_count": len(round_accepted),
+                "strict_accepted_count": len(round_strict_accepted),
+                "soft_accepted_count": len(round_soft_accepted),
                 "remaining_needed_after": max(
                     0, needed_count - len(accepted_candidates) - len(round_accepted)
                 ),
@@ -1329,6 +1669,8 @@ def run_domain_refill_stage(
             }
         )
         accepted_candidates.extend(round_accepted)
+        strict_accepted_candidates.extend(round_strict_accepted)
+        soft_accepted_candidates.extend(round_soft_accepted)
         near_duplicate_rejected_count += round_near_duplicate_rejected
         story_cluster_rejected_count += round_story_cluster_rejected
         if error or len(accepted_candidates) >= needed_count or not round_accepted:
@@ -1337,8 +1679,12 @@ def run_domain_refill_stage(
     return {
         "refill_calls": len(refill_runs),
         "accepted_candidates": accepted_candidates,
+        "strict_accepted_candidates": strict_accepted_candidates,
+        "soft_accepted_candidates": soft_accepted_candidates,
         "refill_runs": refill_runs,
         "media_refilled_count": len(accepted_candidates),
+        "strict_refill_accepted_count": len(strict_accepted_candidates),
+        "soft_refill_accepted_count": len(soft_accepted_candidates),
         "near_duplicate_rejected_count": near_duplicate_rejected_count,
         "story_cluster_rejected_count": story_cluster_rejected_count,
         "duplicate_slip_count": 0,
@@ -1370,7 +1716,10 @@ def enrich_articles_with_tavily(
         report["stop_reason"] = "disabled"
         report["notes"].append("Tavily enrichment is disabled for this run.")
         report["accepted_by_stage_preview"] = {
+            "source_preserved": sample_titles(article_dicts),
             "verify": [],
+            "strict_refill": [],
+            "soft_refill": [],
             "priority_refill": [],
             "secondary_refill": [],
             "official_fallback": [],
@@ -1384,7 +1733,10 @@ def enrich_articles_with_tavily(
             "TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles."
         )
         report["accepted_by_stage_preview"] = {
+            "source_preserved": sample_titles(article_dicts),
             "verify": [],
+            "strict_refill": [],
+            "soft_refill": [],
             "priority_refill": [],
             "secondary_refill": [],
             "official_fallback": [],
@@ -1405,10 +1757,33 @@ def enrich_articles_with_tavily(
         report["prefiltered_count"] = prefilter["prefiltered_count"]
         report["prefilter_stats"] = prefilter["prefilter_stats"]
         report["prefilter_bucket_counts"] = prefilter["prefilter_bucket_counts"]
+        report["topic_bucket_counts"] = prefilter["prefilter_bucket_counts"]
         report["prefilter_candidates"] = prefilter_clusters["annotated_candidates"]
         report["excluded_prefilter_candidates"] = prefilter[
             "excluded_prefilter_candidates"
         ]
+        source_preserved_candidates = prefilter_clusters["annotated_candidates"]
+        source_preserved_articles = [
+            dict(candidate["article"]) for candidate in source_preserved_candidates
+        ]
+        source_preserved_count = len(source_preserved_articles)
+        report["source_valid_count"] = source_preserved_count
+        report["source_preserved_count"] = source_preserved_count
+        report["hard_rejected_count"] = len(prefilter["excluded_prefilter_candidates"])
+        report["source_dropped_count"] = report["hard_rejected_count"]
+        report["source_preserved_candidates"] = [
+            {
+                "title": candidate.get("title", ""),
+                "source": candidate.get("source", ""),
+                "link": candidate.get("link", ""),
+                "topic_bucket": candidate.get("topic_bucket"),
+                "topic_confidence": candidate.get("topic_confidence"),
+                "technology_relevant": candidate.get("technology_relevant"),
+                "acceptance_reason": candidate.get("acceptance_reason"),
+            }
+            for candidate in source_preserved_candidates
+        ]
+        report["hard_rejected_candidates"] = prefilter["excluded_prefilter_candidates"]
         report["cluster_count"] = prefilter_clusters["cluster_count"]
         report["clustered_prefilter_count"] = prefilter_clusters[
             "clustered_candidate_count"
@@ -1452,29 +1827,63 @@ def enrich_articles_with_tavily(
         report["verify_runs"] = verify["verify_runs"]
         report["verified_candidates"] = verify["verified_candidates"]
         report["rejected_candidates"] = verify["rejected_candidates"]
+        skipped_verified_titles = {
+            run.get("title") for run in verify["preserved_unverified_candidates"]
+        } | {run.get("title") for run in verify["verified_candidates"]}
+        skipped_budget_candidates = [
+            {
+                "title": candidate.get("title", ""),
+                "source": candidate.get("source", ""),
+                "link": candidate.get("link", ""),
+                "prefilter_bucket": candidate.get("prefilter_bucket"),
+                "topic_bucket": candidate.get("topic_bucket"),
+                "topic_confidence": candidate.get("topic_confidence"),
+                "technology_relevant": candidate.get("technology_relevant"),
+                "request_outcome": "not_requested",
+                "validation_outcome": "not_evaluated",
+                "verification_status": "not_verified_budget_preserved",
+                "date_confidence": "unverified",
+                "acceptance_reason": "source_preserved_not_verified",
+                "rejection_reason": None,
+            }
+            for candidate in verify_view["verify_candidates"][verify["verify_budget"] :]
+            if candidate.get("title") not in skipped_verified_titles
+        ]
+        report["preserved_unverified_candidates"] = (
+            verify["preserved_unverified_candidates"] + skipped_budget_candidates
+        )
+        report["preserved_unverified_count"] = max(
+            0, source_preserved_count - len(verify["verified_candidates"])
+        )
+        report["verify_diagnostics"] = (
+            verify["verify_diagnostics"] + skipped_budget_candidates
+        )
         report["neighbor_candidates_verified_count"] = sum(
             1
             for candidate in verify["verified_candidates"]
-            if candidate.get("prefilter_bucket") == "ai_neighbor"
+            if candidate.get("prefilter_bucket") == "tech_adjacent"
         )
         report["neighbor_candidates_outside_24h_count"] = sum(
             1
-            for candidate in verify["rejected_candidates"]
-            if candidate.get("prefilter_bucket") == "ai_neighbor"
+            for candidate in report["preserved_unverified_candidates"]
+            if candidate.get("prefilter_bucket") == "tech_adjacent"
             and candidate.get("validation_outcome") == "outside_24h"
         )
         report["neighbor_candidates_no_match_count"] = sum(
             1
-            for candidate in verify["rejected_candidates"]
-            if candidate.get("prefilter_bucket") == "ai_neighbor"
+            for candidate in report["preserved_unverified_candidates"]
+            if candidate.get("prefilter_bucket") == "tech_adjacent"
             and candidate.get("validation_outcome") == "no_match"
         )
 
-        verified_output_articles = (
-            verify["preserved_error_articles"] + verify["verified_articles"]
+        verified_output_articles = source_preserved_articles
+        final_cap = final_article_cap(settings, source_preserved_count)
+        refill_target_count = min(
+            final_cap,
+            max(settings.min_articles, source_preserved_count),
         )
         report["refill_needed_count"] = max(
-            0, settings.min_articles - len(verified_output_articles)
+            0, refill_target_count - len(verified_output_articles)
         )
 
         remaining_budget = max(0, settings.max_total_calls - report["total_calls"])
@@ -1483,9 +1892,7 @@ def enrich_articles_with_tavily(
             priority_refill = run_domain_refill_stage(
                 base_articles=article_dicts,
                 prior_candidates=verified_output_articles,
-                include_domains=list(
-                    settings.trusted_domains.priority_refill_media_whitelist
-                ),
+                include_domains=priority_refill_domains(settings),
                 query=settings.priority_refill_query,
                 stage_name="priority_refill",
                 settings=settings,
@@ -1499,6 +1906,12 @@ def enrich_articles_with_tavily(
         report["total_calls"] += priority_refill["refill_calls"]
         report["priority_refilled_count"] = priority_refill["media_refilled_count"]
         report["media_refilled_count"] = priority_refill["media_refilled_count"]
+        report["strict_refill_accepted_count"] += priority_refill[
+            "strict_refill_accepted_count"
+        ]
+        report["soft_refill_accepted_count"] += priority_refill[
+            "soft_refill_accepted_count"
+        ]
         report["near_duplicate_rejected_count"] = priority_refill[
             "near_duplicate_rejected_count"
         ]
@@ -1513,7 +1926,7 @@ def enrich_articles_with_tavily(
         secondary_candidates: list[dict[str, Any]] = []
         secondary_needed_count = max(
             0,
-            settings.min_articles
+            refill_target_count
             - len(verified_output_articles)
             - len(priority_refill["accepted_candidates"]),
         )
@@ -1523,9 +1936,7 @@ def enrich_articles_with_tavily(
                 prior_candidates=(
                     verified_output_articles + priority_refill["accepted_candidates"]
                 ),
-                include_domains=list(
-                    settings.trusted_domains.secondary_refill_candidate_domains
-                ),
+                include_domains=secondary_refill_domains(settings),
                 query=settings.priority_refill_query,
                 stage_name="secondary_refill",
                 settings=settings,
@@ -1543,6 +1954,12 @@ def enrich_articles_with_tavily(
                 "media_refilled_count"
             ]
             report["media_refilled_count"] += report["secondary_refilled_count"]
+            report["strict_refill_accepted_count"] += secondary_refill[
+                "strict_refill_accepted_count"
+            ]
+            report["soft_refill_accepted_count"] += secondary_refill[
+                "soft_refill_accepted_count"
+            ]
             report["near_duplicate_rejected_count"] += secondary_refill[
                 "near_duplicate_rejected_count"
             ]
@@ -1559,7 +1976,7 @@ def enrich_articles_with_tavily(
         official_candidates: list[dict[str, Any]] = []
         official_needed_count = max(
             0,
-            settings.min_articles
+            refill_target_count
             - len(verified_output_articles)
             - len(priority_refill["accepted_candidates"])
             - len(secondary_candidates),
@@ -1592,6 +2009,12 @@ def enrich_articles_with_tavily(
             report["fallback_calls"] = official["refill_calls"]
             report["total_calls"] += official["refill_calls"]
             report["official_refilled_count"] = official["media_refilled_count"]
+            report["strict_refill_accepted_count"] += official[
+                "strict_refill_accepted_count"
+            ]
+            report["soft_refill_accepted_count"] += official[
+                "soft_refill_accepted_count"
+            ]
             report["near_duplicate_rejected_count"] += official[
                 "near_duplicate_rejected_count"
             ]
@@ -1608,13 +2031,49 @@ def enrich_articles_with_tavily(
             + secondary_candidates
             + official_candidates
         )
+        final_articles = final_articles[:final_cap]
         report["final_count"] = len(final_articles)
+        report["added_by_tavily_count"] = max(
+            0, report["final_count"] - source_preserved_count
+        )
+        report["final_count_delta_vs_source"] = (
+            report["final_count"] - source_preserved_count
+        )
         report["refill_remaining_count"] = max(
             0, settings.min_articles - report["final_count"]
         )
+        strict_refill_candidates = (
+            priority_refill["strict_accepted_candidates"]
+            + (
+                secondary_refill.get("strict_accepted_candidates", [])
+                if "secondary_refill" in locals()
+                else []
+            )
+            + (
+                official.get("strict_accepted_candidates", [])
+                if "official" in locals()
+                else []
+            )
+        )
+        soft_refill_candidates = (
+            priority_refill["soft_accepted_candidates"]
+            + (
+                secondary_refill.get("soft_accepted_candidates", [])
+                if "secondary_refill" in locals()
+                else []
+            )
+            + (
+                official.get("soft_accepted_candidates", [])
+                if "official" in locals()
+                else []
+            )
+        )
         report["accepted_by_stage_preview"] = {
+            "source_preserved": sample_titles(source_preserved_articles),
             "preserved_errors": sample_titles(verify["preserved_error_articles"]),
             "verify": sample_titles(verify["verified_articles"]),
+            "strict_refill": sample_titles(strict_refill_candidates),
+            "soft_refill": sample_titles(soft_refill_candidates),
             "priority_refill": sample_titles(priority_refill["accepted_candidates"]),
             "secondary_refill": sample_titles(secondary_candidates),
             "official_fallback": sample_titles(official_candidates),
@@ -1659,7 +2118,10 @@ def enrich_articles_with_tavily(
             "The pipeline fell back to the deduped articles after an enrichment error."
         )
         report["accepted_by_stage_preview"] = {
+            "source_preserved": sample_titles(article_dicts),
             "verify": [],
+            "strict_refill": [],
+            "soft_refill": [],
             "priority_refill": [],
             "secondary_refill": [],
             "official_fallback": [],
