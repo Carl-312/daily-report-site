@@ -149,12 +149,20 @@ def test_enrichment_timeout_preserves_original_articles(monkeypatch) -> None:
     assert result["report"]["accepted_by_stage_preview"]["preserved_errors"] == [
         "OpenAI releases new developer tools"
     ]
-    assert result["report"]["rejected_candidates"][0]["request_outcome"] == "timeout"
     assert (
-        result["report"]["rejected_candidates"][0]["validation_outcome"]
+        result["report"]["preserved_unverified_candidates"][0]["request_outcome"]
+        == "timeout"
+    )
+    assert (
+        result["report"]["preserved_unverified_candidates"][0]["verification_status"]
+        == "request_error_preserved"
+    )
+    assert (
+        result["report"]["preserved_unverified_candidates"][0]["validation_outcome"]
         == "not_evaluated"
     )
-    assert result["report"]["rejected_candidates"][0]["rejection_reason"] is None
+    assert result["report"]["rejected_candidates"] == []
+    assert result["report"]["final_count_delta_vs_source"] == 0
 
 
 def test_enrichment_session_trust_env_follows_settings(monkeypatch) -> None:
@@ -231,7 +239,7 @@ def test_enrichment_below_min_stop_reason_when_official_fallback_disabled(
     )
 
 
-def test_verify_rejects_matched_article_outside_24h(monkeypatch) -> None:
+def test_verify_outside_24h_preserves_source_with_date_warning(monkeypatch) -> None:
     cfg = load_project_config()
     article = sample_articles()[0]
 
@@ -270,18 +278,27 @@ def test_verify_rejects_matched_article_outside_24h(monkeypatch) -> None:
         reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
     )
 
-    assert result["articles"] == []
-    assert result["report"]["final_count"] == 0
+    assert result["articles"] == [article]
+    assert result["report"]["final_count"] == 1
+    assert result["report"]["source_preserved_count"] == 1
+    assert result["report"]["final_count_delta_vs_source"] == 0
     assert result["report"]["verify_runs"][0]["request_outcome"] == "success"
     assert result["report"]["verify_runs"][0]["matched"] is True
     assert result["report"]["verify_runs"][0]["within_24h"] is False
     assert result["report"]["verify_runs"][0]["validation_outcome"] == "outside_24h"
     assert (
-        result["report"]["rejected_candidates"][0]["rejection_reason"] == "outside_24h"
+        result["report"]["verify_runs"][0]["verification_status"] == "matched_but_stale"
     )
+    assert (
+        result["report"]["preserved_unverified_candidates"][0]["date_confidence"]
+        == "outside_strict_window"
+    )
+    assert result["report"]["rejected_candidates"] == []
 
 
-def test_verify_rejects_matched_article_missing_published_date(monkeypatch) -> None:
+def test_verify_missing_published_date_preserves_source_with_warning(
+    monkeypatch,
+) -> None:
     cfg = load_project_config()
     article = sample_articles()[0]
 
@@ -320,8 +337,9 @@ def test_verify_rejects_matched_article_missing_published_date(monkeypatch) -> N
         reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
     )
 
-    assert result["articles"] == []
-    assert result["report"]["final_count"] == 0
+    assert result["articles"] == [article]
+    assert result["report"]["final_count"] == 1
+    assert result["report"]["source_preserved_count"] == 1
     assert result["report"]["verify_runs"][0]["request_outcome"] == "success"
     assert result["report"]["verify_runs"][0]["matched"] is True
     assert result["report"]["verify_runs"][0]["within_24h"] is None
@@ -330,12 +348,15 @@ def test_verify_rejects_matched_article_missing_published_date(monkeypatch) -> N
         == "missing_published_date"
     )
     assert (
-        result["report"]["rejected_candidates"][0]["rejection_reason"]
-        == "missing_published_date"
+        result["report"]["verify_runs"][0]["verification_status"]
+        == "matched_missing_date"
     )
+    assert result["report"]["rejected_candidates"] == []
 
 
-def test_prefilter_keeps_ai_neighbor_in_lower_priority_bucket(monkeypatch) -> None:
+def test_prefilter_classifies_tech_adjacent_in_lower_priority_bucket(
+    monkeypatch,
+) -> None:
     cfg = load_project_config()
     neighbor_title = (
         "California adopts new rules allowing manufacturers to test and deploy "
@@ -367,10 +388,12 @@ def test_prefilter_keeps_ai_neighbor_in_lower_priority_bucket(monkeypatch) -> No
     )
 
     assert result["report"]["prefilter_stats"]["excluded_non_ai_relevant"] == 0
-    assert result["report"]["prefilter_bucket_counts"]["ai_neighbor"] == 1
+    assert result["report"]["prefilter_bucket_counts"]["tech_adjacent"] == 1
     assert (
-        result["report"]["prefilter_candidates"][0]["prefilter_bucket"] == "ai_neighbor"
+        result["report"]["prefilter_candidates"][0]["prefilter_bucket"]
+        == "tech_adjacent"
     )
+    assert result["report"]["prefilter_candidates"][0]["technology_relevant"] is True
     assert seen_queries == [f'"{neighbor_title}"']
 
 
@@ -378,7 +401,7 @@ def test_verify_order_prioritizes_core_ai_then_neighbors_then_low_signal(
     monkeypatch,
 ) -> None:
     cfg = load_project_config()
-    low_signal_title = "Startup funding round reshapes enterprise software market"
+    business_title = "Startup funding round reshapes enterprise software market"
     neighbor_title = (
         "California adopts new rules allowing manufacturers to test and deploy "
         "heavy-duty autonomous vehicles"
@@ -394,7 +417,7 @@ def test_verify_order_prioritizes_core_ai_then_neighbors_then_low_signal(
 
     result = enrich_articles_with_tavily(
         [
-            make_article(low_signal_title, "https://example.com/low-signal"),
+            make_article(business_title, "https://example.com/business"),
             make_article(neighbor_title, "https://example.com/neighbor"),
             make_article(core_ai_title, "https://example.com/core-ai"),
         ],
@@ -414,23 +437,26 @@ def test_verify_order_prioritizes_core_ai_then_neighbors_then_low_signal(
     )
 
     assert result["report"]["prefilter_bucket_counts"] == {
-        "core_ai": 1,
-        "ai_neighbor": 1,
-        "generic_or_low_signal": 1,
+        "ai_core": 1,
+        "tech_core": 0,
+        "tech_business": 1,
+        "tech_adjacent": 1,
+        "generic_or_low_signal": 0,
+        "hard_reject": 0,
     }
     bucket_by_title = {
         candidate["title"]: candidate["prefilter_bucket"]
         for candidate in result["report"]["prefilter_candidates"]
     }
     assert bucket_by_title == {
-        core_ai_title: "core_ai",
-        neighbor_title: "ai_neighbor",
-        low_signal_title: "generic_or_low_signal",
+        core_ai_title: "ai_core",
+        business_title: "tech_business",
+        neighbor_title: "tech_adjacent",
     }
     assert seen_queries == [
         f'"{core_ai_title}"',
+        f'"{business_title}"',
         f'"{neighbor_title}"',
-        f'"{low_signal_title}"',
     ]
 
 
@@ -474,11 +500,12 @@ def test_aggregate_like_article_is_hard_rejected_before_verify(monkeypatch) -> N
     ]
 
 
-def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
+def test_refill_accepts_trusted_non_ai_technology_news(monkeypatch) -> None:
     cfg = load_project_config()
+    expected_domains = news_enrichment.priority_refill_domains(cfg.enrichment)
 
     def fake_search(session, api_key, payload):
-        assert payload.get("include_domains") == ["thenextweb.com", "venturebeat.com"]
+        assert payload.get("include_domains") == expected_domains
         return {
             "latency_ms": 10.0,
             "response": {
@@ -487,7 +514,57 @@ def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
                         "title": "Startup funding round reshapes enterprise software market",
                         "url": "https://thenextweb.com/news/startup-funding-enterprise-software",
                         "published_date": "2026-04-01T03:30:00Z",
-                        "content": "Low-signal startup funding item without a strong AI title.",
+                        "content": "Enterprise software funding item without model news.",
+                        "score": 0.92,
+                    }
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 1,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 1,
+                "min_articles": 1,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    candidate = result["report"]["priority_refill_runs"][0]["candidate_results"][0]
+    assert result["report"]["priority_refilled_count"] == 1
+    assert result["report"]["strict_refill_accepted_count"] == 1
+    assert result["report"]["final_count"] == 1
+    assert candidate["within_24h"] is True
+    assert candidate["ai_title_relevant"] is False
+    assert candidate["technology_relevant"] is True
+    assert candidate["topic_bucket"] == "tech_business"
+    assert candidate["accepted"] is True
+    assert candidate["refill_acceptance"] == "strict_refill"
+
+
+def test_refill_rejects_non_tech_social_or_political_news(monkeypatch) -> None:
+    cfg = load_project_config()
+
+    def fake_search(session, api_key, payload):
+        return {
+            "latency_ms": 10.0,
+            "response": {
+                "results": [
+                    {
+                        "title": "Celebrity sports music tour announces ticket sale",
+                        "url": "https://thenextweb.com/news/not-technology",
+                        "published_date": "2026-04-01T03:30:00Z",
+                        "content": "Entertainment item without a technology event.",
                         "score": 0.92,
                     }
                 ]
@@ -516,9 +593,119 @@ def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
     candidate = result["report"]["priority_refill_runs"][0]["candidate_results"][0]
     assert result["report"]["priority_refilled_count"] == 0
     assert result["report"]["final_count"] == 0
-    assert candidate["within_24h"] is True
-    assert candidate["ai_title_relevant"] is False
+    assert candidate["technology_relevant"] is False
     assert candidate["accepted"] is False
+    assert candidate["rejection_reason"] == "non_technology"
+
+
+def test_soft_date_refill_can_enter_after_strict_pool_exhausted(monkeypatch) -> None:
+    cfg = load_project_config()
+
+    def fake_search(session, api_key, payload):
+        return {
+            "latency_ms": 10.0,
+            "response": {
+                "results": [
+                    {
+                        "title": "OpenAI launches AI coding workspace",
+                        "url": "https://thenextweb.com/news/openai-coding-workspace",
+                        "published_date": "2026-04-01T03:00:00Z",
+                        "content": "Strictly valid AI item.",
+                        "score": 0.98,
+                    },
+                    {
+                        "title": "Startup funding round reshapes enterprise software market",
+                        "url": "https://thenextweb.com/news/startup-funding-enterprise-software",
+                        "published_date": "2026-03-30T04:00:00Z",
+                        "content": "Enterprise software funding item.",
+                        "score": 0.9,
+                    },
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 1,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 1,
+                "min_articles": 2,
+                "refill_search_window_hours": 72,
+                "soft_date_window_hours": 72,
+                "allow_soft_date_refill": True,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    candidates = result["report"]["priority_refill_runs"][0]["candidate_results"]
+    assert result["report"]["final_count"] == 2
+    assert result["report"]["strict_refill_accepted_count"] == 1
+    assert result["report"]["soft_refill_accepted_count"] == 1
+    assert candidates[1]["within_strict_window"] is False
+    assert candidates[1]["lenient_within_window"] is True
+    assert candidates[1]["accepted"] is True
+    assert candidates[1]["refill_acceptance"] == "soft_refill"
+
+
+def test_refill_caps_at_max_articles_after_enrichment(monkeypatch) -> None:
+    cfg = load_project_config()
+    source_article = make_article(
+        "OpenAI launches AI agents for developer tools",
+        "https://example.com/source-openai-agents",
+    )
+
+    def fake_search(session, api_key, payload):
+        return {
+            "latency_ms": 10.0,
+            "response": {
+                "results": [
+                    make_tavily_result(
+                        "Anthropic releases Claude enterprise console",
+                        "venturebeat.com",
+                        "claude-enterprise-console",
+                    ),
+                    make_tavily_result(
+                        "Mistral debuts AI inference platform",
+                        "thenextweb.com",
+                        "mistral-inference-platform",
+                    ),
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [source_article],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 2,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 1,
+                "min_articles": 3,
+                "max_articles_after_enrichment": 2,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert result["report"]["source_preserved_count"] == 1
+    assert result["report"]["priority_refilled_count"] == 1
+    assert result["report"]["final_count"] == 2
+    assert result["report"]["final_count_delta_vs_source"] == 1
 
 
 def test_refill_lenient_diagnostics_do_not_pollute_strict_output(monkeypatch) -> None:
@@ -751,13 +938,17 @@ def test_refill_uses_staged_tavily_calls_until_minimum_is_met(
         ),
     ]
     seen_domain_groups: list[list[str]] = []
+    expected_priority_domains = news_enrichment.priority_refill_domains(cfg.enrichment)
+    expected_secondary_domains = news_enrichment.secondary_refill_domains(
+        cfg.enrichment
+    )
 
     def fake_search(session, api_key, payload):
         include_domains = payload.get("include_domains") or []
         seen_domain_groups.append(include_domains)
-        if include_domains == ["thenextweb.com", "venturebeat.com"]:
+        if include_domains == expected_priority_domains:
             return {"latency_ms": 10.0, "response": {"results": priority_results}}
-        if include_domains == ["reuters.com", "arstechnica.com"]:
+        if include_domains == expected_secondary_domains:
             return {"latency_ms": 12.0, "response": {"results": secondary_results}}
         raise AssertionError(f"Unexpected payload: {payload}")
 
@@ -780,10 +971,7 @@ def test_refill_uses_staged_tavily_calls_until_minimum_is_met(
         reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
     )
 
-    assert seen_domain_groups == [
-        ["thenextweb.com", "venturebeat.com"],
-        ["reuters.com", "arstechnica.com"],
-    ]
+    assert seen_domain_groups == [expected_priority_domains, expected_secondary_domains]
     assert result["report"]["refill_needed_count"] == 10
     assert result["report"]["priority_refilled_count"] == 4
     assert result["report"]["secondary_refilled_count"] == 6
@@ -794,7 +982,7 @@ def test_refill_uses_staged_tavily_calls_until_minimum_is_met(
     assert result["report"]["stop_reason"] == "secondary_refill_complete"
     assert result["report"]["secondary_refill_runs"][0]["needed_before"] == 6
     assert result["report"]["secondary_refill_runs"][0]["remaining_needed_after"] == 0
-    assert len(result["report"]["secondary_refill_runs"][0]["candidate_results"]) == 6
+    assert len(result["report"]["secondary_refill_runs"][0]["candidate_results"]) == 8
 
 
 def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
@@ -807,13 +995,6 @@ def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
         "Google DeepMind updates Gemini robotics controller",
         "Microsoft ships Copilot assistant for security teams",
         "Meta releases Llama model tuning toolkit",
-        "Mistral launches AI inference service for developers",
-        "Cohere adds enterprise retrieval agents",
-        "Perplexity unveils AI shopping assistant",
-        "Databricks upgrades machine learning governance",
-        "Nvidia introduces robotics foundation model",
-        "Amazon tests warehouse AI robot fleet",
-        "Hugging Face publishes dataset quality tools",
     ]
     articles = [
         make_article(title, f"https://example.com/story-{index}")
@@ -838,15 +1019,19 @@ def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
     for result in secondary_results:
         result["published_date"] = "2026-05-11T12:00:00Z"
     seen_domain_groups: list[list[str]] = []
+    expected_priority_domains = news_enrichment.priority_refill_domains(cfg.enrichment)
+    expected_secondary_domains = news_enrichment.secondary_refill_domains(
+        cfg.enrichment
+    )
 
     def fake_search(session, api_key, payload):
         include_domains = payload.get("include_domains")
         if not include_domains:
             return {"latency_ms": 5.0, "response": {"results": []}}
         seen_domain_groups.append(include_domains)
-        if include_domains == ["thenextweb.com", "venturebeat.com"]:
+        if include_domains == expected_priority_domains:
             return {"latency_ms": 10.0, "response": {"results": []}}
-        if include_domains == ["reuters.com", "arstechnica.com"]:
+        if include_domains == expected_secondary_domains:
             return {"latency_ms": 12.0, "response": {"results": secondary_results}}
         raise AssertionError(f"Unexpected payload: {payload}")
 
@@ -873,10 +1058,120 @@ def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
     assert result["report"]["verify_budget"] == 5
     assert result["report"]["verify_calls"] == 5
     assert result["report"]["refill_calls"] == 2
-    assert seen_domain_groups == [
-        ["thenextweb.com", "venturebeat.com"],
-        ["reuters.com", "arstechnica.com"],
+    assert seen_domain_groups == [expected_priority_domains, expected_secondary_domains]
+    assert result["report"]["secondary_refilled_count"] == 5
+    assert result["report"]["final_count"] == 10
+    assert result["report"]["final_count_delta_vs_source"] == 5
+    assert result["report"]["stop_reason"] == "secondary_refill_complete"
+
+
+def test_wide_filter_refill_forces_three_topic_rounds_and_strict_acceptance(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    source_article = make_article(
+        "OpenAI launches AI agents for developer tools",
+        "https://example.com/source-openai-agents",
+    )
+    queries = [
+        "today AI model product launch developer tools",
+        "today AI companies funding acquisition regulation",
+        "today AI chips cloud cybersecurity robotics",
     ]
-    assert result["report"]["secondary_refilled_count"] == 6
-    assert result["report"]["final_count"] == 6
-    assert result["report"]["stop_reason"] == "budget_exhausted_after_secondary_refill"
+    query_topics = [
+        "ai_models_products_developer_tools",
+        "ai_companies_funding_mna_regulation",
+        "ai_adjacent_chips_cloud_security_robotics",
+    ]
+    seen_payloads: list[dict] = []
+
+    def fake_search(session, api_key, payload):
+        seen_payloads.append(payload)
+        if not payload.get("include_domains"):
+            return {"latency_ms": 5.0, "response": {"results": []}}
+        query = payload["query"]
+        if query == queries[0]:
+            return {
+                "latency_ms": 10.0,
+                "response": {
+                    "results": [
+                        make_tavily_result(
+                            "Anthropic releases Claude developer console",
+                            "venturebeat.com",
+                            "claude-developer-console",
+                        )
+                    ]
+                },
+            }
+        if query == queries[1]:
+            soft = make_tavily_result(
+                "AI startup funding round reshapes enterprise software market",
+                "reuters.com",
+                "ai-startup-funding",
+            )
+            soft["published_date"] = "2026-03-30T04:00:00Z"
+            return {"latency_ms": 11.0, "response": {"results": [soft]}}
+        if query == queries[2]:
+            return {
+                "latency_ms": 12.0,
+                "response": {
+                    "results": [
+                        make_tavily_result(
+                            "Nvidia introduces AI robotics foundation model",
+                            "wired.com",
+                            "nvidia-robotics-foundation",
+                        )
+                    ]
+                },
+            }
+        raise AssertionError(f"Unexpected query: {query}")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [source_article],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 6,
+                "max_verify_calls": 1,
+                "max_refill_rounds": 3,
+                "min_refill_rounds": 3,
+                "refill_to_max_articles": True,
+                "min_articles": 1,
+                "max_articles_after_enrichment": 3,
+                "refill_queries": queries,
+                "refill_query_topics": query_topics,
+                "refill_search_window_hours": 24,
+                "lenient_refill_diagnostics_enabled": True,
+                "lenient_refill_window_hours": 72,
+                "allow_soft_date_refill": False,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    refill_payloads = [
+        payload for payload in seen_payloads if payload.get("include_domains")
+    ]
+    report = result["report"]
+
+    assert [payload["query"] for payload in refill_payloads] == queries
+    assert all(payload["topic"] == "news" for payload in refill_payloads)
+    assert report["source_preserved_count"] == 1
+    assert report["refill_rounds"] == 3
+    assert report["query_topics"] == query_topics
+    assert report["priority_refilled_count"] == 2
+    assert report["soft_refill_accepted_count"] == 0
+    assert report["strict_refill_accepted_count"] == 2
+    assert report["added_by_tavily_count"] == 2
+    assert report["final_count_delta_vs_source"] == 2
+    assert report["safe_to_commit"] is True
+    assert report["priority_refill_runs"][1]["query_topic"] == query_topics[1]
+    soft_candidate = report["priority_refill_runs"][1]["candidate_results"][0]
+    assert soft_candidate["date_confidence"] == "soft"
+    assert soft_candidate["accepted"] is False
+    assert soft_candidate["rejection_reason"] == "soft_date_diagnostic_only"

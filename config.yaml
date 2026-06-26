@@ -22,18 +22,47 @@ output:
 enrichment:
   enabled: false
   trust_env: true
+  boundary_mode: tech_news
+  preserve_source_on_verify_failure: true
   min_articles: 10
+  max_articles_after_enrichment: 14
   strict_hours: 24
-  max_total_calls: 7
-  max_verify_calls: 6
-  max_refill_rounds: 1
-  refill_max_results: 8
+  max_total_calls: 10
+  max_verify_calls: 4
+  max_refill_rounds: 2
+  refill_max_results: 12
+  refill_search_window_hours: 48
+  soft_date_window_hours: 72
+  allow_soft_date_refill: true
   verify_search_depth: basic
+  refill_search_depth: advanced
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
+  refill_queries:
+    - "technology news software startups cybersecurity chips hardware apps cloud"
+    - "AI technology startups developer tools models robotics automation"
+    - "consumer technology platforms social apps security semiconductors funding"
+  accept_refill_topic_buckets:
+    - ai_core
+    - tech_core
+    - tech_business
+    - tech_adjacent
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
   official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
   trusted_domains:
+    source_overlap_domains:
+      - techcrunch.com
+      - www.theverge.com
+    priority_tech_media_domains:
+      - arstechnica.com
+      - thenextweb.com
+      - venturebeat.com
+      - engadget.com
+      - wired.com
+    secondary_business_tech_domains:
+      - reuters.com
+      - bloomberg.com
+      - cnbc.com
     priority_refill_media_whitelist:
       - thenextweb.com
       - venturebeat.com
@@ -43,3 +72,6 @@ enrichment:
     official_fallback_domains:
       - openai.com
       - anthropic.com
+      - googleblog.com
+      - microsoft.com
+      - nvidia.com

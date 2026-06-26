@@ -33,7 +33,7 @@ pip install -r requirements-dev.txt
 
 ```bash
 MODELSCOPE_API_KEY=sk-your-api-key
-MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
+MODELSCOPE_MODEL=ZhipuAI/GLM-5.1
 ```
 
 没有 API Key 时可直接使用离线模式。

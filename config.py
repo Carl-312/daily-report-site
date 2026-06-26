@@ -25,7 +25,7 @@ class Settings(BaseModel):
         description="ModelScope API Base URL",
     )
     model: str = Field(
-        default="moonshotai/Kimi-K2.5", description="ModelScope model ID"
+        default="ZhipuAI/GLM-5.1", description="ModelScope model ID"
     )
 
     # Fallback provider: SiliconFlow (OpenAI-compatible)
@@ -77,6 +77,28 @@ class Settings(BaseModel):
 class EnrichmentTrustedDomains(BaseModel):
     """Trusted domains for staged Tavily refill"""
 
+    source_overlap_domains: List[str] = Field(
+        default_factory=lambda: [
+            "techcrunch.com",
+            "www.theverge.com",
+        ]
+    )
+    priority_tech_media_domains: List[str] = Field(
+        default_factory=lambda: [
+            "arstechnica.com",
+            "thenextweb.com",
+            "venturebeat.com",
+            "engadget.com",
+            "wired.com",
+        ]
+    )
+    secondary_business_tech_domains: List[str] = Field(
+        default_factory=lambda: [
+            "reuters.com",
+            "bloomberg.com",
+            "cnbc.com",
+        ]
+    )
     priority_refill_media_whitelist: List[str] = Field(
         default_factory=lambda: [
             "thenextweb.com",
@@ -93,6 +115,9 @@ class EnrichmentTrustedDomains(BaseModel):
         default_factory=lambda: [
             "openai.com",
             "anthropic.com",
+            "googleblog.com",
+            "microsoft.com",
+            "nvidia.com",
         ]
     )
 
@@ -102,18 +127,42 @@ class EnrichmentSettings(BaseModel):
 
     enabled: bool = Field(default=False)
     trust_env: bool = Field(default=True)
+    boundary_mode: str = Field(default="tech_news")
+    preserve_source_on_verify_failure: bool = Field(default=True)
     min_articles: int = Field(default=10)
+    max_articles_after_enrichment: int = Field(default=14)
     strict_hours: int = Field(default=24)
-    max_total_calls: int = Field(default=7)
-    max_verify_calls: int = Field(default=6)
-    max_refill_rounds: int = Field(default=1)
-    refill_max_results: int = Field(default=8)
-    refill_search_window_hours: int = Field(default=24)
+    max_total_calls: int = Field(default=10)
+    max_verify_calls: int = Field(default=4)
+    max_refill_rounds: int = Field(default=2)
+    min_refill_rounds: int = Field(default=0)
+    refill_to_max_articles: bool = Field(default=False)
+    refill_max_results: int = Field(default=12)
+    refill_search_window_hours: int = Field(default=48)
+    soft_date_window_hours: int = Field(default=72)
+    allow_soft_date_refill: bool = Field(default=True)
     verify_search_depth: str = Field(default="basic")
+    refill_search_depth: str = Field(default="advanced")
     enable_fuzzy_second_pass: bool = Field(default=False)
     enable_official_fallback: bool = Field(default=False)
     lenient_refill_diagnostics_enabled: bool = Field(default=False)
     lenient_refill_window_hours: int = Field(default=72)
+    refill_queries: List[str] = Field(
+        default_factory=lambda: [
+            "technology news software startups cybersecurity chips hardware apps cloud",
+            "AI technology startups developer tools models robotics automation",
+            "consumer technology platforms social apps security semiconductors funding",
+        ]
+    )
+    refill_query_topics: List[str] = Field(default_factory=list)
+    accept_refill_topic_buckets: List[str] = Field(
+        default_factory=lambda: [
+            "ai_core",
+            "tech_core",
+            "tech_business",
+            "tech_adjacent",
+        ]
+    )
     priority_refill_query: str = Field(
         default="OpenAI Anthropic AI model launch startup funding developer tools"
     )
@@ -137,7 +186,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "api_base_url": os.getenv(
             "MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1"
         ),
-        "model": os.getenv("MODELSCOPE_MODEL", "moonshotai/Kimi-K2.5"),
+        "model": os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-5.1"),
         "fallback_api_key": os.getenv("SILICONFLOW_API_KEY", ""),
         "fallback_api_base_url": os.getenv(
             "SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1"

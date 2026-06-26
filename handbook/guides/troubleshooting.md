@@ -85,9 +85,33 @@ python3 main.py run --offline --enrichment off
 - `skip_reason=missing_api_key`：缺少 `TAVILY_API_KEY`，主流程应继续使用去重后的文章。
 - `request_outcome=timeout/http_error/connection_error/request_error`：这是请求失败，不应当被解释为新闻验证失败。
 - `preserved_error_count` 大于 0：verify 请求失败时保留了原始 deduped articles，符合 fail-open 预期。
+- `preserved_unverified_count` 大于 0：source 文章未被 Tavily 严格验证，但仍按 source-preserve 进入最终候选。
 - `final_count=0` 且 `input_count=0`：source 没有候选，Tavily 只能尝试受控 refill；这不是 verify 成熟度证明，也不说明可以放弃 source 层。
+- `final_count_delta_vs_source < 0`：这是安全红线。检查 `hard_rejected_candidates` 是否能解释 source 减少；如果不能，灰度 workflow 不应回写正式 `data/` / `content/`。
 
-不要为了单次 `final_count` 不足而放宽 `strict_hours: 24`，也不要临时把 `trusted_domains` 当作热修名单扩张。
+不要为了单次 `final_count` 不足而无条件放宽 `strict_hours: 24`，也不要临时把 `trusted_domains` 当作热修名单扩张。优先看 `source_preserved_count`、`strict_refill_accepted_count`、`soft_refill_accepted_count` 和 `added_by_tavily_count`。
+
+### Tavily 搜到了但没有补入
+
+先看 `priority_refill_runs` / `secondary_refill_runs` 中每个 `candidate_results`：
+
+- `technology_relevant=false` 或 `rejection_reason=non_technology`：候选不是明确科技新闻。
+- `duplicate_or_cluster=true`：标题或 story cluster 已被 source 或更早 refill 覆盖。
+- `within_strict_window=false` 且 `lenient_within_window=false`：超出 strict 与 soft-date 窗口。
+- `published_date` 缺失：默认不能作为 strict refill；只有明确满足 soft-date 策略的候选才可进入 `soft_refill`。
+- `acceptance_cap_reached`：已达到本轮补量缺口或 `max_articles_after_enrichment`。
+
+补量是否真的产生净增，看 `added_by_tavily_count` 和 `final_count_delta_vs_source`，不要只看 Tavily API `result_count`。
+
+### Tavily gray safety gate 阻止回写
+
+`.github/workflows/tavily-gray.yml` 会生成 artifact 文件：
+
+```text
+gray/tavily/YYYY-MM-DD/safety-gate.json
+```
+
+如果其中 `safe_to_commit=false` 且 `reason=final_count_below_source_valid_count`，表示 Tavily 路径把有效 source 文章数压低了。该 run 会上传 artifact 供排查，但不会把生成的 `data/` / `content/` 回写到 main。
 
 ### GitHub Actions 手动 Tavily 灰度没有效果
 

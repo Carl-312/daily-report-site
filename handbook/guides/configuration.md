@@ -31,18 +31,45 @@ output:
 enrichment:
   enabled: false
   trust_env: true
+  boundary_mode: tech_news
+  preserve_source_on_verify_failure: true
   min_articles: 10
+  max_articles_after_enrichment: 14
   strict_hours: 24
-  max_total_calls: 7
-  max_verify_calls: 6
-  max_refill_rounds: 1
-  refill_max_results: 8
+  max_total_calls: 10
+  max_verify_calls: 4
+  max_refill_rounds: 2
+  refill_max_results: 12
+  refill_search_window_hours: 48
+  soft_date_window_hours: 72
+  allow_soft_date_refill: true
   verify_search_depth: basic
+  refill_search_depth: advanced
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
-  priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
-  official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  refill_queries:
+    - "technology news software startups cybersecurity chips hardware apps cloud"
+    - "AI technology startups developer tools models robotics automation"
+    - "consumer technology platforms social apps security semiconductors funding"
+  accept_refill_topic_buckets:
+    - ai_core
+    - tech_core
+    - tech_business
+    - tech_adjacent
   trusted_domains:
+    source_overlap_domains:
+      - techcrunch.com
+      - www.theverge.com
+    priority_tech_media_domains:
+      - arstechnica.com
+      - thenextweb.com
+      - venturebeat.com
+      - engadget.com
+      - wired.com
+    secondary_business_tech_domains:
+      - reuters.com
+      - bloomberg.com
+      - cnbc.com
     priority_refill_media_whitelist:
       - thenextweb.com
       - venturebeat.com
@@ -95,17 +122,24 @@ enrichment.enabled: false
 字段含义：
 
 - `enabled`：默认是否启用 Tavily。当前 PR 不默认开启。
+- `boundary_mode`：当前为 `tech_news`，表示科技新闻优先，AI 是高优先级子集。
+- `preserve_source_on_verify_failure`：默认 `true`。Tavily verify 失败、无匹配或缺日期时标注置信度，但不删除有效 source 文章。
 - `min_articles`：目标文章数，不代表一定补满。
-- `strict_hours`：严格时间窗，当前目标是 24 小时，不为凑数量放宽。
+- `max_articles_after_enrichment`：source 保留后的最终上限；不会为了 cap 删除有效 source。
+- `strict_hours`：严格时间窗，当前目标是 24 小时。
+- `soft_date_window_hours` / `allow_soft_date_refill`：在 source 不足时，允许可信科技新闻在较宽窗口内以 `soft_refill` 标记补入。
 - `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：调用预算，避免单次运行不可控；默认会从总预算中为 priority + secondary refill 预留调用空间。
 - `verify_search_depth`：verify 使用的 Tavily search depth，当前默认 `basic`。
+- `refill_search_depth`：refill 使用的 Tavily search depth，当前默认 `advanced`。
+- `refill_queries`：科技新闻多 query 补量池，不再只搜 AI 公司和模型发布。
+- `accept_refill_topic_buckets`：允许进入补量的 topic bucket；默认接受 `ai_core`、`tech_core`、`tech_business`、`tech_adjacent`。
 - `enable_official_fallback`：是否启用官方站点补量，默认不启用。
-- `trusted_domains`：策略层域名集合，不是线上热修名单。
+- `trusted_domains`：策略层域名集合，不是线上热修名单；新字段按 source overlap、priority tech media、secondary business tech 分层，旧 whitelist 字段暂时保留兼容。
 
 术语约定：
 
-- `verify`：验证已有 source 候选。
-- `refill`：在 verify / preserved 后不足时按可信域名补量；priority 不足时再进入 secondary，达到 `min_articles` 后停止。
+- `verify`：验证已有 source 候选并写入 `verification_status`，默认不负责删除。
+- `refill`：在 source preserved 后仍不足时按可信域名补量；priority 不足时再进入 secondary。
 - `official_fallback`：官方站点补量，默认不启用。
 - `fail-open`：Tavily 出错时保住现有抓取和落盘。
 
@@ -133,7 +167,7 @@ dist/     HTML 构建输出
 
 ```bash
 MODELSCOPE_API_KEY=sk-your-key
-MODELSCOPE_MODEL=moonshotai/Kimi-K2.5
+MODELSCOPE_MODEL=ZhipuAI/GLM-5.1
 SYFT_WEB_APP_URL=https://syft.example.com
 SYFT_SECRET_KEY=your-syft-secret-key
 TAVILY_API_KEY=

@@ -155,8 +155,20 @@ def test_scorecard_explains_budget_and_metadata_low_count(
     assert scorecard["input_quality"]["aggregate_title_count"] == 1
     assert scorecard["refill"]["priority_refill"]["published_date_missing_rate"] == 1.0
     assert scorecard["budget"]["secondary_entered"] is False
-    assert scorecard["diagnosis"]["primary_limiter"] == "budget_exhausted"
+    assert scorecard["diagnosis"]["primary_limiter"] == "source_count_reduced"
     assert "published_date_missing" in scorecard["diagnosis"]["contributing_factors"]
+    assert (
+        "final_count_below_source_valid_count"
+        in scorecard["diagnosis"]["contributing_factors"]
+    )
+    assert scorecard["safety_gate"] == {
+        "safe_to_commit": False,
+        "source_input_count": 3,
+        "source_valid_count": 2,
+        "final_count": 1,
+        "final_count_delta_vs_source": -1,
+        "reason": "final_count_below_source_valid_count",
+    }
     assert scorecard["diagnosis"]["needs_fixture"] is True
     assert scorecard["trend_metrics"] == {
         "final_count": 1,
@@ -164,6 +176,15 @@ def test_scorecard_explains_budget_and_metadata_low_count(
         "priority_refilled_count": 0,
         "secondary_refilled_count": 0,
         "published_date_missing_rate": 1.0,
+        "source_preserved_count": 2,
+        "source_dropped_count": 0,
+        "hard_rejected_count": 0,
+        "preserved_unverified_count": 0,
+        "refill_rounds": 1,
+        "added_by_tavily_count": 0,
+        "strict_refill_accepted_count": 0,
+        "soft_refill_accepted_count": 0,
+        "final_count_delta_vs_source": -1,
         "lenient_candidate_count": 0,
         "proven_within_72h_count": 0,
         "missing_date_unproven_count": 0,
@@ -172,8 +193,9 @@ def test_scorecard_explains_budget_and_metadata_low_count(
     }
 
     markdown = render_scorecard_markdown(scorecard)
-    assert "Primary limiter: `budget_exhausted`" in markdown
+    assert "Primary limiter: `source_count_reduced`" in markdown
     assert "Fixture candidate: true" in markdown
+    assert "| refill_rounds | `1` |" in markdown
 
 
 def test_scorecard_prioritizes_network_failure_diagnosis(tmp_path: Path) -> None:
@@ -209,8 +231,13 @@ def test_scorecard_prioritizes_network_failure_diagnosis(tmp_path: Path) -> None
 
     scorecard = build_scorecard(artifact_dir)
 
-    assert scorecard["diagnosis"]["primary_limiter"] == "network_failure"
+    assert scorecard["diagnosis"]["primary_limiter"] == "source_count_reduced"
     assert "network_failures" in scorecard["diagnosis"]["contributing_factors"]
+    assert (
+        "final_count_below_source_valid_count"
+        in scorecard["diagnosis"]["contributing_factors"]
+    )
+    assert scorecard["safety_gate"]["safe_to_commit"] is False
     assert scorecard["verify"]["request_outcomes"] == {"timeout": 1}
 
 

@@ -1,18 +1,38 @@
-# Isolated Tavily gray validation. This workflow never commits, publishes, or deploys.
+# Tavily gray validation. Scheduled main runs can commit the generated final report.
 name: Tavily Gray Daily
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  RETENTION_DAYS: "7"
   TZ: Asia/Shanghai
 
 on:
   workflow_dispatch:
+    inputs:
+      experiment:
+        description: "Controlled gray experiment to run"
+        required: true
+        default: baseline
+        type: choice
+        options:
+          - baseline
+          - budget_9
+          - domain_priority_media
+          - wide-filter-ai-refill
+      summary_mode:
+        description: "Summary renderer for report.md"
+        required: true
+        default: offline
+        type: choice
+        options:
+          - offline
+          - llm
   schedule:
     # GitHub Actions cron uses UTC. 12:56 UTC = 20:56 Asia/Shanghai.
     - cron: "56 12 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: tavily-gray
@@ -25,6 +45,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Resolve gray artifact paths
         id: paths
@@ -63,80 +85,12 @@ jobs:
         shell: bash
         env:
           GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+          GRAY_EXPERIMENT: ${{ github.event_name == 'workflow_dispatch' && inputs.experiment || 'baseline' }}
         run: |
-          python3 - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          import yaml
-
-          config_path = Path("config.yaml")
-          gray_dir = Path(os.environ["GRAY_DIR"])
-          overrides_path = gray_dir / "logs" / "gray-experiment-overrides.json"
-
-          cfg = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
-          enrichment = cfg.setdefault("enrichment", {})
-          trusted_domains = enrichment.setdefault("trusted_domains", {})
-
-          overrides = {
-              "experiment": "gray_3_lenient_3day_diagnostic",
-              "reason": "Diagnose 3-day Tavily refill recall separately from strict freshness acceptance without changing production defaults.",
-              "enrichment": {
-                  "strict_hours": 24,
-                  "refill_max_results": 8,
-                  "refill_search_window_hours": 72,
-                  "lenient_refill_diagnostics_enabled": True,
-                  "lenient_refill_window_hours": 72,
-                  "trusted_domains": {
-                      "priority_refill_media_whitelist": [
-                          "reuters.com",
-                          "arstechnica.com",
-                          "techcrunch.com",
-                      ],
-                      "secondary_refill_candidate_domains": [
-                          "thenextweb.com",
-                          "venturebeat.com",
-                      ],
-                  },
-              },
-              "unchanged_safety_defaults": {
-                  "enabled": enrichment.get("enabled", False),
-                  "enable_official_fallback": enrichment.get(
-                      "enable_official_fallback", False
-                  ),
-              },
-          }
-
-          enrichment["strict_hours"] = overrides["enrichment"]["strict_hours"]
-          enrichment["refill_max_results"] = overrides["enrichment"][
-              "refill_max_results"
-          ]
-          enrichment["refill_search_window_hours"] = overrides["enrichment"][
-              "refill_search_window_hours"
-          ]
-          enrichment["lenient_refill_diagnostics_enabled"] = overrides[
-              "enrichment"
-          ]["lenient_refill_diagnostics_enabled"]
-          enrichment["lenient_refill_window_hours"] = overrides["enrichment"][
-              "lenient_refill_window_hours"
-          ]
-          trusted_domains["priority_refill_media_whitelist"] = overrides[
-              "enrichment"
-          ]["trusted_domains"]["priority_refill_media_whitelist"]
-          trusted_domains["secondary_refill_candidate_domains"] = overrides[
-              "enrichment"
-          ]["trusted_domains"]["secondary_refill_candidate_domains"]
-
-          config_path.write_text(
-              yaml.safe_dump(cfg, allow_unicode=True, sort_keys=False),
-              encoding="utf-8",
-          )
-          overrides_path.write_text(
-              json.dumps(overrides, ensure_ascii=False, indent=2) + "\n",
-              encoding="utf-8",
-          )
-          PY
+          python3 scripts/tavily_gray_experiments.py \
+            --experiment "$GRAY_EXPERIMENT" \
+            --config config.yaml \
+            --gray-dir "$GRAY_DIR"
 
           git diff -- config.yaml | tee "$GRAY_DIR/logs/gray-config-diff.patch"
 
@@ -153,21 +107,39 @@ jobs:
           fi
 
       - name: Run Tavily-on gray report
+        id: gray-run
         shell: bash
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+          GRAY_SUMMARY_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.summary_mode || 'offline' }}
         run: |
           set -o pipefail
           log_file="$GRAY_DIR/logs/run.log"
+          summary_args=(--offline)
+          command_text="python3 main.py run --offline --enrichment on"
+
+          if [ "$GRAY_SUMMARY_MODE" = "llm" ]; then
+            summary_args=()
+            command_text="python3 main.py run --enrichment on"
+            if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
+              echo "::error::summary_mode=llm requires MODELSCOPE_API_KEY or SILICONFLOW_API_KEY." | tee -a "$log_file"
+              exit 1
+            fi
+          fi
+
+          echo "command=$command_text" >> "$GITHUB_OUTPUT"
 
           {
             echo "Tavily gray run date: ${{ steps.paths.outputs.run_date }}"
-            echo "Command: python3 main.py run --offline --enrichment on"
+            echo "Summary mode: $GRAY_SUMMARY_MODE"
+            echo "Command: $command_text"
             echo
           } | tee -a "$log_file"
 
-          python3 main.py run --offline --enrichment on 2>&1 | tee -a "$log_file"
+          python3 main.py run "${summary_args[@]}" --enrichment on 2>&1 | tee -a "$log_file"
 
       - name: Collect gray outputs
         if: always()
@@ -248,8 +220,48 @@ jobs:
 
           python3 scripts/tavily_gray_scorecard.py "$GRAY_DIR" \
             --run-id "$GITHUB_RUN_ID_VALUE" \
-            --command "python3 main.py run --offline --enrichment on" \
+            --command "${{ steps.gray-run.outputs.command }}" \
             --new-commit "$GITHUB_SHA_VALUE"
+
+      - name: Prune retained final report window
+        if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+        run: python scripts/manage_retention.py prune --keep-days "$RETENTION_DAYS"
+
+      - name: Commit and push gray final report
+        if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+        shell: bash
+        env:
+          GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+        run: |
+          safe_to_commit="$(python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from pathlib import Path
+
+          safety_path = Path(os.environ["GRAY_DIR"]) / "safety-gate.json"
+          payload = json.loads(safety_path.read_text(encoding="utf-8"))
+          print(str(payload.get("safe_to_commit", False)).lower())
+          if not payload.get("safe_to_commit", False):
+              print(f"reason={payload.get('reason')}", file=sys.stderr)
+          PY
+          )"
+          if [ "$safe_to_commit" != "true" ]; then
+            echo "::error::Tavily gray safety gate blocked final report commit. See safety-gate.json in the uploaded artifact."
+            exit 1
+          fi
+
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add -A content/ data/
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Tavily gray final report: ${{ steps.paths.outputs.run_date }}"
+            git push
+            echo "Gray final report committed and pushed"
+          else
+            echo "No gray final report changes to commit"
+          fi
 
       - name: Upload Tavily gray artifact
         if: always()

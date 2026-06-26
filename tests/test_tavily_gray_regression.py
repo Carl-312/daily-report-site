@@ -115,15 +115,19 @@ def test_gray_fixture_replays_default_budget_into_secondary_refill(
         ),
     ]
     seen_payloads: list[dict] = []
+    expected_priority_domains = news_enrichment.priority_refill_domains(cfg.enrichment)
+    expected_secondary_domains = news_enrichment.secondary_refill_domains(
+        cfg.enrichment
+    )
 
     def fake_search(session, api_key, payload):
         seen_payloads.append(payload)
         include_domains = payload.get("include_domains")
         if not include_domains:
             return {"latency_ms": 5.0, "response": {"results": []}}
-        if include_domains == ["thenextweb.com", "venturebeat.com"]:
+        if include_domains == expected_priority_domains:
             return {"latency_ms": 10.0, "response": {"results": priority_results}}
-        if include_domains == ["reuters.com", "arstechnica.com"]:
+        if include_domains == expected_secondary_domains:
             return {"latency_ms": 12.0, "response": {"results": secondary_results}}
         raise AssertionError(f"Unexpected Tavily payload: {payload}")
 
@@ -138,7 +142,7 @@ def test_gray_fixture_replays_default_budget_into_secondary_refill(
                 "max_total_calls": 7,
                 "max_verify_calls": 6,
                 "max_refill_rounds": 1,
-                "min_articles": 10,
+                "min_articles": 14,
             }
         ),
         tavily_api_key="test-key",
@@ -158,25 +162,23 @@ def test_gray_fixture_replays_default_budget_into_secondary_refill(
 
     assert report["input_count"] == old_metrics["input_count"]
     assert report["prefiltered_count"] == old_metrics["prefiltered_count"]
+    assert report["source_preserved_count"] == 12
     assert report["reserved_refill_calls"] == 2
     assert report["verify_budget"] == 5
     assert report["verify_budget"] < old_metrics["verify_budget"]
     assert report["verify_calls"] == 5
     assert len(verify_payloads) == 5
     assert report["verify_skipped_due_budget"] == 7
-    assert report["refill_calls"] == 2
-    assert refill_domain_groups == [
-        ["thenextweb.com", "venturebeat.com"],
-        ["reuters.com", "arstechnica.com"],
-    ]
+    assert report["refill_calls"] == 1
+    assert refill_domain_groups == [expected_priority_domains]
     assert report["priority_refilled_count"] == 2
-    assert report["secondary_refilled_count"] == 8
-    assert report["final_count"] == 10
-    assert report["stop_reason"] == "secondary_refill_complete"
-    assert report["accepted_by_stage_preview"]["secondary_refill"] == [
-        "Salesforce launches AI workflow inspector",
-        "Adobe releases generative design monitor",
-        "Oracle adds AI database tuning agent",
+    assert report["secondary_refilled_count"] == 0
+    assert report["final_count"] == 14
+    assert report["final_count_delta_vs_source"] == 2
+    assert report["stop_reason"] == "priority_refill_complete"
+    assert report["accepted_by_stage_preview"]["priority_refill"] == [
+        "OpenAI launches AI evaluation console",
+        "Anthropic ships Claude developer observability",
     ]
 
 
