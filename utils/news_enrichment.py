@@ -792,6 +792,9 @@ def build_initial_report(
         "preserved_unverified_count": 0,
         "added_by_tavily_count": 0,
         "final_count_delta_vs_source": 0,
+        "refill_rounds": 0,
+        "query_topics": [],
+        "safe_to_commit": True,
         "prefiltered_count": len(articles),
         "prefilter_stats": {},
         "prefilter_bucket_counts": empty_prefilter_bucket_counts(),
@@ -871,6 +874,12 @@ def build_initial_report(
             "max_total_calls": settings.max_total_calls,
             "max_verify_calls": settings.max_verify_calls,
             "max_refill_rounds": settings.max_refill_rounds,
+            "min_refill_rounds": int(
+                getattr(settings, "min_refill_rounds", 0) or 0
+            ),
+            "refill_to_max_articles": bool(
+                getattr(settings, "refill_to_max_articles", False)
+            ),
             "refill_max_results": settings.refill_max_results,
             "refill_search_window_hours": getattr(
                 settings, "refill_search_window_hours", 24
@@ -885,6 +894,9 @@ def build_initial_report(
             "refill_search_depth": getattr(settings, "refill_search_depth", "advanced"),
             "verify_max_results": VERIFY_MAX_RESULTS,
             "refill_queries": list(getattr(settings, "refill_queries", []) or []),
+            "refill_query_topics": list(
+                getattr(settings, "refill_query_topics", []) or []
+            ),
             "accept_refill_topic_buckets": list(
                 getattr(settings, "accept_refill_topic_buckets", [])
                 or sorted(TECHNOLOGY_TOPIC_BUCKETS)
@@ -944,6 +956,8 @@ def below_min_stop_reason(*, secondary_refill_executed: bool) -> str:
 def empty_refill_result(remaining_budget: int) -> dict[str, Any]:
     return {
         "refill_calls": 0,
+        "refill_rounds": 0,
+        "query_topics": [],
         "accepted_candidates": [],
         "strict_accepted_candidates": [],
         "soft_accepted_candidates": [],
@@ -1172,6 +1186,21 @@ def refill_queries(settings: Any, fallback_query: str) -> list[str]:
     return [fallback_query]
 
 
+def refill_query_topics(settings: Any, query_count: int) -> list[str]:
+    configured = [
+        topic.strip()
+        for topic in list(getattr(settings, "refill_query_topics", []) or [])
+        if topic and topic.strip()
+    ]
+    topics: list[str] = []
+    for index in range(query_count):
+        if index < len(configured):
+            topics.append(configured[index])
+        else:
+            topics.append(f"query_{index + 1}")
+    return topics
+
+
 def accepted_refill_buckets(settings: Any) -> set[str]:
     configured = set(getattr(settings, "accept_refill_topic_buckets", []) or [])
     return configured or set(TECHNOLOGY_TOPIC_BUCKETS)
@@ -1183,6 +1212,24 @@ def final_article_cap(settings: Any, source_count: int) -> int:
         or settings.min_articles
     )
     return max(source_count, configured)
+
+
+def update_report_safety_fields(report: dict[str, Any]) -> None:
+    source_input_count = int(
+        report.get("source_input_count") or report.get("input_count") or 0
+    )
+    source_valid_count = int(
+        report.get("source_preserved_count")
+        if report.get("source_preserved_count") is not None
+        else report.get("source_valid_count") or 0
+    )
+    final_count = int(report.get("final_count") or 0)
+    safe_to_commit = not (
+        source_input_count > 0
+        and source_valid_count > 0
+        and final_count < source_valid_count
+    )
+    report["safe_to_commit"] = safe_to_commit
 
 
 def run_verify_stage(
@@ -1396,10 +1443,11 @@ def run_domain_refill_stage(
     near_duplicate_rejected_count = 0
     story_cluster_rejected_count = 0
 
+    min_refill_rounds = max(0, int(getattr(settings, "min_refill_rounds", 0) or 0))
     if (
-        settings.max_refill_rounds <= 0
+        (settings.max_refill_rounds <= 0 and min_refill_rounds <= 0)
         or remaining_budget <= 0
-        or needed_count <= 0
+        or (needed_count <= 0 and min_refill_rounds <= 0)
         or not include_domains
     ):
         return empty_refill_result(remaining_budget)
@@ -1420,15 +1468,19 @@ def run_domain_refill_stage(
     allow_soft_date_refill = bool(getattr(settings, "allow_soft_date_refill", True))
     allowed_topic_buckets = accepted_refill_buckets(settings)
     queries = refill_queries(settings, query)
+    query_topics = refill_query_topics(settings, len(queries))
     start_date, end_date = report_window(
         reference_dt,
         window_hours=request_window_hours,
     )
-    rounds_budget = min(settings.max_refill_rounds, remaining_budget, len(queries))
+    configured_max_rounds = max(settings.max_refill_rounds, min_refill_rounds)
+    rounds_budget = min(configured_max_rounds, remaining_budget, len(queries))
+    required_rounds = min(min_refill_rounds, rounds_budget)
     for round_index in range(rounds_budget):
         round_query = queries[round_index]
+        query_topic = query_topics[round_index]
         needed_before_round = max(0, needed_count - len(accepted_candidates))
-        if needed_before_round <= 0:
+        if needed_before_round <= 0 and round_index >= required_rounds:
             break
         payload = {
             "query": round_query,
@@ -1553,12 +1605,27 @@ def run_domain_refill_stage(
                 rejection_reason = "non_technology"
             elif duplicate_or_cluster:
                 rejection_reason = "duplicate_or_story_cluster"
+            elif (
+                within_window is False
+                and lenient_within_window is True
+                and not allow_soft_date_refill
+            ):
+                rejection_reason = "soft_date_diagnostic_only"
             elif within_window is False and lenient_within_window is False:
                 rejection_reason = f"outside_{lenient_window_hours}h"
             elif within_window is None:
                 rejection_reason = "missing_published_date"
             elif not strict_slot_available:
                 rejection_reason = "acceptance_cap_reached"
+
+            if within_window is True:
+                date_confidence = "strict"
+            elif lenient_within_window is True:
+                date_confidence = "soft"
+            elif within_window is None:
+                date_confidence = "missing"
+            else:
+                date_confidence = "outside_strict_window"
 
             if near_duplicate_existing:
                 round_near_duplicate_rejected += 1
@@ -1586,6 +1653,8 @@ def run_domain_refill_stage(
                 "url": url,
                 "domain": domain,
                 "published_date": result_item.get("published_date"),
+                "date_confidence": date_confidence,
+                "query_topic": query_topic,
                 "within_24h": within_window,
                 "within_strict_window": within_window,
                 "strict_window_hours": settings.strict_hours,
@@ -1644,6 +1713,7 @@ def run_domain_refill_stage(
                 "stage": stage_name,
                 "round": round_index + 1,
                 "query": round_query,
+                "query_topic": query_topic,
                 "search_depth": getattr(settings, "refill_search_depth", "advanced"),
                 "max_results": settings.refill_max_results,
                 "include_domains": include_domains,
@@ -1673,11 +1743,21 @@ def run_domain_refill_stage(
         soft_accepted_candidates.extend(round_soft_accepted)
         near_duplicate_rejected_count += round_near_duplicate_rejected
         story_cluster_rejected_count += round_story_cluster_rejected
-        if error or len(accepted_candidates) >= needed_count or not round_accepted:
+        completed_rounds = round_index + 1
+        required_rounds_complete = completed_rounds >= required_rounds
+        target_filled = len(accepted_candidates) >= needed_count
+        stalled = not round_accepted
+        if error or (required_rounds_complete and (target_filled or stalled)):
             break
 
     return {
         "refill_calls": len(refill_runs),
+        "refill_rounds": len(refill_runs),
+        "query_topics": [
+            run.get("query_topic")
+            for run in refill_runs
+            if run.get("query_topic")
+        ],
         "accepted_candidates": accepted_candidates,
         "strict_accepted_candidates": strict_accepted_candidates,
         "soft_accepted_candidates": soft_accepted_candidates,
@@ -1724,6 +1804,7 @@ def enrich_articles_with_tavily(
             "secondary_refill": [],
             "official_fallback": [],
         }
+        update_report_safety_fields(report)
         return {"articles": article_dicts, "report": report}
 
     if not tavily_api_key:
@@ -1741,6 +1822,7 @@ def enrich_articles_with_tavily(
             "secondary_refill": [],
             "official_fallback": [],
         }
+        update_report_safety_fields(report)
         return {"articles": article_dicts, "report": report}
 
     session = requests.Session()
@@ -1878,17 +1960,21 @@ def enrich_articles_with_tavily(
 
         verified_output_articles = source_preserved_articles
         final_cap = final_article_cap(settings, source_preserved_count)
-        refill_target_count = min(
-            final_cap,
-            max(settings.min_articles, source_preserved_count),
-        )
+        if bool(getattr(settings, "refill_to_max_articles", False)):
+            refill_target_count = final_cap
+        else:
+            refill_target_count = min(
+                final_cap,
+                max(settings.min_articles, source_preserved_count),
+            )
         report["refill_needed_count"] = max(
             0, refill_target_count - len(verified_output_articles)
         )
 
         remaining_budget = max(0, settings.max_total_calls - report["total_calls"])
         priority_refill = empty_refill_result(remaining_budget)
-        if report["refill_needed_count"] > 0:
+        force_refill_rounds = int(getattr(settings, "min_refill_rounds", 0) or 0) > 0
+        if report["refill_needed_count"] > 0 or force_refill_rounds:
             priority_refill = run_domain_refill_stage(
                 base_articles=article_dicts,
                 prior_candidates=verified_output_articles,
@@ -1903,6 +1989,8 @@ def enrich_articles_with_tavily(
                 needed_count=report["refill_needed_count"],
             )
         report["refill_calls"] = priority_refill["refill_calls"]
+        report["refill_rounds"] = priority_refill["refill_rounds"]
+        report["query_topics"] = list(priority_refill["query_topics"])
         report["total_calls"] += priority_refill["refill_calls"]
         report["priority_refilled_count"] = priority_refill["media_refilled_count"]
         report["media_refilled_count"] = priority_refill["media_refilled_count"]
@@ -1949,6 +2037,8 @@ def enrich_articles_with_tavily(
             secondary_refill_executed = secondary_refill["refill_calls"] > 0
             secondary_candidates = secondary_refill["accepted_candidates"]
             report["refill_calls"] += secondary_refill["refill_calls"]
+            report["refill_rounds"] += secondary_refill["refill_rounds"]
+            report["query_topics"].extend(secondary_refill["query_topics"])
             report["total_calls"] += secondary_refill["refill_calls"]
             report["secondary_refilled_count"] = secondary_refill[
                 "media_refilled_count"
@@ -2007,6 +2097,8 @@ def enrich_articles_with_tavily(
             )
             official_candidates = official["accepted_candidates"]
             report["fallback_calls"] = official["refill_calls"]
+            report["refill_rounds"] += official["refill_rounds"]
+            report["query_topics"].extend(official["query_topics"])
             report["total_calls"] += official["refill_calls"]
             report["official_refilled_count"] = official["media_refilled_count"]
             report["strict_refill_accepted_count"] += official[
@@ -2042,6 +2134,7 @@ def enrich_articles_with_tavily(
         report["refill_remaining_count"] = max(
             0, settings.min_articles - report["final_count"]
         )
+        update_report_safety_fields(report)
         strict_refill_candidates = (
             priority_refill["strict_accepted_candidates"]
             + (
@@ -2126,4 +2219,5 @@ def enrich_articles_with_tavily(
             "secondary_refill": [],
             "official_fallback": [],
         }
+        update_report_safety_fields(report)
         return {"articles": article_dicts, "report": report}

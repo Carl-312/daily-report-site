@@ -18,6 +18,7 @@ on:
           - baseline
           - budget_9
           - domain_priority_media
+          - wide-filter-ai-refill
   schedule:
     # GitHub Actions cron uses UTC. 12:56 UTC = 20:56 Asia/Shanghai.
     - cron: "56 12 * * *"

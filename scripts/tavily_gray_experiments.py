@@ -15,7 +15,14 @@ from typing import Any
 import yaml
 
 BASELINE_PROFILE = "gray_3_lenient_3day_diagnostic"
-EXPERIMENT_NAMES = ("baseline", "budget_9", "domain_priority_media")
+WIDE_FILTER_PROFILE = "wide_filter_ai_refill"
+WIDE_FILTER_EXPERIMENT = "wide-filter-ai-refill"
+EXPERIMENT_NAMES = (
+    "baseline",
+    "budget_9",
+    "domain_priority_media",
+    WIDE_FILTER_EXPERIMENT,
+)
 
 BASELINE_PRIORITY_DOMAINS = [
     "reuters.com",
@@ -29,6 +36,36 @@ DOMAIN_PRIORITY_MEDIA_DOMAINS = [
 BASELINE_SECONDARY_DOMAINS = [
     "thenextweb.com",
     "venturebeat.com",
+]
+WIDE_PRIORITY_TECH_DOMAINS = [
+    "arstechnica.com",
+    "thenextweb.com",
+    "venturebeat.com",
+    "engadget.com",
+    "wired.com",
+    "reuters.com",
+    "bloomberg.com",
+    "cnbc.com",
+]
+WIDE_SOURCE_OVERLAP_DOMAINS = [
+    "techcrunch.com",
+    "www.theverge.com",
+    "theverge.com",
+]
+WIDE_SECONDARY_BUSINESS_DOMAINS = [
+    "reuters.com",
+    "bloomberg.com",
+    "cnbc.com",
+]
+WIDE_REFILL_QUERIES = [
+    "today AI model product launch developer tools OpenAI Anthropic Google DeepMind Meta Mistral coding agents",
+    "today AI companies startup funding acquisition merger regulation OpenAI Anthropic Microsoft Nvidia",
+    "today AI chips cloud cybersecurity robotics data center semiconductors autonomous systems",
+]
+WIDE_REFILL_QUERY_TOPICS = [
+    "ai_models_products_developer_tools",
+    "ai_companies_funding_mna_regulation",
+    "ai_adjacent_chips_cloud_security_robotics",
 ]
 
 
@@ -94,6 +131,63 @@ def build_experiment_overrides(
         reason = (
             "Test only whether removing TechCrunch from priority refill media changes "
             "priority refill quality while keeping the baseline call budget."
+        )
+    elif experiment == WIDE_FILTER_EXPERIMENT:
+        enrichment = {
+            "boundary_mode": "tech_news",
+            "preserve_source_on_verify_failure": True,
+            "strict_hours": 24,
+            "max_total_calls": 10,
+            "max_verify_calls": 4,
+            "max_refill_rounds": 3,
+            "min_refill_rounds": 3,
+            "refill_to_max_articles": True,
+            "refill_max_results": 12,
+            "refill_search_window_hours": 24,
+            "soft_date_window_hours": 72,
+            "allow_soft_date_refill": False,
+            "verify_search_depth": "basic",
+            "refill_search_depth": "advanced",
+            "lenient_refill_diagnostics_enabled": True,
+            "lenient_refill_window_hours": 72,
+            "refill_queries": list(WIDE_REFILL_QUERIES),
+            "refill_query_topics": list(WIDE_REFILL_QUERY_TOPICS),
+            "accept_refill_topic_buckets": [
+                "ai_core",
+                "tech_core",
+                "tech_business",
+                "tech_adjacent",
+                "generic_or_low_signal",
+            ],
+            "trusted_domains": {
+                "source_overlap_domains": list(WIDE_SOURCE_OVERLAP_DOMAINS),
+                "priority_tech_media_domains": list(WIDE_PRIORITY_TECH_DOMAINS),
+                "secondary_business_tech_domains": list(WIDE_SECONDARY_BUSINESS_DOMAINS),
+                "priority_refill_media_whitelist": list(WIDE_PRIORITY_TECH_DOMAINS),
+                "secondary_refill_candidate_domains": list(
+                    WIDE_SECONDARY_BUSINESS_DOMAINS
+                ),
+            },
+        }
+        changed_variable = WIDE_FILTER_PROFILE
+        exact_override = {
+            "runtime_profile": WIDE_FILTER_PROFILE,
+            "source_policy": "preserve_source_tech_news_with_date_confidence",
+            "refill_rounds": {
+                "min_refill_rounds": 3,
+                "max_refill_rounds": 3,
+                "query_topics": list(WIDE_REFILL_QUERY_TOPICS),
+            },
+            "date_policy": {
+                "strict_hours": 24,
+                "allow_soft_date_refill": False,
+                "lenient_diagnostics_hours": 72,
+            },
+        }
+        reason = (
+            "Run one isolated wide-filter gray experiment that preserves source tech "
+            "news, performs at least three Tavily news refill rounds, accepts only "
+            "strict 24-hour refill candidates, and leaves production defaults unchanged."
         )
 
     return {

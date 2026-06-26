@@ -135,6 +135,8 @@ class EnrichmentSettings(BaseModel):
     max_total_calls: int = Field(default=10)
     max_verify_calls: int = Field(default=4)
     max_refill_rounds: int = Field(default=2)
+    min_refill_rounds: int = Field(default=0)
+    refill_to_max_articles: bool = Field(default=False)
     refill_max_results: int = Field(default=12)
     refill_search_window_hours: int = Field(default=48)
     soft_date_window_hours: int = Field(default=72)
@@ -152,6 +154,7 @@ class EnrichmentSettings(BaseModel):
             "consumer technology platforms social apps security semiconductors funding",
         ]
     )
+    refill_query_topics: List[str] = Field(default_factory=list)
     accept_refill_topic_buckets: List[str] = Field(
         default_factory=lambda: [
             "ai_core",

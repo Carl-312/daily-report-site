@@ -12,6 +12,9 @@ from scripts.tavily_gray_experiments import (
     BASELINE_SECONDARY_DOMAINS,
     DOMAIN_PRIORITY_MEDIA_DOMAINS,
     EXPERIMENT_NAMES,
+    WIDE_FILTER_EXPERIMENT,
+    WIDE_REFILL_QUERIES,
+    WIDE_REFILL_QUERY_TOPICS,
     apply_gray_experiment,
     build_experiment_overrides,
 )
@@ -154,6 +157,30 @@ def test_experiment_mapping_changes_only_the_declared_variable() -> None:
     assert domain["enrichment"]["max_total_calls"] == 7
 
 
+def test_wide_filter_ai_refill_experiment_preserves_defaults_and_sets_three_topics() -> None:
+    wide = build_experiment_overrides(
+        WIDE_FILTER_EXPERIMENT,
+        BASE_ENRICHMENT_DEFAULTS,
+    )
+
+    assert wide["experiment"] == WIDE_FILTER_EXPERIMENT
+    assert wide["changed_variable"] == "wide_filter_ai_refill"
+    assert wide["enrichment"]["boundary_mode"] == "tech_news"
+    assert wide["enrichment"]["preserve_source_on_verify_failure"] is True
+    assert wide["enrichment"]["strict_hours"] == 24
+    assert wide["enrichment"]["allow_soft_date_refill"] is False
+    assert wide["enrichment"]["max_refill_rounds"] == 3
+    assert wide["enrichment"]["min_refill_rounds"] == 3
+    assert wide["enrichment"]["refill_to_max_articles"] is True
+    assert wide["enrichment"]["refill_queries"] == list(WIDE_REFILL_QUERIES)
+    assert wide["enrichment"]["refill_query_topics"] == list(
+        WIDE_REFILL_QUERY_TOPICS
+    )
+    assert len(wide["enrichment"]["refill_queries"]) == 3
+    assert wide["unchanged_safety_defaults"]["enabled"] is False
+    assert wide["unchanged_safety_defaults"]["enable_official_fallback"] is False
+
+
 def test_apply_experiment_writes_artifact_and_preserves_safety_defaults(
     tmp_path: Path,
 ) -> None:
@@ -168,7 +195,7 @@ def test_apply_experiment_writes_artifact_and_preserves_safety_defaults(
         encoding="utf-8",
     )
 
-    overrides = apply_gray_experiment(config_path, gray_dir, "budget_9")
+    overrides = apply_gray_experiment(config_path, gray_dir, WIDE_FILTER_EXPERIMENT)
     artifact_payload = json.loads(
         (gray_dir / "logs" / "gray-experiment-overrides.json").read_text(
             encoding="utf-8"
@@ -194,10 +221,12 @@ def test_apply_experiment_writes_artifact_and_preserves_safety_defaults(
         enrichment["official_fallback_query"]
         == BASE_ENRICHMENT_DEFAULTS["official_fallback_query"]
     )
-    assert enrichment["max_total_calls"] == 9
-    assert enrichment["trusted_domains"]["priority_refill_media_whitelist"] == (
-        BASELINE_PRIORITY_DOMAINS
-    )
+    assert enrichment["max_refill_rounds"] == 3
+    assert enrichment["min_refill_rounds"] == 3
+    assert enrichment["refill_queries"] == list(WIDE_REFILL_QUERIES)
+    assert enrichment["refill_query_topics"] == list(WIDE_REFILL_QUERY_TOPICS)
+    assert enrichment["allow_soft_date_refill"] is False
+    assert "reuters.com" in enrichment["trusted_domains"]["priority_tech_media_domains"]
 
 
 def test_unknown_experiment_is_rejected() -> None:

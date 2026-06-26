@@ -161,6 +161,9 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
     soft_accepted_count = sum(int(run.get("soft_accepted_count") or 0) for run in runs)
     return {
         "calls": len(runs),
+        "query_topics": [
+            run.get("query_topic") for run in runs if run.get("query_topic")
+        ],
         "result_count": sum(int(run.get("result_count") or 0) for run in runs),
         "accepted_count": accepted_count,
         "strict_accepted_count": strict_accepted_count,
@@ -168,6 +171,8 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
         "published_date_missing_count": missing_published,
         "published_date_missing_rate": rate(missing_published, len(candidates)),
         "request_outcomes": value_counts(runs, "request_outcome"),
+        "date_confidence_counts": value_counts(candidates, "date_confidence"),
+        "query_topic_counts": value_counts(runs, "query_topic"),
         "topic_bucket_counts": value_counts(candidates, "topic_bucket"),
         "near_duplicate_rejected_count": sum(
             int(run.get("near_duplicate_rejected_count") or 0) for run in runs
@@ -334,6 +339,10 @@ def summarize_verify(enrichment: dict[str, Any]) -> dict[str, Any]:
             enrichment.get("preserved_unverified_count") or len(preserved_unverified)
         ),
         "validation_outcomes": value_counts(runs, "validation_outcome"),
+        "date_confidence_counts": value_counts(
+            as_list(enrichment.get("verify_diagnostics")) or runs,
+            "date_confidence",
+        ),
         "verification_statuses": value_counts(
             as_list(enrichment.get("verify_diagnostics")) or runs,
             "verification_status",
@@ -625,6 +634,17 @@ def build_scorecard(
             "strict_final_count": lenient_diagnostics["strict_final_count"],
             "min_articles": min_articles,
             "refill_remaining_count": refill_remaining_count,
+            "refill_rounds": int(
+                enrichment.get("refill_rounds")
+                if enrichment.get("refill_rounds") is not None
+                else sum(summary["calls"] for summary in refill_summaries.values())
+            ),
+            "query_topics": enrichment.get("query_topics")
+            or [
+                topic
+                for summary in refill_summaries.values()
+                for topic in summary.get("query_topics", [])
+            ],
             "added_by_tavily_count": int(enrichment.get("added_by_tavily_count") or 0),
             "strict_refill_accepted_count": int(
                 enrichment.get("strict_refill_accepted_count")
@@ -666,6 +686,7 @@ def build_scorecard(
         "source_dropped_count": scorecard["input_quality"]["source_dropped_count"],
         "hard_rejected_count": scorecard["input_quality"]["hard_rejected_count"],
         "preserved_unverified_count": scorecard["verify"]["preserved_unverified_count"],
+        "refill_rounds": scorecard["output"]["refill_rounds"],
         "added_by_tavily_count": scorecard["output"]["added_by_tavily_count"],
         "strict_refill_accepted_count": scorecard["output"][
             "strict_refill_accepted_count"
@@ -740,6 +761,8 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         f"| soft_refill_accepted_count | {markdown_value(output['soft_refill_accepted_count'])} |",
         f"| min_articles | {markdown_value(output['min_articles'])} |",
         f"| refill_remaining_count | {markdown_value(output['refill_remaining_count'])} |",
+        f"| refill_rounds | {markdown_value(output['refill_rounds'])} |",
+        f"| query_topics | {markdown_value(output['query_topics'])} |",
         f"| total_calls | {markdown_value(budget['total_calls'])} |",
         f"| stop_reason | {markdown_value(output['stop_reason'])} |",
         f"| safe_to_commit | {markdown_value(safety_gate['safe_to_commit'])} |",
@@ -747,12 +770,13 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         "",
         "## Stage Outcomes",
         "",
-        "| Stage | Calls | Results | Accepted | Missing Date Rate | Request Outcomes |",
-        "|---|---:|---:|---:|---:|---|",
+        "| Stage | Calls | Results | Accepted | Missing Date Rate | Query Topics | Request Outcomes |",
+        "|---|---:|---:|---:|---:|---|---|",
         (
             "| verify | "
             f"{markdown_value(verify['calls'])} | - | "
             f"{markdown_value(verify['verified_count'])} | - | "
+            "- | "
             f"{markdown_value(verify['request_outcomes'])} |"
         ),
     ]
@@ -764,6 +788,7 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
             f"{markdown_value(summary['result_count'])} | "
             f"{markdown_value(summary['accepted_count'])} | "
             f"{markdown_value(summary['published_date_missing_rate'])} | "
+            f"{markdown_value(summary['query_topics'])} | "
             f"{markdown_value(summary['request_outcomes'])} |"
         )
 

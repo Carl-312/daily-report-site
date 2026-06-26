@@ -180,6 +180,7 @@ def test_scorecard_explains_budget_and_metadata_low_count(
         "source_dropped_count": 0,
         "hard_rejected_count": 0,
         "preserved_unverified_count": 0,
+        "refill_rounds": 1,
         "added_by_tavily_count": 0,
         "strict_refill_accepted_count": 0,
         "soft_refill_accepted_count": 0,
@@ -194,6 +195,7 @@ def test_scorecard_explains_budget_and_metadata_low_count(
     markdown = render_scorecard_markdown(scorecard)
     assert "Primary limiter: `source_count_reduced`" in markdown
     assert "Fixture candidate: true" in markdown
+    assert "| refill_rounds | `1` |" in markdown
 
 
 def test_scorecard_prioritizes_network_failure_diagnosis(tmp_path: Path) -> None:

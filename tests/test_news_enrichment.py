@@ -1063,3 +1063,115 @@ def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
     assert result["report"]["final_count"] == 10
     assert result["report"]["final_count_delta_vs_source"] == 5
     assert result["report"]["stop_reason"] == "secondary_refill_complete"
+
+
+def test_wide_filter_refill_forces_three_topic_rounds_and_strict_acceptance(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    source_article = make_article(
+        "OpenAI launches AI agents for developer tools",
+        "https://example.com/source-openai-agents",
+    )
+    queries = [
+        "today AI model product launch developer tools",
+        "today AI companies funding acquisition regulation",
+        "today AI chips cloud cybersecurity robotics",
+    ]
+    query_topics = [
+        "ai_models_products_developer_tools",
+        "ai_companies_funding_mna_regulation",
+        "ai_adjacent_chips_cloud_security_robotics",
+    ]
+    seen_payloads: list[dict] = []
+
+    def fake_search(session, api_key, payload):
+        seen_payloads.append(payload)
+        if not payload.get("include_domains"):
+            return {"latency_ms": 5.0, "response": {"results": []}}
+        query = payload["query"]
+        if query == queries[0]:
+            return {
+                "latency_ms": 10.0,
+                "response": {
+                    "results": [
+                        make_tavily_result(
+                            "Anthropic releases Claude developer console",
+                            "venturebeat.com",
+                            "claude-developer-console",
+                        )
+                    ]
+                },
+            }
+        if query == queries[1]:
+            soft = make_tavily_result(
+                "AI startup funding round reshapes enterprise software market",
+                "reuters.com",
+                "ai-startup-funding",
+            )
+            soft["published_date"] = "2026-03-30T04:00:00Z"
+            return {"latency_ms": 11.0, "response": {"results": [soft]}}
+        if query == queries[2]:
+            return {
+                "latency_ms": 12.0,
+                "response": {
+                    "results": [
+                        make_tavily_result(
+                            "Nvidia introduces AI robotics foundation model",
+                            "wired.com",
+                            "nvidia-robotics-foundation",
+                        )
+                    ]
+                },
+            }
+        raise AssertionError(f"Unexpected query: {query}")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+
+    result = enrich_articles_with_tavily(
+        [source_article],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 6,
+                "max_verify_calls": 1,
+                "max_refill_rounds": 3,
+                "min_refill_rounds": 3,
+                "refill_to_max_articles": True,
+                "min_articles": 1,
+                "max_articles_after_enrichment": 3,
+                "refill_queries": queries,
+                "refill_query_topics": query_topics,
+                "refill_search_window_hours": 24,
+                "lenient_refill_diagnostics_enabled": True,
+                "lenient_refill_window_hours": 72,
+                "allow_soft_date_refill": False,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    refill_payloads = [
+        payload for payload in seen_payloads if payload.get("include_domains")
+    ]
+    report = result["report"]
+
+    assert [payload["query"] for payload in refill_payloads] == queries
+    assert all(payload["topic"] == "news" for payload in refill_payloads)
+    assert report["source_preserved_count"] == 1
+    assert report["refill_rounds"] == 3
+    assert report["query_topics"] == query_topics
+    assert report["priority_refilled_count"] == 2
+    assert report["soft_refill_accepted_count"] == 0
+    assert report["strict_refill_accepted_count"] == 2
+    assert report["added_by_tavily_count"] == 2
+    assert report["final_count_delta_vs_source"] == 2
+    assert report["safe_to_commit"] is True
+    assert report["priority_refill_runs"][1]["query_topic"] == query_topics[1]
+    soft_candidate = report["priority_refill_runs"][1]["candidate_results"][0]
+    assert soft_candidate["date_confidence"] == "soft"
+    assert soft_candidate["accepted"] is False
+    assert soft_candidate["rejection_reason"] == "soft_date_diagnostic_only"
