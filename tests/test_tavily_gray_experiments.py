@@ -168,6 +168,7 @@ def test_wide_filter_ai_refill_experiment_preserves_defaults_and_sets_three_topi
     assert wide["enrichment"]["boundary_mode"] == "tech_news"
     assert wide["enrichment"]["preserve_source_on_verify_failure"] is True
     assert wide["enrichment"]["strict_hours"] == 24
+    assert wide["enrichment"]["max_articles_after_enrichment"] == 18
     assert wide["enrichment"]["allow_soft_date_refill"] is False
     assert wide["enrichment"]["max_refill_rounds"] == 3
     assert wide["enrichment"]["min_refill_rounds"] == 3

@@ -137,6 +137,7 @@ def build_experiment_overrides(
             "boundary_mode": "tech_news",
             "preserve_source_on_verify_failure": True,
             "strict_hours": 24,
+            "max_articles_after_enrichment": 18,
             "max_total_calls": 10,
             "max_verify_calls": 4,
             "max_refill_rounds": 3,
