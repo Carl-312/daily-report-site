@@ -25,7 +25,7 @@ class Settings(BaseModel):
         description="ModelScope API Base URL",
     )
     model: str = Field(
-        default="moonshotai/Kimi-K2.5", description="ModelScope model ID"
+        default="ZhipuAI/GLM-5.1", description="ModelScope model ID"
     )
 
     # Fallback provider: SiliconFlow (OpenAI-compatible)
@@ -186,7 +186,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "api_base_url": os.getenv(
             "MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1"
         ),
-        "model": os.getenv("MODELSCOPE_MODEL", "moonshotai/Kimi-K2.5"),
+        "model": os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-5.1"),
         "fallback_api_key": os.getenv("SILICONFLOW_API_KEY", ""),
         "fallback_api_base_url": os.getenv(
             "SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1"
