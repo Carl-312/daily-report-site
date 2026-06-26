@@ -17,7 +17,7 @@ graph TB
         C --> D[Deduplication]
         D --> E[JSON Storage]
         E --> F{Summarizer}
-        F -->|API Mode| G[ModelScope Kimi-K2.5]
+        F -->|API Mode| G[ModelScope GLM-5.1]
         F -->|Offline Mode| H[Local Algorithm]
     end
     
@@ -121,10 +121,10 @@ messages = [
 
 # 3. 调用 ModelScope API
 response = requests.post(
-    "https://api.modelscope.cn/v1/chat/completions",
+    "https://api-inference.modelscope.cn/v1/chat/completions",
     headers={"Authorization": f"Bearer {api_key}"},
     json={
-        "model": "moonshotai/Kimi-K2.5",
+        "model": "ZhipuAI/GLM-5.1",
         "messages": messages,
         "stream": True  # 流式输出
     }
@@ -265,7 +265,7 @@ def get_config() -> Config:
     
     return Config(
         api_key=os.getenv("MODELSCOPE_API_KEY", ""),
-        model=os.getenv("MODELSCOPE_MODEL", "moonshotai/Kimi-K2.5"),
+        model=os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-5.1"),
         sources=yaml_cfg["sources"],
         max_articles=yaml_cfg["limits"]["max_articles"],
         # ...
