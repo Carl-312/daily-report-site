@@ -19,6 +19,14 @@ on:
           - budget_9
           - domain_priority_media
           - wide-filter-ai-refill
+      summary_mode:
+        description: "Summary renderer for report.md"
+        required: true
+        default: offline
+        type: choice
+        options:
+          - offline
+          - llm
   schedule:
     # GitHub Actions cron uses UTC. 12:56 UTC = 20:56 Asia/Shanghai.
     - cron: "56 12 * * *"
@@ -99,21 +107,39 @@ jobs:
           fi
 
       - name: Run Tavily-on gray report
+        id: gray-run
         shell: bash
         env:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+          MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           GRAY_DIR: ${{ steps.paths.outputs.gray_dir }}
+          GRAY_SUMMARY_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.summary_mode || 'offline' }}
         run: |
           set -o pipefail
           log_file="$GRAY_DIR/logs/run.log"
+          summary_args=(--offline)
+          command_text="python3 main.py run --offline --enrichment on"
+
+          if [ "$GRAY_SUMMARY_MODE" = "llm" ]; then
+            summary_args=()
+            command_text="python3 main.py run --enrichment on"
+            if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
+              echo "::error::summary_mode=llm requires MODELSCOPE_API_KEY or SILICONFLOW_API_KEY." | tee -a "$log_file"
+              exit 1
+            fi
+          fi
+
+          echo "command=$command_text" >> "$GITHUB_OUTPUT"
 
           {
             echo "Tavily gray run date: ${{ steps.paths.outputs.run_date }}"
-            echo "Command: python3 main.py run --offline --enrichment on"
+            echo "Summary mode: $GRAY_SUMMARY_MODE"
+            echo "Command: $command_text"
             echo
           } | tee -a "$log_file"
 
-          python3 main.py run --offline --enrichment on 2>&1 | tee -a "$log_file"
+          python3 main.py run "${summary_args[@]}" --enrichment on 2>&1 | tee -a "$log_file"
 
       - name: Collect gray outputs
         if: always()
@@ -194,7 +220,7 @@ jobs:
 
           python3 scripts/tavily_gray_scorecard.py "$GRAY_DIR" \
             --run-id "$GITHUB_RUN_ID_VALUE" \
-            --command "python3 main.py run --offline --enrichment on" \
+            --command "${{ steps.gray-run.outputs.command }}" \
             --new-commit "$GITHUB_SHA_VALUE"
 
       - name: Prune retained final report window

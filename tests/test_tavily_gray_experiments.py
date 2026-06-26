@@ -79,18 +79,34 @@ def test_workflow_dispatch_exposes_only_controlled_experiment_choices() -> None:
     )
 
     dispatch_inputs = workflow["on"]["workflow_dispatch"]["inputs"]
-    assert list(dispatch_inputs) == ["experiment"]
+    assert list(dispatch_inputs) == ["experiment", "summary_mode"]
 
     experiment = dispatch_inputs["experiment"]
     assert experiment["type"] == "choice"
     assert experiment["default"] == "baseline"
     assert experiment["options"] == list(EXPERIMENT_NAMES)
 
+    summary_mode = dispatch_inputs["summary_mode"]
+    assert summary_mode["type"] == "choice"
+    assert summary_mode["default"] == "offline"
+    assert summary_mode["options"] == ["offline", "llm"]
+
     apply_step = workflow_step(workflow, "Apply gray experiment overrides")
     assert (
         apply_step["env"]["GRAY_EXPERIMENT"]
         == "${{ github.event_name == 'workflow_dispatch' && inputs.experiment || 'baseline' }}"
     )
+    run_step = workflow_step(workflow, "Run Tavily-on gray report")
+    assert run_step["env"]["GRAY_SUMMARY_MODE"] == (
+        "${{ github.event_name == 'workflow_dispatch' && inputs.summary_mode || 'offline' }}"
+    )
+    assert run_step["env"]["MODELSCOPE_API_KEY"] == "${{ secrets.MODELSCOPE_API_KEY }}"
+    assert run_step["env"]["SILICONFLOW_API_KEY"] == (
+        "${{ secrets.SILICONFLOW_API_KEY }}"
+    )
+    assert "summary_mode=llm requires MODELSCOPE_API_KEY" in run_step["run"]
+    assert 'command_text="python3 main.py run --enrichment on"' in run_step["run"]
+    assert 'summary_args=(--offline)' in run_step["run"]
     assert "schedule" in workflow["on"]
 
 
