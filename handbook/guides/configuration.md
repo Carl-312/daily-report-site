@@ -133,7 +133,7 @@ dist/     HTML 构建输出
 
 ```bash
 MODELSCOPE_API_KEY=sk-your-key
-MODELSCOPE_MODEL=ZhipuAI/GLM-5.1
+MODELSCOPE_MODEL=ZhipuAI/GLM-5.2
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 SYFT_WEB_APP_URL=https://syft.example.com
 SYFT_SECRET_KEY=your-syft-secret-key

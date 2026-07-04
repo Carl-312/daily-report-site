@@ -9,9 +9,9 @@ def test_default_llm_models(monkeypatch, tmp_path) -> None:
 
     cfg = load_config(str(tmp_path / "missing-config.yaml"))
 
-    assert Settings().model == "ZhipuAI/GLM-5.1"
+    assert Settings().model == "ZhipuAI/GLM-5.2"
     assert Settings().fallback_model == "Pro/moonshotai/Kimi-K2.6"
-    assert cfg.model == "ZhipuAI/GLM-5.1"
+    assert cfg.model == "ZhipuAI/GLM-5.2"
     assert cfg.fallback_model == "Pro/moonshotai/Kimi-K2.6"
 
 
