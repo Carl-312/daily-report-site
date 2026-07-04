@@ -52,8 +52,9 @@
 | Name | Value |
 | --- | --- |
 | `MODELSCOPE_API_KEY` | ModelScope API Key |
+| `SILICONFLOW_API_KEY` | SiliconFlow API Key（可选，用作 LLM 备用供应商） |
 
-未配置时，部署 workflow 会自动退回离线模式。
+两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 

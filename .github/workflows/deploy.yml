@@ -81,6 +81,7 @@ jobs:
         env:
           ENABLE_TAVILY: ${{ inputs.enable_tavily || false }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           TAVILY_API_KEY: ${{ inputs.enable_tavily && secrets.TAVILY_API_KEY || '' }}
         run: |
           ENRICHMENT_ARGS=()
@@ -93,8 +94,8 @@ jobs:
             fi
           fi
 
-          if [ -z "$MODELSCOPE_API_KEY" ]; then
-            echo "Warning: MODELSCOPE_API_KEY not set, using offline mode"
+          if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
+            echo "Warning: no LLM API key set, using offline mode"
             python main.py run --offline "${ENRICHMENT_ARGS[@]}"
           else
             echo "Using AI summarization"
