@@ -59,6 +59,22 @@ def apply_enrichment(cfg, args, articles, date_str: str):
     return result
 
 
+def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
+    """Generate an LLM summary, falling back to offline output when providers fail."""
+    if offline:
+        return offline_summary(articles)
+
+    if not cfg.api_key and not cfg.fallback_api_key:
+        print("   ⚠️  No API key, using offline mode")
+        return offline_summary(articles)
+
+    try:
+        return summarize(articles, stream=True)
+    except Exception as exc:
+        print(f"   ⚠️  AI summarization failed, using offline mode: {exc}")
+        return offline_summary(articles)
+
+
 def cmd_run(args):
     """Full pipeline: fetch → summarize → build"""
     cfg = get_config()
@@ -99,13 +115,7 @@ def cmd_run(args):
 
     # 4. Summarize
     print("\n🤖 Generating summary...")
-    if args.offline:
-        content = offline_summary(articles_dict)
-    elif not cfg.api_key and not cfg.fallback_api_key:
-        print("   ⚠️  No API key, using offline mode")
-        content = offline_summary(articles_dict)
-    else:
-        content = summarize(articles_dict, stream=True)
+    content = summarize_or_offline(articles_dict, offline=args.offline, cfg=cfg)
 
     # 5. Build Markdown title
     title = f"🔥（{today_cn()}）每日AI资讯一览✨"
@@ -173,13 +183,7 @@ def cmd_summarize(args):
     articles = data.get("articles", [])
     print(f"🤖 Summarizing {len(articles)} articles...")
 
-    if args.offline:
-        content = offline_summary(articles)
-    elif not cfg.api_key and not cfg.fallback_api_key:
-        print("   ⚠️  No API key, using offline mode")
-        content = offline_summary(articles)
-    else:
-        content = summarize(articles, stream=True)
+    content = summarize_or_offline(articles, offline=args.offline, cfg=cfg)
 
     title = f"🔥（{today_cn()}）每日AI资讯一览✨"
     full_content = f"{title}\n\n{content}"
