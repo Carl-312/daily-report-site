@@ -1,70 +1,52 @@
 {
-  "date": "2026-06-28",
+  "date": "2026-07-05",
   "articles": [
     {
-      "title": "Asian AI startups launch Mythos-like  models as Anthropic’s export ban drags on",
-      "link": "https://techcrunch.com/2026/06/27/asian-ai-startups-launch-mythos-like-models-as-anthropics-export-ban-drags-on/",
+      "title": "New Google commercial imagines a Declaration of Independence written with help from AI",
+      "link": "https://techcrunch.com/2026/07/04/new-google-commercial-imagines-a-declaration-of-independence-written-with-help-from-ai/",
       "description": "",
-      "publish_time": "2026-06-27",
+      "publish_time": "2026-07-04",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "SoftBank’s CEO isn’t the only one with questions about Elon Musk’s orbital data center hype",
-      "link": "https://techcrunch.com/2026/06/27/softbanks-ceo-isnt-the-only-one-with-questions-about-elon-musks-orbital-data-center-hype/",
+      "title": "Midjourney wants Hollywood studios to reveal the details of their AI usage",
+      "link": "https://techcrunch.com/2026/07/04/midjourney-wants-hollywood-studios-to-reveal-the-details-of-their-ai-usage/",
       "description": "",
-      "publish_time": "2026-06-27",
+      "publish_time": "2026-07-04",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "The fittest founder in the room got cancer. Here’s how he used AI to fight back.",
-      "link": "https://techcrunch.com/2026/06/27/the-fittest-founder-in-the-room-got-cancer-heres-how-he-used-ai-to-fight-back/",
+      "title": "What is Mistral AI? Everything to know about the OpenAI competitor",
+      "link": "https://techcrunch.com/2026/07/04/what-is-mistral-ai-everything-to-know-about-the-openai-competitor/",
       "description": "",
-      "publish_time": "2026-06-27",
+      "publish_time": "2026-07-04",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Instagram is testing more ways to customize ‘Your Algorithm’",
-      "link": "https://techcrunch.com/2026/06/27/instagram-is-testing-more-ways-for-users-to-customize-your-algorithm/",
+      "title": "Alibaba reportedly bans employees from using Claude Code",
+      "link": "https://techcrunch.com/2026/07/04/alibaba-reportedly-bans-employees-from-using-claude-code/",
       "description": "",
-      "publish_time": "2026-06-27",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Indian payments chief thinks AI will be heavily involved in next era of digital payment growth",
-      "link": "https://techcrunch.com/2026/06/27/indian-payments-chief-thinks-ai-will-be-heavily-involved-in-next-era-of-digital-payment-growth/",
-      "description": "",
-      "publish_time": "2026-06-27",
-      "content": "",
-      "priority": 1,
-      "source": "techcrunch"
-    },
-    {
-      "title": "Apple Vision Pro exec is reportedly leaving for OpenAI",
-      "link": "https://techcrunch.com/2026/06/27/apple-vision-pro-exec-is-reportedly-leaving-for-openai/",
-      "description": "",
-      "publish_time": "2026-06-27",
+      "publish_time": "2026-07-04",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     }
   ],
   "enrichment": {
-    "report_date": "2026-06-28",
-    "reference_dt": "2026-06-28T13:04:23.599710+08:00",
+    "report_date": "2026-07-05",
+    "reference_dt": "2026-07-05T12:41:24.673980+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
     "error": null,
-    "input_count": 6,
-    "prefiltered_count": 6,
+    "input_count": 4,
+    "prefiltered_count": 4,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -94,8 +76,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 6,
-    "strict_final_count": 6,
+    "final_count": 4,
+    "strict_final_count": 4,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
