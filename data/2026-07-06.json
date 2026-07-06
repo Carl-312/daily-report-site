@@ -1,64 +1,64 @@
 {
-  "date": "2026-06-29",
+  "date": "2026-07-06",
   "articles": [
     {
-      "title": "Why Wall Street thinks US memory maker Micron is the next Nvidia",
-      "link": "https://techcrunch.com/2026/06/28/why-wall-street-thinks-us-memory-maker-micron-is-the-next-nvidia/",
+      "title": "Amazon will stop accepting new customers for Mechanical Turk",
+      "link": "https://techcrunch.com/2026/07/05/amazon-will-stop-accepting-new-customers-for-mechanical-turk/",
       "description": "",
-      "publish_time": "2026-06-28",
+      "publish_time": "2026-07-05",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Govee’s smart nugget ice maker makes every iced drink feel like a luxury",
-      "link": "https://techcrunch.com/2026/06/28/govees-smart-nugget-ice-maker-makes-every-iced-drink-feel-like-a-luxury/",
+      "title": "5 desk gadgets that can make your workday better",
+      "link": "https://techcrunch.com/2026/07/05/5-desk-gadgets-that-can-make-your-workday-better/",
       "description": "",
-      "publish_time": "2026-06-28",
+      "publish_time": "2026-07-05",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Writer Ian Bogost says ‘The Small Stuff’ can help us reclaim our lives from too much convenience",
-      "link": "https://techcrunch.com/2026/06/28/writer-ian-bogost-says-the-small-stuff-can-help-us-reclaim-our-lives-from-dematerialization/",
+      "title": "What is Bending Spoons? The little-known AOL and Vimeo owner that’s now public",
+      "link": "https://techcrunch.com/2026/07/05/what-is-bending-spoons-everything-to-know-about-aols-acquirer/",
       "description": "",
-      "publish_time": "2026-06-28",
+      "publish_time": "2026-07-05",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Ford rehires ‘gray beard’ engineers after AI falls short",
-      "link": "https://techcrunch.com/2026/06/28/ford-rehires-gray-beard-engineers-after-ai-falls-short/",
+      "title": "Trump memecoin investors lost $3.8 billion, analysis finds",
+      "link": "https://techcrunch.com/2026/07/05/trump-memecoin-investors-lost-3-8-billion-analysis-finds/",
       "description": "",
-      "publish_time": "2026-06-28",
+      "publish_time": "2026-07-05",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "California law targeting loud streaming ads takes effect on July 1",
-      "link": "https://techcrunch.com/2026/06/28/california-law-targeting-loud-streaming-ads-takes-effect-on-july-1/",
+      "title": "Almost 90 new unicorns have been minted so far this year — here they are",
+      "link": "https://techcrunch.com/2026/07/05/almost-40-new-unicorns-have-been-minted-so-far-this-year-here-they-are/",
       "description": "",
-      "publish_time": "2026-06-28",
+      "publish_time": "2026-07-05",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "TechCrunch Mobility: All eyes on Tesla FSD",
-      "link": "https://techcrunch.com/2026/06/28/techcrunch-mobility-all-eyes-on-tesla-fsd/",
+      "title": "Uber’s European expansion plans may have hit a speed bump",
+      "link": "https://techcrunch.com/2026/07/05/ubers-european-expansion-plans-may-have-hit-a-speed-bump/",
       "description": "",
-      "publish_time": "2026-06-28",
+      "publish_time": "2026-07-05",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     }
   ],
   "enrichment": {
-    "report_date": "2026-06-29",
-    "reference_dt": "2026-06-29T13:13:21.377294+08:00",
+    "report_date": "2026-07-06",
+    "reference_dt": "2026-07-06T12:53:03.131289+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
