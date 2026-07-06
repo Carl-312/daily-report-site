@@ -56,6 +56,8 @@
 
 两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
+`MODELSCOPE_SECONDARY_MODEL` 是非密钥配置，默认已使用 `moonshotai/Kimi-K2.7-Code`，通常不需要配置为 secret。
+
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 
 | Name | Value |

@@ -1,5 +1,5 @@
 """
-LLM Summarizer using ModelScope API with SiliconFlow fallback.
+LLM Summarizer using ModelScope API with secondary ModelScope and SiliconFlow fallback.
 Summarizes news articles into daily reports.
 """
 
@@ -47,24 +47,42 @@ def _provider_candidates() -> list[dict[str, str]]:
     cfg = get_config()
     providers: list[dict[str, str]] = []
 
+    def append_provider(name: str, base_url: str, api_key: str, model: str) -> None:
+        if not api_key or not model:
+            return
+        candidate = {
+            "name": name,
+            "base_url": base_url,
+            "api_key": api_key,
+            "model": model,
+        }
+        if any(
+            provider["base_url"] == base_url and provider["model"] == model
+            for provider in providers
+        ):
+            return
+        providers.append(candidate)
+
     if cfg.api_key:
-        providers.append(
-            {
-                "name": "ModelScope",
-                "base_url": cfg.api_base_url,
-                "api_key": cfg.api_key,
-                "model": cfg.model,
-            }
+        append_provider(
+            "ModelScope",
+            cfg.api_base_url,
+            cfg.api_key,
+            cfg.model,
+        )
+        append_provider(
+            "ModelScope secondary",
+            cfg.api_base_url,
+            cfg.api_key,
+            cfg.modelscope_secondary_model,
         )
 
     if cfg.fallback_api_key:
-        providers.append(
-            {
-                "name": "SiliconFlow",
-                "base_url": cfg.fallback_api_base_url,
-                "api_key": cfg.fallback_api_key,
-                "model": cfg.fallback_model,
-            }
+        append_provider(
+            "SiliconFlow",
+            cfg.fallback_api_base_url,
+            cfg.fallback_api_key,
+            cfg.fallback_model,
         )
 
     return providers

@@ -14,6 +14,10 @@ import yaml
 # Load .env file
 load_dotenv(encoding="utf-8", override=True)
 
+DEFAULT_MODELSCOPE_MODEL = "ZhipuAI/GLM-5.2"
+DEFAULT_MODELSCOPE_SECONDARY_MODEL = "moonshotai/Kimi-K2.7-Code"
+DEFAULT_SILICONFLOW_MODEL = "Pro/moonshotai/Kimi-K2.6"
+
 
 class Settings(BaseModel):
     """Application settings with validation"""
@@ -24,7 +28,13 @@ class Settings(BaseModel):
         default="https://api-inference.modelscope.cn/v1",
         description="ModelScope API Base URL",
     )
-    model: str = Field(default="ZhipuAI/GLM-5.2", description="ModelScope model ID")
+    model: str = Field(
+        default=DEFAULT_MODELSCOPE_MODEL, description="Primary ModelScope model ID"
+    )
+    modelscope_secondary_model: str = Field(
+        default=DEFAULT_MODELSCOPE_SECONDARY_MODEL,
+        description="Secondary ModelScope model ID",
+    )
 
     # Fallback provider: SiliconFlow (OpenAI-compatible)
     fallback_api_key: str = Field(default="", description="SiliconFlow API Key")
@@ -32,7 +42,7 @@ class Settings(BaseModel):
         default="https://api.siliconflow.cn/v1", description="SiliconFlow API Base URL"
     )
     fallback_model: str = Field(
-        default="Pro/moonshotai/Kimi-K2.6", description="SiliconFlow model ID"
+        default=DEFAULT_SILICONFLOW_MODEL, description="SiliconFlow model ID"
     )
 
     max_output: int = Field(default=2000, description="Max output tokens")
@@ -135,12 +145,15 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "api_base_url": os.getenv(
             "MODELSCOPE_BASE_URL", "https://api-inference.modelscope.cn/v1"
         ),
-        "model": os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-5.2"),
+        "model": os.getenv("MODELSCOPE_MODEL", DEFAULT_MODELSCOPE_MODEL),
+        "modelscope_secondary_model": os.getenv(
+            "MODELSCOPE_SECONDARY_MODEL", DEFAULT_MODELSCOPE_SECONDARY_MODEL
+        ),
         "fallback_api_key": os.getenv("SILICONFLOW_API_KEY", ""),
         "fallback_api_base_url": os.getenv(
             "SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1"
         ),
-        "fallback_model": os.getenv("SILICONFLOW_MODEL", "Pro/moonshotai/Kimi-K2.6"),
+        "fallback_model": os.getenv("SILICONFLOW_MODEL", DEFAULT_SILICONFLOW_MODEL),
         "max_output": int(os.getenv("MODELSCOPE_MAX_OUTPUT", "2000")),
         "timezone": os.getenv("TIMEZONE", "Asia/Shanghai"),
         "syft_web_app_url": os.getenv("SYFT_WEB_APP_URL", ""),

@@ -17,7 +17,7 @@ graph TB
         C --> D[Deduplication]
         D --> E[JSON Storage]
         E --> F{Summarizer}
-        F -->|API Mode| G[ModelScope Kimi-K2.5]
+        F -->|API Mode| G[ModelScope GLM-5.2 → ModelScope Kimi-K2.7-Code → SiliconFlow]
         F -->|Offline Mode| H[Local Algorithm]
     end
     
@@ -104,7 +104,7 @@ def dedupe(articles: List[Article]) -> List[Article]:
 
 | 模式 | 触发条件 | 使用场景 |
 |------|---------|---------|
-| API Mode | `MODELSCOPE_API_KEY` 已配置 | 生产环境，高质量摘要 |
+| API Mode | `MODELSCOPE_API_KEY` 或 `SILICONFLOW_API_KEY` 已配置 | 生产环境，高质量摘要 |
 | Offline Mode | 无 API Key 或 `--offline` 参数 | 本地测试，快速预览 |
 
 **API Mode 流程**:
@@ -119,16 +119,18 @@ messages = [
     {"role": "user", "content": json.dumps(articles, ensure_ascii=False)}
 ]
 
-# 3. 调用 ModelScope API
+# 3. 按顺序调用 OpenAI-compatible API provider
 response = requests.post(
-    "https://api.modelscope.cn/v1/chat/completions",
+    "https://api-inference.modelscope.cn/v1/chat/completions",
     headers={"Authorization": f"Bearer {api_key}"},
     json={
-        "model": "moonshotai/Kimi-K2.5",
+        "model": "ZhipuAI/GLM-5.2",
         "messages": messages,
         "stream": True  # 流式输出
     }
 )
+# 失败后依次尝试 ModelScope moonshotai/Kimi-K2.7-Code、
+# SiliconFlow Pro/moonshotai/Kimi-K2.6。
 ```
 
 **Offline Mode 逻辑**:
@@ -265,7 +267,11 @@ def get_config() -> Config:
     
     return Config(
         api_key=os.getenv("MODELSCOPE_API_KEY", ""),
-        model=os.getenv("MODELSCOPE_MODEL", "moonshotai/Kimi-K2.5"),
+        model=os.getenv("MODELSCOPE_MODEL", "ZhipuAI/GLM-5.2"),
+        modelscope_secondary_model=os.getenv(
+            "MODELSCOPE_SECONDARY_MODEL",
+            "moonshotai/Kimi-K2.7-Code",
+        ),
         sources=yaml_cfg["sources"],
         max_articles=yaml_cfg["limits"]["max_articles"],
         # ...
@@ -413,7 +419,7 @@ python main.py test
 
 ### 2. 自定义摘要模型
 
-**配置**: `.env` 中的 `MODELSCOPE_MODEL`  
+**配置**: `.env` 中的 `MODELSCOPE_MODEL` 和 `MODELSCOPE_SECONDARY_MODEL`
 **兼容性**: 支持所有 OpenAI-Compatible API
 
 ### 3. 主题定制

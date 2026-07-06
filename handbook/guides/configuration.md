@@ -134,11 +134,14 @@ dist/     HTML 构建输出
 ```bash
 MODELSCOPE_API_KEY=sk-your-key
 MODELSCOPE_MODEL=ZhipuAI/GLM-5.2
+MODELSCOPE_SECONDARY_MODEL=moonshotai/Kimi-K2.7-Code
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 SYFT_WEB_APP_URL=https://syft.example.com
 SYFT_SECRET_KEY=your-syft-secret-key
 TAVILY_API_KEY=
 ```
+
+AI 摘要的默认尝试顺序是：ModelScope `ZhipuAI/GLM-5.2` → ModelScope `moonshotai/Kimi-K2.7-Code` → SiliconFlow `Pro/moonshotai/Kimi-K2.6`。
 
 未配置 `MODELSCOPE_API_KEY` 时，可使用：
 
