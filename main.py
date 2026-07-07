@@ -18,7 +18,12 @@ from utils import (
     save_markdown,
     load_json,
 )
-from summarizer import summarize, offline_summary, test_connection
+from summarizer import (
+    summarize,
+    offline_summary,
+    test_connection,
+    validate_summary_quality,
+)
 
 
 def resolve_enrichment_enabled(cfg, mode: str) -> bool:
@@ -70,13 +75,15 @@ def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
 
     try:
         content = summarize(articles, stream=True)
-        if content.strip():
-            return content
-        print("   ⚠️  AI summarization returned empty content, using offline mode")
-        return offline_summary(articles)
+        validate_summary_quality(content, expected_items=min(10, len(articles)))
+        return content
     except Exception as exc:
-        print(f"   ⚠️  AI summarization failed, using offline mode: {exc}")
-        return offline_summary(articles)
+        message = (
+            "AI summarization failed quality checks; refusing to publish "
+            "an offline fallback because Chinese summary quality cannot be guaranteed."
+        )
+        print(f"   ❌  {message} Cause: {exc}")
+        raise RuntimeError(message) from exc
 
 
 def cmd_run(args):

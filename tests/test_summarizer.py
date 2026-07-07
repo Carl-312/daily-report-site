@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
+import pytest
+
 import summarizer
 
 
@@ -21,6 +23,15 @@ def _llm_config(**overrides):
     }
     cfg.update(overrides)
     return SimpleNamespace(**cfg)
+
+
+def _valid_summary(item_count: int = 1) -> str:
+    lines = []
+    for index in range(1, item_count + 1):
+        lines.append(f"{index}. 人工智能公司发布重要产品更新，推动行业应用场景继续扩展")
+        lines.append("")
+    lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")
+    return "\n".join(lines)
 
 
 def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
@@ -76,14 +87,14 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
     def fake_summarize_sync(client, params):
         calls.append((client, params["model"]))
         if params["model"] == "moonshotai/Kimi-K2.7-Code":
-            return "secondary model summary"
+            return _valid_summary()
         raise RuntimeError("provider failed")
 
     monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
 
     content = summarizer.summarize([{"title": "Story"}], stream=False)
 
-    assert content == "secondary model summary"
+    assert content == _valid_summary()
     assert calls == [
         ("https://modelscope.test/v1|modelscope-key", "ZhipuAI/GLM-5.2"),
         (
@@ -107,32 +118,44 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
         calls.append(params["model"])
         if params["model"] == "ZhipuAI/GLM-5.2":
             return "  \n"
-        return "fallback model summary"
+        return _valid_summary()
 
     monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
 
     content = summarizer.summarize([{"title": "Story"}], stream=False)
 
-    assert content == "fallback model summary"
+    assert content == _valid_summary()
     assert calls == ["ZhipuAI/GLM-5.2", "moonshotai/Kimi-K2.7-Code"]
 
 
-def test_offline_summary_preserves_full_title_and_link() -> None:
-    content = summarizer.offline_summary(
-        [
-            {
-                "title": (
-                    "A very long AI funding headline that should stay readable "
-                    "instead of being cut off"
-                ),
-                "link": "https://example.com/story",
-                "priority": 1,
-            }
-        ],
-        limit=1,
+def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
+    summarizer.validate_summary_quality(
+        _valid_summary(item_count=10), expected_items=10
     )
 
-    assert (
-        "[🔥A very long AI funding headline that should stay readable "
-        "instead of being cut off](https://example.com/story)"
-    ) in content
+
+def test_validate_summary_quality_rejects_english_link_list() -> None:
+    content = "\n\n".join(
+        [
+            "1. [🔥Netflix invented binge-watching. Now it may have outgrown it.]"
+            "(https://example.com/story)",
+            "2. [🔥The first AI-run ransomware attack still needed a human]"
+            "(https://example.com/story-2)",
+            "互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
+        ]
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError):
+        summarizer.validate_summary_quality(content, expected_items=2)
+
+
+def test_validate_summary_quality_rejects_incomplete_digest() -> None:
+    content = "\n\n".join(
+        [
+            "1. 人工智能公司发布重要产品更新，推动行业应用场景继续扩展",
+            "互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
+        ]
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError):
+        summarizer.validate_summary_quality(content, expected_items=10)

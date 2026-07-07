@@ -6,9 +6,14 @@ Summarizes news articles into daily reports.
 from __future__ import annotations
 import json
 from pathlib import Path
+import re
 from typing import Any
 from openai import OpenAI
 from config import get_config
+
+
+class SummaryQualityError(ValueError):
+    """Raised when an LLM response is not a usable Chinese daily summary."""
 
 
 def create_client(base_url: str, api_key: str) -> OpenAI:
@@ -40,6 +45,53 @@ def compress_articles(articles: list[dict]) -> list[dict]:
             }
         )
     return compressed
+
+
+def _count_cjk(text: str) -> int:
+    """Count CJK characters as a practical proxy for Chinese summary quality."""
+    return len(re.findall(r"[\u4e00-\u9fff]", text))
+
+
+def _numbered_items(content: str) -> list[str]:
+    """Extract numbered daily-report items from Markdown-ish text."""
+    items = []
+    for line in content.splitlines():
+        match = re.match(r"^\s*\d+[.、]\s+(.+?)\s*$", line)
+        if match:
+            items.append(match.group(1))
+    return items
+
+
+def validate_summary_quality(content: str, expected_items: int = 10) -> None:
+    """Validate that generated content is a complete Simplified Chinese digest."""
+    stripped = content.strip()
+    if not stripped:
+        raise SummaryQualityError("summary is empty")
+
+    items = _numbered_items(stripped)
+    min_items = max(1, min(10, expected_items))
+    if len(items) < min_items:
+        raise SummaryQualityError(
+            f"summary has {len(items)} numbered items, expected at least {min_items}"
+        )
+
+    if "互动话题" not in stripped:
+        raise SummaryQualityError("summary is missing the interaction footer")
+
+    searchable_chars = re.findall(r"[\u4e00-\u9fffA-Za-z]", stripped)
+    chinese_ratio = _count_cjk(stripped) / max(1, len(searchable_chars))
+    if chinese_ratio < 0.45:
+        raise SummaryQualityError(
+            f"summary is not predominantly Chinese (ratio={chinese_ratio:.2f})"
+        )
+
+    for index, item in enumerate(items[:min_items], 1):
+        if _count_cjk(item) < 8:
+            raise SummaryQualityError(
+                f"item {index} does not contain enough Chinese content"
+            )
+        if "http://" in item or "https://" in item:
+            raise SummaryQualityError(f"item {index} contains a raw link")
 
 
 def _provider_candidates() -> list[dict[str, str]]:
@@ -137,8 +189,10 @@ def summarize(articles: list[dict], stream: bool = True) -> str:
                 content = _summarize_stream(client, params)
             else:
                 content = _summarize_sync(client, params)
-            if not content.strip():
-                raise ValueError("provider returned an empty summary")
+            validate_summary_quality(
+                content,
+                expected_items=min(10, len(compressed)),
+            )
             return content
         except Exception as e:
             errors.append(f"{provider['name']}[{provider['model']}]: {e}")
