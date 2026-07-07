@@ -134,8 +134,12 @@ def summarize(articles: list[dict], stream: bool = True) -> str:
                 )
 
             if stream:
-                return _summarize_stream(client, params)
-            return _summarize_sync(client, params)
+                content = _summarize_stream(client, params)
+            else:
+                content = _summarize_sync(client, params)
+            if not content.strip():
+                raise ValueError("provider returned an empty summary")
+            return content
         except Exception as e:
             errors.append(f"{provider['name']}[{provider['model']}]: {e}")
             print(f"\n   ⚠️  {provider['name']} failed: {e}")
@@ -173,8 +177,12 @@ def offline_summary(articles: list[dict], limit: int = 10) -> str:
     lines = []
     for i, a in enumerate(sorted_arts[:limit], 1):
         title = (a.get("title") or "").replace("\n", "").strip()
+        link = (a.get("link") or "").strip()
         marker = "🔥" if a.get("priority", 0) > 0 else ""
-        lines.append(f"{i}. {marker}{title[:40]}")
+        headline = f"{marker}{title}"
+        if link:
+            headline = f"[{headline}]({link})"
+        lines.append(f"{i}. {headline}")
         lines.append("")
 
     lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")

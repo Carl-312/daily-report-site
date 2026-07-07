@@ -91,3 +91,48 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
             "moonshotai/Kimi-K2.7-Code",
         ),
     ]
+
+
+def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+    calls: list[str] = []
+
+    def fake_summarize_sync(client, params):
+        calls.append(params["model"])
+        if params["model"] == "ZhipuAI/GLM-5.2":
+            return "  \n"
+        return "fallback model summary"
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+
+    content = summarizer.summarize([{"title": "Story"}], stream=False)
+
+    assert content == "fallback model summary"
+    assert calls == ["ZhipuAI/GLM-5.2", "moonshotai/Kimi-K2.7-Code"]
+
+
+def test_offline_summary_preserves_full_title_and_link() -> None:
+    content = summarizer.offline_summary(
+        [
+            {
+                "title": (
+                    "A very long AI funding headline that should stay readable "
+                    "instead of being cut off"
+                ),
+                "link": "https://example.com/story",
+                "priority": 1,
+            }
+        ],
+        limit=1,
+    )
+
+    assert (
+        "[🔥A very long AI funding headline that should stay readable "
+        "instead of being cut off](https://example.com/story)"
+    ) in content

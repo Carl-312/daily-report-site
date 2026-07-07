@@ -69,7 +69,11 @@ def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
         return offline_summary(articles)
 
     try:
-        return summarize(articles, stream=True)
+        content = summarize(articles, stream=True)
+        if content.strip():
+            return content
+        print("   ⚠️  AI summarization returned empty content, using offline mode")
+        return offline_summary(articles)
     except Exception as exc:
         print(f"   ⚠️  AI summarization failed, using offline mode: {exc}")
         return offline_summary(articles)
