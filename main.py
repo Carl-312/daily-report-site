@@ -28,7 +28,11 @@ from utils.run_contracts import (
     new_manifest,
     write_manifest,
 )
-from utils.publication import create_run_workspace, promote_staged_files
+from utils.publication import (
+    create_run_workspace,
+    promote_staged_files,
+    recover_incomplete_promotions,
+)
 from utils.publish_policy import decide_publication
 from summarizer import (
     offline_summary_result,
@@ -80,10 +84,10 @@ def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None 
 
 def create_run_observer(cfg, clock: RunClock):
     """Create a non-public run manifest; promotion remains a later phase."""
+    runs_dir = getattr(cfg, "runs_dir", ".runs")
+    recover_incomplete_promotions(runs_dir)
     manifest = new_manifest(cfg, clock)
-    workspace = create_run_workspace(
-        getattr(cfg, "runs_dir", ".runs"), clock.report_date_ymd, manifest.run_id
-    )
+    workspace = create_run_workspace(runs_dir, clock.report_date_ymd, manifest.run_id)
     write_manifest(workspace.manifest_path, manifest)
     return manifest, workspace
 
