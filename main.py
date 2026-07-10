@@ -22,6 +22,7 @@ from utils import (
 )
 from utils.run_contracts import RunClock, StageResult, new_manifest, write_manifest
 from utils.publication import create_run_workspace, promote_staged_files
+from utils.publish_policy import decide_publication
 from summarizer import (
     summarize,
     offline_summary,
@@ -87,13 +88,21 @@ def update_run_observer(path, manifest, *, stages=(), sources=()):
     return updated
 
 
-def stage_and_publish_run(cfg, workspace, date_str: str, report: dict, content: str):
+def stage_and_publish_run(
+    cfg, workspace, date_str: str, report: dict, content: str, source_results=()
+):
     """Build a complete candidate edition before changing any public artifact."""
     from build import build_site
     from utils.storage import save_json, save_markdown
 
-    if not report["articles"]:
-        raise RuntimeError("publication blocked: no accepted articles")
+    decision = decide_publication(
+        articles_count=len(report["articles"]),
+        source_results=tuple(source_results),
+        summary_succeeded=True,
+        build_succeeded=True,
+    )
+    if not decision.publish:
+        raise RuntimeError(f"publication blocked: {decision.reason}")
     workspace.content_dir.mkdir(parents=True, exist_ok=True)
     public_content = Path(cfg.content_dir)
     if public_content.exists():
@@ -204,6 +213,7 @@ def cmd_run(args):
             "enrichment": enrichment_result["report"],
         },
         full_content,
+        source_results,
     )
 
     print("\n" + "=" * 50)

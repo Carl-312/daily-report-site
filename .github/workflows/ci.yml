@@ -8,6 +8,34 @@ on:
   pull_request:
 
 jobs:
+  p0-contract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install development dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Verify P0 transaction and gate contracts
+        run: >-
+          PYTHONPATH=. pytest -q
+          tests/test_atomic_storage.py
+          tests/test_publication.py
+          tests/test_staged_run.py
+          tests/test_publish_policy.py
+          tests/test_run_clock.py
+          tests/test_run_contracts.py
+          tests/test_run_manifest.py
+
   quality:
     runs-on: ubuntu-latest
 
