@@ -57,11 +57,18 @@ python -m http.server 8000 --directory dist
 **每日发布**（`.github/workflows/deploy.yml`）：
 - 触发：每天 00:36 UTC（北京时间 08:36）或手动触发
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
-- 流程：抓取新闻 → AI 摘要 → 构建站点 → 归档历史 → 部署 Pages
+- 默认流程：抓取新闻 → AI 摘要 → 构建站点；`main` 上的 schedule 或手动 `publish=true` 才会继续归档、提交保留内容并部署 Pages
+- 预览流程：非 `main` 分支，或手动 `publish=false`，只上传 `daily-report-preview-<run_id>` artifact，不发布 Pages
 - 数据保留：main 分支保留最近 7 天，超期数据归档至 GitHub Release
 - Tavily：只通过手动 `enable_tavily=true` 灰度启用，定时任务不默认开启
 
 详见 [handbook/deployment/](handbook/deployment/) 目录。
+
+**2026-07-10 灰度验证**：已从灰色分支移除 `content/2026-07-10.md` 和
+`data/2026-07-10.json`。成功预览 run `29076119648` 使用
+`skip_generate=true`、`publish=false`、`enable_tavily=false`，artifact 为
+`daily-report-preview-29076119648`；产物不含当天内容或 `dist/2026-07-10.html`。
+该 run 未发布 GitHub Pages，PR #8 仍为 OPEN/Draft，线上 URL 未变。
 
 ## 项目结构
 

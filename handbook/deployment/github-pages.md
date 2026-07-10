@@ -22,12 +22,15 @@
 
 ### 2. 运行部署 workflow
 
-执行 `Daily Report Deploy` 后，workflow 会：
+在 `main` 上执行生产模式的 `Daily Report Deploy` 后，workflow 会：
 
 1. 生成日报
 2. 构建 `dist/`
-3. 在 `main` 分支上上传 `dist/` 为 Pages artifact
-4. 在 `main` 分支上由 `deploy-pages` 发布
+3. 仅在 publish mode 下，在 `main` 分支上上传选定的 `dist/` 为 Pages artifact
+4. 由满足 `main`、`publish=true` 且 Pages 已启用条件的 `deploy` job 发布
+
+非 `main` 分支以及手动 `publish=false` 运行只上传
+`daily-report-preview-<run_id>`，不会发布 Pages。
 
 ### 3. 验证结果
 
@@ -44,7 +47,15 @@
 
 如果未来需要“站点可浏览全历史”，建议额外引入归档索引或对象存储读取逻辑。
 
-如果你在非 `main` 分支上手动触发 workflow，它可以用于验证构建是否成功，但不会真的发布 Pages。
+如果你在非 `main` 分支上手动触发 workflow，它可以用于验证构建是否成功，但不会真的发布 Pages；`main` 上手动 `publish=false` 也遵循同一预览边界。
+
+## 2026-07-10 灰度结果
+
+成功预览 run `29076119648` 使用 `skip_generate=true`、`publish=false`、
+`enable_tavily=false`，生成 artifact `daily-report-preview-29076119648`。
+artifact 不含 `content/2026-07-10.md`、`data/2026-07-10.json` 或
+`dist/2026-07-10.html`；这只证明灰度分支删除和重建结果，不是生产 Pages 发布。
+PR #8 仍为 OPEN/Draft，线上 URL 未变。
 
 ## 常见误区
 

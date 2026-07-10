@@ -29,19 +29,17 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment
+- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment；`publish` 明确控制是否发布生产版本
 - 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`
 - 关键步骤：
   1. 运行 `python main.py run` 或 `python main.py run --offline`
-  2. 构建 `dist/`
-  3. 仅在 `main` 分支上执行 `python scripts/manage_retention.py bundle --keep-days 7`
-  4. 仅在 `main` 分支上上传归档到 GitHub Release `daily-report-archive`
-  5. 仅在 `main` 分支上执行 `python scripts/manage_retention.py prune --keep-days 7`
-  6. 仅在 `main` 分支上提交保留后的 `data/` / `content/`
-  7. 仅在 `main` 分支上上传 `dist/` 为 Pages artifact 并发布
+  2. `skip_generate=true` 时改为运行 `python main.py build`
+  3. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
+  4. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
+  5. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
 
 ## 必要配置
 
@@ -91,7 +89,17 @@
 
 当前最小方案只对 `data/` / `content/` 做长期归档；站点本身只展示仓库保留窗口内的内容。
 
-`workflow_dispatch` 在非 `main` 分支上仍可用于手动验证生成流程，但不会回写仓库、上传归档或发布 Pages。
+`workflow_dispatch` 在非 `main` 分支上仍可用于手动验证生成流程，但只上传预览 artifact，不会回写仓库、上传归档或发布 Pages。`publish=false` 即使在
+`main` 上也保持预览模式。
+
+### 2026-07-10 灰度证据
+
+成功预览 run `29076119648` 的输入为 `skip_generate=true`、`publish=false`、
+`enable_tavily=false`；`generate-and-deploy` 成功，`deploy` 跳过，预览 artifact
+为 `daily-report-preview-29076119648`。artifact 保留 2026-07-04 至 2026-07-09
+内容与 `dist/`，不含 `content/2026-07-10.md`、`data/2026-07-10.json` 或
+`dist/2026-07-10.html`。PR #8 仍为 OPEN/Draft（head
+`gsd/daily-news-reliability`，base `main`）；本次 run 未发布 Pages，生产 URL 未变。
 
 手动触发时保持 `enable_tavily=false` 会沿用默认路径，不显式启用 Tavily；设为 `true` 时运行 `python main.py run --enrichment on`，用于验证生产 runner 的 Tavily 接线。
 

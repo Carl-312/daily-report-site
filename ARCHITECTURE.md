@@ -308,24 +308,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
+      - name: Resolve publish mode
+        # true only for main + schedule, or manual publish=true
+        # otherwise upload daily-report-preview-<run_id>
       - name: Setup Python
       - name: Install dependencies
-      - name: Run daily report
-        env:
-          MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
-        run: python main.py run
-      - name: Commit changes
-        run: |
-          git add .
-          git commit -m "Daily report: $(date)"
-          git push
-      - name: Deploy to Pages
-        uses: actions/upload-pages-artifact@v2
+      - name: Generate daily report or build retained content
+      - name: Upload generated preview artifact
+        if: publish != 'true'
+        uses: actions/upload-artifact@v4
+      - name: Commit retained generated content
+        if: publish == 'true' && github.ref == 'refs/heads/main'
+      - name: Upload Pages artifact
+        if: publish == 'true' && Pages is enabled
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && publish == 'true' && Pages is enabled
+    needs: generate-and-deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
 ```
+
+`publish` 由 workflow 的 `publish-mode` 决定：只有 `main` 上的定时运行，或
+手动输入 `publish=true`，才会执行归档、保留窗口清理、提交 `data/`/`content/`
+和 Pages 发布。非 `main` 分支及 `publish=false` 只保留预览 artifact，不修改
+`main`，也不会让 `deploy` job 运行。
+
+2026-07-10 的成功预览 run 为 `29076119648`，输入为
+`skip_generate=true`、`publish=false`、`enable_tavily=false`，artifact 为
+`daily-report-preview-29076119648`。该 artifact 不含
+`content/2026-07-10.md`、`data/2026-07-10.json` 或
+`dist/2026-07-10.html`；这代表灰度分支页面删除和构建结果，不代表生产 Pages
+已发布。PR #8 仍为 OPEN/Draft，生产 URL 未变。
 
 ### GitHub Pages 配置
 
-- **Source**: GitHub Actions (推荐) 或 `gh-pages` 分支
+- **Source**: GitHub Actions
 - **Custom Domain**: 可选配置 CNAME
 - **HTTPS**: 自动启用
 
