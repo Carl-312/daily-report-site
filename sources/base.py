@@ -12,8 +12,6 @@ import time
 from typing import List
 import requests
 
-from utils.run_contracts import RunDeadlineExceeded
-
 
 @dataclass
 class Article:
@@ -78,6 +76,8 @@ class BaseSource(ABC):
         random_value=random.random,
     ) -> requests.Response:
         """Make a bounded retryable GET without retrying configuration 4xx errors."""
+        from utils.run_contracts import RunDeadlineExceeded
+
         last_error: requests.RequestException | None = None
         for attempt in range(1, max_attempts + 1):
             self.last_attempts = attempt
@@ -116,6 +116,8 @@ class BaseSource(ABC):
         deadline_at: datetime | None,
         stage: str,
     ) -> float:
+        from utils.run_contracts import RunDeadlineExceeded
+
         if deadline_at is None:
             return timeout
         remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
