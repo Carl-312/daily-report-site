@@ -9,7 +9,12 @@ from time import perf_counter
 from typing import Dict, Type, List
 
 from .base import BaseSource, Article
-from utils.run_contracts import ArticleSnapshot, Diagnostic, SourceRunResult
+from utils.run_contracts import (
+    ArticleSnapshot,
+    Diagnostic,
+    RunDeadlineExceeded,
+    SourceRunResult,
+)
 from .aibase import AIBaseSource
 from .techcrunch import TechCrunchSource
 from .theverge import TheVergeSource
@@ -38,6 +43,7 @@ def fetch_batch(
     syft_url: str = "",
     syft_key: str = "",
     reference_dt: datetime | None = None,
+    deadline_at: datetime | None = None,
 ) -> tuple[List[Article], tuple[SourceRunResult, ...]]:
     """
     Fetch articles from all enabled sources
@@ -81,7 +87,9 @@ def fetch_batch(
                 source = REGISTRY[name]()
 
             articles = source.fetch(
-                max_articles=max_articles, reference_dt=reference_dt
+                max_articles=max_articles,
+                reference_dt=reference_dt,
+                deadline_at=deadline_at,
             )
             all_articles.extend(articles)
             print(f"✅ {name}: fetched {len(articles)} articles")
@@ -99,6 +107,8 @@ def fetch_batch(
                 )
             )
 
+        except RunDeadlineExceeded:
+            raise
         except Exception as e:
             print(f"❌ {name}: failed - {e}")
             error_kind = type(e).__name__
@@ -131,6 +141,7 @@ def fetch_all(
     syft_url: str = "",
     syft_key: str = "",
     reference_dt: datetime | None = None,
+    deadline_at: datetime | None = None,
 ) -> List[Article]:
     """Compatibility wrapper returning only the combined articles list."""
     articles, _ = fetch_batch(
@@ -139,6 +150,7 @@ def fetch_all(
         syft_url=syft_url,
         syft_key=syft_key,
         reference_dt=reference_dt,
+        deadline_at=deadline_at,
     )
     return articles
 

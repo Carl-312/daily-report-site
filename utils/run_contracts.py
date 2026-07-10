@@ -79,6 +79,37 @@ class RunClock:
             f"{self.report_date.day:02d}日"
         )
 
+    def remaining_seconds(self, now: datetime | None = None) -> float:
+        """Return the remaining run budget from the immutable deadline."""
+        current = now or datetime.now(self.started_at.tzinfo)
+        if current.tzinfo is None or current.utcoffset() is None:
+            raise ValueError("RunClock now must be timezone-aware")
+        return (self.deadline_at - current.astimezone(self.deadline_at.tzinfo)).total_seconds()
+
+    def require_time(self, stage: str, now: datetime | None = None) -> float:
+        """Fail closed once a stage reaches the run deadline."""
+        remaining = self.remaining_seconds(now)
+        if remaining <= 0:
+            raise RunDeadlineExceeded(
+                f"run deadline exceeded before or during {stage}"
+            )
+        return remaining
+
+    def bounded_timeout(
+        self,
+        requested_seconds: float,
+        stage: str,
+        now: datetime | None = None,
+    ) -> float:
+        """Bound one network timeout by the remaining run budget."""
+        if requested_seconds <= 0:
+            raise ValueError("requested_seconds must be positive")
+        return min(float(requested_seconds), self.require_time(stage, now))
+
+
+class RunDeadlineExceeded(TimeoutError):
+    """The current run cannot start another bounded stage operation."""
+
 
 class StrictFrozenModel(BaseModel):
     """Persisted records reject schema drift and cannot be reassigned."""

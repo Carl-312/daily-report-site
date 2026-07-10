@@ -12,6 +12,8 @@ import time
 from typing import List
 import requests
 
+from utils.run_contracts import RunDeadlineExceeded
+
 
 @dataclass
 class Article:
@@ -57,7 +59,10 @@ class BaseSource(ABC):
 
     @abstractmethod
     def fetch(
-        self, max_articles: int = 14, reference_dt: datetime | None = None
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
     ) -> List[Article]:
         """Fetch articles from source. Must be implemented by subclasses."""
         pass
@@ -68,6 +73,7 @@ class BaseSource(ABC):
         timeout: int = 15,
         *,
         max_attempts: int = 3,
+        deadline_at: datetime | None = None,
         sleep=time.sleep,
         random_value=random.random,
     ) -> requests.Response:
@@ -75,9 +81,10 @@ class BaseSource(ABC):
         last_error: requests.RequestException | None = None
         for attempt in range(1, max_attempts + 1):
             self.last_attempts = attempt
+            request_timeout = self._bounded_timeout(timeout, deadline_at, "source fetch")
             try:
                 response = self.session.get(
-                    url, headers=self.HEADERS, timeout=timeout, proxies={}
+                    url, headers=self.HEADERS, timeout=request_timeout, proxies={}
                 )
                 if response.status_code == 429 or response.status_code >= 500:
                     response.raise_for_status()
@@ -89,8 +96,30 @@ class BaseSource(ABC):
                 retryable = status is None or status == 429 or status >= 500
                 if not retryable or attempt == max_attempts:
                     raise
-                sleep((2 ** (attempt - 1)) * 0.1 + random_value() * 0.05)
+                delay = (2 ** (attempt - 1)) * 0.1 + random_value() * 0.05
+                if deadline_at is not None:
+                    remaining = (
+                        deadline_at - datetime.now(deadline_at.tzinfo)
+                    ).total_seconds()
+                    if remaining <= delay:
+                        raise RunDeadlineExceeded(
+                            "run deadline exceeded during source retry backoff"
+                        ) from exc
+                sleep(delay)
         raise last_error or RuntimeError("unreachable retry loop")
+
+    @staticmethod
+    def _bounded_timeout(
+        timeout: float,
+        deadline_at: datetime | None,
+        stage: str,
+    ) -> float:
+        if deadline_at is None:
+            return timeout
+        remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
+        if remaining <= 0:
+            raise RunDeadlineExceeded(f"run deadline exceeded during {stage}")
+        return min(float(timeout), remaining)
 
     def _parse_html(self, content: bytes):
         """Parse HTML content using BeautifulSoup"""

@@ -30,7 +30,10 @@ class AIBaseSource(BaseSource):
     DAILY_URL = "https://news.aibase.com/zh/daily"
 
     def fetch(
-        self, max_articles: int = 14, reference_dt: datetime | None = None
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
     ) -> List[Article]:
         """Fetch today's AI daily digest"""
         today_beijing = (
@@ -38,7 +41,7 @@ class AIBaseSource(BaseSource):
         )
 
         # Get daily page
-        resp = self._get(self.DAILY_URL)
+        resp = self._get(self.DAILY_URL, deadline_at=deadline_at)
         resp.raise_for_status()
         soup = self._parse_html(resp.content)
 
@@ -48,7 +51,7 @@ class AIBaseSource(BaseSource):
             return []
 
         # Extract article detail
-        article = self._extract_detail(link)
+        article = self._extract_detail(link, deadline_at=deadline_at)
         if not article:
             return []
 
@@ -92,10 +95,12 @@ class AIBaseSource(BaseSource):
         candidates.sort(key=score, reverse=True)
         return candidates[0]["url"]
 
-    def _extract_detail(self, link: str) -> Article | None:
+    def _extract_detail(
+        self, link: str, *, deadline_at: datetime | None = None
+    ) -> Article | None:
         """Extract article details from page"""
         try:
-            resp = self._get(link)
+            resp = self._get(link, deadline_at=deadline_at)
             resp.raise_for_status()
             soup = self._parse_html(resp.content)
 

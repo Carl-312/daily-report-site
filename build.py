@@ -13,6 +13,7 @@ import shutil
 import markdown
 
 from config import get_config
+from utils.run_contracts import RunDeadlineExceeded
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -152,6 +153,11 @@ def resolve_paths(
     )
 
 
+def _require_deadline(deadline_at: datetime | None, stage: str) -> None:
+    if deadline_at is not None and datetime.now(deadline_at.tzinfo) >= deadline_at:
+        raise RunDeadlineExceeded(f"run deadline exceeded during {stage}")
+
+
 def parse_frontmatter(content: str) -> tuple[dict[str, str], str]:
     """Parse YAML frontmatter from markdown content."""
     meta = {"title": "Untitled", "date": ""}
@@ -242,6 +248,7 @@ def build_site(
     source_dir: Path | None = None,
     output_dir: Path | None = None,
     assets_dir: Path | None = None,
+    deadline_at: datetime | None = None,
 ) -> list[dict[str, str]]:
     """Build the entire static site."""
     source_dir, output_dir, assets_dir = resolve_paths(
@@ -249,6 +256,7 @@ def build_site(
     )
 
     print("🚀 Building Daily Report site...")
+    _require_deadline(deadline_at, "site build")
     source_dir.mkdir(parents=True, exist_ok=True)
     prepare_output_dir(output_dir)
 
@@ -265,6 +273,7 @@ def build_site(
 
     articles: list[dict[str, str]] = []
     for md_path in md_files:
+        _require_deadline(deadline_at, "site build")
         article = build_article(md_path)
         articles.append(article)
 

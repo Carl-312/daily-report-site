@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from sources.base import Article
+from utils.run_contracts import RunDeadlineExceeded
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
@@ -487,8 +488,14 @@ def search_tavily(
     api_key: str,
     payload: dict[str, Any],
     timeout: int = REQUEST_TIMEOUT_SECONDS,
+    deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
     started = time.perf_counter()
+    if deadline_at is not None:
+        remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
+        if remaining <= 0:
+            raise RunDeadlineExceeded("run deadline exceeded before Tavily request")
+        timeout = min(float(timeout), remaining)
     response = session.post(
         TAVILY_SEARCH_URL,
         json={"api_key": api_key, **payload},
@@ -500,6 +507,20 @@ def search_tavily(
         "latency_ms": latency_ms,
         "response": response.json(),
     }
+
+
+def _search_tavily_with_deadline(
+    session: requests.Session,
+    api_key: str,
+    payload: dict[str, Any],
+    deadline_at: datetime | None,
+) -> dict[str, Any]:
+    """Keep legacy test doubles/callers compatible when no deadline is set."""
+    if deadline_at is None:
+        return search_tavily(session, api_key, payload)
+    return search_tavily(
+        session, api_key, payload, deadline_at=deadline_at
+    )
 
 
 def classify_request_outcome(error: Exception | None) -> str:
@@ -965,6 +986,7 @@ def run_verify_stage(
     session: requests.Session,
     api_key: str,
     reference_dt: datetime,
+    deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
     start_date, end_date = report_window(reference_dt)
     reserved_refill_calls = reserved_refill_call_budget(settings)
@@ -1009,7 +1031,9 @@ def run_verify_stage(
         results: list[dict[str, Any]] = []
 
         try:
-            response = search_tavily(session, api_key, payload)
+            response = _search_tavily_with_deadline(
+                session, api_key, payload, deadline_at
+            )
             latency_ms = response["latency_ms"]
             body = response["response"]
             results = body.get("results", []) or []
@@ -1032,6 +1056,8 @@ def run_verify_stage(
                     reference_dt=reference_dt,
                     strict_hours=settings.strict_hours,
                 )
+        except RunDeadlineExceeded:
+            raise
         except Exception as exc:
             error = str(exc)
             error_obj = exc
@@ -1132,6 +1158,7 @@ def run_domain_refill_stage(
     reference_dt: datetime,
     remaining_budget: int,
     needed_count: int,
+    deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
     accepted_candidates: list[dict[str, Any]] = []
     refill_runs: list[dict[str, Any]] = []
@@ -1180,9 +1207,13 @@ def run_domain_refill_stage(
         error_obj: Exception | None = None
         results: list[dict[str, Any]] = []
         try:
-            response = search_tavily(session, api_key, payload)
+            response = _search_tavily_with_deadline(
+                session, api_key, payload, deadline_at
+            )
             latency_ms = response["latency_ms"]
             results = response["response"].get("results", []) or []
+        except RunDeadlineExceeded:
+            raise
         except Exception as exc:
             error = str(exc)
             error_obj = exc
@@ -1354,6 +1385,7 @@ def enrich_articles_with_tavily(
     tavily_api_key: str,
     enabled: bool,
     reference_dt: datetime | None = None,
+    deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
     article_dicts = [article_to_dict(article) for article in articles]
     reference_dt = reference_dt or datetime.now(tz=REPORT_TIMEZONE)
@@ -1434,6 +1466,7 @@ def enrich_articles_with_tavily(
             session=session,
             api_key=tavily_api_key,
             reference_dt=reference_dt,
+            deadline_at=deadline_at,
         )
         baseline_verify_calls = min(
             len(prefilter_clusters["annotated_candidates"]),
@@ -1494,6 +1527,7 @@ def enrich_articles_with_tavily(
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
                 needed_count=report["refill_needed_count"],
+                deadline_at=deadline_at,
             )
         report["refill_calls"] = priority_refill["refill_calls"]
         report["total_calls"] += priority_refill["refill_calls"]
@@ -1534,6 +1568,7 @@ def enrich_articles_with_tavily(
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
                 needed_count=secondary_needed_count,
+                deadline_at=deadline_at,
             )
             secondary_refill_executed = secondary_refill["refill_calls"] > 0
             secondary_candidates = secondary_refill["accepted_candidates"]
@@ -1587,6 +1622,7 @@ def enrich_articles_with_tavily(
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
                 needed_count=official_needed_count,
+                deadline_at=deadline_at,
             )
             official_candidates = official["accepted_candidates"]
             report["fallback_calls"] = official["refill_calls"]

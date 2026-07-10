@@ -21,10 +21,13 @@ class TechCrunchSource(BaseSource):
     BASE_URL = "https://techcrunch.com"
 
     def fetch(
-        self, max_articles: int = 14, reference_dt: datetime | None = None
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
     ) -> List[Article]:
         """Fetch recent tech news"""
-        resp = self._get(self.BASE_URL)
+        resp = self._get(self.BASE_URL, deadline_at=deadline_at)
         resp.raise_for_status()
         soup = self._parse_html(resp.content)
 

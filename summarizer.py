@@ -5,20 +5,30 @@ Summarizes news articles into daily reports.
 
 from __future__ import annotations
 import json
+from datetime import datetime
 from pathlib import Path
 import re
 from typing import Any
 from openai import OpenAI
 from config import get_config
+from utils.run_contracts import RunDeadlineExceeded
 
 
 class SummaryQualityError(ValueError):
     """Raised when an LLM response is not a usable Chinese daily summary."""
 
 
-def create_client(base_url: str, api_key: str) -> OpenAI:
+def create_client(
+    base_url: str,
+    api_key: str,
+    *,
+    timeout: float | None = None,
+) -> OpenAI:
     """Create OpenAI-compatible client."""
-    return OpenAI(base_url=base_url, api_key=api_key)
+    options = {"base_url": base_url, "api_key": api_key, "max_retries": 0}
+    if timeout is not None:
+        options["timeout"] = timeout
+    return OpenAI(**options)
 
 
 def load_prompt(path: str = None) -> str:
@@ -140,7 +150,11 @@ def _provider_candidates() -> list[dict[str, str]]:
     return providers
 
 
-def summarize(articles: list[dict], stream: bool = True) -> str:
+def summarize(
+    articles: list[dict],
+    stream: bool = True,
+    deadline_at=None,
+) -> str:
     """
     Summarize articles using LLM with provider fallback.
 
@@ -167,7 +181,20 @@ def summarize(articles: list[dict], stream: bool = True) -> str:
 
     errors: list[str] = []
     for idx, provider in enumerate(providers):
-        client = create_client(provider["base_url"], provider["api_key"])
+        if deadline_at is not None:
+            remaining = (
+                deadline_at - datetime.now(deadline_at.tzinfo)
+            ).total_seconds()
+            if remaining <= 0:
+                raise RunDeadlineExceeded("run deadline exceeded before summary")
+        else:
+            remaining = None
+        if remaining is None:
+            client = create_client(provider["base_url"], provider["api_key"])
+        else:
+            client = create_client(
+                provider["base_url"], provider["api_key"], timeout=remaining
+            )
         params: dict[str, Any] = {
             "model": provider["model"],
             "max_tokens": cfg.max_output,

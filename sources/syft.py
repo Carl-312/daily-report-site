@@ -23,7 +23,10 @@ class SyftSource(BaseSource):
         self.secret_key = secret_key
 
     def fetch(
-        self, max_articles: int = 14, reference_dt: datetime | None = None
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
     ) -> List[Article]:
         """Fetch news from Syft email digest API"""
         if not self.web_app_url or not self.secret_key:
@@ -38,7 +41,7 @@ class SyftSource(BaseSource):
             self.web_app_url,
             params={"secret": self.secret_key, "date": today},
             headers=self.HEADERS,
-            timeout=30,
+            timeout=self._bounded_timeout(30, deadline_at, "syft fetch"),
         )
         resp.raise_for_status()
 

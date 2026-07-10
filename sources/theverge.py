@@ -21,10 +21,13 @@ class TheVergeSource(BaseSource):
     AI_URL = "https://www.theverge.com/ai-artificial-intelligence"
 
     def fetch(
-        self, max_articles: int = 14, reference_dt: datetime | None = None
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
     ) -> List[Article]:
         """Fetch AI news from The Verge"""
-        resp = self._get(self.AI_URL)
+        resp = self._get(self.AI_URL, deadline_at=deadline_at)
         resp.raise_for_status()
         soup = self._parse_html(resp.content)
 

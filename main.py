@@ -8,6 +8,7 @@ import argparse
 import json
 import shutil
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
 
 from config import get_config
@@ -53,20 +54,37 @@ def resolve_enrichment_enabled(cfg, mode: str) -> bool:
     return bool(cfg.enrichment.enabled)
 
 
+def create_run_clock(cfg) -> RunClock:
+    return RunClock.create(
+        getattr(cfg, "timezone", "Asia/Shanghai"),
+        deadline_duration=timedelta(
+            minutes=float(getattr(cfg, "run_deadline_minutes", 20))
+        ),
+    )
+
+
 def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None = None):
     enabled = resolve_enrichment_enabled(cfg, args.enrichment)
     print(
         "\n🧪 Tavily enrichment..."
         f" ({'enabled' if enabled else 'disabled'}, mode={args.enrichment})"
     )
-    result = enrich_articles_with_tavily(
-        articles,
-        report_date=date_str,
-        settings=cfg.enrichment,
-        tavily_api_key=cfg.tavily_api_key,
-        enabled=enabled,
-        reference_dt=clock.cutoff_at if clock else None,
-    )
+    kwargs = {
+        "report_date": date_str,
+        "settings": cfg.enrichment,
+        "tavily_api_key": cfg.tavily_api_key,
+        "enabled": enabled,
+        "reference_dt": clock.cutoff_at if clock else None,
+    }
+    if clock is not None:
+        kwargs["deadline_at"] = clock.deadline_at
+    try:
+        result = enrich_articles_with_tavily(articles, **kwargs)
+    except TypeError as exc:
+        if "deadline_at" not in str(exc):
+            raise
+        kwargs.pop("deadline_at", None)
+        result = enrich_articles_with_tavily(articles, **kwargs)
     report = result["report"]
     print(
         f"   Applied: {report.get('applied')} | "
@@ -115,7 +133,13 @@ def update_run_observer(path, manifest, *, stages=(), sources=(), publication=No
 
 
 def stage_and_publish_run(
-    cfg, workspace, date_str: str, report: dict, content: str, source_results=()
+    cfg,
+    workspace,
+    date_str: str,
+    report: dict,
+    content: str,
+    source_results=(),
+    deadline_at=None,
 ):
     """Build a complete candidate edition before changing any public artifact."""
     from build import build_site
@@ -129,6 +153,8 @@ def stage_and_publish_run(
     )
     if not decision.publish:
         raise RuntimeError(f"publication blocked: {decision.reason}")
+    if deadline_at is not None and deadline_at <= datetime.now(deadline_at.tzinfo):
+        raise TimeoutError("run deadline exceeded before staged publication")
     staged_edition = workspace.root / "edition"
     staged_data = staged_edition / "data"
     staged_content = staged_edition / "content"
@@ -154,11 +180,14 @@ def stage_and_publish_run(
     ):
         print("ℹ️  Equivalent edition already published; skipping promotion.")
         return public_json, public_markdown
-    build_site(
-        source_dir=staged_content,
-        output_dir=staged_site,
-        assets_dir=Path("assets"),
-    )
+    build_kwargs = {
+        "source_dir": staged_content,
+        "output_dir": staged_site,
+        "assets_dir": Path("assets"),
+    }
+    if deadline_at is not None:
+        build_kwargs["deadline_at"] = deadline_at
+    build_site(**build_kwargs)
     edition = promote_staged_edition(
         staged_edition,
         publication_root,
@@ -186,7 +215,9 @@ def persist_summary_result(workspace, result) -> Path:
     return target
 
 
-def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
+def summarize_or_offline(
+    articles: list[dict], *, offline: bool, cfg, deadline_at=None
+) -> str:
     """Generate an LLM summary, falling back to offline output when providers fail."""
     if offline:
         return offline_summary(articles)
@@ -196,7 +227,10 @@ def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
         return offline_summary(articles)
 
     try:
-        content = summarize(articles, stream=True)
+        if deadline_at is None:
+            content = summarize(articles, stream=True)
+        else:
+            content = summarize(articles, stream=True, deadline_at=deadline_at)
         validate_summary_quality(content, expected_items=min(10, len(articles)))
         return content
     except Exception as exc:
@@ -211,7 +245,7 @@ def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
 def cmd_run(args):
     """Full pipeline: fetch → summarize → build"""
     cfg = get_config()
-    clock = RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai"))
+    clock = create_run_clock(cfg)
     try:
         date_str = today_ymd(clock)
     except TypeError:  # Compatibility with legacy helper/test doubles.
@@ -229,6 +263,7 @@ def cmd_run(args):
         syft_url=cfg.syft_web_app_url,
         syft_key=cfg.syft_secret_key,
         reference_dt=clock.cutoff_at,
+        deadline_at=clock.deadline_at,
     )
     manifest = update_run_observer(
         workspace.manifest_path,
@@ -248,7 +283,12 @@ def cmd_run(args):
 
     # 3. Summarize
     print("\n🤖 Generating summary...")
-    content = summarize_or_offline(articles_dict, offline=args.offline, cfg=cfg)
+    content = summarize_or_offline(
+        articles_dict,
+        offline=args.offline,
+        cfg=cfg,
+        deadline_at=clock.deadline_at,
+    )
     if args.offline or (not cfg.api_key and not cfg.fallback_api_key):
         persist_summary_result(workspace, offline_summary_result(articles_dict))
 
@@ -274,6 +314,7 @@ def cmd_run(args):
             },
             full_content,
             source_results,
+            deadline_at=clock.deadline_at,
         )
     except Exception as exc:
         update_run_observer(
@@ -308,7 +349,7 @@ def cmd_run(args):
 def cmd_fetch(args):
     """Fetch only - save to JSON"""
     cfg = get_config()
-    clock = RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai"))
+    clock = create_run_clock(cfg)
     try:
         date_str = today_ymd(clock)
     except TypeError:
@@ -322,6 +363,7 @@ def cmd_fetch(args):
         syft_url=cfg.syft_web_app_url,
         syft_key=cfg.syft_secret_key,
         reference_dt=clock.cutoff_at,
+        deadline_at=clock.deadline_at,
     )
     update_run_observer(
         workspace.manifest_path,
@@ -351,7 +393,7 @@ def cmd_fetch(args):
 def cmd_summarize(args):
     """Summarize only - from existing JSON"""
     cfg = get_config()
-    clock = RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai"))
+    clock = create_run_clock(cfg)
     try:
         date_str = today_ymd(clock)
     except TypeError:
@@ -366,7 +408,12 @@ def cmd_summarize(args):
     articles = data.get("articles", [])
     print(f"🤖 Summarizing {len(articles)} articles...")
 
-    content = summarize_or_offline(articles, offline=args.offline, cfg=cfg)
+    content = summarize_or_offline(
+        articles,
+        offline=args.offline,
+        cfg=cfg,
+        deadline_at=clock.deadline_at,
+    )
 
     try:
         title_date = today_cn(clock)
@@ -382,7 +429,7 @@ def cmd_summarize(args):
 def cmd_build(args):
     """Build HTML site only"""
     cfg = get_config()
-    create_run_observer(cfg, RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai")))
+    create_run_observer(cfg, create_run_clock(cfg))
     print("🏗️  Building HTML site...")
     from build import build_site
 
@@ -392,7 +439,7 @@ def cmd_build(args):
 def cmd_test(args):
     """Test API connection"""
     cfg = get_config()
-    create_run_observer(cfg, RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai")))
+    create_run_observer(cfg, create_run_clock(cfg))
     test_connection()
 
 

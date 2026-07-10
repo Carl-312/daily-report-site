@@ -20,6 +20,9 @@ output:
   site_dir: dist
   publication_root: .publication
 
+run:
+  deadline_minutes: 20
+
 enrichment:
   enabled: false
   trust_env: true
