@@ -10,7 +10,9 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Mapping
 
@@ -25,6 +27,19 @@ class PromotionResult:
 
 
 @dataclass(frozen=True, slots=True)
+class PublicEdition:
+    """One complete, immutable public view selected by a single pointer."""
+
+    root: Path
+    pointer_path: Path
+    run_id: str
+    report_date: str
+    data_dir: Path
+    content_dir: Path
+    site_dir: Path
+
+
+@dataclass(frozen=True, slots=True)
 class RunWorkspace:
     """Run-local locations for artifacts before they become public."""
 
@@ -35,6 +50,128 @@ class RunWorkspace:
     content_dir: Path
     site_dir: Path
     journal_path: Path
+
+
+def read_current_edition(publication_root: str | Path) -> PublicEdition | None:
+    """Resolve the one public edition selected by the atomic pointer."""
+    root = Path(publication_root).resolve()
+    pointer_path = root / "public-version.json"
+    if not pointer_path.is_file():
+        return None
+
+    payload = json.loads(pointer_path.read_text(encoding="utf-8"))
+    if payload.get("schema_version") != 1:
+        raise ValueError("unsupported publication pointer schema")
+    run_id = str(payload.get("run_id", ""))
+    report_date = str(payload.get("report_date", ""))
+    edition_value = payload.get("edition")
+    if not run_id or not report_date or not isinstance(edition_value, str):
+        raise ValueError("publication pointer is incomplete")
+
+    edition = (root / edition_value).resolve()
+    editions_root = (root / "editions").resolve()
+    if not edition.is_relative_to(editions_root):
+        raise ValueError("publication edition must remain below editions directory")
+    if not edition.is_dir():
+        raise FileNotFoundError(f"selected publication edition is missing: {edition}")
+
+    data_dir = edition / "data"
+    content_dir = edition / "content"
+    site_dir = edition / "site"
+    if not all(path.is_dir() for path in (data_dir, content_dir, site_dir)):
+        raise ValueError("selected publication edition is incomplete")
+    return PublicEdition(
+        root=edition,
+        pointer_path=pointer_path,
+        run_id=run_id,
+        report_date=report_date,
+        data_dir=data_dir,
+        content_dir=content_dir,
+        site_dir=site_dir,
+    )
+
+
+def promote_staged_edition(
+    staged_dir: Path,
+    publication_root: str | Path,
+    *,
+    run_id: str,
+    report_date: str,
+) -> PublicEdition:
+    """Publish a complete edition by atomically replacing one public pointer.
+
+    The edition is first renamed into the private editions directory. Readers
+    continue using the previous pointer until the final atomic pointer write;
+    after that write all three artifact families resolve to the same edition.
+    """
+    if not staged_dir.is_dir():
+        raise FileNotFoundError(f"staged publication edition missing: {staged_dir}")
+    if not run_id or "/" in run_id or "\\" in run_id:
+        raise ValueError("run_id must be a simple directory component")
+    required_dirs = [staged_dir / name for name in ("data", "content", "site")]
+    if not all(path.is_dir() for path in required_dirs):
+        raise ValueError("staged publication edition must contain data/content/site")
+
+    root = Path(publication_root).resolve()
+    editions_root = root / "editions"
+    editions_root.mkdir(parents=True, exist_ok=True)
+    target = editions_root / run_id
+    if target.exists():
+        raise FileExistsError(f"publication edition already exists: {target}")
+    os.replace(staged_dir, target)
+
+    pointer_path = root / "public-version.json"
+    pointer = {
+        "schema_version": 1,
+        "run_id": run_id,
+        "report_date": report_date,
+        "edition": str(target.relative_to(root)),
+        "published_at": datetime.now(timezone.utc).isoformat(),
+        "paths": {"data": "data", "content": "content", "site": "site"},
+    }
+    try:
+        atomic_write_text(
+            pointer_path,
+            json.dumps(pointer, ensure_ascii=False, indent=2) + "\n",
+        )
+    except BaseException:
+        # The old pointer is still authoritative. Keep the complete orphaned
+        # edition for recovery/inspection rather than deleting good data.
+        raise
+    return PublicEdition(
+        root=target,
+        pointer_path=pointer_path,
+        run_id=run_id,
+        report_date=report_date,
+        data_dir=target / "data",
+        content_dir=target / "content",
+        site_dir=target / "site",
+    )
+
+
+def mirror_public_edition(edition: PublicEdition, targets: Mapping[str, Path]) -> None:
+    """Refresh legacy output paths after pointer publication.
+
+    These paths remain for CLI and GitHub Actions compatibility. They are not
+    the consistency boundary; readers needing a cross-path view must resolve
+    ``public-version.json`` through :func:`read_current_edition`.
+    """
+    for name, source in (
+        ("data", edition.data_dir),
+        ("content", edition.content_dir),
+        ("site", edition.site_dir),
+    ):
+        target = Path(targets[name])
+        staged = target.with_name(f".{target.name}.mirror-staging")
+        if staged.exists():
+            shutil.rmtree(staged) if staged.is_dir() else staged.unlink()
+        shutil.copytree(source, staged)
+        if target.exists():
+            backup = target.with_name(f".{target.name}.mirror-previous")
+            if backup.exists():
+                shutil.rmtree(backup) if backup.is_dir() else backup.unlink()
+            os.replace(target, backup)
+        os.replace(staged, target)
 
 
 def create_run_workspace(

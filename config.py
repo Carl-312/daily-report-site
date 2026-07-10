@@ -65,6 +65,7 @@ class Settings(BaseModel):
     data_dir: str = Field(default="data")
     content_dir: str = Field(default="content")
     site_dir: str = Field(default="dist")
+    publication_root: str = Field(default=".publication")
     runs_dir: str = Field(default=".runs")
 
     # Syft (optional)
@@ -185,6 +186,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 "site_dir": output_cfg.get(
                     "site_dir", output_cfg.get("docs_dir", "dist")
                 ),
+                "publication_root": output_cfg.get("publication_root", ".publication"),
                 "enrichment": cfg.get("enrichment", {}),
             }
 

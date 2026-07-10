@@ -18,6 +18,7 @@ output:
   json_dir: data
   md_dir: content
   site_dir: dist
+  publication_root: .publication
 
 enrichment:
   enabled: false

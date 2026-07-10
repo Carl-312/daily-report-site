@@ -96,7 +96,7 @@ CREATED -> COLLECTED -> CURATED -> SUMMARIZED -> RENDERED -> PUBLISHED
   site/
 ```
 
-阶段产物先写到该 staging 目录。只有所有发布门禁通过，才使用同一文件系统内的 `Path.replace()` 或目录切换，把当天 JSON、Markdown 和站点整体提升为正式版本。失败时保留正式版本和失败运行清单，便于复盘或从某阶段重跑。
+阶段产物先写到该 staging 目录。只有所有发布门禁通过，才把包含 `data/`、`content/` 和 `site/` 的完整 edition 放入版本目录，并原子替换唯一的 `public-version.json` 指针。读者先读取一次指针，再相对该 edition 解析三类产物；失败时保留正式版本和失败运行清单，便于复盘或从某阶段重跑。根目录下的旧 `data/`、`content/`、`dist/` 仅作为兼容镜像，不是跨路径一致性的读取边界。
 
 统一发布政策建议如下：
 

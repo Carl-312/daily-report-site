@@ -30,8 +30,9 @@ from utils.run_contracts import (
 )
 from utils.publication import (
     create_run_workspace,
-    promote_staged_directory,
-    promote_staged_files,
+    mirror_public_edition,
+    promote_staged_edition,
+    read_current_edition,
     recover_incomplete_promotions,
 )
 from utils.publish_policy import decide_publication
@@ -93,6 +94,14 @@ def create_run_observer(cfg, clock: RunClock):
     return manifest, workspace
 
 
+def resolve_publication_root(cfg) -> Path:
+    """Resolve the pointer store without leaking test/preview state globally."""
+    configured = getattr(cfg, "publication_root", None)
+    if configured:
+        return Path(configured)
+    return Path(cfg.data_dir).resolve().parent / ".publication"
+
+
 def update_run_observer(path, manifest, *, stages=(), sources=(), publication=None):
     updated = manifest.model_copy(
         update={
@@ -120,34 +129,51 @@ def stage_and_publish_run(
     )
     if not decision.publish:
         raise RuntimeError(f"publication blocked: {decision.reason}")
-    workspace.content_dir.mkdir(parents=True, exist_ok=True)
-    public_content = Path(cfg.content_dir)
+    staged_edition = workspace.root / "edition"
+    staged_data = staged_edition / "data"
+    staged_content = staged_edition / "content"
+    staged_site = staged_edition / "site"
+    staged_content.mkdir(parents=True, exist_ok=True)
+    publication_root = resolve_publication_root(cfg)
+    current = read_current_edition(publication_root)
+    public_content = current.content_dir if current else Path(cfg.content_dir)
     if public_content.exists():
-        shutil.copytree(public_content, workspace.content_dir, dirs_exist_ok=True)
-    staged_json = save_json(str(workspace.root), date_str, report)
-    staged_markdown = save_markdown(str(workspace.content_dir), date_str, content)
+        shutil.copytree(public_content, staged_content, dirs_exist_ok=True)
+    staged_json = save_json(str(staged_data), date_str, report)
+    staged_markdown = save_markdown(str(staged_content), date_str, content)
     public_json = Path(cfg.data_dir) / f"{date_str}.json"
     public_markdown = Path(cfg.content_dir) / f"{date_str}.md"
     if (
-        public_json.is_file()
-        and public_markdown.is_file()
-        and staged_json.read_bytes() == public_json.read_bytes()
-        and staged_markdown.read_bytes() == public_markdown.read_bytes()
+        current is not None
+        and (current.data_dir / f"{date_str}.json").is_file()
+        and (current.content_dir / f"{date_str}.md").is_file()
+        and staged_json.read_bytes()
+        == (current.data_dir / f"{date_str}.json").read_bytes()
+        and staged_markdown.read_bytes()
+        == (current.content_dir / f"{date_str}.md").read_bytes()
     ):
         print("ℹ️  Equivalent edition already published; skipping promotion.")
         return public_json, public_markdown
     build_site(
-        source_dir=workspace.content_dir,
-        output_dir=workspace.site_dir,
+        source_dir=staged_content,
+        output_dir=staged_site,
         assets_dir=Path("assets"),
     )
-    mappings = {
-        staged_json: public_json,
-        staged_markdown: public_markdown,
-    }
-    promote_staged_files(mappings, journal_path=workspace.journal_path)
-    promote_staged_directory(workspace.site_dir, Path(cfg.site_dir))
-    return mappings[staged_json], mappings[staged_markdown]
+    edition = promote_staged_edition(
+        staged_edition,
+        publication_root,
+        run_id=workspace.root.name,
+        report_date=date_str,
+    )
+    mirror_public_edition(
+        edition,
+        {
+            "data": Path(cfg.data_dir),
+            "content": Path(cfg.content_dir),
+            "site": Path(cfg.site_dir),
+        },
+    )
+    return public_json, public_markdown
 
 
 def persist_summary_result(workspace, result) -> Path:
