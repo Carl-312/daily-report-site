@@ -80,5 +80,36 @@ def test_run_workspace_is_run_scoped_and_rejects_path_escape(tmp_path) -> None:
 
     with pytest.raises(ValueError, match="report_date"):
         publication.create_run_workspace(tmp_path, "../outside", "run-1")
+    with pytest.raises(ValueError, match="report_date"):
+        publication.create_run_workspace(tmp_path, "..", "run-1")
     with pytest.raises(ValueError, match="run_id"):
         publication.create_run_workspace(tmp_path, "2026-07-10", "../outside")
+
+
+def test_recovery_restores_backup_from_interrupted_journal(tmp_path) -> None:
+    target = tmp_path / "public" / "report.json"
+    backup = tmp_path / "runs" / "2026-07-10" / "run" / "backups" / "0-report.json"
+    target.parent.mkdir(parents=True)
+    backup.parent.mkdir(parents=True)
+    backup.write_text("last-known-good", encoding="utf-8")
+    journal = backup.parents[1] / "promotion.json"
+    journal.write_text(
+        json.dumps(
+            {
+                "state": "preparing",
+                "entries": [
+                    {
+                        "target": str(target),
+                        "backup": str(backup),
+                        "staged": str(backup.parents[1] / "staged.json"),
+                        "target_existed": True,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert publication.recover_incomplete_promotions(tmp_path / "runs") == 1
+    assert target.read_text(encoding="utf-8") == "last-known-good"
+    assert json.loads(journal.read_text(encoding="utf-8"))["state"] == "rolled_back"
