@@ -2,7 +2,7 @@
 
 **分支：** `gsd/daily-news-reliability`  
 **PR：** Draft #8  
-**状态：** 进行中，禁止合并
+**状态：** 灰度分支实现完成，Draft PR 保持不合并
 
 ## 已验证能力
 
@@ -24,10 +24,14 @@
 
 这些检查只证明当前测试矩阵通过，不是 merge 授权。
 
-## 尚未完成的交付门禁
+## 交付门禁证据
 
-1. 需要重新运行完整代码审查、灰度场景、最终回归和 GitHub Actions 检查，并补齐本次改造的验收证据。
-2. PR 仍必须保持 Draft，验证全部通过前不得合入 `main`。
+- 本地：Ruff lint/format 全绿，pytest `75 passed`（仅既有 Pydantic 弃用 warning）。
+- GitHub Actions push run `29073505317`：`p0-contract`、`quality`、`gray-scenarios`、`final-regression` 全部通过。
+- GitHub Actions pull request run `29073506997`：`p0-contract`、`quality`、`gray-scenarios`、`final-regression` 全部通过。
+- 深度代码审查：`01-REVIEW.md` 当前 verdict 为 `passed`，无 P0/P1/P2 finding。
+
+PR #8 仍必须保持 Draft；不得直接修改或合入 `main`。
 
 在上述阻塞项消除、回滚演练和最终审查重新通过前，PR 必须保持 Draft，且不得合入 `main`。
 
