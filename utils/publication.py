@@ -24,6 +24,40 @@ class PromotionResult:
     targets: tuple[Path, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class RunWorkspace:
+    """Run-local locations for artifacts before they become public."""
+
+    root: Path
+    manifest_path: Path
+    articles_path: Path
+    summary_path: Path
+    content_dir: Path
+    site_dir: Path
+    journal_path: Path
+
+
+def create_run_workspace(
+    runs_dir: str | Path, report_date: str, run_id: str
+) -> RunWorkspace:
+    """Create a constrained, run-scoped staging workspace."""
+    if not report_date or "/" in report_date or "\\" in report_date:
+        raise ValueError("report_date must be a simple directory component")
+    if not run_id or "/" in run_id or "\\" in run_id or run_id in {".", ".."}:
+        raise ValueError("run_id must be a simple directory component")
+    root = Path(runs_dir).resolve() / report_date / run_id
+    root.mkdir(parents=True, exist_ok=True)
+    return RunWorkspace(
+        root=root,
+        manifest_path=root / "manifest.json",
+        articles_path=root / "articles.json",
+        summary_path=root / "summary.md",
+        content_dir=root / "content",
+        site_dir=root / "site",
+        journal_path=root / "promotion.json",
+    )
+
+
 def promote_staged_files(
     staged_to_target: Mapping[Path, Path], *, journal_path: Path
 ) -> PromotionResult:

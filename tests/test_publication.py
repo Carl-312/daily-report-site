@@ -67,3 +67,18 @@ def test_failed_promotion_restores_last_known_good_files(tmp_path, monkeypatch) 
     assert target_one.read_text(encoding="utf-8") == "old-one"
     assert target_two.read_text(encoding="utf-8") == "old-two"
     assert json.loads(journal.read_text(encoding="utf-8"))["state"] == "rolled_back"
+
+
+def test_run_workspace_is_run_scoped_and_rejects_path_escape(tmp_path) -> None:
+    workspace = publication.create_run_workspace(
+        tmp_path / ".runs", "2026-07-10", "run-1"
+    )
+
+    assert workspace.root == (tmp_path / ".runs" / "2026-07-10" / "run-1").resolve()
+    assert workspace.articles_path == workspace.root / "articles.json"
+    assert workspace.site_dir == workspace.root / "site"
+
+    with pytest.raises(ValueError, match="report_date"):
+        publication.create_run_workspace(tmp_path, "../outside", "run-1")
+    with pytest.raises(ValueError, match="run_id"):
+        publication.create_run_workspace(tmp_path, "2026-07-10", "../outside")
