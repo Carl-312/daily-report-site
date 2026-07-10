@@ -78,13 +78,13 @@
 | OBS-01 | Phase 4 | Pending |
 | OBS-02 | Phase 6 | Pending |
 | DEL-01 | Phase 1 | Pending |
-| DEL-02 | Phase 6 | Pending |
-| DEL-03 | Phase 6 | Pending |
+| DEL-02 | Phase 7 | Pending |
+| DEL-03 | Phase 7 | Pending |
 | DEL-04 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 22 total
-- Mapped to phases: 22
+- v1 requirements: 21 total
+- Mapped to phases: 21
 - Unmapped: 0 ✓
 
 ---
