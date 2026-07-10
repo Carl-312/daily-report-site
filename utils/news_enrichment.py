@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from email.utils import parsedate_to_datetime
 import re
-import time
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from typing import Any
@@ -19,6 +18,11 @@ from zoneinfo import ZoneInfo
 import requests
 
 from sources.base import Article
+from utils.enrichment_policy import decide_enrichment
+from utils.enrichment_transport import (
+    TavilyTransport,
+    classify_request_outcome as classify_transport_outcome,
+)
 from utils.run_contracts import RunDeadlineExceeded
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
@@ -490,23 +494,12 @@ def search_tavily(
     timeout: int = REQUEST_TIMEOUT_SECONDS,
     deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
-    started = time.perf_counter()
-    if deadline_at is not None:
-        remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
-        if remaining <= 0:
-            raise RunDeadlineExceeded("run deadline exceeded before Tavily request")
-        timeout = min(float(timeout), remaining)
-    response = session.post(
-        TAVILY_SEARCH_URL,
-        json={"api_key": api_key, **payload},
-        timeout=timeout,
-    )
-    latency_ms = round((time.perf_counter() - started) * 1000, 2)
-    response.raise_for_status()
-    return {
-        "latency_ms": latency_ms,
-        "response": response.json(),
-    }
+    return TavilyTransport(
+        session,
+        api_key,
+        deadline_at=deadline_at,
+        default_timeout=timeout,
+    ).search(payload)
 
 
 def _search_tavily_with_deadline(
@@ -524,17 +517,7 @@ def _search_tavily_with_deadline(
 
 
 def classify_request_outcome(error: Exception | None) -> str:
-    if error is None:
-        return "success"
-    if isinstance(error, requests.Timeout):
-        return "timeout"
-    if isinstance(error, requests.HTTPError):
-        return "http_error"
-    if isinstance(error, requests.ConnectionError):
-        return "connection_error"
-    if isinstance(error, requests.RequestException):
-        return "request_error"
-    return "unexpected_error"
+    return classify_transport_outcome(error)
 
 
 def pick_best_match(
@@ -979,7 +962,7 @@ def reserved_refill_call_budget(settings: Any) -> int:
     return min(desired_refill_calls, max_reservable_calls)
 
 
-def run_verify_stage(
+def _run_verify_stage_legacy(
     *,
     candidates: list[dict[str, Any]],
     settings: Any,
@@ -1145,7 +1128,7 @@ def run_verify_stage(
     }
 
 
-def run_domain_refill_stage(
+def _run_domain_refill_stage_legacy(
     *,
     base_articles: list[dict[str, Any]],
     prior_candidates: list[dict[str, Any]],
@@ -1377,6 +1360,20 @@ def run_domain_refill_stage(
     }
 
 
+def run_verify_stage(**kwargs: Any) -> dict[str, Any]:
+    """Delegate verification through its stable module boundary."""
+    from utils.enrichment_verification import run_verify_stage as run_stage
+
+    return run_stage(**kwargs)
+
+
+def run_domain_refill_stage(**kwargs: Any) -> dict[str, Any]:
+    """Delegate refill through its stable module boundary."""
+    from utils.enrichment_refill import run_domain_refill_stage as run_stage
+
+    return run_stage(**kwargs)
+
+
 def enrich_articles_with_tavily(
     articles: list[Article | dict[str, Any]],
     *,
@@ -1397,24 +1394,16 @@ def enrich_articles_with_tavily(
         settings=settings,
     )
 
-    if not enabled:
-        report["skip_reason"] = "disabled"
-        report["stop_reason"] = "disabled"
-        report["notes"].append("Tavily enrichment is disabled for this run.")
-        report["accepted_by_stage_preview"] = {
-            "verify": [],
-            "priority_refill": [],
-            "secondary_refill": [],
-            "official_fallback": [],
-        }
-        return {"articles": article_dicts, "report": report}
-
-    if not tavily_api_key:
-        report["skip_reason"] = "missing_api_key"
-        report["stop_reason"] = "missing_api_key"
-        report["notes"].append(
-            "TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles."
-        )
+    decision = decide_enrichment(enabled=enabled, api_key=tavily_api_key)
+    if not decision.apply:
+        report["skip_reason"] = decision.skip_reason
+        report["stop_reason"] = decision.skip_reason
+        if decision.skip_reason == "disabled":
+            report["notes"].append("Tavily enrichment is disabled for this run.")
+        else:
+            report["notes"].append(
+                "TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles."
+            )
         report["accepted_by_stage_preview"] = {
             "verify": [],
             "priority_refill": [],
