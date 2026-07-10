@@ -7,6 +7,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
+import random
+import time
 from typing import List
 import requests
 
@@ -59,9 +61,34 @@ class BaseSource(ABC):
         """Fetch articles from source. Must be implemented by subclasses."""
         pass
 
-    def _get(self, url: str, timeout: int = 15) -> requests.Response:
-        """Make HTTP GET request with standard headers"""
-        return self.session.get(url, headers=self.HEADERS, timeout=timeout, proxies={})
+    def _get(
+        self,
+        url: str,
+        timeout: int = 15,
+        *,
+        max_attempts: int = 3,
+        sleep=time.sleep,
+        random_value=random.random,
+    ) -> requests.Response:
+        """Make a bounded retryable GET without retrying configuration 4xx errors."""
+        last_error: requests.RequestException | None = None
+        for attempt in range(1, max_attempts + 1):
+            try:
+                response = self.session.get(
+                    url, headers=self.HEADERS, timeout=timeout, proxies={}
+                )
+                if response.status_code == 429 or response.status_code >= 500:
+                    response.raise_for_status()
+                return response
+            except requests.RequestException as exc:
+                last_error = exc
+                response = getattr(exc, "response", None)
+                status = getattr(response, "status_code", None)
+                retryable = status is None or status == 429 or status >= 500
+                if not retryable or attempt == max_attempts:
+                    raise
+                sleep((2 ** (attempt - 1)) * 0.1 + random_value() * 0.05)
+        raise last_error or RuntimeError("unreachable retry loop")
 
     def _parse_html(self, content: bytes):
         """Parse HTML content using BeautifulSoup"""
