@@ -297,8 +297,6 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
     ]
     order: list[str] = []
     summarized_articles: list[dict] = []
-    original_save_json = daily_main.save_json
-    original_save_markdown = daily_main.save_markdown
 
     def fake_fetch_batch(**kwargs):
         order.append("fetch_all")
@@ -342,29 +340,14 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
             },
         }
 
-    def recording_save_json(dir_path, date_str, data):
-        assert order == ["fetch_all", "dedupe", "enrich_articles_with_tavily"]
-        order.append("save_json")
-        return original_save_json(dir_path, date_str, data)
-
     def fake_offline_summary(articles):
-        assert order == [
-            "fetch_all",
-            "dedupe",
-            "enrich_articles_with_tavily",
-            "save_json",
-        ]
+        assert order == ["fetch_all", "dedupe", "enrich_articles_with_tavily"]
         order.append("offline_summary")
         summarized_articles.extend(articles)
         return "\n".join(f"- {article['title']}" for article in articles)
 
-    def recording_save_markdown(dir_path, date_str, content):
+    def fake_build_site(**kwargs):
         assert order[-1] == "offline_summary"
-        order.append("save_markdown")
-        return original_save_markdown(dir_path, date_str, content)
-
-    def fake_build_site():
-        assert order[-1] == "save_markdown"
         order.append("build")
         return []
 
@@ -378,9 +361,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         "enrich_articles_with_tavily",
         fake_enrich_articles_with_tavily,
     )
-    monkeypatch.setattr(daily_main, "save_json", recording_save_json)
     monkeypatch.setattr(daily_main, "offline_summary", fake_offline_summary)
-    monkeypatch.setattr(daily_main, "save_markdown", recording_save_markdown)
     monkeypatch.setattr(build, "build_site", fake_build_site)
 
     daily_main.cmd_run(SimpleNamespace(enrichment="on", offline=True))
@@ -394,9 +375,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         "fetch_all",
         "dedupe",
         "enrich_articles_with_tavily",
-        "save_json",
         "offline_summary",
-        "save_markdown",
         "build",
     ]
     assert saved_report["articles"] == enriched_articles

@@ -5,7 +5,9 @@ Unified CLI for fetching news, summarizing, and building static site
 
 from __future__ import annotations
 import argparse
+import shutil
 import sys
+from pathlib import Path
 
 from config import get_config
 from sources import fetch_batch, Article
@@ -19,6 +21,7 @@ from utils import (
     load_json,
 )
 from utils.run_contracts import RunClock, StageResult, new_manifest, write_manifest
+from utils.publication import create_run_workspace, promote_staged_files
 from summarizer import (
     summarize,
     offline_summary,
@@ -69,11 +72,11 @@ def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None 
 def create_run_observer(cfg, clock: RunClock):
     """Create a non-public run manifest; promotion remains a later phase."""
     manifest = new_manifest(cfg, clock)
-    path = write_manifest(
-        f"{getattr(cfg, 'runs_dir', '.runs')}/{clock.report_date_ymd}/{manifest.run_id}/manifest.json",
-        manifest,
+    workspace = create_run_workspace(
+        getattr(cfg, "runs_dir", ".runs"), clock.report_date_ymd, manifest.run_id
     )
-    return manifest, path
+    write_manifest(workspace.manifest_path, manifest)
+    return manifest, workspace
 
 
 def update_run_observer(path, manifest, *, stages=(), sources=()):
@@ -82,6 +85,39 @@ def update_run_observer(path, manifest, *, stages=(), sources=()):
     )
     write_manifest(path, updated)
     return updated
+
+
+def stage_and_publish_run(cfg, workspace, date_str: str, report: dict, content: str):
+    """Build a complete candidate edition before changing any public artifact."""
+    from build import build_site
+    from utils.storage import save_json, save_markdown
+
+    if not report["articles"]:
+        raise RuntimeError("publication blocked: no accepted articles")
+    workspace.content_dir.mkdir(parents=True, exist_ok=True)
+    public_content = Path(cfg.content_dir)
+    if public_content.exists():
+        shutil.copytree(public_content, workspace.content_dir, dirs_exist_ok=True)
+    staged_json = save_json(str(workspace.root), date_str, report)
+    staged_markdown = save_markdown(str(workspace.content_dir), date_str, content)
+    build_site(
+        source_dir=workspace.content_dir,
+        output_dir=workspace.site_dir,
+        assets_dir=Path("assets"),
+    )
+    mappings = {
+        staged_json: Path(cfg.data_dir) / f"{date_str}.json",
+        staged_markdown: Path(cfg.content_dir) / f"{date_str}.md",
+    }
+    mappings.update(
+        {
+            staged: Path(cfg.site_dir) / staged.relative_to(workspace.site_dir)
+            for staged in workspace.site_dir.rglob("*")
+            if staged.is_file()
+        }
+    )
+    promote_staged_files(mappings, journal_path=workspace.journal_path)
+    return mappings[staged_json], mappings[staged_markdown]
 
 
 def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
@@ -114,7 +150,7 @@ def cmd_run(args):
         date_str = today_ymd(clock)
     except TypeError:  # Compatibility with legacy helper/test doubles.
         date_str = today_ymd()
-    manifest, manifest_path = create_run_observer(cfg, clock)
+    manifest, workspace = create_run_observer(cfg, clock)
 
     print(f"🚀 Daily Report - {date_str}")
     print("=" * 50)
@@ -129,7 +165,7 @@ def cmd_run(args):
         reference_dt=clock.cutoff_at,
     )
     manifest = update_run_observer(
-        manifest_path,
+        workspace.manifest_path,
         manifest,
         stages=(StageResult(name="fetch", status="ok", started_at=clock.started_at),),
         sources=source_results,
@@ -144,23 +180,11 @@ def cmd_run(args):
     enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
     articles_dict = enrichment_result["articles"]
 
-    # 3. Save JSON
-    json_path = save_json(
-        cfg.data_dir,
-        date_str,
-        {
-            "date": date_str,
-            "articles": articles_dict,
-            "enrichment": enrichment_result["report"],
-        },
-    )
-    print(f"\n💾 Saved JSON: {json_path}")
-
-    # 4. Summarize
+    # 3. Summarize
     print("\n🤖 Generating summary...")
     content = summarize_or_offline(articles_dict, offline=args.offline, cfg=cfg)
 
-    # 5. Build Markdown title
+    # 4. Build Markdown title
     try:
         title_date = today_cn(clock)
     except TypeError:  # Compatibility with legacy helper/test doubles.
@@ -168,15 +192,19 @@ def cmd_run(args):
     title = f"🔥（{title_date}）每日AI资讯一览✨"
     full_content = f"{title}\n\n{content}"
 
-    # 6. Save Markdown
-    md_path = save_markdown(cfg.content_dir, date_str, full_content)
-    print(f"\n📝 Saved Markdown: {md_path}")
-
-    # 7. Build HTML
-    print("\n🏗️  Building HTML site...")
-    from build import build_site
-
-    build_site()
+    # 5. Stage JSON, Markdown, and the complete static site, then promote.
+    print("\n🏗️  Building staged site and publishing complete edition...")
+    json_path, md_path = stage_and_publish_run(
+        cfg,
+        workspace,
+        date_str,
+        {
+            "date": date_str,
+            "articles": articles_dict,
+            "enrichment": enrichment_result["report"],
+        },
+        full_content,
+    )
 
     print("\n" + "=" * 50)
     print("✅ Done!")
@@ -194,7 +222,7 @@ def cmd_fetch(args):
         date_str = today_ymd(clock)
     except TypeError:
         date_str = today_ymd()
-    manifest, manifest_path = create_run_observer(cfg, clock)
+    manifest, workspace = create_run_observer(cfg, clock)
 
     print(f"📡 Fetching news for {date_str}...")
     articles, source_results = fetch_batch(
@@ -205,7 +233,7 @@ def cmd_fetch(args):
         reference_dt=clock.cutoff_at,
     )
     update_run_observer(
-        manifest_path,
+        workspace.manifest_path,
         manifest,
         stages=(StageResult(name="fetch", status="ok", started_at=clock.started_at),),
         sources=source_results,
