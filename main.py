@@ -20,7 +20,13 @@ from utils import (
     save_markdown,
     load_json,
 )
-from utils.run_contracts import RunClock, StageResult, new_manifest, write_manifest
+from utils.run_contracts import (
+    PublicationState,
+    RunClock,
+    StageResult,
+    new_manifest,
+    write_manifest,
+)
 from utils.publication import create_run_workspace, promote_staged_files
 from utils.publish_policy import decide_publication
 from summarizer import (
@@ -80,9 +86,13 @@ def create_run_observer(cfg, clock: RunClock):
     return manifest, workspace
 
 
-def update_run_observer(path, manifest, *, stages=(), sources=()):
+def update_run_observer(path, manifest, *, stages=(), sources=(), publication=None):
     updated = manifest.model_copy(
-        update={"stages": tuple(stages), "sources": tuple(sources)}
+        update={
+            "stages": tuple(stages),
+            "sources": tuple(sources),
+            "publication": publication or manifest.publication,
+        }
     )
     write_manifest(path, updated)
     return updated
@@ -213,17 +223,39 @@ def cmd_run(args):
 
     # 5. Stage JSON, Markdown, and the complete static site, then promote.
     print("\n🏗️  Building staged site and publishing complete edition...")
-    json_path, md_path = stage_and_publish_run(
-        cfg,
-        workspace,
-        date_str,
-        {
-            "date": date_str,
-            "articles": articles_dict,
-            "enrichment": enrichment_result["report"],
-        },
-        full_content,
-        source_results,
+    try:
+        json_path, md_path = stage_and_publish_run(
+            cfg,
+            workspace,
+            date_str,
+            {
+                "date": date_str,
+                "articles": articles_dict,
+                "enrichment": enrichment_result["report"],
+            },
+            full_content,
+            source_results,
+        )
+    except Exception as exc:
+        update_run_observer(
+            workspace.manifest_path,
+            manifest,
+            stages=manifest.stages,
+            sources=source_results,
+            publication=PublicationState(status="blocked", reason=str(exc)),
+        )
+        raise
+    degraded = any(result.status in {"failed", "degraded"} for result in source_results)
+    update_run_observer(
+        workspace.manifest_path,
+        manifest,
+        stages=manifest.stages,
+        sources=source_results,
+        publication=PublicationState(
+            status="published",
+            published_run_id=manifest.run_id,
+            reason="source_degraded" if degraded else None,
+        ),
     )
 
     print("\n" + "=" * 50)
