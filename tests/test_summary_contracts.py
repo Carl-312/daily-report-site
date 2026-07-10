@@ -6,6 +6,7 @@ from utils.summary_contracts import (
     fingerprint_summary_input,
     render_summary_markdown,
 )
+from summarizer import offline_summary_result
 
 
 def test_structured_summary_renders_deterministically_with_article_links() -> None:
@@ -42,3 +43,20 @@ def test_summary_fingerprints_are_stable_for_identical_input() -> None:
 
     assert first == second
     assert changed[0] != first[0]
+
+
+def test_offline_summary_result_keeps_article_provenance() -> None:
+    result = offline_summary_result(
+        [
+            {
+                "title": "AI launch",
+                "description": "new capability",
+                "link": "https://example.test/a",
+                "priority": 1,
+            }
+        ]
+    )
+
+    assert result.policy == "offline"
+    assert result.items[0].article_id == "https://example.test/a"
+    assert result.items[0].url == "https://example.test/a"

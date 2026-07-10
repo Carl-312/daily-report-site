@@ -243,6 +243,44 @@ def offline_summary(articles: list[dict], limit: int = 10) -> str:
     return "\n".join(lines)
 
 
+def offline_summary_result(articles: list[dict], limit: int = 10):
+    """Create a structured deterministic offline summary for replayable runs."""
+    from utils.summary_contracts import (
+        SummaryAttempt,
+        SummaryItem,
+        SummaryResult,
+        fingerprint_summary_input,
+    )
+
+    selected = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)[
+        :limit
+    ]
+    input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
+        selected, "offline"
+    )
+    items = tuple(
+        SummaryItem(
+            article_id=article.get("link") or f"offline-{index}",
+            title=(article.get("title") or "").replace("\n", "").strip(),
+            summary=article.get("description") or "离线模式：仅提供原始新闻标题。",
+            url=article.get("link") or "",
+        )
+        for index, article in enumerate(selected, 1)
+    )
+    return SummaryResult(
+        policy="offline",
+        items=items,
+        discussion_topic="你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
+        provider="local",
+        model="deterministic",
+        input_fingerprint=input_fingerprint,
+        prompt_fingerprint=prompt_fingerprint,
+        attempts=(
+            SummaryAttempt(provider="local", model="deterministic", status="ok"),
+        ),
+    )
+
+
 def test_connection() -> bool:
     """Test API connection (primary first, then fallback)."""
     providers = _provider_candidates()
