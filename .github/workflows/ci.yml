@@ -99,3 +99,33 @@ jobs:
             .pytest_cache/
           if-no-files-found: ignore
           retention-days: 7
+
+  final-regression:
+    needs: [quality, p0-contract, gray-scenarios]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install development dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run final lint, format, and regression suite
+        run: |
+          ruff check .
+          ruff format --check .
+          PYTHONPATH=. pytest
+
+      - name: Verify reliability documentation is present
+        run: |
+          test -f docs/daily-news-task-improvement-analysis.md
+          test -f ARCHITECTURE.md
+          test -f .planning/ROADMAP.md
