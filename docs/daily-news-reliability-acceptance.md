@@ -9,7 +9,7 @@
 - 运行时钟、严格 manifest、来源状态与脱敏配置指纹。
 - JSON/Markdown 原子单文件替换，run-scoped staging、journal、备份与中断恢复。
 - staged 站点目录切换；摘要/建站失败和零文章门禁不会覆盖正式产物。
-- 完整 `data/content/site` edition 与原子 `public-version.json` 指针；兼容路径只在指针成功后刷新。
+- 完整 `data/content/site` edition 与原子 `public-version.json` 指针；兼容路径只在指针成功后刷新，失败时不影响 pointer 选中的权威版本。
 - AI provider 与离线摘要均生成 `SummaryResult`，记录 provider/model、attempt、输入与 prompt 指纹并可 replay。
 - enrichment 的 transport、policy、verification、refill 已分别落在独立模块，主编排仍通过稳定边界调用。
 - 部分来源降级、全源失败、重复等价输入 no-op、来源有限重试。

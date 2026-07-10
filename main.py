@@ -216,15 +216,20 @@ def stage_and_publish_run(
         report_date=date_str,
         deadline_at=deadline_at,
     )
-    mirror_public_edition(
-        edition,
-        {
-            "data": Path(cfg.data_dir),
-            "content": Path(cfg.content_dir),
-            "site": Path(cfg.site_dir),
-        },
-        deadline_at=deadline_at,
-    )
+    try:
+        mirror_public_edition(
+            edition,
+            {
+                "data": Path(cfg.data_dir),
+                "content": Path(cfg.content_dir),
+                "site": Path(cfg.site_dir),
+            },
+            deadline_at=deadline_at,
+        )
+    except Exception as exc:
+        print(
+            f"⚠️  Legacy compatibility mirror failed after publication: {type(exc).__name__}"
+        )
     return public_json, public_markdown
 
 
@@ -259,15 +264,20 @@ def rebuild_current_site(cfg, clock, workspace):
         report_date=report_date,
         deadline_at=clock.deadline_at,
     )
-    mirror_public_edition(
-        edition,
-        {
-            "data": Path(cfg.data_dir),
-            "content": Path(cfg.content_dir),
-            "site": Path(cfg.site_dir),
-        },
-        deadline_at=clock.deadline_at,
-    )
+    try:
+        mirror_public_edition(
+            edition,
+            {
+                "data": Path(cfg.data_dir),
+                "content": Path(cfg.content_dir),
+                "site": Path(cfg.site_dir),
+            },
+            deadline_at=clock.deadline_at,
+        )
+    except Exception as exc:
+        print(
+            f"⚠️  Legacy compatibility mirror failed after publication: {type(exc).__name__}"
+        )
     return edition
 
 
