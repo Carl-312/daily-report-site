@@ -89,7 +89,7 @@ def fetch_batch(
                 SourceRunResult(
                     source=name,
                     status="ok" if articles else "empty",
-                    attempts=1,
+                    attempts=source.last_attempts or 1,
                     duration_ms=round((perf_counter() - started) * 1000),
                     fetched_count=len(articles),
                     accepted_count=len(articles),
@@ -106,7 +106,8 @@ def fetch_batch(
                 SourceRunResult(
                     source=name,
                     status="failed",
-                    attempts=1,
+                    attempts=getattr(locals().get("source", None), "last_attempts", 0)
+                    or 1,
                     duration_ms=round((perf_counter() - started) * 1000),
                     fetched_count=0,
                     accepted_count=0,

@@ -51,6 +51,7 @@ def test_get_retries_timeout_and_retryable_http_statuses() -> None:
 
     assert result is not None
     assert source.session.calls == 3
+    assert source.last_attempts == 3
     assert sleeps == [0.1, 0.2]
 
 
@@ -61,3 +62,4 @@ def test_get_does_not_retry_non_retryable_client_error() -> None:
     with pytest.raises(requests.HTTPError):
         source._get("https://example.test", sleep=lambda _: None)
     assert source.session.calls == 1
+    assert source.last_attempts == 1

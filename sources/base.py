@@ -53,6 +53,7 @@ class BaseSource(ABC):
     def __init__(self):
         self.session = requests.Session()
         self.session.trust_env = False
+        self.last_attempts = 0
 
     @abstractmethod
     def fetch(
@@ -73,6 +74,7 @@ class BaseSource(ABC):
         """Make a bounded retryable GET without retrying configuration 4xx errors."""
         last_error: requests.RequestException | None = None
         for attempt in range(1, max_attempts + 1):
+            self.last_attempts = attempt
             try:
                 response = self.session.get(
                     url, headers=self.HEADERS, timeout=timeout, proxies={}
