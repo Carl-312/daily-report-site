@@ -38,12 +38,13 @@ from utils.publication import (
 )
 from utils.publish_policy import decide_publication
 from summarizer import (
-    offline_summary_result,
     summarize,
+    summarize_result,
     offline_summary,
     test_connection,
     validate_summary_quality,
 )
+from utils.summary_contracts import render_summary_markdown
 
 
 def resolve_enrichment_enabled(cfg, mode: str) -> bool:
@@ -242,6 +243,25 @@ def summarize_or_offline(
         raise RuntimeError(message) from exc
 
 
+def summarize_with_result(articles: list[dict], *, offline: bool, cfg, deadline_at=None):
+    """Return rendered content plus the structured result used to publish it."""
+    from summarizer import offline_summary_result
+
+    if offline or (not cfg.api_key and not cfg.fallback_api_key):
+        content = offline_summary(articles)
+        return content, offline_summary_result(articles)
+    try:
+        result = summarize_result(articles, stream=True, deadline_at=deadline_at)
+        return render_summary_markdown(result), result
+    except Exception as exc:
+        message = (
+            "AI summarization failed quality checks; refusing to publish "
+            "an offline fallback because Chinese summary quality cannot be guaranteed."
+        )
+        print(f"   ❌  {message} Cause: {exc}")
+        raise RuntimeError(message) from exc
+
+
 def cmd_run(args):
     """Full pipeline: fetch → summarize → build"""
     cfg = get_config()
@@ -283,14 +303,13 @@ def cmd_run(args):
 
     # 3. Summarize
     print("\n🤖 Generating summary...")
-    content = summarize_or_offline(
+    content, summary_result = summarize_with_result(
         articles_dict,
         offline=args.offline,
         cfg=cfg,
         deadline_at=clock.deadline_at,
     )
-    if args.offline or (not cfg.api_key and not cfg.fallback_api_key):
-        persist_summary_result(workspace, offline_summary_result(articles_dict))
+    persist_summary_result(workspace, summary_result)
 
     # 4. Build Markdown title
     try:
@@ -311,6 +330,7 @@ def cmd_run(args):
                 "date": date_str,
                 "articles": articles_dict,
                 "enrichment": enrichment_result["report"],
+                "summary": summary_result.model_dump(mode="json"),
             },
             full_content,
             source_results,
@@ -398,7 +418,7 @@ def cmd_summarize(args):
         date_str = today_ymd(clock)
     except TypeError:
         date_str = today_ymd()
-    create_run_observer(cfg, clock)
+    _manifest, workspace = create_run_observer(cfg, clock)
 
     data = load_json(cfg.data_dir, date_str)
     if not data:
@@ -408,7 +428,7 @@ def cmd_summarize(args):
     articles = data.get("articles", [])
     print(f"🤖 Summarizing {len(articles)} articles...")
 
-    content = summarize_or_offline(
+    content, summary_result = summarize_with_result(
         articles,
         offline=args.offline,
         cfg=cfg,
@@ -423,6 +443,7 @@ def cmd_summarize(args):
     full_content = f"{title}\n\n{content}"
 
     md_path = save_markdown(cfg.content_dir, date_str, full_content)
+    persist_summary_result(workspace, summary_result)
     print(f"✅ Saved to {md_path}")
 
 

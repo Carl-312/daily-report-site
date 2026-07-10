@@ -12,6 +12,12 @@ from typing import Any
 from openai import OpenAI
 from config import get_config
 from utils.run_contracts import RunDeadlineExceeded
+from utils.summary_contracts import (
+    SummaryAttempt,
+    SummaryItem,
+    SummaryResult,
+    fingerprint_summary_input,
+)
 
 
 class SummaryQualityError(ValueError):
@@ -224,6 +230,163 @@ def summarize(
         except Exception as e:
             errors.append(f"{provider['name']}[{provider['model']}]: {e}")
             print(f"\n   ⚠️  {provider['name']} failed: {e}")
+
+    raise RuntimeError("All LLM providers failed. " + " | ".join(errors))
+
+
+def _parse_summary_result(
+    content: str,
+    articles: list[dict],
+    *,
+    policy: str,
+    provider: str,
+    model: str,
+    input_fingerprint: str,
+    prompt_fingerprint: str,
+    attempts: tuple[SummaryAttempt, ...],
+) -> SummaryResult:
+    """Convert validated model text into a provenance-preserving contract."""
+    items: list[SummaryItem] = []
+    for index, line in enumerate(content.splitlines()):
+        match = re.match(r"^\s*\d+[.、]\s+(.+?)\s*$", line)
+        if not match:
+            continue
+        text = match.group(1).strip()
+        link_match = re.match(r"^\[(.+?)\]\((https?://[^)]+)\)[:：]\s*(.+)$", text)
+        if link_match:
+            title, url, summary = link_match.groups()
+        else:
+            article = articles[len(items)] if len(items) < len(articles) else {}
+            title = article.get("title") or text
+            url = article.get("link") or ""
+            summary = text
+        article_id = url or f"article-{index + 1}"
+        items.append(
+            SummaryItem(
+                article_id=article_id,
+                title=title.strip(),
+                summary=summary.strip(),
+                url=url.strip(),
+            )
+        )
+
+    discussion_topic = ""
+    for line in content.splitlines():
+        if "互动话题" in line:
+            discussion_topic = re.sub(r"^.*?互动话题[：:]\s*", "", line).strip()
+            break
+    if not discussion_topic:
+        discussion_topic = "欢迎分享你最关注的新闻。"
+    return SummaryResult(
+        policy=policy,
+        items=tuple(items),
+        discussion_topic=discussion_topic,
+        provider=provider,
+        model=model,
+        input_fingerprint=input_fingerprint,
+        prompt_fingerprint=prompt_fingerprint,
+        attempts=attempts,
+    )
+
+
+def summarize_result(
+    articles: list[dict],
+    *,
+    stream: bool = True,
+    deadline_at=None,
+) -> SummaryResult:
+    """Generate a structured AI summary with provider-attempt provenance."""
+    if not articles:
+        input_fingerprint, prompt_fingerprint = fingerprint_summary_input([], "")
+        return SummaryResult(
+            policy="required_ai",
+            items=(),
+            discussion_topic="暂无新闻。",
+            provider="none",
+            model="none",
+            input_fingerprint=input_fingerprint,
+            prompt_fingerprint=prompt_fingerprint,
+            attempts=(),
+        )
+
+    cfg = get_config()
+    providers = _provider_candidates()
+    if not providers:
+        raise ValueError(
+            "No LLM provider API key found. Set MODELSCOPE_API_KEY or SILICONFLOW_API_KEY."
+        )
+    compressed = compress_articles(articles)
+    system_prompt = load_prompt()
+    input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
+        compressed, system_prompt
+    )
+    user_input = json.dumps({"articles": compressed}, ensure_ascii=False, indent=2)
+    attempts: list[SummaryAttempt] = []
+    errors: list[str] = []
+
+    for idx, provider in enumerate(providers):
+        remaining = None
+        if deadline_at is not None:
+            remaining = (
+                deadline_at - datetime.now(deadline_at.tzinfo)
+            ).total_seconds()
+            if remaining <= 0:
+                raise RunDeadlineExceeded("run deadline exceeded before summary")
+        try:
+            client = (
+                create_client(provider["base_url"], provider["api_key"])
+                if remaining is None
+                else create_client(
+                    provider["base_url"], provider["api_key"], timeout=remaining
+                )
+            )
+            params: dict[str, Any] = {
+                "model": provider["model"],
+                "max_tokens": cfg.max_output,
+                "temperature": 0.7,
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_input},
+                ],
+                "stream": stream,
+            }
+            content = (
+                _summarize_stream(client, params)
+                if stream
+                else _summarize_sync(client, params)
+            )
+            validate_summary_quality(content, expected_items=min(10, len(compressed)))
+            attempts.append(
+                SummaryAttempt(
+                    provider=provider["name"],
+                    model=provider["model"],
+                    status="ok",
+                )
+            )
+            return _parse_summary_result(
+                content,
+                articles,
+                policy="required_ai",
+                provider=provider["name"],
+                model=provider["model"],
+                input_fingerprint=input_fingerprint,
+                prompt_fingerprint=prompt_fingerprint,
+                attempts=tuple(attempts),
+            )
+        except RunDeadlineExceeded:
+            raise
+        except Exception as exc:
+            errors.append(f"{provider['name']}[{provider['model']}]: {exc}")
+            attempts.append(
+                SummaryAttempt(
+                    provider=provider["name"],
+                    model=provider["model"],
+                    status="failed",
+                    error_kind=type(exc).__name__,
+                )
+            )
+            if idx + 1 < len(providers):
+                print(f"\n   ⚠️  {provider['name']} failed: {exc}")
 
     raise RuntimeError("All LLM providers failed. " + " | ".join(errors))
 

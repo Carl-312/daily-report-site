@@ -128,6 +128,36 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     assert calls == ["ZhipuAI/GLM-5.2", "moonshotai/Kimi-K2.7-Code"]
 
 
+def test_summarize_result_records_provider_attempts_and_article_provenance(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+
+    def fake_summarize_sync(client, params):
+        if params["model"] == "ZhipuAI/GLM-5.2":
+            raise RuntimeError("primary unavailable")
+        return _valid_summary()
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    result = summarizer.summarize_result(
+        [{"title": "Story", "link": "https://example.test/story"}],
+        stream=False,
+    )
+
+    assert result.provider == "ModelScope secondary"
+    assert result.model == "moonshotai/Kimi-K2.7-Code"
+    assert [attempt.status for attempt in result.attempts] == ["failed", "ok"]
+    assert result.items[0].article_id == "https://example.test/story"
+    assert result.items[0].url == "https://example.test/story"
+    assert result.validation_passed is True
+
+
 def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
     summarizer.validate_summary_quality(
         _valid_summary(item_count=10), expected_items=10

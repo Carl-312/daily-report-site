@@ -246,7 +246,7 @@ schema validation
 - 没有文章时 `summarize()` 返回“暂无新闻”（`summarizer.py:154-155`），随后主流程仍要求至少一个编号条目，因此在线路径会失败；离线路径则可能生成只有互动话题的日报。零文章政策前后不一致。
 - helper 名为 `summarize_or_offline`，docstring 声称失败时回退，但配置了 API key 后的任何在线失败都会拒绝 offline 并抛错（`main.py:67-86`）。这个 fail-closed 选择本身可以合理，但应成为显式策略而不是隐藏分支。
 - 供应商请求未在本地代码中设置明确的任务级超时、重试预算和尝试记录（`summarizer.py:168-224`）。
-- 最终 JSON 只保存文章和 enrichment 报告，没有保存摘要使用的 provider/model、prompt 指纹、输入哈希和验证结果（`main.py:115-123`）。难以精确重放或解释同一天两次摘要为何不同。
+- 旧实现的最终 JSON 只保存文章和 enrichment 报告；当前主流程已将 `SummaryResult` 一并写入 staged JSON，并在 run workspace 保存 `summary.json`，可精确重放或解释同一天两次摘要为何不同。
 
 ### 7.2 建议设计
 

@@ -10,6 +10,7 @@
 - JSON/Markdown 原子单文件替换，run-scoped staging、journal、备份与中断恢复。
 - staged 站点目录切换；摘要/建站失败和零文章门禁不会覆盖正式产物。
 - 完整 `data/content/site` edition 与原子 `public-version.json` 指针；兼容路径只在指针成功后刷新。
+- AI provider 与离线摘要均生成 `SummaryResult`，记录 provider/model、attempt、输入与 prompt 指纹并可 replay。
 - 部分来源降级、全源失败、重复等价输入 no-op、来源有限重试。
 - 离线结构化摘要与 replay 元数据。
 
@@ -25,8 +26,7 @@
 ## 未闭合的阻塞项
 
 1. 运行级 deadline 尚未限制来源、Tavily、摘要和构建的总耗时。
-2. AI provider 输出尚未完全迁移到 `SummaryResult`，当前结构化 replay 仅覆盖离线模式。
-3. Tavily 大模块尚未按 transport/policy/verification/refill 拆分。
+2. Tavily 大模块尚未按 transport/policy/verification/refill 拆分。
 
 在上述阻塞项消除、回滚演练和最终审查重新通过前，PR 必须保持 Draft，且不得合入 `main`。
 
