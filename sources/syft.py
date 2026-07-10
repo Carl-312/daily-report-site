@@ -27,44 +27,35 @@ class SyftSource(BaseSource):
     ) -> List[Article]:
         """Fetch news from Syft email digest API"""
         if not self.web_app_url or not self.secret_key:
-            return []
+            raise ValueError("Syft source requires web_app_url and secret_key")
 
-        try:
-            today = (
-                (reference_dt or datetime.now(beijing_tz))
-                .astimezone(beijing_tz)
-                .strftime("%Y-%m-%d")
-            )
+        today = (
+            (reference_dt or datetime.now(beijing_tz))
+            .astimezone(beijing_tz)
+            .strftime("%Y-%m-%d")
+        )
+        resp = self.session.get(
+            self.web_app_url,
+            params={"secret": self.secret_key, "date": today},
+            headers=self.HEADERS,
+            timeout=30,
+        )
+        resp.raise_for_status()
 
-            resp = self.session.get(
-                self.web_app_url,
-                params={
-                    "secret": self.secret_key,
-                    "date": today,
-                },
-                headers=self.HEADERS,
-                timeout=30,
-            )
-            resp.raise_for_status()
+        data = resp.json()
+        if not data.get("success"):
+            raise RuntimeError("Syft API returned success=false")
 
-            data = resp.json()
-            if not data.get("success"):
-                return []
-
-            articles = []
-            for item in data.get("articles", [])[:max_articles]:
-                articles.append(
-                    Article(
-                        title=item.get("title", ""),
-                        link=item.get("link", ""),
-                        description=item.get("description", ""),
-                        publish_time=item.get("date", today),
-                        priority=1,
-                        source=self.name,
-                    )
+        articles = []
+        for item in data.get("articles", [])[:max_articles]:
+            articles.append(
+                Article(
+                    title=item.get("title", ""),
+                    link=item.get("link", ""),
+                    description=item.get("description", ""),
+                    publish_time=item.get("date", today),
+                    priority=1,
+                    source=self.name,
                 )
-
-            return articles
-
-        except Exception:
-            return []
+            )
+        return articles
