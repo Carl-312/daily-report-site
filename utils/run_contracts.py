@@ -84,15 +84,15 @@ class RunClock:
         current = now or datetime.now(self.started_at.tzinfo)
         if current.tzinfo is None or current.utcoffset() is None:
             raise ValueError("RunClock now must be timezone-aware")
-        return (self.deadline_at - current.astimezone(self.deadline_at.tzinfo)).total_seconds()
+        return (
+            self.deadline_at - current.astimezone(self.deadline_at.tzinfo)
+        ).total_seconds()
 
     def require_time(self, stage: str, now: datetime | None = None) -> float:
         """Fail closed once a stage reaches the run deadline."""
         remaining = self.remaining_seconds(now)
         if remaining <= 0:
-            raise RunDeadlineExceeded(
-                f"run deadline exceeded before or during {stage}"
-            )
+            raise RunDeadlineExceeded(f"run deadline exceeded before or during {stage}")
         return remaining
 
     def bounded_timeout(

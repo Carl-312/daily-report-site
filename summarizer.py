@@ -188,9 +188,7 @@ def summarize(
     errors: list[str] = []
     for idx, provider in enumerate(providers):
         if deadline_at is not None:
-            remaining = (
-                deadline_at - datetime.now(deadline_at.tzinfo)
-            ).total_seconds()
+            remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
             if remaining <= 0:
                 raise RunDeadlineExceeded("run deadline exceeded before summary")
         else:
@@ -332,9 +330,7 @@ def summarize_result(
     for idx, provider in enumerate(providers):
         remaining = None
         if deadline_at is not None:
-            remaining = (
-                deadline_at - datetime.now(deadline_at.tzinfo)
-            ).total_seconds()
+            remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
             if remaining <= 0:
                 raise RunDeadlineExceeded("run deadline exceeded before summary")
         try:

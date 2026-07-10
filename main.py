@@ -82,7 +82,9 @@ def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None 
         "deadline_at" in inspect.signature(enrich_articles_with_tavily).parameters
         or any(
             parameter.kind is inspect.Parameter.VAR_KEYWORD
-            for parameter in inspect.signature(enrich_articles_with_tavily).parameters.values()
+            for parameter in inspect.signature(
+                enrich_articles_with_tavily
+            ).parameters.values()
         )
     ):
         kwargs["deadline_at"] = clock.deadline_at
@@ -306,7 +308,9 @@ def summarize_or_offline(
         raise RuntimeError(message) from exc
 
 
-def summarize_with_result(articles: list[dict], *, offline: bool, cfg, deadline_at=None):
+def summarize_with_result(
+    articles: list[dict], *, offline: bool, cfg, deadline_at=None
+):
     """Return rendered content plus the structured result used to publish it."""
     from summarizer import offline_summary_result
 
@@ -367,9 +371,7 @@ def cmd_run(args):
 
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
     try:
-        enrichment_result = apply_enrichment(
-            cfg, args, articles_dict, date_str, clock
-        )
+        enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
     except Exception as exc:
         record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
         raise

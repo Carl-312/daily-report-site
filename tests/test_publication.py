@@ -130,9 +130,7 @@ def test_public_edition_switches_all_reader_paths_with_one_pointer(tmp_path) -> 
     )
 
     assert edition.run_id == "run-new"
-    pointer = (tmp_path / "public" / "public-version.json").read_text(
-        encoding="utf-8"
-    )
+    pointer = (tmp_path / "public" / "public-version.json").read_text(encoding="utf-8")
     assert '"run_id": "run-new"' in pointer
     resolved = publication.read_current_edition(tmp_path / "public")
     assert resolved == edition
@@ -146,7 +144,9 @@ def test_public_edition_switches_all_reader_paths_with_one_pointer(tmp_path) -> 
     } == {"new\n"}
 
 
-def test_failed_pointer_write_keeps_previous_selected_edition(tmp_path, monkeypatch) -> None:
+def test_failed_pointer_write_keeps_previous_selected_edition(
+    tmp_path, monkeypatch
+) -> None:
     public_root = tmp_path / "public"
     first = tmp_path / "first"
     second = tmp_path / "second"

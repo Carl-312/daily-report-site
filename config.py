@@ -189,9 +189,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                     "site_dir", output_cfg.get("docs_dir", "dist")
                 ),
                 "publication_root": output_cfg.get("publication_root", ".publication"),
-                "run_deadline_minutes": cfg.get("run", {}).get(
-                    "deadline_minutes", 20
-                ),
+                "run_deadline_minutes": cfg.get("run", {}).get("deadline_minutes", 20),
                 "enrichment": cfg.get("enrichment", {}),
             }
 

@@ -9,6 +9,7 @@ import requests
 
 from utils.run_contracts import RunDeadlineExceeded
 
+
 def run_verify_stage(
     *,
     candidates: list[dict[str, Any]],
@@ -28,6 +29,7 @@ def run_verify_stage(
         reserved_refill_call_budget,
         within_strict_hours,
     )
+
     start_date, end_date = report_window(reference_dt)
     reserved_refill_calls = reserved_refill_call_budget(settings)
     verify_budget = max(
@@ -183,6 +185,3 @@ def run_verify_stage(
         "verified_candidates": verified_candidates,
         "rejected_candidates": rejected_candidates,
     }
-
-
-

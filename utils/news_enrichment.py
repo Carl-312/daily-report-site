@@ -511,9 +511,7 @@ def _search_tavily_with_deadline(
     """Keep legacy test doubles/callers compatible when no deadline is set."""
     if deadline_at is None:
         return search_tavily(session, api_key, payload)
-    return search_tavily(
-        session, api_key, payload, deadline_at=deadline_at
-    )
+    return search_tavily(session, api_key, payload, deadline_at=deadline_at)
 
 
 def classify_request_outcome(error: Exception | None) -> str:

@@ -81,7 +81,9 @@ class BaseSource(ABC):
         last_error: requests.RequestException | None = None
         for attempt in range(1, max_attempts + 1):
             self.last_attempts = attempt
-            request_timeout = self._bounded_timeout(timeout, deadline_at, "source fetch")
+            request_timeout = self._bounded_timeout(
+                timeout, deadline_at, "source fetch"
+            )
             try:
                 response = self.session.get(
                     url, headers=self.HEADERS, timeout=request_timeout, proxies={}

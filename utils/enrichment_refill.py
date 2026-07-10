@@ -9,6 +9,7 @@ import requests
 
 from utils.run_contracts import RunDeadlineExceeded
 
+
 def run_domain_refill_stage(
     *,
     base_articles: list[dict[str, Any]],
@@ -39,6 +40,7 @@ def run_domain_refill_stage(
         report_window,
         within_strict_hours,
     )
+
     accepted_candidates: list[dict[str, Any]] = []
     refill_runs: list[dict[str, Any]] = []
     near_duplicate_rejected_count = 0
@@ -254,6 +256,3 @@ def run_domain_refill_stage(
         "duplicate_slip_count": 0,
         "remaining_budget_after_refill": max(0, remaining_budget - len(refill_runs)),
     }
-
-
-
