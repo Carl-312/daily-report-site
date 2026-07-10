@@ -5,6 +5,7 @@ Unified CLI for fetching news, summarizing, and building static site
 
 from __future__ import annotations
 import argparse
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -30,6 +31,7 @@ from utils.run_contracts import (
 from utils.publication import create_run_workspace, promote_staged_files
 from utils.publish_policy import decide_publication
 from summarizer import (
+    offline_summary_result,
     summarize,
     offline_summary,
     test_connection,
@@ -149,6 +151,16 @@ def stage_and_publish_run(
     return mappings[staged_json], mappings[staged_markdown]
 
 
+def persist_summary_result(workspace, result) -> Path:
+    """Persist structured summary metadata for replay without publishing it."""
+    target = workspace.root / "summary.json"
+    target.write_text(
+        json.dumps(result.model_dump(mode="json"), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return target
+
+
 def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
     """Generate an LLM summary, falling back to offline output when providers fail."""
     if offline:
@@ -212,6 +224,8 @@ def cmd_run(args):
     # 3. Summarize
     print("\n🤖 Generating summary...")
     content = summarize_or_offline(articles_dict, offline=args.offline, cfg=cfg)
+    if args.offline or (not cfg.api_key and not cfg.fallback_api_key):
+        persist_summary_result(workspace, offline_summary_result(articles_dict))
 
     # 4. Build Markdown title
     try:
