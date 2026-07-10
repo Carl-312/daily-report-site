@@ -4,6 +4,19 @@
 
 ---
 
+## Phase 1 运行契约（增量）
+
+`utils/run_contracts.py` 是后续每日任务运行事实的持久化边界：它提供不可变
+`RunClock`、严格的 `DailyRunManifest`/阶段/来源结果模型、脱敏且确定性的配置
+指纹，以及 manifest 读写工具。持久化模型会拒绝未知字段，并在写入前移除包含
+密钥、令牌或密码的配置值。
+
+该模块在 Phase 1 保持与当前 CLI 及公开输出路径解耦，确保既有日报生成行为不
+变。原子 staging、提升和 last-known-good 回滚保护从 Phase 2 开始；单独写入
+Phase 1 manifest 不构成发布安全保证。
+
+---
+
 ## 🏗️ 架构概览
 
 ```mermaid
