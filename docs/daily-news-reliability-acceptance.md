@@ -11,6 +11,7 @@
 - staged 站点目录切换；摘要/建站失败和零文章门禁不会覆盖正式产物。
 - 完整 `data/content/site` edition 与原子 `public-version.json` 指针；兼容路径只在指针成功后刷新。
 - AI provider 与离线摘要均生成 `SummaryResult`，记录 provider/model、attempt、输入与 prompt 指纹并可 replay。
+- enrichment 的 transport、policy、verification、refill 已分别落在独立模块，主编排仍通过稳定边界调用。
 - 部分来源降级、全源失败、重复等价输入 no-op、来源有限重试。
 - 离线结构化摘要与 replay 元数据。
 
@@ -23,10 +24,10 @@
 
 这些检查只证明当前测试矩阵通过，不是 merge 授权。
 
-## 未闭合的阻塞项
+## 尚未完成的交付门禁
 
-1. 运行级 deadline 尚未限制来源、Tavily、摘要和构建的总耗时。
-2. Tavily 大模块尚未按 transport/policy/verification/refill 拆分。
+1. 需要重新运行完整代码审查、灰度场景、最终回归和 GitHub Actions 检查，并补齐本次改造的验收证据。
+2. PR 仍必须保持 Draft，验证全部通过前不得合入 `main`。
 
 在上述阻塞项消除、回滚演练和最终审查重新通过前，PR 必须保持 Draft，且不得合入 `main`。
 

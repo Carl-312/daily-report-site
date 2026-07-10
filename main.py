@@ -5,6 +5,7 @@ Unified CLI for fetching news, summarizing, and building static site
 
 from __future__ import annotations
 import argparse
+import inspect
 import json
 import shutil
 import sys
@@ -76,15 +77,15 @@ def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None 
         "enabled": enabled,
         "reference_dt": clock.cutoff_at if clock else None,
     }
-    if clock is not None:
+    if clock is not None and (
+        "deadline_at" in inspect.signature(enrich_articles_with_tavily).parameters
+        or any(
+            parameter.kind is inspect.Parameter.VAR_KEYWORD
+            for parameter in inspect.signature(enrich_articles_with_tavily).parameters.values()
+        )
+    ):
         kwargs["deadline_at"] = clock.deadline_at
-    try:
-        result = enrich_articles_with_tavily(articles, **kwargs)
-    except TypeError as exc:
-        if "deadline_at" not in str(exc):
-            raise
-        kwargs.pop("deadline_at", None)
-        result = enrich_articles_with_tavily(articles, **kwargs)
+    result = enrich_articles_with_tavily(articles, **kwargs)
     report = result["report"]
     print(
         f"   Applied: {report.get('applied')} | "

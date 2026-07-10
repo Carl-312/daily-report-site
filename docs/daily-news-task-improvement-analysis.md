@@ -362,7 +362,7 @@ enrichment/
 
 1. 先用现有行为建立 characterize tests 和 report invariants。
 2. 按 models/normalize/policy/transport/verify/refill/service 分解。
-3. 让主流程使用同一套 report/diagnostic 约定。
+3. 让主流程使用同一套 report/diagnostic 约定。当前正式路径已将 transport、policy、verification、refill 置于独立模块边界，`news_enrichment.py` 保留归一化、聚类和总编排。
 
 ## 10. 最终目标形态
 
