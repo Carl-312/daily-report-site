@@ -348,6 +348,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
 
     def fake_build_site(**kwargs):
         assert order[-1] == "offline_summary"
+        kwargs["output_dir"].mkdir(parents=True, exist_ok=True)
         order.append("build")
         return []
 

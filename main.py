@@ -30,6 +30,7 @@ from utils.run_contracts import (
 )
 from utils.publication import (
     create_run_workspace,
+    promote_staged_directory,
     promote_staged_files,
     recover_incomplete_promotions,
 )
@@ -144,14 +145,8 @@ def stage_and_publish_run(
         staged_json: public_json,
         staged_markdown: public_markdown,
     }
-    mappings.update(
-        {
-            staged: Path(cfg.site_dir) / staged.relative_to(workspace.site_dir)
-            for staged in workspace.site_dir.rglob("*")
-            if staged.is_file()
-        }
-    )
     promote_staged_files(mappings, journal_path=workspace.journal_path)
+    promote_staged_directory(workspace.site_dir, Path(cfg.site_dir))
     return mappings[staged_json], mappings[staged_markdown]
 
 

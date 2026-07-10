@@ -109,6 +109,34 @@ def promote_staged_files(
         raise
 
 
+def promote_staged_directory(staged_dir: Path, target_dir: Path) -> Path:
+    """Replace a complete site directory as one rename boundary.
+
+    The former directory remains beside the target until the caller's run
+    retention policy removes it; unlike per-file promotion this cannot expose
+    a mixture of old and new site pages.
+    """
+    if not staged_dir.is_dir():
+        raise FileNotFoundError(f"staged site directory missing: {staged_dir}")
+    backup = target_dir.with_name(f".{target_dir.name}.previous")
+    if backup.exists():
+        if backup.is_dir():
+            import shutil
+
+            shutil.rmtree(backup)
+        else:
+            backup.unlink()
+    if target_dir.exists():
+        os.replace(target_dir, backup)
+    try:
+        os.replace(staged_dir, target_dir)
+    except BaseException:
+        if backup.exists():
+            os.replace(backup, target_dir)
+        raise
+    return target_dir
+
+
 def _restore(
     entries: list[dict[str, object]], replaced: list[dict[str, object]]
 ) -> None:
