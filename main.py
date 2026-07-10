@@ -109,14 +109,24 @@ def stage_and_publish_run(
         shutil.copytree(public_content, workspace.content_dir, dirs_exist_ok=True)
     staged_json = save_json(str(workspace.root), date_str, report)
     staged_markdown = save_markdown(str(workspace.content_dir), date_str, content)
+    public_json = Path(cfg.data_dir) / f"{date_str}.json"
+    public_markdown = Path(cfg.content_dir) / f"{date_str}.md"
+    if (
+        public_json.is_file()
+        and public_markdown.is_file()
+        and staged_json.read_bytes() == public_json.read_bytes()
+        and staged_markdown.read_bytes() == public_markdown.read_bytes()
+    ):
+        print("ℹ️  Equivalent edition already published; skipping promotion.")
+        return public_json, public_markdown
     build_site(
         source_dir=workspace.content_dir,
         output_dir=workspace.site_dir,
         assets_dir=Path("assets"),
     )
     mappings = {
-        staged_json: Path(cfg.data_dir) / f"{date_str}.json",
-        staged_markdown: Path(cfg.content_dir) / f"{date_str}.md",
+        staged_json: public_json,
+        staged_markdown: public_markdown,
     }
     mappings.update(
         {
