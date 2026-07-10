@@ -10,6 +10,7 @@ import html
 from pathlib import Path
 import re
 import shutil
+from urllib.parse import urlparse
 
 import markdown
 
@@ -164,6 +165,20 @@ def _require_deadline(deadline_at: datetime | None, stage: str) -> None:
         raise RunDeadlineExceeded(f"run deadline exceeded during {stage}")
 
 
+def _sanitize_link_schemes(value: str) -> str:
+    """Neutralize unsafe Markdown-generated href/src schemes."""
+    attribute = re.compile(r'(?P<prefix>\b(?:href|src)=["\'])(?P<url>[^"\']+)')
+
+    def replace(match: re.Match[str]) -> str:
+        url = match.group("url")
+        scheme = urlparse(url).scheme.lower()
+        if scheme and scheme not in {"http", "https"}:
+            return f"{match.group('prefix')}#"
+        return match.group(0)
+
+    return attribute.sub(replace, value)
+
+
 def parse_frontmatter(content: str) -> tuple[dict[str, str], str]:
     """Parse YAML frontmatter from markdown content."""
     meta = {"title": "Untitled", "date": ""}
@@ -205,6 +220,7 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
         extensions=["tables", "fenced_code", "codehilite", "toc"],
     )
     html_content = convert_ol_to_paragraphs(html_content)
+    html_content = _sanitize_link_schemes(html_content)
 
     date = meta.get("date") or md_path.stem
     title = meta.get("title") or f"日报 {date}"

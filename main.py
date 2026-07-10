@@ -429,6 +429,8 @@ def cmd_run(args):
     except Exception as exc:
         record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
         raise
+    current = read_current_edition(resolve_publication_root(cfg))
+    published_run_id = current.run_id if current else manifest.run_id
     degraded = any(result.status in {"failed", "degraded"} for result in source_results)
     update_run_observer(
         workspace.manifest_path,
@@ -437,8 +439,14 @@ def cmd_run(args):
         sources=source_results,
         publication=PublicationState(
             status="published",
-            published_run_id=manifest.run_id,
-            reason="source_degraded" if degraded else None,
+            published_run_id=published_run_id,
+            reason=(
+                "already_published"
+                if published_run_id != manifest.run_id
+                else "source_degraded"
+                if degraded
+                else None
+            ),
         ),
     )
 
@@ -461,14 +469,19 @@ def cmd_fetch(args):
     manifest, workspace = create_run_observer(cfg, clock)
 
     print(f"📡 Fetching news for {date_str}...")
-    articles, source_results = fetch_batch(
-        enabled_sources=cfg.sources,
-        max_articles=cfg.max_articles,
-        syft_url=cfg.syft_web_app_url,
-        syft_key=cfg.syft_secret_key,
-        reference_dt=clock.cutoff_at,
-        deadline_at=clock.deadline_at,
-    )
+    source_results = ()
+    try:
+        articles, source_results = fetch_batch(
+            enabled_sources=cfg.sources,
+            max_articles=cfg.max_articles,
+            syft_url=cfg.syft_web_app_url,
+            syft_key=cfg.syft_secret_key,
+            reference_dt=clock.cutoff_at,
+            deadline_at=clock.deadline_at,
+        )
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
+        raise
     update_run_observer(
         workspace.manifest_path,
         manifest,
@@ -478,18 +491,26 @@ def cmd_fetch(args):
 
     articles = dedupe(articles)
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
-    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
+    try:
+        enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
+        raise
     articles_dict = enrichment_result["articles"]
 
-    json_path = save_json(
-        cfg.data_dir,
-        date_str,
-        {
-            "date": date_str,
-            "articles": articles_dict,
-            "enrichment": enrichment_result["report"],
-        },
-    )
+    try:
+        json_path = save_json(
+            cfg.data_dir,
+            date_str,
+            {
+                "date": date_str,
+                "articles": articles_dict,
+                "enrichment": enrichment_result["report"],
+            },
+        )
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
+        raise
 
     print(f"✅ Saved {len(articles_dict)} articles to {json_path}")
 
@@ -509,17 +530,27 @@ def cmd_summarize(args):
     data = load_json(data_dir, date_str)
     if not data:
         print(f"❌ No data found for {date_str}")
-        return
+        record_blocked_run(
+            cfg,
+            workspace,
+            _manifest,
+            error=FileNotFoundError(f"no data found for {date_str}"),
+        )
+        raise FileNotFoundError(f"no data found for {date_str}")
 
     articles = data.get("articles", [])
     print(f"🤖 Summarizing {len(articles)} articles...")
 
-    content, summary_result = summarize_with_result(
-        articles,
-        offline=args.offline,
-        cfg=cfg,
-        deadline_at=clock.deadline_at,
-    )
+    try:
+        content, summary_result = summarize_with_result(
+            articles,
+            offline=args.offline,
+            cfg=cfg,
+            deadline_at=clock.deadline_at,
+        )
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, _manifest, error=exc)
+        raise
 
     try:
         title_date = today_cn(clock)
@@ -530,15 +561,29 @@ def cmd_summarize(args):
 
     report = dict(data)
     report["summary"] = summary_result.model_dump(mode="json")
-    _json_path, md_path = stage_and_publish_run(
-        cfg,
-        workspace,
-        date_str,
-        report,
-        full_content,
-        deadline_at=clock.deadline_at,
+    try:
+        _json_path, md_path = stage_and_publish_run(
+            cfg,
+            workspace,
+            date_str,
+            report,
+            full_content,
+            deadline_at=clock.deadline_at,
+        )
+        persist_summary_result(workspace, summary_result)
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, _manifest, error=exc)
+        raise
+    current = read_current_edition(resolve_publication_root(cfg))
+    update_run_observer(
+        workspace.manifest_path,
+        _manifest,
+        publication=PublicationState(
+            status="published",
+            published_run_id=current.run_id if current else _manifest.run_id,
+            reason="summary_recovery",
+        ),
     )
-    persist_summary_result(workspace, summary_result)
     print(f"✅ Saved to {md_path}")
 
 

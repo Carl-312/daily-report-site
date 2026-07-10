@@ -96,3 +96,22 @@ def test_manifest_rejects_invalid_schema_status_and_naive_time(tmp_path) -> None
     path.write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(ValidationError, match="timezone-aware"):
         read_manifest(path)
+
+
+def test_manifest_writer_uses_atomic_storage(monkeypatch, tmp_path) -> None:
+    import utils.storage
+
+    calls = []
+    real_atomic_write = utils.storage.atomic_write_bytes
+
+    def capture(path, content):
+        calls.append(path)
+        return real_atomic_write(path, content)
+
+    monkeypatch.setattr(utils.storage, "atomic_write_bytes", capture)
+    path = write_manifest(
+        tmp_path / "manifest.json", new_manifest(_settings(), _clock())
+    )
+
+    assert path.exists()
+    assert calls == [path]
