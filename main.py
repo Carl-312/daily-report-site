@@ -19,7 +19,6 @@ from utils import (
     today_ymd,
     today_cn,
     save_json,
-    save_markdown,
     load_json,
 )
 from utils.run_contracts import (
@@ -420,7 +419,9 @@ def cmd_summarize(args):
         date_str = today_ymd()
     _manifest, workspace = create_run_observer(cfg, clock)
 
-    data = load_json(cfg.data_dir, date_str)
+    current = read_current_edition(resolve_publication_root(cfg))
+    data_dir = current.data_dir if current else Path(cfg.data_dir)
+    data = load_json(data_dir, date_str)
     if not data:
         print(f"❌ No data found for {date_str}")
         return
@@ -442,7 +443,16 @@ def cmd_summarize(args):
     title = f"🔥（{title_date}）每日AI资讯一览✨"
     full_content = f"{title}\n\n{content}"
 
-    md_path = save_markdown(cfg.content_dir, date_str, full_content)
+    report = dict(data)
+    report["summary"] = summary_result.model_dump(mode="json")
+    _json_path, md_path = stage_and_publish_run(
+        cfg,
+        workspace,
+        date_str,
+        report,
+        full_content,
+        deadline_at=clock.deadline_at,
+    )
     persist_summary_result(workspace, summary_result)
     print(f"✅ Saved to {md_path}")
 

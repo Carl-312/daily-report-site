@@ -106,6 +106,24 @@ jobs:
         if: ${{ inputs.skip_generate }}
         run: python main.py build
 
+      - name: Resolve one public site edition
+        id: public-edition
+        if: steps.publish-mode.outputs.publish == 'true'
+        shell: bash
+        run: |
+          SITE_DIR=$(python - <<'PY'
+          from pathlib import Path
+          from config import get_config
+          from utils.publication import read_current_edition
+
+          cfg = get_config()
+          edition = read_current_edition(cfg.publication_root)
+          print(edition.site_dir if edition else Path(cfg.site_dir).resolve())
+          PY
+          )
+          echo "site_dir=$SITE_DIR" >> "$GITHUB_OUTPUT"
+          echo "Pages will upload the selected public edition: $SITE_DIR"
+
       - name: Upload generated preview artifact
         if: steps.publish-mode.outputs.publish != 'true'
         uses: actions/upload-artifact@v4
@@ -115,6 +133,7 @@ jobs:
             data/
             content/
             dist/
+            .publication/
             daily_update.log
             *.log
           if-no-files-found: ignore
@@ -191,7 +210,7 @@ jobs:
         if: steps.publish-mode.outputs.publish == 'true' && steps.pages-check.outputs.enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ${{ steps.public-edition.outputs.site_dir }}
 
       - name: Upload run logs (optional)
         if: always()

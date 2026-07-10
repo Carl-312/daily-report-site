@@ -146,9 +146,14 @@ def resolve_paths(
 ) -> tuple[Path, Path, Path]:
     """Resolve site build paths from arguments or runtime config."""
     cfg = get_config()
+    current = None
+    if source_dir is None or output_dir is None:
+        from utils.publication import read_current_edition
+
+        current = read_current_edition(getattr(cfg, "publication_root", ".publication"))
     return (
-        source_dir or Path(cfg.content_dir),
-        output_dir or Path(cfg.site_dir),
+        source_dir or (current.content_dir if current else Path(cfg.content_dir)),
+        output_dir or (current.site_dir if current else Path(cfg.site_dir)),
         assets_dir or Path("assets"),
     )
 
