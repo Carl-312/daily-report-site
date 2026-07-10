@@ -6,6 +6,7 @@ All sources should inherit from this class
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+from datetime import datetime
 from typing import List
 import requests
 
@@ -52,7 +53,9 @@ class BaseSource(ABC):
         self.session.trust_env = False
 
     @abstractmethod
-    def fetch(self, max_articles: int = 14) -> List[Article]:
+    def fetch(
+        self, max_articles: int = 14, reference_dt: datetime | None = None
+    ) -> List[Article]:
         """Fetch articles from source. Must be implemented by subclasses."""
         pass
 

@@ -4,9 +4,12 @@ Provides centralized access to all news sources
 """
 
 from __future__ import annotations
+from datetime import datetime
+from time import perf_counter
 from typing import Dict, Type, List
 
 from .base import BaseSource, Article
+from utils.run_contracts import ArticleSnapshot, Diagnostic, SourceRunResult
 from .aibase import AIBaseSource
 from .techcrunch import TechCrunchSource
 from .theverge import TheVergeSource
@@ -29,12 +32,13 @@ def get_source(name: str, **kwargs) -> BaseSource | None:
     return None
 
 
-def fetch_all(
+def fetch_batch(
     enabled_sources: Dict[str, bool],
     max_articles: int = 14,
     syft_url: str = "",
     syft_key: str = "",
-) -> List[Article]:
+    reference_dt: datetime | None = None,
+) -> tuple[List[Article], tuple[SourceRunResult, ...]]:
     """
     Fetch articles from all enabled sources
 
@@ -48,11 +52,27 @@ def fetch_all(
         Combined list of articles from all sources
     """
     all_articles: List[Article] = []
+    outcomes: list[SourceRunResult] = []
 
     for name, enabled in enabled_sources.items():
-        if not enabled or name not in REGISTRY:
+        if not enabled:
+            continue
+        if name not in REGISTRY:
+            outcomes.append(
+                SourceRunResult(
+                    source=name,
+                    status="failed",
+                    attempts=0,
+                    duration_ms=0,
+                    fetched_count=0,
+                    accepted_count=0,
+                    error_kind="configuration",
+                    error_message="unknown enabled source",
+                )
+            )
             continue
 
+        started = perf_counter()
         try:
             # Special handling for Syft source
             if name == "syft":
@@ -60,14 +80,60 @@ def fetch_all(
             else:
                 source = REGISTRY[name]()
 
-            articles = source.fetch(max_articles=max_articles)
+            articles = source.fetch(
+                max_articles=max_articles, reference_dt=reference_dt
+            )
             all_articles.extend(articles)
             print(f"✅ {name}: fetched {len(articles)} articles")
+            outcomes.append(
+                SourceRunResult(
+                    source=name,
+                    status="ok" if articles else "empty",
+                    attempts=1,
+                    duration_ms=round((perf_counter() - started) * 1000),
+                    fetched_count=len(articles),
+                    accepted_count=len(articles),
+                    articles=tuple(
+                        ArticleSnapshot(**article.to_dict()) for article in articles
+                    ),
+                )
+            )
 
         except Exception as e:
             print(f"❌ {name}: failed - {e}")
+            outcomes.append(
+                SourceRunResult(
+                    source=name,
+                    status="failed",
+                    attempts=1,
+                    duration_ms=round((perf_counter() - started) * 1000),
+                    fetched_count=0,
+                    accepted_count=0,
+                    error_kind="source_error",
+                    error_message=str(e),
+                    diagnostics=(Diagnostic(code="source_error", message=str(e)),),
+                )
+            )
 
-    return all_articles
+    return all_articles, tuple(outcomes)
+
+
+def fetch_all(
+    enabled_sources: Dict[str, bool],
+    max_articles: int = 14,
+    syft_url: str = "",
+    syft_key: str = "",
+    reference_dt: datetime | None = None,
+) -> List[Article]:
+    """Compatibility wrapper returning only the combined articles list."""
+    articles, _ = fetch_batch(
+        enabled_sources,
+        max_articles=max_articles,
+        syft_url=syft_url,
+        syft_key=syft_key,
+        reference_dt=reference_dt,
+    )
+    return articles
 
 
 __all__ = [
@@ -76,6 +142,7 @@ __all__ = [
     "REGISTRY",
     "get_source",
     "fetch_all",
+    "fetch_batch",
     "AIBaseSource",
     "TechCrunchSource",
     "TheVergeSource",

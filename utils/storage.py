@@ -13,13 +13,17 @@ from typing import Any
 beijing_tz = timezone(timedelta(hours=8))
 
 
-def today_ymd() -> str:
+def today_ymd(clock=None) -> str:
     """Get today's date in YYYY-MM-DD format (Beijing time)"""
+    if clock is not None:
+        return clock.report_date_ymd
     return datetime.now(beijing_tz).strftime("%Y-%m-%d")
 
 
-def today_cn() -> str:
+def today_cn(clock=None) -> str:
     """Get today's date in Chinese format"""
+    if clock is not None:
+        return clock.report_date_cn
     d = datetime.now(beijing_tz)
     return f"{d.year}年{d.month:02d}月{d.day:02d}日"
 

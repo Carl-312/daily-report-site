@@ -198,6 +198,8 @@ def _require_aware(value: datetime, field_name: str) -> None:
 
 def redact_sensitive(value: Any) -> Any:
     """Recursively omit secret-bearing fields from JSON-compatible data."""
+    if hasattr(value, "model_dump"):
+        return redact_sensitive(value.model_dump(mode="json"))
     if isinstance(value, dict):
         return {
             str(key): redact_sensitive(item)
@@ -223,9 +225,12 @@ def canonical_json_bytes(value: Any) -> bytes:
 
 def fingerprint_settings(settings: Any) -> tuple[dict[str, Any], str]:
     """Return a redacted settings snapshot and its deterministic SHA-256 hash."""
-    if not hasattr(settings, "model_dump"):
-        raise TypeError("settings must provide model_dump(mode='json')")
-    snapshot = redact_sensitive(settings.model_dump(mode="json"))
+    raw_settings = (
+        settings.model_dump(mode="json")
+        if hasattr(settings, "model_dump")
+        else vars(settings)
+    )
+    snapshot = redact_sensitive(raw_settings)
     if not isinstance(snapshot, dict):
         raise TypeError("settings snapshot must be a mapping")
     digest = hashlib.sha256(canonical_json_bytes(snapshot)).hexdigest()
@@ -234,7 +239,12 @@ def fingerprint_settings(settings: Any) -> tuple[dict[str, Any], str]:
 
 def scrub_diagnostic(message: str, settings: Any) -> str:
     """Remove known configured secret values from a diagnostic message."""
-    values = _sensitive_values(settings.model_dump(mode="json"))
+    raw_settings = (
+        settings.model_dump(mode="json")
+        if hasattr(settings, "model_dump")
+        else vars(settings)
+    )
+    values = _sensitive_values(raw_settings)
     safe_message = message
     for value in values:
         if value:

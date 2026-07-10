@@ -65,6 +65,7 @@ class Settings(BaseModel):
     data_dir: str = Field(default="data")
     content_dir: str = Field(default="content")
     site_dir: str = Field(default="dist")
+    runs_dir: str = Field(default=".runs")
 
     # Syft (optional)
     syft_web_app_url: str = Field(default="")

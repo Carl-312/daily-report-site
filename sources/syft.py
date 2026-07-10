@@ -22,13 +22,19 @@ class SyftSource(BaseSource):
         self.web_app_url = web_app_url
         self.secret_key = secret_key
 
-    def fetch(self, max_articles: int = 14) -> List[Article]:
+    def fetch(
+        self, max_articles: int = 14, reference_dt: datetime | None = None
+    ) -> List[Article]:
         """Fetch news from Syft email digest API"""
         if not self.web_app_url or not self.secret_key:
             return []
 
         try:
-            today = datetime.now(beijing_tz).strftime("%Y-%m-%d")
+            today = (
+                (reference_dt or datetime.now(beijing_tz))
+                .astimezone(beijing_tz)
+                .strftime("%Y-%m-%d")
+            )
 
             resp = self.session.get(
                 self.web_app_url,

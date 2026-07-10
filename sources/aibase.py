@@ -29,9 +29,13 @@ class AIBaseSource(BaseSource):
     BASE_URL = "https://news.aibase.com"
     DAILY_URL = "https://news.aibase.com/zh/daily"
 
-    def fetch(self, max_articles: int = 14) -> List[Article]:
+    def fetch(
+        self, max_articles: int = 14, reference_dt: datetime | None = None
+    ) -> List[Article]:
         """Fetch today's AI daily digest"""
-        today_beijing = datetime.now(beijing_tz).date()
+        today_beijing = (
+            (reference_dt or datetime.now(beijing_tz)).astimezone(beijing_tz).date()
+        )
 
         # Get daily page
         resp = self._get(self.DAILY_URL)

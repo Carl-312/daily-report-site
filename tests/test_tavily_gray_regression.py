@@ -256,6 +256,8 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         data_dir=str(tmp_path / "data"),
         content_dir=str(tmp_path / "content"),
         site_dir=str(tmp_path / "dist"),
+        runs_dir=str(tmp_path / "runs"),
+        timezone="Asia/Shanghai",
         enrichment=cfg.enrichment,
         tavily_api_key="test-key",
         api_key="",
@@ -298,9 +300,9 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
     original_save_json = daily_main.save_json
     original_save_markdown = daily_main.save_markdown
 
-    def fake_fetch_all(**kwargs):
+    def fake_fetch_batch(**kwargs):
         order.append("fetch_all")
-        return list(source_articles)
+        return list(source_articles), ()
 
     def fake_dedupe(articles):
         assert order == ["fetch_all"]
@@ -314,6 +316,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         settings,
         tavily_api_key,
         enabled,
+        reference_dt,
     ):
         assert order == ["fetch_all", "dedupe"]
         assert articles == source_articles
@@ -368,7 +371,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
     monkeypatch.setattr(daily_main, "get_config", lambda: runtime_cfg)
     monkeypatch.setattr(daily_main, "today_ymd", lambda: "2026-05-11")
     monkeypatch.setattr(daily_main, "today_cn", lambda: "2026年05月11日")
-    monkeypatch.setattr(daily_main, "fetch_all", fake_fetch_all)
+    monkeypatch.setattr(daily_main, "fetch_batch", fake_fetch_batch)
     monkeypatch.setattr(daily_main, "dedupe", fake_dedupe)
     monkeypatch.setattr(
         daily_main,

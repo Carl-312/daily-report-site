@@ -8,7 +8,7 @@ import argparse
 import sys
 
 from config import get_config
-from sources import fetch_all, Article
+from sources import fetch_batch, Article
 from utils import (
     dedupe,
     enrich_articles_with_tavily,
@@ -18,6 +18,7 @@ from utils import (
     save_markdown,
     load_json,
 )
+from utils.run_contracts import RunClock, StageResult, new_manifest, write_manifest
 from summarizer import (
     summarize,
     offline_summary,
@@ -34,7 +35,7 @@ def resolve_enrichment_enabled(cfg, mode: str) -> bool:
     return bool(cfg.enrichment.enabled)
 
 
-def apply_enrichment(cfg, args, articles, date_str: str):
+def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None = None):
     enabled = resolve_enrichment_enabled(cfg, args.enrichment)
     print(
         "\n🧪 Tavily enrichment..."
@@ -46,6 +47,7 @@ def apply_enrichment(cfg, args, articles, date_str: str):
         settings=cfg.enrichment,
         tavily_api_key=cfg.tavily_api_key,
         enabled=enabled,
+        reference_dt=clock.cutoff_at if clock else None,
     )
     report = result["report"]
     print(
@@ -62,6 +64,24 @@ def apply_enrichment(cfg, args, articles, date_str: str):
             f" total={report.get('total_calls', 0)}"
         )
     return result
+
+
+def create_run_observer(cfg, clock: RunClock):
+    """Create a non-public run manifest; promotion remains a later phase."""
+    manifest = new_manifest(cfg, clock)
+    path = write_manifest(
+        f"{getattr(cfg, 'runs_dir', '.runs')}/{clock.report_date_ymd}/{manifest.run_id}/manifest.json",
+        manifest,
+    )
+    return manifest, path
+
+
+def update_run_observer(path, manifest, *, stages=(), sources=()):
+    updated = manifest.model_copy(
+        update={"stages": tuple(stages), "sources": tuple(sources)}
+    )
+    write_manifest(path, updated)
+    return updated
 
 
 def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
@@ -89,18 +109,30 @@ def summarize_or_offline(articles: list[dict], *, offline: bool, cfg) -> str:
 def cmd_run(args):
     """Full pipeline: fetch → summarize → build"""
     cfg = get_config()
-    date_str = today_ymd()
+    clock = RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai"))
+    try:
+        date_str = today_ymd(clock)
+    except TypeError:  # Compatibility with legacy helper/test doubles.
+        date_str = today_ymd()
+    manifest, manifest_path = create_run_observer(cfg, clock)
 
     print(f"🚀 Daily Report - {date_str}")
     print("=" * 50)
 
     # 1. Fetch
     print("\n📡 Fetching news...")
-    articles = fetch_all(
+    articles, source_results = fetch_batch(
         enabled_sources=cfg.sources,
         max_articles=cfg.max_articles,
         syft_url=cfg.syft_web_app_url,
         syft_key=cfg.syft_secret_key,
+        reference_dt=clock.cutoff_at,
+    )
+    manifest = update_run_observer(
+        manifest_path,
+        manifest,
+        stages=(StageResult(name="fetch", status="ok", started_at=clock.started_at),),
+        sources=source_results,
     )
 
     # 2. Dedupe
@@ -109,7 +141,7 @@ def cmd_run(args):
     print(f"   Remaining: {len(articles)} unique articles")
 
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
-    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str)
+    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
     articles_dict = enrichment_result["articles"]
 
     # 3. Save JSON
@@ -129,7 +161,11 @@ def cmd_run(args):
     content = summarize_or_offline(articles_dict, offline=args.offline, cfg=cfg)
 
     # 5. Build Markdown title
-    title = f"🔥（{today_cn()}）每日AI资讯一览✨"
+    try:
+        title_date = today_cn(clock)
+    except TypeError:  # Compatibility with legacy helper/test doubles.
+        title_date = today_cn()
+    title = f"🔥（{title_date}）每日AI资讯一览✨"
     full_content = f"{title}\n\n{content}"
 
     # 6. Save Markdown
@@ -153,19 +189,31 @@ def cmd_run(args):
 def cmd_fetch(args):
     """Fetch only - save to JSON"""
     cfg = get_config()
-    date_str = today_ymd()
+    clock = RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai"))
+    try:
+        date_str = today_ymd(clock)
+    except TypeError:
+        date_str = today_ymd()
+    manifest, manifest_path = create_run_observer(cfg, clock)
 
     print(f"📡 Fetching news for {date_str}...")
-    articles = fetch_all(
+    articles, source_results = fetch_batch(
         enabled_sources=cfg.sources,
         max_articles=cfg.max_articles,
         syft_url=cfg.syft_web_app_url,
         syft_key=cfg.syft_secret_key,
+        reference_dt=clock.cutoff_at,
+    )
+    update_run_observer(
+        manifest_path,
+        manifest,
+        stages=(StageResult(name="fetch", status="ok", started_at=clock.started_at),),
+        sources=source_results,
     )
 
     articles = dedupe(articles)
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
-    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str)
+    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
     articles_dict = enrichment_result["articles"]
 
     json_path = save_json(
@@ -184,7 +232,12 @@ def cmd_fetch(args):
 def cmd_summarize(args):
     """Summarize only - from existing JSON"""
     cfg = get_config()
-    date_str = today_ymd()
+    clock = RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai"))
+    try:
+        date_str = today_ymd(clock)
+    except TypeError:
+        date_str = today_ymd()
+    create_run_observer(cfg, clock)
 
     data = load_json(cfg.data_dir, date_str)
     if not data:
@@ -196,7 +249,11 @@ def cmd_summarize(args):
 
     content = summarize_or_offline(articles, offline=args.offline, cfg=cfg)
 
-    title = f"🔥（{today_cn()}）每日AI资讯一览✨"
+    try:
+        title_date = today_cn(clock)
+    except TypeError:
+        title_date = today_cn()
+    title = f"🔥（{title_date}）每日AI资讯一览✨"
     full_content = f"{title}\n\n{content}"
 
     md_path = save_markdown(cfg.content_dir, date_str, full_content)
@@ -205,6 +262,8 @@ def cmd_summarize(args):
 
 def cmd_build(args):
     """Build HTML site only"""
+    cfg = get_config()
+    create_run_observer(cfg, RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai")))
     print("🏗️  Building HTML site...")
     from build import build_site
 
@@ -213,6 +272,8 @@ def cmd_build(args):
 
 def cmd_test(args):
     """Test API connection"""
+    cfg = get_config()
+    create_run_observer(cfg, RunClock.create(getattr(cfg, "timezone", "Asia/Shanghai")))
     test_connection()
 
 
