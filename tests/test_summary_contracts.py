@@ -1,0 +1,44 @@
+from __future__ import annotations
+
+from utils.summary_contracts import (
+    SummaryItem,
+    SummaryResult,
+    fingerprint_summary_input,
+    render_summary_markdown,
+)
+
+
+def test_structured_summary_renders_deterministically_with_article_links() -> None:
+    input_hash, prompt_hash = fingerprint_summary_input(
+        [{"title": "AI launch", "link": "https://example.test/a"}], "prompt"
+    )
+    result = SummaryResult(
+        policy="offline",
+        items=(
+            SummaryItem(
+                article_id="a1",
+                title="AI launch",
+                summary="发布了新能力",
+                url="https://example.test/a",
+            ),
+        ),
+        discussion_topic="你会如何使用这项能力？",
+        provider="local",
+        model="deterministic",
+        input_fingerprint=input_hash,
+        prompt_fingerprint=prompt_hash,
+    )
+
+    assert render_summary_markdown(result) == (
+        "1. [AI launch](https://example.test/a)：发布了新能力\n\n"
+        "💬 互动话题：你会如何使用这项能力？"
+    )
+
+
+def test_summary_fingerprints_are_stable_for_identical_input() -> None:
+    first = fingerprint_summary_input([{"title": "A"}], "prompt")
+    second = fingerprint_summary_input([{"title": "A"}], "prompt")
+    changed = fingerprint_summary_input([{"title": "B"}], "prompt")
+
+    assert first == second
+    assert changed[0] != first[0]
