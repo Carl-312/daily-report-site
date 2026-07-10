@@ -318,11 +318,13 @@ def new_manifest(
 
 
 def write_manifest(path: str | Path, manifest: DailyRunManifest) -> Path:
-    """Persist a validated manifest deterministically (atomicity is Phase 2)."""
-    target = Path(path)
-    target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(canonical_json_bytes(manifest.model_dump(mode="json")) + b"\n")
-    return target
+    """Persist a validated manifest atomically for recovery and diagnosis."""
+    from utils.storage import atomic_write_bytes
+
+    return atomic_write_bytes(
+        path,
+        canonical_json_bytes(manifest.model_dump(mode="json")) + b"\n",
+    )
 
 
 def read_manifest(path: str | Path) -> DailyRunManifest:

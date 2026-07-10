@@ -27,6 +27,7 @@ from utils.run_contracts import (
     RunClock,
     StageResult,
     new_manifest,
+    scrub_diagnostic,
     write_manifest,
 )
 from utils.publication import (
@@ -133,6 +134,21 @@ def update_run_observer(path, manifest, *, stages=(), sources=(), publication=No
     return updated
 
 
+def record_blocked_run(cfg, workspace, manifest, *, sources=(), error=None):
+    reason = type(error).__name__ if error is not None else "run_failed"
+    if error is not None:
+        detail = scrub_diagnostic(str(error), cfg)
+        if detail:
+            reason = f"{reason}: {detail}"
+    return update_run_observer(
+        workspace.manifest_path,
+        manifest,
+        stages=manifest.stages,
+        sources=tuple(sources),
+        publication=PublicationState(status="blocked", reason=reason),
+    )
+
+
 def stage_and_publish_run(
     cfg,
     workspace,
@@ -189,11 +205,14 @@ def stage_and_publish_run(
     if deadline_at is not None:
         build_kwargs["deadline_at"] = deadline_at
     build_site(**build_kwargs)
+    if deadline_at is not None and deadline_at <= datetime.now(deadline_at.tzinfo):
+        raise TimeoutError("run deadline exceeded after site build")
     edition = promote_staged_edition(
         staged_edition,
         publication_root,
         run_id=workspace.root.name,
         report_date=date_str,
+        deadline_at=deadline_at,
     )
     mirror_public_edition(
         edition,
@@ -202,8 +221,52 @@ def stage_and_publish_run(
             "content": Path(cfg.content_dir),
             "site": Path(cfg.site_dir),
         },
+        deadline_at=deadline_at,
     )
     return public_json, public_markdown
+
+
+def rebuild_current_site(cfg, clock, workspace):
+    """Rebuild a new site edition without mutating the selected edition."""
+    from build import build_site
+
+    current = read_current_edition(resolve_publication_root(cfg))
+    report_date = current.report_date if current else clock.report_date_ymd
+    staged_edition = workspace.root / "edition"
+    staged_data = staged_edition / "data"
+    staged_content = staged_edition / "content"
+    staged_site = staged_edition / "site"
+    source_data = current.data_dir if current else Path(cfg.data_dir)
+    source_content = current.content_dir if current else Path(cfg.content_dir)
+    staged_data.mkdir(parents=True, exist_ok=True)
+    staged_content.mkdir(parents=True, exist_ok=True)
+    if source_data.exists():
+        shutil.copytree(source_data, staged_data, dirs_exist_ok=True)
+    if source_content.exists():
+        shutil.copytree(source_content, staged_content, dirs_exist_ok=True)
+    build_site(
+        source_dir=staged_content,
+        output_dir=staged_site,
+        assets_dir=Path("assets"),
+        deadline_at=clock.deadline_at,
+    )
+    edition = promote_staged_edition(
+        staged_edition,
+        resolve_publication_root(cfg),
+        run_id=workspace.root.name,
+        report_date=report_date,
+        deadline_at=clock.deadline_at,
+    )
+    mirror_public_edition(
+        edition,
+        {
+            "data": Path(cfg.data_dir),
+            "content": Path(cfg.content_dir),
+            "site": Path(cfg.site_dir),
+        },
+        deadline_at=clock.deadline_at,
+    )
+    return edition
 
 
 def persist_summary_result(workspace, result) -> Path:
@@ -277,14 +340,19 @@ def cmd_run(args):
 
     # 1. Fetch
     print("\n📡 Fetching news...")
-    articles, source_results = fetch_batch(
-        enabled_sources=cfg.sources,
-        max_articles=cfg.max_articles,
-        syft_url=cfg.syft_web_app_url,
-        syft_key=cfg.syft_secret_key,
-        reference_dt=clock.cutoff_at,
-        deadline_at=clock.deadline_at,
-    )
+    source_results = ()
+    try:
+        articles, source_results = fetch_batch(
+            enabled_sources=cfg.sources,
+            max_articles=cfg.max_articles,
+            syft_url=cfg.syft_web_app_url,
+            syft_key=cfg.syft_secret_key,
+            reference_dt=clock.cutoff_at,
+            deadline_at=clock.deadline_at,
+        )
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
+        raise
     manifest = update_run_observer(
         workspace.manifest_path,
         manifest,
@@ -298,18 +366,28 @@ def cmd_run(args):
     print(f"   Remaining: {len(articles)} unique articles")
 
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
-    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
+    try:
+        enrichment_result = apply_enrichment(
+            cfg, args, articles_dict, date_str, clock
+        )
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
+        raise
     articles_dict = enrichment_result["articles"]
 
     # 3. Summarize
     print("\n🤖 Generating summary...")
-    content, summary_result = summarize_with_result(
-        articles_dict,
-        offline=args.offline,
-        cfg=cfg,
-        deadline_at=clock.deadline_at,
-    )
-    persist_summary_result(workspace, summary_result)
+    try:
+        content, summary_result = summarize_with_result(
+            articles_dict,
+            offline=args.offline,
+            cfg=cfg,
+            deadline_at=clock.deadline_at,
+        )
+        persist_summary_result(workspace, summary_result)
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
+        raise
 
     # 4. Build Markdown title
     try:
@@ -337,13 +415,7 @@ def cmd_run(args):
             deadline_at=clock.deadline_at,
         )
     except Exception as exc:
-        update_run_observer(
-            workspace.manifest_path,
-            manifest,
-            stages=manifest.stages,
-            sources=source_results,
-            publication=PublicationState(status="blocked", reason=str(exc)),
-        )
+        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
         raise
     degraded = any(result.status in {"failed", "degraded"} for result in source_results)
     update_run_observer(
@@ -461,11 +533,23 @@ def cmd_summarize(args):
 def cmd_build(args):
     """Build HTML site only"""
     cfg = get_config()
-    create_run_observer(cfg, create_run_clock(cfg))
+    clock = create_run_clock(cfg)
+    manifest, workspace = create_run_observer(cfg, clock)
     print("🏗️  Building HTML site...")
-    from build import build_site
-
-    build_site()
+    try:
+        edition = rebuild_current_site(cfg, clock, workspace)
+    except Exception as exc:
+        record_blocked_run(cfg, workspace, manifest, error=exc)
+        raise
+    update_run_observer(
+        workspace.manifest_path,
+        manifest,
+        publication=PublicationState(
+            status="published",
+            published_run_id=edition.run_id,
+            reason="site_rebuild",
+        ),
+    )
 
 
 def cmd_test(args):

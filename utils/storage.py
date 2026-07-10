@@ -49,6 +49,16 @@ def atomic_write_bytes(path: str | Path, content: bytes) -> Path:
             handle.flush()
             os.fsync(handle.fileno())
         os.replace(temp_path, target)
+        try:
+            directory_fd = os.open(target.parent, os.O_RDONLY | os.O_DIRECTORY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
+        except OSError:
+            # Directory fsync is not available on every supported filesystem;
+            # the file itself is still atomically replaced and synced.
+            pass
         return target
     except BaseException:
         temp_path.unlink(missing_ok=True)

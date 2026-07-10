@@ -19,6 +19,11 @@ from typing import Mapping
 from utils.storage import atomic_write_text
 
 
+def _require_deadline(deadline_at, stage: str) -> None:
+    if deadline_at is not None and datetime.now(deadline_at.tzinfo) >= deadline_at:
+        raise TimeoutError(f"run deadline exceeded during {stage}")
+
+
 @dataclass(frozen=True, slots=True)
 class PromotionResult:
     journal_path: Path
@@ -97,6 +102,7 @@ def promote_staged_edition(
     *,
     run_id: str,
     report_date: str,
+    deadline_at=None,
 ) -> PublicEdition:
     """Publish a complete edition by atomically replacing one public pointer.
 
@@ -111,6 +117,7 @@ def promote_staged_edition(
     required_dirs = [staged_dir / name for name in ("data", "content", "site")]
     if not all(path.is_dir() for path in required_dirs):
         raise ValueError("staged publication edition must contain data/content/site")
+    _require_deadline(deadline_at, "edition promotion")
 
     root = Path(publication_root).resolve()
     editions_root = root / "editions"
@@ -130,6 +137,7 @@ def promote_staged_edition(
         "paths": {"data": "data", "content": "content", "site": "site"},
     }
     try:
+        _require_deadline(deadline_at, "public version pointer replacement")
         atomic_write_text(
             pointer_path,
             json.dumps(pointer, ensure_ascii=False, indent=2) + "\n",
@@ -149,7 +157,12 @@ def promote_staged_edition(
     )
 
 
-def mirror_public_edition(edition: PublicEdition, targets: Mapping[str, Path]) -> None:
+def mirror_public_edition(
+    edition: PublicEdition,
+    targets: Mapping[str, Path],
+    *,
+    deadline_at=None,
+) -> None:
     """Refresh legacy output paths after pointer publication.
 
     These paths remain for CLI and GitHub Actions compatibility. They are not
@@ -161,11 +174,13 @@ def mirror_public_edition(edition: PublicEdition, targets: Mapping[str, Path]) -
         ("content", edition.content_dir),
         ("site", edition.site_dir),
     ):
+        _require_deadline(deadline_at, f"legacy {name} mirror")
         target = Path(targets[name])
         staged = target.with_name(f".{target.name}.mirror-staging")
         if staged.exists():
             shutil.rmtree(staged) if staged.is_dir() else staged.unlink()
         shutil.copytree(source, staged)
+        _require_deadline(deadline_at, f"legacy {name} mirror")
         if target.exists():
             backup = target.with_name(f".{target.name}.mirror-previous")
             if backup.exists():

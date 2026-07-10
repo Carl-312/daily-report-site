@@ -23,6 +23,7 @@ from utils.enrichment_transport import (
     TavilyTransport,
     classify_request_outcome as classify_transport_outcome,
 )
+from utils.run_contracts import RunDeadlineExceeded, scrub_diagnostic
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
@@ -1276,10 +1277,12 @@ def enrich_articles_with_tavily(
             )
         report["notes"].append("Exact verify and staged refill completed.")
         return {"articles": final_articles, "report": report}
+    except RunDeadlineExceeded:
+        raise
     except Exception as exc:
         report["applied"] = False
         report["skip_reason"] = "enrichment_error"
-        report["error"] = str(exc)
+        report["error"] = scrub_diagnostic(str(exc), settings)
         report["stop_reason"] = "enrichment_error"
         report["notes"].append(
             "The pipeline fell back to the deduped articles after an enrichment error."

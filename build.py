@@ -6,6 +6,7 @@ Converts Markdown files to HTML pages for GitHub Pages.
 from __future__ import annotations
 
 from datetime import datetime
+import html
 from pathlib import Path
 import re
 import shutil
@@ -200,7 +201,7 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
     meta, body = parse_frontmatter(content)
 
     html_content = markdown.markdown(
-        body,
+        html.escape(body),
         extensions=["tables", "fenced_code", "codehilite", "toc"],
     )
     html_content = convert_ol_to_paragraphs(html_content)
@@ -214,12 +215,12 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
     except ValueError:
         date_display = date
 
-    html = TEMPLATE.format(
-        title=title,
-        date=date,
-        date_display=date_display,
+    rendered_html = TEMPLATE.format(
+        title=html.escape(title),
+        date=html.escape(date, quote=True),
+        date_display=html.escape(date_display),
         content=html_content,
-        base_path=base_path,
+        base_path=html.escape(base_path, quote=True),
         build_time=datetime.now().strftime("%Y-%m-%d %H:%M"),
     )
 
@@ -228,7 +229,7 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
         "title": title,
         "date": date,
         "date_display": date_display,
-        "html": html,
+        "html": rendered_html,
     }
 
 
@@ -236,9 +237,9 @@ def build_card(article: dict[str, str], featured: bool = False) -> str:
     """Generate a card HTML for article listing."""
     card_class = "card featured" if featured else "card"
     return f"""
-      <a href="{article["filename"]}" class="{card_class}">
-        <h3>{article["title"]}</h3>
-        <time>{article["date_display"]}</time>
+      <a href="{html.escape(article["filename"], quote=True)}" class="{html.escape(card_class, quote=True)}">
+        <h3>{html.escape(article["title"])}</h3>
+        <time>{html.escape(article["date_display"])}</time>
       </a>"""
 
 
@@ -312,9 +313,9 @@ def build_site(
 
     archive_items = (
         "\n".join(
-            f'      <a href="{article["filename"]}" class="archive-item">'
-            f'<span class="date">{article["date"]}</span>'
-            f'<span class="title">{article["title"]}</span></a>'
+            f'      <a href="{html.escape(article["filename"], quote=True)}" class="archive-item">'
+            f'<span class="date">{html.escape(article["date"])}</span>'
+            f'<span class="title">{html.escape(article["title"])}</span></a>'
             for article in articles
         )
         if articles

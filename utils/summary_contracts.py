@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import html
 import json
 from typing import Literal
 
@@ -48,9 +49,13 @@ def fingerprint_summary_input(articles: list[dict], prompt: str) -> tuple[str, s
 
 def render_summary_markdown(result: SummaryResult) -> str:
     """Render a saved summary result without invoking a model."""
-    lines = [
-        f"{index}. [{item.title}]({item.url})：{item.summary}"
-        for index, item in enumerate(result.items, 1)
-    ]
-    lines.extend(["", f"💬 互动话题：{result.discussion_topic}"])
+    lines = []
+    for index, item in enumerate(result.items, 1):
+        title = item.title.replace("[", "\\[").replace("]", "\\]")
+        summary = item.summary.replace("\n", " ").strip()
+        if item.url.startswith(("http://", "https://")):
+            lines.append(f"{index}. [{title}]({item.url})：{summary}")
+        else:
+            lines.append(f"{index}. {title}：{summary}")
+    lines.extend(["", f"💬 互动话题：{html.escape(result.discussion_topic)}"])
     return "\n".join(lines)

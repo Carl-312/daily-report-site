@@ -253,7 +253,12 @@ def _parse_summary_result(
             continue
         text = match.group(1).strip()
         link_match = re.match(r"^\[(.+?)\]\((https?://[^)]+)\)[:：]\s*(.+)$", text)
-        if link_match:
+        input_urls = {
+            str(article.get("link"))
+            for article in articles
+            if str(article.get("link") or "").startswith(("http://", "https://"))
+        }
+        if link_match and link_match.group(2) in input_urls:
             title, url, summary = link_match.groups()
         else:
             article = articles[len(items)] if len(items) < len(articles) else {}
