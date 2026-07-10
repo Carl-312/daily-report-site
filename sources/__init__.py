@@ -101,6 +101,7 @@ def fetch_batch(
 
         except Exception as e:
             print(f"❌ {name}: failed - {e}")
+            error_kind = type(e).__name__
             outcomes.append(
                 SourceRunResult(
                     source=name,
@@ -109,9 +110,14 @@ def fetch_batch(
                     duration_ms=round((perf_counter() - started) * 1000),
                     fetched_count=0,
                     accepted_count=0,
-                    error_kind="source_error",
-                    error_message=str(e),
-                    diagnostics=(Diagnostic(code="source_error", message=str(e)),),
+                    error_kind=error_kind,
+                    error_message="source execution failed; inspect protected logs",
+                    diagnostics=(
+                        Diagnostic(
+                            code="source_error",
+                            message="source execution failed; inspect protected logs",
+                        ),
+                    ),
                 )
             )
 
