@@ -1,46 +1,46 @@
 {
-  "date": "2026-07-05",
+  "date": "2026-07-12",
   "articles": [
     {
-      "title": "New Google commercial imagines a Declaration of Independence written with help from AI",
-      "link": "https://techcrunch.com/2026/07/04/new-google-commercial-imagines-a-declaration-of-independence-written-with-help-from-ai/",
+      "title": "Reed Jobs would rather talk about curing cancer than his last name",
+      "link": "https://techcrunch.com/2026/07/11/reed-jobs-would-rather-talk-about-curing-cancer-than-his-last-name/",
       "description": "",
-      "publish_time": "2026-07-04",
+      "publish_time": "2026-07-11",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Midjourney wants Hollywood studios to reveal the details of their AI usage",
-      "link": "https://techcrunch.com/2026/07/04/midjourney-wants-hollywood-studios-to-reveal-the-details-of-their-ai-usage/",
+      "title": "This slushie machine was a lifesaver during NYC’s heat wave",
+      "link": "https://techcrunch.com/2026/07/11/this-slushie-machine-was-a-lifesaver-during-nycs-heat-wave/",
       "description": "",
-      "publish_time": "2026-07-04",
+      "publish_time": "2026-07-11",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "What is Mistral AI? Everything to know about the OpenAI competitor",
-      "link": "https://techcrunch.com/2026/07/04/what-is-mistral-ai-everything-to-know-about-the-openai-competitor/",
+      "title": "Smart glasses without a camera? Even Realities bets productivity beats recording everyone",
+      "link": "https://techcrunch.com/2026/07/11/smart-glasses-without-a-camera-even-realities-bets-productivity-beats-recording-everyone/",
       "description": "",
-      "publish_time": "2026-07-04",
+      "publish_time": "2026-07-11",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     },
     {
-      "title": "Alibaba reportedly bans employees from using Claude Code",
-      "link": "https://techcrunch.com/2026/07/04/alibaba-reportedly-bans-employees-from-using-claude-code/",
+      "title": "OpenAI bets on families as ChatGPT goes deeper into households",
+      "link": "https://techcrunch.com/2026/07/11/openai-bets-on-families-as-chatgpt-goes-deeper-into-households/",
       "description": "",
-      "publish_time": "2026-07-04",
+      "publish_time": "2026-07-11",
       "content": "",
       "priority": 1,
       "source": "techcrunch"
     }
   ],
   "enrichment": {
-    "report_date": "2026-07-05",
-    "reference_dt": "2026-07-05T12:41:24.673980+08:00",
+    "report_date": "2026-07-12",
+    "reference_dt": "2026-07-12T12:06:54.523093+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
