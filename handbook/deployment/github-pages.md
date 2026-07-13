@@ -57,6 +57,13 @@ artifact 不含 `content/2026-07-10.md`、`data/2026-07-10.json` 或
 `dist/2026-07-10.html`；这只证明灰度分支删除和重建结果，不是生产 Pages 发布。
 PR #8 仍为 OPEN/Draft，线上 URL 未变。
 
+## 2026-07-13 预览结果
+
+[Preview run `29238871654`](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654)
+在灰度分支提交 `adc9bf0` 上以 `publish=false` 完成生成。2 条去重后候选生成 2 条摘要，
+`article_id` 来源校验通过，artifact 成功上传；`deploy` job 跳过，生产 Pages 未改变。
+这次运行只验证生成和摘要契约，不是生产部署验收。
+
 ## 常见误区
 
 - 不要再把 `docs/` 当成 Pages 根目录

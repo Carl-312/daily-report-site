@@ -14,8 +14,9 @@
 
 旧文档仍作为历史设计和实验记录保留；后续判断当前状态时，以本文为准。
 
-本文状态基准：`2026-05-12`，基于当前工作区代码、文档和
-`2026-05-11` Tavily GitHub Actions 灰度 artifact。
+本文状态基准：`2026-07-13`。历史结论仍基于 `2026-05-11` Tavily
+GitHub Actions 灰度 artifact；当前 Tavily 仍默认关闭，2026-07-13 的最新
+摘要契约预览使用 `enable_tavily=false`，不作为 Tavily live 验证样本。
 
 ## 一句话结论
 
@@ -471,7 +472,7 @@ JSON 的 `enrichment` 字段是复盘入口。
 当前仍需要加固：
 
 - refill stage 的 `request_outcome` 已在单轮 run 里有返回，但历史 `data/2026-04-01.json` 中主要通过 `error` 字段体现 timeout，诊断语义仍可继续统一。
-- source 为空时的 `stop_reason` 需要比旧的 `official_fallback_disabled` 更精确。当前工作区已有未提交修改，把它细化为 `below_min_articles_after_*_official_fallback_disabled`。
+- source 为空时的 `stop_reason` 已细化为 `below_min_articles_after_*_official_fallback_disabled`，并有回归测试覆盖；后续只在行为变化时更新本文。
 
 ## 当前测试状态
 
@@ -542,26 +543,11 @@ python main.py run --offline "${ENRICHMENT_ARGS[@]}"
 
 因此，当前 GitHub Actions 每日任务仍不会验证 Tavily 生产表现；生产 runner 表现需要手动触发 `enable_tavily=true` 后再复盘 JSON `enrichment` 字段。
 
-## 当前工作区状态说明
+## 当前工作区状态说明（2026-07-13）
 
-当前工作区存在 Tavily multi-agent PR 相关未提交改动：
-
-- `.env.example`
-- `.github/workflows/deploy.yml`
-- `handbook/deployment/github-actions.md`
-- `handbook/guides/tavily-integration.md`
-- `tests/test_news_enrichment.py`
-- `utils/news_enrichment.py`
-- `content/2026-05-05.md` 当前为未跟踪生成产物，集成验收不依赖它
-
-这些改动表示 Tavily 迭代正在继续，尤其集中在：
-
-- verify prefilter 分层放宽。
-- 更精确的 request / validation outcome 与 stop reason。
-- source 为 0 条时的诊断说明。
-- Actions 手动灰度入口和 `.env.example` key 示例。
-
-本文不会把这些未提交改动视为已经合并到远端生产，只记录为当前工作区事实。
+当前灰度分支工作区干净，最新提交为 `adc9bf0`。Tavily 相关代码、测试和
+Actions 手动入口已纳入灰度分支；但 Tavily 仍只在手动 `enable_tavily=true`
+时执行，最新摘要契约 preview 没有开启它，因此不能据此宣称 Tavily 生产行为已验收。
 
 ## 未完成事项与风险
 

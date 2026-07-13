@@ -2,12 +2,16 @@
 
 AI 驱动的技术新闻日报生成器，自动聚合、摘要并发布每日科技资讯。
 
+当前维护基线：2026-07-13，灰度分支提交 [`adc9bf0`](https://github.com/Carl-312/daily-report-site/commit/adc9bf03fd1b96160bfd957d30842f6b31947626)。生产 `main` 未被本次验证改动。
+
 ## 特性
 
 - **自动化工作流**：GitHub Actions 定时抓取、生成、部署，零人工干预
 - **多源聚合**：AIBase、TechCrunch、The Verge、Syft 等主流科技媒体
 - **Tavily 灰度增强**：可选的 post-fetch enrichment，用于 verify 现有候选并在不足时受控 refill
 - **智能摘要**：ModelScope API（GLM-5.2 → Kimi-K2.7-Code）+ SiliconFlow（Kimi-K2.6）备用，支持离线模式
+- **摘要契约**：候选注入稳定 `article_id`，本地校验一一映射、唯一性、源 URL 和数量上限；没有新闻不硬凑条数
+- **输入去重**：规范化 URL、移除跟踪参数，并拦截明显的跨来源故事改写，保留高优先级候选
 - **轻量架构**：主分支仅保留 7 天数据，历史归档至 Release，站点构建隔离至 `dist/`
 - **质量保障**：CI 自动执行 Ruff 检查和 pytest 测试
 
@@ -64,11 +68,13 @@ python -m http.server 8000 --directory dist
 
 详见 [handbook/deployment/](handbook/deployment/) 目录。
 
-**2026-07-10 灰度验证**：已从灰色分支移除 `content/2026-07-10.md` 和
+**历史灰度验证（2026-07-10）**：已从灰色分支移除 `content/2026-07-10.md` 和
 `data/2026-07-10.json`。成功预览 run `29076119648` 使用
 `skip_generate=true`、`publish=false`、`enable_tavily=false`，artifact 为
 `daily-report-preview-29076119648`；产物不含当天内容或 `dist/2026-07-10.html`。
 该 run 未发布 GitHub Pages，PR #8 仍为 OPEN/Draft，线上 URL 未变。
+
+**当前 P0 预览验证（2026-07-13）**：提交 [`adc9bf0`](https://github.com/Carl-312/daily-report-site/commit/adc9bf03fd1b96160bfd957d30842f6b31947626) 在 [GitHub Actions run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 以 `publish=false`、`enable_tavily=false` 真实执行。2 条去重后候选只生成 2 条摘要，`article_id` 为 `a1/a2`，artifact 生成成功，deploy job 按预期跳过，GitHub Pages 未改变。当前本地验证为 `pytest -q`：85 passed；Ruff lint/format 通过。
 
 ## 项目结构
 
@@ -97,6 +103,9 @@ daily-report-site/
 - [handbook/guides/configuration.md](handbook/guides/configuration.md) - 配置说明
 - [handbook/guides/tavily-integration.md](handbook/guides/tavily-integration.md) - Tavily 使用、诊断和灰度说明
 - [handbook/guides/extending-sources.md](handbook/guides/extending-sources.md) - 扩展新闻源
+- [handbook/guides/daily-product-quality-audit.md](handbook/guides/daily-product-quality-audit.md) - 日报质量审计与重复问题记录
+- [docs/daily-news-reliability-acceptance.md](docs/daily-news-reliability-acceptance.md) - 验收证据与交付门禁
+- [docs/daily-news-task-improvement-analysis.md](docs/daily-news-task-improvement-analysis.md) - 稳定性与架构改进分析
 - [handbook/deployment/](handbook/deployment/) - 部署指南
 
 ## License

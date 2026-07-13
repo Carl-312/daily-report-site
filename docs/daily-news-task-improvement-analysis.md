@@ -12,15 +12,27 @@
 | --- | --- | --- |
 | P0 | 事务式运行与发布门禁 | 防止失败或降级运行覆盖已发布的好版本 |
 | P0 | 来源执行契约与统一时钟 | 区分空结果和故障，统一“每日/最近”的时间语义 |
+| P0 | 摘要 `article_id` 契约与输入去重 | 阻止一篇输入被拆成多条、URL/明显故事重复和无依据扩展 |
 | P1 | 统一文章模型与质量管线 | 消除宽松字典、重复归一化和隐式过滤 |
-| P1 | 结构化、可重放的摘要阶段 | 提高摘要稳定性、可验证性和故障恢复能力 |
+| P1 | 完整结构化、可重放的摘要阶段 | 在已落地最小契约上继续统一 provider 输出、策略和重放 |
 | P1 | 全链路可观测性与模块拆分 | 让运维判断和代码演进建立在同一套运行事实之上 |
 
 不建议现阶段引入数据库、消息队列或微服务。这个项目是每天一次、数据量很小的文件型批任务，使用“类型化阶段结果 + 原子文件发布 + 运行清单”就能获得大部分稳定性收益，同时保持架构轻量。
 
+## 状态修订（2026-07-13）
+
+本文是稳定性基线分析，不再把以下两项视为待实现建议：
+
+- `summarizer.py` 已为候选注入短 `article_id`，`SummaryResult` 和本地 renderer 负责摘要来源、数量、唯一性与源 URL 校验。
+- `utils/dedupe.py` 已做 canonical URL、跟踪参数/片段清理和明显跨来源故事去重，并按优先级保留候选。
+
+提交 `adc9bf0` 的本地回归为 `85 passed`，2026-07-13 的 [Actions preview run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 验证了 2 条输入只生成 2 条摘要。尚未解决的质量问题是不同输入之间的深层语义重复、主体/主题配额、AI 相关性门禁和更完整的来源可观测性；后续建议仍以本文的 P1 设计为准。
+
 ## 2. 分析范围
 
-按本次要求，只查看了 `README.md` 和每日任务直接相关的核心功能代码：
+本文初版按本次要求，只查看了 `README.md` 和每日任务直接相关的核心功能代码；当时没有查看测试、工作流、历史数据、benchmark、handbook、prompt 内容或外围脚本。因此，下面的初始分析不应替代当前验收证据；最新实现和运行结果以本节状态修订及 `docs/daily-news-reliability-acceptance.md` 为准。
+
+初版分析范围包括：
 
 - `main.py`
 - `config.py`
@@ -190,9 +202,9 @@ RunClock(report_date, timezone, cutoff_at, recency_window, deadline_at)
 
 `Article` 在抓取阶段是 dataclass，进入主流程后转成无约束 `dict`（`sources/base.py:13-34`、`main.py:111-123`）。增强模块继续大量接收 `Any` 和字符串 key，报告本身也是一个大型字典（`utils/news_enrichment.py:658-762`、`utils/news_enrichment.py:1349-1357`）。字段缺失、状态含义和阶段修改无法由类型系统或配置校验提前发现。
 
-去重语义也分散：
+去重语义仍有边界，但最小输入护栏已经落地：
 
-- 初始 `dedupe()` 只使用“标准化标题 + 域名”精确 key（`utils/dedupe.py:17-69`），同一 URL 的标题变体或跨媒体同一事件不会合并。
+- 初始 `dedupe()` 现在先规范化 URL、移除跟踪参数和片段，再拦截明显的跨来源标题改写（`utils/dedupe.py`），同一 URL 的常见变体不会产生第二候选。
 - Tavily 模块又实现了更完整的标题归一化、canonical URL、近重复和故事聚类（`utils/news_enrichment.py:123-149`、`utils/news_enrichment.py:270-456`）。
 - 同名的 `normalize_title()` 有两套实现，长期容易产生阶段间行为差异。
 - 增强启用时，验证只处理预算内候选（`utils/news_enrichment.py:984-1119`）；预算外候选记录为 `verify_skipped_due_budget`，但不会自然进入 `verified_output_articles`（`utils/news_enrichment.py:1473-1478`）。这是可以接受的严格策略，但主流程没有把这种大量过滤纳入发布决策。
@@ -235,13 +247,13 @@ schema validation
 - 发布门禁至少包含文章数、来源多样性、近期文章比例和关键阶段降级状态。
 - 危险或冲突的输出目录在启动时失败，而不是执行 `rmtree()` 后才暴露。
 
-## 7. P1：结构化、可重放的摘要阶段
+## 7. P1：摘要阶段的进一步结构化与可重放
 
 ### 7.1 当前风险
 
-当前摘要的供应商回退和中文质量检查是合理基础，但输出契约仍依赖 Markdown 文本形状：
+当前摘要已经有 `SummaryResult`、`article_id` 和确定性 Markdown renderer；仍需继续收紧 provider 输出和策略边界：
 
-- 使用正则识别 `1.` 或 `1、` 开头的单行条目，并要求“互动话题”和中文比例（`summarizer.py:55-95`）。模型只要改变换行或列表样式，就可能被判失败。
+- 在线模型当前仍以 Markdown-ish 文本返回，再由正则提取编号条目并要求“互动话题”和中文比例（`summarizer.py:55-95`）。模型只要改变换行或列表样式，就可能被判失败；本地 `article_id` 校验只能保证来源和边界，不能替代 JSON schema。
 - `summarize()` 已经校验一次，`summarize_or_offline()` 又校验一次（`summarizer.py:192-196`、`main.py:76-79`），职责重复。
 - 没有文章时 `summarize()` 返回“暂无新闻”（`summarizer.py:154-155`），随后主流程仍要求至少一个编号条目，因此在线路径会失败；离线路径则可能生成只有互动话题的日报。零文章政策前后不一致。
 - helper 名为 `summarize_or_offline`，docstring 声称失败时回退，但配置了 API key 后的任何在线失败都会拒绝 offline 并抛错（`main.py:67-86`）。这个 fail-closed 选择本身可以合理，但应成为显式策略而不是隐藏分支。
@@ -250,7 +262,7 @@ schema validation
 
 ### 7.2 建议设计
 
-将“模型生成”和“Markdown 渲染”分开。模型阶段返回受约束的 `SummaryResult`，至少包含条目数组、互动话题、供应商、模型、尝试次数、输入哈希、prompt 哈希和验证结果。每个条目应关联稳定的 `article_id`，Markdown 由本地确定性 renderer 生成。
+保留现有“模型生成”和“Markdown 渲染”分离的边界。下一步将 provider 输出直接收敛到受约束的 JSON `SummaryResult`，并继续记录条目数组、互动话题、供应商、模型、尝试次数、输入哈希、prompt 哈希和验证结果；`article_id` 与本地确定性 renderer 已完成，不应再交给提示词单独保证。
 
 如果所选供应商不能可靠提供结构化输出，也可以要求 JSON 文本并做严格 schema 校验；失败时进入下一个模型。关键是不要让 Markdown 排版本身承担业务协议。
 
@@ -355,7 +367,7 @@ enrichment/
 
 1. 固定 Article/QualityReport/StageResult 类型。
 2. 合并重复的标题、URL、故事归一化逻辑。
-3. 让模型返回结构化摘要，本地确定性渲染 Markdown。
+3. 在已落地的 `article_id` 契约和本地 renderer 之上，让 provider 返回严格结构化摘要，并统一重放入口。
 4. 记录输入、prompt、模型和产物指纹，支持 run 级重放。
 
 ### 第 4 阶段：在契约稳定后拆分增强模块

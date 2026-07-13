@@ -37,9 +37,10 @@
 - 关键步骤：
   1. 运行 `python main.py run` 或 `python main.py run --offline`
   2. `skip_generate=true` 时改为运行 `python main.py build`
-  3. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
-  4. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
-  5. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
+  3. 摘要阶段必须满足候选数量上限与唯一 `article_id` 契约；失败时不生成越界或无输入映射的日报
+  4. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
+  5. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
+  6. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
 
 ## 必要配置
 
@@ -118,6 +119,13 @@ Tavily 灰度限制：
 - `preserved_error_count` / `final_count` / `stop_reason`
 - `verify_runs[*].request_outcome` 与 refill runs 的 `request_outcome`
 
+### 2026-07-13 摘要契约预览证据
+
+提交 `adc9bf0` 的 [preview run `29238871654`](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654)
+使用 `skip_generate=false`、`enable_tavily=false`、`publish=false`。2 条去重后候选生成 2 条摘要，
+`a1/a2` 的来源契约校验通过，artifact 成功生成，`deploy` job 跳过；该 run 未回写仓库或发布
+GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavily 开启或生产发布已验收。
+
 ## 手动验证建议
 
 合并前建议分别手动触发一次：
@@ -132,6 +140,8 @@ Tavily 灰度限制：
 - `main` 上是否只保留最近 7 天的 `data/` / `content/`
 - 手动设置 `enable_tavily=true` 时，日志是否显示 `--enrichment on`
 - `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
+- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否唯一且数量不超过 `articles`
+- 少量输入时 Markdown 是否按真实候选数输出，而不是固定凑满 10 条
 
 ## 相关文档
 

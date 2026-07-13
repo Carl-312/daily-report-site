@@ -39,6 +39,17 @@ python main.py build
 python scripts/manage_retention.py bundle --keep-days 7
 ```
 
+### 摘要条数超过输入候选数或出现重复
+
+当前契约要求输出条数不超过 `min(10, len(articles))`；没有候选时应显示“暂无新闻”，不能为了凑满 10 条扩写。每条摘要还必须带唯一的 `article_id`，并对应输入文章的源 URL。
+
+排查当天 `data/YYYY-MM-DD.json`：
+
+- 看 `articles` 数量和 `summary.items` 数量是否一致（最多 10 条）。
+- 看 `summary.items[*].article_id` 是否为 `a1`、`a2` 等已知且不重复的 ID。
+- 如果出现 `SummaryQualityError`、未知/重复 ID、URL 不匹配或 `publication blocked`，应保留上一版产物，修复输入或摘要结果后再重跑，不要手工把 Markdown 凑到 10 条。
+- 输入 URL 带跟踪参数、片段，或不同来源标题只是明显改写时，`dedupe()` 会合并并保留高优先级候选；这是预期的候选减少，不是抓取丢失。
+
 ### API Key 不可用
 
 确认 `.env` 中有：
