@@ -1,0 +1,173 @@
+{
+  "date": "2026-07-13",
+  "articles": [
+    {
+      "title": "AI日报：抖音电商将豆包纳入抖店结算序列;Claude Fable5访问权限延长至19日；商汤开源SenseNova-Vision统一视觉大模型",
+      "link": "https://news.aibase.com/zh/daily/29551",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 :https://app.aibase.com/zh 1、抖音电商将豆包纳入抖店结算序列，GEO全面进入成交归因时代 抖音电商将大模型应用“豆包”纳入抖店结算序列，标志着AI导流订单实现商业化计算，并构建了“类目+渠道”的综合成本模型，为大模型商业化落地提供了行业样本。 🛒 抖音电商将大模型应用“豆包”纳入技术服务费规则，标志着AI导流订单实现商业化计算。 📊 平台调整了特定类目的基础技术服务费费率，并构建了“类目+渠道”的综合成本模型。 🔍 生成式AI搜索优化（GEO）从曝光逻辑转向成交归因与成本核算阶段。 2、Anthropic再续命:Fable5访问权限延长至7月19日，留人更要挽回口碑 Anthropic宣…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI 资讯\nAI 产品库\nGEO 平台\nMCP 服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：抖音电商将豆包纳入抖店结算序列;Claude Fable5访问权限延长至19日；商汤开源SenseNova-Vision统一视觉大模型\n发布于最新AI日报\n发布时间 :\n2026年7月13号 16:48\n阅读 :\n1\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n:https://app.aibase.com/zh\n1、抖音电商将豆包纳入抖店结算序列，GEO全面进入成交归因时代\n抖音电商将大模型应用“豆包”纳入抖店结算序列，标志着AI导流订单实现商业化计算，并构建了“类目+渠道”的综合成本模型，为大模型商业化落地提供了行业样本。\n【AiBase提要:】\n🛒 抖音电商将大模型应用“豆包”纳入技术服务费规则，标志着AI导流订单实现商业化计算。\n📊 平台调整了特定类目的基础技术服务费费率，并构建了“类目+渠道”的综合成本模型。\n🔍 生成式AI搜索优化（GEO）从曝光逻辑转向成交归因与成本核算阶段。\n2、Anthropic再续命:Fable5访问权限延长至7月19日，留人更要挽回口碑\nAnthropic宣布延长Claude Fable5旗舰模型的访问权限至7月19日，并保持Claude Code的费率上限。此举旨在应对AI行业竞争和修复品牌形象，同时让用户在延期期间享受优惠。【AiBase提要:】\n📅 Fable5访问权限延长至7月19日，以留住开发者用户。\n🛡️ Anthropic 面对安全合规问题，品牌形象修复仍需时间。\n🔄 用户对 Fable5的使用计入订阅限额的一半，无需额外费用。\n3、商汤开源SenseNova-Vision统一视觉大模型，单模型横扫四大核心视觉任务\n商汤科技发布并开源SenseNova-Vision统一视觉大模型，该模型在多个视觉任务中表现出色，展现出超越现有模型的能力，并同步开源了大规模数据集，为行业提供重要支持。\n【AiBase提要:】\n🧠 单模型在四大核心视觉领域全面领先，表现优于专用模型。\n📊 在检测、分割、深度等任务中实现全面超越Vision Banana。\n📦 开源模型及包含5000万条样本的视觉指令语料库，推动技术普及。\n4、Claude Code再进化!内置浏览器让AI自主“刷网页”\nAnthropic为Claude Code带来了重大升级，新增内置浏览器窗口功能，使开发者能够直接在应用内访问和操作外部网页，提高工作效率。同时，通过多重安全审查机制确保AI行为的安全性，并允许企业通过白名单管理限制AI的访问范围，满足不同场景下的安全需求。\n【AiBase提要:】\n🧠 内置浏览器窗口提升开发者效率\n🔒 安全审查机制保障用户控制权\n🌐 白名单管理满足企业级安全需求\n5、努比亚AI宠物机器人iMoochi定档7月17日上线，主打情感陪伴与拟生命交互\n努比亚AI宠物机器人iMoochi以情感陪伴为核心，通过拟生命体交互设计和个性化成长功能，为都市独居人群提供独特的陪伴体验。\n【AiBase提要:】\n🧸 iMoochi通过拟生命体交互设计，提供温暖陪伴体验。\n🧠 硬件配置强大，支持个性化成长和声纹认主功能。\n🎨 五种性格选择，满足不同用户的情感需求。\n6、旗舰模型需求激增，OpenAI紧急解锁GPT-5.6Sol算力限制\nOpenAI为应对GPT-5.6Sol需求激增，临时取消了Plus、Pro及Business订阅用户的5小时使用限制，并优化了模型运行效率，以降低算力和Token消耗。这一举措不仅是为了应对短期流量冲击，也反映了大模型行业向工程化和降本转型的趋势。\n【AiBase提要:】\n🧠 OpenAI临时取消GPT-5.6Sol的使用限制，以应对市场需求激增。\n🚀 优化模型运行效率，降低算力与Token消耗，提升任务承载能力。\n📊 行业趋势从“参数军备竞赛”转向“落地工程化与运营降本”。\n7、蚂蚁集团连发两款开源安全模型，为大模型与智能体套上“紧箍咒”\n蚂蚁集团宣布开源两款智能体安全模型SingGuard-NSFA和多模态安全护栏SingGuard，旨在为大模型和智能体提供更加完善的底层安全能力。这些模型针对智能体行为控制、权限管理和多模态内容安全等挑战，提供了全面的解决方案。\n【AiBase提要:】\n🧠 智能体安全护栏SingGuard-NSFA为智能体操作提供实时安全检测，覆盖7大类、28个中类和185个具体场景。\n🛡️ 多模态安全护栏SingGuard可识别攻击者隐藏在文字、图片等不同模态中的复杂攻击，支持运行时动态加载自然语言安全规则。\n🌐 蚂蚁集团持续参与AI安全标准和治理体系建设，推动AI安全能力从技术创新走向产业实践。\n8、阶跃星辰发布 Step Edge 系列终端模型，实现本地高效多模态处理\n阶跃星辰发布 Step Edge 系列终端模型，实现本地高效多模态处理。该模型可在本地处理文本、图像和音频，支持屏幕理解、语音识别等功能，同时具备低延迟和高隐私安全性。\n【AiBase提要:】\n🧠 Step Edge 系列模型可在本地处理文本、图像和音频，支持屏幕理解、语音识别等功能。\n📶 该系列模型调用延迟低至0.1秒，显著降低设备对网络和云计算的依赖。\n🚀 官方表示，Step Edge 系列模型在29项核心评估指标中均位列\n第一\n，展现出领先的终端侧多模态能力。\n相关推荐\n微软全面引入AI挖掘Windows漏洞，后续安全补丁修复数量将大幅增加\n微软Windows团队全面用AI挖掘漏洞，后续每月安全更新将囊括更多修补，强调漏洞并未增加而是发现效率提升。内部已于5月上线多模态AI安全系统MDASH，自动扫描Windows关键组件，助力系统安全加固。\n2026年7月13号 17:30\n235.2k\n阶跃星辰发布 Step Edge 系列终端模型，实现本地高效多模态处理\n阶跃星辰发布面向手机、车载等终端的Step Edge系列模型，包含基础版、Audio版、GUI版及Gen版。该模型支持本地处理图文音频，能实现屏幕理解、语音识别、界面操作与图像生成，工具调用延迟低至0.1秒。简单、高频或弱网场景下任务全在本地完成，复杂推理则交由云端处理，实现端云高效协同。\n2026年7月13号 14:51\n161.1k\n商汤开源SenseNova-Vision统一视觉大模型，单模型横扫四大核心视觉任务\n商汤发布并开源“日日新SenseNova-Vision”视觉大模型，核心是将视觉能力原生融入通用基础模型，打破传统将检测、分割等专家模型打包的割裂模式。该模型以单模型在多项评测中实现了四大领域的性能碾压，标志着视觉任务向统一原生架构的关键升级。\n2026年7月13号 13:57\n164.8k\n抖音电商将豆包纳入抖店结算序列，GEO全面进入成交归因时代\n抖音电商战略调整，将AI应用“豆包”纳入技术服务费规则，明确费率根据商品类目与成交渠道综合确定。这意味着豆包不再仅是前端购物入口，来自该渠道的订单将在商家结算侧被正式识别归因，新规于2026年7月15日生效。\n2026年7月13号 13:54\n136.8k\n近七成美国民众渴望共享AI红利！呼吁设立主权财富基金\n美国科技企业频繁裁员但利润持续攀升，引发民众强烈不满。最新全国调查显示，69%受访者支持强制AI公司交出50%股份，注入公共主权财富基金，让全体公民共享技术变革红利，以应对失业危机。\n2026年7月13号 9:37\n150.8k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase"
+    },
+    {
+      "title": "TechCrunch Mobility: A robotaxi ultimatum",
+      "link": "https://techcrunch.com/2026/07/12/techcrunch-mobility-a-robotaxi-ultimatum/",
+      "description": "",
+      "publish_time": "2026-07-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-07-13",
+    "reference_dt": "2026-07-13T20:07:27.164141+08:00",
+    "enabled": false,
+    "applied": false,
+    "skip_reason": "disabled",
+    "error": null,
+    "input_count": 2,
+    "prefiltered_count": 2,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 0,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 2,
+    "strict_final_count": 2,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "disabled",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Tavily enrichment is disabled for this run."
+    ]
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "商汤开源SenseNova-Vision大模型",
+        "summary": "推出统一视觉大模型，助力视觉理解技术发展。",
+        "url": "https://news.aibase.com/zh/daily/29551"
+      },
+      {
+        "article_id": "a1",
+        "title": "Anthropic延长Claude Fable5访问权限",
+        "summary": "该模型访问期限延至7月19日，以挽回口碑。",
+        "url": "https://news.aibase.com/zh/daily/29551"
+      },
+      {
+        "article_id": "a1",
+        "title": "生成式AI搜索优化进入新阶段",
+        "summary": "GEO从曝光逻辑全面转向成交归因与成本核算。",
+        "url": "https://news.aibase.com/zh/daily/29551"
+      },
+      {
+        "article_id": "a1",
+        "title": "抖音电商将豆包纳入抖店结算序列",
+        "summary": "标志着AI导流订单实现商业化计算与成本核算。",
+        "url": "https://news.aibase.com/zh/daily/29551"
+      },
+      {
+        "article_id": "a2",
+        "title": "TechCrunch发布Robotaxi报道",
+        "summary": "指出自动驾驶出租车行业正面临关键的最后通牒。",
+        "url": "https://techcrunch.com/2026/07/12/techcrunch-mobility-a-robotaxi-ultimatum/"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
+    "provider": "ModelScope",
+    "model": "ZhipuAI/GLM-5.2",
+    "input_fingerprint": "443a8800c88c2462a0ec0fb81650c877171971ac4214d4ae03fbda0edf08767b",
+    "prompt_fingerprint": "6cc852476f726c006141e825c7520a5e250b7979941f5b4eb2836cbef359235c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "ZhipuAI/GLM-5.2",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "validation_passed": true
+  }
+}
