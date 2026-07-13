@@ -142,6 +142,6 @@ python -m http.server 8000 --directory dist
 
 ## 相关文档
 
-- 本地运行：[`../deployment/local.md`](../deployment/local.md)
-- GitHub Actions：[`../deployment/github-actions.md`](../deployment/github-actions.md)
-- Tavily 接入总览：[`tavily-integration.md`](tavily-integration.md)
+- 本地运行：[`local.md`](local.md)
+- GitHub Actions：[`github-actions.md`](github-actions.md)
+- Tavily 接入总览：[`tavily.md`](tavily.md)

@@ -147,4 +147,4 @@ GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavi
 
 - GitHub Pages：[`github-pages.md`](github-pages.md)
 - 本地运行：[`local.md`](local.md)
-- Tavily 接入总览：[`../guides/tavily-integration.md`](../guides/tavily-integration.md)
+- Tavily 接入总览：[`tavily.md`](tavily.md)

@@ -30,7 +30,7 @@
 
 ## 2. 分析范围
 
-本文初版按本次要求，只查看了 `README.md` 和每日任务直接相关的核心功能代码；当时没有查看测试、工作流、历史数据、benchmark、handbook、prompt 内容或外围脚本。因此，下面的初始分析不应替代当前验收证据；最新实现和运行结果以本节状态修订及 `docs/daily-news-reliability-acceptance.md` 为准。
+本文初版按本次要求，只查看了 `README.md` 和每日任务直接相关的核心功能代码；当时没有查看测试、工作流、历史数据、benchmark、handbook、prompt 内容或外围脚本。因此，下面的初始分析不应替代当前验收证据；最新实现和运行结果以本节状态修订及 [`acceptance.md`](acceptance.md) 为准。
 
 初版分析范围包括：
 

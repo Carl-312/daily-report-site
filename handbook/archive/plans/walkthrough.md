@@ -1,5 +1,7 @@
 # Daily Report Site 规划建议
 
+> 已归档：本文是早期项目规划，不是当前实现清单。当前入口见 [`../../README.md`](../../README.md)。
+
 ## 背景
 
 基于 2026-03-25 的仓库现状，这个项目已经出现了几类典型的“规模刚开始上来就会反复踩坑”的问题：
@@ -155,7 +157,7 @@
 1. `content/`、`data/`、`docs/` 都在 `main` 持续增长
 2. `docs/` 目录同时包含：
    - 生成站点页面，如 `docs/2026-03-25.html`
-   - 工程文档，如 `docs/deployment/local.md`
+   - 工程文档，如 `handbook/operations/local.md`
 
 这会带来几个隐患：
 

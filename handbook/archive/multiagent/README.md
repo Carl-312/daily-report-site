@@ -2,9 +2,11 @@
 
 本文是 `/home/carl/daily-report-site` 中推进 Tavily 兜底新闻能力的 multi-agent 工作入口。
 
+> 归档说明：本文记录 2026 年 5 月的协作方案，不代表当前任务状态。当前 Tavily 入口是 [`../../operations/tavily.md`](../../operations/tavily.md)，当前开发规范见 [`../../development/README.md`](../../development/README.md)。
+
 目标不是让多个 agent 同时“随便优化 Tavily”，而是把一个 PR 拆成互不干扰的独立工作区：每个 agent 有明确文件所有权、禁止触碰范围、验收命令和交付格式。
 
-> 目录名沿用当前仓库中的 `mutiagent` 路径。若后续要改成 `multiagent`，请单独做一次纯命名迁移，不要混进 Tavily PR。
+原文曾使用拼写错误的 `mutiagent` 路径；本次文档整理已将其归档到 `archive/multiagent/`，历史引用仅保留作上下文。
 
 ## PR 总目标
 
@@ -42,7 +44,7 @@ fetch_all
 - `config.yaml`: 默认 Tavily 策略，当前必须保持默认关闭。
 - `tests/test_news_enrichment.py`: Tavily 行为契约测试。
 - `.github/workflows/deploy.yml`: 生产 runner 接线。
-- `handbook/guides/tavily-integration.md`: Tavily 当前状态总入口。
+- `handbook/operations/tavily.md`: Tavily 当前状态总入口。
 
 ## Agent 分工总表
 

@@ -167,6 +167,6 @@ python3 main.py run --offline --enrichment off
 
 ## 相关文档
 
-- 本地运行：[`../deployment/local.md`](../deployment/local.md)
-- 扩展新闻源：[`extending-sources.md`](extending-sources.md)
-- Tavily 接入总览：[`tavily-integration.md`](tavily-integration.md)
+- 本地运行：[`local.md`](local.md)
+- 扩展新闻源：[`../development/source-adapters.md`](../development/source-adapters.md)
+- Tavily 接入总览：[`tavily.md`](tavily.md)

@@ -1,5 +1,7 @@
 # 推荐 PR 拆分
 
+> 已归档：这是早期治理改造的拆分建议。当前代码和文档已完成多轮迭代，请以 [`../../quality/acceptance.md`](../../quality/acceptance.md)、[`../../development/contributing.md`](../../development/contributing.md) 和 [`../../operations/README.md`](../../operations/README.md) 为准。
+
 这轮治理改造建议按下面 4 个 PR 顺序合入，保持每一步都可独立验证、回滚成本低。
 
 ## 1. `chore/python-and-dev-deps-alignment`

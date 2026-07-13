@@ -6,8 +6,8 @@ Gray Test 3 实施准备：[`tavily-gray-3-experiment-plan.md`](tavily-gray-3-ex
 
 ## 当前状态
 
-本文记录 Tavily enrichment 的验证计划和最新执行结果。实现细节、配置说明和历史分析仍以
-`handbook/guides/tavily-integration.md` 为准。
+本文记录 Tavily enrichment 的验证计划和历史执行结果。实现细节、配置说明和当前状态仍以
+[`handbook/operations/tavily.md`](../../operations/tavily.md) 为准。
 
 截至 2026-05-12：
 

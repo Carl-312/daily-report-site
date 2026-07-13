@@ -186,6 +186,6 @@ scorecard 需要新增：
 
 ## 相关文档
 
-- [GitHub Actions 部署与预览](../deployment/github-actions.md)
-- [Tavily 接入和诊断](tavily-integration.md)
-- [故障排查](troubleshooting.md)
+- [GitHub Actions 部署与预览](../operations/github-actions.md)
+- [Tavily 接入和诊断](../operations/tavily.md)
+- [故障排查](../operations/troubleshooting.md)

@@ -1,113 +1,21 @@
 # Daily Report Site
 
-AI 驱动的技术新闻日报生成器，自动聚合、摘要并发布每日科技资讯。
+AI 驱动的技术新闻日报生成器。
 
-当前维护基线：2026-07-13，灰度分支提交 [`adc9bf0`](https://github.com/Carl-312/daily-report-site/commit/adc9bf03fd1b96160bfd957d30842f6b31947626)。生产 `main` 未被本次验证改动。
+本页只负责导航；项目说明、运行手册、架构设计、质量证据和历史记录按主题维护在 [`handbook/`](handbook/README.md) 中。
 
-## 特性
+## 从这里开始
 
-- **自动化工作流**：GitHub Actions 定时抓取、生成、部署，零人工干预
-- **多源聚合**：AIBase、TechCrunch、The Verge、Syft 等主流科技媒体
-- **Tavily 灰度增强**：可选的 post-fetch enrichment，用于 verify 现有候选并在不足时受控 refill
-- **智能摘要**：ModelScope API（GLM-5.2 → Kimi-K2.7-Code）+ SiliconFlow（Kimi-K2.6）备用，支持离线模式
-- **摘要契约**：候选注入稳定 `article_id`，本地校验一一映射、唯一性、源 URL 和数量上限；没有新闻不硬凑条数
-- **输入去重**：规范化 URL、移除跟踪参数，并拦截明显的跨来源故事改写，保留高优先级候选
-- **轻量架构**：主分支仅保留 7 天数据，历史归档至 Release，站点构建隔离至 `dist/`
-- **质量保障**：CI 自动执行 Ruff 检查和 pytest 测试
+- [快速开始](handbook/getting-started.md)：安装、配置和一次本地运行
+- [系统架构](handbook/architecture/README.md)：数据流、模块边界和可靠性约束
+- [运行与部署](handbook/operations/README.md)：本地运行、Actions、Pages、配置和故障排查
+- [开发指南](handbook/development/README.md)：贡献、扩展新闻源和迭代流程
+- [质量与验收](handbook/quality/README.md)：质量审计、验收证据和后续改进
+- [接口参考](handbook/reference/README.md)：CLI、摘要契约、去重和存储 API
+- [历史归档](handbook/archive/README.md)：已结束的实验、旧规划和 multi-agent 记录
 
-## 快速开始
+## 项目约束
 
-**环境要求**：Python 3.12
-
-```bash
-# 安装依赖
-pip install -r requirements-dev.txt
-
-# 配置 API Key（可选，不配置则使用离线模式）
-cp .env.example .env
-# 编辑 .env 填入 MODELSCOPE_API_KEY 或 SILICONFLOW_API_KEY
-
-# 运行完整流程
-python main.py run
-
-# 离线模式（无需 API Key）
-python main.py run --offline
-
-# 显式启用 Tavily 灰度增强（默认关闭）
-TAVILY_API_KEY=... python3 main.py fetch --enrichment on
-TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
-
-# 安全关闭 Tavily 增强
-python3 main.py fetch --enrichment off
-python3 main.py run --offline --enrichment off
-
-# 本地预览
-python -m http.server 8000 --directory dist
-```
-
-**Windows PowerShell**：
-```powershell
-.\run_daily.ps1          # 完整流程
-.\run_daily.ps1 -Offline # 离线模式
-.\run_daily.ps1 -NoCommit # 不提交 Git
-```
-
-## 自动化部署
-
-**CI 检查**（`.github/workflows/ci.yml`）：
-- 触发：`push` / `pull_request`
-- 执行：Ruff 代码检查 + pytest 测试
-
-**每日发布**（`.github/workflows/deploy.yml`）：
-- 触发：每天 00:36 UTC（北京时间 08:36）或手动触发
-- 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
-- 默认流程：抓取新闻 → AI 摘要 → 构建站点；`main` 上的 schedule 或手动 `publish=true` 才会继续归档、提交保留内容并部署 Pages
-- 预览流程：非 `main` 分支，或手动 `publish=false`，只上传 `daily-report-preview-<run_id>` artifact，不发布 Pages
-- 数据保留：main 分支保留最近 7 天，超期数据归档至 GitHub Release
-- Tavily：只通过手动 `enable_tavily=true` 灰度启用，定时任务不默认开启
-
-详见 [handbook/deployment/](handbook/deployment/) 目录。
-
-**历史灰度验证（2026-07-10）**：已从灰色分支移除 `content/2026-07-10.md` 和
-`data/2026-07-10.json`。成功预览 run `29076119648` 使用
-`skip_generate=true`、`publish=false`、`enable_tavily=false`，artifact 为
-`daily-report-preview-29076119648`；产物不含当天内容或 `dist/2026-07-10.html`。
-该 run 未发布 GitHub Pages，PR #8 仍为 OPEN/Draft，线上 URL 未变。
-
-**当前 P0 预览验证（2026-07-13）**：提交 [`adc9bf0`](https://github.com/Carl-312/daily-report-site/commit/adc9bf03fd1b96160bfd957d30842f6b31947626) 在 [GitHub Actions run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 以 `publish=false`、`enable_tavily=false` 真实执行。2 条去重后候选只生成 2 条摘要，`article_id` 为 `a1/a2`，artifact 生成成功，deploy job 按预期跳过，GitHub Pages 未改变。当前本地验证为 `pytest -q`：85 passed；Ruff lint/format 通过。
-
-## 项目结构
-
-```
-daily-report-site/
-├── .github/workflows/   # CI 与部署工作流
-├── sources/             # 新闻源适配器（aibase, techcrunch, theverge, syft）
-├── prompts/             # AI 摘要提示词模板
-├── scripts/             # 归档与清理脚本
-├── tests/               # pytest 测试
-├── handbook/            # 详细文档
-├── content/             # Markdown 产物（最近 7 天）
-├── data/                # JSON 数据（最近 7 天）
-├── dist/                # 站点构建输出（Git 忽略）
-├── main.py              # CLI 入口
-├── build.py             # 静态站点生成器
-├── summarizer.py        # AI 摘要模块
-├── config.py            # 配置管理
-└── config.yaml          # 项目配置
-```
-
-## 文档
-
-- [ARCHITECTURE.md](ARCHITECTURE.md) - 系统架构与数据流
-- [CONTRIBUTING.md](CONTRIBUTING.md) - 开发规范
-- [handbook/guides/configuration.md](handbook/guides/configuration.md) - 配置说明
-- [handbook/guides/tavily-integration.md](handbook/guides/tavily-integration.md) - Tavily 使用、诊断和灰度说明
-- [handbook/guides/extending-sources.md](handbook/guides/extending-sources.md) - 扩展新闻源
-- [handbook/guides/daily-product-quality-audit.md](handbook/guides/daily-product-quality-audit.md) - 日报质量审计与重复问题记录
-- [docs/daily-news-reliability-acceptance.md](docs/daily-news-reliability-acceptance.md) - 验收证据与交付门禁
-- [docs/daily-news-task-improvement-analysis.md](docs/daily-news-task-improvement-analysis.md) - 稳定性与架构改进分析
-- [handbook/deployment/](handbook/deployment/) - 部署指南
-
-## License
-
-MIT
+- [AGENTS.md](AGENTS.md)：当前工作区的协作与交付约束
+- [`.github/workflows/`](.github/workflows/)：CI 与每日发布流程
+- [配置示例](config.yaml)：非密钥运行配置

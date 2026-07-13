@@ -4,9 +4,9 @@
 
 本文是日报项目 Tavily 接入工作的统一入口，合并并校准以下分散材料：
 
-- `handbook/guides/history/tavily-news-enrichment.md`
-- `handbook/guides/history/tavily-trusted-domains-draft.md`
-- `handbook/guides/history/tavily-prefilter-relaxation-plan.md`
+- `handbook/archive/tavily/tavily-news-enrichment.md`
+- `handbook/archive/tavily/tavily-trusted-domains-draft.md`
+- `handbook/archive/tavily/tavily-prefilter-relaxation-plan.md`
 - `data/benchmarks/tavily-*.md`
 - `data/2026-04-01.json`
 - 当前代码中的 `main.py`、`config.py`、`config.yaml`、`utils/news_enrichment.py`
@@ -232,7 +232,7 @@ python3 main.py fetch --enrichment off
 - `scripts/benchmark_tavily_whitelist.py`
 - `data/benchmarks/tavily-whitelist-2026-04-01.json`
 - `data/benchmarks/tavily-whitelist-2026-04-01.md`
-- `handbook/guides/history/tavily-trusted-domains-draft.md`
+- `handbook/archive/tavily/tavily-trusted-domains-draft.md`
 
 首轮结论：
 
@@ -716,8 +716,8 @@ PYTHONPATH=. pytest -q tests/test_news_enrichment.py
 
 只有在需要保留原始实验过程时，才补充：
 
-- `history/tavily-trusted-domains-draft.md`
-- `history/tavily-prefilter-relaxation-plan.md`
+- `../archive/tavily/tavily-trusted-domains-draft.md`
+- `../archive/tavily/tavily-prefilter-relaxation-plan.md`
 - benchmark 结果文件
 
 ## 源材料索引
@@ -753,6 +753,6 @@ PYTHONPATH=. pytest -q tests/test_news_enrichment.py
 
 ### 旧文档
 
-- `handbook/guides/history/tavily-news-enrichment.md`
-- `handbook/guides/history/tavily-trusted-domains-draft.md`
-- `handbook/guides/history/tavily-prefilter-relaxation-plan.md`
+- `handbook/archive/tavily/tavily-news-enrichment.md`
+- `handbook/archive/tavily/tavily-trusted-domains-draft.md`
+- `handbook/archive/tavily/tavily-prefilter-relaxation-plan.md`

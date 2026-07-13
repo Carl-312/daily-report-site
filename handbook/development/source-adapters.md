@@ -600,15 +600,15 @@ REDDIT_CLIENT_SECRET=your-client-secret
 - [requests 文档](https://docs.python-requests.org/)
 - [BeautifulSoup 文档](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 - [feedparser 文档](https://feedparser.readthedocs.io/)
-- [API 参考文档](../api/README.md)
+- [API 参考文档](../reference/api.md)
 
 ---
 
 ## 🚀 下一步
 
-- [配置文件详解](configuration.md)
-- [故障排查手册](troubleshooting.md)
-- [查看 CONTRIBUTING 规范](../../CONTRIBUTING.md)
+- [配置文件详解](../operations/configuration.md)
+- [故障排查手册](../operations/troubleshooting.md)
+- [查看 CONTRIBUTING 规范](contributing.md)
 
 ---
 

@@ -24,4 +24,6 @@ dist/
 .runs/
 .archive-staging/
 archive/
+!handbook/archive/
+!handbook/archive/**
 tmp/

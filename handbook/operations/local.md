@@ -108,4 +108,4 @@ pytest
 
 - GitHub Actions：[`github-actions.md`](github-actions.md)
 - GitHub Pages：[`github-pages.md`](github-pages.md)
-- 配置说明：[`../guides/configuration.md`](../guides/configuration.md)
+- 配置说明：[`configuration.md`](configuration.md)

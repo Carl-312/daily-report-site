@@ -31,7 +31,7 @@
 
 ## Current bottleneck
 
-当前 [utils/news_enrichment.py](/home/carl/daily-report-site/utils/news_enrichment.py:533) 的 `build_prefilter_summary()` 里，只要标题不命中 `AI_KEYWORD_RE`，就会直接记为 `non_ai_relevant` 并被排除。
+当前 [`utils/news_enrichment.py`](../../../utils/news_enrichment.py#L533) 的 `build_prefilter_summary()` 里，只要标题不命中 `AI_KEYWORD_RE`，就会直接记为 `non_ai_relevant` 并被排除。
 
 这会带来两个问题：
 
