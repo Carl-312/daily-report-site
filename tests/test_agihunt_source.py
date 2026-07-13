@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from datetime import datetime, timedelta
 from pathlib import Path
+import subprocess
+import sys
 import threading
 import time
 from zoneinfo import ZoneInfo
@@ -33,6 +35,22 @@ from utils.run_contracts import RunDeadlineExceeded
 REFERENCE = ZoneInfo("Asia/Shanghai")
 NOW = datetime(2026, 7, 13, 8, 36, tzinfo=REFERENCE)
 FIXTURE_PATH = Path(__file__).parent / "fixtures" / "agihunt" / "channel-items.json"
+
+
+def test_utils_can_be_imported_before_sources_without_a_cycle() -> None:
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            "from utils import storage; from sources import Article; assert storage and Article",
+        ],
+        cwd=Path(__file__).parents[1],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
 
 
 def settings(**updates) -> AgihuntSettings:

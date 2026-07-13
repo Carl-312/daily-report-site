@@ -24,8 +24,8 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+from article_identity import canonical_url, normalize_title
 from config import AgihuntSettings
-from utils.dedupe import canonical_url, normalize_title
 from utils.run_contracts import Diagnostic, RunDeadlineExceeded
 
 from .base import Article, BaseSource
