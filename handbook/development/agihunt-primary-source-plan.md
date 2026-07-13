@@ -132,8 +132,11 @@ AGIHunt 适配器不复用 `BaseSource._get()` 的默认“三次重试”语义
 请求上限、一次受控重试、严格错误映射、频道配额和 provenance；默认配置仍为
 `sources.agihunt: false`，灰度只能用 `--agihunt on`。新增 GitHub shadow health
 gate 会验证 manifest、请求预算、原帖 URL、摘要 URL、Markdown 归因和 staged
-publication。离线 fixture 回归与全量测试已通过（`114 passed`），Ruff lint/format
-通过。真实 API 字段和日报链接形态尚未被视为已验证，必须继续完成 Phase 0。
+publication。Phase 0 另有 `scripts/agihunt_live_smoke.py`：用户显式确认后仅调用
+`/channels`、日报和一个频道，物理请求硬上限为 3，并只写出去敏的 shape/传输
+记录。离线 fixture 回归与全量测试已通过（`120 passed`），Ruff lint/format 和
+GitHub 的 P0、quality、gray-scenarios、final-regression 均通过。真实 API 字段和
+日报链接形态尚未被视为已验证，必须继续完成 Phase 0。
 
 ### Phase 2：Shadow 运行与质量比较
 

@@ -174,7 +174,15 @@ class AgihuntClient:
         cache_dir: str | Path | None = None,
         session: requests.Session | None = None,
         sleep: Callable[[float], None] = time.sleep,
+        request_budget: int | None = None,
     ) -> None:
+        if (
+            request_budget is not None
+            and not 1 <= request_budget <= settings.request_budget
+        ):
+            raise ValueError(
+                "AGIHunt client request_budget must be within configured limits"
+            )
         self.api_key = api_key.strip()
         self.settings = settings
         self.session = session or requests.Session()
@@ -183,6 +191,7 @@ class AgihuntClient:
         self.cache_dir = Path(cache_dir or self._default_cache_dir())
         self.cache_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
         self._request_lock = threading.Lock()
+        self.request_budget = request_budget or settings.request_budget
         self.network_requests = 0
         self.cache_hits = 0
         self.last_request_attempts = 0
@@ -281,7 +290,7 @@ class AgihuntClient:
     ) -> dict[str, Any]:
         last_error: AgihuntError | None = None
         for attempt in range(1, 3):
-            if self.network_requests >= self.settings.request_budget:
+            if self.network_requests >= self.request_budget:
                 raise AgihuntRequestBudgetExceededError(
                     "AGIHunt request budget exhausted"
                 )
