@@ -43,25 +43,28 @@ def article_id_for_index(index: int) -> str:
     return f"a{index}"
 
 
-def validate_summary_result(result: SummaryResult, articles: list[dict]) -> None:
-    """Validate summary provenance before a result can be rendered or published."""
-    expected_count = min(10, len(articles))
-    if len(result.items) != expected_count:
+def validate_summary_result(
+    result: SummaryResult, articles: list[dict], *, max_items: int = 10
+) -> None:
+    """Validate source provenance without limiting one source to one news item."""
+    if max_items < 1:
+        raise ValueError("max_items must be positive")
+    if not articles and result.items:
+        raise ValueError("summary cannot contain items without source articles")
+    if articles and not result.items:
+        raise ValueError("summary must contain at least one item when sources exist")
+    if len(result.items) > max_items:
         raise ValueError(
-            f"summary has {len(result.items)} items, expected {expected_count}"
+            f"summary has {len(result.items)} items, maximum allowed is {max_items}"
         )
 
     expected_articles = {
         article_id_for_index(index): article
         for index, article in enumerate(articles, 1)
     }
-    seen_ids: set[str] = set()
     for item in result.items:
         if item.article_id not in expected_articles:
             raise ValueError(f"summary references unknown article_id {item.article_id}")
-        if item.article_id in seen_ids:
-            raise ValueError(f"summary repeats article_id {item.article_id}")
-        seen_ids.add(item.article_id)
 
         article = expected_articles[item.article_id]
         expected_url = str(article.get("link") or "").strip()

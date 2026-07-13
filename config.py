@@ -56,6 +56,7 @@ class Settings(BaseModel):
 
     # Limits
     max_articles: int = Field(default=14)
+    max_summary_items: int = Field(default=10, gt=0)
 
     # Compress settings
     title_max: int = Field(default=150)
@@ -174,6 +175,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
             yaml_settings = {
                 "sources": cfg.get("sources", {}),
                 "max_articles": cfg.get("limits", {}).get("max_articles", 14),
+                "max_summary_items": cfg.get("limits", {}).get("max_summary_items", 10),
                 "title_max": cfg.get("summarize", {})
                 .get("compress", {})
                 .get("title_max", 150),

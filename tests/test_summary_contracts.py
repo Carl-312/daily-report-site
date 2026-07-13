@@ -63,7 +63,7 @@ def test_offline_summary_result_keeps_article_provenance() -> None:
     assert result.items[0].url == "https://example.test/a"
 
 
-def test_summary_contract_rejects_duplicate_ids_and_source_mismatch() -> None:
+def test_summary_contract_allows_multiple_items_from_one_source() -> None:
     result = SummaryResult(
         policy="required_ai",
         items=(
@@ -77,6 +77,33 @@ def test_summary_contract_rejects_duplicate_ids_and_source_mismatch() -> None:
                 article_id="a1",
                 title="AI launch again",
                 summary="重复发布了新能力",
+                url="https://example.test/a",
+            ),
+        ),
+        discussion_topic="你会如何使用这项能力？",
+        provider="local",
+        model="test",
+        input_fingerprint="input",
+        prompt_fingerprint="prompt",
+    )
+
+    validate_summary_result(
+        result,
+        [
+            {"title": "AI launch", "link": "https://example.test/a"},
+            {"title": "Second story", "link": "https://example.test/b"},
+        ],
+    )
+
+
+def test_summary_contract_still_rejects_source_url_mismatch() -> None:
+    result = SummaryResult(
+        policy="required_ai",
+        items=(
+            SummaryItem(
+                article_id="a1",
+                title="AI launch",
+                summary="发布了新能力",
                 url="https://example.test/other",
             ),
         ),
@@ -90,12 +117,30 @@ def test_summary_contract_rejects_duplicate_ids_and_source_mismatch() -> None:
     try:
         validate_summary_result(
             result,
-            [
-                {"title": "AI launch", "link": "https://example.test/a"},
-                {"title": "Second story", "link": "https://example.test/b"},
-            ],
+            [{"title": "AI launch", "link": "https://example.test/a"}],
         )
     except ValueError as exc:
-        assert "repeats article_id" in str(exc)
+        assert "mismatched source URL" in str(exc)
     else:
         raise AssertionError("invalid summary contract was accepted")
+
+
+def test_summary_contract_rejects_empty_result_with_sources() -> None:
+    result = SummaryResult(
+        policy="offline",
+        items=(),
+        discussion_topic="暂无新闻。",
+        provider="local",
+        model="deterministic",
+        input_fingerprint="input",
+        prompt_fingerprint="prompt",
+    )
+
+    try:
+        validate_summary_result(
+            result, [{"title": "AI launch", "link": "https://example.test/a"}]
+        )
+    except ValueError as exc:
+        assert "at least one item" in str(exc)
+    else:
+        raise AssertionError("empty summary was accepted with source articles")

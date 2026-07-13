@@ -14,7 +14,7 @@
 - enrichment 的 transport、policy、verification、refill 已分别落在独立模块，主编排仍通过稳定边界调用。
 - 部分来源降级、全源失败、重复等价输入 no-op、来源有限重试。
 - 离线结构化摘要与 replay 元数据。
-- 摘要 `article_id` 契约：数量、唯一 ID、源 URL、标题和摘要均在本地校验，发布前再次复核。
+- 摘要来源契约：数量受独立 `max_summary_items` 限制；`article_id` 必须来自输入，允许同一来源支撑多条新闻；源 URL、标题和摘要均在本地校验，发布前再次复核。
 - 输入 URL/故事去重：移除跟踪参数和片段，拦截明显跨来源标题改写，不依赖 LLM 扩展候选。
 - 静态站点列表渲染：紧凑有序列表和带链接摘要均保留，不会因 HTML 转换正则过窄而生成空正文。
 
@@ -35,7 +35,7 @@
 - [GitHub Actions preview run `29238871654`](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654)：提交 `adc9bf0`，输入 `skip_generate=false`、`enable_tavily=false`、`publish=false`；2 条候选生成 2 条摘要，`a1/a2` 映射通过，artifact 成功，deploy job 跳过，未发布 Pages。
 - [生产 run `29242010254`](https://github.com/Carl-312/daily-report-site/actions/runs/29242010254)：修复摘要契约后将旧页面替换为 2 条 JSON/Markdown，但产物审查发现 HTML 列表渲染为空，未作为最终验收通过。
 - [最终生产 run `29242308496`](https://github.com/Carl-312/daily-report-site/actions/runs/29242308496)：PR #9 合并后的构建修复版本，`generate-and-deploy` 与 `deploy` 均成功；2 条输入生成 2 条摘要，`a1/a2` 和源 URL 映射通过，线上 HTML 实际显示两条摘要且无 `<p>10.`。
-- [最终线上页面](https://carl-312.github.io/daily-report-site/2026-07-13.html)：生成时间为 2026-07-13 10:19，显示 2 条摘要。
+- [最终线上页面](https://carl-312.github.io/daily-report-site/2026-07-13.html)：上述历史版本页面显示 2 条摘要；本轮重构后应以新的当天产物审查结果为准。
 - 该验证覆盖默认关闭 Tavily 的生产路径，不等同于 Tavily 开启路径的质量结论。
 
 ## 历史交付门禁证据

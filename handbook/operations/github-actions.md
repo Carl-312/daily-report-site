@@ -37,7 +37,7 @@
 - 关键步骤：
   1. 运行 `python main.py run` 或 `python main.py run --offline`
   2. `skip_generate=true` 时改为运行 `python main.py build`
-  3. 摘要阶段必须满足候选数量上限与唯一 `article_id` 契约；失败时不生成越界或无输入映射的日报
+  3. 摘要阶段必须满足独立新闻条数上限与来源 `article_id` 契约；失败时不生成越界或无输入映射的日报，同一来源可支撑多条独立新闻
   4. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
   5. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
   6. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
@@ -140,8 +140,8 @@ GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavi
 - `main` 上是否只保留最近 7 天的 `data/` / `content/`
 - 手动设置 `enable_tavily=true` 时，日志是否显示 `--enrichment on`
 - `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
-- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否唯一且数量不超过 `articles`
-- 少量输入时 Markdown 是否按真实候选数输出，而不是固定凑满 10 条
+- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且数量不超过 `max_summary_items`
+- 聚合来源是否能拆出多条有独立标题和摘要的新闻，同时没有重复事实
 
 ## 相关文档
 

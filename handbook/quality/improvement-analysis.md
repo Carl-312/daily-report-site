@@ -23,10 +23,10 @@
 
 本文是稳定性基线分析，不再把以下两项视为待实现建议：
 
-- `summarizer.py` 已为候选注入短 `article_id`，`SummaryResult` 和本地 renderer 负责摘要来源、数量、唯一性与源 URL 校验。
+- `summarizer.py` 已为候选注入短 `article_id`，`SummaryResult` 和本地 renderer 负责摘要来源、独立条数上限与源 URL 校验；一个来源可被多个独立新闻条目引用。
 - `utils/dedupe.py` 已做 canonical URL、跟踪参数/片段清理和明显跨来源故事去重，并按优先级保留候选。
 
-提交 `adc9bf0` 的本地回归为 `85 passed`，2026-07-13 的 [Actions preview run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 验证了 2 条输入只生成 2 条摘要。尚未解决的质量问题是不同输入之间的深层语义重复、主体/主题配额、AI 相关性门禁和更完整的来源可观测性；后续建议仍以本文的 P1 设计为准。
+提交 `adc9bf0` 的本地回归为 `85 passed`，2026-07-13 的 [Actions preview run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 验证了旧版 2 条输入生成 2 条摘要。本轮改造后，摘要数量改由独立 `max_summary_items` 控制，允许聚合来源拆分；仍需通过当天产物审查防止不同条目重复同一事实。
 
 ## 2. 分析范围
 
