@@ -133,10 +133,10 @@
 - `README.md`
 - `CONTRIBUTING.md`
 - `handbook/README.md`
-- `handbook/deployment/github-actions.md`
-- `handbook/guides/configuration.md`
-- `handbook/guides/tavily-integration.md`
-- `handbook/guides/troubleshooting.md`
+- `handbook/operations/github-actions.md`
+- `handbook/operations/configuration.md`
+- `handbook/operations/tavily.md`
+- `handbook/operations/troubleshooting.md`
 
 已覆盖说明：
 
@@ -169,16 +169,16 @@
 - `CONTRIBUTING.md`
 - `config.py`
 - `handbook/README.md`
-- `handbook/deployment/github-actions.md`
-- `handbook/guides/configuration.md`
-- `handbook/guides/tavily-integration.md`
-- `handbook/guides/troubleshooting.md`
+- `handbook/operations/github-actions.md`
+- `handbook/operations/configuration.md`
+- `handbook/operations/tavily.md`
+- `handbook/operations/troubleshooting.md`
 - `scripts/benchmark_tavily.py`
 - `scripts/benchmark_tavily_whitelist.py`
 - `scripts/experiment_news_enrichment.py`
 - `tests/test_news_enrichment.py`
 - `utils/news_enrichment.py`
-- `handbook/guides/mutiagent/agent-e-integration-conclusion-2026-05-05.md`
+- `handbook/archive/multiagent/agent-e-integration-conclusion-2026-05-05.md`
 
 说明：
 
@@ -318,10 +318,10 @@ doc terminology markers found
 python3 - <<'PY'
 from pathlib import Path
 for rel in [
-    'handbook/guides/tavily-integration.md',
-    'handbook/guides/configuration.md',
-    'handbook/deployment/github-actions.md',
-    'handbook/guides/mutiagent/README.md',
+    'handbook/operations/tavily.md',
+    'handbook/operations/configuration.md',
+    'handbook/operations/github-actions.md',
+    'handbook/archive/multiagent/README.md',
 ]:
     assert Path(rel).exists(), rel
 print('expected handbook files exist')

@@ -35,7 +35,7 @@
 
 ```bash
 git status --short --branch
-sed -n '1,260p' handbook/guides/tavily-integration.md
+sed -n '1,260p' handbook/operations/tavily.md
 sed -n '1,360p' AGENT_ITERATION_WORKFLOW.md
 sed -n '1,360p' tests/test_news_enrichment.py
 sed -n '1,260p' utils/news_enrichment.py

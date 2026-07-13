@@ -1,6 +1,6 @@
 # Tavily Prefilter Relaxation Plan
 
-> 统一入口：当前 Tavily 接入总状态与 prefilter 下一步已经合并到 `handbook/guides/tavily-integration.md`。本文保留为 prefilter 放宽的专项计划草案。
+> 统一入口：当前 Tavily 接入总状态与 prefilter 下一步已经合并到 `handbook/operations/tavily.md`。本文保留为 prefilter 放宽的专项计划草案。
 
 ## Goal
 

@@ -10,7 +10,7 @@
 
 允许你改的典型 glue 文件：
 
-- `handbook/guides/tavily-integration.md`
+- `handbook/operations/tavily.md`
 - `handbook/README.md`
 - `.github/workflows/deploy.yml`
 - `tests/test_news_enrichment.py`
@@ -35,8 +35,8 @@
 
 ```bash
 git status --short --branch
-sed -n '1,260p' handbook/guides/mutiagent/README.md
-sed -n '1,260p' handbook/guides/tavily-integration.md
+sed -n '1,260p' handbook/archive/multiagent/README.md
+sed -n '1,260p' handbook/operations/tavily.md
 sed -n '1,360p' AGENT_ITERATION_WORKFLOW.md
 sed -n '1,260p' utils/news_enrichment.py
 sed -n '1,320p' tests/test_news_enrichment.py
@@ -60,7 +60,7 @@ sed -n '1,240p' .github/workflows/deploy.yml
 2. `tests/test_news_enrichment.py` 覆盖新增诊断字段和失败语义。
 3. `.github/workflows/deploy.yml` 只提供手动 Tavily 灰度，不默认开启。
 4. `.env.example` 有 `TAVILY_API_KEY=`，没有真实 secret。
-5. `handbook/guides/tavily-integration.md` 与最终字段、命令一致。
+5. `handbook/operations/tavily.md` 与最终字段、命令一致。
 6. `config.yaml` 仍是 `enrichment.enabled: false`。
 7. 生成 JSON 的 `enrichment` 字段足以复盘 Tavily 是否执行、失败在哪个阶段、保留了哪些原始文章。
 

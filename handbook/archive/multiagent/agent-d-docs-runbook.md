@@ -8,14 +8,14 @@
 
 你可以修改：
 
-- `handbook/guides/tavily-integration.md`
-- `handbook/guides/configuration.md`
-- `handbook/deployment/github-actions.md`
-- `handbook/guides/troubleshooting.md`
+- `handbook/operations/tavily.md`
+- `handbook/operations/configuration.md`
+- `handbook/operations/github-actions.md`
+- `handbook/operations/troubleshooting.md`
 - `handbook/README.md`
 - `README.md`
 - `CONTRIBUTING.md`
-- `handbook/guides/mutiagent/*`
+- `handbook/archive/multiagent/*`
 
 ## Forbidden Files
 
@@ -33,9 +33,9 @@
 
 ```bash
 git status --short --branch
-sed -n '1,260p' handbook/guides/tavily-integration.md
-sed -n '1,220p' handbook/guides/configuration.md
-sed -n '1,220p' handbook/deployment/github-actions.md
+sed -n '1,260p' handbook/operations/tavily.md
+sed -n '1,220p' handbook/operations/configuration.md
+sed -n '1,220p' handbook/operations/github-actions.md
 sed -n '1,220p' handbook/README.md
 sed -n '1,360p' AGENT_ITERATION_WORKFLOW.md
 ```
@@ -105,10 +105,10 @@ PY
 python3 - <<'PY'
 from pathlib import Path
 for rel in [
-    'handbook/guides/tavily-integration.md',
-    'handbook/guides/configuration.md',
-    'handbook/deployment/github-actions.md',
-    'handbook/guides/mutiagent/README.md',
+    'handbook/operations/tavily.md',
+    'handbook/operations/configuration.md',
+    'handbook/operations/github-actions.md',
+    'handbook/archive/multiagent/README.md',
 ]:
     assert Path(rel).exists(), rel
 print('expected handbook files exist')

@@ -199,7 +199,7 @@ PY
 
 ## 结果记录模板
 
-把每次 run 追加到 `handbook/guides/tavily-validation-iteration-plan.md`：
+把每次 run 追加到 `handbook/archive/tavily/tavily-validation-iteration-plan.md`：
 
 ```markdown
 ### Gray Test 3 Diagnostic Run - YYYY-MM-DD

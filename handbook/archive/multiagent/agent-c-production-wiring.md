@@ -13,7 +13,7 @@
 
 必要时可以小范围修改 GitHub Actions handbook：
 
-- `handbook/deployment/github-actions.md`
+- `handbook/operations/github-actions.md`
 
 如果需要改其他文档，把需求交给 D。
 
@@ -38,7 +38,7 @@
 git status --short --branch
 sed -n '1,240p' .github/workflows/deploy.yml
 sed -n '1,180p' .env.example
-sed -n '1,220p' handbook/guides/tavily-integration.md
+sed -n '1,220p' handbook/operations/tavily.md
 ```
 
 ## Required Behavior

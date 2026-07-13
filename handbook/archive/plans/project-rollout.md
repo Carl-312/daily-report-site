@@ -15,7 +15,7 @@
 - `requirements-dev.txt`
 - `README.md`
 - `CONTRIBUTING.md`
-- `handbook/deployment/local.md`
+- `handbook/operations/local.md`
 
 验收点：
 
@@ -45,8 +45,8 @@
 
 - `scripts/manage_retention.py`
 - `.github/workflows/deploy.yml`
-- `handbook/deployment/github-actions.md`
-- `handbook/guides/troubleshooting.md`
+- `handbook/operations/github-actions.md`
+- `handbook/operations/troubleshooting.md`
 
 验收点：
 
