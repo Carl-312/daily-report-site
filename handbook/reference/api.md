@@ -42,7 +42,7 @@ python main.py test
 - `validate_summary_result(result, articles) -> None`
 - `render_summary_markdown(result) -> str`
 
-摘要条目必须使用输入候选的唯一 `article_id`，数量不能超过输入候选数，且源 URL 必须一致；这些规则由本地代码校验，不由提示词单独保证。
+摘要条目必须使用输入候选中已知的 `article_id`，数量不能超过独立日报上限，且每条源 URL 必须与引用的输入候选一致。同一个 `article_id` 可以出现在多个条目中，以支持聚合链接拆分；这些规则由本地代码校验，不由提示词单独保证。
 
 ### `utils/dedupe.py`
 

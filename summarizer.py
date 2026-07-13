@@ -26,6 +26,12 @@ class SummaryQualityError(ValueError):
     """Raised when an LLM response is not a usable Chinese daily summary."""
 
 
+def _summary_limit(cfg=None) -> int:
+    """Return the independent daily-news limit, not a source-candidate limit."""
+    cfg = cfg or get_config()
+    return max(1, int(getattr(cfg, "max_summary_items", 10)))
+
+
 def create_client(
     base_url: str,
     api_key: str,
@@ -88,6 +94,16 @@ def _extract_article_id(item: str) -> tuple[str, str] | None:
     return match.group(1), match.group(2).strip()
 
 
+def _split_generated_headline(article: dict, text: str) -> tuple[str, str]:
+    """Separate a model-generated headline from its factual explanation."""
+    for separator in ("：", ":"):
+        if separator in text:
+            title, summary = text.split(separator, 1)
+            if title.strip() and summary.strip():
+                return title.strip(), summary.strip()
+    return (article.get("title") or text).strip(), text.strip()
+
+
 def validate_summary_quality(
     content: str,
     expected_items: int = 10,
@@ -98,12 +114,12 @@ def validate_summary_quality(
     if not stripped:
         raise SummaryQualityError("summary is empty")
 
-    max_items = max(0, min(10, expected_items))
+    max_items = max(0, expected_items)
     if max_items == 0:
         raise SummaryQualityError("cannot publish a summary without source articles")
 
     items = _numbered_items(stripped)
-    min_items = max_items
+    min_items = 1
     if len(items) < min_items:
         raise SummaryQualityError(
             f"summary has {len(items)} numbered items, expected at least {min_items}"
@@ -123,8 +139,7 @@ def validate_summary_quality(
             f"summary is not predominantly Chinese (ratio={chinese_ratio:.2f})"
         )
 
-    seen_article_ids: set[str] = set()
-    for index, item in enumerate(items[:min_items], 1):
+    for index, item in enumerate(items, 1):
         body = item
         if expected_article_ids is not None:
             parsed = _extract_article_id(item)
@@ -137,12 +152,6 @@ def validate_summary_quality(
                 raise SummaryQualityError(
                     f"item {index} references unknown article_id {article_id}"
                 )
-            if article_id in seen_article_ids:
-                raise SummaryQualityError(
-                    f"item {index} repeats article_id {article_id}"
-                )
-            seen_article_ids.add(article_id)
-
         if _count_cjk(body) < 8:
             raise SummaryQualityError(
                 f"item {index} does not contain enough Chinese content"
@@ -263,7 +272,7 @@ def summarize(
                 content = _summarize_sync(client, params)
             validate_summary_quality(
                 content,
-                expected_items=min(10, len(compressed)),
+                expected_items=_summary_limit(cfg),
                 expected_article_ids={article["article_id"] for article in compressed},
             )
             return content
@@ -284,6 +293,7 @@ def _parse_summary_result(
     input_fingerprint: str,
     prompt_fingerprint: str,
     attempts: tuple[SummaryAttempt, ...],
+    max_items: int,
 ) -> SummaryResult:
     """Convert validated model text into a provenance-preserving contract."""
     numbered_lines: list[tuple[int, str]] = []
@@ -292,9 +302,9 @@ def _parse_summary_result(
         if match:
             numbered_lines.append((index, match.group(1).strip()))
 
-    if len(numbered_lines) > len(articles):
+    if len(numbered_lines) > max_items:
         raise SummaryQualityError(
-            "summary contains more numbered items than source articles"
+            f"summary contains more than the {max_items}-item daily limit"
         )
 
     items: list[SummaryItem] = []
@@ -302,7 +312,6 @@ def _parse_summary_result(
         article_id_for_index(index): article
         for index, article in enumerate(articles, 1)
     }
-    seen_article_ids: set[str] = set()
     for index, text in numbered_lines:
         parsed = _extract_article_id(text)
         if parsed is None:
@@ -315,12 +324,7 @@ def _parse_summary_result(
             raise SummaryQualityError(
                 f"summary references unknown article_id {article_id}"
             )
-        if article_id in seen_article_ids:
-            raise SummaryQualityError(
-                f"summary maps multiple items to article {article_id}"
-            )
-        seen_article_ids.add(article_id)
-        title = article.get("title") or summary
+        title, summary = _split_generated_headline(article, summary)
         url = str(article.get("link") or "")
         items.append(
             SummaryItem(
@@ -416,7 +420,7 @@ def summarize_result(
             )
             validate_summary_quality(
                 content,
-                expected_items=min(10, len(compressed)),
+                expected_items=_summary_limit(cfg),
                 expected_article_ids={article["article_id"] for article in compressed},
             )
             attempts.append(
@@ -435,8 +439,9 @@ def summarize_result(
                 input_fingerprint=input_fingerprint,
                 prompt_fingerprint=prompt_fingerprint,
                 attempts=tuple(attempts),
+                max_items=_summary_limit(cfg),
             )
-            validate_summary_result(result, articles)
+            validate_summary_result(result, articles, max_items=_summary_limit(cfg))
             return result
         except RunDeadlineExceeded:
             raise
@@ -485,7 +490,7 @@ def offline_summary(articles: list[dict], limit: int = 10) -> str:
         return "暂无新闻"
 
     sorted_arts = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
-    limit = min(10, len(sorted_arts), max(0, limit))
+    limit = min(len(sorted_arts), max(0, limit))
 
     lines = []
     for i, a in enumerate(sorted_arts[:limit], 1):
@@ -512,7 +517,7 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
     )
 
     sorted_articles = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
-    limit = min(10, len(sorted_articles), max(0, limit))
+    limit = min(len(sorted_articles), max(0, limit))
     selected = sorted_articles[:limit]
     input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
         selected, "offline"
@@ -538,7 +543,7 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
             SummaryAttempt(provider="local", model="deterministic", status="ok"),
         ),
     )
-    validate_summary_result(result, selected)
+    validate_summary_result(result, selected, max_items=limit or 1)
     return result
 
 

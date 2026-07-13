@@ -171,7 +171,11 @@ def stage_and_publish_run(
     summary_payload = report.get("summary")
     if summary_payload is not None:
         summary_result = SummaryResult.model_validate(summary_payload)
-        validate_summary_result(summary_result, report["articles"])
+        validate_summary_result(
+            summary_result,
+            report["articles"],
+            max_items=getattr(cfg, "max_summary_items", 10),
+        )
 
     decision = decide_publication(
         articles_count=len(report["articles"]),
@@ -304,19 +308,28 @@ def summarize_or_offline(
     articles: list[dict], *, offline: bool, cfg, deadline_at=None
 ) -> str:
     """Generate an LLM summary, falling back to offline output when providers fail."""
+    summary_limit = max(1, int(getattr(cfg, "max_summary_items", 10)))
     if offline:
-        return offline_summary(articles)
+        return (
+            offline_summary(articles)
+            if summary_limit == 10
+            else offline_summary(articles, limit=summary_limit)
+        )
 
     if not cfg.api_key and not cfg.fallback_api_key:
         print("   ⚠️  No API key, using offline mode")
-        return offline_summary(articles)
+        return (
+            offline_summary(articles)
+            if summary_limit == 10
+            else offline_summary(articles, limit=summary_limit)
+        )
 
     try:
         if deadline_at is None:
             content = summarize(articles, stream=True)
         else:
             content = summarize(articles, stream=True, deadline_at=deadline_at)
-        validate_summary_quality(content, expected_items=min(10, len(articles)))
+        validate_summary_quality(content, expected_items=summary_limit)
         return content
     except Exception as exc:
         message = (
@@ -333,14 +346,20 @@ def summarize_with_result(
     """Return rendered content plus the structured result used to publish it."""
     from summarizer import offline_summary_result
 
+    summary_limit = max(1, int(getattr(cfg, "max_summary_items", 10)))
+
     if offline or (not cfg.api_key and not cfg.fallback_api_key):
-        content = offline_summary(articles)
-        result = offline_summary_result(articles)
-        validate_summary_result(result, articles)
+        content = (
+            offline_summary(articles)
+            if summary_limit == 10
+            else offline_summary(articles, limit=summary_limit)
+        )
+        result = offline_summary_result(articles, limit=summary_limit)
+        validate_summary_result(result, articles, max_items=summary_limit)
         return content, result
     try:
         result = summarize_result(articles, stream=True, deadline_at=deadline_at)
-        validate_summary_result(result, articles)
+        validate_summary_result(result, articles, max_items=summary_limit)
         return render_summary_markdown(result), result
     except Exception as exc:
         message = (
@@ -540,6 +559,11 @@ def cmd_summarize(args):
     current = read_current_edition(resolve_publication_root(cfg))
     data_dir = current.data_dir if current else Path(cfg.data_dir)
     data = load_json(data_dir, date_str)
+    # `fetch` writes a replay checkpoint before promotion, so allow the
+    # following `summarize` command to consume that same-day root checkpoint
+    # even when the current public edition is still yesterday's edition.
+    if not data and current and data_dir != Path(cfg.data_dir):
+        data = load_json(Path(cfg.data_dir), date_str)
     if not data:
         print(f"❌ No data found for {date_str}")
         record_blocked_run(

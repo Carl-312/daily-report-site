@@ -36,6 +36,17 @@ def _valid_summary(item_count: int = 1) -> str:
     return "\n".join(lines)
 
 
+def _summary_with_sources(source_ids: list[str]) -> str:
+    lines = []
+    for index, source_id in enumerate(source_ids, 1):
+        lines.append(
+            f"{index}. [{source_id}] 第{index}条独立新闻发布重要产品更新，推动行业应用场景继续扩展"
+        )
+        lines.append("")
+    lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")
+    return "\n".join(lines)
+
+
 def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
     monkeypatch,
 ) -> None:
@@ -166,14 +177,19 @@ def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
     )
 
 
-def test_validate_summary_quality_rejects_more_items_than_candidates() -> None:
+def test_validate_summary_quality_uses_independent_daily_limit() -> None:
+    summarizer.validate_summary_quality(
+        _valid_summary(item_count=10), expected_items=10
+    )
     with pytest.raises(summarizer.SummaryQualityError, match="maximum allowed is 4"):
         summarizer.validate_summary_quality(
             _valid_summary(item_count=10), expected_items=4
         )
 
 
-def test_summarize_result_rejects_model_expansion(monkeypatch) -> None:
+def test_summarize_result_allows_multiple_news_from_source_candidates(
+    monkeypatch,
+) -> None:
     monkeypatch.setattr(summarizer, "get_config", _llm_config)
     monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
     monkeypatch.setattr(
@@ -184,7 +200,9 @@ def test_summarize_result_rejects_model_expansion(monkeypatch) -> None:
     monkeypatch.setattr(
         summarizer,
         "_summarize_sync",
-        lambda client, params: _valid_summary(item_count=10),
+        lambda client, params: _summary_with_sources(
+            ["a1", "a1", "a1", "a2", "a2", "a3", "a3", "a4", "a4", "a1"]
+        ),
     )
 
     articles = [
@@ -192,8 +210,10 @@ def test_summarize_result_rejects_model_expansion(monkeypatch) -> None:
         for index in range(4)
     ]
 
-    with pytest.raises(RuntimeError, match="All LLM providers failed"):
-        summarizer.summarize_result(articles, stream=False)
+    result = summarizer.summarize_result(articles, stream=False)
+
+    assert len(result.items) == 10
+    assert [item.article_id for item in result.items].count("a1") == 4
 
 
 def test_offline_summary_does_not_expand_candidate_count() -> None:
@@ -217,18 +237,17 @@ def test_validate_summary_quality_rejects_unknown_article_id() -> None:
         )
 
 
-def test_validate_summary_quality_rejects_duplicate_article_id() -> None:
+def test_validate_summary_quality_allows_duplicate_article_id() -> None:
     content = (
         "1. [a1] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
         "2. [a1] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
         "互动话题：你最关注哪条AI新闻？"
     )
-    with pytest.raises(summarizer.SummaryQualityError, match="repeats article_id"):
-        summarizer.validate_summary_quality(
-            content,
-            expected_items=2,
-            expected_article_ids={"a1", "a2"},
-        )
+    summarizer.validate_summary_quality(
+        content,
+        expected_items=2,
+        expected_article_ids={"a1", "a2"},
+    )
 
 
 def test_validate_summary_quality_rejects_english_link_list() -> None:
@@ -246,13 +265,12 @@ def test_validate_summary_quality_rejects_english_link_list() -> None:
         summarizer.validate_summary_quality(content, expected_items=2)
 
 
-def test_validate_summary_quality_rejects_incomplete_digest() -> None:
+def test_validate_summary_quality_rejects_digest_without_interaction_footer() -> None:
     content = "\n\n".join(
         [
             "1. 人工智能公司发布重要产品更新，推动行业应用场景继续扩展",
-            "互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
         ]
     )
 
-    with pytest.raises(summarizer.SummaryQualityError):
+    with pytest.raises(summarizer.SummaryQualityError, match="interaction footer"):
         summarizer.validate_summary_quality(content, expected_items=10)
