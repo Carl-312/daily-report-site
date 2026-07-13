@@ -2,7 +2,7 @@
 
 状态：开放问题<br>
 审计执行日期：2026-07-13<br>
-证据范围：2026-07-04 至 2026-07-12 的 main 正式产物，以及 2026-07-04 至 2026-07-10 的 Tavily Gray Actions artifact。
+证据范围：2026-07-04 至 2026-07-13 的 main 正式产物，以及 2026-07-04 至 2026-07-10 的 Tavily Gray Actions artifact。
 
 本文记录已经由 GitHub 产物验证的质量风险、边界和后续验收标准。它不是 Tavily 默认开启的批准记录，也不替代每次运行的 manifest、日志或发布决策。
 
@@ -73,6 +73,18 @@
 
 本修复关闭了“超额扩展和无输入映射”路径；同一输入的重复绑定已由显式 `article_id` 阻断，不同输入之间的语义重复仍需要后续主题级校验进一步收紧。
 
+### 2026-07-13 生产页面撤换与最终重跑
+
+2026-07-13 的定时生产 run `29223231724` 使用旧版本代码，将 1 条 TechCrunch 候选扩写为 10 条 robotaxi 改写；该 run 的 Actions 状态虽然成功，但页面质量不合格。修复版本通过 PR #8 合并后，第一次生产重跑 `29242010254` 已将 JSON/Markdown 收敛为 2 条，但产物审查又发现静态构建层把紧凑有序列表全部清空：`build.py` 的 `convert_ol_to_paragraphs()` 只匹配 `<li><p>...</p></li>`，而当前 Markdown renderer 输出的是 `<li>...</li>`。
+
+第二个修复通过 PR #9 合并，新增普通列表和带 URL 列表的构建回归测试。最终生产 run `29242308496` 的 `generate-and-deploy` 与 Pages deploy 均成功，`data/2026-07-13.json` 记录 2 个输入、2 个摘要，`article_id` 为 `a1/a2`；线上页面实际呈现两条带源链接的摘要，没有第 10 条扩写，也没有空正文。
+
+- 旧页面与最终页面：[2026-07-13 线上日报](https://carl-312.github.io/daily-report-site/2026-07-13.html)
+- 旧问题 run：[定时生产 run 29223231724](https://github.com/Carl-312/daily-report-site/actions/runs/29223231724)
+- 第一次替换 run：[生产 run 29242010254](https://github.com/Carl-312/daily-report-site/actions/runs/29242010254)
+- 最终修复 run：[生产 run 29242308496](https://github.com/Carl-312/daily-report-site/actions/runs/29242308496)
+- 构建修复：[PR #9](https://github.com/Carl-312/daily-report-site/pull/9)
+
 ### P0 实现记录（2026-07-13）
 
 本轮已完成两个最小化护栏：
@@ -83,7 +95,7 @@
 
 这两个护栏解决的是“同一输入被拆成多条”和输入候选重复问题；不同输入之间的深层语义相似、主体配额和 AI 相关性仍不在本轮范围内。
 
-- 回归验证：`pytest -q` → `85 passed`；Ruff lint/format 通过。
+- 回归验证：摘要契约阶段为 `85 passed`；最终构建修复后为 `86 passed`；Ruff lint/format 通过。
 
 ### AI 主题稀释
 
