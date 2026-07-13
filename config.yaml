@@ -18,6 +18,10 @@ output:
   json_dir: data
   md_dir: content
   site_dir: dist
+  publication_root: .publication
+
+run:
+  deadline_minutes: 20
 
 enrichment:
   enabled: false

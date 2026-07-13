@@ -256,6 +256,8 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         data_dir=str(tmp_path / "data"),
         content_dir=str(tmp_path / "content"),
         site_dir=str(tmp_path / "dist"),
+        runs_dir=str(tmp_path / "runs"),
+        timezone="Asia/Shanghai",
         enrichment=cfg.enrichment,
         tavily_api_key="test-key",
         api_key="",
@@ -295,12 +297,10 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
     ]
     order: list[str] = []
     summarized_articles: list[dict] = []
-    original_save_json = daily_main.save_json
-    original_save_markdown = daily_main.save_markdown
 
-    def fake_fetch_all(**kwargs):
+    def fake_fetch_batch(**kwargs):
         order.append("fetch_all")
-        return list(source_articles)
+        return list(source_articles), ()
 
     def fake_dedupe(articles):
         assert order == ["fetch_all"]
@@ -314,6 +314,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         settings,
         tavily_api_key,
         enabled,
+        reference_dt,
     ):
         assert order == ["fetch_all", "dedupe"]
         assert articles == source_articles
@@ -339,45 +340,29 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
             },
         }
 
-    def recording_save_json(dir_path, date_str, data):
-        assert order == ["fetch_all", "dedupe", "enrich_articles_with_tavily"]
-        order.append("save_json")
-        return original_save_json(dir_path, date_str, data)
-
     def fake_offline_summary(articles):
-        assert order == [
-            "fetch_all",
-            "dedupe",
-            "enrich_articles_with_tavily",
-            "save_json",
-        ]
+        assert order == ["fetch_all", "dedupe", "enrich_articles_with_tavily"]
         order.append("offline_summary")
         summarized_articles.extend(articles)
         return "\n".join(f"- {article['title']}" for article in articles)
 
-    def recording_save_markdown(dir_path, date_str, content):
+    def fake_build_site(**kwargs):
         assert order[-1] == "offline_summary"
-        order.append("save_markdown")
-        return original_save_markdown(dir_path, date_str, content)
-
-    def fake_build_site():
-        assert order[-1] == "save_markdown"
+        kwargs["output_dir"].mkdir(parents=True, exist_ok=True)
         order.append("build")
         return []
 
     monkeypatch.setattr(daily_main, "get_config", lambda: runtime_cfg)
     monkeypatch.setattr(daily_main, "today_ymd", lambda: "2026-05-11")
     monkeypatch.setattr(daily_main, "today_cn", lambda: "2026年05月11日")
-    monkeypatch.setattr(daily_main, "fetch_all", fake_fetch_all)
+    monkeypatch.setattr(daily_main, "fetch_batch", fake_fetch_batch)
     monkeypatch.setattr(daily_main, "dedupe", fake_dedupe)
     monkeypatch.setattr(
         daily_main,
         "enrich_articles_with_tavily",
         fake_enrich_articles_with_tavily,
     )
-    monkeypatch.setattr(daily_main, "save_json", recording_save_json)
     monkeypatch.setattr(daily_main, "offline_summary", fake_offline_summary)
-    monkeypatch.setattr(daily_main, "save_markdown", recording_save_markdown)
     monkeypatch.setattr(build, "build_site", fake_build_site)
 
     daily_main.cmd_run(SimpleNamespace(enrichment="on", offline=True))
@@ -391,9 +376,7 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         "fetch_all",
         "dedupe",
         "enrich_articles_with_tavily",
-        "save_json",
         "offline_summary",
-        "save_markdown",
         "build",
     ]
     assert saved_report["articles"] == enriched_articles

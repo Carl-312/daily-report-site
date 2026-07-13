@@ -20,6 +20,10 @@ Thumbs.db
 
 # Build output and local archive staging
 dist/
+.publication/
+.runs/
 .archive-staging/
 archive/
+!handbook/archive/
+!handbook/archive/**
 tmp/

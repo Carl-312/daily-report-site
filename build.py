@@ -6,13 +6,16 @@ Converts Markdown files to HTML pages for GitHub Pages.
 from __future__ import annotations
 
 from datetime import datetime
+import html
 from pathlib import Path
 import re
 import shutil
+from urllib.parse import urlparse
 
 import markdown
 
 from config import get_config
+from utils.run_contracts import RunDeadlineExceeded
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -145,11 +148,35 @@ def resolve_paths(
 ) -> tuple[Path, Path, Path]:
     """Resolve site build paths from arguments or runtime config."""
     cfg = get_config()
+    current = None
+    if source_dir is None or output_dir is None:
+        from utils.publication import read_current_edition
+
+        current = read_current_edition(getattr(cfg, "publication_root", ".publication"))
     return (
-        source_dir or Path(cfg.content_dir),
-        output_dir or Path(cfg.site_dir),
+        source_dir or (current.content_dir if current else Path(cfg.content_dir)),
+        output_dir or (current.site_dir if current else Path(cfg.site_dir)),
         assets_dir or Path("assets"),
     )
+
+
+def _require_deadline(deadline_at: datetime | None, stage: str) -> None:
+    if deadline_at is not None and datetime.now(deadline_at.tzinfo) >= deadline_at:
+        raise RunDeadlineExceeded(f"run deadline exceeded during {stage}")
+
+
+def _sanitize_link_schemes(value: str) -> str:
+    """Neutralize unsafe Markdown-generated href/src schemes."""
+    attribute = re.compile(r'(?P<prefix>\b(?:href|src)=["\'])(?P<url>[^"\']+)')
+
+    def replace(match: re.Match[str]) -> str:
+        url = match.group("url")
+        scheme = urlparse(url).scheme.lower()
+        if scheme and scheme not in {"http", "https"}:
+            return f"{match.group('prefix')}#"
+        return match.group(0)
+
+    return attribute.sub(replace, value)
 
 
 def parse_frontmatter(content: str) -> tuple[dict[str, str], str]:
@@ -189,10 +216,11 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
     meta, body = parse_frontmatter(content)
 
     html_content = markdown.markdown(
-        body,
+        html.escape(body),
         extensions=["tables", "fenced_code", "codehilite", "toc"],
     )
     html_content = convert_ol_to_paragraphs(html_content)
+    html_content = _sanitize_link_schemes(html_content)
 
     date = meta.get("date") or md_path.stem
     title = meta.get("title") or f"日报 {date}"
@@ -203,12 +231,12 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
     except ValueError:
         date_display = date
 
-    html = TEMPLATE.format(
-        title=title,
-        date=date,
-        date_display=date_display,
+    rendered_html = TEMPLATE.format(
+        title=html.escape(title),
+        date=html.escape(date, quote=True),
+        date_display=html.escape(date_display),
         content=html_content,
-        base_path=base_path,
+        base_path=html.escape(base_path, quote=True),
         build_time=datetime.now().strftime("%Y-%m-%d %H:%M"),
     )
 
@@ -217,7 +245,7 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
         "title": title,
         "date": date,
         "date_display": date_display,
-        "html": html,
+        "html": rendered_html,
     }
 
 
@@ -225,9 +253,9 @@ def build_card(article: dict[str, str], featured: bool = False) -> str:
     """Generate a card HTML for article listing."""
     card_class = "card featured" if featured else "card"
     return f"""
-      <a href="{article["filename"]}" class="{card_class}">
-        <h3>{article["title"]}</h3>
-        <time>{article["date_display"]}</time>
+      <a href="{html.escape(article["filename"], quote=True)}" class="{html.escape(card_class, quote=True)}">
+        <h3>{html.escape(article["title"])}</h3>
+        <time>{html.escape(article["date_display"])}</time>
       </a>"""
 
 
@@ -242,6 +270,7 @@ def build_site(
     source_dir: Path | None = None,
     output_dir: Path | None = None,
     assets_dir: Path | None = None,
+    deadline_at: datetime | None = None,
 ) -> list[dict[str, str]]:
     """Build the entire static site."""
     source_dir, output_dir, assets_dir = resolve_paths(
@@ -249,6 +278,7 @@ def build_site(
     )
 
     print("🚀 Building Daily Report site...")
+    _require_deadline(deadline_at, "site build")
     source_dir.mkdir(parents=True, exist_ok=True)
     prepare_output_dir(output_dir)
 
@@ -265,6 +295,7 @@ def build_site(
 
     articles: list[dict[str, str]] = []
     for md_path in md_files:
+        _require_deadline(deadline_at, "site build")
         article = build_article(md_path)
         articles.append(article)
 
@@ -298,9 +329,9 @@ def build_site(
 
     archive_items = (
         "\n".join(
-            f'      <a href="{article["filename"]}" class="archive-item">'
-            f'<span class="date">{article["date"]}</span>'
-            f'<span class="title">{article["title"]}</span></a>'
+            f'      <a href="{html.escape(article["filename"], quote=True)}" class="archive-item">'
+            f'<span class="date">{html.escape(article["date"])}</span>'
+            f'<span class="title">{html.escape(article["title"])}</span></a>'
             for article in articles
         )
         if articles

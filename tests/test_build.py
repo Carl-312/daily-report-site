@@ -65,3 +65,30 @@ def test_build_site_without_content_creates_empty_state_pages(tmp_path: Path) ->
     assert "暂无日报" in (output_dir / "index.html").read_text(encoding="utf-8")
     assert "近期日报归档" in (output_dir / "archive.html").read_text(encoding="utf-8")
     assert not list(output_dir.glob("2026-*.html"))
+
+
+def test_build_site_escapes_untrusted_markdown_and_metadata(tmp_path: Path) -> None:
+    source_dir = tmp_path / "content"
+    output_dir = tmp_path / "dist"
+    assets_dir = tmp_path / "assets"
+    source_dir.mkdir()
+    assets_dir.mkdir()
+    (source_dir / "2026-03-25.md").write_text(
+        """---
+title: <script>alert('x')</script>
+date: 2026-03-25
+---
+
+<script>alert('body')</script>
+
+[unsafe](javascript:alert('link'))
+""",
+        encoding="utf-8",
+    )
+
+    build_site(source_dir=source_dir, output_dir=output_dir, assets_dir=assets_dir)
+
+    html = (output_dir / "2026-03-25.html").read_text(encoding="utf-8")
+    assert "<script>" not in html
+    assert "&lt;script&gt;" in html
+    assert "javascript:" not in html

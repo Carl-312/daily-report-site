@@ -49,6 +49,7 @@ class Settings(BaseModel):
 
     # Timezone
     timezone: str = Field(default="Asia/Shanghai")
+    run_deadline_minutes: float = Field(default=20, gt=0)
 
     # Sources config
     sources: Dict[str, bool] = Field(default_factory=dict)
@@ -65,6 +66,8 @@ class Settings(BaseModel):
     data_dir: str = Field(default="data")
     content_dir: str = Field(default="content")
     site_dir: str = Field(default="dist")
+    publication_root: str = Field(default=".publication")
+    runs_dir: str = Field(default=".runs")
 
     # Syft (optional)
     syft_web_app_url: str = Field(default="")
@@ -156,6 +159,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "fallback_model": os.getenv("SILICONFLOW_MODEL", DEFAULT_SILICONFLOW_MODEL),
         "max_output": int(os.getenv("MODELSCOPE_MAX_OUTPUT", "2000")),
         "timezone": os.getenv("TIMEZONE", "Asia/Shanghai"),
+        "run_deadline_minutes": float(os.getenv("RUN_DEADLINE_MINUTES", "20")),
         "syft_web_app_url": os.getenv("SYFT_WEB_APP_URL", ""),
         "syft_secret_key": os.getenv("SYFT_SECRET_KEY", ""),
         "tavily_api_key": os.getenv("TAVILY_API_KEY", ""),
@@ -184,6 +188,8 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 "site_dir": output_cfg.get(
                     "site_dir", output_cfg.get("docs_dir", "dist")
                 ),
+                "publication_root": output_cfg.get("publication_root", ".publication"),
+                "run_deadline_minutes": cfg.get("run", {}).get("deadline_minutes", 20),
                 "enrichment": cfg.get("enrichment", {}),
             }
 

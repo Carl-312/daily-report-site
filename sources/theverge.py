@@ -20,18 +20,29 @@ class TheVergeSource(BaseSource):
     BASE_URL = "https://www.theverge.com"
     AI_URL = "https://www.theverge.com/ai-artificial-intelligence"
 
-    def fetch(self, max_articles: int = 14) -> List[Article]:
+    def fetch(
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
+    ) -> List[Article]:
         """Fetch AI news from The Verge"""
-        resp = self._get(self.AI_URL)
+        resp = self._get(self.AI_URL, deadline_at=deadline_at)
         resp.raise_for_status()
         soup = self._parse_html(resp.content)
 
-        articles = self._parse_articles(soup)
-        filtered = [a for a in articles if self._is_recent(a.publish_time)]
+        articles = self._parse_articles(soup, reference_dt=reference_dt)
+        filtered = [
+            a
+            for a in articles
+            if self._is_recent(a.publish_time, reference_dt=reference_dt)
+        ]
 
         return filtered[:max_articles]
 
-    def _parse_articles(self, soup) -> List[Article]:
+    def _parse_articles(
+        self, soup, reference_dt: datetime | None = None
+    ) -> List[Article]:
         """Parse article links from AI section"""
         selectors = [
             "h2 a",
@@ -83,7 +94,9 @@ class TheVergeSource(BaseSource):
                     link=link,
                     description="",
                     publish_time=publish_time,
-                    priority=1 if self._is_recent(publish_time) else 0,
+                    priority=1
+                    if self._is_recent(publish_time, reference_dt=reference_dt)
+                    else 0,
                     source=self.name,
                 )
             )
@@ -98,13 +111,19 @@ class TheVergeSource(BaseSource):
             return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
         return ""
 
-    def _is_recent(self, publish_time: str) -> bool:
+    def _is_recent(
+        self, publish_time: str, reference_dt: datetime | None = None
+    ) -> bool:
         """Check if article is within last 48 hours"""
         if not publish_time:
             return False
         try:
             pub_date = datetime.strptime(publish_time, "%Y-%m-%d")
-            now = datetime.now(beijing_tz).replace(tzinfo=None)
+            now = (
+                (reference_dt or datetime.now(beijing_tz))
+                .astimezone(beijing_tz)
+                .replace(tzinfo=None)
+            )
             return (now - pub_date).days <= 1
         except Exception:
             return False

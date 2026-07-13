@@ -28,7 +28,9 @@ def _llm_config(**overrides):
 def _valid_summary(item_count: int = 1) -> str:
     lines = []
     for index in range(1, item_count + 1):
-        lines.append(f"{index}. 人工智能公司发布重要产品更新，推动行业应用场景继续扩展")
+        lines.append(
+            f"{index}. [a{index}] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展"
+        )
         lines.append("")
     lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")
     return "\n".join(lines)
@@ -128,10 +130,105 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     assert calls == ["ZhipuAI/GLM-5.2", "moonshotai/Kimi-K2.7-Code"]
 
 
+def test_summarize_result_records_provider_attempts_and_article_provenance(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+
+    def fake_summarize_sync(client, params):
+        if params["model"] == "ZhipuAI/GLM-5.2":
+            raise RuntimeError("primary unavailable")
+        return _valid_summary()
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    result = summarizer.summarize_result(
+        [{"title": "Story", "link": "https://example.test/story"}],
+        stream=False,
+    )
+
+    assert result.provider == "ModelScope secondary"
+    assert result.model == "moonshotai/Kimi-K2.7-Code"
+    assert [attempt.status for attempt in result.attempts] == ["failed", "ok"]
+    assert result.items[0].article_id == "a1"
+    assert result.items[0].url == "https://example.test/story"
+    assert result.validation_passed is True
+
+
 def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
     summarizer.validate_summary_quality(
         _valid_summary(item_count=10), expected_items=10
     )
+
+
+def test_validate_summary_quality_rejects_more_items_than_candidates() -> None:
+    with pytest.raises(summarizer.SummaryQualityError, match="maximum allowed is 4"):
+        summarizer.validate_summary_quality(
+            _valid_summary(item_count=10), expected_items=4
+        )
+
+
+def test_summarize_result_rejects_model_expansion(monkeypatch) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+    monkeypatch.setattr(
+        summarizer,
+        "_summarize_sync",
+        lambda client, params: _valid_summary(item_count=10),
+    )
+
+    articles = [
+        {"title": f"Story {index}", "link": f"https://example.test/{index}"}
+        for index in range(4)
+    ]
+
+    with pytest.raises(RuntimeError, match="All LLM providers failed"):
+        summarizer.summarize_result(articles, stream=False)
+
+
+def test_offline_summary_does_not_expand_candidate_count() -> None:
+    articles = [
+        {"title": f"Story {index}", "link": f"https://example.test/{index}"}
+        for index in range(4)
+    ]
+
+    summary = summarizer.offline_summary(articles)
+
+    assert len(summarizer._numbered_items(summary)) == 4
+
+
+def test_validate_summary_quality_rejects_unknown_article_id() -> None:
+    with pytest.raises(summarizer.SummaryQualityError, match="unknown article_id"):
+        summarizer.validate_summary_quality(
+            "1. [a9] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
+            "互动话题：你最关注哪条AI新闻？",
+            expected_items=1,
+            expected_article_ids={"a1"},
+        )
+
+
+def test_validate_summary_quality_rejects_duplicate_article_id() -> None:
+    content = (
+        "1. [a1] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
+        "2. [a1] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
+        "互动话题：你最关注哪条AI新闻？"
+    )
+    with pytest.raises(summarizer.SummaryQualityError, match="repeats article_id"):
+        summarizer.validate_summary_quality(
+            content,
+            expected_items=2,
+            expected_article_ids={"a1", "a2"},
+        )
 
 
 def test_validate_summary_quality_rejects_english_link_list() -> None:

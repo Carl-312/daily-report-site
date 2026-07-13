@@ -20,20 +20,31 @@ class TechCrunchSource(BaseSource):
     name = "techcrunch"
     BASE_URL = "https://techcrunch.com"
 
-    def fetch(self, max_articles: int = 14) -> List[Article]:
+    def fetch(
+        self,
+        max_articles: int = 14,
+        reference_dt: datetime | None = None,
+        deadline_at: datetime | None = None,
+    ) -> List[Article]:
         """Fetch recent tech news"""
-        resp = self._get(self.BASE_URL)
+        resp = self._get(self.BASE_URL, deadline_at=deadline_at)
         resp.raise_for_status()
         soup = self._parse_html(resp.content)
 
-        articles = self._parse_articles(soup)
+        articles = self._parse_articles(soup, reference_dt=reference_dt)
 
         # Filter to last 24-48 hours
-        filtered = [a for a in articles if self._is_recent(a.publish_time)]
+        filtered = [
+            a
+            for a in articles
+            if self._is_recent(a.publish_time, reference_dt=reference_dt)
+        ]
 
         return filtered[:max_articles]
 
-    def _parse_articles(self, soup) -> List[Article]:
+    def _parse_articles(
+        self, soup, reference_dt: datetime | None = None
+    ) -> List[Article]:
         """Parse article links from homepage"""
         selectors = [
             "h2 a",
@@ -95,7 +106,9 @@ class TechCrunchSource(BaseSource):
                     link=link,
                     description="",
                     publish_time=publish_time,
-                    priority=1 if self._is_recent(publish_time) else 0,
+                    priority=1
+                    if self._is_recent(publish_time, reference_dt=reference_dt)
+                    else 0,
                     source=self.name,
                 )
             )
@@ -110,14 +123,20 @@ class TechCrunchSource(BaseSource):
             return f"{year}-{month}-{day}"
         return ""
 
-    def _is_recent(self, publish_time: str) -> bool:
+    def _is_recent(
+        self, publish_time: str, reference_dt: datetime | None = None
+    ) -> bool:
         """Check if article is within last 48 hours"""
         if not publish_time or len(publish_time) != 10:
             return False
 
         try:
             pub_date = datetime.strptime(publish_time, "%Y-%m-%d")
-            now = datetime.now(beijing_tz).replace(tzinfo=None)
+            now = (
+                (reference_dt or datetime.now(beijing_tz))
+                .astimezone(beijing_tz)
+                .replace(tzinfo=None)
+            )
             diff = now - pub_date
             return diff.days <= 1
         except Exception:

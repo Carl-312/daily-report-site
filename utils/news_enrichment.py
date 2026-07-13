@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from email.utils import parsedate_to_datetime
 import re
-import time
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from typing import Any
@@ -19,6 +18,12 @@ from zoneinfo import ZoneInfo
 import requests
 
 from sources.base import Article
+from utils.enrichment_policy import decide_enrichment
+from utils.enrichment_transport import (
+    TavilyTransport,
+    classify_request_outcome as classify_transport_outcome,
+)
+from utils.run_contracts import RunDeadlineExceeded, scrub_diagnostic
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
@@ -487,33 +492,30 @@ def search_tavily(
     api_key: str,
     payload: dict[str, Any],
     timeout: int = REQUEST_TIMEOUT_SECONDS,
+    deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
-    started = time.perf_counter()
-    response = session.post(
-        TAVILY_SEARCH_URL,
-        json={"api_key": api_key, **payload},
-        timeout=timeout,
-    )
-    latency_ms = round((time.perf_counter() - started) * 1000, 2)
-    response.raise_for_status()
-    return {
-        "latency_ms": latency_ms,
-        "response": response.json(),
-    }
+    return TavilyTransport(
+        session,
+        api_key,
+        deadline_at=deadline_at,
+        default_timeout=timeout,
+    ).search(payload)
+
+
+def _search_tavily_with_deadline(
+    session: requests.Session,
+    api_key: str,
+    payload: dict[str, Any],
+    deadline_at: datetime | None,
+) -> dict[str, Any]:
+    """Keep legacy test doubles/callers compatible when no deadline is set."""
+    if deadline_at is None:
+        return search_tavily(session, api_key, payload)
+    return search_tavily(session, api_key, payload, deadline_at=deadline_at)
 
 
 def classify_request_outcome(error: Exception | None) -> str:
-    if error is None:
-        return "success"
-    if isinstance(error, requests.Timeout):
-        return "timeout"
-    if isinstance(error, requests.HTTPError):
-        return "http_error"
-    if isinstance(error, requests.ConnectionError):
-        return "connection_error"
-    if isinstance(error, requests.RequestException):
-        return "request_error"
-    return "unexpected_error"
+    return classify_transport_outcome(error)
 
 
 def pick_best_match(
@@ -958,392 +960,18 @@ def reserved_refill_call_budget(settings: Any) -> int:
     return min(desired_refill_calls, max_reservable_calls)
 
 
-def run_verify_stage(
-    *,
-    candidates: list[dict[str, Any]],
-    settings: Any,
-    session: requests.Session,
-    api_key: str,
-    reference_dt: datetime,
-) -> dict[str, Any]:
-    start_date, end_date = report_window(reference_dt)
-    reserved_refill_calls = reserved_refill_call_budget(settings)
-    verify_budget = max(
-        0,
-        min(
-            settings.max_verify_calls,
-            max(0, settings.max_total_calls - reserved_refill_calls),
-        ),
-    )
-    verify_runs: list[dict[str, Any]] = []
-    verified_articles: list[dict[str, Any]] = []
-    preserved_error_articles: list[dict[str, Any]] = []
-    verified_candidates: list[dict[str, Any]] = []
-    rejected_candidates: list[dict[str, Any]] = []
+def run_verify_stage(**kwargs: Any) -> dict[str, Any]:
+    """Delegate verification through its stable module boundary."""
+    from utils.enrichment_verification import run_verify_stage as run_stage
 
-    for index, candidate in enumerate(candidates[:verify_budget], start=1):
-        prefilter_bucket = candidate.get("prefilter_bucket", "generic_or_low_signal")
-        query = f'"{candidate["title"]}"'
-        payload = {
-            "query": query,
-            "topic": "news",
-            "search_depth": settings.verify_search_depth,
-            "max_results": VERIFY_MAX_RESULTS,
-            "include_answer": False,
-            "include_images": False,
-            "include_raw_content": False,
-            "auto_parameters": False,
-            "start_date": start_date,
-            "end_date": end_date,
-        }
-
-        matched = False
-        matched_url = None
-        matched_title = None
-        matched_published_date = None
-        title_similarity_value = None
-        within_window = None
-        error = None
-        error_obj: Exception | None = None
-        latency_ms = None
-        results: list[dict[str, Any]] = []
-
-        try:
-            response = search_tavily(session, api_key, payload)
-            latency_ms = response["latency_ms"]
-            body = response["response"]
-            results = body.get("results", []) or []
-            best_match = pick_best_match(
-                results,
-                expected_title=candidate["title"],
-                expected_url=candidate["link"],
-            )
-            if best_match:
-                title_similarity_value = best_match["title_similarity"]
-                matched = best_match["exact_url_match"] or (
-                    bool(best_match["same_domain"])
-                    and title_similarity_value >= TITLE_SIMILARITY_MATCH_THRESHOLD
-                )
-                matched_url = best_match["url"]
-                matched_title = best_match["title"]
-                matched_published_date = best_match["published_date"]
-                within_window = within_strict_hours(
-                    matched_published_date,
-                    reference_dt=reference_dt,
-                    strict_hours=settings.strict_hours,
-                )
-        except Exception as exc:
-            error = str(exc)
-            error_obj = exc
-
-        accepted = bool(matched) and within_window is True
-        request_outcome = classify_request_outcome(error_obj)
-        if request_outcome != "success":
-            validation_outcome = "not_evaluated"
-        elif accepted:
-            validation_outcome = "accepted"
-        elif not matched:
-            validation_outcome = "no_match"
-        elif within_window is False:
-            validation_outcome = "outside_24h"
-        else:
-            validation_outcome = "missing_published_date"
-        verify_runs.append(
-            {
-                "sample_id": f"{reference_dt.date().isoformat()}::prefilter::{index}",
-                "query": query,
-                "prefilter_bucket": prefilter_bucket,
-                "search_depth": settings.verify_search_depth,
-                "latency_ms": latency_ms,
-                "result_count": len(results),
-                "matched": matched,
-                "within_24h": within_window,
-                "matched_url": matched_url,
-                "matched_title": matched_title,
-                "matched_published_date": matched_published_date,
-                "title_similarity": title_similarity_value,
-                "accepted": accepted,
-                "request_outcome": request_outcome,
-                "validation_outcome": validation_outcome,
-                "error": error,
-            }
-        )
-
-        candidate_summary = {
-            "title": candidate.get("title", ""),
-            "source": candidate.get("source", ""),
-            "link": candidate.get("link", ""),
-            "prefilter_bucket": prefilter_bucket,
-            "matched_url": matched_url,
-            "matched_title": matched_title,
-            "within_24h": within_window,
-            "title_similarity": title_similarity_value,
-            "cluster_id": candidate.get("cluster_id"),
-            "cluster_role": candidate.get("cluster_role"),
-            "cluster_representative_title": candidate.get(
-                "cluster_representative_title"
-            ),
-            "request_outcome": request_outcome,
-            "validation_outcome": validation_outcome,
-            "transport_error": error,
-            "rejection_reason": None,
-        }
-        if request_outcome == "success" and not matched:
-            candidate_summary["rejection_reason"] = "no_match"
-        elif request_outcome == "success" and within_window is False:
-            candidate_summary["rejection_reason"] = "outside_24h"
-        elif request_outcome == "success" and within_window is None:
-            candidate_summary["rejection_reason"] = "missing_published_date"
-
-        if accepted:
-            article = dict(candidate["article"])
-            if matched_published_date:
-                article["publish_time"] = matched_published_date
-            verified_articles.append(article)
-            verified_candidates.append(candidate_summary)
-        else:
-            rejected_candidates.append(candidate_summary)
-            if error:
-                preserved_error_articles.append(dict(candidate["article"]))
-
-    return {
-        "verify_budget": verify_budget,
-        "reserved_refill_calls": reserved_refill_calls,
-        "verify_calls": len(verify_runs),
-        "verify_skipped_due_budget": max(0, len(candidates) - verify_budget),
-        "verify_runs": verify_runs,
-        "verified_articles": verified_articles,
-        "preserved_error_articles": preserved_error_articles,
-        "verified_candidates": verified_candidates,
-        "rejected_candidates": rejected_candidates,
-    }
+    return run_stage(**kwargs)
 
 
-def run_domain_refill_stage(
-    *,
-    base_articles: list[dict[str, Any]],
-    prior_candidates: list[dict[str, Any]],
-    include_domains: list[str],
-    query: str,
-    stage_name: str,
-    settings: Any,
-    session: requests.Session,
-    api_key: str,
-    reference_dt: datetime,
-    remaining_budget: int,
-    needed_count: int,
-) -> dict[str, Any]:
-    accepted_candidates: list[dict[str, Any]] = []
-    refill_runs: list[dict[str, Any]] = []
-    near_duplicate_rejected_count = 0
-    story_cluster_rejected_count = 0
+def run_domain_refill_stage(**kwargs: Any) -> dict[str, Any]:
+    """Delegate refill through its stable module boundary."""
+    from utils.enrichment_refill import run_domain_refill_stage as run_stage
 
-    if (
-        settings.max_refill_rounds <= 0
-        or remaining_budget <= 0
-        or needed_count <= 0
-        or not include_domains
-    ):
-        return empty_refill_result(remaining_budget)
-
-    request_window_hours = refill_request_window_hours(settings)
-    lenient_window_hours = int(
-        getattr(settings, "lenient_refill_window_hours", 72) or 72
-    )
-    lenient_diagnostics_enabled = bool(
-        getattr(settings, "lenient_refill_diagnostics_enabled", False)
-    )
-    start_date, end_date = report_window(
-        reference_dt,
-        window_hours=request_window_hours,
-    )
-    rounds_budget = min(settings.max_refill_rounds, remaining_budget)
-    for round_index in range(rounds_budget):
-        needed_before_round = max(0, needed_count - len(accepted_candidates))
-        if needed_before_round <= 0:
-            break
-        payload = {
-            "query": query,
-            "topic": "news",
-            "search_depth": REFILL_SEARCH_DEPTH,
-            "max_results": settings.refill_max_results,
-            "include_answer": False,
-            "include_images": False,
-            "include_raw_content": False,
-            "auto_parameters": False,
-            "include_domains": include_domains,
-            "start_date": start_date,
-            "end_date": end_date,
-        }
-        latency_ms = None
-        error = None
-        error_obj: Exception | None = None
-        results: list[dict[str, Any]] = []
-        try:
-            response = search_tavily(session, api_key, payload)
-            latency_ms = response["latency_ms"]
-            results = response["response"].get("results", []) or []
-        except Exception as exc:
-            error = str(exc)
-            error_obj = exc
-
-        existing = build_dynamic_existing_index(
-            base_articles,
-            prior_candidates + accepted_candidates,
-        )
-        round_accepted: list[dict[str, Any]] = []
-        run_candidates: list[dict[str, Any]] = []
-        seen_titles: set[str] = set()
-        round_near_duplicate_rejected = 0
-        round_story_cluster_rejected = 0
-
-        for index, result_item in enumerate(results, start=1):
-            strict_slot_available = (
-                len(accepted_candidates) + len(round_accepted) < needed_count
-            )
-            if not lenient_diagnostics_enabled and not strict_slot_available:
-                break
-            title = result_item.get("title", "")
-            url = result_item.get("url", "")
-            normalized_title = normalize_title(title)
-            canonical = canonical_url(url)
-            duplicate_existing = (
-                normalized_title in existing["titles"] or canonical in existing["urls"]
-            )
-            duplicate_within_results = normalized_title in seen_titles
-            seen_titles.add(normalized_title)
-            cluster_match = find_story_cluster_match(
-                {
-                    "title": title,
-                    "url": url,
-                },
-                prior_candidates + accepted_candidates + round_accepted,
-            )
-            near_duplicate_existing = (
-                cluster_match is not None
-                and cluster_match["relation_type"] == "near_duplicate"
-            )
-            story_cluster_existing = (
-                cluster_match is not None
-                and cluster_match["relation_type"] == "story_cluster"
-            )
-            within_window = within_strict_hours(
-                result_item.get("published_date"),
-                reference_dt=reference_dt,
-                strict_hours=settings.strict_hours,
-            )
-            lenient_within_window = within_strict_hours(
-                result_item.get("published_date"),
-                reference_dt=reference_dt,
-                strict_hours=lenient_window_hours,
-            )
-            title_is_ai_relevant = ai_title_relevant(title)
-            duplicate_or_cluster = (
-                duplicate_existing
-                or duplicate_within_results
-                or near_duplicate_existing
-                or story_cluster_existing
-            )
-            accepted = (
-                strict_slot_available
-                and bool(within_window)
-                and title_is_ai_relevant
-                and not duplicate_existing
-                and not duplicate_within_results
-                and not near_duplicate_existing
-                and not story_cluster_existing
-            )
-            if near_duplicate_existing:
-                round_near_duplicate_rejected += 1
-            elif story_cluster_existing:
-                round_story_cluster_rejected += 1
-
-            accepted_article = {
-                "title": title,
-                "link": url,
-                "description": result_item.get("content", ""),
-                "publish_time": result_item.get("published_date", "") or "",
-                "content": result_item.get("content", "") or "",
-                "priority": 0,
-                "source": domain_of(url),
-                "score": result_item.get("score"),
-            }
-            run_candidate = {
-                "rank": index,
-                "title": title,
-                "url": url,
-                "domain": domain_of(url),
-                "published_date": result_item.get("published_date"),
-                "within_24h": within_window,
-                "within_strict_window": within_window,
-                "strict_window_hours": settings.strict_hours,
-                "lenient_within_window": lenient_within_window,
-                "lenient_window_hours": lenient_window_hours,
-                "lenient_candidate": (
-                    lenient_diagnostics_enabled and lenient_within_window is not False
-                ),
-                "lenient_rejection_reason": (
-                    f"outside_{lenient_window_hours}h"
-                    if lenient_within_window is False
-                    else None
-                ),
-                "ai_title_relevant": title_is_ai_relevant,
-                "duplicate_existing": duplicate_existing,
-                "duplicate_within_results": duplicate_within_results,
-                "near_duplicate_existing": near_duplicate_existing,
-                "story_cluster_existing": story_cluster_existing,
-                "duplicate_or_cluster": duplicate_or_cluster,
-                "cluster_match": cluster_match,
-                "accepted": accepted,
-                "score": result_item.get("score"),
-            }
-            run_candidates.append(run_candidate)
-            if accepted:
-                round_accepted.append(accepted_article)
-
-        refill_runs.append(
-            {
-                "stage": stage_name,
-                "round": round_index + 1,
-                "query": query,
-                "search_depth": REFILL_SEARCH_DEPTH,
-                "max_results": settings.refill_max_results,
-                "include_domains": include_domains,
-                "start_date": start_date,
-                "end_date": end_date,
-                "request_window_hours": request_window_hours,
-                "lenient_diagnostic_window_hours": lenient_window_hours,
-                "latency_ms": latency_ms,
-                "result_count": len(results),
-                "needed_before": needed_before_round,
-                "accepted_count": len(round_accepted),
-                "remaining_needed_after": max(
-                    0, needed_count - len(accepted_candidates) - len(round_accepted)
-                ),
-                "request_outcome": classify_request_outcome(error_obj),
-                "near_duplicate_rejected_count": round_near_duplicate_rejected,
-                "story_cluster_rejected_count": round_story_cluster_rejected,
-                "duplicate_slip_count": 0,
-                "candidate_results": run_candidates,
-                "error": error,
-            }
-        )
-        accepted_candidates.extend(round_accepted)
-        near_duplicate_rejected_count += round_near_duplicate_rejected
-        story_cluster_rejected_count += round_story_cluster_rejected
-        if error or len(accepted_candidates) >= needed_count or not round_accepted:
-            break
-
-    return {
-        "refill_calls": len(refill_runs),
-        "accepted_candidates": accepted_candidates,
-        "refill_runs": refill_runs,
-        "media_refilled_count": len(accepted_candidates),
-        "near_duplicate_rejected_count": near_duplicate_rejected_count,
-        "story_cluster_rejected_count": story_cluster_rejected_count,
-        "duplicate_slip_count": 0,
-        "remaining_budget_after_refill": max(0, remaining_budget - len(refill_runs)),
-    }
+    return run_stage(**kwargs)
 
 
 def enrich_articles_with_tavily(
@@ -1354,6 +982,7 @@ def enrich_articles_with_tavily(
     tavily_api_key: str,
     enabled: bool,
     reference_dt: datetime | None = None,
+    deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
     article_dicts = [article_to_dict(article) for article in articles]
     reference_dt = reference_dt or datetime.now(tz=REPORT_TIMEZONE)
@@ -1365,24 +994,16 @@ def enrich_articles_with_tavily(
         settings=settings,
     )
 
-    if not enabled:
-        report["skip_reason"] = "disabled"
-        report["stop_reason"] = "disabled"
-        report["notes"].append("Tavily enrichment is disabled for this run.")
-        report["accepted_by_stage_preview"] = {
-            "verify": [],
-            "priority_refill": [],
-            "secondary_refill": [],
-            "official_fallback": [],
-        }
-        return {"articles": article_dicts, "report": report}
-
-    if not tavily_api_key:
-        report["skip_reason"] = "missing_api_key"
-        report["stop_reason"] = "missing_api_key"
-        report["notes"].append(
-            "TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles."
-        )
+    decision = decide_enrichment(enabled=enabled, api_key=tavily_api_key)
+    if not decision.apply:
+        report["skip_reason"] = decision.skip_reason
+        report["stop_reason"] = decision.skip_reason
+        if decision.skip_reason == "disabled":
+            report["notes"].append("Tavily enrichment is disabled for this run.")
+        else:
+            report["notes"].append(
+                "TAVILY_API_KEY is missing, so the pipeline safely fell back to the deduped articles."
+            )
         report["accepted_by_stage_preview"] = {
             "verify": [],
             "priority_refill": [],
@@ -1434,6 +1055,7 @@ def enrich_articles_with_tavily(
             session=session,
             api_key=tavily_api_key,
             reference_dt=reference_dt,
+            deadline_at=deadline_at,
         )
         baseline_verify_calls = min(
             len(prefilter_clusters["annotated_candidates"]),
@@ -1494,6 +1116,7 @@ def enrich_articles_with_tavily(
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
                 needed_count=report["refill_needed_count"],
+                deadline_at=deadline_at,
             )
         report["refill_calls"] = priority_refill["refill_calls"]
         report["total_calls"] += priority_refill["refill_calls"]
@@ -1534,6 +1157,7 @@ def enrich_articles_with_tavily(
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
                 needed_count=secondary_needed_count,
+                deadline_at=deadline_at,
             )
             secondary_refill_executed = secondary_refill["refill_calls"] > 0
             secondary_candidates = secondary_refill["accepted_candidates"]
@@ -1587,6 +1211,7 @@ def enrich_articles_with_tavily(
                 reference_dt=reference_dt,
                 remaining_budget=remaining_budget,
                 needed_count=official_needed_count,
+                deadline_at=deadline_at,
             )
             official_candidates = official["accepted_candidates"]
             report["fallback_calls"] = official["refill_calls"]
@@ -1650,10 +1275,12 @@ def enrich_articles_with_tavily(
             )
         report["notes"].append("Exact verify and staged refill completed.")
         return {"articles": final_articles, "report": report}
+    except RunDeadlineExceeded:
+        raise
     except Exception as exc:
         report["applied"] = False
         report["skip_reason"] = "enrichment_error"
-        report["error"] = str(exc)
+        report["error"] = scrub_diagnostic(str(exc), settings)
         report["stop_reason"] = "enrichment_error"
         report["notes"].append(
             "The pipeline fell back to the deduped articles after an enrichment error."
