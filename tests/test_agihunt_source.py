@@ -282,6 +282,25 @@ def test_client_uses_budget_for_physical_retries(tmp_path) -> None:
     assert len(session.calls) == 1
 
 
+def test_client_can_apply_a_lower_phase_zero_request_budget(tmp_path) -> None:
+    session = RecordingSession([response({"items": []}) for _ in range(3)])
+    client = AgihuntClient(
+        api_key="test-key",
+        settings=settings(),
+        cache_dir=tmp_path,
+        session=session,
+        request_budget=3,
+    )
+
+    for channel in ("models", "research", "coding-agents"):
+        assert client.fetch_channel_items(channel, "2026-07-13") == []
+    with pytest.raises(AgihuntRequestBudgetExceededError):
+        client.fetch_channel_items("products", "2026-07-13")
+
+    assert client.network_requests == 3
+    assert len(session.calls) == 3
+
+
 def test_client_rejects_invalid_channel_payload(tmp_path) -> None:
     session = RecordingSession([response({"items": "not-a-list"})])
     client = AgihuntClient(
