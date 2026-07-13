@@ -6,42 +6,11 @@ Removes duplicate articles based on canonical URL and obvious story-title rewrit
 from __future__ import annotations
 from difflib import SequenceMatcher
 import hashlib
-import re
-from urllib.parse import parse_qsl, urlencode, urlparse, urlsplit, urlunsplit
+from urllib.parse import urlparse
 from typing import List
 
+from article_identity import canonical_url, normalize_title
 from sources.base import Article
-
-_norm_re = re.compile(r"[\s\-—_]+")
-_title_punctuation_re = re.compile(r"[^\w\s\u4e00-\u9fff]+", re.UNICODE)
-_tracking_param_re = re.compile(r"^(utm_|fbclid$|gclid$|ref$)", re.IGNORECASE)
-
-
-def normalize_title(title: str) -> str:
-    """Normalize title for comparison"""
-    t = _title_punctuation_re.sub(" ", (title or "").strip().lower())
-    return _norm_re.sub(" ", t).strip()
-
-
-def canonical_url(link: str) -> str:
-    """Remove URL noise that should not create a second candidate."""
-    try:
-        parsed = urlsplit((link or "").strip())
-    except ValueError:
-        return ""
-    if not parsed.scheme or not parsed.netloc:
-        return ""
-    query = urlencode(
-        sorted(
-            [
-                (key, value)
-                for key, value in parse_qsl(parsed.query, keep_blank_values=True)
-                if not _tracking_param_re.match(key)
-            ]
-        )
-    )
-    path = parsed.path.rstrip("/") or "/"
-    return urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(), path, query, ""))
 
 
 def get_domain(url: str) -> str:
