@@ -201,10 +201,13 @@ def convert_ol_to_paragraphs(html: str) -> str:
 
     def replace_ol(match: re.Match[str]) -> str:
         ol_content = match.group(1)
-        items = re.findall(r"<li>\s*<p>(.+?)</p>\s*</li>", ol_content, re.DOTALL)
-        paragraphs = [
-            f"<p>{index}. {item.strip()}</p>" for index, item in enumerate(items, 1)
-        ]
+        items = re.findall(r"<li\b[^>]*>(.*?)</li>", ol_content, re.DOTALL)
+        paragraphs = []
+        for index, item in enumerate(items, 1):
+            item = item.strip()
+            item = re.sub(r"^<p>(.*?)</p>$", r"\1", item, flags=re.DOTALL)
+            if item:
+                paragraphs.append(f"<p>{index}. {item}</p>")
         return "\n".join(paragraphs)
 
     return re.sub(r"<ol>(.+?)</ol>", replace_ol, html, flags=re.DOTALL)

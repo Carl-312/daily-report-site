@@ -44,6 +44,35 @@ date: 2026-03-25
     assert (output_dir / "archive.html").read_text(encoding="utf-8").find(
         "AI 新闻日报 2026-03-25"
     ) != -1
+    html = (output_dir / "2026-03-25.html").read_text(encoding="utf-8")
+    assert "<p>1. 第一条</p>" in html
+    assert "<p>2. 第二条</p>" in html
+
+
+def test_build_article_preserves_linked_ordered_items(tmp_path: Path) -> None:
+    source_dir = tmp_path / "content"
+    output_dir = tmp_path / "dist"
+    assets_dir = tmp_path / "assets"
+    source_dir.mkdir()
+    assets_dir.mkdir()
+    (assets_dir / "style.css").write_text("body { color: black; }\n", encoding="utf-8")
+    (source_dir / "2026-07-13.md").write_text(
+        """---
+title: AI 新闻日报 2026-07-13
+date: 2026-07-13
+---
+
+1. [第一条](https://example.com/1)：摘要一
+2. [第二条](https://example.com/2)：摘要二
+""",
+        encoding="utf-8",
+    )
+
+    build_site(source_dir=source_dir, output_dir=output_dir, assets_dir=assets_dir)
+
+    html = (output_dir / "2026-07-13.html").read_text(encoding="utf-8")
+    assert '<p>1. <a href="https://example.com/1">第一条</a>：摘要一</p>' in html
+    assert '<p>2. <a href="https://example.com/2">第二条</a>：摘要二</p>' in html
 
 
 def test_build_site_without_content_creates_empty_state_pages(tmp_path: Path) -> None:
