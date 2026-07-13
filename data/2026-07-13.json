@@ -1,0 +1,115 @@
+{
+  "date": "2026-07-13",
+  "articles": [
+    {
+      "title": "TechCrunch Mobility: A robotaxi ultimatum",
+      "link": "https://techcrunch.com/2026/07/12/techcrunch-mobility-a-robotaxi-ultimatum/",
+      "description": "",
+      "publish_time": "2026-07-12",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch"
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-07-13",
+    "reference_dt": "2026-07-13T12:09:24.212844+08:00",
+    "enabled": false,
+    "applied": false,
+    "skip_reason": "disabled",
+    "error": null,
+    "input_count": 1,
+    "prefiltered_count": 1,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 0,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 1,
+    "strict_final_count": 1,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "disabled",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Tavily enrichment is disabled for this run."
+    ]
+  }
+}
