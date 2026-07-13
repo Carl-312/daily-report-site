@@ -126,6 +126,6 @@ jobs:
 
       - name: Verify reliability documentation is present
         run: |
-          test -f docs/daily-news-task-improvement-analysis.md
+          test -f handbook/quality/improvement-analysis.md
           test -f ARCHITECTURE.md
           test -f .planning/ROADMAP.md
