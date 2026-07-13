@@ -12,6 +12,7 @@
 - Tavily 接入总览：`guides/tavily-integration.md`
 - Tavily multi-agent PR 指南：`guides/mutiagent/README.md`
 - Tavily 历史文档归档：`guides/history/README.md`
+- 日报正式与灰度产物质量审计：`guides/daily-product-quality-audit.md`
 - 故障排查：`guides/troubleshooting.md`
 - API 参考：`api/README.md`
 - 分 PR 落地建议：`project-rollout.md`

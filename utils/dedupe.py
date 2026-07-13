@@ -1,23 +1,47 @@
 """
 Deduplication utilities
-Removes duplicate articles based on title + domain hash
+Removes duplicate articles based on canonical URL and obvious story-title rewrites.
 """
 
 from __future__ import annotations
-import re
+from difflib import SequenceMatcher
 import hashlib
-from urllib.parse import urlparse
+import re
+from urllib.parse import parse_qsl, urlencode, urlparse, urlsplit, urlunsplit
 from typing import List
 
 from sources.base import Article
 
 _norm_re = re.compile(r"[\s\-—_]+")
+_title_punctuation_re = re.compile(r"[^\w\s\u4e00-\u9fff]+", re.UNICODE)
+_tracking_param_re = re.compile(r"^(utm_|fbclid$|gclid$|ref$)", re.IGNORECASE)
 
 
 def normalize_title(title: str) -> str:
     """Normalize title for comparison"""
-    t = (title or "").strip().lower()
-    return _norm_re.sub(" ", t)
+    t = _title_punctuation_re.sub(" ", (title or "").strip().lower())
+    return _norm_re.sub(" ", t).strip()
+
+
+def canonical_url(link: str) -> str:
+    """Remove URL noise that should not create a second candidate."""
+    try:
+        parsed = urlsplit((link or "").strip())
+    except ValueError:
+        return ""
+    if not parsed.scheme or not parsed.netloc:
+        return ""
+    query = urlencode(
+        sorted(
+            [
+                (key, value)
+                for key, value in parse_qsl(parsed.query, keep_blank_values=True)
+                if not _tracking_param_re.match(key)
+            ]
+        )
+    )
+    path = parsed.path.rstrip("/") or "/"
+    return urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(), path, query, ""))
 
 
 def get_domain(url: str) -> str:
@@ -37,13 +61,27 @@ def article_key(article: Article | dict) -> str:
         title = article.get("title", "")
         link = article.get("link", "")
 
-    base = f"{normalize_title(title)}|{get_domain(link)}"
+    normalized_url = canonical_url(link)
+    base = normalized_url or normalize_title(title)
     return hashlib.md5(base.encode("utf-8")).hexdigest()
+
+
+def _same_story(left_title: str, right_title: str) -> bool:
+    """Catch only obvious cross-source title rewrites."""
+    left = normalize_title(left_title)
+    right = normalize_title(right_title)
+    if not left or not right:
+        return False
+    if left == right:
+        return True
+    if min(len(left), len(right)) < 18:
+        return False
+    return SequenceMatcher(None, left, right).ratio() >= 0.9
 
 
 def dedupe(articles: List[Article | dict]) -> List[Article | dict]:
     """
-    Remove duplicate articles based on title + domain
+    Remove duplicate articles based on canonical URL and obvious title rewrites.
     Higher priority articles are kept when duplicates are found
     """
 
@@ -56,13 +94,20 @@ def dedupe(articles: List[Article | dict]) -> List[Article | dict]:
     sorted_articles = sorted(articles, key=get_priority, reverse=True)
 
     seen = set()
+    seen_titles: list[str] = []
     result = []
 
     for article in sorted_articles:
         key = article_key(article)
         if key in seen:
             continue
+        title = (
+            article.title if isinstance(article, Article) else article.get("title", "")
+        )
+        if any(_same_story(title, seen_title) for seen_title in seen_titles):
+            continue
         seen.add(key)
+        seen_titles.append(title)
         result.append(article)
 
     # Return sorted by priority

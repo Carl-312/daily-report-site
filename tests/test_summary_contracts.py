@@ -5,6 +5,7 @@ from utils.summary_contracts import (
     SummaryResult,
     fingerprint_summary_input,
     render_summary_markdown,
+    validate_summary_result,
 )
 from summarizer import offline_summary_result
 
@@ -58,5 +59,43 @@ def test_offline_summary_result_keeps_article_provenance() -> None:
     )
 
     assert result.policy == "offline"
-    assert result.items[0].article_id == "https://example.test/a"
+    assert result.items[0].article_id == "a1"
     assert result.items[0].url == "https://example.test/a"
+
+
+def test_summary_contract_rejects_duplicate_ids_and_source_mismatch() -> None:
+    result = SummaryResult(
+        policy="required_ai",
+        items=(
+            SummaryItem(
+                article_id="a1",
+                title="AI launch",
+                summary="发布了新能力",
+                url="https://example.test/a",
+            ),
+            SummaryItem(
+                article_id="a1",
+                title="AI launch again",
+                summary="重复发布了新能力",
+                url="https://example.test/other",
+            ),
+        ),
+        discussion_topic="你会如何使用这项能力？",
+        provider="local",
+        model="test",
+        input_fingerprint="input",
+        prompt_fingerprint="prompt",
+    )
+
+    try:
+        validate_summary_result(
+            result,
+            [
+                {"title": "AI launch", "link": "https://example.test/a"},
+                {"title": "Second story", "link": "https://example.test/b"},
+            ],
+        )
+    except ValueError as exc:
+        assert "repeats article_id" in str(exc)
+    else:
+        raise AssertionError("invalid summary contract was accepted")

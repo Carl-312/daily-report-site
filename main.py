@@ -45,7 +45,11 @@ from summarizer import (
     test_connection,
     validate_summary_quality,
 )
-from utils.summary_contracts import render_summary_markdown
+from utils.summary_contracts import (
+    SummaryResult,
+    render_summary_markdown,
+    validate_summary_result,
+)
 
 
 def resolve_enrichment_enabled(cfg, mode: str) -> bool:
@@ -163,6 +167,11 @@ def stage_and_publish_run(
     """Build a complete candidate edition before changing any public artifact."""
     from build import build_site
     from utils.storage import save_json, save_markdown
+
+    summary_payload = report.get("summary")
+    if summary_payload is not None:
+        summary_result = SummaryResult.model_validate(summary_payload)
+        validate_summary_result(summary_result, report["articles"])
 
     decision = decide_publication(
         articles_count=len(report["articles"]),
@@ -326,9 +335,12 @@ def summarize_with_result(
 
     if offline or (not cfg.api_key and not cfg.fallback_api_key):
         content = offline_summary(articles)
-        return content, offline_summary_result(articles)
+        result = offline_summary_result(articles)
+        validate_summary_result(result, articles)
+        return content, result
     try:
         result = summarize_result(articles, stream=True, deadline_at=deadline_at)
+        validate_summary_result(result, articles)
         return render_summary_markdown(result), result
     except Exception as exc:
         message = (
@@ -538,7 +550,7 @@ def cmd_summarize(args):
         )
         raise FileNotFoundError(f"no data found for {date_str}")
 
-    articles = data.get("articles", [])
+    articles = dedupe(data.get("articles", []))
     print(f"🤖 Summarizing {len(articles)} articles...")
 
     try:
@@ -560,6 +572,7 @@ def cmd_summarize(args):
     full_content = f"{title}\n\n{content}"
 
     report = dict(data)
+    report["articles"] = articles
     report["summary"] = summary_result.model_dump(mode="json")
     try:
         _json_path, md_path = stage_and_publish_run(

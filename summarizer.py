@@ -16,7 +16,9 @@ from utils.summary_contracts import (
     SummaryAttempt,
     SummaryItem,
     SummaryResult,
+    article_id_for_index,
     fingerprint_summary_input,
+    validate_summary_result,
 )
 
 
@@ -50,9 +52,10 @@ def compress_articles(articles: list[dict]) -> list[dict]:
     """Compress articles to reduce token usage"""
     cfg = get_config()
     compressed = []
-    for a in articles:
+    for index, a in enumerate(articles, 1):
         compressed.append(
             {
+                "article_id": article_id_for_index(index),
                 "title": (a.get("title") or "")[: cfg.title_max],
                 "link": a.get("link") or "",
                 "publish_time": a.get("publish_time") or "",
@@ -78,17 +81,36 @@ def _numbered_items(content: str) -> list[str]:
     return items
 
 
-def validate_summary_quality(content: str, expected_items: int = 10) -> None:
+def _extract_article_id(item: str) -> tuple[str, str] | None:
+    match = re.match(r"^\[([A-Za-z0-9_-]+)\]\s+(.+?)\s*$", item)
+    if not match:
+        return None
+    return match.group(1), match.group(2).strip()
+
+
+def validate_summary_quality(
+    content: str,
+    expected_items: int = 10,
+    expected_article_ids: set[str] | None = None,
+) -> None:
     """Validate that generated content is a complete Simplified Chinese digest."""
     stripped = content.strip()
     if not stripped:
         raise SummaryQualityError("summary is empty")
 
+    max_items = max(0, min(10, expected_items))
+    if max_items == 0:
+        raise SummaryQualityError("cannot publish a summary without source articles")
+
     items = _numbered_items(stripped)
-    min_items = max(1, min(10, expected_items))
+    min_items = max_items
     if len(items) < min_items:
         raise SummaryQualityError(
             f"summary has {len(items)} numbered items, expected at least {min_items}"
+        )
+    if len(items) > max_items:
+        raise SummaryQualityError(
+            f"summary has {len(items)} numbered items, maximum allowed is {max_items}"
         )
 
     if "互动话题" not in stripped:
@@ -101,12 +123,31 @@ def validate_summary_quality(content: str, expected_items: int = 10) -> None:
             f"summary is not predominantly Chinese (ratio={chinese_ratio:.2f})"
         )
 
+    seen_article_ids: set[str] = set()
     for index, item in enumerate(items[:min_items], 1):
-        if _count_cjk(item) < 8:
+        body = item
+        if expected_article_ids is not None:
+            parsed = _extract_article_id(item)
+            if parsed is None:
+                raise SummaryQualityError(
+                    f"item {index} is missing its article_id prefix"
+                )
+            article_id, body = parsed
+            if article_id not in expected_article_ids:
+                raise SummaryQualityError(
+                    f"item {index} references unknown article_id {article_id}"
+                )
+            if article_id in seen_article_ids:
+                raise SummaryQualityError(
+                    f"item {index} repeats article_id {article_id}"
+                )
+            seen_article_ids.add(article_id)
+
+        if _count_cjk(body) < 8:
             raise SummaryQualityError(
                 f"item {index} does not contain enough Chinese content"
             )
-        if "http://" in item or "https://" in item:
+        if "http://" in body or "https://" in body:
             raise SummaryQualityError(f"item {index} contains a raw link")
 
 
@@ -223,6 +264,7 @@ def summarize(
             validate_summary_quality(
                 content,
                 expected_items=min(10, len(compressed)),
+                expected_article_ids={article["article_id"] for article in compressed},
             )
             return content
         except Exception as e:
@@ -244,31 +286,47 @@ def _parse_summary_result(
     attempts: tuple[SummaryAttempt, ...],
 ) -> SummaryResult:
     """Convert validated model text into a provenance-preserving contract."""
-    items: list[SummaryItem] = []
+    numbered_lines: list[tuple[int, str]] = []
     for index, line in enumerate(content.splitlines()):
         match = re.match(r"^\s*\d+[.、]\s+(.+?)\s*$", line)
-        if not match:
-            continue
-        text = match.group(1).strip()
-        link_match = re.match(r"^\[(.+?)\]\((https?://[^)]+)\)[:：]\s*(.+)$", text)
-        input_urls = {
-            str(article.get("link"))
-            for article in articles
-            if str(article.get("link") or "").startswith(("http://", "https://"))
-        }
-        if link_match and link_match.group(2) in input_urls:
-            title, url, summary = link_match.groups()
-        else:
-            article = articles[len(items)] if len(items) < len(articles) else {}
-            title = article.get("title") or text
-            url = article.get("link") or ""
-            summary = text
-        article_id = url or f"article-{index + 1}"
+        if match:
+            numbered_lines.append((index, match.group(1).strip()))
+
+    if len(numbered_lines) > len(articles):
+        raise SummaryQualityError(
+            "summary contains more numbered items than source articles"
+        )
+
+    items: list[SummaryItem] = []
+    articles_by_id = {
+        article_id_for_index(index): article
+        for index, article in enumerate(articles, 1)
+    }
+    seen_article_ids: set[str] = set()
+    for index, text in numbered_lines:
+        parsed = _extract_article_id(text)
+        if parsed is None:
+            raise SummaryQualityError(
+                f"item {index + 1} is missing its article_id prefix"
+            )
+        article_id, summary = parsed
+        article = articles_by_id.get(article_id)
+        if article is None:
+            raise SummaryQualityError(
+                f"summary references unknown article_id {article_id}"
+            )
+        if article_id in seen_article_ids:
+            raise SummaryQualityError(
+                f"summary maps multiple items to article {article_id}"
+            )
+        seen_article_ids.add(article_id)
+        title = article.get("title") or summary
+        url = str(article.get("link") or "")
         items.append(
             SummaryItem(
                 article_id=article_id,
                 title=title.strip(),
-                summary=summary.strip(),
+                summary=summary,
                 url=url.strip(),
             )
         )
@@ -356,7 +414,11 @@ def summarize_result(
                 if stream
                 else _summarize_sync(client, params)
             )
-            validate_summary_quality(content, expected_items=min(10, len(compressed)))
+            validate_summary_quality(
+                content,
+                expected_items=min(10, len(compressed)),
+                expected_article_ids={article["article_id"] for article in compressed},
+            )
             attempts.append(
                 SummaryAttempt(
                     provider=provider["name"],
@@ -364,7 +426,7 @@ def summarize_result(
                     status="ok",
                 )
             )
-            return _parse_summary_result(
+            result = _parse_summary_result(
                 content,
                 articles,
                 policy="required_ai",
@@ -374,6 +436,8 @@ def summarize_result(
                 prompt_fingerprint=prompt_fingerprint,
                 attempts=tuple(attempts),
             )
+            validate_summary_result(result, articles)
+            return result
         except RunDeadlineExceeded:
             raise
         except Exception as exc:
@@ -417,7 +481,11 @@ def _summarize_stream(client: OpenAI, params: dict) -> str:
 
 def offline_summary(articles: list[dict], limit: int = 10) -> str:
     """Offline fallback: simple bullet list without LLM"""
+    if not articles:
+        return "暂无新闻"
+
     sorted_arts = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
+    limit = min(10, len(sorted_arts), max(0, limit))
 
     lines = []
     for i, a in enumerate(sorted_arts[:limit], 1):
@@ -443,22 +511,22 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
         fingerprint_summary_input,
     )
 
-    selected = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)[
-        :limit
-    ]
+    sorted_articles = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
+    limit = min(10, len(sorted_articles), max(0, limit))
+    selected = sorted_articles[:limit]
     input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
         selected, "offline"
     )
     items = tuple(
         SummaryItem(
-            article_id=article.get("link") or f"offline-{index}",
+            article_id=article_id_for_index(index),
             title=(article.get("title") or "").replace("\n", "").strip(),
             summary=article.get("description") or "离线模式：仅提供原始新闻标题。",
             url=article.get("link") or "",
         )
         for index, article in enumerate(selected, 1)
     )
-    return SummaryResult(
+    result = SummaryResult(
         policy="offline",
         items=items,
         discussion_topic="你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
@@ -470,6 +538,8 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
             SummaryAttempt(provider="local", model="deterministic", status="ok"),
         ),
     )
+    validate_summary_result(result, selected)
+    return result
 
 
 def test_connection() -> bool:
