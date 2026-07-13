@@ -53,6 +53,9 @@ python main.py run
 
 ```bash
 python main.py run --offline
+
+# 需要 AGIHUNT_API_KEY；只用于非生产 shadow
+python main.py fetch --agihunt on --enrichment off
 ```
 
 分步执行：

@@ -6,6 +6,7 @@
 - [配置](configuration.md)：`config.yaml`、环境变量和 Tavily 开关
 - [GitHub Actions](github-actions.md)：定时任务、手动预览、归档和发布门禁
 - [GitHub Pages](github-pages.md)：静态站点发布与回滚检查
+- [AGIHunt](agihunt.md)：官方 Agent API、shadow 运行和主来源启用门禁
 - [故障排查](troubleshooting.md)：按症状定位并安全恢复
 - [Tavily](tavily.md)：可选 enrichment 的当前状态、诊断和灰度边界
 

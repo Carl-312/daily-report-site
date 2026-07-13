@@ -59,7 +59,7 @@ config.yaml + .env
 
 `sources/` 通过显式 registry 管理 source adapter；`fetch_batch()` 聚合来源结果，并将单源状态保留在 `SourceRunResult` 中。来源适配器负责 HTTP、解析、时间过滤和 `Article` 生成，不负责摘要或发布决策。
 
-当前 source 包括 `aibase`、`techcrunch`、`theverge` 和可选的 `syft`。新增 source 的接口和验证见[扩展新闻源](../development/source-adapters.md)。
+当前 source 包括关闭态的主候选 `agihunt`、`aibase`、`techcrunch`、`theverge` 和可选的 `syft`。`agihunt` 只经官方 Agent API 读取日报诊断和有限频道候选，默认保持关闭直到多日 shadow 通过；新增 source 的接口和验证见[扩展新闻源](../development/source-adapters.md)。
 
 ### 3. 输入去重层
 

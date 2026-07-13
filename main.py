@@ -60,6 +60,47 @@ def resolve_enrichment_enabled(cfg, mode: str) -> bool:
     return bool(cfg.enrichment.enabled)
 
 
+def resolve_enabled_sources(cfg, args) -> dict[str, bool]:
+    """Apply one-run AGIHunt shadow overrides without changing config.yaml."""
+
+    sources = dict(getattr(cfg, "sources", {}))
+    mode = getattr(args, "agihunt", "auto")
+    if mode != "auto":
+        sources["agihunt"] = mode == "on"
+    return sources
+
+
+def agihunt_attribution_line(articles: list[Article | dict]) -> str:
+    """Render a compact public attribution only when AGIHunt supplied input."""
+
+    for article in articles:
+        if isinstance(article, Article):
+            source = article.source
+            provenance = article.provenance
+        else:
+            source = str(article.get("source", ""))
+            provenance = article.get("provenance", {})
+        provider = (
+            provenance.get("provider", "") if isinstance(provenance, dict) else ""
+        )
+        if source == "agihunt" or provider == "AGI HUNT · agihunt.info":
+            return "> 候选来源：AGI HUNT · agihunt.info；每条资讯保留原帖链接。"
+    return ""
+
+
+def compose_report_content(
+    title: str, content: str, articles: list[Article | dict]
+) -> str:
+    """Keep source attribution outside the summary model's factual output."""
+
+    parts = [title]
+    attribution = agihunt_attribution_line(articles)
+    if attribution:
+        parts.append(attribution)
+    parts.append(content)
+    return "\n\n".join(parts)
+
+
 def create_run_clock(cfg) -> RunClock:
     return RunClock.create(
         getattr(cfg, "timezone", "Asia/Shanghai"),
@@ -388,10 +429,12 @@ def cmd_run(args):
     source_results = ()
     try:
         articles, source_results = fetch_batch(
-            enabled_sources=cfg.sources,
+            enabled_sources=resolve_enabled_sources(cfg, args),
             max_articles=cfg.max_articles,
             syft_url=cfg.syft_web_app_url,
             syft_key=cfg.syft_secret_key,
+            agihunt_api_key=getattr(cfg, "agihunt_api_key", ""),
+            agihunt_settings=getattr(cfg, "agihunt", None),
             reference_dt=clock.cutoff_at,
             deadline_at=clock.deadline_at,
         )
@@ -438,7 +481,7 @@ def cmd_run(args):
     except TypeError:  # Compatibility with legacy helper/test doubles.
         title_date = today_cn()
     title = f"🔥（{title_date}）每日AI资讯一览✨"
-    full_content = f"{title}\n\n{content}"
+    full_content = compose_report_content(title, content, articles_dict)
 
     # 5. Stage JSON, Markdown, and the complete static site, then promote.
     print("\n🏗️  Building staged site and publishing complete edition...")
@@ -503,10 +546,12 @@ def cmd_fetch(args):
     source_results = ()
     try:
         articles, source_results = fetch_batch(
-            enabled_sources=cfg.sources,
+            enabled_sources=resolve_enabled_sources(cfg, args),
             max_articles=cfg.max_articles,
             syft_url=cfg.syft_web_app_url,
             syft_key=cfg.syft_secret_key,
+            agihunt_api_key=getattr(cfg, "agihunt_api_key", ""),
+            agihunt_settings=getattr(cfg, "agihunt", None),
             reference_dt=clock.cutoff_at,
             deadline_at=clock.deadline_at,
         )
@@ -593,7 +638,7 @@ def cmd_summarize(args):
     except TypeError:
         title_date = today_cn()
     title = f"🔥（{title_date}）每日AI资讯一览✨"
-    full_content = f"{title}\n\n{content}"
+    full_content = compose_report_content(title, content, articles)
 
     report = dict(data)
     report["articles"] = articles
@@ -674,6 +719,12 @@ def main():
         default="auto",
         help="Enable, disable, or follow config for Tavily enrichment",
     )
+    p_run.add_argument(
+        "--agihunt",
+        choices=("auto", "on", "off"),
+        default="auto",
+        help="Enable, disable, or follow config for the AGIHunt source",
+    )
     p_run.set_defaults(func=cmd_run)
 
     # fetch command
@@ -683,6 +734,12 @@ def main():
         choices=("auto", "on", "off"),
         default="auto",
         help="Enable, disable, or follow config for Tavily enrichment",
+    )
+    p_fetch.add_argument(
+        "--agihunt",
+        choices=("auto", "on", "off"),
+        default="auto",
+        help="Enable, disable, or follow config for the AGIHunt source",
     )
     p_fetch.set_defaults(func=cmd_fetch)
 

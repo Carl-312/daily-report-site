@@ -24,6 +24,7 @@ def _settings(**updates) -> Settings:
         "api_key": "primary-secret",
         "fallback_api_key": "fallback-secret",
         "syft_secret_key": "syft-secret",
+        "agihunt_api_key": "agihunt-secret",
         "tavily_api_key": "tavily-secret",
         "sources": {"aibase": True},
     }
@@ -39,18 +40,29 @@ def _clock() -> RunClock:
 
 def test_fingerprint_is_canonical_redacted_and_sensitive_to_non_secrets() -> None:
     one = _settings()
-    two = _settings(api_key="other-primary", tavily_api_key="other-tavily")
+    two = _settings(
+        api_key="other-primary",
+        agihunt_api_key="other-agihunt",
+        tavily_api_key="other-tavily",
+    )
     snapshot, first = fingerprint_settings(one)
     _, second = fingerprint_settings(two)
 
     serialized = canonical_json_bytes(snapshot).decode("utf-8")
     assert first == second
-    for secret in ("primary-secret", "fallback-secret", "syft-secret", "tavily-secret"):
+    for secret in (
+        "primary-secret",
+        "fallback-secret",
+        "syft-secret",
+        "agihunt-secret",
+        "tavily-secret",
+    ):
         assert secret not in serialized
     for secret_name in (
         "api_key",
         "fallback_api_key",
         "syft_secret_key",
+        "agihunt_api_key",
         "tavily_api_key",
     ):
         assert secret_name not in serialized

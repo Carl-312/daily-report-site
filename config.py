@@ -6,8 +6,9 @@ Loads settings from .env and config.yaml
 from __future__ import annotations
 import os
 from pathlib import Path
+import re
 from typing import Dict, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from dotenv import load_dotenv
 import yaml
 
@@ -17,6 +18,91 @@ load_dotenv(encoding="utf-8", override=True)
 DEFAULT_MODELSCOPE_MODEL = "ZhipuAI/GLM-5.2"
 DEFAULT_MODELSCOPE_SECONDARY_MODEL = "moonshotai/Kimi-K2.7-Code"
 DEFAULT_SILICONFLOW_MODEL = "Pro/moonshotai/Kimi-K2.6"
+
+
+_AGIHUNT_CHANNEL_SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{0,63}$")
+
+
+class AgihuntSettings(BaseModel):
+    """Non-secret settings for the bounded AGIHunt Agent API client."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    api_base_url: str = Field(default="https://agihunt.info/agent/v1")
+    skill_version: str = Field(default="1.2.2")
+    cache_ttl_seconds: int = Field(default=600, ge=60, le=3600)
+    request_budget: int = Field(default=5, ge=1, le=5)
+    timeout_seconds: float = Field(default=15, gt=0, le=30)
+    retry_wait_cap_seconds: float = Field(default=30, ge=0, le=30)
+    include_report: bool = Field(default=True)
+    core_channels: List[str] = Field(
+        default_factory=lambda: ["models", "research", "coding-agents"]
+    )
+    supplemental_channel: str = Field(default="products")
+    per_channel_limit: int = Field(default=4, ge=1, le=20)
+    core_channel_quota: int = Field(default=3, ge=1, le=14)
+    supplemental_quota: int = Field(default=3, ge=1, le=14)
+    max_age_hours: int = Field(default=30, ge=1, le=72)
+    future_tolerance_minutes: int = Field(default=5, ge=0, le=60)
+    entity_limit: int = Field(default=2, ge=1, le=5)
+    entity_keywords: List[str] = Field(
+        default_factory=lambda: [
+            "openai",
+            "anthropic",
+            "google",
+            "meta",
+            "microsoft",
+            "xai",
+            "deepseek",
+            "nvidia",
+        ]
+    )
+    source_priority: int = Field(default=3, ge=0, le=10)
+
+    @field_validator("core_channels")
+    @classmethod
+    def validate_core_channels(cls, channels: List[str]) -> List[str]:
+        if not channels:
+            raise ValueError("agihunt core_channels must not be empty")
+        normalized = [cls._validate_channel_slug(channel) for channel in channels]
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("agihunt core_channels must be unique")
+        return normalized
+
+    @field_validator("supplemental_channel")
+    @classmethod
+    def validate_supplemental_channel(cls, channel: str) -> str:
+        return cls._validate_channel_slug(channel)
+
+    @field_validator("entity_keywords")
+    @classmethod
+    def validate_entity_keywords(cls, values: List[str]) -> List[str]:
+        normalized = [value.strip().lower() for value in values if value.strip()]
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("agihunt entity_keywords must be unique")
+        return normalized
+
+    @model_validator(mode="after")
+    def validate_request_plan(self) -> "AgihuntSettings":
+        if not self.api_base_url.startswith("https://"):
+            raise ValueError("agihunt api_base_url must use https")
+        if self.supplemental_channel in self.core_channels:
+            raise ValueError(
+                "agihunt supplemental_channel must differ from core_channels"
+            )
+        planned_requests = len(self.core_channels) + 1 + int(self.include_report)
+        if planned_requests > self.request_budget:
+            raise ValueError(
+                "agihunt request_budget is lower than the configured endpoint plan"
+            )
+        return self
+
+    @staticmethod
+    def _validate_channel_slug(value: str) -> str:
+        normalized = value.strip().lower()
+        if not _AGIHUNT_CHANNEL_SLUG.fullmatch(normalized):
+            raise ValueError("agihunt channel slug is invalid")
+        return normalized
 
 
 class Settings(BaseModel):
@@ -73,6 +159,10 @@ class Settings(BaseModel):
     # Syft (optional)
     syft_web_app_url: str = Field(default="")
     syft_secret_key: str = Field(default="")
+
+    # AGIHunt (optional; key is environment-only)
+    agihunt_api_key: str = Field(default="", description="AGIHunt API Key")
+    agihunt: AgihuntSettings = Field(default_factory=AgihuntSettings)
 
     # Tavily (optional)
     tavily_api_key: str = Field(default="", description="Tavily API Key")
@@ -163,6 +253,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "run_deadline_minutes": float(os.getenv("RUN_DEADLINE_MINUTES", "20")),
         "syft_web_app_url": os.getenv("SYFT_WEB_APP_URL", ""),
         "syft_secret_key": os.getenv("SYFT_SECRET_KEY", ""),
+        "agihunt_api_key": os.getenv("AGIHUNT_API_KEY", ""),
         "tavily_api_key": os.getenv("TAVILY_API_KEY", ""),
     }
 
@@ -192,6 +283,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 ),
                 "publication_root": output_cfg.get("publication_root", ".publication"),
                 "run_deadline_minutes": cfg.get("run", {}).get("deadline_minutes", 20),
+                "agihunt": cfg.get("agihunt", {}),
                 "enrichment": cfg.get("enrichment", {}),
             }
 

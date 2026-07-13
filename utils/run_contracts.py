@@ -131,6 +131,7 @@ class ArticleSnapshot(StrictFrozenModel):
     content: str = ""
     priority: int = 0
     source: str = ""
+    provenance: dict[str, str] = Field(default_factory=dict)
 
 
 class StageResult(StrictFrozenModel):

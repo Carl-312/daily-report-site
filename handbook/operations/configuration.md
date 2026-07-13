@@ -8,6 +8,7 @@
 
 ```yaml
 sources:
+  agihunt: false
   aibase: true
   techcrunch: true
   theverge: true
@@ -62,11 +63,33 @@ enrichment:
 
 ```yaml
 sources:
+  agihunt: false
   aibase: true
   techcrunch: true
   theverge: true
   syft: false
 ```
+
+`agihunt` 默认必须保持 `false`。本地或 GitHub 灰度只能通过显式
+`--agihunt on` 临时覆盖；正式启用前需要完成多日 shadow 验证，详见
+[AGIHunt 运行手册](agihunt.md)。
+
+### `agihunt`
+
+AGIHunt 的非密钥策略配置位于顶层 `agihunt:`。默认策略最多 5 次串行
+请求：日报诊断、`models` / `research` / `coding-agents` 三个核心频道和
+一个补充频道。`hot` 只在各自频道内排序；跨频道由固定配额决定。
+
+```yaml
+agihunt:
+  request_budget: 5
+  include_report: true
+  core_channels: [models, research, coding-agents]
+  supplemental_channel: products
+  cache_ttl_seconds: 600
+```
+
+不要把 `AGIHUNT_API_KEY` 写入此处。它只允许存在于运行环境中。
 
 ### `limits.max_articles`
 
@@ -138,6 +161,7 @@ MODELSCOPE_SECONDARY_MODEL=moonshotai/Kimi-K2.7-Code
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 SYFT_WEB_APP_URL=https://syft.example.com
 SYFT_SECRET_KEY=your-syft-secret-key
+AGIHUNT_API_KEY=
 TAVILY_API_KEY=
 ```
 
@@ -161,6 +185,13 @@ TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
 ```bash
 python3 main.py fetch --enrichment off
 python3 main.py run --offline --enrichment off
+```
+
+AGIHunt 灰度仅在完成授权后显式运行：
+
+```bash
+python3 main.py fetch --agihunt on --enrichment off
+python3 main.py run --offline --agihunt on --enrichment off
 ```
 
 `--enrichment auto` 会跟随 `config.yaml`，因此在默认 `enrichment.enabled: false` 下不会启用 Tavily。

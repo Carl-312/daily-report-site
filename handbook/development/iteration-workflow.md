@@ -2,6 +2,11 @@
 
 本文件面向在 `/home/carl/daily-report-site` 内工作的 agent。
 
+> 范围说明：本文只约束 Tavily enrichment 的迭代。AGIHunt 作为主候选来源的
+> 接入、授权、shadow 和生产门禁以
+> [AGIHunt 主来源接入规划](agihunt-primary-source-plan.md)为准，不受本文“唯一
+> 主线”的历史表述限制。
+
 从本版开始，项目迭代主线不再是“泛化地优化日报流水线”，而是收敛为一个更明确的目标：
 
 > 持续设计、验证、加固一套以 Tavily API 为核心的新闻验证与补量架构，确保进入日报正式产物的新闻具备可解释的时效性、可信度与降级语义。

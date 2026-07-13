@@ -12,6 +12,22 @@
 - ✅ 注册并启用新闻源
 - ✅ 测试和调试新闻源
 
+## 生产级认证 API：AGIHunt
+
+`sources/agihunt.py` 是当前带认证 API adapter 的参考实现。它与下方的教学
+示例不同：客户端专门处理官方 header、串行请求、十分钟缓存、单次受控重试、
+deadline、错误映射和可审计 provenance；`AgihuntSource` 只把频道原帖 URL
+转成 `Article`。日报 Markdown 不能直接拆成多条发布新闻。
+
+默认保持 `sources.agihunt: false`。只在已配置 `AGIHUNT_API_KEY` 的 shadow
+环境使用：
+
+```bash
+python main.py fetch --agihunt on --enrichment off
+```
+
+具体授权、灰度和回滚步骤见[AGIHunt 运行手册](../operations/agihunt.md)。
+
 ---
 
 ## 📋 前置知识
