@@ -29,7 +29,7 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment；`publish` 明确控制是否发布生产版本
+- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本
 - 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
@@ -52,10 +52,15 @@
 | --- | --- |
 | `MODELSCOPE_API_KEY` | ModelScope API Key |
 | `SILICONFLOW_API_KEY` | SiliconFlow API Key（可选，用作 LLM 备用供应商） |
+| `AGIHUNT_API_KEY` | AGIHunt Agent API Key（只在 `enable_agihunt=true` 时注入） |
 
 两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
 `MODELSCOPE_SECONDARY_MODEL` 是非密钥配置，默认已使用 `moonshotai/Kimi-K2.7-Code`，通常不需要配置为 secret。
+
+AGIHunt 的 source 默认关闭。手动灰度时设定 `enable_agihunt=true` 会传入
+`--agihunt on`；如果 `AGIHUNT_API_KEY` 缺失，workflow 会立即失败而不是将
+配置错误伪装为空来源。此开关不会改变定时生产任务的默认来源集合。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 
@@ -142,6 +147,9 @@ GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavi
 - `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
 - `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且数量不超过 `max_summary_items`
 - 聚合来源是否能拆出多条有独立标题和摘要的新闻，同时没有重复事实
+- AGIHunt gray 时 `scripts/agihunt_gray_health.py` 已通过，`.runs/` 中的
+  `agihunt-gray-health.json`、manifest 和 provenance 具有频道与原帖 URL，且
+  `publish=false` artifact 没有发布 Pages
 
 ## 相关文档
 

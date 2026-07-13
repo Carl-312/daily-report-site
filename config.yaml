@@ -1,8 +1,42 @@
 sources:
+  # 默认关闭；仅在本地/Actions 灰度中用 --agihunt on 显式启用。
+  agihunt: false
   aibase: true
   techcrunch: true
   theverge: true
   syft: false           # 需要配置 SYFT_* 环境变量
+
+# AGIHunt 的密钥只能来自运行环境中的 AGIHUNT_API_KEY。
+# 请求数预算包含失败后的受控重试，避免超出服务方 1–5 次/任务的建议范围。
+agihunt:
+  api_base_url: https://agihunt.info/agent/v1
+  skill_version: 1.2.2
+  cache_ttl_seconds: 600
+  request_budget: 5
+  timeout_seconds: 15
+  retry_wait_cap_seconds: 30
+  include_report: true
+  core_channels:
+    - models
+    - research
+    - coding-agents
+  supplemental_channel: products
+  per_channel_limit: 4
+  core_channel_quota: 3
+  supplemental_quota: 3
+  max_age_hours: 30
+  future_tolerance_minutes: 5
+  entity_limit: 2
+  entity_keywords:
+    - openai
+    - anthropic
+    - google
+    - meta
+    - microsoft
+    - xai
+    - deepseek
+    - nvidia
+  source_priority: 3
 
 limits:
   max_articles: 14

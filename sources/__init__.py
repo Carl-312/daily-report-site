@@ -6,8 +6,9 @@ Provides centralized access to all news sources
 from __future__ import annotations
 from datetime import datetime
 from time import perf_counter
-from typing import Dict, Type, List
+from typing import Dict, List, Type
 
+from config import AgihuntSettings
 from .base import BaseSource, Article
 from utils.run_contracts import (
     ArticleSnapshot,
@@ -19,6 +20,7 @@ from .aibase import AIBaseSource
 from .techcrunch import TechCrunchSource
 from .theverge import TheVergeSource
 from .syft import SyftSource
+from .agihunt import AgihuntSource
 
 # Registry of available sources
 REGISTRY: Dict[str, Type[BaseSource]] = {
@@ -26,6 +28,7 @@ REGISTRY: Dict[str, Type[BaseSource]] = {
     "techcrunch": TechCrunchSource,
     "theverge": TheVergeSource,
     "syft": SyftSource,
+    "agihunt": AgihuntSource,
 }
 
 
@@ -42,6 +45,8 @@ def fetch_batch(
     max_articles: int = 14,
     syft_url: str = "",
     syft_key: str = "",
+    agihunt_api_key: str = "",
+    agihunt_settings: AgihuntSettings | None = None,
     reference_dt: datetime | None = None,
     deadline_at: datetime | None = None,
 ) -> tuple[List[Article], tuple[SourceRunResult, ...]]:
@@ -53,6 +58,8 @@ def fetch_batch(
         max_articles: Max articles per source
         syft_url: Syft API URL (for syft source)
         syft_key: Syft API key (for syft source)
+        agihunt_api_key: AGIHunt API key (for agihunt source)
+        agihunt_settings: Non-secret AGIHunt client and selection settings
 
     Returns:
         Combined list of articles from all sources
@@ -79,10 +86,16 @@ def fetch_batch(
             continue
 
         started = perf_counter()
+        source: BaseSource | None = None
         try:
             # Special handling for Syft source
             if name == "syft":
                 source = SyftSource(web_app_url=syft_url, secret_key=syft_key)
+            elif name == "agihunt":
+                source = AgihuntSource(
+                    api_key=agihunt_api_key,
+                    settings=agihunt_settings,
+                )
             else:
                 source = REGISTRY[name]()
 
@@ -93,39 +106,61 @@ def fetch_batch(
             )
             all_articles.extend(articles)
             print(f"✅ {name}: fetched {len(articles)} articles")
+            fetched_count = getattr(source, "last_fetched_count", None)
+            fetched_count = max(int(fetched_count or 0), len(articles))
+            diagnostics = tuple(getattr(source, "last_diagnostics", ()))
+            status = getattr(source, "last_status", None) or (
+                "ok" if articles else "empty"
+            )
+            if status == "empty" and fetched_count:
+                status = "degraded"
+                diagnostics += (
+                    Diagnostic(
+                        code="source_empty_after_fetch",
+                        message="source fetched candidates but accepted none",
+                    ),
+                )
+            attempts = source.last_attempts
+            if attempts == 0 and name != "agihunt":
+                attempts = 1
             outcomes.append(
                 SourceRunResult(
                     source=name,
-                    status="ok" if articles else "empty",
-                    attempts=source.last_attempts or 1,
+                    status=status,
+                    attempts=attempts,
                     duration_ms=round((perf_counter() - started) * 1000),
-                    fetched_count=len(articles),
+                    fetched_count=fetched_count,
                     accepted_count=len(articles),
                     articles=tuple(
                         ArticleSnapshot(**article.to_dict()) for article in articles
                     ),
+                    diagnostics=diagnostics,
                 )
             )
 
         except RunDeadlineExceeded:
             raise
-        except Exception as e:
-            print(f"❌ {name}: failed - {e}")
-            error_kind = type(e).__name__
+        except Exception as error:
+            error_kind = type(error).__name__
+            print(f"❌ {name}: failed - {error_kind}")
+            source_diagnostics = tuple(
+                getattr(source, "last_diagnostics", ()) if source else ()
+            )
+            diagnostic_code = getattr(error, "diagnostic_code", "source_error")
             outcomes.append(
                 SourceRunResult(
                     source=name,
                     status="failed",
-                    attempts=getattr(locals().get("source", None), "last_attempts", 0)
-                    or 1,
+                    attempts=(getattr(source, "last_attempts", 0) or 1),
                     duration_ms=round((perf_counter() - started) * 1000),
-                    fetched_count=0,
+                    fetched_count=int(getattr(source, "last_fetched_count", 0) or 0),
                     accepted_count=0,
                     error_kind=error_kind,
                     error_message="source execution failed; inspect protected logs",
-                    diagnostics=(
+                    diagnostics=source_diagnostics
+                    + (
                         Diagnostic(
-                            code="source_error",
+                            code=diagnostic_code,
                             message="source execution failed; inspect protected logs",
                         ),
                     ),
@@ -140,6 +175,8 @@ def fetch_all(
     max_articles: int = 14,
     syft_url: str = "",
     syft_key: str = "",
+    agihunt_api_key: str = "",
+    agihunt_settings: AgihuntSettings | None = None,
     reference_dt: datetime | None = None,
     deadline_at: datetime | None = None,
 ) -> List[Article]:
@@ -149,6 +186,8 @@ def fetch_all(
         max_articles=max_articles,
         syft_url=syft_url,
         syft_key=syft_key,
+        agihunt_api_key=agihunt_api_key,
+        agihunt_settings=agihunt_settings,
         reference_dt=reference_dt,
         deadline_at=deadline_at,
     )
@@ -166,4 +205,5 @@ __all__ = [
     "TechCrunchSource",
     "TheVergeSource",
     "SyftSource",
+    "AgihuntSource",
 ]

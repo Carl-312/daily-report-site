@@ -5,6 +5,7 @@
 - [贡献与交付规范](contributing.md)：分支、提交、CI、PR 和安全边界
 - [迭代工作流](iteration-workflow.md)：从证据、假设到灰度验证的固定步骤
 - [扩展新闻源](source-adapters.md)：新增 source 的接口、测试和配置方式
+- [AGIHunt 主来源接入规划](agihunt-primary-source-plan.md)：官方 Agent API、重要性筛选、授权与灰度启用方案
 - [接口参考](../reference/api.md)：调用边界和结果模型
 - [架构说明](../architecture/README.md)：确认改动所在层级
 

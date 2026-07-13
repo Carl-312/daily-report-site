@@ -5,11 +5,11 @@ All sources should inherit from this class
 
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 import random
 import time
-from typing import List
+from typing import Any, List
 import requests
 
 
@@ -24,6 +24,7 @@ class Article:
     content: str = ""
     priority: int = 0
     source: str = ""
+    provenance: dict[str, str] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         return {
@@ -34,6 +35,7 @@ class Article:
             "content": self.content,
             "priority": self.priority,
             "source": self.source,
+            "provenance": dict(self.provenance),
         }
 
 
@@ -54,6 +56,12 @@ class BaseSource(ABC):
         self.session = requests.Session()
         self.session.trust_env = False
         self.last_attempts = 0
+        # Source-specific adapters can expose richer, additive run facts.  The
+        # registry falls back to the returned Article count for legacy sources.
+        self.last_fetched_count: int | None = None
+        self.last_accepted_count: int | None = None
+        self.last_status: str | None = None
+        self.last_diagnostics: tuple[Any, ...] = ()
 
     @abstractmethod
     def fetch(

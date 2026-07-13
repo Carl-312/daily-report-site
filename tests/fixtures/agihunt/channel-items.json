@@ -1,0 +1,58 @@
+{
+  "report": {
+    "day": "2026-07-13",
+    "markdown": "# Synthetic AGIHunt report\n\nFixture-only coverage metadata.",
+    "generated_at": "2026-07-13T06:00:00+08:00",
+    "html_url": "https://agihunt.info/daily/2026-07-13"
+  },
+  "channels": {
+    "models": [
+      {
+        "title": "Model lower hot",
+        "text": "A synthetic lower-ranked model story.",
+        "url": "https://example.test/models/lower",
+        "author": "fixture",
+        "hot": 10,
+        "published_at": "2026-07-13T07:15:00+08:00"
+      },
+      {
+        "title": "Model higher hot",
+        "text": "A synthetic higher-ranked model story.",
+        "url": "https://example.test/models/higher",
+        "author": "fixture",
+        "hot": 90,
+        "published_at": "2026-07-13T07:20:00+08:00"
+      }
+    ],
+    "research": [
+      {
+        "title": "Research very high hot",
+        "text": "A synthetic research story.",
+        "url": "https://example.test/research/high",
+        "author": "fixture",
+        "hot": 9999,
+        "published_at": "2026-07-13T07:25:00+08:00"
+      }
+    ],
+    "coding-agents": [
+      {
+        "title": "Coding agent story",
+        "text": "A synthetic coding-agent story.",
+        "url": "https://example.test/coding/agent",
+        "author": "fixture",
+        "hot": 1,
+        "published_at": "2026-07-13T07:30:00+08:00"
+      }
+    ],
+    "products": [
+      {
+        "title": "Product story",
+        "text": "A synthetic product story.",
+        "url": "https://example.test/products/story",
+        "author": "fixture",
+        "hot": 5,
+        "published_at": "2026-07-13T07:35:00+08:00"
+      }
+    ]
+  }
+}
