@@ -1,6 +1,7 @@
 # AGIHunt 作为每日 AI 新闻主来源的接入规划
 
-- 状态：Phase 1 关闭态实现已完成本地验证；Phase 0 第 1 天真实样本已完成，第 2 天待完成
+- 状态：Phase 1 关闭态实现已完成本地验证；Phase 0 真实样本为 1/2 天，Phase 2
+  GitHub shadow 为 1/7 天且健康；`sources.agihunt` 仍关闭，`main` 尚未合并。
 - 创建日期：2026-07-13
 - 范围：设计与验证计划；本文件不授权、不写入密钥，也不改变生产抓取行为。
 
@@ -29,7 +30,7 @@ AGIHunt Agent API（日报 / 频道条目）
 
 现有 source 的共同输出是 `Article(title, link, description, publish_time, content, priority, source)`。AIBase 实际返回一篇当日聚合日报；TechCrunch 与 The Verge 从页面和 URL 日期提取候选；Syft 是带密钥的 JSON 接口。`max_articles` 是传给**每个** source 的上限，默认 14。全局去重会优先保留较高 `priority` 的候选；摘要最多发布 10 条，且每一条的 URL 必须来自输入候选。
 
-这意味着接入点清晰，但 AGIHunt 的 top-100 频道数据不能原样送入摘要：适配器必须在返回 `Article` 前完成有界、可解释的“重要性”选择。当前全量回归基线为 `88 passed`（2026-07-13）。
+这意味着接入点清晰，但 AGIHunt 的 top-100 频道数据不能原样送入摘要：适配器必须在返回 `Article` 前完成有界、可解释的“重要性”选择。当前全量回归基线为 `124 passed`（2026-07-14；另有一条既有 Pydantic 弃用警告）。
 
 ## AGIHunt API 约束与设计边界
 
@@ -172,7 +173,8 @@ ModelScope endpoint/token 以“无可用 provider”拒绝。故不将未经账
 ### Phase 3：主来源启用与安全回滚
 
 1. 在配置中把 `agihunt` 放在已启用来源的首位，保留其他 source 作为次级输入；先执行一次非发布预览。
-2. 将 `AGIHUNT_API_KEY` 放入 GitHub Actions Secret，并只在生成步骤注入环境变量。
+2. `AGIHUNT_API_KEY` 已配置为 GitHub Actions Secret，且只在生成步骤注入环境变量；生产
+   启用前仍须复核该 Secret 与 shadow 记录，绝不写入仓库或产物。
 3. 在确认预览内容、manifest 和缓存/限额报告后，允许定时生产运行；持续审计前 7 天日报。
 
 **通过条件：** 正式日报显示 AGI HUNT 来源归因和原帖链接；主来源短暂故障不会覆盖上一版；每日 API 调用数、缓存命中和配额状态均在可观察范围内。
@@ -192,6 +194,8 @@ ModelScope endpoint/token 以“无可用 provider”拒绝。故不将未经账
 3. 哪些频道在 7 天 shadow 里能提升“重要性”而非增加重复；固定频道和轮换频道需要由数据决定。
 4. AGIHunt 条目与直连媒体报道属于同一故事时，最终应保留哪个原帖 URL，以及如何同时保留 AGIHunt 的发现 provenance。
 5. Tavily 对社交/公众号链接的验证误拒绝率是否可接受；没有回放证据前不调整其默认策略。
+6. 当前 ModelScope endpoint/token 尚未启用 Kimi K2.7 Code provider；在获得可用凭据前，
+   不能把“模型推理使用 ModelScope Kimi”标记为已验收。
 
 ## 相关资料
 

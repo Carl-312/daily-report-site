@@ -2,6 +2,22 @@
 
 AGIHunt 通过官方 Agent API 提供日报覆盖信息和频道原帖候选。当前接入仍是关闭态：`config.yaml` 中的 `sources.agihunt` 必须保持 `false`，只在显式灰度运行中使用 `--agihunt on`。
 
+## 当前验证状态（2026-07-14）
+
+- 本地授权样本已完成第 1/2 天：`/channels`、日报和 `models` 频道共 3 次串行物理请求，
+  去敏记录健康；确认了 12 个频道 slug、条目的关键字段、ISO 8601 UTC
+  `published_at` 与数值型 `hot`。日报仍只作覆盖诊断。
+- [GitHub shadow 第 1 天](https://github.com/Carl-312/daily-report-site/actions/runs/29301983421)
+  在 `enable_agihunt=true`、`enable_tavily=false`、`publish=false` 下通过；artifact 的
+  `agihunt-gray-health.json` 为 `healthy: true`，source 为 `ok`，接受 13 个候选、使用 5
+  次请求，且没有发布 Pages 或回写生成内容。
+- `AGIHUNT_API_KEY` 已成功用于本地检查和 Actions shadow，但文档不记录其值。仍需第 2 天
+  样本与连续 7 天 shadow，才可考虑改变默认配置或合并 `main`。
+- 当次摘要没有满足 ModelScope Kimi 要求：当前 endpoint/token 对 Kimi K2.7 Code 返回
+  “无可用 provider”，因此安全回退到 SiliconFlow。即使使用[官方模型页](https://www.modelscope.cn/models/moonshotai/Kimi-K2.7-Code/summary)
+  所列的 `moonshotai/Kimi-K2.7-Code:Moonshot` 也未通过；需要 provider 已启用的
+  ModelScope 凭据后再验证，不能以此改写默认模型配置。
+
 ## 安全边界
 
 - 只调用 `https://agihunt.info/agent/v1` 的官方端点；不抓取 HTML、sitemap 或未公开接口。

@@ -172,6 +172,11 @@ TAVILY_API_KEY=
 
 AI 摘要的默认尝试顺序是：ModelScope `ZhipuAI/GLM-5.2` → ModelScope `moonshotai/Kimi-K2.7-Code` → SiliconFlow `Pro/moonshotai/Kimi-K2.6`。
 
+当前状态（2026-07-14）：已验证的 AGIHunt shadow 中，配置的 ModelScope endpoint/token
+拒绝了 Kimi K2.7 Code（包括官方文档列出的 provider 限定 ID），因此摘要安全回退到
+SiliconFlow。保留现有默认顺序；只有维护者提供已启用 Kimi provider 的 ModelScope 凭据并
+通过真实运行后，才可调整默认模型或宣称该模型要求已满足。
+
 未配置 `MODELSCOPE_API_KEY` 时，可使用：
 
 ```bash
