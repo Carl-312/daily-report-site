@@ -90,6 +90,7 @@ def _numbered_items(content: str) -> list[str]:
 
 _JSON_FENCE = re.compile(r"^```(?:json)?\s*(.*?)\s*```$", re.DOTALL | re.IGNORECASE)
 _PUBLIC_LINK = re.compile(r"(?:https?://|www\.)|\[[^\]]+\]\([^)]*\)", re.IGNORECASE)
+_PUBLIC_ARTICLE_ID = re.compile(r"\[a\d+\]", re.IGNORECASE)
 
 
 def _strip_json_fence(content: str) -> str:
@@ -102,6 +103,10 @@ def _strip_json_fence(content: str) -> str:
 
 def _contains_public_link(value: str) -> bool:
     return bool(_PUBLIC_LINK.search(value))
+
+
+def _contains_public_article_id(value: str) -> bool:
+    return bool(_PUBLIC_ARTICLE_ID.search(value))
 
 
 def _parse_summary_draft(content: str) -> SummaryDraft:
@@ -139,6 +144,8 @@ def validate_summary_quality(
         raise SummaryQualityError("summary is missing the interaction topic")
     if _contains_public_link(discussion_topic):
         raise SummaryQualityError("interaction topic contains a link")
+    if _contains_public_article_id(discussion_topic):
+        raise SummaryQualityError("interaction topic exposes an article_id")
 
     visible_text = "\n".join(f"{item.title} {item.summary}" for item in draft.items)
     searchable_chars = re.findall(r"[\u4e00-\u9fffA-Za-z]", visible_text)
@@ -165,6 +172,8 @@ def validate_summary_quality(
             )
         if _contains_public_link(title) or _contains_public_link(summary):
             raise SummaryQualityError(f"item {index} contains a link")
+        if _contains_public_article_id(title) or _contains_public_article_id(summary):
+            raise SummaryQualityError(f"item {index} exposes an article_id")
     return draft
 
 
