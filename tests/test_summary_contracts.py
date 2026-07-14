@@ -10,7 +10,7 @@ from utils.summary_contracts import (
 from summarizer import offline_summary_result
 
 
-def test_structured_summary_renders_deterministically_with_article_links() -> None:
+def test_structured_summary_renders_without_article_ids_or_links() -> None:
     input_hash, prompt_hash = fingerprint_summary_input(
         [{"title": "AI launch", "link": "https://example.test/a"}], "prompt"
     )
@@ -32,9 +32,34 @@ def test_structured_summary_renders_deterministically_with_article_links() -> No
     )
 
     assert render_summary_markdown(result) == (
-        "1. [AI launch](https://example.test/a)：发布了新能力\n\n"
-        "💬 互动话题：你会如何使用这项能力？"
+        "1. AI launch：发布了新能力\n\n💬 互动话题：你会如何使用这项能力？"
     )
+
+
+def test_renderer_removes_links_from_untrusted_offline_text() -> None:
+    result = SummaryResult(
+        policy="offline",
+        items=(
+            SummaryItem(
+                article_id="a1",
+                title="[AI launch](https://example.test/a)",
+                summary="详情见 www.example.test/a ，发布了新能力。",
+                url="https://example.test/a",
+            ),
+        ),
+        discussion_topic="去 https://example.test/a 查看详情吗？",
+        provider="local",
+        model="deterministic",
+        input_fingerprint="input",
+        prompt_fingerprint="prompt",
+    )
+
+    rendered = render_summary_markdown(result)
+
+    assert "https://" not in rendered
+    assert "www.example.test" not in rendered
+    assert "[AI launch]" not in rendered
+    assert "1. AI launch：详情见，发布了新能力。" in rendered
 
 
 def test_summary_fingerprints_are_stable_for_identical_input() -> None:

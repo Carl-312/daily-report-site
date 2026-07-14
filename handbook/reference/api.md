@@ -36,7 +36,7 @@ python main.py test
 - `summarize_result(articles, stream=False) -> SummaryResult`
 - `offline_summary(articles) -> str`
 - `offline_summary_result(articles) -> SummaryResult`
-- `validate_summary_quality(content, expected_items=10, expected_article_ids=None) -> None`
+- `validate_summary_quality(content, expected_items=10, expected_article_ids=None) -> SummaryDraft`
 - `test_connection() -> bool`
 
 ### `utils/summary_contracts.py`
@@ -45,7 +45,8 @@ python main.py test
 - `validate_summary_result(result, articles) -> None`
 - `render_summary_markdown(result) -> str`
 
-摘要条目必须使用输入候选中已知的 `article_id`，数量不能超过独立日报上限，且每条源 URL 必须与引用的输入候选一致。同一个 `article_id` 可以出现在多个条目中，以支持聚合链接拆分；这些规则由本地代码校验，不由提示词单独保证。
+在线模型只返回紧凑 JSON；`SummaryDraft` 在本地严格校验后才与候选的私有来源
+URL 关联。摘要条目必须使用输入候选中已知的 `article_id`，数量不能超过独立日报上限，且每条源 URL 必须与引用的输入候选一致。同一个 `article_id` 可以出现在多个条目中，以支持聚合链接拆分；这些规则由本地代码校验，不由提示词单独保证。读者页面由 renderer 确定性生成，不显示 `article_id` 或来源 URL。
 
 ### `utils/dedupe.py`
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from types import SimpleNamespace
 
 import pytest
@@ -26,24 +27,47 @@ def _llm_config(**overrides):
 
 
 def _valid_summary(item_count: int = 1) -> str:
-    lines = []
-    for index in range(1, item_count + 1):
-        lines.append(
-            f"{index}. [a{index}] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展"
-        )
-        lines.append("")
-    lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")
-    return "\n".join(lines)
+    return json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": f"a{index}",
+                    "title": f"第{index}条人工智能产品更新",
+                    "summary": "推动行业应用场景继续扩展，并带来新的实际价值。",
+                }
+                for index in range(1, item_count + 1)
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？欢迎留言分享你的看法！",
+        },
+        ensure_ascii=False,
+    )
 
 
 def _summary_with_sources(source_ids: list[str]) -> str:
+    return json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": source_id,
+                    "title": f"第{index}条独立AI新闻",
+                    "summary": "发布重要产品更新，推动行业应用场景继续扩展。",
+                }
+                for index, source_id in enumerate(source_ids, 1)
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？欢迎留言分享你的看法！",
+        },
+        ensure_ascii=False,
+    )
+
+
+def _rendered_summary(item_count: int = 1) -> str:
     lines = []
-    for index, source_id in enumerate(source_ids, 1):
+    for index in range(1, item_count + 1):
         lines.append(
-            f"{index}. [{source_id}] 第{index}条独立新闻发布重要产品更新，推动行业应用场景继续扩展"
+            f"{index}. 第{index}条人工智能产品更新："
+            "推动行业应用场景继续扩展，并带来新的实际价值。"
         )
-        lines.append("")
-    lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")
+    lines.extend(["", "💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！"])
     return "\n".join(lines)
 
 
@@ -107,7 +131,9 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
 
     content = summarizer.summarize([{"title": "Story"}], stream=False)
 
-    assert content == _valid_summary()
+    assert content == _rendered_summary()
+    assert "a1" not in content
+    assert "http" not in content
     assert calls == [
         ("https://modelscope.test/v1|modelscope-key", "ZhipuAI/GLM-5.2"),
         (
@@ -137,7 +163,7 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
 
     content = summarizer.summarize([{"title": "Story"}], stream=False)
 
-    assert content == _valid_summary()
+    assert content == _rendered_summary()
     assert calls == ["ZhipuAI/GLM-5.2", "Tencent-Hunyuan/Hy3"]
 
 
@@ -225,23 +251,72 @@ def test_offline_summary_does_not_expand_candidate_count() -> None:
     summary = summarizer.offline_summary(articles)
 
     assert len(summarizer._numbered_items(summary)) == 4
+    assert "https://" not in summary
+
+
+def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+
+    compressed = summarizer.compress_articles(
+        [
+            {
+                "title": "AI launch",
+                "description": "new capability",
+                "link": "https://example.test/private-source",
+            }
+        ]
+    )
+
+    assert compressed == [
+        {
+            "article_id": "a1",
+            "title": "AI launch",
+            "publish_time": "",
+            "description": "new capability",
+            "priority": 0,
+        }
+    ]
 
 
 def test_validate_summary_quality_rejects_unknown_article_id() -> None:
     with pytest.raises(summarizer.SummaryQualityError, match="unknown article_id"):
         summarizer.validate_summary_quality(
-            "1. [a9] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
-            "互动话题：你最关注哪条AI新闻？",
+            json.dumps(
+                {
+                    "items": [
+                        {
+                            "article_id": "a9",
+                            "title": "人工智能产品更新",
+                            "summary": "推动行业应用场景继续扩展。",
+                        }
+                    ],
+                    "discussion_topic": "你最关注哪条AI新闻？",
+                },
+                ensure_ascii=False,
+            ),
             expected_items=1,
             expected_article_ids={"a1"},
         )
 
 
 def test_validate_summary_quality_allows_duplicate_article_id() -> None:
-    content = (
-        "1. [a1] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
-        "2. [a1] 人工智能公司发布重要产品更新，推动行业应用场景继续扩展\n\n"
-        "互动话题：你最关注哪条AI新闻？"
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "人工智能产品更新",
+                    "summary": "推动行业应用场景继续扩展。",
+                },
+                {
+                    "article_id": "a1",
+                    "title": "人工智能商业进展",
+                    "summary": "带来新的行业应用和市场机会。",
+                },
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
     )
     summarizer.validate_summary_quality(
         content,
@@ -250,27 +325,59 @@ def test_validate_summary_quality_allows_duplicate_article_id() -> None:
     )
 
 
-def test_validate_summary_quality_rejects_english_link_list() -> None:
-    content = "\n\n".join(
-        [
-            "1. [🔥Netflix invented binge-watching. Now it may have outgrown it.]"
-            "(https://example.com/story)",
-            "2. [🔥The first AI-run ransomware attack still needed a human]"
-            "(https://example.com/story-2)",
-            "互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬",
-        ]
+def test_validate_summary_quality_rejects_schema_drift() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "人工智能产品更新",
+                    "summary": "推动行业应用场景继续扩展。",
+                    "url": "https://example.test/should-not-be-returned",
+                }
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
     )
 
-    with pytest.raises(summarizer.SummaryQualityError):
+    with pytest.raises(summarizer.SummaryQualityError, match="JSON matching"):
+        summarizer.validate_summary_quality(content, expected_items=1)
+
+
+def test_validate_summary_quality_rejects_links_in_reader_facing_fields() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "[人工智能产品](https://example.com/story)",
+                    "summary": "发布重要能力并推动行业应用场景继续扩展。",
+                }
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="contains a link"):
         summarizer.validate_summary_quality(content, expected_items=2)
 
 
-def test_validate_summary_quality_rejects_digest_without_interaction_footer() -> None:
-    content = "\n\n".join(
-        [
-            "1. 人工智能公司发布重要产品更新，推动行业应用场景继续扩展",
-        ]
+def test_validate_summary_quality_rejects_digest_without_interaction_topic() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "人工智能产品更新",
+                    "summary": "推动行业应用场景继续扩展。",
+                }
+            ],
+            "discussion_topic": "",
+        },
+        ensure_ascii=False,
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="interaction footer"):
+    with pytest.raises(summarizer.SummaryQualityError, match="interaction topic"):
         summarizer.validate_summary_quality(content, expected_items=10)
