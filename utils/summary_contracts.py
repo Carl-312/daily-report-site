@@ -5,16 +5,38 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import re
 from typing import Literal
 
 from utils.run_contracts import StrictFrozenModel
 
 
+_MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\([^)]*\)")
+_URL = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
+
+
 class SummaryItem(StrictFrozenModel):
+    """One validated summary item with private source provenance."""
+
     article_id: str
     title: str
     summary: str
     url: str
+
+
+class SummaryDraftItem(StrictFrozenModel):
+    """Model-facing item shape before source provenance is joined locally."""
+
+    article_id: str
+    title: str
+    summary: str
+
+
+class SummaryDraft(StrictFrozenModel):
+    """Minimal JSON contract required from an LLM daily-summary response."""
+
+    items: tuple[SummaryDraftItem, ...]
+    discussion_topic: str
 
 
 class SummaryAttempt(StrictFrozenModel):
@@ -90,14 +112,20 @@ def fingerprint_summary_input(articles: list[dict], prompt: str) -> tuple[str, s
 
 
 def render_summary_markdown(result: SummaryResult) -> str:
-    """Render a saved summary result without invoking a model."""
+    """Render reader-facing Markdown without exposing source IDs or URLs."""
+
+    def public_text(value: str) -> str:
+        without_links = _MARKDOWN_LINK.sub(r"\1", value)
+        without_urls = _URL.sub("", without_links)
+        compact = " ".join(without_urls.replace("\n", " ").split())
+        return re.sub(r"\s+([，。！？；：])", r"\1", compact)
+
     lines = []
     for index, item in enumerate(result.items, 1):
-        title = item.title.replace("[", "\\[").replace("]", "\\]")
-        summary = item.summary.replace("\n", " ").strip()
-        if item.url.startswith(("http://", "https://")):
-            lines.append(f"{index}. [{title}]({item.url})：{summary}")
-        else:
-            lines.append(f"{index}. {title}：{summary}")
-    lines.extend(["", f"💬 互动话题：{html.escape(result.discussion_topic)}"])
+        title = public_text(item.title).replace("[", "\\[").replace("]", "\\]")
+        summary = public_text(item.summary)
+        lines.append(f"{index}. {title}：{summary}")
+    lines.extend(
+        ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
+    )
     return "\n".join(lines)

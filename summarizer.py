@@ -14,10 +14,12 @@ from config import get_config
 from utils.run_contracts import RunDeadlineExceeded
 from utils.summary_contracts import (
     SummaryAttempt,
+    SummaryDraft,
     SummaryItem,
     SummaryResult,
     article_id_for_index,
     fingerprint_summary_input,
+    render_summary_markdown,
     validate_summary_result,
 )
 
@@ -63,7 +65,6 @@ def compress_articles(articles: list[dict]) -> list[dict]:
             {
                 "article_id": article_id_for_index(index),
                 "title": (a.get("title") or "")[: cfg.title_max],
-                "link": a.get("link") or "",
                 "publish_time": a.get("publish_time") or "",
                 "description": (a.get("description") or "")[: cfg.desc_max],
                 "priority": a.get("priority", 0),
@@ -87,77 +88,84 @@ def _numbered_items(content: str) -> list[str]:
     return items
 
 
-def _extract_article_id(item: str) -> tuple[str, str] | None:
-    match = re.match(r"^\[([A-Za-z0-9_-]+)\]\s+(.+?)\s*$", item)
-    if not match:
-        return None
-    return match.group(1), match.group(2).strip()
+_JSON_FENCE = re.compile(r"^```(?:json)?\s*(.*?)\s*```$", re.DOTALL | re.IGNORECASE)
+_PUBLIC_LINK = re.compile(r"(?:https?://|www\.)|\[[^\]]+\]\([^)]*\)", re.IGNORECASE)
 
 
-def _split_generated_headline(article: dict, text: str) -> tuple[str, str]:
-    """Separate a model-generated headline from its factual explanation."""
-    for separator in ("：", ":"):
-        if separator in text:
-            title, summary = text.split(separator, 1)
-            if title.strip() and summary.strip():
-                return title.strip(), summary.strip()
-    return (article.get("title") or text).strip(), text.strip()
+def _strip_json_fence(content: str) -> str:
+    """Accept a fenced JSON response while keeping the model contract strict."""
+
+    stripped = content.strip()
+    match = _JSON_FENCE.fullmatch(stripped)
+    return match.group(1).strip() if match else stripped
+
+
+def _contains_public_link(value: str) -> bool:
+    return bool(_PUBLIC_LINK.search(value))
+
+
+def _parse_summary_draft(content: str) -> SummaryDraft:
+    try:
+        return SummaryDraft.model_validate_json(_strip_json_fence(content))
+    except ValueError as exc:
+        raise SummaryQualityError(
+            "summary is not valid JSON matching the contract"
+        ) from exc
 
 
 def validate_summary_quality(
     content: str,
     expected_items: int = 10,
     expected_article_ids: set[str] | None = None,
-) -> None:
-    """Validate that generated content is a complete Simplified Chinese digest."""
-    stripped = content.strip()
-    if not stripped:
-        raise SummaryQualityError("summary is empty")
+) -> SummaryDraft:
+    """Validate the compact JSON output before joining private source metadata."""
+    draft = _parse_summary_draft(content)
 
     max_items = max(0, expected_items)
     if max_items == 0:
         raise SummaryQualityError("cannot publish a summary without source articles")
 
-    items = _numbered_items(stripped)
-    min_items = 1
-    if len(items) < min_items:
+    if not draft.items:
         raise SummaryQualityError(
-            f"summary has {len(items)} numbered items, expected at least {min_items}"
+            "summary must contain at least one item when source articles exist"
         )
-    if len(items) > max_items:
+    if len(draft.items) > max_items:
         raise SummaryQualityError(
-            f"summary has {len(items)} numbered items, maximum allowed is {max_items}"
+            f"summary has {len(draft.items)} items, maximum allowed is {max_items}"
         )
 
-    if "互动话题" not in stripped:
-        raise SummaryQualityError("summary is missing the interaction footer")
+    discussion_topic = draft.discussion_topic.strip()
+    if not discussion_topic:
+        raise SummaryQualityError("summary is missing the interaction topic")
+    if _contains_public_link(discussion_topic):
+        raise SummaryQualityError("interaction topic contains a link")
 
-    searchable_chars = re.findall(r"[\u4e00-\u9fffA-Za-z]", stripped)
-    chinese_ratio = _count_cjk(stripped) / max(1, len(searchable_chars))
+    visible_text = "\n".join(f"{item.title} {item.summary}" for item in draft.items)
+    searchable_chars = re.findall(r"[\u4e00-\u9fffA-Za-z]", visible_text)
+    chinese_ratio = _count_cjk(visible_text) / max(1, len(searchable_chars))
     if chinese_ratio < 0.45:
         raise SummaryQualityError(
             f"summary is not predominantly Chinese (ratio={chinese_ratio:.2f})"
         )
 
-    for index, item in enumerate(items, 1):
-        body = item
+    for index, item in enumerate(draft.items, 1):
+        article_id = item.article_id.strip()
+        title = item.title.strip()
+        summary = item.summary.strip()
         if expected_article_ids is not None:
-            parsed = _extract_article_id(item)
-            if parsed is None:
-                raise SummaryQualityError(
-                    f"item {index} is missing its article_id prefix"
-                )
-            article_id, body = parsed
             if article_id not in expected_article_ids:
                 raise SummaryQualityError(
                     f"item {index} references unknown article_id {article_id}"
                 )
-        if _count_cjk(body) < 8:
+        if not title or not summary:
+            raise SummaryQualityError(f"item {index} is missing a title or summary")
+        if _count_cjk(f"{title}{summary}") < 8:
             raise SummaryQualityError(
                 f"item {index} does not contain enough Chinese content"
             )
-        if "http://" in body or "https://" in body:
-            raise SummaryQualityError(f"item {index} contains a raw link")
+        if _contains_public_link(title) or _contains_public_link(summary):
+            raise SummaryQualityError(f"item {index} contains a link")
+    return draft
 
 
 def _provider_candidates() -> list[dict[str, str]]:
@@ -224,67 +232,12 @@ def summarize(
     if not articles:
         return "暂无新闻"
 
-    cfg = get_config()
-    providers = _provider_candidates()
-    if not providers:
-        raise ValueError(
-            "No LLM provider API key found. Set MODELSCOPE_API_KEY or SILICONFLOW_API_KEY."
-        )
-
-    compressed = compress_articles(articles)
-    user_input = json.dumps({"articles": compressed}, ensure_ascii=False, indent=2)
-    system_prompt = load_prompt()
-
-    errors: list[str] = []
-    for idx, provider in enumerate(providers):
-        if deadline_at is not None:
-            remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
-            if remaining <= 0:
-                raise RunDeadlineExceeded("run deadline exceeded before summary")
-        else:
-            remaining = None
-        if remaining is None:
-            client = create_client(provider["base_url"], provider["api_key"])
-        else:
-            client = create_client(
-                provider["base_url"], provider["api_key"], timeout=remaining
-            )
-        params: dict[str, Any] = {
-            "model": provider["model"],
-            "max_tokens": cfg.max_output,
-            "temperature": 0.7,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_input},
-            ],
-            "stream": stream,
-        }
-
-        try:
-            if idx > 0:
-                print(
-                    f"\n   🔁 Trying fallback provider: {provider['name']} ({provider['model']})"
-                )
-
-            if stream:
-                content = _summarize_stream(client, params)
-            else:
-                content = _summarize_sync(client, params)
-            validate_summary_quality(
-                content,
-                expected_items=_summary_limit(cfg),
-                expected_article_ids={article["article_id"] for article in compressed},
-            )
-            return content
-        except Exception as e:
-            errors.append(f"{provider['name']}[{provider['model']}]: {e}")
-            print(f"\n   ⚠️  {provider['name']} failed: {e}")
-
-    raise RuntimeError("All LLM providers failed. " + " | ".join(errors))
+    result = summarize_result(articles, stream=stream, deadline_at=deadline_at)
+    return render_summary_markdown(result)
 
 
 def _parse_summary_result(
-    content: str,
+    draft: SummaryDraft,
     articles: list[dict],
     *,
     policy: str,
@@ -293,59 +246,35 @@ def _parse_summary_result(
     input_fingerprint: str,
     prompt_fingerprint: str,
     attempts: tuple[SummaryAttempt, ...],
-    max_items: int,
 ) -> SummaryResult:
-    """Convert validated model text into a provenance-preserving contract."""
-    numbered_lines: list[tuple[int, str]] = []
-    for index, line in enumerate(content.splitlines()):
-        match = re.match(r"^\s*\d+[.、]\s+(.+?)\s*$", line)
-        if match:
-            numbered_lines.append((index, match.group(1).strip()))
-
-    if len(numbered_lines) > max_items:
-        raise SummaryQualityError(
-            f"summary contains more than the {max_items}-item daily limit"
-        )
+    """Join validated model output to private source provenance."""
 
     items: list[SummaryItem] = []
     articles_by_id = {
         article_id_for_index(index): article
         for index, article in enumerate(articles, 1)
     }
-    for index, text in numbered_lines:
-        parsed = _extract_article_id(text)
-        if parsed is None:
-            raise SummaryQualityError(
-                f"item {index + 1} is missing its article_id prefix"
-            )
-        article_id, summary = parsed
+    for item in draft.items:
+        article_id = item.article_id.strip()
         article = articles_by_id.get(article_id)
         if article is None:
             raise SummaryQualityError(
                 f"summary references unknown article_id {article_id}"
             )
-        title, summary = _split_generated_headline(article, summary)
         url = str(article.get("link") or "")
         items.append(
             SummaryItem(
                 article_id=article_id,
-                title=title.strip(),
-                summary=summary,
+                title=item.title.replace("\n", " ").strip(),
+                summary=item.summary.replace("\n", " ").strip(),
                 url=url.strip(),
             )
         )
 
-    discussion_topic = ""
-    for line in content.splitlines():
-        if "互动话题" in line:
-            discussion_topic = re.sub(r"^.*?互动话题[：:]\s*", "", line).strip()
-            break
-    if not discussion_topic:
-        discussion_topic = "欢迎分享你最关注的新闻。"
     return SummaryResult(
         policy=policy,
         items=tuple(items),
-        discussion_topic=discussion_topic,
+        discussion_topic=draft.discussion_topic.strip(),
         provider=provider,
         model=model,
         input_fingerprint=input_fingerprint,
@@ -411,14 +340,12 @@ def summarize_result(
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_input},
                 ],
-                "stream": stream,
+                # A JSON response must be complete before strict local parsing;
+                # do not expose internal article IDs in streamed console output.
+                "stream": False,
             }
-            content = (
-                _summarize_stream(client, params)
-                if stream
-                else _summarize_sync(client, params)
-            )
-            validate_summary_quality(
+            content = _summarize_sync(client, params)
+            draft = validate_summary_quality(
                 content,
                 expected_items=_summary_limit(cfg),
                 expected_article_ids={article["article_id"] for article in compressed},
@@ -431,7 +358,7 @@ def summarize_result(
                 )
             )
             result = _parse_summary_result(
-                content,
+                draft,
                 articles,
                 policy="required_ai",
                 provider=provider["name"],
@@ -439,7 +366,6 @@ def summarize_result(
                 input_fingerprint=input_fingerprint,
                 prompt_fingerprint=prompt_fingerprint,
                 attempts=tuple(attempts),
-                max_items=_summary_limit(cfg),
             )
             validate_summary_result(result, articles, max_items=_summary_limit(cfg))
             return result
@@ -485,26 +411,10 @@ def _summarize_stream(client: OpenAI, params: dict) -> str:
 
 
 def offline_summary(articles: list[dict], limit: int = 10) -> str:
-    """Offline fallback: simple bullet list without LLM"""
+    """Offline fallback rendered with the same private-provenance policy."""
     if not articles:
         return "暂无新闻"
-
-    sorted_arts = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
-    limit = min(len(sorted_arts), max(0, limit))
-
-    lines = []
-    for i, a in enumerate(sorted_arts[:limit], 1):
-        title = (a.get("title") or "").replace("\n", "").strip()
-        link = (a.get("link") or "").strip()
-        marker = "🔥" if a.get("priority", 0) > 0 else ""
-        headline = f"{marker}{title}"
-        if link:
-            headline = f"[{headline}]({link})"
-        lines.append(f"{i}. {headline}")
-        lines.append("")
-
-    lines.append("互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！🤔💬")
-    return "\n".join(lines)
+    return render_summary_markdown(offline_summary_result(articles, limit=limit))
 
 
 def offline_summary_result(articles: list[dict], limit: int = 10):

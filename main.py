@@ -39,11 +39,9 @@ from utils.publication import (
 )
 from utils.publish_policy import decide_publication
 from summarizer import (
-    summarize,
     summarize_result,
     offline_summary,
     test_connection,
-    validate_summary_quality,
 )
 from utils.summary_contracts import (
     SummaryResult,
@@ -84,7 +82,7 @@ def agihunt_attribution_line(articles: list[Article | dict]) -> str:
             provenance.get("provider", "") if isinstance(provenance, dict) else ""
         )
         if source == "agihunt" or provider == "AGI HUNT · agihunt.info":
-            return "> 候选来源：AGI HUNT · agihunt.info；每条资讯保留原帖链接。"
+            return "> 候选来源：AGI HUNT · agihunt.info。"
     return ""
 
 
@@ -366,12 +364,9 @@ def summarize_or_offline(
         )
 
     try:
-        if deadline_at is None:
-            content = summarize(articles, stream=True)
-        else:
-            content = summarize(articles, stream=True, deadline_at=deadline_at)
-        validate_summary_quality(content, expected_items=summary_limit)
-        return content
+        result = summarize_result(articles, stream=True, deadline_at=deadline_at)
+        validate_summary_result(result, articles, max_items=summary_limit)
+        return render_summary_markdown(result)
     except Exception as exc:
         message = (
             "AI summarization failed quality checks; refusing to publish "

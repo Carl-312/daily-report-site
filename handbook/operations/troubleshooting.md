@@ -41,7 +41,7 @@ python scripts/manage_retention.py bundle --keep-days 7
 
 ### 摘要来源映射异常或条数超限
 
-当前契约要求输出条数不超过独立的 `max_summary_items`；没有候选时应显示“暂无新闻”。同一个 `article_id` 可以被多个独立新闻条目引用，但每条都必须对应输入文章的源 URL，不能新增来源或编造事实。
+当前契约要求输出条数不超过独立的 `max_summary_items`；没有候选时应显示“暂无新闻”。同一个 `article_id` 可以被多个独立新闻条目引用，但每条都必须对应输入文章的源 URL，不能新增来源或编造事实。ID 与 URL 只保存在内部 `SummaryResult`/JSON 溯源数据，读者页面不会显示它们。
 
 排查当天 `data/YYYY-MM-DD.json`：
 
