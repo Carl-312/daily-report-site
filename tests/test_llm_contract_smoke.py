@@ -45,7 +45,8 @@ def test_probe_capability_can_explicitly_disable_thinking() -> None:
 
     assert capability.thinking_control_parameter == "enable_thinking"
     assert capability.thinking_control_value is False
-    assert capability.timeout_seconds == 90
+    assert capability.execution.attempt_timeout_seconds == 90
+    assert capability.execution.max_attempts == 1
 
 
 def test_contract_smoke_writes_only_secret_safe_attempt_evidence(

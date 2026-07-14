@@ -194,10 +194,8 @@ def test_isolated_gray_can_use_an_ai_summary_for_prompt_validation(
 
     captured: dict[str, object] = {}
 
-    def fake_summarize_result(articles, *, stream, deadline_at):
-        captured.update(
-            {"articles": articles, "stream": stream, "deadline_at": deadline_at}
-        )
+    def fake_summarize_result(articles, *, deadline_at):
+        captured.update({"articles": articles, "deadline_at": deadline_at})
         return SummaryResult(
             policy="required_ai",
             items=(
@@ -238,7 +236,6 @@ def test_isolated_gray_can_use_an_ai_summary_for_prompt_validation(
     assert verification["summary_mode"] == "ai"
     assert verification["summary_provenance"]["ai_verified"] is True
     assert verification["summary_provenance"]["policy"] == "required_ai"
-    assert captured["stream"] is False
     assert captured["articles"] == [article.to_dict()]
 
 

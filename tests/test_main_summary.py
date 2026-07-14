@@ -35,10 +35,9 @@ def test_summarize_or_offline_raises_when_llm_fails_with_provider_key(
     cfg = SimpleNamespace(api_key="modelscope-key", fallback_api_key="siliconflow-key")
     calls: list[str] = []
 
-    def fake_summarize_result(article_payload, *, stream, deadline_at):
+    def fake_summarize_result(article_payload, *, deadline_at):
         calls.append("summarize_result")
         assert article_payload == articles
-        assert stream is True
         assert deadline_at is None
         raise RuntimeError("provider outage")
 
@@ -58,10 +57,9 @@ def test_summarize_or_offline_raises_when_llm_returns_invalid_result(
     cfg = SimpleNamespace(api_key="modelscope-key", fallback_api_key="")
     calls: list[str] = []
 
-    def fake_summarize_result(article_payload, *, stream, deadline_at):
+    def fake_summarize_result(article_payload, *, deadline_at):
         calls.append("summarize_result")
         assert article_payload == articles
-        assert stream is True
         assert deadline_at is None
         return _valid_summary_result().model_copy(update={"items": ()})
 

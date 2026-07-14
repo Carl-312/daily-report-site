@@ -2,7 +2,13 @@ from __future__ import annotations
 
 import pytest
 
-from config import LLMModelCapability, LLMSettings, Settings, load_config
+from config import (
+    LLMExecutionPolicy,
+    LLMModelCapability,
+    LLMSettings,
+    Settings,
+    load_config,
+)
 
 
 def test_default_llm_models(monkeypatch, tmp_path) -> None:
@@ -50,10 +56,18 @@ def test_repository_config_loads_endpoint_scoped_llm_capabilities(monkeypatch) -
     assert glm.thinking_control_parameter == "enable_thinking"
     assert glm.thinking_control_value is False
     assert glm.request_mode == "prompt_only"
+    assert glm.execution.delivery_mode == "non_stream"
+    assert glm.execution.max_output_tokens == 2000
+    assert glm.execution.attempt_timeout_seconds == 120
+    assert glm.execution.max_attempts == 1
     assert qwen.supports_json_schema is True
     assert qwen.enforces_json_schema is False
     assert qwen.request_mode == "prompt_only"
     assert cfg.llm.compatible_output_contract is True
+    assert all(
+        capability.model != "deepseek-ai/DeepSeek-V4-Pro"
+        for capability in cfg.llm.capabilities
+    )
 
 
 def test_unverified_structured_output_cannot_be_enabled() -> None:
@@ -79,7 +93,6 @@ def test_capability_lookup_does_not_leak_across_endpoints() -> None:
             )
         ]
     )
-
     assert (
         settings.capability_for(
             "modelscope", "https://one.example/v1", "same/model"
@@ -92,6 +105,14 @@ def test_capability_lookup_does_not_leak_across_endpoints() -> None:
         ).thinking_control_parameter
         is None
     )
+
+
+def test_execution_policy_rejects_unbounded_retry_configuration() -> None:
+    with pytest.raises(ValueError):
+        LLMExecutionPolicy(max_attempts=4)
+
+    with pytest.raises(ValueError, match="duplicates"):
+        LLMExecutionPolicy(retryable_codes=("timeout", "timeout"))
 
 
 def test_agihunt_secret_is_environment_only_and_policy_loads_from_yaml(

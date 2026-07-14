@@ -32,12 +32,27 @@ python main.py test
 
 ### `summarizer.py`
 
-- `summarize(articles, stream=False) -> str`
-- `summarize_result(articles, stream=False) -> SummaryResult`
+- `summarize(articles, deadline_at=None) -> str`
+- `summarize_result(articles, deadline_at=None, attempt_artifact_path=None) -> SummaryResult`
 - `offline_summary(articles) -> str`
 - `offline_summary_result(articles) -> SummaryResult`
 - `validate_summary_quality(content, expected_items=10, expected_article_ids=None) -> SummaryDraft`
 - `test_connection() -> bool`
+
+在线摘要当前只有原子 `non_stream` 交付模式。调用接口不接受 `stream` 开关；内部必须先收齐
+唯一响应，再依次通过 envelope、contract、来源绑定和编辑质量门禁。未来即使增加
+`buffered_stream`，也只能在内存聚合完成后进入同一组门禁。
+
+### `utils/llm_execution.py`
+
+- `effective_execution_policy(policy, ...) -> LLMExecutionPolicy`
+- `bounded_provider_deadline(policy, run_deadline) -> datetime | None`
+- `bounded_attempt_timeout(policy, ...) -> float`
+- `should_retry(failure_code, retryable, attempt_number, policy, ...) -> bool`
+
+输出 token、单次请求 timeout、provider 总预算与整个 run deadline 是四个独立边界。
+SDK 固定 `max_retries=0`；应用层只按模型策略进行有界重试，并为每个真实 HTTP 请求生成一条
+`SummaryAttempt`。
 
 ### `utils/summary_contracts.py`
 
@@ -114,6 +129,12 @@ provenance、数据/摘要 URL 映射、Markdown 归因和 staged publication。
 - `site_dir`
 - `agihunt_api_key`（仅环境变量）
 - `agihunt`（非密钥 API 与筛选策略）
+
+LLM 相关对象：
+
+- `LLMModelCapability`：endpoint/model 的协议能力与参数名
+- `LLMExecutionPolicy`：交付模式、输出预算、时间预算和应用层重试策略
+- `SummaryAttemptsArtifact`：逐 HTTP 请求的脱敏、原子 attempt 证据
 
 ## 相关文档
 

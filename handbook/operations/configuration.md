@@ -34,7 +34,19 @@ llm:
   capability_ttl_hours: 168
   attempts_filename: summary-attempts.json
   compatible_output_contract: true
-  capabilities: []
+  capabilities:
+    - provider: modelscope
+      base_url: https://api-inference.modelscope.cn/v1
+      model: ZhipuAI/GLM-5.2
+      request_mode: prompt_only
+      max_tokens_parameter: max_tokens
+      execution:
+        delivery_mode: non_stream
+        max_output_tokens: 2000
+        attempt_timeout_seconds: 120
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
 
 enrichment:
   enabled: false
@@ -121,11 +133,24 @@ agihunt:
 
 ### `llm`
 
-定义 OpenAI-compatible 模型的非密钥 capability、逐模型 timeout、token 参数名和请求模式。
+定义 OpenAI-compatible 模型的非密钥 capability、执行策略、token 参数名和请求模式。
 能力按 `(provider, base_url, model)` 精确匹配；未知模型默认使用 `prompt_only`，不会按模型名
 猜测 thinking 或 Structured Outputs 参数。`json_schema` 只有在冲突负例证明 provider 真正
 强制 Schema 后才能启用。完整字段、探针命令和失败分类见
 [LLM API 兼容性运行手册](llm-api-compatibility.md)。
+
+每个 capability 的 `execution` 独立定义：
+
+- `delivery_mode`：当前生产仅支持 `non_stream`；未经探针验证的模式不会自动启用。
+- `max_output_tokens`：模型输出 token 上限；缺失时回退到全局兼容默认值。
+- `attempt_timeout_seconds`：一次 HTTP 请求最多等待多久，不影响 token 上限。
+- `provider_budget_seconds`：同模型所有请求与退避的总时间边界；可选。
+- `max_attempts`：首次请求加重试的总调用数，默认 `1`、最大 `3`。
+- `retry_backoff_seconds` / `retryable_codes`：应用层退避和允许考虑重试的分类。
+
+`max_attempts=1` 完全关闭同模型重试；OpenAI SDK 本身仍固定不自动重试。不要把提高 timeout
+当作 `finish_reason=length` 的修复，也不要为了单个 thinking 模型提高所有模型的全局 token
+上限。
 
 ### `output`
 

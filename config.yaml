@@ -87,7 +87,13 @@ llm:
       content_shape: string_or_blocks
       max_tokens_parameter: max_tokens
       supports_temperature: true
-      timeout_seconds: 120
+      execution:
+        delivery_mode: non_stream
+        max_output_tokens: 2000
+        attempt_timeout_seconds: 120
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
       last_verified_at: 2026-07-14T00:00:00+08:00
       verification_sample_count: 5
     - provider: modelscope
@@ -99,7 +105,13 @@ llm:
       content_shape: string_or_blocks
       max_tokens_parameter: max_tokens
       supports_temperature: true
-      timeout_seconds: 180
+      execution:
+        delivery_mode: non_stream
+        max_output_tokens: 2000
+        attempt_timeout_seconds: 180
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
       last_verified_at: 2026-07-14T00:00:00+08:00
       verification_sample_count: 1
     - provider: modelscope
@@ -111,7 +123,13 @@ llm:
       content_shape: string_or_blocks
       max_tokens_parameter: max_tokens
       supports_temperature: true
-      timeout_seconds: 180
+      execution:
+        delivery_mode: non_stream
+        max_output_tokens: 2000
+        attempt_timeout_seconds: 180
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
       last_verified_at: 2026-07-14T00:00:00+08:00
       verification_sample_count: 2
     - provider: modelscope
@@ -126,7 +144,13 @@ llm:
       content_shape: string_or_blocks
       max_tokens_parameter: max_tokens
       supports_temperature: true
-      timeout_seconds: 180
+      execution:
+        delivery_mode: non_stream
+        max_output_tokens: 2000
+        attempt_timeout_seconds: 180
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
       last_verified_at: 2026-07-14T00:00:00+08:00
       verification_sample_count: 5
 

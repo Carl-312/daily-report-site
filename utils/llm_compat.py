@@ -10,6 +10,8 @@ reader-visible content.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 import hashlib
 import json
 from json import JSONDecodeError
@@ -59,6 +61,7 @@ class FailureClassification:
     retryable: bool
     http_status: int | None = None
     request_id: str | None = None
+    retry_after_seconds: float | None = None
 
 
 @dataclass(slots=True)
@@ -68,6 +71,7 @@ class CompletionTelemetry:
     transport_status: TransportStatus = "not_started"
     http_status: int | None = None
     request_id: str | None = None
+    retry_after_seconds: float | None = None
     content_type: str | None = None
     response_sha256: str | None = None
     choices_count: int | None = None
@@ -131,14 +135,18 @@ def classify_exception(exc: Exception) -> FailureClassification:
             retryable=exc.retryable,
             http_status=telemetry.http_status if telemetry else None,
             request_id=telemetry.request_id if telemetry else None,
+            retry_after_seconds=(telemetry.retry_after_seconds if telemetry else None),
         )
 
     status = _optional_int(getattr(exc, "status_code", None))
     request_id = _optional_text(getattr(exc, "request_id", None))
+    retry_after_seconds = _retry_after_seconds(exc)
     message = " ".join(str(exc).lower().split())
 
     if isinstance(exc, APITimeoutError) or _looks_like_timeout(exc, message):
-        return FailureClassification("transport", "timeout", True)
+        return FailureClassification(
+            "transport", "timeout", True, retry_after_seconds=retry_after_seconds
+        )
     if isinstance(exc, APIConnectionError):
         if _contains_any(message, "proxy", "tunnel"):
             code = "network_proxy"
@@ -153,17 +161,26 @@ def classify_exception(exc: Exception) -> FailureClassification:
             code = "network_dns"
         else:
             code = "network_connection"
-        return FailureClassification("transport", code, True)
+        return FailureClassification(
+            "transport", code, True, retry_after_seconds=retry_after_seconds
+        )
 
     if isinstance(exc, (AuthenticationError, PermissionDeniedError)) or status in {
         401,
         403,
     }:
         return FailureClassification(
-            "http", "authentication", False, status, request_id
+            "http",
+            "authentication",
+            False,
+            status,
+            request_id,
+            retry_after_seconds,
         )
     if isinstance(exc, RateLimitError) or status == 429:
-        return FailureClassification("http", "rate_limit", True, status, request_id)
+        return FailureClassification(
+            "http", "rate_limit", True, status, request_id, retry_after_seconds
+        )
     if isinstance(exc, BadRequestError) or status == 400:
         code = (
             "provider_unavailable"
@@ -175,7 +192,9 @@ def classify_exception(exc: Exception) -> FailureClassification:
             )
             else "bad_request"
         )
-        return FailureClassification("http", code, False, status, request_id)
+        return FailureClassification(
+            "http", code, False, status, request_id, retry_after_seconds
+        )
     if isinstance(exc, APIStatusError) or status is not None:
         code = "http_5xx" if status is not None and status >= 500 else "http_error"
         return FailureClassification(
@@ -184,6 +203,7 @@ def classify_exception(exc: Exception) -> FailureClassification:
             status is not None and (status >= 500 or status in {408, 409}),
             status,
             request_id,
+            retry_after_seconds,
         )
     if isinstance(exc, (JSONDecodeError, APIResponseValidationError)):
         return FailureClassification("envelope", "protocol_invalid_json", False)
@@ -247,6 +267,7 @@ def request_chat_completion(client: Any, params: dict[str, Any]) -> CompletionRe
         )
         telemetry.http_status = classification.http_status
         telemetry.request_id = classification.request_id
+        telemetry.retry_after_seconds = classification.retry_after_seconds
         raise LLMCompatibilityError(
             f"chat completion failed ({classification.code})",
             stage=classification.stage,
@@ -416,6 +437,7 @@ def _extract_final_text(
             "provider returned no choices",
             stage="extraction",
             code="empty_choices",
+            retryable=True,
             telemetry=telemetry,
         )
     if not isinstance(choices, (list, tuple)):
@@ -690,6 +712,25 @@ def _optional_text(value: Any) -> str | None:
         return None
     text = str(value).strip()
     return text or None
+
+
+def _retry_after_seconds(exc: Exception) -> float | None:
+    """Parse a provider Retry-After hint without persisting response headers."""
+
+    response = getattr(exc, "response", None)
+    value = _header_value(getattr(response, "headers", None), "retry-after")
+    if value is None:
+        return None
+    try:
+        return max(0.0, float(value))
+    except (TypeError, ValueError):
+        try:
+            retry_at = parsedate_to_datetime(value)
+        except (TypeError, ValueError, OverflowError):
+            return None
+        if retry_at.tzinfo is None:
+            retry_at = retry_at.replace(tzinfo=timezone.utc)
+        return max(0.0, (retry_at - datetime.now(timezone.utc)).total_seconds())
 
 
 def _looks_like_timeout(exc: Exception, message: str) -> bool:

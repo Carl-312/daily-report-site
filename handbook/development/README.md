@@ -7,6 +7,7 @@
 - [扩展新闻源](source-adapters.md)：新增 source 的接口、测试和配置方式
 - [AGIHunt 主来源接入规划](agihunt-primary-source-plan.md)：官方 Agent API、重要性筛选、授权与灰度启用方案
 - [LLM API 兼容性与输出契约改造计划](llm-api-compatibility-plan.md)：多模型响应分层、必要/候选约束、阶段实施与回归矩阵
+- [LLM 执行架构修复方案](llm-execution-architecture-remediation.md)：移除伪 stream 接口、拆分时间与 token 预算、增加可观测的同模型重试
 - [接口参考](../reference/api.md)：调用边界和结果模型
 - [架构说明](../architecture/README.md)：确认改动所在层级
 

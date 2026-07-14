@@ -367,9 +367,7 @@ def run_isolated_gray(
     elif summary_mode == "ai":
         # This is intentionally opt-in: gray runs normally avoid model spend,
         # but a prompt revision must be verified against a real model response.
-        summary_result = summarize_result(
-            article_dicts, stream=False, deadline_at=clock.deadline_at
-        )
+        summary_result = summarize_result(article_dicts, deadline_at=clock.deadline_at)
     else:
         raise ValueError(f"unsupported gray summary mode: {summary_mode!r}")
     summary_provenance = summary_provenance_audit(summary_mode, summary_result)

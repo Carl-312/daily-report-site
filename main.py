@@ -364,7 +364,7 @@ def summarize_or_offline(
         )
 
     try:
-        result = summarize_result(articles, stream=True, deadline_at=deadline_at)
+        result = summarize_result(articles, deadline_at=deadline_at)
         validate_summary_result(result, articles, max_items=summary_limit)
         return render_summary_markdown(result)
     except Exception as exc:
@@ -401,7 +401,6 @@ def summarize_with_result(
     try:
         result = summarize_result(
             articles,
-            stream=True,
             deadline_at=deadline_at,
             attempt_artifact_path=attempt_artifact_path,
         )

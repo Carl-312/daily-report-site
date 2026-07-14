@@ -91,6 +91,14 @@ def test_protocol_fixtures_have_stable_failure_codes(
     assert error.value.telemetry is not None
 
 
+def test_completed_empty_choices_is_eligible_for_policy_evaluation() -> None:
+    with pytest.raises(LLMCompatibilityError) as error:
+        request_chat_completion(_raw_client(_fixture("choices_null.json")), {})
+
+    assert error.value.code == "empty_choices"
+    assert error.value.retryable is True
+
+
 def test_wrong_content_type_is_not_treated_as_a_contract_failure() -> None:
     with pytest.raises(LLMCompatibilityError) as error:
         request_chat_completion(
@@ -188,6 +196,18 @@ def test_failure_classifier_keeps_http_categories_mutually_exclusive() -> None:
     assert classify_exception(auth_error).code == "authentication"
     assert classify_exception(rate_error).code == "rate_limit"
     assert classify_exception(server_error).code == "http_5xx"
+
+
+def test_failure_classifier_keeps_only_the_retry_after_duration() -> None:
+    rate_error = RuntimeError("slow down")
+    rate_error.status_code = 429
+    rate_error.response = SimpleNamespace(headers={"retry-after": "7"})
+
+    classification = classify_exception(rate_error)
+
+    assert classification.code == "rate_limit"
+    assert classification.retryable is True
+    assert classification.retry_after_seconds == 7
 
 
 def test_failure_classifier_distinguishes_timeout_dns_and_proxy() -> None:

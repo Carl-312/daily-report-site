@@ -7,7 +7,7 @@ from types import SimpleNamespace
 import pytest
 
 import summarizer
-from config import LLMModelCapability, LLMSettings
+from config import LLMExecutionPolicy, LLMModelCapability, LLMSettings
 from utils.llm_compat import LLMCompatibilityError
 from utils.summary_contracts import (
     SUMMARY_MAX_VISIBLE_CHARS,
@@ -41,7 +41,7 @@ def _llm_config(**overrides):
                     model="ZhipuAI/GLM-5.2",
                     thinking_control_parameter="enable_thinking",
                     thinking_control_value=False,
-                    timeout_seconds=60,
+                    execution=LLMExecutionPolicy(attempt_timeout_seconds=60),
                 )
             ],
         ),
@@ -179,13 +179,17 @@ def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
     )
     captured: dict = {}
 
-    def fake_summarize_sync(_client, params):
+    def fake_request_non_stream_completion(_client, params):
         captured.update(params)
         return _valid_summary()
 
-    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    monkeypatch.setattr(
+        summarizer,
+        "_request_non_stream_completion",
+        fake_request_non_stream_completion,
+    )
 
-    summarizer.summarize_result([{"title": "Story"}], stream=False)
+    summarizer.summarize_result([{"title": "Story"}])
 
     assert captured["model"] == "ZhipuAI/GLM-5.2"
     assert captured["temperature"] == 0.2
@@ -205,15 +209,19 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
     )
     calls: list[tuple[str, str]] = []
 
-    def fake_summarize_sync(client, params):
+    def fake_request_non_stream_completion(client, params):
         calls.append((client, params["model"]))
         if params["model"] == "Tencent-Hunyuan/Hy3":
             return _valid_summary()
         raise RuntimeError("provider failed")
 
-    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    monkeypatch.setattr(
+        summarizer,
+        "_request_non_stream_completion",
+        fake_request_non_stream_completion,
+    )
 
-    content = summarizer.summarize([{"title": "Story"}], stream=False)
+    content = summarizer.summarize([{"title": "Story"}])
 
     assert content == _rendered_summary()
     assert "a1" not in content
@@ -237,21 +245,25 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     )
     calls: list[str] = []
 
-    def fake_summarize_sync(client, params):
+    def fake_request_non_stream_completion(client, params):
         calls.append(params["model"])
         if params["model"] == "ZhipuAI/GLM-5.2":
             return "  \n"
         return _valid_summary()
 
-    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    monkeypatch.setattr(
+        summarizer,
+        "_request_non_stream_completion",
+        fake_request_non_stream_completion,
+    )
 
-    content = summarizer.summarize([{"title": "Story"}], stream=False)
+    content = summarizer.summarize([{"title": "Story"}])
 
     assert content == _rendered_summary()
     assert calls == ["ZhipuAI/GLM-5.2", "Tencent-Hunyuan/Hy3"]
 
 
-def test_summarize_sync_rejects_an_empty_choices_list() -> None:
+def test_non_stream_request_rejects_an_empty_choices_list() -> None:
     client = SimpleNamespace(
         chat=SimpleNamespace(
             completions=SimpleNamespace(
@@ -261,12 +273,12 @@ def test_summarize_sync_rejects_an_empty_choices_list() -> None:
     )
 
     with pytest.raises(LLMCompatibilityError, match="no choices") as error:
-        summarizer._summarize_sync(client, {})
+        summarizer._request_non_stream_completion(client, {})
     assert error.value.stage == "extraction"
     assert error.value.code == "empty_choices"
 
 
-def test_summarize_sync_rejects_empty_message_content() -> None:
+def test_non_stream_request_rejects_empty_message_content() -> None:
     client = SimpleNamespace(
         chat=SimpleNamespace(
             completions=SimpleNamespace(
@@ -278,7 +290,7 @@ def test_summarize_sync_rejects_empty_message_content() -> None:
     )
 
     with pytest.raises(LLMCompatibilityError, match="empty final text") as error:
-        summarizer._summarize_sync(client, {})
+        summarizer._request_non_stream_completion(client, {})
     assert error.value.code == "empty_content"
 
 
@@ -293,15 +305,18 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
         lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
     )
 
-    def fake_summarize_sync(client, params):
+    def fake_request_non_stream_completion(client, params):
         if params["model"] == "ZhipuAI/GLM-5.2":
             raise RuntimeError("primary unavailable")
         return _valid_summary()
 
-    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    monkeypatch.setattr(
+        summarizer,
+        "_request_non_stream_completion",
+        fake_request_non_stream_completion,
+    )
     result = summarizer.summarize_result(
         [{"title": "Story", "link": "https://example.test/story"}],
-        stream=False,
     )
 
     assert result.provider == "ModelScope secondary"
@@ -328,13 +343,12 @@ def test_summarize_result_loads_an_explicit_experiment_prompt(monkeypatch) -> No
     )
     monkeypatch.setattr(
         summarizer,
-        "_summarize_sync",
+        "_request_non_stream_completion",
         lambda _client, _params: _valid_summary(),
     )
 
     result = summarizer.summarize_result(
         [{"title": "Story", "link": "https://example.test/story"}],
-        stream=False,
         prompt_path=Path("prompts/experiments/probe.md"),
     )
 
@@ -420,7 +434,7 @@ def test_summarize_result_allows_multiple_news_from_source_candidates(
     )
     monkeypatch.setattr(
         summarizer,
-        "_summarize_sync",
+        "_request_non_stream_completion",
         lambda client, params: _summary_with_sources(
             ["a1", "a1", "a1", "a2", "a2", "a3", "a3", "a4", "a4", "a1"]
         ),
@@ -431,7 +445,7 @@ def test_summarize_result_allows_multiple_news_from_source_candidates(
         for index in range(4)
     ]
 
-    result = summarizer.summarize_result(articles, stream=False)
+    result = summarizer.summarize_result(articles)
 
     assert len(result.items) == 10
     assert [item.article_id for item in result.items].count("a1") == 4

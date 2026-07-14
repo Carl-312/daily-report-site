@@ -88,6 +88,10 @@ def _probe_capability(
 ) -> LLMModelCapability:
     values = base.model_dump()
     values["request_mode"] = request_mode
+    # A live probe's CLI request budget is authoritative; do not inherit
+    # application-level retries from production policy.
+    values["execution"]["max_attempts"] = 1
+    values["execution"]["retryable_codes"] = ()
     if request_mode == "json_object":
         values["supports_json_object"] = True
     if request_mode == "json_schema":
@@ -96,7 +100,7 @@ def _probe_capability(
         values["supports_json_schema"] = True
         values["enforces_json_schema"] = True
     if timeout is not None:
-        values["timeout_seconds"] = timeout
+        values["execution"]["attempt_timeout_seconds"] = timeout
     if enable_thinking is not None:
         values["thinking_control_parameter"] = "enable_thinking"
         values["thinking_control_value"] = enable_thinking
@@ -120,7 +124,10 @@ def _conflict_probe(
     client = create_client(
         cfg.api_base_url,
         cfg.api_key,
-        timeout=capability.timeout_seconds or cfg.llm.default_timeout_seconds,
+        timeout=(
+            capability.execution.attempt_timeout_seconds
+            or cfg.llm.default_timeout_seconds
+        ),
     )
     params: dict[str, Any] = {
         "model": model,
@@ -232,7 +239,6 @@ def run(args: argparse.Namespace) -> int:
         try:
             summary = summarize_result(
                 articles,
-                stream=False,
                 provider_candidates=[_provider(cfg, model, capability)],
                 prompt_path=prompt_path,
             )

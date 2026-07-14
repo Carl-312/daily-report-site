@@ -24,6 +24,30 @@ DEFAULT_SILICONFLOW_MODEL = "Pro/moonshotai/Kimi-K2.6"
 _AGIHUNT_CHANNEL_SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{0,63}$")
 
 
+class LLMExecutionPolicy(BaseModel):
+    """Bounded, auditable execution policy for one model capability."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    delivery_mode: Literal["non_stream", "buffered_stream"] = "non_stream"
+    max_output_tokens: int | None = Field(default=None, ge=1)
+    attempt_timeout_seconds: float | None = Field(default=None, gt=0, le=600)
+    provider_budget_seconds: float | None = Field(default=None, gt=0, le=1200)
+    max_attempts: int = Field(default=1, ge=1, le=3)
+    retry_backoff_seconds: float = Field(default=1, ge=0, le=30)
+    retryable_codes: tuple[str, ...] = ()
+
+    @field_validator("retryable_codes")
+    @classmethod
+    def validate_retryable_codes(cls, values: tuple[str, ...]) -> tuple[str, ...]:
+        normalized = tuple(value.strip() for value in values)
+        if any(not value for value in normalized):
+            raise ValueError("llm retryable_codes must not contain empty values")
+        if len(set(normalized)) != len(normalized):
+            raise ValueError("llm retryable_codes must not contain duplicates")
+        return normalized
+
+
 class LLMModelCapability(BaseModel):
     """Verified behavior for one provider/endpoint/model combination."""
 
@@ -43,7 +67,7 @@ class LLMModelCapability(BaseModel):
     content_shape: Literal["string", "blocks", "string_or_blocks"] = "string_or_blocks"
     max_tokens_parameter: Literal["max_tokens", "max_completion_tokens"] = "max_tokens"
     supports_temperature: bool = True
-    timeout_seconds: float | None = Field(default=None, gt=0, le=600)
+    execution: LLMExecutionPolicy = Field(default_factory=LLMExecutionPolicy)
     last_verified_at: datetime | None = None
     verification_sample_count: int = Field(default=0, ge=0)
 
@@ -108,7 +132,6 @@ class LLMSettings(BaseModel):
             provider=provider_name,
             base_url=base_url,
             model=model,
-            timeout_seconds=self.default_timeout_seconds,
         )
 
 
@@ -232,7 +255,7 @@ class Settings(BaseModel):
         default=DEFAULT_SILICONFLOW_MODEL, description="SiliconFlow model ID"
     )
 
-    max_output: int = Field(default=2000, description="Max output tokens")
+    max_output: int = Field(default=2000, ge=1, description="Max output tokens")
     llm: LLMSettings = Field(default_factory=LLMSettings)
 
     # Timezone

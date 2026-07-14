@@ -72,7 +72,13 @@ llm:
       thinking_control_parameter: enable_thinking
       thinking_control_value: false
       max_tokens_parameter: max_tokens
-      timeout_seconds: 120
+      execution:
+        delivery_mode: non_stream
+        max_output_tokens: 2000
+        attempt_timeout_seconds: 120
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
 ```
 
 约束如下：
@@ -86,25 +92,47 @@ llm:
 - `/models` 目录结果和一次 happy path 不能更新 capability；需要正例、冲突负例、时间和
   样本数。
 - API key 只来自环境变量，不能写入 capability、日志或 attempt artifact。
+- `max_tokens_parameter` 是协议字段名；`execution.max_output_tokens` 是该字段的模型级值。
+  未配置模型级值时才回退到现有全局 `MODELSCOPE_MAX_OUTPUT`。
+- `attempt_timeout_seconds` 只限制一次 HTTP 请求；`provider_budget_seconds` 限制同模型全部
+  请求与退避。两者还会被整个 run deadline 截短，但都不会改变输出 token 上限。
+- `delivery_mode=buffered_stream` 尚未获得生产验证，当前执行器会 fail-closed；不得用它绕过
+  单文档、reasoning 隔离和发布门禁。
 
 ## Attempt artifact
 
 正常 `run` / `summarize` 会在本次私有 run workspace 写入
-`summary-attempts.json`。每个 provider 无论失败还是 fallback 成功都会留下独立记录，典型
-字段包括：
+`summary-attempts.json`。一条 attempt 对应一次真实 HTTP 请求；同模型重试也会新增记录，
+不会覆盖第一次失败。典型字段包括：
 
 ```text
-provider / model / endpoint_label / request_mode
-transport_status / http_status / request_id
+sequence / provider_attempt_number / provider_max_attempts / retry_of_sequence
+retry_decision / provider / model / endpoint_label / request_mode / delivery_mode
+attempt_timeout_seconds / provider_budget_seconds / provider_deadline_at / run_deadline_at
+max_output_tokens
+transport_status / http_status / request_id / retry_after_seconds
 failure_stage / failure_code / retryable
 choices_count / content_length / reasoning_length / finish_reason
 prompt_tokens / completion_tokens / reasoning_tokens / total_tokens
 response_sha256 / contract_valid / provenance_valid / quality_valid / publishable
+selected_attempt_sequence
 ```
 
 所有 provider 失败时，artifact 会在最终异常抛出前原子写入；公开日报和上一版 publication
 不会被覆盖。artifact 不含 API key、Authorization header、完整异常 header、正文或完整
 reasoning。
+
+## 应用层重试
+
+SDK 始终使用 `max_retries=0`。只有同时满足以下条件时，应用层才会发送同模型的下一次真实
+请求：失败分类允许重试、reason code 出现在该模型 `retryable_codes`、尚未达到
+`max_attempts`，并且 provider 与 run 的剩余预算能容纳退避。失败 attempt 会先原子落盘，
+然后才计算重试与等待。
+
+`empty_choices`、timeout、连接失败、rate limit、HTTP 408/409/5xx 最多额外请求一次；
+`Retry-After` 放不进剩余预算时立即 fallback。`incomplete_output`（包括
+`finish_reason=length`）、认证/参数错误、协议多文档、contract、provenance 和 quality 失败
+均不做同请求原样重试。
 
 ## 分层定位
 
@@ -128,3 +156,6 @@ reasoning。
 `request_mode` 设回 `prompt_only`，移除未经验证的 thinking/参数覆盖，并通过
 `MODELSCOPE_SECONDARY_MODEL` 选择已验证模型。不要关闭本地 contract、来源或质量校验，
 也不要把失败运行自动改成 offline 发布。
+
+需要立即关闭应用层重试时，把所有模型的 `execution.max_attempts` 设为 `1`；无需删除失败分类
+或 attempt 证据字段。

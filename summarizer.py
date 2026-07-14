@@ -10,10 +10,10 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 import re
-from time import monotonic
+from time import monotonic, sleep
 from typing import Any
 from openai import OpenAI
-from config import LLMModelCapability, LLMSettings, get_config
+from config import LLMExecutionPolicy, LLMModelCapability, LLMSettings, get_config
 from utils.llm_compat import (
     CompletionResult,
     CompletionTelemetry,
@@ -22,6 +22,13 @@ from utils.llm_compat import (
     endpoint_label,
     extract_single_json_object,
     request_chat_completion,
+)
+from utils.llm_execution import (
+    ExecutionBudgetExceeded,
+    bounded_attempt_timeout,
+    bounded_provider_deadline,
+    effective_execution_policy,
+    evaluate_retry,
 )
 from utils.run_contracts import RunDeadlineExceeded
 from utils.summary_contracts import (
@@ -96,6 +103,8 @@ class AllProvidersFailed(RuntimeError):
             f"{attempt.provider}[{attempt.model}]={attempt.failure_code}"
             for attempt in attempts
         )
+        if not summary:
+            summary = "no executable provider candidates"
         super().__init__(f"All LLM providers failed. {summary}")
 
 
@@ -862,7 +871,6 @@ def _provider_candidates() -> list[dict[str, Any]]:
 
 def summarize(
     articles: list[dict],
-    stream: bool = True,
     deadline_at=None,
 ) -> str:
     """
@@ -870,7 +878,6 @@ def summarize(
 
     Args:
         articles: List of article dicts
-        stream: Whether to stream output (default True)
 
     Returns:
         Summarized markdown content
@@ -878,7 +885,7 @@ def summarize(
     if not articles:
         return "暂无新闻"
 
-    result = summarize_result(articles, stream=stream, deadline_at=deadline_at)
+    result = summarize_result(articles, deadline_at=deadline_at)
     return render_summary_markdown(result)
 
 
@@ -937,14 +944,12 @@ def _parse_summary_result(
 def summarize_result(
     articles: list[dict],
     *,
-    stream: bool = True,
     deadline_at=None,
     attempt_artifact_path: str | Path | None = None,
     provider_candidates: list[dict[str, Any]] | None = None,
     prompt_path: str | Path | None = None,
 ) -> SummaryResult:
     """Generate a structured AI summary with provider-attempt provenance."""
-    del stream
     if not articles:
         input_fingerprint, prompt_fingerprint = fingerprint_summary_input([], "")
         return SummaryResult(
@@ -979,7 +984,7 @@ def summarize_result(
     user_input = json.dumps({"articles": compressed}, ensure_ascii=False, indent=2)
     attempts: list[SummaryAttempt] = []
 
-    for idx, provider in enumerate(providers):
+    for provider_index, provider in enumerate(providers):
         capability = provider.get("capability")
         if not isinstance(capability, LLMModelCapability):
             capability = resolve_model_capability(
@@ -988,19 +993,27 @@ def summarize_result(
                 provider["base_url"],
                 provider["model"],
             )
-        if not capability.supports_chat_completions:
-            attempts.append(
-                _summary_attempt(
-                    provider,
-                    capability,
-                    started_at=datetime.now(timezone.utc),
-                    elapsed_ms=0,
-                    status="skipped",
-                    classification_stage="http",
-                    classification_code="capability_disabled",
-                    retryable=False,
-                )
+        execution = effective_execution_policy(
+            capability.execution,
+            default_max_output_tokens=int(getattr(cfg, "max_output", 2000)),
+            default_attempt_timeout_seconds=float(
+                getattr(getattr(cfg, "llm", None), "default_timeout_seconds", 180)
+            ),
+        )
+        provider_started_at = datetime.now(timezone.utc)
+        provider_deadline = bounded_provider_deadline(
+            execution, deadline_at, now=provider_started_at
+        )
+
+        if execution.delivery_mode != "non_stream":
+            _persist_summary_attempts(
+                attempt_artifact_path,
+                attempts,
+                input_fingerprint=input_fingerprint,
+                prompt_fingerprint=prompt_fingerprint,
             )
+            continue
+        if not capability.supports_chat_completions:
             _persist_summary_attempts(
                 attempt_artifact_path,
                 attempts,
@@ -1009,108 +1022,151 @@ def summarize_result(
             )
             continue
 
-        remaining = None
-        if deadline_at is not None:
-            remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
-            if remaining <= 0:
-                raise RunDeadlineExceeded("run deadline exceeded before summary")
-        requested_timeout = capability.timeout_seconds or getattr(
-            getattr(cfg, "llm", None), "default_timeout_seconds", 180
-        )
-        timeout = (
-            min(float(requested_timeout), remaining)
-            if remaining
-            else float(requested_timeout)
-        )
-        started_at = datetime.now(timezone.utc)
-        started_clock = monotonic()
-        completion: CompletionResult | None = None
-        try:
-            client = create_client(
-                provider["base_url"], provider["api_key"], timeout=timeout
-            )
-            params: dict[str, Any] = {
-                "model": provider["model"],
-                "messages": [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_input},
-                ],
-                # A JSON response must be complete before strict local parsing;
-                # do not expose internal article IDs in streamed console output.
-                "stream": False,
-            }
-            params[capability.max_tokens_parameter] = cfg.max_output
-            if capability.supports_temperature:
-                params["temperature"] = 0.2
-            params.update(model_request_options(capability))
-            completion = _coerce_completion_result(_summarize_sync(client, params))
-            validated = _validate_summary_payload(
-                completion.content,
-                expected_items=_summary_limit(cfg),
-                expected_article_ids={article["article_id"] for article in compressed},
-                compatible_contract=getattr(
-                    getattr(cfg, "llm", None),
-                    "compatible_output_contract",
-                    True,
-                ),
-            )
-            elapsed_ms = max(0, round((monotonic() - started_clock) * 1000))
-            successful_attempt = _summary_attempt(
-                provider,
-                capability,
-                started_at=started_at,
-                elapsed_ms=elapsed_ms,
-                status="ok",
-                telemetry=completion.telemetry,
-                diagnostics=validated.diagnostics,
-            )
-            result = _parse_summary_result(
-                validated.draft,
-                articles,
-                policy="required_ai",
-                provider=provider["name"],
-                model=provider["model"],
-                input_fingerprint=input_fingerprint,
-                prompt_fingerprint=prompt_fingerprint,
-                attempts=tuple(attempts + [successful_attempt]),
-            )
+        retry_of_sequence: int | None = None
+        for provider_attempt_number in range(1, execution.max_attempts + 1):
+            attempt_started_at = datetime.now(timezone.utc)
             try:
-                validate_summary_result(result, articles, max_items=_summary_limit(cfg))
-            except ValueError as exc:
-                raise SummaryProvenanceError(
-                    "local source binding failed after model validation",
-                    code="source_url_mismatch",
-                ) from exc
-            attempts.append(successful_attempt)
-            _persist_summary_attempts(
-                attempt_artifact_path,
-                attempts,
-                input_fingerprint=input_fingerprint,
-                prompt_fingerprint=prompt_fingerprint,
-                publishable=True,
-                selected_provider=provider["name"],
-                selected_model=provider["model"],
-            )
-            print(
-                f"\n   ✅ {provider['name']} succeeded: "
-                f"model={provider['model']} items={len(result.items)}"
-            )
-            return result
-        except RunDeadlineExceeded:
-            raise
-        except Exception as exc:
-            classification = classify_exception(exc)
-            telemetry = (
-                completion.telemetry if completion else getattr(exc, "telemetry", None)
-            )
-            issue_diagnostics = tuple(
-                _issue_diagnostic(issue) for issue in getattr(exc, "issues", ())
-            )
-            attempts.append(
-                _summary_attempt(
+                timeout = bounded_attempt_timeout(
+                    execution,
+                    provider_deadline=provider_deadline,
+                    run_deadline=deadline_at,
+                    now=attempt_started_at,
+                )
+            except ExecutionBudgetExceeded as exc:
+                if attempts and attempts[-1].retry_decision == "retry_scheduled":
+                    attempts[-1] = attempts[-1].model_copy(
+                        update={
+                            "retry_decision": (
+                                "run_deadline_exhausted"
+                                if exc.scope == "run"
+                                else "provider_budget_exhausted"
+                            )
+                        }
+                    )
+                    _persist_summary_attempts(
+                        attempt_artifact_path,
+                        attempts,
+                        input_fingerprint=input_fingerprint,
+                        prompt_fingerprint=prompt_fingerprint,
+                    )
+                if exc.scope == "run":
+                    raise RunDeadlineExceeded(
+                        "run deadline exceeded before summary attempt"
+                    ) from exc
+                break
+
+            sequence = len(attempts) + 1
+            started_clock = monotonic()
+            completion: CompletionResult | None = None
+            try:
+                client = create_client(
+                    provider["base_url"], provider["api_key"], timeout=timeout
+                )
+                params: dict[str, Any] = {
+                    "model": provider["model"],
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_input},
+                    ],
+                    # Publication still requires one complete, private JSON response.
+                    "stream": False,
+                }
+                params[capability.max_tokens_parameter] = execution.max_output_tokens
+                if capability.supports_temperature:
+                    params["temperature"] = 0.2
+                params.update(model_request_options(capability))
+                completion = _coerce_completion_result(
+                    _request_non_stream_completion(client, params)
+                )
+                validated = _validate_summary_payload(
+                    completion.content,
+                    expected_items=_summary_limit(cfg),
+                    expected_article_ids={
+                        article["article_id"] for article in compressed
+                    },
+                    compatible_contract=getattr(
+                        getattr(cfg, "llm", None),
+                        "compatible_output_contract",
+                        True,
+                    ),
+                )
+                elapsed_ms = max(0, round((monotonic() - started_clock) * 1000))
+                successful_attempt = _summary_attempt(
                     provider,
                     capability,
-                    started_at=started_at,
+                    execution=execution,
+                    sequence=sequence,
+                    provider_attempt_number=provider_attempt_number,
+                    retry_of_sequence=retry_of_sequence,
+                    retry_decision="selected",
+                    attempt_timeout_seconds=timeout,
+                    provider_deadline_at=provider_deadline,
+                    run_deadline_at=deadline_at,
+                    started_at=attempt_started_at,
+                    elapsed_ms=elapsed_ms,
+                    status="ok",
+                    telemetry=completion.telemetry,
+                    diagnostics=validated.diagnostics,
+                )
+                result = _parse_summary_result(
+                    validated.draft,
+                    articles,
+                    policy="required_ai",
+                    provider=provider["name"],
+                    model=provider["model"],
+                    input_fingerprint=input_fingerprint,
+                    prompt_fingerprint=prompt_fingerprint,
+                    attempts=tuple(attempts + [successful_attempt]),
+                )
+                try:
+                    validate_summary_result(
+                        result, articles, max_items=_summary_limit(cfg)
+                    )
+                except ValueError as exc:
+                    raise SummaryProvenanceError(
+                        "local source binding failed after model validation",
+                        code="source_url_mismatch",
+                    ) from exc
+                attempts.append(successful_attempt)
+                _persist_summary_attempts(
+                    attempt_artifact_path,
+                    attempts,
+                    input_fingerprint=input_fingerprint,
+                    prompt_fingerprint=prompt_fingerprint,
+                    publishable=True,
+                    selected_provider=provider["name"],
+                    selected_model=provider["model"],
+                    selected_attempt_sequence=sequence,
+                )
+                print(
+                    f"\n   ✅ {provider['name']} succeeded: "
+                    f"model={provider['model']} items={len(result.items)}"
+                )
+                return result
+            except RunDeadlineExceeded:
+                raise
+            except Exception as exc:
+                classification = classify_exception(exc)
+                telemetry = (
+                    completion.telemetry
+                    if completion
+                    else getattr(exc, "telemetry", None)
+                )
+                issue_diagnostics = tuple(
+                    _issue_diagnostic(issue) for issue in getattr(exc, "issues", ())
+                )
+                failed_attempt = _summary_attempt(
+                    provider,
+                    capability,
+                    execution=execution,
+                    sequence=sequence,
+                    provider_attempt_number=provider_attempt_number,
+                    retry_of_sequence=retry_of_sequence,
+                    retry_decision="not_evaluated",
+                    attempt_timeout_seconds=timeout,
+                    provider_deadline_at=provider_deadline,
+                    run_deadline_at=deadline_at,
+                    started_at=attempt_started_at,
                     elapsed_ms=max(0, round((monotonic() - started_clock) * 1000)),
                     status="failed",
                     telemetry=telemetry,
@@ -1119,18 +1175,46 @@ def summarize_result(
                     retryable=classification.retryable,
                     diagnostics=issue_diagnostics,
                 )
-            )
-            _persist_summary_attempts(
-                attempt_artifact_path,
-                attempts,
-                input_fingerprint=input_fingerprint,
-                prompt_fingerprint=prompt_fingerprint,
-            )
-            if idx + 1 < len(providers):
-                print(
-                    f"\n   ⚠️  {provider['name']} failed: "
-                    f"stage={classification.stage} code={classification.code}"
+                attempts.append(failed_attempt)
+                # Persist the completed HTTP attempt before evaluating or waiting
+                # on a retry, so an interrupted process retains the first failure.
+                _persist_summary_attempts(
+                    attempt_artifact_path,
+                    attempts,
+                    input_fingerprint=input_fingerprint,
+                    prompt_fingerprint=prompt_fingerprint,
                 )
+
+                decision = evaluate_retry(
+                    classification.code,
+                    classification.retryable,
+                    provider_attempt_number,
+                    execution,
+                    provider_deadline=provider_deadline,
+                    run_deadline=deadline_at,
+                    retry_after_seconds=classification.retry_after_seconds,
+                )
+                attempts[-1] = failed_attempt.model_copy(
+                    update={"retry_decision": decision.reason}
+                )
+                _persist_summary_attempts(
+                    attempt_artifact_path,
+                    attempts,
+                    input_fingerprint=input_fingerprint,
+                    prompt_fingerprint=prompt_fingerprint,
+                )
+                if not decision.retry:
+                    break
+                retry_of_sequence = sequence
+                if decision.backoff_seconds:
+                    sleep(decision.backoff_seconds)
+
+        if provider_index + 1 < len(providers) and attempts:
+            last_attempt = attempts[-1]
+            print(
+                f"\n   ⚠️  {provider['name']} failed: "
+                f"stage={last_attempt.failure_stage} code={last_attempt.failure_code}"
+            )
 
     raise AllProvidersFailed(tuple(attempts))
 
@@ -1139,6 +1223,14 @@ def _summary_attempt(
     provider: dict[str, Any],
     capability: LLMModelCapability,
     *,
+    execution: LLMExecutionPolicy,
+    sequence: int,
+    provider_attempt_number: int,
+    retry_of_sequence: int | None,
+    retry_decision: str,
+    attempt_timeout_seconds: float | None,
+    provider_deadline_at,
+    run_deadline_at,
     started_at: datetime,
     elapsed_ms: int,
     status: str,
@@ -1161,13 +1253,25 @@ def _summary_attempt(
         provider=provider["name"],
         model=provider["model"],
         status=status,
+        sequence=sequence,
+        provider_attempt_number=provider_attempt_number,
+        provider_max_attempts=execution.max_attempts,
+        retry_of_sequence=retry_of_sequence,
+        retry_decision=retry_decision,
         endpoint_label=endpoint_label(provider["base_url"]),
         request_mode=capability.request_mode,
+        delivery_mode=execution.delivery_mode,
+        attempt_timeout_seconds=attempt_timeout_seconds,
+        provider_budget_seconds=execution.provider_budget_seconds,
+        provider_deadline_at=provider_deadline_at,
+        run_deadline_at=run_deadline_at,
+        max_output_tokens=execution.max_output_tokens,
         started_at=started_at,
         elapsed_ms=elapsed_ms,
         transport_status=telemetry.transport_status,
         http_status=telemetry.http_status,
         request_id=telemetry.request_id,
+        retry_after_seconds=telemetry.retry_after_seconds,
         failure_stage=classification_stage,
         failure_code=classification_code,
         retryable=retryable,
@@ -1200,6 +1304,7 @@ def _persist_summary_attempts(
     publishable: bool = False,
     selected_provider: str | None = None,
     selected_model: str | None = None,
+    selected_attempt_sequence: int | None = None,
 ) -> Path | None:
     if path is None:
         return None
@@ -1217,6 +1322,7 @@ def _persist_summary_attempts(
         publishable=publishable,
         selected_provider=selected_provider,
         selected_model=selected_model,
+        selected_attempt_sequence=selected_attempt_sequence,
     )
     temporary = target.with_name(f".{target.name}.tmp")
     temporary.write_text(
@@ -1248,27 +1354,11 @@ def _coerce_completion_result(value: Any) -> CompletionResult:
     )
 
 
-def _summarize_sync(client: OpenAI, params: dict) -> CompletionResult:
-    """Non-streaming summarization with provider-neutral extraction."""
+def _request_non_stream_completion(client: OpenAI, params: dict) -> CompletionResult:
+    """Collect one complete response with provider-neutral extraction."""
 
     params["stream"] = False
     return request_chat_completion(client, params)
-
-
-def _summarize_stream(client: OpenAI, params: dict) -> str:
-    """Streaming summarization with live output"""
-    params["stream"] = True
-    response = client.chat.completions.create(**params)
-
-    result = []
-    for chunk in response:
-        if chunk.choices and chunk.choices[0].delta.content:
-            content = chunk.choices[0].delta.content
-            print(content, end="", flush=True)
-            result.append(content)
-
-    print()  # Newline after streaming
-    return "".join(result)
 
 
 def offline_summary(articles: list[dict], limit: int = 10) -> str:
@@ -1330,11 +1420,18 @@ def test_connection() -> bool:
     for provider in providers:
         capability = provider["capability"]
         try:
-            timeout = capability.timeout_seconds or getattr(
-                getattr(get_config(), "llm", None), "default_timeout_seconds", 180
+            cfg = get_config()
+            execution = effective_execution_policy(
+                capability.execution,
+                default_max_output_tokens=int(getattr(cfg, "max_output", 2000)),
+                default_attempt_timeout_seconds=float(
+                    getattr(getattr(cfg, "llm", None), "default_timeout_seconds", 180)
+                ),
             )
             client = create_client(
-                provider["base_url"], provider["api_key"], timeout=timeout
+                provider["base_url"],
+                provider["api_key"],
+                timeout=execution.attempt_timeout_seconds,
             )
             params: dict[str, Any] = {
                 "model": provider["model"],
@@ -1348,7 +1445,9 @@ def test_connection() -> bool:
             if capability.supports_temperature:
                 params["temperature"] = 0.2
             params.update(model_request_options(capability))
-            completion = _coerce_completion_result(_summarize_sync(client, params))
+            completion = _coerce_completion_result(
+                _request_non_stream_completion(client, params)
+            )
             print("✅ API 连接成功！")
             print(f"   供应商: {provider['name']}")
             print(f"   模型: {provider['model']}")

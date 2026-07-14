@@ -9,7 +9,7 @@ import re
 from datetime import datetime
 from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, model_validator
 
 from utils.run_contracts import StrictFrozenModel
 
@@ -73,18 +73,41 @@ class SummaryValidationIssue(StrictFrozenModel):
 
 
 class SummaryAttempt(StrictFrozenModel):
-    """A replayable, secret-safe record of one provider/model attempt."""
+    """A replayable, secret-safe record of one real completion request."""
 
     provider: str
     model: str
     status: Literal["ok", "failed", "skipped"]
+    sequence: int = Field(default=1, ge=1)
+    provider_attempt_number: int = Field(default=1, ge=1)
+    provider_max_attempts: int = Field(default=1, ge=1, le=3)
+    retry_of_sequence: int | None = Field(default=None, ge=1)
+    retry_decision: Literal[
+        "not_evaluated",
+        "not_applicable",
+        "selected",
+        "retry_scheduled",
+        "max_attempts_reached",
+        "retry_limit_reached",
+        "failure_not_retryable",
+        "code_not_allowed",
+        "provider_budget_exhausted",
+        "run_deadline_exhausted",
+    ] = "not_applicable"
     endpoint_label: str = ""
     request_mode: Literal["prompt_only", "json_object", "json_schema"] = "prompt_only"
+    delivery_mode: Literal["non_stream", "buffered_stream"] = "non_stream"
+    attempt_timeout_seconds: float | None = Field(default=None, gt=0, le=600)
+    provider_budget_seconds: float | None = Field(default=None, gt=0, le=1200)
+    provider_deadline_at: datetime | None = None
+    run_deadline_at: datetime | None = None
+    max_output_tokens: int | None = Field(default=None, ge=1)
     started_at: datetime | None = None
     elapsed_ms: int = Field(default=0, ge=0)
     transport_status: Literal["not_started", "failed", "completed"] = "not_started"
     http_status: int | None = Field(default=None, ge=100, le=599)
     request_id: str | None = None
+    retry_after_seconds: float | None = Field(default=None, ge=0)
     failure_stage: (
         Literal[
             "transport",
@@ -120,11 +143,24 @@ class SummaryAttempt(StrictFrozenModel):
     # ``failure_stage`` and ``failure_code`` exclusively.
     error_kind: str | None = None
 
+    @model_validator(mode="after")
+    def validate_attempt_sequence(self) -> "SummaryAttempt":
+        if self.provider_attempt_number > self.provider_max_attempts:
+            raise ValueError("provider attempt number exceeds configured maximum")
+        if self.provider_attempt_number == 1 and self.retry_of_sequence is not None:
+            raise ValueError("a provider's first attempt cannot be a retry")
+        if (
+            self.retry_of_sequence is not None
+            and self.retry_of_sequence >= self.sequence
+        ):
+            raise ValueError("retry_of_sequence must reference an earlier attempt")
+        return self
+
 
 class SummaryAttemptsArtifact(StrictFrozenModel):
     """Private attempt evidence written even when every provider fails."""
 
-    schema_version: Literal[1] = 1
+    schema_version: Literal[2] = 2
     source_type: Literal["live", "offline", "reviewed", "synthetic"]
     created_at: datetime
     real_api_attempted: bool
@@ -134,6 +170,7 @@ class SummaryAttemptsArtifact(StrictFrozenModel):
     publishable: bool
     selected_provider: str | None = None
     selected_model: str | None = None
+    selected_attempt_sequence: int | None = Field(default=None, ge=1)
 
 
 class SummaryResult(StrictFrozenModel):
