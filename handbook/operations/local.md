@@ -34,12 +34,19 @@ pip install -r requirements-dev.txt
 ```bash
 MODELSCOPE_API_KEY=sk-your-api-key
 MODELSCOPE_MODEL=ZhipuAI/GLM-5.2
-MODELSCOPE_SECONDARY_MODEL=Tencent-Hunyuan/Hy3
+MODELSCOPE_SECONDARY_MODEL=
 SILICONFLOW_API_KEY=sk-your-fallback-key
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 ```
 
 没有 API Key 时可直接使用离线模式。
+
+先运行最小在线探针；它只输出 endpoint、模型名、`choices` 数量和正文长度，不输出密钥或
+模型正文：
+
+```bash
+python scripts/modelscope_smoke.py
+```
 
 ## 运行方式
 

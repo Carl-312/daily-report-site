@@ -34,6 +34,13 @@ class SummaryQualityError(ValueError):
     """Raised when an LLM response is not a usable Chinese daily summary."""
 
 
+def modelscope_request_options(model: str) -> dict[str, Any]:
+    """Return verified ModelScope-specific generation controls for a model."""
+    if model == "ZhipuAI/GLM-5.2":
+        return {"extra_body": {"enable_thinking": False}}
+    return {}
+
+
 def _summary_limit(cfg=None) -> int:
     """Return the independent daily-news limit, not a source-candidate limit."""
     cfg = cfg or get_config()
@@ -455,7 +462,7 @@ def summarize_result(
             params: dict[str, Any] = {
                 "model": provider["model"],
                 "max_tokens": cfg.max_output,
-                "temperature": 0.7,
+                "temperature": 0.2,
                 "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_input},
@@ -464,6 +471,8 @@ def summarize_result(
                 # do not expose internal article IDs in streamed console output.
                 "stream": False,
             }
+            if provider["name"].startswith("ModelScope"):
+                params.update(modelscope_request_options(provider["model"]))
             content = _summarize_sync(client, params)
             draft = validate_summary_quality(
                 content,
@@ -488,6 +497,10 @@ def summarize_result(
                 attempts=tuple(attempts),
             )
             validate_summary_result(result, articles, max_items=_summary_limit(cfg))
+            print(
+                f"\n   ✅ {provider['name']} succeeded: "
+                f"model={provider['model']} items={len(result.items)}"
+            )
             return result
         except RunDeadlineExceeded:
             raise
@@ -513,7 +526,10 @@ def _summarize_sync(client: OpenAI, params: dict) -> str:
     response = client.chat.completions.create(**params)
     if not response.choices:
         raise SummaryQualityError("provider returned an empty choices list")
-    return response.choices[0].message.content or ""
+    content = response.choices[0].message.content or ""
+    if not content.strip():
+        raise SummaryQualityError("provider returned empty message content")
+    return content
 
 
 def _summarize_stream(client: OpenAI, params: dict) -> str:
@@ -590,21 +606,29 @@ def test_connection() -> bool:
     for provider in providers:
         try:
             client = create_client(provider["base_url"], provider["api_key"])
-            response = client.chat.completions.create(
-                model=provider["model"],
-                messages=[
+            params: dict[str, Any] = {
+                "model": provider["model"],
+                "messages": [
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": "你好，请用一句话介绍自己。"},
                 ],
-                stream=False,
-            )
+                "max_tokens": 64,
+                "temperature": 0.2,
+                "stream": False,
+            }
+            if provider["name"].startswith("ModelScope"):
+                params.update(modelscope_request_options(provider["model"]))
+            content = _summarize_sync(client, params)
             print("✅ API 连接成功！")
             print(f"   供应商: {provider['name']}")
             print(f"   模型: {provider['model']}")
-            print(f"   响应: {response.choices[0].message.content}")
+            print(f"   非空正文长度: {len(content)}")
             return True
-        except Exception as e:
-            print(f"⚠️  {provider['name']} 连接失败: {e}")
+        except Exception as exc:
+            message = str(exc)
+            if provider["api_key"]:
+                message = message.replace(provider["api_key"], "***")
+            print(f"⚠️  {provider['name']} 连接失败: {message}")
 
     print("❌ 所有供应商连接失败")
     return False

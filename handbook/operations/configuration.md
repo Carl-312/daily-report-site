@@ -170,7 +170,7 @@ dist/     HTML 构建输出
 ```bash
 MODELSCOPE_API_KEY=sk-your-key
 MODELSCOPE_MODEL=ZhipuAI/GLM-5.2
-MODELSCOPE_SECONDARY_MODEL=Tencent-Hunyuan/Hy3
+MODELSCOPE_SECONDARY_MODEL=
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 SYFT_WEB_APP_URL=https://syft.example.com
 SYFT_SECRET_KEY=your-syft-secret-key
@@ -178,22 +178,16 @@ AGIHUNT_API_KEY=
 TAVILY_API_KEY=
 ```
 
-AI 摘要的默认尝试顺序是：ModelScope `ZhipuAI/GLM-5.2` → ModelScope
-`Tencent-Hunyuan/Hy3` → SiliconFlow `Pro/moonshotai/Kimi-K2.6`。
+AI 摘要的默认尝试顺序是：ModelScope `ZhipuAI/GLM-5.2` → SiliconFlow
+`Pro/moonshotai/Kimi-K2.6`。只有显式设置 `MODELSCOPE_SECONDARY_MODEL` 时，才会在两者
+之间增加第二个 ModelScope 候选。
 
-当前状态（2026-07-14）：已验证的 AGIHunt shadow 中，配置的 ModelScope endpoint/token
-拒绝了 Kimi K2.7 Code（包括官方文档列出的 provider 限定 ID），因此曾安全回退到
-SiliconFlow。维护者随后将第二候选切换到 `Tencent-Hunyuan/Hy3`；[非发布 GitHub
-运行 `29305758611`](https://github.com/Carl-312/daily-report-site/actions/runs/29305758611)
-实际尝试了该模型，但它返回空摘要并触发 `SummaryQualityError`，最终仍由 SiliconFlow
-生成。保留此用户指定的第二候选配置以便后续验证，但不能将它标记为当前 endpoint/token
-下可用的摘要模型。
-
-本轮提示词的最新隔离验证中，配置的主模型端点返回“无可用 provider”，备用端点返回
-空 `choices`，因此没有任何可验证的 `required_ai` 结果。随后生成的
-`tmp/agihunt-trending-gray-2026-07-14-prompt-examples-reviewed-replay-v1/` 是
-`summary_mode: reviewed`、`policy: offline`、`provider: editorial_review` 的人工复核
-回放，只能验证摘要契约与渲染链路，不能标记为 AI 验证通过。
+当前状态（2026-07-14）：`ZhipuAI/GLM-5.2` 是约 753B 参数的当前旗舰。结构化摘要请求
+固定传入 `enable_thinking=false`，避免 2000 token 上限被 reasoning 消耗；相同 14 篇
+输入的本地真实请求已返回非空 `choices`、7 条摘要并通过完整 JSON/中文/来源合同。
+`Tencent-Hunyuan/Hy3` 的非流式响应会拼接多个 JSON 对象，前三个对象为空
+`choices`，导致 OpenAI SDK 抛出 `JSONDecodeError`，因此不再作为默认备用模型。
+历史人工复核或离线回放仍只能验证契约与渲染，不能作为 API 成功证据。
 
 未配置 `MODELSCOPE_API_KEY` 时，可使用：
 

@@ -7,7 +7,8 @@
 ```text
 .github/workflows/
 ├── ci.yml
-└── deploy.yml
+├── deploy.yml
+└── modelscope-smoke.yml
 ```
 
 ## `CI`
@@ -23,6 +24,18 @@
   - `pytest`
 
 建议将其设为分支保护必过项。
+
+## `ModelScope API Smoke`
+
+用途：手动执行与本地相同的最小 Chat Completions 请求，并要求响应包含非空
+`choices` 和非空正文。日志只记录 endpoint、模型名、数量、长度与失败分类，不打印密钥
+或模型正文。
+
+- 触发：`workflow_dispatch`
+- Secret：`MODELSCOPE_API_KEY`
+- 命令：`python scripts/modelscope_smoke.py`
+- 失败分类：网络/代理、鉴权、配额、模型或 provider 不可用、非法 JSON、空
+  `choices`、空正文
 
 ## `Daily Report Deploy`
 
@@ -56,7 +69,8 @@
 
 两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
-`MODELSCOPE_SECONDARY_MODEL` 是非密钥配置，默认使用 `Tencent-Hunyuan/Hy3`，通常不需要配置为 secret。
+`MODELSCOPE_SECONDARY_MODEL` 是可选的非密钥配置，默认留空；只有经过真实 API 验证的
+模型才应显式设置。已知会返回协议异常或空 `choices` 的模型不得放入默认回退链。
 
 AGIHunt 的 source 默认关闭。手动灰度时设定 `enable_agihunt=true` 会传入
 `--agihunt on`；如果 `AGIHUNT_API_KEY` 缺失，workflow 会立即失败而不是将
@@ -72,14 +86,15 @@ source `ok`、13 个接受候选、5 次物理请求和 `publication_status: pub
 `published` 仅表示 staged publication 成功；本次 run 没有提交内容、部署 Pages 或运行
 发布 job。
 
-此结果是 7 天观察的第 1 天。当前 ModelScope endpoint/token 不支持 Kimi K2.7 Code
-provider，摘要安全回退到 SiliconFlow。维护者现已把第二候选改为
-`Tencent-Hunyuan/Hy3`，并完成一次 `publish=false` GitHub 灰度：
+此结果是 7 天观察的第 1 天。历史运行中，ModelScope endpoint/token 不支持 Kimi K2.7
+Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/Hy3` 完成一次
+`publish=false` GitHub 灰度：
 [run `29305758611`](https://github.com/Carl-312/daily-report-site/actions/runs/29305758611)
 成功完成 health gate，仍为 source `ok`、13 个接受候选、5 次物理请求，且没有发布或回写。
-但摘要 provenance 记录主 ModelScope 与 `Tencent-Hunyuan/Hy3` 都因空摘要触发
+但摘要 provenance 记录当时的主 ModelScope 与 `Tencent-Hunyuan/Hy3` 都因空摘要触发
 `SummaryQualityError`，最终使用 SiliconFlow `Pro/moonshotai/Kimi-K2.6`。因此该模型
-尝试不计为可用验证，也不新增 7 天 shadow 的通过日，更不能据此提前生产启用 AGIHunt。
+尝试不计为可用验证，也不新增 7 天 shadow 的通过日。Hy3 现已从默认回退链移除；这不
+改变 AGIHunt 的独立灰度门槛。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 

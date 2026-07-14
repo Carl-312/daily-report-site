@@ -117,6 +117,44 @@ def test_provider_candidates_skip_duplicate_modelscope_model(monkeypatch) -> Non
     ]
 
 
+def test_glm52_modelscope_request_disables_thinking() -> None:
+    assert summarizer.modelscope_request_options("ZhipuAI/GLM-5.2") == {
+        "extra_body": {"enable_thinking": False}
+    }
+    assert summarizer.modelscope_request_options("custom/model") == {}
+
+
+def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
+    monkeypatch.setattr(
+        summarizer,
+        "get_config",
+        lambda: _llm_config(
+            modelscope_secondary_model="ZhipuAI/GLM-5.2",
+            fallback_api_key="",
+        ),
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+    captured: dict = {}
+
+    def fake_summarize_sync(_client, params):
+        captured.update(params)
+        return _valid_summary()
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+
+    summarizer.summarize_result([{"title": "Story"}], stream=False)
+
+    assert captured["model"] == "ZhipuAI/GLM-5.2"
+    assert captured["temperature"] == 0.2
+    assert captured["stream"] is False
+    assert captured["extra_body"] == {"enable_thinking": False}
+
+
 def test_summarize_tries_modelscope_secondary_before_siliconflow(
     monkeypatch,
 ) -> None:
@@ -185,6 +223,21 @@ def test_summarize_sync_rejects_an_empty_choices_list() -> None:
     )
 
     with pytest.raises(summarizer.SummaryQualityError, match="empty choices"):
+        summarizer._summarize_sync(client, {})
+
+
+def test_summarize_sync_rejects_empty_message_content() -> None:
+    client = SimpleNamespace(
+        chat=SimpleNamespace(
+            completions=SimpleNamespace(
+                create=lambda **_kwargs: SimpleNamespace(
+                    choices=[SimpleNamespace(message=SimpleNamespace(content="  \n"))]
+                )
+            )
+        )
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="empty message content"):
         summarizer._summarize_sync(client, {})
 
 

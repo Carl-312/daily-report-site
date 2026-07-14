@@ -12,11 +12,11 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from dotenv import load_dotenv
 import yaml
 
-# Load .env file
-load_dotenv(encoding="utf-8", override=True)
+# Load local defaults without overriding explicit process/Actions settings.
+load_dotenv(encoding="utf-8", override=False)
 
 DEFAULT_MODELSCOPE_MODEL = "ZhipuAI/GLM-5.2"
-DEFAULT_MODELSCOPE_SECONDARY_MODEL = "Tencent-Hunyuan/Hy3"
+DEFAULT_MODELSCOPE_SECONDARY_MODEL = ""
 DEFAULT_SILICONFLOW_MODEL = "Pro/moonshotai/Kimi-K2.6"
 
 
