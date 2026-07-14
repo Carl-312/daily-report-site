@@ -175,9 +175,11 @@ AI 摘要的默认尝试顺序是：ModelScope `ZhipuAI/GLM-5.2` → ModelScope
 
 当前状态（2026-07-14）：已验证的 AGIHunt shadow 中，配置的 ModelScope endpoint/token
 拒绝了 Kimi K2.7 Code（包括官方文档列出的 provider 限定 ID），因此曾安全回退到
-SiliconFlow。维护者已要求将第二候选切换到 `Tencent-Hunyuan/Hy3`；它必须通过一次真实的
-非发布 GitHub 灰度后，才能标记为可用。若仍被 endpoint/token 拒绝，摘要将继续安全回退到
-SiliconFlow。
+SiliconFlow。维护者随后将第二候选切换到 `Tencent-Hunyuan/Hy3`；[非发布 GitHub
+运行 `29305758611`](https://github.com/Carl-312/daily-report-site/actions/runs/29305758611)
+实际尝试了该模型，但它返回空摘要并触发 `SummaryQualityError`，最终仍由 SiliconFlow
+生成。保留此用户指定的第二候选配置以便后续验证，但不能将它标记为当前 endpoint/token
+下可用的摘要模型。
 
 未配置 `MODELSCOPE_API_KEY` 时，可使用：
 

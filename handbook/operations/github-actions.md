@@ -74,8 +74,12 @@ source `ok`、13 个接受候选、5 次物理请求和 `publication_status: pub
 
 此结果是 7 天观察的第 1 天。当前 ModelScope endpoint/token 不支持 Kimi K2.7 Code
 provider，摘要安全回退到 SiliconFlow。维护者现已把第二候选改为
-`Tencent-Hunyuan/Hy3`，将以一次 `publish=false` GitHub 灰度验证；在该运行成功前，不能
-把该模型标记为已验证，也不能据此提前合并或生产启用 AGIHunt。
+`Tencent-Hunyuan/Hy3`，并完成一次 `publish=false` GitHub 灰度：
+[run `29305758611`](https://github.com/Carl-312/daily-report-site/actions/runs/29305758611)
+成功完成 health gate，仍为 source `ok`、13 个接受候选、5 次物理请求，且没有发布或回写。
+但摘要 provenance 记录主 ModelScope 与 `Tencent-Hunyuan/Hy3` 都因空摘要触发
+`SummaryQualityError`，最终使用 SiliconFlow `Pro/moonshotai/Kimi-K2.6`。因此该模型
+尝试不计为可用验证，也不新增 7 天 shadow 的通过日，更不能据此提前合并或生产启用 AGIHunt。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 
