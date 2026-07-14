@@ -47,6 +47,11 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--data", default="data/2026-07-14.json")
     parser.add_argument("--models", nargs="+", default=None)
     parser.add_argument(
+        "--prompt-path",
+        default=None,
+        help="Optional experiment prompt; the configured production prompt is unchanged.",
+    )
+    parser.add_argument(
         "--request-mode",
         choices=("prompt_only", "json_object", "json_schema"),
         default="prompt_only",
@@ -171,6 +176,10 @@ def run(args: argparse.Namespace) -> int:
         print("MODELSCOPE_API_KEY is not configured.", file=sys.stderr)
         return 2
     data_path = Path(args.data)
+    prompt_path = Path(args.prompt_path) if args.prompt_path else None
+    if prompt_path is not None and not prompt_path.is_file():
+        print(f"Prompt file does not exist: {prompt_path}", file=sys.stderr)
+        return 2
     report = json.loads(data_path.read_text(encoding="utf-8"))
     articles = report.get("articles")
     if not isinstance(articles, list) or not articles:
@@ -208,6 +217,7 @@ def run(args: argparse.Namespace) -> int:
                 articles,
                 stream=False,
                 provider_candidates=[_provider(cfg, model, capability)],
+                prompt_path=prompt_path,
             )
             contract = {
                 "status": "publishable",
@@ -248,6 +258,7 @@ def run(args: argparse.Namespace) -> int:
         "created_at": timestamp.isoformat(),
         "endpoint": endpoint_label(cfg.api_base_url),
         "input_path": str(data_path),
+        "prompt_path": str(prompt_path) if prompt_path is not None else None,
         "request_mode": args.request_mode,
         "schema_conflict_requested": args.schema_conflict,
         "request_budget": args.request_budget,

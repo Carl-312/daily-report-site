@@ -312,6 +312,36 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
     assert result.validation_passed is True
 
 
+def test_summarize_result_loads_an_explicit_experiment_prompt(monkeypatch) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+    loaded_paths: list[str | None] = []
+
+    def fake_load_prompt(path=None):
+        loaded_paths.append(path)
+        return "experiment prompt"
+
+    monkeypatch.setattr(summarizer, "load_prompt", fake_load_prompt)
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
+    )
+    monkeypatch.setattr(
+        summarizer,
+        "_summarize_sync",
+        lambda _client, _params: _valid_summary(),
+    )
+
+    result = summarizer.summarize_result(
+        [{"title": "Story", "link": "https://example.test/story"}],
+        stream=False,
+        prompt_path=Path("prompts/experiments/probe.md"),
+    )
+
+    assert result.validation_passed is True
+    assert loaded_paths == ["prompts/experiments/probe.md"]
+
+
 def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
     summarizer.validate_summary_quality(
         _valid_summary(item_count=10), expected_items=10
@@ -336,6 +366,21 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     assert "Hugging Face首席执行官表示，企业正逐渐放弃租赁模式" in prompt
     assert "苹果正式起诉OpenAI，指控其涉嫌窃取" in prompt
     assert "Meta因遭遇广泛用户反对，已紧急移除Instagram平台" in prompt
+
+
+def test_kimi_hy3_experiment_prompt_declares_one_document_contract() -> None:
+    prompt = (
+        Path(__file__).resolve().parents[1]
+        / "prompts"
+        / "experiments"
+        / "kimi-k2.7-hy3-feasibility.md"
+    ).read_text(encoding="utf-8")
+
+    assert "只能是一个合法 JSON 文档" in prompt
+    assert "三个摘要对象必须全部放在同一个根对象的 `items` 数组中" in prompt
+    assert "不得先回显空模板" in prompt
+    assert "从不同事件中选择恰好 3 条" in prompt
+    assert "输出最后一个 `}` 后立即停止" in prompt
 
 
 def test_validate_summary_quality_uses_independent_daily_limit() -> None:

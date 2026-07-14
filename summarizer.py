@@ -941,6 +941,7 @@ def summarize_result(
     deadline_at=None,
     attempt_artifact_path: str | Path | None = None,
     provider_candidates: list[dict[str, Any]] | None = None,
+    prompt_path: str | Path | None = None,
 ) -> SummaryResult:
     """Generate a structured AI summary with provider-attempt provenance."""
     del stream
@@ -969,7 +970,9 @@ def summarize_result(
             "No LLM provider API key found. Set MODELSCOPE_API_KEY or SILICONFLOW_API_KEY."
         )
     compressed = compress_articles(articles)
-    system_prompt = load_prompt()
+    system_prompt = (
+        load_prompt(str(prompt_path)) if prompt_path is not None else load_prompt()
+    )
     input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
         compressed, system_prompt
     )

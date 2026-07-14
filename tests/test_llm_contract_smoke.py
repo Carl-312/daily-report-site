@@ -13,6 +13,7 @@ def _args(**overrides):
         "live": False,
         "data": "unused.json",
         "models": None,
+        "prompt_path": None,
         "request_mode": "prompt_only",
         "schema_conflict": False,
         "request_budget": 1,
@@ -44,10 +45,11 @@ def test_contract_smoke_writes_only_secret_safe_attempt_evidence(
         llm=LLMSettings(default_timeout_seconds=30),
     )
     monkeypatch.setattr(llm_contract_smoke, "get_config", lambda: cfg)
-    monkeypatch.setattr(
-        llm_contract_smoke,
-        "summarize_result",
-        lambda *_args, **_kwargs: SummaryResult(
+    captured: dict = {}
+
+    def fake_summarize_result(*_args, **kwargs):
+        captured.update(kwargs)
+        return SummaryResult(
             policy="required_ai",
             items=(
                 SummaryItem(
@@ -71,8 +73,16 @@ def test_contract_smoke_writes_only_secret_safe_attempt_evidence(
                 ),
             ),
             validation_passed=True,
-        ),
+        )
+
+    monkeypatch.setattr(
+        llm_contract_smoke,
+        "summarize_result",
+        fake_summarize_result,
     )
+
+    prompt_path = tmp_path / "experiment.md"
+    prompt_path.write_text("experimental prompt", encoding="utf-8")
 
     exit_code = llm_contract_smoke.run(
         _args(
@@ -80,6 +90,7 @@ def test_contract_smoke_writes_only_secret_safe_attempt_evidence(
             data=str(data_path),
             output=str(output_path),
             models=["model-a"],
+            prompt_path=str(prompt_path),
         )
     )
 
@@ -87,5 +98,7 @@ def test_contract_smoke_writes_only_secret_safe_attempt_evidence(
     artifact = json.loads(artifact_text)
     assert exit_code == 0
     assert artifact["source_type"] == "live"
+    assert artifact["prompt_path"] == str(prompt_path)
     assert artifact["results"][0]["contract"]["status"] == "publishable"
     assert "modelscope-secret" not in artifact_text
+    assert captured["prompt_path"] == prompt_path
