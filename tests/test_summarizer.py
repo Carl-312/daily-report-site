@@ -383,6 +383,21 @@ def test_kimi_hy3_experiment_prompt_declares_one_document_contract() -> None:
     assert "输出最后一个 `}` 后立即停止" in prompt
 
 
+def test_deepseek_v4_experiment_prompt_has_quality_and_shape_margin() -> None:
+    prompt = (
+        Path(__file__).resolve().parents[1]
+        / "prompts"
+        / "experiments"
+        / "deepseek-v4-pro-feasibility.md"
+    ).read_text(encoding="utf-8")
+
+    assert "恰好选择 7 条不同事件" in prompt
+    assert "目标为 38–55 个" in prompt
+    assert "必须且只能包含 `article_id`、`summary` 两个字段" in prompt
+    assert "严禁在 item 内放置 `discussion_topic`" in prompt
+    assert "根级 `discussion_topic` 存在且只出现一次" in prompt
+
+
 def test_validate_summary_quality_uses_independent_daily_limit() -> None:
     summarizer.validate_summary_quality(
         _valid_summary(item_count=10), expected_items=10

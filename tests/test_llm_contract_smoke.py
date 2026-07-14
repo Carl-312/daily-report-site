@@ -15,6 +15,7 @@ def _args(**overrides):
         "models": None,
         "prompt_path": None,
         "request_mode": "prompt_only",
+        "enable_thinking": None,
         "schema_conflict": False,
         "request_budget": 1,
         "timeout": None,
@@ -27,6 +28,24 @@ def _args(**overrides):
 def test_contract_smoke_requires_explicit_live_acknowledgement(capsys) -> None:
     assert llm_contract_smoke.run(_args()) == 2
     assert "without --live" in capsys.readouterr().err
+
+
+def test_probe_capability_can_explicitly_disable_thinking() -> None:
+    base = llm_contract_smoke.LLMModelCapability(
+        provider="modelscope",
+        model="deepseek-ai/DeepSeek-V4-Pro",
+    )
+
+    capability = llm_contract_smoke._probe_capability(
+        base,
+        request_mode="prompt_only",
+        timeout=90,
+        enable_thinking=False,
+    )
+
+    assert capability.thinking_control_parameter == "enable_thinking"
+    assert capability.thinking_control_value is False
+    assert capability.timeout_seconds == 90
 
 
 def test_contract_smoke_writes_only_secret_safe_attempt_evidence(
@@ -99,6 +118,7 @@ def test_contract_smoke_writes_only_secret_safe_attempt_evidence(
     assert exit_code == 0
     assert artifact["source_type"] == "live"
     assert artifact["prompt_path"] == str(prompt_path)
+    assert artifact["enable_thinking"] is None
     assert artifact["results"][0]["contract"]["status"] == "publishable"
     assert "modelscope-secret" not in artifact_text
     assert captured["prompt_path"] == prompt_path

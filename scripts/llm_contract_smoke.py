@@ -57,6 +57,15 @@ def _parser() -> argparse.ArgumentParser:
         default="prompt_only",
     )
     parser.add_argument(
+        "--enable-thinking",
+        action=argparse.BooleanOptionalAction,
+        default=None,
+        help=(
+            "Probe the provider-specific extra_body.enable_thinking switch. "
+            "Omit both forms to send no thinking control."
+        ),
+    )
+    parser.add_argument(
         "--schema-conflict",
         action="store_true",
         help=(
@@ -71,7 +80,11 @@ def _parser() -> argparse.ArgumentParser:
 
 
 def _probe_capability(
-    base: LLMModelCapability, *, request_mode: str, timeout: float | None
+    base: LLMModelCapability,
+    *,
+    request_mode: str,
+    timeout: float | None,
+    enable_thinking: bool | None,
 ) -> LLMModelCapability:
     values = base.model_dump()
     values["request_mode"] = request_mode
@@ -84,6 +97,9 @@ def _probe_capability(
         values["enforces_json_schema"] = True
     if timeout is not None:
         values["timeout_seconds"] = timeout
+    if enable_thinking is not None:
+        values["thinking_control_parameter"] = "enable_thinking"
+        values["thinking_control_value"] = enable_thinking
     return LLMModelCapability.model_validate(values)
 
 
@@ -211,6 +227,7 @@ def run(args: argparse.Namespace) -> int:
             base_capability,
             request_mode=args.request_mode,
             timeout=args.timeout,
+            enable_thinking=args.enable_thinking,
         )
         try:
             summary = summarize_result(
@@ -260,6 +277,7 @@ def run(args: argparse.Namespace) -> int:
         "input_path": str(data_path),
         "prompt_path": str(prompt_path) if prompt_path is not None else None,
         "request_mode": args.request_mode,
+        "enable_thinking": args.enable_thinking,
         "schema_conflict_requested": args.schema_conflict,
         "request_budget": args.request_budget,
         "requests_planned": requests_needed,
