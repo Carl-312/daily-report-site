@@ -79,7 +79,7 @@ provider，摘要安全回退到 SiliconFlow。维护者现已把第二候选改
 成功完成 health gate，仍为 source `ok`、13 个接受候选、5 次物理请求，且没有发布或回写。
 但摘要 provenance 记录主 ModelScope 与 `Tencent-Hunyuan/Hy3` 都因空摘要触发
 `SummaryQualityError`，最终使用 SiliconFlow `Pro/moonshotai/Kimi-K2.6`。因此该模型
-尝试不计为可用验证，也不新增 7 天 shadow 的通过日，更不能据此提前合并或生产启用 AGIHunt。
+尝试不计为可用验证，也不新增 7 天 shadow 的通过日，更不能据此提前生产启用 AGIHunt。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 

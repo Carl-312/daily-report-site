@@ -23,7 +23,10 @@ agihunt:
     - research
     - coding-agents
   supplemental_channel: products
-  per_channel_limit: 4
+  # AGIHunt 最多保留 20 条独立候选。四频道各取前 6 条作为本地缓冲，
+  # 以便在严格去重后仍有机会补足 20；这不改变 5 次 API 请求预算。
+  max_articles: 20
+  per_channel_limit: 6
   core_channel_quota: 3
   supplemental_quota: 3
   max_age_hours: 30

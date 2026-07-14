@@ -60,6 +60,7 @@ def settings(**updates) -> AgihuntSettings:
         "core_channels": ["models", "research", "coding-agents"],
         "supplemental_channel": "products",
         "request_budget": 5,
+        "max_articles": 14,
         "per_channel_limit": 4,
         "core_channel_quota": 1,
         "supplemental_quota": 1,
@@ -68,6 +69,11 @@ def settings(**updates) -> AgihuntSettings:
         "entity_keywords": ["openai"],
     }
     values.update(updates)
+    if "max_articles" not in updates:
+        values["max_articles"] = min(
+            values["max_articles"],
+            (len(values["core_channels"]) + 1) * values["per_channel_limit"],
+        )
     return AgihuntSettings(**values)
 
 
@@ -435,6 +441,106 @@ def test_source_uses_channel_quotas_without_comparing_hot_across_channels() -> N
     assert all(article.source == "agihunt" for article in articles)
 
 
+def test_source_can_select_twenty_candidates_with_four_channel_prefixes() -> None:
+    channels = ("models", "research", "coding-agents", "products")
+    distinct_topics = (
+        "foundation release",
+        "robotics benchmark",
+        "security evaluation",
+        "developer workflow",
+        "multimodal product launch",
+    )
+    fixture = {
+        "report": {
+            "day": "2026-07-13",
+            "markdown": "report",
+            "generated_at": "2026-07-13T00:00:00+00:00",
+            "html_url": "https://agihunt.info/daily/2026-07-13",
+        },
+        "channels": {
+            channel: [
+                {
+                    "title": f"{channel} {distinct_topics[index - 1]}",
+                    "text": "valid candidate",
+                    "url": f"https://example.test/{channel}/{index}",
+                    "hot": 100 - index,
+                    "published_at": "2026-07-13T07:00:00+08:00",
+                }
+                for index in range(1, 6)
+            ]
+            for channel in channels
+        },
+    }
+    source = AgihuntSource(
+        client=FixtureClient(fixture),
+        settings=settings(
+            max_articles=20,
+            per_channel_limit=5,
+            entity_keywords=[],
+        ),
+    )
+
+    articles = source.fetch(reference_dt=NOW)
+
+    assert len(articles) == 20
+    assert source.last_accepted_count == 20
+    assert {article.provenance["channel"] for article in articles} == set(channels)
+    assert {article.provenance["retrieval"] for article in articles} == {"channel_hot"}
+
+
+def test_registry_can_override_only_the_agihunt_candidate_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    channels = ("models", "research", "coding-agents", "products")
+    distinct_topics = (
+        "foundation release",
+        "robotics benchmark",
+        "security evaluation",
+        "developer workflow",
+        "multimodal product launch",
+    )
+    fixture = {
+        "report": {
+            "day": "2026-07-13",
+            "markdown": "report",
+            "generated_at": "2026-07-13T00:00:00+00:00",
+            "html_url": "https://agihunt.info/daily/2026-07-13",
+        },
+        "channels": {
+            channel: [
+                {
+                    "title": f"{channel} {distinct_topics[index - 1]}",
+                    "url": f"https://example.test/cap/{channel}/{index}",
+                    "hot": 100 - index,
+                    "published_at": "2026-07-13T07:00:00+08:00",
+                }
+                for index in range(1, 6)
+            ]
+            for channel in channels
+        },
+    }
+    source = AgihuntSource(
+        client=FixtureClient(fixture),
+        settings=settings(
+            max_articles=20,
+            per_channel_limit=5,
+            entity_keywords=[],
+        ),
+    )
+    monkeypatch.setattr(source_registry, "AgihuntSource", lambda **_kwargs: source)
+
+    articles, outcomes = source_registry.fetch_batch(
+        {"agihunt": True},
+        max_articles=14,
+        agihunt_settings=source.settings,
+        agihunt_max_articles=20,
+        reference_dt=NOW,
+    )
+
+    assert len(articles) == 20
+    assert outcomes[0].accepted_count == 20
+
+
 def test_source_rejects_invalid_times_urls_duplicates_and_entity_overflow() -> None:
     fixture = load_fixture()
     fixture["channels"] = {
@@ -515,6 +621,7 @@ def test_source_rejects_invalid_times_urls_duplicates_and_entity_overflow() -> N
     ]
     assert articles[0].provenance == {
         "provider": AGIHUNT_SOURCE_LABEL,
+        "retrieval": "channel_hot",
         "channel": "models",
         "channel_rank": "1",
         "api_day": "2026-07-13",

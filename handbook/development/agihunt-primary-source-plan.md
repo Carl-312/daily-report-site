@@ -1,7 +1,8 @@
 # AGIHunt 作为每日 AI 新闻主来源的接入规划
 
 - 状态：Phase 1 关闭态实现已完成本地验证；Phase 0 真实样本为 1/2 天，Phase 2
-  GitHub shadow 为 1/7 天且健康；`sources.agihunt` 仍关闭，`main` 尚未合并。
+  GitHub shadow 为 1/7 天且健康；实现以 `sources.agihunt: false` 的关闭态合入，后续
+  样本仍是生产启用的前置条件。
 - 创建日期：2026-07-13
 - 范围：设计与验证计划；本文件不授权、不写入密钥，也不改变生产抓取行为。
 
@@ -28,7 +29,7 @@ AGIHunt Agent API（日报 / 频道条目）
 
 当前日报是单进程、文件型批处理：`main.py` 调用 `fetch_batch()`，对所有候选执行 `dedupe()`，再进入默认关闭的 Tavily enrichment、摘要和原子 staged publication。`sources/__init__.py` 串行调用已启用的 source，并将每个结果记录为 `SourceRunResult`。
 
-现有 source 的共同输出是 `Article(title, link, description, publish_time, content, priority, source)`。AIBase 实际返回一篇当日聚合日报；TechCrunch 与 The Verge 从页面和 URL 日期提取候选；Syft 是带密钥的 JSON 接口。`max_articles` 是传给**每个** source 的上限，默认 14。全局去重会优先保留较高 `priority` 的候选；摘要最多发布 10 条，且每一条的 URL 必须来自输入候选。
+现有 source 的共同输出是 `Article(title, link, description, publish_time, content, priority, source)`。AIBase 实际返回一篇当日聚合日报；TechCrunch 与 The Verge 从页面和 URL 日期提取候选；Syft 是带密钥的 JSON 接口。全局 `limits.max_articles` 仍为每个非 AGIHunt source 的 14 条上限；AGIHunt 单独使用 `agihunt.max_articles=20`。全局去重会优先保留较高 `priority` 的候选；摘要最多发布 10 条，且每一条的 URL 必须来自输入候选。
 
 这意味着接入点清晰，但 AGIHunt 的 top-100 频道数据不能原样送入摘要：适配器必须在返回 `Article` 前完成有界、可解释的“重要性”选择。当前全量回归基线为 `124 passed`（2026-07-14；另有一条既有 Pydantic 弃用警告）。
 
@@ -66,7 +67,7 @@ AGIHunt Agent API（日报 / 频道条目）
 
 ### 从热门条目到重要候选
 
-`AgihuntSource.fetch(max_articles=14, ...)` 的返回数量不得超过既有 source 上限。其本地、确定性选择顺序为：
+`AgihuntSource.fetch(max_articles=20, ...)` 的返回数量不得超过 AGIHunt 专属上限。四个已配置频道各自本地保留前 6 条，先构成 24 条候选缓冲，再在去重后至多保留 20 条；这不增加 API 请求数。其本地、确定性选择顺序为：
 
 1. 校验 API 响应和必要字段，规范化 URL/标题，保留频道、作者、热度、频道内名次、API 日期和 AGIHunt 日报链接等 provenance。
 2. 对每个频道只按返回顺序或 `hot` 排名选取有限前缀；绝不把不同频道的裸 `hot` 分数直接比较。
@@ -135,7 +136,7 @@ AGIHunt 适配器不复用 `BaseSource._get()` 的默认“三次重试”语义
 gate 会验证 manifest、请求预算、原帖 URL、摘要 URL、Markdown 归因和 staged
 publication。Phase 0 另有 `scripts/agihunt_live_smoke.py`：用户显式确认后仅调用
 `/channels`、日报和一个频道，物理请求硬上限为 3，并只写出去敏的 shape/传输
-记录。离线 fixture 回归与全量测试已通过（`124 passed`），Ruff lint/format 和
+记录。离线 fixture 回归与全量测试已通过，Ruff lint/format 和
 GitHub 的 P0、quality、gray-scenarios、final-regression 均通过。真实 API 字段和
 日报链接形态尚未被视为已验证，必须继续完成 Phase 0。
 
@@ -163,8 +164,8 @@ shadow，才可考虑改变 `main` 的生产配置。
 在 `enable_agihunt=true`、`enable_tavily=false`、`publish=false` 下成功完成。preview
 artifact 根目录的去敏 health 记录为 `healthy: true`，AGIHunt source 为 `ok`，接受 13
 个候选、使用 5 次物理请求，staged publication 为 `published`；workflow 没有提交内容、
-部署 Pages 或运行发布 job。这是连续 7 天观察的第 1 天，不构成生产启用或合并 `main` 的
-豁免。该次摘要 provenance 还表明 ModelScope Kimi 尝试被拒绝，随后回退到
+部署 Pages 或运行发布 job。这是连续 7 天观察的第 1 天，不构成生产启用的豁免。该次
+摘要 provenance 还表明 ModelScope Kimi 尝试被拒绝，随后回退到
 SiliconFlow；[官方模型页](https://www.modelscope.cn/models/moonshotai/Kimi-K2.7-Code/summary)
 列出的 `moonshotai/Kimi-K2.7-Code:Moonshot` 也被当前
 ModelScope endpoint/token 以“无可用 provider”拒绝。维护者随后把第二候选切换为
@@ -199,7 +200,9 @@ AGIHunt health gate 通过，但主 ModelScope 与 Hunyuan 尝试均因空摘要
 5. Tavily 对社交/公众号链接的验证误拒绝率是否可接受；没有回放证据前不调整其默认策略。
 6. 当前 ModelScope endpoint/token 尚未启用 Kimi K2.7 Code provider；第二候选
    `Tencent-Hunyuan/Hy3` 已在真实 GitHub 灰度中返回空摘要并触发 `SummaryQualityError`。
-   在有可用结果前，不能将任一 ModelScope 备用模型标记为已验收。
+   本轮提示词验证中，配置的主模型端点继续提示“无可用 provider”，备用端点返回空
+   `choices`；最新健康产物是 `summary_mode: reviewed` 的人工复核回放，不是 AI 结果。
+   在有可用 `required_ai` 结果前，不能将任一端点或模型标记为已验收。
 
 ## 相关资料
 

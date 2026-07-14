@@ -39,7 +39,7 @@ python main.py build
 python scripts/manage_retention.py bundle --keep-days 7
 ```
 
-### 摘要来源映射异常或条数超限
+### 摘要来源映射、条数或字数超限
 
 当前契约要求输出条数不超过独立的 `max_summary_items`；没有候选时应显示“暂无新闻”。同一个 `article_id` 可以被多个独立新闻条目引用，但每条都必须对应输入文章的源 URL，不能新增来源或编造事实。ID 与 URL 只保存在内部 `SummaryResult`/JSON 溯源数据，读者页面不会显示它们。
 
@@ -47,6 +47,10 @@ python scripts/manage_retention.py bundle --keep-days 7
 
 - 看 `summary.items` 数量是否不超过 `max_summary_items`，不再要求与 `articles` 数量一致。
 - 看 `summary.items[*].article_id` 是否为 `a1`、`a2` 等已知 ID；重复 ID 只有在每条内容独立且 URL 一致时才是合法的。
+- 看每条 `summary` 去除空白后的可见字符数是否优先落在 35–50；为保留完整事实可放宽至 80，超过 80 或少于 30 会在本地摘要契约处阻断发布，不能只依赖提示词。
+- 看每条 `summary` 是否是一条可独立理解的完整句（以 `。`、`！` 或 `？` 结尾），且不含 `：`、`...` 或 `…`；读者 Markdown 应直接显示该句，不能再渲染成“标题：摘要”。
+- `--summary-mode ai` 只接受 `policy: required_ai` 的模型结果。主端点“无可用 provider”或备用端点返回空 `choices` 都是 AI 验证失败；不得把随后生成的 `offline` / `reviewed` 结果改标为 AI。
+- 人工复核回放应同时保留 `summary_mode: reviewed`、非 AI policy、`editorial_review` provider 和 `publish: false`，并在报告中明确它只验证本地契约与渲染链路。
 - 如果出现 `SummaryQualityError`、未知 ID、URL 不匹配或 `publication blocked`，应保留上一版产物，修复输入或摘要结果后再重跑。
 - 输入 URL 带跟踪参数、片段，或不同来源标题只是明显改写时，`dedupe()` 会合并并保留高优先级候选；这是预期的候选减少，不是抓取丢失。
 

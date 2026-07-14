@@ -430,6 +430,9 @@ def cmd_run(args):
             syft_key=cfg.syft_secret_key,
             agihunt_api_key=getattr(cfg, "agihunt_api_key", ""),
             agihunt_settings=getattr(cfg, "agihunt", None),
+            agihunt_max_articles=getattr(
+                getattr(cfg, "agihunt", None), "max_articles", None
+            ),
             reference_dt=clock.cutoff_at,
             deadline_at=clock.deadline_at,
         )
@@ -547,6 +550,9 @@ def cmd_fetch(args):
             syft_key=cfg.syft_secret_key,
             agihunt_api_key=getattr(cfg, "agihunt_api_key", ""),
             agihunt_settings=getattr(cfg, "agihunt", None),
+            agihunt_max_articles=getattr(
+                getattr(cfg, "agihunt", None), "max_articles", None
+            ),
             reference_dt=clock.cutoff_at,
             deadline_at=clock.deadline_at,
         )

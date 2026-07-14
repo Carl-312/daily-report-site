@@ -14,6 +14,22 @@ from utils.run_contracts import StrictFrozenModel
 _MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\([^)]*\)")
 _URL = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
 _ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
+_SUMMARY_COLON = re.compile(r"[:：]")
+_SUMMARY_TRUNCATION = re.compile(r"(?:…|\.{3,})")
+_SUMMARY_SENTENCE_ENDINGS = frozenset("。！？")
+
+# A reader-facing daily-news sentence normally needs enough room for its
+# subject, action, and one useful qualifier. The approved editorial examples
+# land in the 35–50-character range, so do not let a headline-shaped
+# 20-character fragment pass as a finished digest. Whitespace is not
+# reader-visible and therefore does not count; all other Unicode characters
+# (including punctuation and product names) do. Keep these values beside the
+# shared result contract so online, offline, replay, and gray paths cannot
+# silently diverge.
+SUMMARY_MIN_VISIBLE_CHARS = 30
+SUMMARY_TARGET_MIN_VISIBLE_CHARS = 35
+SUMMARY_TARGET_MAX_VISIBLE_CHARS = 50
+SUMMARY_MAX_VISIBLE_CHARS = 80
 
 
 class SummaryItem(StrictFrozenModel):
@@ -66,6 +82,41 @@ def article_id_for_index(index: int) -> str:
     return f"a{index}"
 
 
+def summary_visible_character_count(value: str) -> int:
+    """Count reader-visible characters for the per-item summary budget."""
+    return sum(not character.isspace() for character in value)
+
+
+def reader_summary_issues(value: str) -> tuple[str, ...]:
+    """Describe violations of the one-sentence reader-facing summary contract."""
+
+    normalized = " ".join(value.split())
+    issues: list[str] = []
+    visible_characters = summary_visible_character_count(normalized)
+    if not normalized:
+        issues.append("must not be empty")
+        return tuple(issues)
+    if visible_characters < SUMMARY_MIN_VISIBLE_CHARS:
+        issues.append(
+            f"has {visible_characters} visible characters; expected at least "
+            f"{SUMMARY_MIN_VISIBLE_CHARS}"
+        )
+    if visible_characters > SUMMARY_MAX_VISIBLE_CHARS:
+        issues.append(
+            f"has {visible_characters} visible characters; maximum is "
+            f"{SUMMARY_MAX_VISIBLE_CHARS}"
+        )
+    if _SUMMARY_COLON.search(normalized):
+        issues.append("must not contain a colon")
+    if _SUMMARY_TRUNCATION.search(normalized):
+        issues.append("must not contain a truncation marker")
+    if normalized[-1] not in _SUMMARY_SENTENCE_ENDINGS:
+        issues.append("must end with a complete sentence ending")
+    elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in normalized[:-1]):
+        issues.append("must contain exactly one reader sentence")
+    return tuple(issues)
+
+
 def validate_summary_result(
     result: SummaryResult, articles: list[dict], *, max_items: int = 10
 ) -> None:
@@ -99,6 +150,10 @@ def validate_summary_result(
             raise ValueError(
                 f"summary article_id {item.article_id} must have title and summary"
             )
+        if issues := reader_summary_issues(item.summary):
+            raise ValueError(
+                f"summary article_id {item.article_id} " + "; ".join(issues)
+            )
 
 
 def fingerprint_summary_input(articles: list[dict], prompt: str) -> tuple[str, str]:
@@ -124,9 +179,11 @@ def render_summary_markdown(result: SummaryResult) -> str:
 
     lines = []
     for index, item in enumerate(result.items, 1):
-        title = public_text(item.title).replace("[", "\\[").replace("]", "\\]")
-        summary = public_text(item.summary)
-        lines.append(f"{index}. {title}：{summary}")
+        # `summary` is the complete reader-facing sentence. Keeping `title`
+        # internal avoids the old "title：summary" duplication and guarantees
+        # that the renderer never introduces a colon-shaped split.
+        summary = public_text(item.summary).replace("：", "，").replace(":", "，")
+        lines.append(f"{index}. {summary}")
     lines.extend(
         ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
     )

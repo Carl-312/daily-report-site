@@ -1,15 +1,29 @@
 """Validate one AGIHunt shadow run before calling its preview artifact healthy."""
 
+# ruff: noqa: E402
+
 from __future__ import annotations
 
 import argparse
 import json
 from pathlib import Path
+import sys
 from typing import Any
 from urllib.parse import urlsplit
 
 
+_REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPOSITORY_ROOT))
+
+from utils.summary_contracts import (
+    reader_summary_issues,
+    summary_visible_character_count,
+)
+
+
 AGIHUNT_LABEL = "AGI HUNT · agihunt.info"
+AGIHUNT_CHANNEL_HOT_FEED = "channel_hot"
 
 
 def is_http_url(value: object) -> bool:
@@ -109,10 +123,13 @@ def evaluate_shadow_run(
                 errors.append(f"agihunt provenance is missing {key}")
         if provenance.get("provider") != AGIHUNT_LABEL:
             errors.append("agihunt provenance has an unexpected provider label")
+        if provenance.get("retrieval") != AGIHUNT_CHANNEL_HOT_FEED:
+            errors.append("agihunt provenance must identify the channel_hot feed")
         if report_date and provenance.get("api_day") != report_date:
             errors.append("agihunt provenance api_day must match the run report_date")
     data_path = data_dir / f"{report_date}.json"
     content_path = content_dir / f"{report_date}.md"
+    summary_items: list[Any] = []
     checks["data_path"] = str(data_path)
     checks["content_path"] = str(content_path)
     if not data_path.is_file():
@@ -133,7 +150,17 @@ def evaluate_shadow_run(
             if not isinstance(summary, dict):
                 errors.append("generated summary must be an object")
             else:
-                for item in summary.get("items", []):
+                summary_items = summary.get("items", [])
+                if not isinstance(summary_items, list):
+                    errors.append("generated summary items must be a list")
+                    summary_items = []
+                elif not summary_items:
+                    errors.append("generated summary must contain at least one item")
+                summary_lengths: list[dict[str, Any]] = []
+                summary_formats: list[dict[str, Any]] = []
+                checks["summary_length"] = summary_lengths
+                checks["summary_format"] = summary_formats
+                for item in summary_items:
                     if (
                         not isinstance(item, dict)
                         or not is_http_url(item.get("url"))
@@ -141,10 +168,55 @@ def evaluate_shadow_run(
                     ):
                         errors.append("summary URL must match an input candidate link")
                         break
+                    summary_text = item.get("summary")
+                    if not isinstance(summary_text, str):
+                        errors.append("summary item must include a text summary")
+                        break
+                    visible_characters = summary_visible_character_count(summary_text)
+                    summary_lengths.append(
+                        {
+                            "article_id": item.get("article_id"),
+                            "visible_characters": visible_characters,
+                        }
+                    )
+                    issues = list(reader_summary_issues(summary_text))
+                    summary_formats.append(
+                        {
+                            "article_id": item.get("article_id"),
+                            "issues": issues,
+                        }
+                    )
+                    if issues:
+                        errors.append(
+                            "summary item violates the complete reader-sentence "
+                            "contract: " + "; ".join(issues)
+                        )
+                        break
     if not content_path.is_file():
         errors.append("generated Markdown report is missing")
-    elif AGIHUNT_LABEL not in content_path.read_text(encoding="utf-8"):
-        errors.append("generated Markdown report is missing AGIHunt attribution")
+    else:
+        markdown = content_path.read_text(encoding="utf-8")
+        if AGIHUNT_LABEL not in markdown:
+            errors.append("generated Markdown report is missing AGIHunt attribution")
+        rendered_items = [
+            line.split(". ", 1)[1]
+            for line in markdown.splitlines()
+            if line[:1].isdigit() and ". " in line
+        ]
+        rendered_formats = [
+            {"index": index, "issues": list(reader_summary_issues(item))}
+            for index, item in enumerate(rendered_items, 1)
+        ]
+        checks["rendered_summary_format"] = rendered_formats
+        if summary_items and len(rendered_items) != len(summary_items):
+            errors.append("generated Markdown item count must match the summary")
+        for item in rendered_formats:
+            if item["issues"]:
+                errors.append(
+                    "rendered Markdown item violates the complete reader-sentence "
+                    "contract: " + "; ".join(item["issues"])
+                )
+                break
 
     publication = manifest.get("publication", {})
     if not isinstance(publication, dict):

@@ -13,13 +13,19 @@ from openai import OpenAI
 from config import get_config
 from utils.run_contracts import RunDeadlineExceeded
 from utils.summary_contracts import (
+    SUMMARY_MAX_VISIBLE_CHARS,
+    SUMMARY_MIN_VISIBLE_CHARS,
+    SUMMARY_TARGET_MIN_VISIBLE_CHARS,
+    SUMMARY_TARGET_MAX_VISIBLE_CHARS,
     SummaryAttempt,
     SummaryDraft,
     SummaryItem,
     SummaryResult,
     article_id_for_index,
     fingerprint_summary_input,
+    reader_summary_issues,
     render_summary_markdown,
+    summary_visible_character_count,
     validate_summary_result,
 )
 
@@ -91,6 +97,12 @@ def _numbered_items(content: str) -> list[str]:
 _JSON_FENCE = re.compile(r"^```(?:json)?\s*(.*?)\s*```$", re.DOTALL | re.IGNORECASE)
 _PUBLIC_LINK = re.compile(r"(?:https?://|www\.)|\[[^\]]+\]\([^)]*\)", re.IGNORECASE)
 _PUBLIC_ARTICLE_ID = re.compile(r"\[a\d+\]", re.IGNORECASE)
+_SOURCE_SENTENCE = re.compile(r"[^。！？]+[。！？]")
+_TITLE_SEPARATOR = re.compile(r"[:：]")
+_COMPACT_HEADLINE_REWRITES = (
+    ("能力飞跃", "能力显著跃迁"),
+    ("引争议", "引发业界争议"),
+)
 
 
 def _strip_json_fence(content: str) -> str:
@@ -107,6 +119,103 @@ def _contains_public_link(value: str) -> bool:
 
 def _contains_public_article_id(value: str) -> bool:
     return bool(_PUBLIC_ARTICLE_ID.search(value))
+
+
+def _normalize_reader_text(value: object) -> str:
+    """Collapse whitespace before applying the reader-visible character budget."""
+    return " ".join(str(value or "").split())
+
+
+def _complete_reader_sentence(value: object) -> str:
+    """Normalize a title-shaped fact into one displayable sentence."""
+
+    normalized = _normalize_reader_text(value)
+    if not normalized:
+        return ""
+    if normalized[-1] in "。！？":
+        return normalized
+    return f"{normalized.rstrip(' ，、；:：')}。"
+
+
+def _title_reader_sentence(title: str, description: str) -> str:
+    """Turn a source headline into a sentence without a title/summary colon."""
+
+    normalized_title = _normalize_reader_text(title)
+    separator = _TITLE_SEPARATOR.search(normalized_title)
+    if separator:
+        subject = normalized_title[: separator.start()].strip()
+        predicate = normalized_title[separator.end() :].strip()
+        if subject and predicate:
+            # When the source description explicitly attributes a statement to
+            # the headline subject, preserve that relationship. Otherwise the
+            # headline's colon is an apposition and reads naturally with "是".
+            attribution = re.search(
+                rf"{re.escape(subject)}\s*(?:说|称|表示|指出|认为|透露|宣布)",
+                description,
+            )
+            connector = "称" if attribution else "是"
+            normalized_title = f"{subject}{connector}{predicate}"
+    # Source headlines often omit grammatical glue to stay short. Expand only
+    # stable, meaning-preserving patterns so the reader still gets one clear
+    # sentence without falling back to a much longer source description.
+    for source, replacement in _COMPACT_HEADLINE_REWRITES:
+        normalized_title = normalized_title.replace(source, replacement)
+    normalized_title = _TITLE_SEPARATOR.sub("，", normalized_title)
+    return _complete_reader_sentence(normalized_title)
+
+
+def _source_sentence_candidates(value: str) -> list[str]:
+    """Return complete, source-faithful description sentences without clipping."""
+
+    normalized = _normalize_reader_text(value)
+    candidates = [
+        match.group(0).strip() for match in _SOURCE_SENTENCE.finditer(normalized)
+    ]
+    if not candidates and normalized:
+        candidates.append(_complete_reader_sentence(normalized))
+    return [_TITLE_SEPARATOR.sub("，", candidate) for candidate in candidates]
+
+
+def _offline_candidate_rank(source: str, text: str) -> tuple[int, int, int]:
+    """Prefer a normal-length digest without sacrificing a full source fact."""
+
+    length = summary_visible_character_count(text)
+    # A description sentence normally carries the fact's useful qualifier,
+    # while a title in the same range remains a sound fallback.
+    source_rank = 0 if source == "description" else 1
+    target_midpoint = (
+        SUMMARY_TARGET_MIN_VISIBLE_CHARS + SUMMARY_TARGET_MAX_VISIBLE_CHARS
+    ) // 2
+    if SUMMARY_TARGET_MIN_VISIBLE_CHARS <= length <= SUMMARY_TARGET_MAX_VISIBLE_CHARS:
+        return (0, abs(length - target_midpoint), source_rank)
+    if length > SUMMARY_TARGET_MAX_VISIBLE_CHARS:
+        # A complete, source-faithful 51–80-character sentence is preferable
+        # to reverting to a bare headline when no normal-length source fact
+        # exists.
+        return (1, length - SUMMARY_TARGET_MAX_VISIBLE_CHARS, source_rank)
+    return (2, SUMMARY_TARGET_MIN_VISIBLE_CHARS - length, source_rank)
+
+
+def _offline_summary_text(article: dict) -> str:
+    """Choose a factual, complete fallback when an LLM is intentionally absent."""
+
+    title = _normalize_reader_text(article.get("title"))
+    description = _normalize_reader_text(article.get("description"))
+    candidates: list[tuple[str, str]] = []
+    title_sentence = _title_reader_sentence(title, description)
+    if not reader_summary_issues(title_sentence):
+        candidates.append(("title", title_sentence))
+    for sentence in _source_sentence_candidates(description):
+        if not reader_summary_issues(sentence):
+            candidates.append(("description", sentence))
+    if not candidates:
+        raise ValueError(
+            "offline summary cannot preserve one complete "
+            f"{SUMMARY_MIN_VISIBLE_CHARS}–"
+            f"{SUMMARY_MAX_VISIBLE_CHARS}-character source sentence without "
+            "truncation"
+        )
+    return min(candidates, key=lambda candidate: _offline_candidate_rank(*candidate))[1]
 
 
 def _parse_summary_draft(content: str) -> SummaryDraft:
@@ -174,6 +283,8 @@ def validate_summary_quality(
             raise SummaryQualityError(f"item {index} contains a link")
         if _contains_public_article_id(title) or _contains_public_article_id(summary):
             raise SummaryQualityError(f"item {index} exposes an article_id")
+        if issues := reader_summary_issues(summary):
+            raise SummaryQualityError(f"item {index} summary " + "; ".join(issues))
     return draft
 
 
@@ -400,6 +511,8 @@ def _summarize_sync(client: OpenAI, params: dict) -> str:
     """Non-streaming summarization"""
     params["stream"] = False
     response = client.chat.completions.create(**params)
+    if not response.choices:
+        raise SummaryQualityError("provider returned an empty choices list")
     return response.choices[0].message.content or ""
 
 
@@ -445,7 +558,7 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
         SummaryItem(
             article_id=article_id_for_index(index),
             title=(article.get("title") or "").replace("\n", "").strip(),
-            summary=article.get("description") or "离线模式：仅提供原始新闻标题。",
+            summary=_offline_summary_text(article),
             url=article.get("link") or "",
         )
         for index, article in enumerate(selected, 1)

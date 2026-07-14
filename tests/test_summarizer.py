@@ -1,11 +1,20 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 import summarizer
+from utils.summary_contracts import (
+    SUMMARY_MAX_VISIBLE_CHARS,
+    SUMMARY_MIN_VISIBLE_CHARS,
+    SUMMARY_TARGET_MIN_VISIBLE_CHARS,
+    SUMMARY_TARGET_MAX_VISIBLE_CHARS,
+    reader_summary_issues,
+    summary_visible_character_count,
+)
 
 
 def _llm_config(**overrides):
@@ -33,7 +42,7 @@ def _valid_summary(item_count: int = 1) -> str:
                 {
                     "article_id": f"a{index}",
                     "title": f"第{index}条人工智能产品更新",
-                    "summary": "推动行业应用场景继续扩展，并带来新的实际价值。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                 }
                 for index in range(1, item_count + 1)
             ],
@@ -50,7 +59,7 @@ def _summary_with_sources(source_ids: list[str]) -> str:
                 {
                     "article_id": source_id,
                     "title": f"第{index}条独立AI新闻",
-                    "summary": "发布重要产品更新，推动行业应用场景继续扩展。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                 }
                 for index, source_id in enumerate(source_ids, 1)
             ],
@@ -64,8 +73,7 @@ def _rendered_summary(item_count: int = 1) -> str:
     lines = []
     for index in range(1, item_count + 1):
         lines.append(
-            f"{index}. 第{index}条人工智能产品更新："
-            "推动行业应用场景继续扩展，并带来新的实际价值。"
+            f"{index}. 发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。"
         )
     lines.extend(["", "💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！"])
     return "\n".join(lines)
@@ -167,6 +175,19 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     assert calls == ["ZhipuAI/GLM-5.2", "Tencent-Hunyuan/Hy3"]
 
 
+def test_summarize_sync_rejects_an_empty_choices_list() -> None:
+    client = SimpleNamespace(
+        chat=SimpleNamespace(
+            completions=SimpleNamespace(
+                create=lambda **_kwargs: SimpleNamespace(choices=[])
+            )
+        )
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="empty choices"):
+        summarizer._summarize_sync(client, {})
+
+
 def test_summarize_result_records_provider_attempts_and_article_provenance(
     monkeypatch,
 ) -> None:
@@ -201,6 +222,24 @@ def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
     summarizer.validate_summary_quality(
         _valid_summary(item_count=10), expected_items=10
     )
+
+
+def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
+    prompt = (Path(__file__).resolve().parents[1] / "prompts" / "daily.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert (
+        f"优先约 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–{SUMMARY_TARGET_MAX_VISIBLE_CHARS}"
+        in prompt
+    )
+    assert f"通常不得少于 {SUMMARY_MIN_VISIBLE_CHARS} 个字符" in prompt
+    assert f"放宽至 {SUMMARY_MAX_VISIBLE_CHARS} 个字符" in prompt
+    assert "不得依赖“标题：摘要”的写法" in prompt
+    assert "禁止在中途截断、使用省略号或使用 `：`" in prompt
+    assert "Hugging Face首席执行官表示，企业正逐渐放弃租赁模式" in prompt
+    assert "苹果正式起诉OpenAI，指控其涉嫌窃取" in prompt
+    assert "Meta因遭遇广泛用户反对，已紧急移除Instagram平台" in prompt
 
 
 def test_validate_summary_quality_uses_independent_daily_limit() -> None:
@@ -244,7 +283,13 @@ def test_summarize_result_allows_multiple_news_from_source_candidates(
 
 def test_offline_summary_does_not_expand_candidate_count() -> None:
     articles = [
-        {"title": f"Story {index}", "link": f"https://example.test/{index}"}
+        {
+            "title": f"Story {index}",
+            "description": (
+                f"第{index}条测试新闻发布新功能，面向开发者开放使用并提升工作效率。"
+            ),
+            "link": f"https://example.test/{index}",
+        }
         for index in range(4)
     ]
 
@@ -287,7 +332,7 @@ def test_validate_summary_quality_rejects_unknown_article_id() -> None:
                         {
                             "article_id": "a9",
                             "title": "人工智能产品更新",
-                            "summary": "推动行业应用场景继续扩展。",
+                            "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                         }
                     ],
                     "discussion_topic": "你最关注哪条AI新闻？",
@@ -306,12 +351,12 @@ def test_validate_summary_quality_allows_duplicate_article_id() -> None:
                 {
                     "article_id": "a1",
                     "title": "人工智能产品更新",
-                    "summary": "推动行业应用场景继续扩展。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                 },
                 {
                     "article_id": "a1",
                     "title": "人工智能商业进展",
-                    "summary": "带来新的行业应用和市场机会。",
+                    "summary": "带来新的行业应用机会，推动市场持续发展并进一步提升实际应用价值。",
                 },
             ],
             "discussion_topic": "你最关注哪条AI新闻？",
@@ -323,6 +368,137 @@ def test_validate_summary_quality_allows_duplicate_article_id() -> None:
         expected_items=2,
         expected_article_ids={"a1", "a2"},
     )
+
+
+@pytest.mark.parametrize(
+    "summary_length", [SUMMARY_MIN_VISIBLE_CHARS - 1, SUMMARY_MAX_VISIBLE_CHARS + 1]
+)
+def test_validate_summary_quality_rejects_summary_outside_complete_sentence_range(
+    summary_length: int,
+) -> None:
+    summary = "中" * (summary_length - 1) + "。"
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "人工智能产品更新",
+                    "summary": summary,
+                }
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="visible characters"):
+        summarizer.validate_summary_quality(content, expected_items=1)
+
+
+def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (
+    None
+):
+    result = summarizer.offline_summary_result(
+        [
+            {
+                "title": "AI 产品发布",
+                "description": (
+                    "该产品发布了多项新能力，并通过更快的推理速度和更低成本，"
+                    "帮助开发团队提升日常工作效率。"
+                ),
+                "link": "https://example.test/story",
+            }
+        ]
+    )
+
+    summary = result.items[0].summary
+
+    assert summary == (
+        "该产品发布了多项新能力，并通过更快的推理速度和更低成本，"
+        "帮助开发团队提升日常工作效率。"
+    )
+    assert (
+        SUMMARY_MIN_VISIBLE_CHARS
+        <= summary_visible_character_count(summary)
+        <= SUMMARY_MAX_VISIBLE_CHARS
+    )
+    assert summary.endswith("。")
+    assert "…" not in summary
+    assert ":" not in summary
+    assert "：" not in summary
+    assert "https://" not in summary
+
+
+def test_offline_summary_turns_a_colon_headline_into_a_complete_sentence() -> None:
+    result = summarizer.offline_summary_result(
+        [
+            {
+                "title": "Sam Altman：模型终于会做设计了",
+                "description": (
+                    "Sam Altman表示，模型在设计任务上的表现已好到令他感到惊讶。"
+                ),
+                "link": "https://example.test/story",
+            }
+        ]
+    )
+
+    summary = result.items[0].summary
+
+    assert summary == "Sam Altman表示，模型在设计任务上的表现已好到令他感到惊讶。"
+    assert "：" not in summary
+    assert "…" not in summary
+    assert reader_summary_issues(summary) == ()
+
+
+def test_offline_summary_expands_a_compressed_headline_without_clipping() -> None:
+    result = summarizer.offline_summary_result(
+        [
+            {
+                "title": "LLM电脑操控能力飞跃引争议",
+                "description": (
+                    "近期LLM在电脑操控能力上出现显著跃迁，但实际体验与能力宣传仍存在明显分歧。"
+                ),
+                "link": "https://example.test/story",
+            }
+        ]
+    )
+
+    summary = result.items[0].summary
+
+    assert (
+        summary
+        == "近期LLM在电脑操控能力上出现显著跃迁，但实际体验与能力宣传仍存在明显分歧。"
+    )
+    assert reader_summary_issues(summary) == ()
+
+
+@pytest.mark.parametrize(
+    ("summary", "expected"),
+    [
+        ("某公司：发布面向开发者的新模型能力。", "must not contain a colon"),
+        ("某公司发布面向开发者的新模型能力…", "must not contain a truncation marker"),
+        ("某公司发布新模型能力。开发者已可使用。", "must contain exactly one"),
+    ],
+)
+def test_validate_summary_quality_rejects_non_reader_sentence_format(
+    summary: str, expected: str
+) -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "人工智能产品更新",
+                    "summary": summary,
+                }
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match=expected):
+        summarizer.validate_summary_quality(content, expected_items=1)
 
 
 def test_validate_summary_quality_rejects_schema_drift() -> None:

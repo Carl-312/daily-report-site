@@ -33,6 +33,7 @@ from .base import Article, BaseSource
 
 
 AGIHUNT_SOURCE_LABEL = "AGI HUNT · agihunt.info"
+AGIHUNT_CHANNEL_HOT_FEED = "channel_hot"
 
 
 class AgihuntError(RuntimeError):
@@ -459,7 +460,7 @@ class AgihuntSource(BaseSource):
 
     def fetch(
         self,
-        max_articles: int = 14,
+        max_articles: int = 20,
         reference_dt: datetime | None = None,
         deadline_at: datetime | None = None,
     ) -> list[Article]:
@@ -721,6 +722,7 @@ class AgihuntSource(BaseSource):
     ) -> Article:
         provenance = {
             "provider": AGIHUNT_SOURCE_LABEL,
+            "retrieval": AGIHUNT_CHANNEL_HOT_FEED,
             "channel": candidate.channel,
             "channel_rank": str(candidate.rank),
             "api_day": day,
@@ -752,6 +754,7 @@ class AgihuntSource(BaseSource):
         stats = getattr(self.client, "stats", {})
         details = (
             ("api_day", day),
+            ("retrieval", AGIHUNT_CHANNEL_HOT_FEED),
             ("network_requests", str(stats.get("network_requests", 0))),
             ("cache_hits", str(stats.get("cache_hits", 0))),
             ("raw_items", str(raw_count)),
@@ -783,6 +786,7 @@ class AgihuntSource(BaseSource):
 
 __all__ = [
     "AGIHUNT_SOURCE_LABEL",
+    "AGIHUNT_CHANNEL_HOT_FEED",
     "AgihuntAuthenticationError",
     "AgihuntChannelNotFoundError",
     "AgihuntClient",

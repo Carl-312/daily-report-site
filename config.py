@@ -40,7 +40,11 @@ class AgihuntSettings(BaseModel):
         default_factory=lambda: ["models", "research", "coding-agents"]
     )
     supplemental_channel: str = Field(default="products")
-    per_channel_limit: int = Field(default=4, ge=1, le=20)
+    # This is intentionally separate from the global daily-source limit. The
+    # Agent API returns a top-100 list per channel, so selection is bounded
+    # locally without increasing request volume.
+    max_articles: int = Field(default=20, ge=1, le=100)
+    per_channel_limit: int = Field(default=6, ge=1, le=20)
     core_channel_quota: int = Field(default=3, ge=1, le=14)
     supplemental_quota: int = Field(default=3, ge=1, le=14)
     max_age_hours: int = Field(default=30, ge=1, le=72)
@@ -95,6 +99,11 @@ class AgihuntSettings(BaseModel):
         if planned_requests > self.request_budget:
             raise ValueError(
                 "agihunt request_budget is lower than the configured endpoint plan"
+            )
+        candidate_capacity = (len(self.core_channels) + 1) * self.per_channel_limit
+        if self.max_articles > candidate_capacity:
+            raise ValueError(
+                "agihunt max_articles exceeds configured channel candidate capacity"
             )
         return self
 

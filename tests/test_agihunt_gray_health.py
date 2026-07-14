@@ -24,6 +24,7 @@ def source_result(*, requests: int = 5) -> dict:
                 "link": "https://example.test/original-post",
                 "provenance": {
                     "provider": AGIHUNT_LABEL,
+                    "retrieval": "channel_hot",
                     "channel": "models",
                     "channel_rank": "1",
                     "api_day": "2026-07-13",
@@ -51,14 +52,24 @@ def prepare_artifacts(tmp_path) -> tuple[dict, object, object]:
                     {"link": "https://example.test/original-post"},
                 ],
                 "summary": {
-                    "items": [{"url": "https://example.test/original-post"}],
+                    "items": [
+                        {
+                            "article_id": "a1",
+                            "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
+                            "url": "https://example.test/original-post",
+                        }
+                    ],
                 },
             }
         ),
         encoding="utf-8",
     )
     (content_dir / "2026-07-13.md").write_text(
-        f"日报\n\n{AGIHUNT_LABEL}\n", encoding="utf-8"
+        (
+            f"日报\n\n{AGIHUNT_LABEL}\n\n"
+            "1. 发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。\n"
+        ),
+        encoding="utf-8",
     )
     manifest = {
         "report_date": "2026-07-13",
@@ -75,6 +86,9 @@ def test_gray_health_accepts_a_complete_agihunt_shadow(tmp_path) -> None:
 
     assert result["healthy"] is True
     assert result["checks"]["network_requests"] == "5"
+    assert result["checks"]["summary_length"] == [
+        {"article_id": "a1", "visible_characters": 32}
+    ]
 
 
 def test_gray_health_rejects_request_budget_exhaustion(tmp_path) -> None:
@@ -99,6 +113,35 @@ def test_gray_health_rejects_mismatched_provenance_day(tmp_path) -> None:
     )
 
 
+def test_gray_health_rejects_oversized_summary(tmp_path) -> None:
+    manifest, data_dir, content_dir = prepare_artifacts(tmp_path)
+    payload_path = data_dir / "2026-07-13.json"
+    payload = json.loads(payload_path.read_text(encoding="utf-8"))
+    payload["summary"]["items"][0]["summary"] = "中" * 80 + "。"
+    payload_path.write_text(json.dumps(payload), encoding="utf-8")
+
+    result = evaluate_shadow_run(manifest, data_dir=data_dir, content_dir=content_dir)
+
+    assert result["healthy"] is False
+    assert any("maximum is 80" in error for error in result["errors"])
+
+
+def test_gray_health_rejects_rendered_title_summary_colon_format(tmp_path) -> None:
+    manifest, data_dir, content_dir = prepare_artifacts(tmp_path)
+    (content_dir / "2026-07-13.md").write_text(
+        (
+            f"日报\n\n{AGIHUNT_LABEL}\n\n"
+            "1. 人工智能产品更新：发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。\n"
+        ),
+        encoding="utf-8",
+    )
+
+    result = evaluate_shadow_run(manifest, data_dir=data_dir, content_dir=content_dir)
+
+    assert result["healthy"] is False
+    assert any("must not contain a colon" in error for error in result["errors"])
+
+
 def test_full_offline_pipeline_produces_a_healthy_agihunt_shadow(
     tmp_path, monkeypatch
 ) -> None:
@@ -111,12 +154,13 @@ def test_full_offline_pipeline_produces_a_healthy_agihunt_shadow(
     article = Article(
         title="AGIHunt fixture story",
         link="https://example.test/original-post",
-        description="Fixture content",
+        description="AGIHunt灰度测试新闻发布新能力，帮助开发者提升日常工作效率。",
         publish_time=f"{report_date}T07:00:00+08:00",
         priority=3,
         source="agihunt",
         provenance={
             "provider": AGIHUNT_LABEL,
+            "retrieval": "channel_hot",
             "channel": "models",
             "channel_rank": "1",
             "api_day": report_date,

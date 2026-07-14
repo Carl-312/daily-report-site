@@ -47,6 +47,7 @@ def fetch_batch(
     syft_key: str = "",
     agihunt_api_key: str = "",
     agihunt_settings: AgihuntSettings | None = None,
+    agihunt_max_articles: int | None = None,
     reference_dt: datetime | None = None,
     deadline_at: datetime | None = None,
 ) -> tuple[List[Article], tuple[SourceRunResult, ...]]:
@@ -60,6 +61,8 @@ def fetch_batch(
         syft_key: Syft API key (for syft source)
         agihunt_api_key: AGIHunt API key (for agihunt source)
         agihunt_settings: Non-secret AGIHunt client and selection settings
+        agihunt_max_articles: AGIHunt-only candidate cap; other sources keep
+            ``max_articles`` so widening AGIHunt does not broaden every source.
 
     Returns:
         Combined list of articles from all sources
@@ -87,6 +90,7 @@ def fetch_batch(
 
         started = perf_counter()
         source: BaseSource | None = None
+        source_max_articles = max_articles
         try:
             # Special handling for Syft source
             if name == "syft":
@@ -96,11 +100,16 @@ def fetch_batch(
                     api_key=agihunt_api_key,
                     settings=agihunt_settings,
                 )
+                source_max_articles = (
+                    agihunt_max_articles
+                    if agihunt_max_articles is not None
+                    else max_articles
+                )
             else:
                 source = REGISTRY[name]()
 
             articles = source.fetch(
-                max_articles=max_articles,
+                max_articles=source_max_articles,
                 reference_dt=reference_dt,
                 deadline_at=deadline_at,
             )
@@ -177,6 +186,7 @@ def fetch_all(
     syft_key: str = "",
     agihunt_api_key: str = "",
     agihunt_settings: AgihuntSettings | None = None,
+    agihunt_max_articles: int | None = None,
     reference_dt: datetime | None = None,
     deadline_at: datetime | None = None,
 ) -> List[Article]:
@@ -188,6 +198,7 @@ def fetch_all(
         syft_key=syft_key,
         agihunt_api_key=agihunt_api_key,
         agihunt_settings=agihunt_settings,
+        agihunt_max_articles=agihunt_max_articles,
         reference_dt=reference_dt,
         deadline_at=deadline_at,
     )

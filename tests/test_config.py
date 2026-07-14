@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from config import Settings, load_config
 
 
@@ -43,6 +45,7 @@ agihunt:
   request_budget: 2
   core_channels: [models]
   supplemental_channel: products
+  max_articles: 10
   cache_ttl_seconds: 900
   use_environment_proxy: false
 """,
@@ -56,4 +59,27 @@ agihunt:
     assert cfg.agihunt.cache_ttl_seconds == 900
     assert cfg.agihunt.use_environment_proxy is False
     assert cfg.agihunt.core_channels == ["models"]
+    assert cfg.agihunt.max_articles == 10
     assert cfg.sources["agihunt"] is False
+
+
+def test_agihunt_candidate_limit_must_fit_the_channel_prefix_capacity() -> None:
+    with pytest.raises(ValueError, match="candidate capacity"):
+        Settings(
+            agihunt={
+                "core_channels": ["models"],
+                "supplemental_channel": "products",
+                "max_articles": 11,
+                "per_channel_limit": 5,
+            }
+        )
+
+
+def test_default_agihunt_candidate_pool_has_room_for_deduplication() -> None:
+    settings = Settings().agihunt
+
+    assert settings.max_articles == 20
+    assert settings.per_channel_limit == 6
+    assert (
+        len(settings.core_channels) + 1
+    ) * settings.per_channel_limit > settings.max_articles
