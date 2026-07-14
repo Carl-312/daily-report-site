@@ -163,7 +163,11 @@ shadow，才可考虑改变 `main` 的生产配置。
 artifact 根目录的去敏 health 记录为 `healthy: true`，AGIHunt source 为 `ok`，接受 13
 个候选、使用 5 次物理请求，staged publication 为 `published`；workflow 没有提交内容、
 部署 Pages 或运行发布 job。这是连续 7 天观察的第 1 天，不构成生产启用或合并 `main` 的
-豁免。
+豁免。该次摘要 provenance 还表明 ModelScope Kimi 尝试被拒绝，随后回退到
+SiliconFlow；[官方模型页](https://www.modelscope.cn/models/moonshotai/Kimi-K2.7-Code/summary)
+列出的 `moonshotai/Kimi-K2.7-Code:Moonshot` 也被当前
+ModelScope endpoint/token 以“无可用 provider”拒绝。故不将未经账户授权验证的 Kimi
+配置写为默认值；需维护者提供已启用该 provider 的 ModelScope 凭据后，再验证模型要求。
 
 ### Phase 3：主来源启用与安全回滚
 
