@@ -12,7 +12,7 @@ def _llm_config(**overrides):
         "api_key": "modelscope-key",
         "api_base_url": "https://modelscope.test/v1",
         "model": "ZhipuAI/GLM-5.2",
-        "modelscope_secondary_model": "moonshotai/Kimi-K2.7-Code",
+        "modelscope_secondary_model": "Tencent-Hunyuan/Hy3",
         "fallback_api_key": "siliconflow-key",
         "fallback_api_base_url": "https://siliconflow.test/v1",
         "fallback_model": "Pro/moonshotai/Kimi-K2.6",
@@ -62,7 +62,7 @@ def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
         (
             "ModelScope secondary",
             "https://modelscope.test/v1",
-            "moonshotai/Kimi-K2.7-Code",
+            "Tencent-Hunyuan/Hy3",
         ),
         ("SiliconFlow", "https://siliconflow.test/v1", "Pro/moonshotai/Kimi-K2.6"),
     ]
@@ -99,7 +99,7 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
 
     def fake_summarize_sync(client, params):
         calls.append((client, params["model"]))
-        if params["model"] == "moonshotai/Kimi-K2.7-Code":
+        if params["model"] == "Tencent-Hunyuan/Hy3":
             return _valid_summary()
         raise RuntimeError("provider failed")
 
@@ -112,7 +112,7 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
         ("https://modelscope.test/v1|modelscope-key", "ZhipuAI/GLM-5.2"),
         (
             "https://modelscope.test/v1|modelscope-key",
-            "moonshotai/Kimi-K2.7-Code",
+            "Tencent-Hunyuan/Hy3",
         ),
     ]
 
@@ -138,7 +138,7 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     content = summarizer.summarize([{"title": "Story"}], stream=False)
 
     assert content == _valid_summary()
-    assert calls == ["ZhipuAI/GLM-5.2", "moonshotai/Kimi-K2.7-Code"]
+    assert calls == ["ZhipuAI/GLM-5.2", "Tencent-Hunyuan/Hy3"]
 
 
 def test_summarize_result_records_provider_attempts_and_article_provenance(
@@ -164,7 +164,7 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
     )
 
     assert result.provider == "ModelScope secondary"
-    assert result.model == "moonshotai/Kimi-K2.7-Code"
+    assert result.model == "Tencent-Hunyuan/Hy3"
     assert [attempt.status for attempt in result.attempts] == ["failed", "ok"]
     assert result.items[0].article_id == "a1"
     assert result.items[0].url == "https://example.test/story"

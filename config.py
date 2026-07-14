@@ -16,7 +16,7 @@ import yaml
 load_dotenv(encoding="utf-8", override=True)
 
 DEFAULT_MODELSCOPE_MODEL = "ZhipuAI/GLM-5.2"
-DEFAULT_MODELSCOPE_SECONDARY_MODEL = "moonshotai/Kimi-K2.7-Code"
+DEFAULT_MODELSCOPE_SECONDARY_MODEL = "Tencent-Hunyuan/Hy3"
 DEFAULT_SILICONFLOW_MODEL = "Pro/moonshotai/Kimi-K2.6"
 
 
