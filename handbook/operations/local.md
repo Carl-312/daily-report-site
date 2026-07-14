@@ -34,7 +34,7 @@ pip install -r requirements-dev.txt
 ```bash
 MODELSCOPE_API_KEY=sk-your-api-key
 MODELSCOPE_MODEL=ZhipuAI/GLM-5.2
-MODELSCOPE_SECONDARY_MODEL=moonshotai/Kimi-K2.7-Code
+MODELSCOPE_SECONDARY_MODEL=Tencent-Hunyuan/Hy3
 SILICONFLOW_API_KEY=sk-your-fallback-key
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 ```

@@ -56,7 +56,7 @@
 
 两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
-`MODELSCOPE_SECONDARY_MODEL` 是非密钥配置，默认已使用 `moonshotai/Kimi-K2.7-Code`，通常不需要配置为 secret。
+`MODELSCOPE_SECONDARY_MODEL` 是非密钥配置，默认使用 `Tencent-Hunyuan/Hy3`，通常不需要配置为 secret。
 
 AGIHunt 的 source 默认关闭。手动灰度时设定 `enable_agihunt=true` 会传入
 `--agihunt on`；如果 `AGIHUNT_API_KEY` 缺失，workflow 会立即失败而不是将
@@ -73,8 +73,9 @@ source `ok`、13 个接受候选、5 次物理请求和 `publication_status: pub
 发布 job。
 
 此结果是 7 天观察的第 1 天。当前 ModelScope endpoint/token 不支持 Kimi K2.7 Code
-provider，摘要安全回退到 SiliconFlow；在得到 provider 已启用的 ModelScope 凭据前，不能
-把 Kimi 模型要求标记为已验证，也不能据此提前合并或生产启用 AGIHunt。
+provider，摘要安全回退到 SiliconFlow。维护者现已把第二候选改为
+`Tencent-Hunyuan/Hy3`，将以一次 `publish=false` GitHub 灰度验证；在该运行成功前，不能
+把该模型标记为已验证，也不能据此提前合并或生产启用 AGIHunt。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 
