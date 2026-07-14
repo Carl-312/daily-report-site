@@ -147,9 +147,9 @@ GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavi
 - `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
 - `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且数量不超过 `max_summary_items`
 - 聚合来源是否能拆出多条有独立标题和摘要的新闻，同时没有重复事实
-- AGIHunt gray 时 `scripts/agihunt_gray_health.py` 已通过，`.runs/` 中的
-  `agihunt-gray-health.json`、manifest 和 provenance 具有频道与原帖 URL，且
-  `publish=false` artifact 没有发布 Pages
+- AGIHunt gray 时 `scripts/agihunt_gray_health.py` 已通过，preview artifact 根目录的
+  去敏 `agihunt-gray-health.json` 显示健康；health gate 已核对 manifest 与 provenance
+  中的频道和原帖 URL，且 `publish=false` artifact 没有发布 Pages
 
 ## 相关文档
 

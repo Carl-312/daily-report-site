@@ -128,7 +128,7 @@ jobs:
         if: ${{ inputs.enable_agihunt && success() }}
         run: >
           python scripts/agihunt_gray_health.py --runs-dir .runs --data-dir data
-          --content-dir content --output .runs/agihunt-gray-health.json
+          --content-dir content --output agihunt-gray-health.json
 
       - name: Build site from retained content
         if: ${{ inputs.skip_generate }}
@@ -161,8 +161,7 @@ jobs:
             data/
             content/
             dist/
-            .publication/
-            .runs/
+            agihunt-gray-health.json
             daily_update.log
             *.log
           if-no-files-found: ignore
