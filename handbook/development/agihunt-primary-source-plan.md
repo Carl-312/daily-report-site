@@ -158,6 +158,13 @@ shadow，才可考虑改变 `main` 的生产配置。
 
 **通过条件：** 人工审阅确认 AGIHunt 能稳定给出不少于当前主候选的有效重要新闻；没有单一频道/公司异常垄断；请求、缓存、错误和来源归因可从 run artifact 回答。
 
+**2026-07-14 Shadow 第 1 天证据：** [非发布 GitHub 运行](https://github.com/Carl-312/daily-report-site/actions/runs/29301983421)
+在 `enable_agihunt=true`、`enable_tavily=false`、`publish=false` 下成功完成。preview
+artifact 根目录的去敏 health 记录为 `healthy: true`，AGIHunt source 为 `ok`，接受 13
+个候选、使用 5 次物理请求，staged publication 为 `published`；workflow 没有提交内容、
+部署 Pages 或运行发布 job。这是连续 7 天观察的第 1 天，不构成生产启用或合并 `main` 的
+豁免。
+
 ### Phase 3：主来源启用与安全回滚
 
 1. 在配置中把 `agihunt` 放在已启用来源的首位，保留其他 source 作为次级输入；先执行一次非发布预览。
