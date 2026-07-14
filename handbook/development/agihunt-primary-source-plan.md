@@ -1,6 +1,6 @@
 # AGIHunt 作为每日 AI 新闻主来源的接入规划
 
-- 状态：Phase 1 关闭态实现已完成本地验证；Phase 0 授权与真实样本待完成
+- 状态：Phase 1 关闭态实现已完成本地验证；Phase 0 第 1 天真实样本已完成，第 2 天待完成
 - 创建日期：2026-07-13
 - 范围：设计与验证计划；本文件不授权、不写入密钥，也不改变生产抓取行为。
 
@@ -134,9 +134,19 @@ AGIHunt 适配器不复用 `BaseSource._get()` 的默认“三次重试”语义
 gate 会验证 manifest、请求预算、原帖 URL、摘要 URL、Markdown 归因和 staged
 publication。Phase 0 另有 `scripts/agihunt_live_smoke.py`：用户显式确认后仅调用
 `/channels`、日报和一个频道，物理请求硬上限为 3，并只写出去敏的 shape/传输
-记录。离线 fixture 回归与全量测试已通过（`120 passed`），Ruff lint/format 和
+记录。离线 fixture 回归与全量测试已通过（`123 passed`），Ruff lint/format 和
 GitHub 的 P0、quality、gray-scenarios、final-regression 均通过。真实 API 字段和
 日报链接形态尚未被视为已验证，必须继续完成 Phase 0。
+
+**2026-07-14 Phase 0 第 1 天证据：** 用户已配置本地密钥后，受确认的 smoke
+对 `/channels`、当日日报和 `models` 频道完成了 3 次串行物理请求，去敏记录健康。
+已确认频道列表含 12 个 slug、频道条目含 `title` / `text` / `url` / `author` /
+`hot` / `published_at` 等解析所需字段，`published_at` 为 ISO 8601 UTC 字符串，
+`hot` 为数值。日报包含外部原帖链接，但仅凭一天样本不能批准其作为候选输入，故仍
+仅作覆盖诊断。受控网络需要 HTTP(S) proxy 时，client 现在显式读取 proxy /
+`NO_PROXY` 路由，同时保持 Requests 的环境默认认证关闭；该路由有离线测试。原始
+响应缓存和去敏运行记录均保留在忽略目录，未进入仓库。还需完成第 2 天样本和随后
+连续 7 天的 GitHub shadow，才可考虑改变 `main` 的生产配置。
 
 ### Phase 2：Shadow 运行与质量比较
 

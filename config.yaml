@@ -15,6 +15,8 @@ agihunt:
   request_budget: 5
   timeout_seconds: 15
   retry_wait_cap_seconds: 30
+  # 仅解析 HTTP(S)_PROXY / NO_PROXY；不读取 netrc 默认认证。
+  use_environment_proxy: true
   include_report: true
   core_channels:
     - models

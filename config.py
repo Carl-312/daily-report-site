@@ -34,6 +34,7 @@ class AgihuntSettings(BaseModel):
     request_budget: int = Field(default=5, ge=1, le=5)
     timeout_seconds: float = Field(default=15, gt=0, le=30)
     retry_wait_cap_seconds: float = Field(default=30, ge=0, le=30)
+    use_environment_proxy: bool = Field(default=True)
     include_report: bool = Field(default=True)
     core_channels: List[str] = Field(
         default_factory=lambda: ["models", "research", "coding-agents"]

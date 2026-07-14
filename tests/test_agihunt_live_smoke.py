@@ -85,6 +85,20 @@ def test_phase_zero_smoke_is_serial_bounded_and_deidentified() -> None:
     assert result["report"]["markdown_link_hosts"] == {"news.example.test": 1}
 
 
+def test_phase_zero_smoke_strips_markdown_punctuation_from_link_host() -> None:
+    client = SmokeClient()
+    client.fetch_report = lambda day: AgihuntReport(
+        day=day,
+        markdown="[AGIHunt](https://agihunt.info*)",
+        generated_at="2026-07-13T06:01:00+08:00",
+        html_url="https://agihunt.info/report/2026-07-13",
+    )
+
+    result = run_smoke(client, day=DAY, channel="models")
+
+    assert result["report"]["markdown_link_hosts"] == {"agihunt.info": 1}
+
+
 def test_report_not_ready_remains_a_valid_phase_zero_outcome() -> None:
     client = SmokeClient(report_error=AgihuntReportNotReadyError("not ready"))
 

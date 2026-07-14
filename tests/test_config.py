@@ -44,6 +44,7 @@ agihunt:
   core_channels: [models]
   supplemental_channel: products
   cache_ttl_seconds: 900
+  use_environment_proxy: false
 """,
         encoding="utf-8",
     )
@@ -53,5 +54,6 @@ agihunt:
 
     assert cfg.agihunt_api_key == "agihunt-test-secret"
     assert cfg.agihunt.cache_ttl_seconds == 900
+    assert cfg.agihunt.use_environment_proxy is False
     assert cfg.agihunt.core_channels == ["models"]
     assert cfg.sources["agihunt"] is False
