@@ -13,6 +13,7 @@ from utils.run_contracts import StrictFrozenModel
 
 _MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\([^)]*\)")
 _URL = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
+_ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
 
 
 class SummaryItem(StrictFrozenModel):
@@ -115,7 +116,8 @@ def render_summary_markdown(result: SummaryResult) -> str:
     """Render reader-facing Markdown without exposing source IDs or URLs."""
 
     def public_text(value: str) -> str:
-        without_links = _MARKDOWN_LINK.sub(r"\1", value)
+        without_ids = _ARTICLE_ID.sub("", value)
+        without_links = _MARKDOWN_LINK.sub(r"\1", without_ids)
         without_urls = _URL.sub("", without_links)
         compact = " ".join(without_urls.replace("\n", " ").split())
         return re.sub(r"\s+([，。！？；：])", r"\1", compact)

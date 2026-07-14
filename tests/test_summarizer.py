@@ -364,6 +364,25 @@ def test_validate_summary_quality_rejects_links_in_reader_facing_fields() -> Non
         summarizer.validate_summary_quality(content, expected_items=2)
 
 
+def test_validate_summary_quality_rejects_article_ids_in_reader_facing_fields() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "[a1] 人工智能产品更新",
+                    "summary": "推动行业应用场景继续扩展。",
+                }
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="exposes an article_id"):
+        summarizer.validate_summary_quality(content, expected_items=1)
+
+
 def test_validate_summary_quality_rejects_digest_without_interaction_topic() -> None:
     content = json.dumps(
         {

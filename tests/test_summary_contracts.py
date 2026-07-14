@@ -42,7 +42,7 @@ def test_renderer_removes_links_from_untrusted_offline_text() -> None:
         items=(
             SummaryItem(
                 article_id="a1",
-                title="[AI launch](https://example.test/a)",
+                title="[a1] [AI launch](https://example.test/a)",
                 summary="详情见 www.example.test/a ，发布了新能力。",
                 url="https://example.test/a",
             ),
@@ -58,6 +58,7 @@ def test_renderer_removes_links_from_untrusted_offline_text() -> None:
 
     assert "https://" not in rendered
     assert "www.example.test" not in rendered
+    assert "[a1]" not in rendered
     assert "[AI launch]" not in rendered
     assert "1. AI launch：详情见，发布了新能力。" in rendered
 

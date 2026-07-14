@@ -17,6 +17,11 @@ import markdown
 from config import get_config
 from utils.run_contracts import RunDeadlineExceeded
 
+
+_MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\([^)]*\)")
+_PUBLIC_URL = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
+_ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
+
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -179,6 +184,14 @@ def _sanitize_link_schemes(value: str) -> str:
     return attribute.sub(replace, value)
 
 
+def _strip_reader_links(value: str) -> str:
+    """Remove source links and internal IDs while keeping reader-facing labels."""
+    without_ids = _ARTICLE_ID.sub("", value)
+    without_markdown_links = _MARKDOWN_LINK.sub(r"\1", without_ids)
+    without_urls = _PUBLIC_URL.sub("", without_markdown_links)
+    return re.sub(r"\s+([，。！？；：])", r"\1", without_urls)
+
+
 def parse_frontmatter(content: str) -> tuple[dict[str, str], str]:
     """Parse YAML frontmatter from markdown content."""
     meta = {"title": "Untitled", "date": ""}
@@ -217,6 +230,7 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
     """Build a single article HTML from a markdown file."""
     content = md_path.read_text(encoding="utf-8")
     meta, body = parse_frontmatter(content)
+    body = _strip_reader_links(body)
 
     html_content = markdown.markdown(
         html.escape(body),
