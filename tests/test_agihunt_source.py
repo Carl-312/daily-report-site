@@ -126,7 +126,10 @@ def load_fixture() -> dict:
     return json.loads(FIXTURE_PATH.read_text(encoding="utf-8"))
 
 
-def test_client_sends_required_headers_and_uses_ten_minute_cache(tmp_path) -> None:
+def test_client_sends_required_headers_and_uses_ten_minute_cache(
+    tmp_path, monkeypatch
+) -> None:
+    monkeypatch.setattr("sources.agihunt.get_environ_proxies", lambda _url: {})
     session = RecordingSession([response({"items": []})])
     client = AgihuntClient(
         api_key="test-key",
@@ -149,6 +152,48 @@ def test_client_sends_required_headers_and_uses_ten_minute_cache(tmp_path) -> No
     assert client.network_requests == 1
     assert client.cache_hits == 1
     assert list(tmp_path.glob("*.json"))
+
+
+def test_client_uses_explicit_environment_proxy_lookup(tmp_path, monkeypatch) -> None:
+    proxy = {"https": "http://proxy.example.test:8080"}
+    monkeypatch.setattr("sources.agihunt.get_environ_proxies", lambda _url: proxy)
+    session = RecordingSession([response({"items": []})])
+    client = AgihuntClient(
+        api_key="test-key",
+        settings=settings(),
+        cache_dir=tmp_path,
+        session=session,
+    )
+
+    client.fetch_channel_items("models", "2026-07-13")
+
+    _args, request_kwargs = session.calls[0]
+    assert client.session.trust_env is False
+    assert request_kwargs["proxies"] == proxy
+
+
+def test_client_can_disable_environment_proxy_lookup(tmp_path, monkeypatch) -> None:
+    called = False
+
+    def proxy_lookup(_url: str) -> dict[str, str]:
+        nonlocal called
+        called = True
+        return {"https": "http://proxy.example.test:8080"}
+
+    monkeypatch.setattr("sources.agihunt.get_environ_proxies", proxy_lookup)
+    session = RecordingSession([response({"items": []})])
+    client = AgihuntClient(
+        api_key="test-key",
+        settings=settings(use_environment_proxy=False),
+        cache_dir=tmp_path,
+        session=session,
+    )
+
+    client.fetch_channel_items("models", "2026-07-13")
+
+    _args, request_kwargs = session.calls[0]
+    assert called is False
+    assert request_kwargs["proxies"] == {}
 
 
 def test_missing_key_never_issues_a_network_request(tmp_path) -> None:

@@ -39,6 +39,7 @@ from sources.agihunt import (
 MAX_NETWORK_REQUESTS = 3
 MAX_SAMPLED_ITEMS = 3
 _URL_RE = re.compile(r"https?://[^\s<>()\[\]{}\"']+")
+_TRAILING_MARKDOWN_URL_PUNCTUATION = ".,;:!?*_)]}>'\""
 
 
 def _digest(value: str) -> str:
@@ -49,7 +50,10 @@ def _url_host(value: object) -> str:
     if not isinstance(value, str):
         return ""
     try:
-        return urlsplit(value).netloc.lower()
+        # The deliberately simple URL regex can retain Markdown emphasis or
+        # sentence punctuation immediately after a link. Strip only trailing
+        # presentation characters before reporting an aggregate host.
+        return urlsplit(value.rstrip(_TRAILING_MARKDOWN_URL_PUNCTUATION)).netloc.lower()
     except ValueError:
         return ""
 

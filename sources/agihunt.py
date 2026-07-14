@@ -23,6 +23,7 @@ from urllib.parse import parse_qsl, quote, urlencode, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 import requests
+from requests.utils import get_environ_proxies
 
 from article_identity import canonical_url, normalize_title
 from config import AgihuntSettings
@@ -186,6 +187,8 @@ class AgihuntClient:
         self.api_key = api_key.strip()
         self.settings = settings
         self.session = session or requests.Session()
+        # Only proxy routing may consult the environment below. Keep Requests
+        # from applying ambient netrc/default authentication settings.
         self.session.trust_env = False
         self.sleep = sleep
         self.cache_dir = Path(cache_dir or self._default_cache_dir())
@@ -297,6 +300,9 @@ class AgihuntClient:
             self.network_requests += 1
             self.last_request_attempts = attempt
             timeout = self._bounded_timeout(deadline_at)
+            proxies = (
+                get_environ_proxies(url) if self.settings.use_environment_proxy else {}
+            )
             try:
                 response = self.session.get(
                     url,
@@ -308,7 +314,7 @@ class AgihuntClient:
                         ),
                     },
                     timeout=timeout,
-                    proxies={},
+                    proxies=proxies,
                 )
             except requests.RequestException:
                 error: AgihuntError = AgihuntNetworkError("AGIHunt request failed")
