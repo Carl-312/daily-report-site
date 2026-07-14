@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime
+from pathlib import Path
 from types import SimpleNamespace
 from zoneinfo import ZoneInfo
 
@@ -167,3 +168,12 @@ def test_full_offline_pipeline_produces_a_healthy_agihunt_shadow(
     )
 
     assert result["healthy"] is True
+
+
+def test_deploy_workflow_uploads_a_nonhidden_agihunt_health_record() -> None:
+    workflow = (
+        Path(__file__).resolve().parents[1] / ".github" / "workflows" / "deploy.yml"
+    ).read_text(encoding="utf-8")
+
+    assert "--content-dir content --output agihunt-gray-health.json" in workflow
+    assert "            agihunt-gray-health.json" in workflow

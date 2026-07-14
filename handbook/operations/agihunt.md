@@ -57,8 +57,9 @@ python main.py run --offline --agihunt on --enrichment off
 2. 从功能分支手动触发 **Daily Report Deploy**，或在 `main` 上保持 `publish=false`。
 3. 设定 `enable_agihunt=true`、`enable_tavily=false`、`publish=false`。工作流会传入 `--agihunt on`，只上传 preview artifact，不会回写仓库或发布 Pages。
 4. workflow 会运行 `scripts/agihunt_gray_health.py`；通过后下载
-   `daily-report-preview-<run_id>`，检查 `data/`、`content/`、`.runs/`（含
-   `agihunt-gray-health.json`）和生成的 `dist/`。
+   `daily-report-preview-<run_id>`，检查根目录的去敏
+   `agihunt-gray-health.json`、`data/`、`content/` 和生成的 `dist/`。`.runs/`
+   保持隐藏且不上传，以免将运行中间物带入 artifact。
 
 单次灰度健康的最低条件：AGIHunt source 没有认证/兼容性错误、物理请求数不超过 5、所有最终链接是 HTTP(S) 原帖链接、日报 Markdown 显示 `AGI HUNT · agihunt.info` 归因、摘要 URL 与输入候选 URL 一致，且 staged publication 正常完成。自动 health gate 会检查这些可机器验证的条件；人工仍需检查选题质量。`enable_agihunt=true` 但 Secret 缺失时 workflow 会明确失败，不会产生误导性的健康产物。
 
