@@ -1,0 +1,14 @@
+{
+  "id": "synthetic-reasoning-only",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "reasoning_content": "synthetic reasoning placeholder",
+        "content": null
+      }
+    }
+  ]
+}

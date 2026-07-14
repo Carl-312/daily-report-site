@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from config import Settings, load_config
+from config import LLMModelCapability, LLMSettings, Settings, load_config
 
 
 def test_default_llm_models(monkeypatch, tmp_path) -> None:
@@ -30,6 +30,68 @@ def test_llm_model_env_overrides(monkeypatch, tmp_path) -> None:
     assert cfg.model == "custom/modelscope"
     assert cfg.modelscope_secondary_model == "custom/modelscope-secondary"
     assert cfg.fallback_model == "custom/siliconflow"
+
+
+def test_repository_config_loads_endpoint_scoped_llm_capabilities(monkeypatch) -> None:
+    monkeypatch.delenv("MODELSCOPE_MODEL", raising=False)
+
+    cfg = load_config("config.yaml")
+    glm = cfg.llm.capability_for(
+        "modelscope",
+        "https://api-inference.modelscope.cn/v1",
+        "ZhipuAI/GLM-5.2",
+    )
+    qwen = cfg.llm.capability_for(
+        "modelscope",
+        "https://api-inference.modelscope.cn/v1",
+        "Qwen/Qwen3-235B-A22B-Instruct-2507",
+    )
+
+    assert glm.thinking_control_parameter == "enable_thinking"
+    assert glm.thinking_control_value is False
+    assert glm.request_mode == "prompt_only"
+    assert qwen.supports_json_schema is True
+    assert qwen.enforces_json_schema is False
+    assert qwen.request_mode == "prompt_only"
+    assert cfg.llm.compatible_output_contract is True
+
+
+def test_unverified_structured_output_cannot_be_enabled() -> None:
+    with pytest.raises(ValueError, match="verified schema enforcement"):
+        LLMModelCapability(
+            provider="modelscope",
+            model="custom/model",
+            supports_json_schema=True,
+            enforces_json_schema=False,
+            request_mode="json_schema",
+        )
+
+
+def test_capability_lookup_does_not_leak_across_endpoints() -> None:
+    settings = LLMSettings(
+        capabilities=[
+            LLMModelCapability(
+                provider="modelscope",
+                base_url="https://one.example/v1",
+                model="same/model",
+                thinking_control_parameter="enable_thinking",
+                thinking_control_value=False,
+            )
+        ]
+    )
+
+    assert (
+        settings.capability_for(
+            "modelscope", "https://one.example/v1", "same/model"
+        ).thinking_control_parameter
+        == "enable_thinking"
+    )
+    assert (
+        settings.capability_for(
+            "modelscope", "https://two.example/v1", "same/model"
+        ).thinking_control_parameter
+        is None
+    )
 
 
 def test_agihunt_secret_is_environment_only_and_policy_loads_from_yaml(

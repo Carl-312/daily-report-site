@@ -377,7 +377,12 @@ def summarize_or_offline(
 
 
 def summarize_with_result(
-    articles: list[dict], *, offline: bool, cfg, deadline_at=None
+    articles: list[dict],
+    *,
+    offline: bool,
+    cfg,
+    deadline_at=None,
+    attempt_artifact_path: str | Path | None = None,
 ):
     """Return rendered content plus the structured result used to publish it."""
     from summarizer import offline_summary_result
@@ -394,7 +399,12 @@ def summarize_with_result(
         validate_summary_result(result, articles, max_items=summary_limit)
         return content, result
     try:
-        result = summarize_result(articles, stream=True, deadline_at=deadline_at)
+        result = summarize_result(
+            articles,
+            stream=True,
+            deadline_at=deadline_at,
+            attempt_artifact_path=attempt_artifact_path,
+        )
         validate_summary_result(result, articles, max_items=summary_limit)
         return render_summary_markdown(result), result
     except Exception as exc:
@@ -467,6 +477,10 @@ def cmd_run(args):
             offline=args.offline,
             cfg=cfg,
             deadline_at=clock.deadline_at,
+            attempt_artifact_path=workspace.root
+            / getattr(
+                getattr(cfg, "llm", None), "attempts_filename", "summary-attempts.json"
+            ),
         )
         persist_summary_result(workspace, summary_result)
     except Exception as exc:
@@ -629,6 +643,10 @@ def cmd_summarize(args):
             offline=args.offline,
             cfg=cfg,
             deadline_at=clock.deadline_at,
+            attempt_artifact_path=workspace.root
+            / getattr(
+                getattr(cfg, "llm", None), "attempts_filename", "summary-attempts.json"
+            ),
         )
     except Exception as exc:
         record_blocked_run(cfg, workspace, _manifest, error=exc)
@@ -696,7 +714,8 @@ def cmd_test(args):
     """Test API connection"""
     cfg = get_config()
     create_run_observer(cfg, create_run_clock(cfg))
-    test_connection()
+    if not test_connection():
+        raise SystemExit(1)
 
 
 def main():

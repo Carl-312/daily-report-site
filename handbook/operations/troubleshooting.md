@@ -43,6 +43,10 @@ python scripts/manage_retention.py bundle --keep-days 7
 
 当前契约要求输出条数不超过独立的 `max_summary_items`；没有候选时应显示“暂无新闻”。同一个 `article_id` 可以被多个独立新闻条目引用，但每条都必须对应输入文章的源 URL，不能新增来源或编造事实。ID 与 URL 只保存在内部 `SummaryResult`/JSON 溯源数据，读者页面不会显示它们。
 
+模型调用失败时先查看本次 run workspace 的 `summary-attempts.json`，按 `failure_stage` / `failure_code`
+区分网络、HTTP、协议、正文提取、契约、来源与编辑质量；不要再根据最终异常字符串猜测。字段说明与
+live 复测命令见 [LLM API 兼容性运行手册](llm-api-compatibility.md)。
+
 排查当天 `data/YYYY-MM-DD.json`：
 
 - 看 `summary.items` 数量是否不超过 `max_summary_items`，不再要求与 `articles` 数量一致。

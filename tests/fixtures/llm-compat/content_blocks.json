@@ -1,0 +1,31 @@
+{
+  "id": "synthetic-content-blocks",
+  "choices": [
+    {
+      "index": 0,
+      "finish_reason": "stop",
+      "message": {
+        "role": "assistant",
+        "reasoning_content": "synthetic reasoning placeholder",
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"items\":[{\"article_id\":\"a1\",\"summary\":\"发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。\"}],"
+          },
+          {
+            "type": "text",
+            "text": "\"discussion_topic\":\"你最关注哪条AI新闻？\"}"
+          }
+        ]
+      }
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 100,
+    "completion_tokens": 80,
+    "total_tokens": 180,
+    "completion_tokens_details": {
+      "reasoning_tokens": 20
+    }
+  }
+}

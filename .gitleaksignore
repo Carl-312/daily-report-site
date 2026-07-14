@@ -1,0 +1,5 @@
+# Verified historical documentation placeholders, not credentials.  The first
+# appears under “错误做法”; the other two are the same .env template value.
+286b487e878e71f353965a83e0fd0b69ac79e2cd:CONTRIBUTING.md:generic-api-key:186
+286b487e878e71f353965a83e0fd0b69ac79e2cd:docs/guides/configuration.md:generic-api-key:209
+286b487e878e71f353965a83e0fd0b69ac79e2cd:docs/guides/configuration.md:generic-api-key:224

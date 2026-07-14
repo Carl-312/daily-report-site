@@ -6,7 +6,10 @@ import hashlib
 import html
 import json
 import re
+from datetime import datetime
 from typing import Literal
+
+from pydantic import Field
 
 from utils.run_contracts import StrictFrozenModel
 
@@ -17,6 +20,7 @@ _ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
 _SUMMARY_COLON = re.compile(r"[:：]")
 _SUMMARY_TRUNCATION = re.compile(r"(?:…|\.{3,})")
 _SUMMARY_SENTENCE_ENDINGS = frozenset("。！？")
+_SUMMARY_CLOSING_DELIMITERS = frozenset("”’）》」』】)")
 
 # A reader-facing daily-news sentence normally needs enough room for its
 # subject, action, and one useful qualifier. The approved editorial examples
@@ -45,7 +49,9 @@ class SummaryDraftItem(StrictFrozenModel):
     """Model-facing item shape before source provenance is joined locally."""
 
     article_id: str
-    title: str
+    # ``title`` is retained only for replay compatibility with earlier model
+    # responses.  It is not rendered and is never trusted as source metadata.
+    title: str = ""
     summary: str
 
 
@@ -53,14 +59,81 @@ class SummaryDraft(StrictFrozenModel):
     """Minimal JSON contract required from an LLM daily-summary response."""
 
     items: tuple[SummaryDraftItem, ...]
-    discussion_topic: str
+    discussion_topic: str = "你最关注哪条AI新闻？"
+
+
+class SummaryValidationIssue(StrictFrozenModel):
+    """One contract, provenance, or editorial issue without response content."""
+
+    stage: Literal["contract", "provenance", "quality"]
+    code: str
+    message: str
+    item_index: int | None = Field(default=None, ge=1)
+    blocking: bool = True
 
 
 class SummaryAttempt(StrictFrozenModel):
+    """A replayable, secret-safe record of one provider/model attempt."""
+
     provider: str
     model: str
     status: Literal["ok", "failed", "skipped"]
+    endpoint_label: str = ""
+    request_mode: Literal["prompt_only", "json_object", "json_schema"] = "prompt_only"
+    started_at: datetime | None = None
+    elapsed_ms: int = Field(default=0, ge=0)
+    transport_status: Literal["not_started", "failed", "completed"] = "not_started"
+    http_status: int | None = Field(default=None, ge=100, le=599)
+    request_id: str | None = None
+    failure_stage: (
+        Literal[
+            "transport",
+            "http",
+            "envelope",
+            "extraction",
+            "contract",
+            "provenance",
+            "quality",
+        ]
+        | None
+    ) = None
+    failure_code: str | None = None
+    retryable: bool = False
+    choices_count: int | None = Field(default=None, ge=0)
+    content_type: str | None = None
+    content_length: int = Field(default=0, ge=0)
+    reasoning_length: int = Field(default=0, ge=0)
+    finish_reason: str | None = None
+    prompt_tokens: int | None = Field(default=None, ge=0)
+    completion_tokens: int | None = Field(default=None, ge=0)
+    reasoning_tokens: int | None = Field(default=None, ge=0)
+    total_tokens: int | None = Field(default=None, ge=0)
+    response_sha256: str | None = None
+    provider_accepted: bool = False
+    final_text_received: bool = False
+    contract_valid: bool = False
+    provenance_valid: bool = False
+    quality_valid: bool = False
+    publishable: bool = False
+    diagnostics: tuple[str, ...] = ()
+    # Deprecated compatibility field for historical artifacts.  New code uses
+    # ``failure_stage`` and ``failure_code`` exclusively.
     error_kind: str | None = None
+
+
+class SummaryAttemptsArtifact(StrictFrozenModel):
+    """Private attempt evidence written even when every provider fails."""
+
+    schema_version: Literal[1] = 1
+    source_type: Literal["live", "offline", "reviewed", "synthetic"]
+    created_at: datetime
+    real_api_attempted: bool
+    input_fingerprint: str
+    prompt_fingerprint: str
+    attempts: tuple[SummaryAttempt, ...]
+    publishable: bool
+    selected_provider: str | None = None
+    selected_model: str | None = None
 
 
 class SummaryResult(StrictFrozenModel):
@@ -72,7 +145,9 @@ class SummaryResult(StrictFrozenModel):
     input_fingerprint: str
     prompt_fingerprint: str
     attempts: tuple[SummaryAttempt, ...] = ()
-    validation_passed: bool = True
+    # Builders set this only after local contract, provenance, and quality
+    # validation.  Ad-hoc/replayed objects must not claim success by default.
+    validation_passed: bool = False
 
 
 def article_id_for_index(index: int) -> str:
@@ -110,9 +185,10 @@ def reader_summary_issues(value: str) -> tuple[str, ...]:
         issues.append("must not contain a colon")
     if _SUMMARY_TRUNCATION.search(normalized):
         issues.append("must not contain a truncation marker")
-    if normalized[-1] not in _SUMMARY_SENTENCE_ENDINGS:
+    sentence = normalized.rstrip("".join(_SUMMARY_CLOSING_DELIMITERS))
+    if not sentence or sentence[-1] not in _SUMMARY_SENTENCE_ENDINGS:
         issues.append("must end with a complete sentence ending")
-    elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in normalized[:-1]):
+    elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in sentence[:-1]):
         issues.append("must contain exactly one reader sentence")
     return tuple(issues)
 

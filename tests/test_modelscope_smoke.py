@@ -42,7 +42,8 @@ def test_smoke_requires_non_empty_choice_and_content() -> None:
 
     assert exit_code == 0
     assert output[-1] == (
-        "ModelScope smoke succeeded: choices=1 content_length=2 finish_reason=stop"
+        "ModelScope smoke succeeded: choices=1 content_length=2 "
+        "reasoning_length=0 finish_reason=stop"
     )
 
 
@@ -56,7 +57,9 @@ def test_smoke_rejects_empty_choices() -> None:
     )
 
     assert exit_code == 1
-    assert output[-1].endswith("category=empty_choices choices=0")
+    assert output[-1].endswith(
+        "stage=extraction category=empty_choices type=LLMCompatibilityError"
+    )
 
 
 def test_smoke_never_prints_the_api_key_from_an_exception() -> None:
@@ -73,11 +76,11 @@ def test_smoke_never_prints_the_api_key_from_an_exception() -> None:
 
     assert exit_code == 1
     assert "test-secret" not in "\n".join(output)
-    assert "***" in output[-1]
+    assert "category=network_unknown" in output[-1]
 
 
 def test_failure_classifier_distinguishes_provider_unavailable() -> None:
     error = RuntimeError("model has no provider supported")
     error.status_code = 400
 
-    assert classify_failure(error) == "model_or_provider_unavailable"
+    assert classify_failure(error) == "provider_unavailable"

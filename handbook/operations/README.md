@@ -7,6 +7,7 @@
 - [GitHub Actions](github-actions.md)：定时任务、手动预览、归档和发布门禁
 - [GitHub Pages](github-pages.md)：静态站点发布与回滚检查
 - [AGIHunt](agihunt.md)：官方 Agent API、shadow 运行和主来源启用门禁
+- [LLM API 兼容性](llm-api-compatibility.md)：模型 capability、分层 reason code、attempt artifact 和 live 探针
 - [故障排查](troubleshooting.md)：按症状定位并安全恢复
 - [Tavily](tavily.md)：可选 enrichment 的当前状态、诊断和灰度边界
 

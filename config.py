@@ -4,10 +4,11 @@ Loads settings from .env and config.yaml
 """
 
 from __future__ import annotations
+from datetime import datetime
 import os
 from pathlib import Path
 import re
-from typing import Dict, List
+from typing import Dict, List, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from dotenv import load_dotenv
 import yaml
@@ -21,6 +22,94 @@ DEFAULT_SILICONFLOW_MODEL = "Pro/moonshotai/Kimi-K2.6"
 
 
 _AGIHUNT_CHANNEL_SLUG = re.compile(r"^[a-z0-9][a-z0-9-]{0,63}$")
+
+
+class LLMModelCapability(BaseModel):
+    """Verified behavior for one provider/endpoint/model combination."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    provider: str
+    model: str
+    base_url: str = ""
+    supports_chat_completions: bool = True
+    supports_json_object: bool = False
+    supports_json_schema: bool = False
+    enforces_json_schema: bool = False
+    request_mode: Literal["prompt_only", "json_object", "json_schema"] = "prompt_only"
+    thinking_control_parameter: str | None = None
+    thinking_control_value: bool | int | float | str | None = None
+    reasoning_field: str = "reasoning_content"
+    content_shape: Literal["string", "blocks", "string_or_blocks"] = "string_or_blocks"
+    max_tokens_parameter: Literal["max_tokens", "max_completion_tokens"] = "max_tokens"
+    supports_temperature: bool = True
+    timeout_seconds: float | None = Field(default=None, gt=0, le=600)
+    last_verified_at: datetime | None = None
+    verification_sample_count: int = Field(default=0, ge=0)
+
+    @model_validator(mode="after")
+    def validate_negotiated_mode(self) -> "LLMModelCapability":
+        if self.request_mode == "json_object" and not self.supports_json_object:
+            raise ValueError("json_object request mode requires verified support")
+        if self.request_mode == "json_schema" and not (
+            self.supports_json_schema and self.enforces_json_schema
+        ):
+            raise ValueError(
+                "json_schema request mode requires verified schema enforcement"
+            )
+        if bool(self.thinking_control_parameter) != (
+            self.thinking_control_value is not None
+        ):
+            raise ValueError(
+                "thinking control parameter and value must be configured together"
+            )
+        return self
+
+
+class LLMSettings(BaseModel):
+    """Non-secret policy for OpenAI-compatible provider negotiation."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    default_timeout_seconds: float = Field(default=180, gt=0, le=600)
+    capability_ttl_hours: int = Field(default=168, ge=1, le=24 * 90)
+    attempts_filename: str = "summary-attempts.json"
+    compatible_output_contract: bool = True
+    capabilities: List[LLMModelCapability] = Field(default_factory=list)
+
+    @field_validator("attempts_filename")
+    @classmethod
+    def validate_attempts_filename(cls, value: str) -> str:
+        filename = value.strip()
+        if not filename or Path(filename).name != filename:
+            raise ValueError("llm attempts_filename must be a plain filename")
+        return filename
+
+    def capability_for(
+        self, provider: str, base_url: str, model: str
+    ) -> LLMModelCapability:
+        """Return the most specific configured capability or safe defaults."""
+
+        provider_name = provider.strip().lower()
+        normalized_url = base_url.rstrip("/").lower()
+        matches = [
+            capability
+            for capability in self.capabilities
+            if capability.provider.strip().lower() == provider_name
+            and capability.model == model
+            and (
+                not capability.base_url
+                or capability.base_url.rstrip("/").lower() == normalized_url
+            )
+        ]
+        if matches:
+            return max(matches, key=lambda capability: bool(capability.base_url))
+        return LLMModelCapability(
+            provider=provider_name,
+            base_url=base_url,
+            model=model,
+            timeout_seconds=self.default_timeout_seconds,
+        )
 
 
 class AgihuntSettings(BaseModel):
@@ -118,6 +207,8 @@ class AgihuntSettings(BaseModel):
 class Settings(BaseModel):
     """Application settings with validation"""
 
+    model_config = ConfigDict(extra="ignore")
+
     # Primary provider: ModelScope API
     api_key: str = Field(default="", description="ModelScope API Key")
     api_base_url: str = Field(
@@ -142,6 +233,7 @@ class Settings(BaseModel):
     )
 
     max_output: int = Field(default=2000, description="Max output tokens")
+    llm: LLMSettings = Field(default_factory=LLMSettings)
 
     # Timezone
     timezone: str = Field(default="Asia/Shanghai")
@@ -181,9 +273,6 @@ class Settings(BaseModel):
     enrichment: "EnrichmentSettings" = Field(
         default_factory=lambda: EnrichmentSettings()
     )
-
-    class Config:
-        extra = "ignore"
 
 
 class EnrichmentTrustedDomains(BaseModel):
@@ -293,6 +382,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 ),
                 "publication_root": output_cfg.get("publication_root", ".publication"),
                 "run_deadline_minutes": cfg.get("run", {}).get("deadline_minutes", 20),
+                "llm": cfg.get("llm", {}),
                 "agihunt": cfg.get("agihunt", {}),
                 "enrichment": cfg.get("enrichment", {}),
             }

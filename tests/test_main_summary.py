@@ -24,6 +24,7 @@ def _valid_summary_result() -> SummaryResult:
         model="test",
         input_fingerprint="input",
         prompt_fingerprint="prompt",
+        validation_passed=True,
     )
 
 
@@ -89,3 +90,30 @@ def test_summarize_or_offline_uses_offline_when_no_provider_key(monkeypatch) -> 
 
     assert content == "offline content"
     assert calls == ["offline_summary"]
+
+
+def test_cmd_test_returns_nonzero_when_every_connection_fails(monkeypatch) -> None:
+    cfg = SimpleNamespace(timezone="Asia/Shanghai", run_deadline_minutes=20)
+    monkeypatch.setattr(daily_main, "get_config", lambda: cfg)
+    monkeypatch.setattr(daily_main, "create_run_clock", lambda _cfg: object())
+    monkeypatch.setattr(
+        daily_main, "create_run_observer", lambda _cfg, _clock: (object(), object())
+    )
+    monkeypatch.setattr(daily_main, "test_connection", lambda: False)
+
+    with pytest.raises(SystemExit) as error:
+        daily_main.cmd_test(SimpleNamespace())
+
+    assert error.value.code == 1
+
+
+def test_cmd_test_returns_normally_when_a_connection_succeeds(monkeypatch) -> None:
+    cfg = SimpleNamespace(timezone="Asia/Shanghai", run_deadline_minutes=20)
+    monkeypatch.setattr(daily_main, "get_config", lambda: cfg)
+    monkeypatch.setattr(daily_main, "create_run_clock", lambda _cfg: object())
+    monkeypatch.setattr(
+        daily_main, "create_run_observer", lambda _cfg, _clock: (object(), object())
+    )
+    monkeypatch.setattr(daily_main, "test_connection", lambda: True)
+
+    assert daily_main.cmd_test(SimpleNamespace()) is None

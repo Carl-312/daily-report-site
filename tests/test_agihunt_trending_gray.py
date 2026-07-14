@@ -220,6 +220,7 @@ def test_isolated_gray_can_use_an_ai_summary_for_prompt_validation(
                     status="ok",
                 ),
             ),
+            validation_passed=True,
         )
 
     monkeypatch.setattr(gray_script, "summarize_result", fake_summarize_result)
@@ -305,6 +306,7 @@ def test_isolated_gray_can_validate_a_reviewed_source_faithful_summary(
                     status="ok",
                 ),
             ),
+            validation_passed=True,
         )
 
     verification = run_isolated_gray(

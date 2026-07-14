@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source_type": "synthetic",
+  "created_at": "2026-07-14T00:00:00+08:00",
+  "derived_from": "handbook/development/llm-api-compatibility-plan.md",
+  "fixtures": {
+    "content_blocks.json": "final text split across supported content blocks",
+    "reasoning_only.json": "reasoning exists but final content is empty",
+    "choices_null.json": "HTTP envelope has a null choices field",
+    "refusal.json": "assistant refusal blocks publication",
+    "finish_length.json": "partial content with finish_reason=length",
+    "multi_document.txt": "two concatenated response documents"
+  }
+}

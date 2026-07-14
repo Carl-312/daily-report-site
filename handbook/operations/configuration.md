@@ -29,6 +29,13 @@ output:
   md_dir: content
   site_dir: dist
 
+llm:
+  default_timeout_seconds: 180
+  capability_ttl_hours: 168
+  attempts_filename: summary-attempts.json
+  compatible_output_contract: true
+  capabilities: []
+
 enrichment:
   enabled: false
   trust_env: true
@@ -111,6 +118,14 @@ agihunt:
 ### `summarize.prompt_path`
 
 指定摘要 Prompt 模板文件。
+
+### `llm`
+
+定义 OpenAI-compatible 模型的非密钥 capability、逐模型 timeout、token 参数名和请求模式。
+能力按 `(provider, base_url, model)` 精确匹配；未知模型默认使用 `prompt_only`，不会按模型名
+猜测 thinking 或 Structured Outputs 参数。`json_schema` 只有在冲突负例证明 provider 真正
+强制 Schema 后才能启用。完整字段、探针命令和失败分类见
+[LLM API 兼容性运行手册](llm-api-compatibility.md)。
 
 ### `output`
 

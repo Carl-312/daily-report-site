@@ -1,0 +1,2 @@
+{"id":"synthetic-first","choices":null}
+{"id":"synthetic-second","choices":[{"index":0,"finish_reason":"stop","message":{"role":"assistant","content":"OK"}}]}

@@ -64,6 +64,72 @@ output:
 run:
   deadline_minutes: 20
 
+# OpenAI-compatible provider behavior must be enabled per endpoint/model after
+# a real positive probe and a conflicting negative probe.  Accepting a request
+# field or listing a model ID is not enough to enable Structured Outputs.
+llm:
+  default_timeout_seconds: 180
+  capability_ttl_hours: 168
+  attempts_filename: summary-attempts.json
+  compatible_output_contract: true
+  capabilities:
+    - provider: modelscope
+      base_url: https://api-inference.modelscope.cn/v1
+      model: ZhipuAI/GLM-5.2
+      supports_chat_completions: true
+      supports_json_object: false
+      supports_json_schema: false
+      enforces_json_schema: false
+      request_mode: prompt_only
+      thinking_control_parameter: enable_thinking
+      thinking_control_value: false
+      reasoning_field: reasoning_content
+      content_shape: string_or_blocks
+      max_tokens_parameter: max_tokens
+      supports_temperature: true
+      timeout_seconds: 120
+      last_verified_at: 2026-07-14T00:00:00+08:00
+      verification_sample_count: 5
+    - provider: modelscope
+      base_url: https://api-inference.modelscope.cn/v1
+      model: Qwen/Qwen3.5-397B-A17B
+      supports_chat_completions: true
+      request_mode: prompt_only
+      reasoning_field: reasoning_content
+      content_shape: string_or_blocks
+      max_tokens_parameter: max_tokens
+      supports_temperature: true
+      timeout_seconds: 180
+      last_verified_at: 2026-07-14T00:00:00+08:00
+      verification_sample_count: 1
+    - provider: modelscope
+      base_url: https://api-inference.modelscope.cn/v1
+      model: Qwen/Qwen3.5-35B-A3B
+      supports_chat_completions: true
+      request_mode: prompt_only
+      reasoning_field: reasoning_content
+      content_shape: string_or_blocks
+      max_tokens_parameter: max_tokens
+      supports_temperature: true
+      timeout_seconds: 180
+      last_verified_at: 2026-07-14T00:00:00+08:00
+      verification_sample_count: 2
+    - provider: modelscope
+      base_url: https://api-inference.modelscope.cn/v1
+      model: Qwen/Qwen3-235B-A22B-Instruct-2507
+      supports_chat_completions: true
+      supports_json_object: true
+      supports_json_schema: true
+      enforces_json_schema: false
+      request_mode: prompt_only
+      reasoning_field: reasoning_content
+      content_shape: string_or_blocks
+      max_tokens_parameter: max_tokens
+      supports_temperature: true
+      timeout_seconds: 180
+      last_verified_at: 2026-07-14T00:00:00+08:00
+      verification_sample_count: 5
+
 enrichment:
   enabled: false
   trust_env: true

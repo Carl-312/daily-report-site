@@ -7,6 +7,8 @@ from types import SimpleNamespace
 import pytest
 
 import summarizer
+from config import LLMModelCapability, LLMSettings
+from utils.llm_compat import LLMCompatibilityError
 from utils.summary_contracts import (
     SUMMARY_MAX_VISIBLE_CHARS,
     SUMMARY_MIN_VISIBLE_CHARS,
@@ -30,6 +32,19 @@ def _llm_config(**overrides):
         "title_max": 150,
         "desc_max": 300,
         "prompt_path": "missing-prompt.md",
+        "llm": LLMSettings(
+            default_timeout_seconds=60,
+            capabilities=[
+                LLMModelCapability(
+                    provider="modelscope",
+                    base_url="https://modelscope.test/v1",
+                    model="ZhipuAI/GLM-5.2",
+                    thinking_control_parameter="enable_thinking",
+                    thinking_control_value=False,
+                    timeout_seconds=60,
+                )
+            ],
+        ),
     }
     cfg.update(overrides)
     return SimpleNamespace(**cfg)
@@ -118,10 +133,33 @@ def test_provider_candidates_skip_duplicate_modelscope_model(monkeypatch) -> Non
 
 
 def test_glm52_modelscope_request_disables_thinking() -> None:
-    assert summarizer.modelscope_request_options("ZhipuAI/GLM-5.2") == {
+    capability = _llm_config().llm.capability_for(
+        "modelscope", "https://modelscope.test/v1", "ZhipuAI/GLM-5.2"
+    )
+    assert summarizer.modelscope_request_options("ZhipuAI/GLM-5.2", capability) == {
         "extra_body": {"enable_thinking": False}
     }
+    # A model name alone is not capability evidence.
+    assert summarizer.modelscope_request_options("ZhipuAI/GLM-5.2") == {}
     assert summarizer.modelscope_request_options("custom/model") == {}
+
+
+def test_verified_json_schema_uses_only_reader_contract_fields() -> None:
+    capability = LLMModelCapability(
+        provider="modelscope",
+        model="verified/model",
+        supports_json_schema=True,
+        enforces_json_schema=True,
+        request_mode="json_schema",
+    )
+
+    options = summarizer.model_request_options(capability)
+    schema = options["response_format"]["json_schema"]["schema"]
+    item_properties = schema["properties"]["items"]["items"]["properties"]
+
+    assert options["response_format"]["json_schema"]["strict"] is True
+    assert set(item_properties) == {"article_id", "summary"}
+    assert schema["additionalProperties"] is False
 
 
 def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
@@ -137,7 +175,7 @@ def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
     monkeypatch.setattr(
         summarizer,
         "create_client",
-        lambda base_url, api_key: f"{base_url}|{api_key}",
+        lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
     )
     captured: dict = {}
 
@@ -163,7 +201,7 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
     monkeypatch.setattr(
         summarizer,
         "create_client",
-        lambda base_url, api_key: f"{base_url}|{api_key}",
+        lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
     )
     calls: list[tuple[str, str]] = []
 
@@ -195,7 +233,7 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     monkeypatch.setattr(
         summarizer,
         "create_client",
-        lambda base_url, api_key: f"{base_url}|{api_key}",
+        lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
     )
     calls: list[str] = []
 
@@ -222,8 +260,10 @@ def test_summarize_sync_rejects_an_empty_choices_list() -> None:
         )
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="empty choices"):
+    with pytest.raises(LLMCompatibilityError, match="no choices") as error:
         summarizer._summarize_sync(client, {})
+    assert error.value.stage == "extraction"
+    assert error.value.code == "empty_choices"
 
 
 def test_summarize_sync_rejects_empty_message_content() -> None:
@@ -237,8 +277,9 @@ def test_summarize_sync_rejects_empty_message_content() -> None:
         )
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="empty message content"):
+    with pytest.raises(LLMCompatibilityError, match="empty final text") as error:
         summarizer._summarize_sync(client, {})
+    assert error.value.code == "empty_content"
 
 
 def test_summarize_result_records_provider_attempts_and_article_provenance(
@@ -249,7 +290,7 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
     monkeypatch.setattr(
         summarizer,
         "create_client",
-        lambda base_url, api_key: f"{base_url}|{api_key}",
+        lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
     )
 
     def fake_summarize_sync(client, params):
@@ -286,8 +327,10 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
         f"优先约 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–{SUMMARY_TARGET_MAX_VISIBLE_CHARS}"
         in prompt
     )
-    assert f"通常不得少于 {SUMMARY_MIN_VISIBLE_CHARS} 个字符" in prompt
-    assert f"放宽至 {SUMMARY_MAX_VISIBLE_CHARS} 个字符" in prompt
+    assert (
+        f"必须为 {SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个" in prompt
+    )
+    assert "输出前逐条计数自检" in prompt
     assert "不得依赖“标题：摘要”的写法" in prompt
     assert "禁止在中途截断、使用省略号或使用 `：`" in prompt
     assert "Hugging Face首席执行官表示，企业正逐渐放弃租赁模式" in prompt
@@ -299,7 +342,7 @@ def test_validate_summary_quality_uses_independent_daily_limit() -> None:
     summarizer.validate_summary_quality(
         _valid_summary(item_count=10), expected_items=10
     )
-    with pytest.raises(summarizer.SummaryQualityError, match="maximum allowed is 4"):
+    with pytest.raises(summarizer.SummaryContractError, match="maximum allowed is 4"):
         summarizer.validate_summary_quality(
             _valid_summary(item_count=10), expected_items=4
         )
@@ -313,7 +356,7 @@ def test_summarize_result_allows_multiple_news_from_source_candidates(
     monkeypatch.setattr(
         summarizer,
         "create_client",
-        lambda base_url, api_key: f"{base_url}|{api_key}",
+        lambda base_url, api_key, **_kwargs: f"{base_url}|{api_key}",
     )
     monkeypatch.setattr(
         summarizer,
@@ -377,7 +420,7 @@ def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None
 
 
 def test_validate_summary_quality_rejects_unknown_article_id() -> None:
-    with pytest.raises(summarizer.SummaryQualityError, match="unknown article_id"):
+    with pytest.raises(summarizer.SummaryProvenanceError, match="unknown article_id"):
         summarizer.validate_summary_quality(
             json.dumps(
                 {
@@ -554,14 +597,14 @@ def test_validate_summary_quality_rejects_non_reader_sentence_format(
         summarizer.validate_summary_quality(content, expected_items=1)
 
 
-def test_validate_summary_quality_rejects_schema_drift() -> None:
+def test_validate_summary_quality_ignores_untrusted_extra_fields() -> None:
     content = json.dumps(
         {
             "items": [
                 {
                     "article_id": "a1",
                     "title": "人工智能产品更新",
-                    "summary": "推动行业应用场景继续扩展。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                     "url": "https://example.test/should-not-be-returned",
                 }
             ],
@@ -570,18 +613,20 @@ def test_validate_summary_quality_rejects_schema_drift() -> None:
         ensure_ascii=False,
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="JSON matching"):
-        summarizer.validate_summary_quality(content, expected_items=1)
+    draft = summarizer.validate_summary_quality(content, expected_items=1)
+
+    assert draft.items[0].article_id == "a1"
+    assert not hasattr(draft.items[0], "url")
 
 
-def test_validate_summary_quality_rejects_links_in_reader_facing_fields() -> None:
+def test_validate_summary_quality_does_not_gate_on_unrendered_title_links() -> None:
     content = json.dumps(
         {
             "items": [
                 {
                     "article_id": "a1",
                     "title": "[人工智能产品](https://example.com/story)",
-                    "summary": "发布重要能力并推动行业应用场景继续扩展。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                 }
             ],
             "discussion_topic": "你最关注哪条AI新闻？",
@@ -589,18 +634,17 @@ def test_validate_summary_quality_rejects_links_in_reader_facing_fields() -> Non
         ensure_ascii=False,
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="contains a link"):
-        summarizer.validate_summary_quality(content, expected_items=2)
+    summarizer.validate_summary_quality(content, expected_items=2)
 
 
-def test_validate_summary_quality_rejects_article_ids_in_reader_facing_fields() -> None:
+def test_validate_summary_quality_does_not_gate_on_unrendered_title_ids() -> None:
     content = json.dumps(
         {
             "items": [
                 {
                     "article_id": "a1",
                     "title": "[a1] 人工智能产品更新",
-                    "summary": "推动行业应用场景继续扩展。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                 }
             ],
             "discussion_topic": "你最关注哪条AI新闻？",
@@ -608,18 +652,17 @@ def test_validate_summary_quality_rejects_article_ids_in_reader_facing_fields() 
         ensure_ascii=False,
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="exposes an article_id"):
-        summarizer.validate_summary_quality(content, expected_items=1)
+    summarizer.validate_summary_quality(content, expected_items=1)
 
 
-def test_validate_summary_quality_rejects_digest_without_interaction_topic() -> None:
+def test_validate_summary_quality_defaults_missing_interaction_topic() -> None:
     content = json.dumps(
         {
             "items": [
                 {
                     "article_id": "a1",
                     "title": "人工智能产品更新",
-                    "summary": "推动行业应用场景继续扩展。",
+                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
                 }
             ],
             "discussion_topic": "",
@@ -627,5 +670,6 @@ def test_validate_summary_quality_rejects_digest_without_interaction_topic() -> 
         ensure_ascii=False,
     )
 
-    with pytest.raises(summarizer.SummaryQualityError, match="interaction topic"):
-        summarizer.validate_summary_quality(content, expected_items=10)
+    draft = summarizer.validate_summary_quality(content, expected_items=10)
+
+    assert draft.discussion_topic == "你最关注哪条AI新闻？"
