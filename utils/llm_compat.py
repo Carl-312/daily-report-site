@@ -260,6 +260,8 @@ def request_chat_completion(client: Any, params: dict[str, Any]) -> CompletionRe
             ).hexdigest()
     except Exception as exc:
         if isinstance(exc, LLMCompatibilityError):
+            if exc.telemetry is None:
+                exc.telemetry = telemetry
             raise
         classification = classify_exception(exc)
         telemetry.transport_status = (
@@ -284,6 +286,139 @@ def request_chat_completion(client: Any, params: dict[str, Any]) -> CompletionRe
             telemetry=telemetry,
         )
     return _extract_final_text(document, telemetry)
+
+
+def request_streaming_chat_completion(
+    client: Any, params: dict[str, Any]
+) -> CompletionResult:
+    """Buffer one SSE completion and expose only its final assistant content.
+
+    Reasoning deltas are counted for telemetry but are never appended to the
+    final text.  The fully buffered content still passes through the same
+    extraction checks as a non-streaming response before callers can validate
+    or publish it.
+    """
+
+    telemetry = CompletionTelemetry(content_type="text/event-stream")
+    request_params = dict(params)
+    request_params["stream"] = True
+    response_hasher = hashlib.sha256()
+    states: dict[int, dict[str, Any]] = {}
+    usage: Any = None
+
+    try:
+        stream = client.chat.completions.create(**request_params)
+        telemetry.transport_status = "completed"
+        telemetry.http_status = 200
+        for raw_chunk in stream:
+            chunk = _to_plain(raw_chunk)
+            canonical = json.dumps(
+                chunk,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+                default=str,
+            )
+            response_hasher.update(canonical.encode("utf-8"))
+            if not isinstance(chunk, Mapping):
+                raise LLMCompatibilityError(
+                    "provider stream chunk must be a JSON object",
+                    stage="envelope",
+                    code="protocol_shape",
+                    telemetry=telemetry,
+                )
+            if chunk.get("usage") is not None:
+                usage = chunk.get("usage")
+            choices = chunk.get("choices", [])
+            if choices is None:
+                choices = []
+            if not isinstance(choices, (list, tuple)):
+                raise LLMCompatibilityError(
+                    "provider stream choices must be an array",
+                    stage="envelope",
+                    code="protocol_shape",
+                    telemetry=telemetry,
+                )
+            for raw_choice in choices:
+                choice = _mapping_or_none(raw_choice)
+                if choice is None:
+                    raise LLMCompatibilityError(
+                        "provider stream choice must be an object",
+                        stage="envelope",
+                        code="protocol_shape",
+                        telemetry=telemetry,
+                    )
+                index = _optional_int(choice.get("index")) or 0
+                state = states.setdefault(
+                    index,
+                    {
+                        "content": [],
+                        "reasoning_length": 0,
+                        "refusal": False,
+                        "finish_reason": None,
+                    },
+                )
+                delta = _mapping_or_none(choice.get("delta")) or {}
+                content, block_refusal = _content_text(delta.get("content"))
+                if content:
+                    state["content"].append(content)
+                state["refusal"] = bool(
+                    state["refusal"]
+                    or block_refusal
+                    or _flatten_diagnostic_text(delta.get("refusal")).strip()
+                )
+                state["reasoning_length"] += sum(
+                    len(_flatten_diagnostic_text(delta.get(field_name)))
+                    for field_name in _REASONING_FIELDS
+                    if delta.get(field_name) is not None
+                )
+                if choice.get("finish_reason") is not None:
+                    state["finish_reason"] = choice.get("finish_reason")
+    except Exception as exc:
+        if isinstance(exc, LLMCompatibilityError):
+            if exc.telemetry is None:
+                exc.telemetry = telemetry
+            raise
+        classification = classify_exception(exc)
+        telemetry.transport_status = (
+            "failed" if classification.stage == "transport" else "completed"
+        )
+        telemetry.http_status = classification.http_status
+        telemetry.request_id = classification.request_id
+        telemetry.retry_after_seconds = classification.retry_after_seconds
+        raise LLMCompatibilityError(
+            f"streaming chat completion failed ({classification.code})",
+            stage=classification.stage,
+            code=classification.code,
+            retryable=classification.retryable,
+            telemetry=telemetry,
+        ) from exc
+
+    telemetry.response_sha256 = response_hasher.hexdigest()
+    if any(state["finish_reason"] is None for state in states.values()):
+        raise LLMCompatibilityError(
+            "provider stream ended without a terminal finish reason",
+            stage="extraction",
+            code="incomplete_output",
+            telemetry=telemetry,
+        )
+    choices = []
+    for index, state in sorted(states.items()):
+        message: dict[str, Any] = {"content": "".join(state["content"])}
+        if state["reasoning_length"]:
+            # Preserve only the observed length for the shared reasoning-only
+            # check. The actual reasoning text is deliberately discarded.
+            message["reasoning_content"] = "x" * state["reasoning_length"]
+        if state["refusal"]:
+            message["refusal"] = "stream_refusal"
+        choices.append(
+            {
+                "index": index,
+                "message": message,
+                "finish_reason": state["finish_reason"],
+            }
+        )
+    return _extract_final_text({"choices": choices, "usage": usage}, telemetry)
 
 
 def extract_single_json_object(content: str) -> dict[str, Any]:

@@ -52,6 +52,11 @@ def test_repository_config_loads_endpoint_scoped_llm_capabilities(monkeypatch) -
         "https://api-inference.modelscope.cn/v1",
         "Qwen/Qwen3-235B-A22B-Instruct-2507",
     )
+    kimi = cfg.llm.capability_for(
+        "modelscope",
+        "https://api-inference.modelscope.cn/v1",
+        "moonshotai/Kimi-K2.7-Code:Moonshot",
+    )
 
     assert glm.thinking_control_parameter == "enable_thinking"
     assert glm.thinking_control_value is False
@@ -63,6 +68,12 @@ def test_repository_config_loads_endpoint_scoped_llm_capabilities(monkeypatch) -
     assert qwen.supports_json_schema is True
     assert qwen.enforces_json_schema is False
     assert qwen.request_mode == "prompt_only"
+    assert kimi.execution.delivery_mode == "buffered_stream"
+    assert kimi.execution.max_output_tokens == 16000
+    assert kimi.execution.attempt_timeout_seconds == 240
+    assert kimi.supports_temperature is False
+    assert kimi.request_mode == "prompt_only"
+    assert kimi.verification_sample_count == 4
     assert cfg.llm.compatible_output_contract is True
     assert all(
         capability.model != "deepseek-ai/DeepSeek-V4-Pro"

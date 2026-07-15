@@ -141,7 +141,7 @@ agihunt:
 
 每个 capability 的 `execution` 独立定义：
 
-- `delivery_mode`：当前生产仅支持 `non_stream`；未经探针验证的模式不会自动启用。
+- `delivery_mode`：支持 `non_stream` 与私下完整聚合后再校验的 `buffered_stream`；后者只应为已完成真实流式探针的精确 endpoint/model 配置，绝不边生成边发布。
 - `max_output_tokens`：模型输出 token 上限；缺失时回退到全局兼容默认值。
 - `attempt_timeout_seconds`：一次 HTTP 请求最多等待多久，不影响 token 上限。
 - `provider_budget_seconds`：同模型所有请求与退避的总时间边界；可选。

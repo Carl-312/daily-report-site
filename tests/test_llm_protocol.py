@@ -14,6 +14,7 @@ from utils.llm_compat import (
     endpoint_label,
     extract_single_json_object,
     request_chat_completion,
+    request_streaming_chat_completion,
 )
 
 
@@ -44,6 +45,102 @@ def _raw_client(text: str, content_type: str = "application/json") -> SimpleName
 
 def _fixture(name: str) -> str:
     return (FIXTURE_ROOT / name).read_text(encoding="utf-8")
+
+
+def _stream_client(chunks: list[dict]) -> SimpleNamespace:
+    return SimpleNamespace(
+        chat=SimpleNamespace(
+            completions=SimpleNamespace(create=lambda **_params: iter(chunks))
+        )
+    )
+
+
+def test_buffered_stream_keeps_reasoning_out_of_final_content() -> None:
+    chunks = [
+        {
+            "choices": [
+                {
+                    "index": 0,
+                    "delta": {"reasoning_content": "private reasoning"},
+                    "finish_reason": None,
+                }
+            ]
+        },
+        {
+            "choices": [
+                {
+                    "index": 0,
+                    "delta": {"content": "final "},
+                    "finish_reason": None,
+                }
+            ]
+        },
+        {
+            "choices": [
+                {
+                    "index": 0,
+                    "delta": {"content": "text"},
+                    "finish_reason": "stop",
+                }
+            ],
+            "usage": {
+                "prompt_tokens": 10,
+                "completion_tokens": 20,
+                "total_tokens": 30,
+            },
+        },
+    ]
+
+    result = request_streaming_chat_completion(
+        _stream_client(chunks), {"stream": False}
+    )
+
+    assert result.content == "final text"
+    assert "private reasoning" not in result.content
+    assert result.telemetry.reasoning_length == len("private reasoning")
+    assert result.telemetry.finish_reason == "stop"
+    assert result.telemetry.total_tokens == 30
+    assert result.telemetry.content_type == "text/event-stream"
+
+
+def test_buffered_stream_rejects_reasoning_without_final_content() -> None:
+    chunks = [
+        {
+            "choices": [
+                {
+                    "index": 0,
+                    "delta": {"reasoning_content": "private reasoning"},
+                    "finish_reason": "stop",
+                }
+            ]
+        }
+    ]
+
+    with pytest.raises(LLMCompatibilityError) as error:
+        request_streaming_chat_completion(_stream_client(chunks), {})
+
+    assert error.value.code == "reasoning_only"
+    assert error.value.telemetry.reasoning_length == len("private reasoning")
+
+
+def test_buffered_stream_rejects_a_connection_closed_before_terminal_chunk() -> None:
+    chunks = [
+        {
+            "choices": [
+                {
+                    "index": 0,
+                    "delta": {"content": "partial final text"},
+                    "finish_reason": None,
+                }
+            ]
+        }
+    ]
+
+    with pytest.raises(LLMCompatibilityError) as error:
+        request_streaming_chat_completion(_stream_client(chunks), {})
+
+    assert error.value.code == "incomplete_output"
+    assert error.value.telemetry.final_text_received is False
 
 
 def test_fixture_provenance_never_claims_synthetic_data_is_live() -> None:

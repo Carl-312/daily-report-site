@@ -525,29 +525,32 @@ def test_public_summary_api_has_no_ignored_stream_parameter() -> None:
     assert not hasattr(summarizer, "_summarize_stream")
 
 
-def test_unimplemented_buffered_stream_mode_fails_closed(monkeypatch) -> None:
+def test_buffered_stream_mode_uses_private_collector(monkeypatch) -> None:
     monkeypatch.setattr(summarizer, "get_config", _config)
     monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(summarizer, "create_client", lambda *_args, **_kwargs: object())
+    captured: dict = {}
 
-    def unexpected_client(*_args, **_kwargs):
-        raise AssertionError("unsupported delivery mode must not send a request")
+    def complete(_client, params):
+        captured.update(params)
+        return _completion_payload()
 
-    monkeypatch.setattr(summarizer, "create_client", unexpected_client)
+    monkeypatch.setattr(summarizer, "_request_buffered_stream_completion", complete)
     policy = LLMExecutionPolicy(
         delivery_mode="buffered_stream",
         attempt_timeout_seconds=30,
     )
 
-    with pytest.raises(summarizer.AllProvidersFailed) as error:
-        summarizer.summarize_result(
-            [{"title": "Source", "link": "https://example.test/a"}],
-            provider_candidates=[
-                _provider("ModelScope", "model-a", "secret-a", execution=policy)
-            ],
-        )
+    result = summarizer.summarize_result(
+        [{"title": "Source", "link": "https://example.test/a"}],
+        provider_candidates=[
+            _provider("ModelScope", "model-a", "secret-a", execution=policy)
+        ],
+    )
 
-    assert error.value.attempts == ()
-    assert "no executable provider candidates" in str(error.value)
+    assert captured["stream"] is True
+    assert result.attempts[0].delivery_mode == "buffered_stream"
+    assert result.attempts[0].publishable is True
 
 
 def test_openai_sdk_retries_stay_disabled(monkeypatch) -> None:

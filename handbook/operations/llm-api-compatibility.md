@@ -96,8 +96,8 @@ llm:
   未配置模型级值时才回退到现有全局 `MODELSCOPE_MAX_OUTPUT`。
 - `attempt_timeout_seconds` 只限制一次 HTTP 请求；`provider_budget_seconds` 限制同模型全部
   请求与退避。两者还会被整个 run deadline 截短，但都不会改变输出 token 上限。
-- `delivery_mode=buffered_stream` 尚未获得生产验证，当前执行器会 fail-closed；不得用它绕过
-  单文档、reasoning 隔离和发布门禁。
+- `delivery_mode=buffered_stream` 会在内存中分离并聚合 SSE 的 reasoning/content，完整结束后再进入
+  与 non-streaming 相同的单文档、来源与质量门禁；未经精确 endpoint/model live 验证仍不得启用。
 
 ## Attempt artifact
 

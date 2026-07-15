@@ -1,5 +1,9 @@
 # Kimi K2.7 与 Hy3 日报契约可行性实验
 
+> 历史结论（2026-07-14）：本文保留当日非流式探针事实。Kimi K2.7 的 ModelScope 路由已于
+> 2026-07-15 恢复，并通过 buffered stream 完整日报验证；最新结论见
+> [ModelScope Kimi K2.7 Code 流式日报契约验证](kimi-k27-modelscope-live-validation.md)。Hy3 结论未变。
+
 ## 结论
 
 截至 2026-07-14，这两个模型都不应加入生产 fallback：
@@ -50,7 +54,8 @@
 
 ### Kimi K2.7
 
-当前结论是“路由阻塞，提示词层尚不可评估”，不是“模型不遵循 JSON”。下一次只有在以下任一条件成立后才值得复验：
+当日结论是“路由阻塞，提示词层尚不可评估”，不是“模型不遵循 JSON”。2026-07-15 路由恢复后，
+Kimi 已按第二种路径完成流式复验并进入显式 shadow 候选；以下条件保留为当时的复验标准：
 
 1. K2.7 出现在当前凭证的 `/v1/models` 目录并可接受请求；
 2. 配置一个确实提供 K2.7 的 Moonshot 或其他 OpenAI-compatible endpoint。

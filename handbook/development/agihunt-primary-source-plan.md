@@ -198,11 +198,10 @@ AGIHunt health gate 通过，但主 ModelScope 与 Hunyuan 尝试均因空摘要
 3. 哪些频道在 7 天 shadow 里能提升“重要性”而非增加重复；固定频道和轮换频道需要由数据决定。
 4. AGIHunt 条目与直连媒体报道属于同一故事时，最终应保留哪个原帖 URL，以及如何同时保留 AGIHunt 的发现 provenance。
 5. Tavily 对社交/公众号链接的验证误拒绝率是否可接受；没有回放证据前不调整其默认策略。
-6. 当前 ModelScope endpoint/token 尚未启用 Kimi K2.7 Code provider；第二候选
-   `Tencent-Hunyuan/Hy3` 已在真实 GitHub 灰度中返回空摘要并触发 `SummaryQualityError`。
-   本轮提示词验证中，配置的主模型端点继续提示“无可用 provider”，备用端点返回空
-   `choices`；最新健康产物是 `summary_mode: reviewed` 的人工复核回放，不是 AI 结果。
-   在有可用 `required_ai` 结果前，不能将任一端点或模型标记为已验收。
+6. 2026-07-14 的 ModelScope endpoint/token 尚未启用 Kimi K2.7 Code provider；该路由已于
+   2026-07-15 恢复并通过 buffered stream 完整日报验证，但目前只达到显式 shadow 准入，不改变
+   默认 fallback。第二候选 `Tencent-Hunyuan/Hy3` 仍在真实 GitHub 灰度中返回空摘要并触发
+   `SummaryQualityError`。AGIHunt 接入继续不与模型切换绑定成同一次发布。
 
 ## 相关资料
 

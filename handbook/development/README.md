@@ -8,6 +8,10 @@
 - [AGIHunt 主来源接入规划](agihunt-primary-source-plan.md)：官方 Agent API、重要性筛选、授权与灰度启用方案
 - [LLM API 兼容性与输出契约改造计划](llm-api-compatibility-plan.md)：多模型响应分层、必要/候选约束、阶段实施与回归矩阵
 - [LLM 执行架构修复方案](llm-execution-architecture-remediation.md)：移除伪 stream 接口、拆分时间与 token 预算、增加可观测的同模型重试
+- [LLM thinking、JSON 输出与代码定稿可行性分析](llm-thinking-json-feasibility.md)：逐模型判断何时能开 thinking、Structured Outputs 的独立边界，以及由代码定稿日报的推荐架构
+- [ModelScope Kimi K2.7 Code 流式日报契约验证](kimi-k27-modelscope-live-validation.md)：官方流式协议映射、reasoning/content 隔离、完整日报 live 结果与 shadow 准入结论
+- [ModelScope Kimi K2.7 Code 实验记录](kimi-k27-modelscope-experiment-record.md)：本次实验的目标、推进过程、实现改动、验证结果与后续建议概览
+- [小米 MiMo 日报契约可行性实验](xiaomi-mimo-daily-feasibility.md)：OpenAI 兼容验证、V2.5/Pro 的 Non-think 与 Think 对照，以及日报准入结论
 - [接口参考](../reference/api.md)：调用边界和结果模型
 - [架构说明](../architecture/README.md)：确认改动所在层级
 

@@ -98,6 +98,27 @@ llm:
       verification_sample_count: 5
     - provider: modelscope
       base_url: https://api-inference.modelscope.cn/v1
+      model: moonshotai/Kimi-K2.7-Code:Moonshot
+      supports_chat_completions: true
+      supports_json_object: false
+      supports_json_schema: false
+      enforces_json_schema: false
+      request_mode: prompt_only
+      reasoning_field: reasoning_content
+      content_shape: string_or_blocks
+      max_tokens_parameter: max_tokens
+      supports_temperature: false
+      execution:
+        delivery_mode: buffered_stream
+        max_output_tokens: 16000
+        attempt_timeout_seconds: 240
+        max_attempts: 1
+        retry_backoff_seconds: 1
+        retryable_codes: []
+      last_verified_at: 2026-07-15T11:57:00+08:00
+      verification_sample_count: 4
+    - provider: modelscope
+      base_url: https://api-inference.modelscope.cn/v1
       model: Qwen/Qwen3.5-397B-A17B
       supports_chat_completions: true
       request_mode: prompt_only

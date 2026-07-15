@@ -22,6 +22,7 @@ from utils.llm_compat import (
     endpoint_label,
     extract_single_json_object,
     request_chat_completion,
+    request_streaming_chat_completion,
 )
 from utils.llm_execution import (
     ExecutionBudgetExceeded,
@@ -1005,14 +1006,6 @@ def summarize_result(
             execution, deadline_at, now=provider_started_at
         )
 
-        if execution.delivery_mode != "non_stream":
-            _persist_summary_attempts(
-                attempt_artifact_path,
-                attempts,
-                input_fingerprint=input_fingerprint,
-                prompt_fingerprint=prompt_fingerprint,
-            )
-            continue
         if not capability.supports_chat_completions:
             _persist_summary_attempts(
                 attempt_artifact_path,
@@ -1069,14 +1062,19 @@ def summarize_result(
                         {"role": "user", "content": user_input},
                     ],
                     # Publication still requires one complete, private JSON response.
-                    "stream": False,
+                    "stream": execution.delivery_mode == "buffered_stream",
                 }
                 params[capability.max_tokens_parameter] = execution.max_output_tokens
                 if capability.supports_temperature:
                     params["temperature"] = 0.2
                 params.update(model_request_options(capability))
+                request_completion = (
+                    _request_buffered_stream_completion
+                    if execution.delivery_mode == "buffered_stream"
+                    else _request_non_stream_completion
+                )
                 completion = _coerce_completion_result(
-                    _request_non_stream_completion(client, params)
+                    request_completion(client, params)
                 )
                 validated = _validate_summary_payload(
                     completion.content,
@@ -1359,6 +1357,15 @@ def _request_non_stream_completion(client: OpenAI, params: dict) -> CompletionRe
 
     params["stream"] = False
     return request_chat_completion(client, params)
+
+
+def _request_buffered_stream_completion(
+    client: OpenAI, params: dict
+) -> CompletionResult:
+    """Privately buffer an SSE response before contract validation."""
+
+    params["stream"] = True
+    return request_streaming_chat_completion(client, params)
 
 
 def offline_summary(articles: list[dict], limit: int = 10) -> str:
