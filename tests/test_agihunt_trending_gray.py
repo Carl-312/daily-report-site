@@ -22,6 +22,25 @@ from utils.summary_contracts import SummaryAttempt, SummaryItem, SummaryResult
 NOW = datetime(2026, 7, 14, 9, 0, tzinfo=ZoneInfo("Asia/Shanghai"))
 
 
+@pytest.fixture
+def live_publication_deadline(monkeypatch) -> None:
+    """Keep the fixed report date without letting its deadline expire."""
+
+    stage_and_publish = gray_script.stage_and_publish_run
+
+    def stage_with_live_deadline(*args, **kwargs):
+        deadline_at = kwargs.get("deadline_at")
+        timezone = deadline_at.tzinfo if deadline_at is not None else NOW.tzinfo
+        kwargs["deadline_at"] = datetime.now(timezone) + timedelta(minutes=20)
+        return stage_and_publish(*args, **kwargs)
+
+    monkeypatch.setattr(
+        gray_script,
+        "stage_and_publish_run",
+        stage_with_live_deadline,
+    )
+
+
 def agihunt_article() -> Article:
     return Article(
         title="AGIHunt fixture release",
@@ -114,6 +133,7 @@ def test_reader_visibility_check_detects_private_data_exposure(tmp_path: Path) -
 
 def test_isolated_gray_writes_private_evidence_without_touching_public_paths(
     tmp_path: Path,
+    live_publication_deadline,
 ) -> None:
     public_data = tmp_path / "public-data"
     public_content = tmp_path / "public-content"
@@ -183,7 +203,7 @@ def test_isolated_gray_writes_private_evidence_without_touching_public_paths(
 
 
 def test_isolated_gray_can_use_an_ai_summary_for_prompt_validation(
-    tmp_path: Path, monkeypatch
+    tmp_path: Path, monkeypatch, live_publication_deadline
 ) -> None:
     cfg = Settings(agihunt_api_key="test-key")
     article = agihunt_article()
@@ -272,6 +292,7 @@ def test_isolated_gray_refuses_to_label_an_offline_result_as_ai(
 
 def test_isolated_gray_can_validate_a_reviewed_source_faithful_summary(
     tmp_path: Path,
+    live_publication_deadline,
 ) -> None:
     cfg = Settings(agihunt_api_key="test-key")
     article = agihunt_article()
