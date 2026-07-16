@@ -11,6 +11,7 @@ import random
 import time
 from typing import Any, List
 import requests
+from requests.utils import get_environ_proxies
 
 
 @dataclass
@@ -80,6 +81,7 @@ class BaseSource(ABC):
         *,
         max_attempts: int = 3,
         deadline_at: datetime | None = None,
+        use_environment_proxy: bool = False,
         sleep=time.sleep,
         random_value=random.random,
     ) -> requests.Response:
@@ -93,8 +95,14 @@ class BaseSource(ABC):
                 timeout, deadline_at, "source fetch"
             )
             try:
+                proxies = (
+                    get_environ_proxies(url) if use_environment_proxy else {}
+                )
                 response = self.session.get(
-                    url, headers=self.HEADERS, timeout=request_timeout, proxies={}
+                    url,
+                    headers=self.HEADERS,
+                    timeout=request_timeout,
+                    proxies=proxies,
                 )
                 if response.status_code == 429 or response.status_code >= 500:
                     response.raise_for_status()

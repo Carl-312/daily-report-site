@@ -17,9 +17,11 @@ class Session:
     def __init__(self, outcomes):
         self.outcomes = iter(outcomes)
         self.calls = 0
+        self.last_kwargs = {}
 
     def get(self, *args, **kwargs):
         self.calls += 1
+        self.last_kwargs = kwargs
         outcome = next(self.outcomes)
         if isinstance(outcome, Exception):
             raise outcome
@@ -63,3 +65,21 @@ def test_get_does_not_retry_non_retryable_client_error() -> None:
         source._get("https://example.test", sleep=lambda _: None)
     assert source.session.calls == 1
     assert source.last_attempts == 1
+
+
+def test_get_can_use_explicit_environment_proxy_without_trusting_netrc(
+    monkeypatch,
+) -> None:
+    source = Source()
+    source.session = Session([response()])
+    proxy = {"https": "http://proxy.example.test:8080"}
+    monkeypatch.setattr("sources.base.get_environ_proxies", lambda _url: proxy)
+
+    source._get(
+        "https://example.test",
+        use_environment_proxy=True,
+        sleep=lambda _: None,
+    )
+
+    assert source.session.trust_env is False
+    assert source.session.last_kwargs["proxies"] == proxy

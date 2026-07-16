@@ -1,24 +1,37 @@
 """
-The Verge AI News Source
-Fetches AI news from theverge.com/ai-artificial-intelligence
+The Verge AI news source.
+
+The public AI page no longer embeds publication dates in article URLs. Its
+official Atom feed is the stable machine-readable source for canonical links,
+summaries, and timezone-aware publication timestamps.
 """
 
 from __future__ import annotations
-import re
-from datetime import datetime, timezone, timedelta
-from typing import List
 
-from .base import BaseSource, Article
+from datetime import datetime, timedelta, timezone
+from html import unescape
+import re
+from typing import List
+from urllib.parse import urlparse
+from xml.etree import ElementTree
+
+from .base import Article, BaseSource
+
 
 beijing_tz = timezone(timedelta(hours=8))
+ATOM_NAMESPACE = "http://www.w3.org/2005/Atom"
+ATOM = f"{{{ATOM_NAMESPACE}}}"
 
 
 class TheVergeSource(BaseSource):
-    """The Verge AI News Source"""
+    """Fetch recent articles from The Verge's official AI Atom feed."""
 
     name = "theverge"
     BASE_URL = "https://www.theverge.com"
-    AI_URL = "https://www.theverge.com/ai-artificial-intelligence"
+    AI_URL = f"{BASE_URL}/ai-artificial-intelligence"
+    FEED_URL = f"{BASE_URL}/rss/ai-artificial-intelligence/index.xml"
+    MAX_AGE = timedelta(hours=48)
+    FUTURE_TOLERANCE = timedelta(minutes=5)
 
     def fetch(
         self,
@@ -26,104 +39,128 @@ class TheVergeSource(BaseSource):
         reference_dt: datetime | None = None,
         deadline_at: datetime | None = None,
     ) -> List[Article]:
-        """Fetch AI news from The Verge"""
-        resp = self._get(self.AI_URL, deadline_at=deadline_at)
-        resp.raise_for_status()
-        soup = self._parse_html(resp.content)
+        """Fetch recent AI articles with authoritative publication timestamps."""
+        response = self._get(
+            self.FEED_URL,
+            deadline_at=deadline_at,
+            use_environment_proxy=True,
+        )
+        response.raise_for_status()
 
-        articles = self._parse_articles(soup, reference_dt=reference_dt)
-        filtered = [
-            a
-            for a in articles
-            if self._is_recent(a.publish_time, reference_dt=reference_dt)
-        ]
+        candidates = self._parse_feed(response.content)
+        self.last_fetched_count = len(candidates)
 
-        return filtered[:max_articles]
+        accepted = [
+            article
+            for article in candidates
+            if self._is_recent(article.publish_time, reference_dt=reference_dt)
+        ][: max(0, max_articles)]
 
-    def _parse_articles(
-        self, soup, reference_dt: datetime | None = None
-    ) -> List[Article]:
-        """Parse article links from AI section"""
-        selectors = [
-            "h2 a",
-            "h3 a",
-            ".duet--content-cards--content-card a",
-            'a[href*="/2025/"]',
-            'a[href*="/2026/"]',
-        ]
+        self.last_accepted_count = len(accepted)
+        self.last_status = "ok" if accepted else "empty"
+        return accepted
 
-        all_links = []
-        for selector in selectors:
-            try:
-                elements = soup.select(selector)
-                all_links.extend(elements)
-            except Exception:
-                continue
+    def _parse_feed(self, content: bytes) -> List[Article]:
+        """Parse canonical article metadata from The Verge's Atom feed."""
+        root = ElementTree.fromstring(content)
+        seen_urls: set[str] = set()
+        articles: list[Article] = []
 
-        seen_urls = set()
-        articles = []
-
-        for element in all_links:
-            if element.name != "a":
-                continue
-
-            title = element.get_text(strip=True)
-            link = element.get("href", "")
-
-            if link and not link.startswith("http"):
-                link = (
-                    self.BASE_URL + link
-                    if link.startswith("/")
-                    else f"{self.BASE_URL}/{link}"
-                )
+        for entry in root.findall(f"{ATOM}entry"):
+            title = self._clean_fragment(entry.findtext(f"{ATOM}title") or "")
+            publish_time = (entry.findtext(f"{ATOM}published") or "").strip()
+            link = self._entry_link(entry)
 
             if (
-                link in seen_urls
-                or not title
+                not title
                 or len(title) < 10
-                or "theverge.com" not in link
+                or not publish_time
+                or not self._parse_published_datetime(publish_time)
+                or not self._is_theverge_article(link)
+                or link in seen_urls
             ):
                 continue
 
             seen_urls.add(link)
-            publish_time = self._extract_date_from_url(link)
-
+            description = self._clean_fragment(
+                entry.findtext(f"{ATOM}summary") or ""
+            )
             articles.append(
                 Article(
-                    title=title[:150],
+                    title=title[:200],
                     link=link,
-                    description="",
+                    description=description,
                     publish_time=publish_time,
-                    priority=1
-                    if self._is_recent(publish_time, reference_dt=reference_dt)
-                    else 0,
+                    priority=1,
                     source=self.name,
                 )
             )
 
         return articles
 
-    def _extract_date_from_url(self, url: str) -> str:
-        """Extract date from The Verge URL format"""
-        match = re.search(r"/(\d{4})/(\d{1,2})/(\d{1,2})/", url)
-        if match:
-            year, month, day = match.groups()
-            return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+    @staticmethod
+    def _entry_link(entry: ElementTree.Element) -> str:
+        for link in entry.findall(f"{ATOM}link"):
+            if link.get("rel", "alternate") == "alternate":
+                return (link.get("href") or "").strip()
         return ""
+
+    @staticmethod
+    def _clean_fragment(value: str) -> str:
+        """Convert an Atom HTML fragment into compact reader-facing text."""
+        from bs4 import BeautifulSoup
+
+        text = BeautifulSoup(unescape(value), "html.parser").get_text(" ", strip=True)
+        return re.sub(r"\s+", " ", text).strip()
+
+    @staticmethod
+    def _is_theverge_article(link: str) -> bool:
+        try:
+            parsed = urlparse(link)
+        except ValueError:
+            return False
+        return (
+            parsed.scheme in {"http", "https"}
+            and parsed.netloc.lower() in {"theverge.com", "www.theverge.com"}
+            and parsed.path not in {"", "/"}
+        )
+
+    @staticmethod
+    def _parse_published_datetime(value: str) -> datetime | None:
+        text = (value or "").strip()
+        if not text:
+            return None
+        try:
+            parsed = datetime.fromisoformat(text.replace("Z", "+00:00"))
+        except ValueError:
+            try:
+                parsed = datetime.strptime(text, "%Y-%m-%d")
+            except ValueError:
+                return None
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=beijing_tz)
+        return parsed
 
     def _is_recent(
         self, publish_time: str, reference_dt: datetime | None = None
     ) -> bool:
-        """Check if article is within last 48 hours"""
-        if not publish_time:
+        """Return whether a publication falls inside the rolling 48-hour window."""
+        published = self._parse_published_datetime(publish_time)
+        if published is None:
             return False
-        try:
-            pub_date = datetime.strptime(publish_time, "%Y-%m-%d")
-            now = (
-                (reference_dt or datetime.now(beijing_tz))
-                .astimezone(beijing_tz)
-                .replace(tzinfo=None)
-            )
-            return (now - pub_date).days <= 1
-        except Exception:
-            return False
+
+        reference = reference_dt or datetime.now(timezone.utc)
+        if reference.tzinfo is None:
+            reference = reference.replace(tzinfo=beijing_tz)
+
+        age = reference.astimezone(timezone.utc) - published.astimezone(timezone.utc)
+        return -self.FUTURE_TOLERANCE <= age <= self.MAX_AGE
+
+    @staticmethod
+    def _extract_date_from_url(url: str) -> str:
+        """Retain compatibility with callers that inspect legacy dated URLs."""
+        match = re.search(r"/(\d{4})/(\d{1,2})/(\d{1,2})/", url)
+        if not match:
+            return ""
+        year, month, day = match.groups()
+        return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
