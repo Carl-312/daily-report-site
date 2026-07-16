@@ -82,9 +82,7 @@ class TheVergeSource(BaseSource):
                 continue
 
             seen_urls.add(link)
-            description = self._clean_fragment(
-                entry.findtext(f"{ATOM}summary") or ""
-            )
+            description = self._clean_fragment(entry.findtext(f"{ATOM}summary") or "")
             articles.append(
                 Article(
                     title=title[:200],

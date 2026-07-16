@@ -95,9 +95,7 @@ class BaseSource(ABC):
                 timeout, deadline_at, "source fetch"
             )
             try:
-                proxies = (
-                    get_environ_proxies(url) if use_environment_proxy else {}
-                )
+                proxies = get_environ_proxies(url) if use_environment_proxy else {}
                 response = self.session.get(
                     url,
                     headers=self.HEADERS,
