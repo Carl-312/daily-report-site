@@ -1,0 +1,431 @@
+{
+  "date": "2026-07-17",
+  "articles": [
+    {
+      "title": "AI日报：开源模型Kimi K3登场；Google Vids引入Gemini Omni模型；智谱AI冲击10亿美元ARR",
+      "link": "https://news.aibase.com/zh/daily/29690",
+      "description": "欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、2.8万亿参数、100万词元上下文，Kimi K3把开源大模型的 天花板 顶到了全球 最高 文章介绍了月之暗面发布的Kimi K3模型，其参数规模达到2.8万亿，成为全球 最大 的开源模型。该模型支持视觉理解，并具备100万词元的超长上下文窗口，能够处理复杂的任务场景。同时，文章提到国产大模型在商业化方面表现出色，景气度不断上升。 🧠 Kimi K3参数规模达2.8万亿，成为全球 最大 开源模型。 📖 支持视觉理解与100万词元上下文窗口，处理复杂任务能力显著提升。 💰 国产大模型景气度上升，商业化节奏加快，国产替代逻辑被强化。 2、Google Vids…",
+      "publish_time": "未知时间",
+      "content": "首页\nAI 资讯\nAI 产品库\nGEO 平台\nMCP 服务\n模型算力广场\nZH\nAI资讯\n最新AI日报\n正文\nAI日报：开源模型Kimi K3登场；Google Vids引入Gemini Omni模型；智谱AI冲击10亿美元ARR\n发布于最新AI日报\n发布时间 :\n2026年7月17号 15:54\n阅读 :\n1\n分钟\n欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。\n新鲜AI产品\n点击了解\n：\nhttps://app.aibase.com/zh\n1、2.8万亿参数、100万词元上下文，Kimi K3把开源大模型的\n天花板\n顶到了全球\n最高\n文章介绍了月之暗面发布的Kimi K3模型，其参数规模达到2.8万亿，成为全球\n最大\n的开源模型。该模型支持视觉理解，并具备100万词元的超长上下文窗口，能够处理复杂的任务场景。同时，文章提到国产大模型在商业化方面表现出色，景气度不断上升。\n【AiBase提要:】\n🧠 Kimi K3参数规模达2.8万亿，成为全球\n最大\n开源模型。\n📖 支持视觉理解与100万词元上下文窗口，处理复杂任务能力显著提升。\n💰 国产大模型景气度上升，商业化节奏加快，国产替代逻辑被强化。\n2、Google Vids引入Gemini Omni模型 上传自拍+音频就能定制专属数字分身\n谷歌推出Google Vids新功能，用户可通过上传自拍和语音生成专属数字虚拟人，并结合Gemini Omni模型进行视频创作，同时注重安全与合规性。\n【AiBase提要:】\n🖼️ 上传自拍和语音即可生成专属数字虚拟人。\n🎥 融合Gemini Omni模型，实现文字与图片的视频生成。\n🔒 强调安全与合规，通过SynthID技术防止虚假视频。\n3、多家银行上线AI主题银行卡，刷卡可获大模型Token和AI权益\n多家银行近期推出AI主题信用卡和借记卡产品，将大模型Token、AI会员服务等智能化权益引入传统银行卡体系，试图借助人工智能生态吸引年轻用户和科技从业者。\n【AiBase提要:】\n🧠 银行推出AI主题银行卡，引入大模型Token和AI会员服务。\n💰 刷卡送Token的三种模式，满足不同用户需求。\n🌐 AI权益与金融消费场景融合，吸引年轻用户和科技从业者。\n4、Grok 推出 Automations 功能：定时跑、邮件一到就触发，还能替你回信\nGrok推出了Automations功能，让用户只需描述任务需求并设定运行时间或触发条件，即可让Grok自动完成工作。该功能支持定时运行和邮件触发，适用于多种场景，如调研、邮件标记等，极大提升了工作效率。\n【AiBase提要:】\n✨ 提供自动化任务功能，用户只需描述需求并设定运行时间或触发条件，即可让Grok自动完成工作。\n📧 支持邮件触发，Grok会实时监控收件箱，并在符合条件的邮件到达时立即启动任务。\n🔄 每次运行都是全新请求，Grok使用\n最新\n数据执行任务，确保结果准确且实时。\n5、5个月增长15倍，智谱AI凭Coding路线冲击10亿美元ARR\n智谱在AI Coding领域的快速布局使其年度经常性收入（ARR）在5个月内增长15倍，达到10亿美元规模，显示出国内大模型企业在商业化路径上的探索成果。\n【AiBase提要:】\n🚀 智谱年度经常性收入（ARR）在5个月内增长15倍，达到10亿美元规模。\n💻 AI Coding和视频生成成为生成式AI领域商业化增长最快的两大方向。\n📈 智谱通过强化代码生成能力，推动ARR快速增长，并与海外竞争对手展开激烈竞争。\n6、数字永生？面壁智能开源企业数字员工平台StaffDeck\n面壁智能开源了名为StaffDeck的企业级平台，该平台专注于构建和管理数字员工，旨在将组织内部的专业知识、标准作业流程（SOP）以及各类决策规则转化为可长期执行和迭代的数字员工。\n【AiBase提要:】\n🧠 StaffDeck是一个用于构建和管理数字员工的企业级平台，旨在将组织内部的专业知识、标准作业流程（SOP）以及各类决策规则转化为可长期执行和迭代的数字员工。\n💼 与市面上大量套着企业外壳的对话机器人不同，StaffDeck瞄准的是数字劳动力，能够持续工作、不断改进并保留组织知识。\n🌐 StaffDeck由多家机构联合打造，包括面壁智能、东北大学、清华大学自然语言处理实验室（THUNLP）、OpenBMB以及AI9Stars，使其成为面向企业AI落地场景的开放平台。\n详情链接:https://github.com/OpenBMB/StaffDeck\n7、天工短剧工作台上线Agent智能分镜与无限画布，昆仑万维要把AI短剧从随机抽卡拉向可控生产\n文章详细介绍了天工短剧工作台如何通过Agent智能分镜和无限画布技术，解决AI短剧创作中的不可控、质感与产能难平衡以及团队管理难统筹等问题，同时强调了其在精品化、规模化方面的突破。\n【AiBase提要:】\n🎥 天工短剧工作台推出Agent智能分镜与无限画布，提升创作可控性。\n🎬 通过导演思维拆解为六个可视化环节，实现可控生产。\n📊 面向企业级用户优化协同体系，支持多维度数据管理。\n详情链接:https://www.skyproduction.cn/\n8、影视飓风49元AI课程上线首日售出10万份，单日营收超490万元\n影视飓风推出的49元AI实战课程在首日实现销售突破，展现了其在AI教育市场的商业转化能力，但课程质量与用户体验仍需关注。\n【AiBase提要:】\n🎥 影视飓风推出49元AI实战课程，首日销量突破10万份，销售额超490万元。\n⚙️ 课程涵盖AI图片生成、视频生成等基础应用及影视创作进阶玩法，由影视飓风与TapNow联合推出。\n⚠️ 高销量伴随用户评价分化，部分用户反映内容模板化、实操灵活性不足等问题。\n相关推荐\nNVIDIA 发布 Nemotron 3 Embed 系列，8B 版本登顶 RTEB 检索基准\nNVIDIA推出Nemotron3Embed嵌入向量模型系列，专为生产级RAG、智能体检索、代码检索和记忆场景设计。8B版本在RTEB基准测试中排名第一，成为性能最强的开源嵌入模型。系列包含三个开放检查点：精度优先的Nemotron-3-Embed-8B-BF16、轻量化的1B-BF16版，以及针对Blackwell架构优化的1B-NVFP4四比特版本，所有模型均采用双向注意力机制。\n2026年7月17号 17:14\n110.4k\n银河通用机器人创始人王鹤： 2028 年，具身智能的 “ChatGPT 时刻” 即将来临！\n银河通用机器人CTO王鹤在2026世界人工智能大会上预测，具身智能2028年前将迎来重大突破，表现媲美ChatGPT。基础模型经海量数据训练，对未专门训练任务可达70%-80%成功率，堪比早期数字模型。\n2026年7月17号 16:44\n96.4k\n超低延迟 AI 对话神器！Wan-Streamer v0.2 让你与 AI 零距离沟通\n通义实验室推出Wan-Streamer v0.2，彻底解决传统视频通话卡顿、延迟和声画不同步问题。该端到端全模态模型仅550毫秒响应，将听、看、说、演能力整合于单一Transformer架构，实现近乎真实的“面对面”自然交流。\n2026年7月17号 16:32\n78.7k\n文远知行推出物理 AI 大模型 WITT\n文远知行发布物理AI认知基础大模型WeRide WITT，核心是引入“最小物理事实单元”概念，让AI能更精准地理解视频、图像和文本等多模态信息，推动自动驾驶复杂场景的认知能力升级。\n2026年7月17号 15:13\n153.6k\n百度沈抖：每位员工每月发 1000 元额度自由体验主流大模型，强制推行AI办公难见效\n百度沈抖预测，2026年下半年将涌现大量通用与行业智能体落地案例；未来三年是关键窗口，90%的工作将由AI深度协同而非完全替代人完成。\n2026年7月17号 14:03\n171.3k\n智启未来，您的人工智能解决方案智库\nEnglish\n简体中文\n繁體中文\nにほんご\n© 2026\nAIBase",
+      "priority": 1,
+      "source": "aibase",
+      "provenance": {}
+    },
+    {
+      "title": "SpaceX suddenly aborts second Starship V3 launch after ignition",
+      "link": "https://techcrunch.com/2026/07/16/spacex-suddenly-aborts-second-starship-v3-launch-after-ignition/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "San Francisco mayor pushes for tougher rules after the Waymo traffic fiasco",
+      "link": "https://techcrunch.com/2026/07/16/san-francisco-mayor-pushes-for-tougher-rules-after-the-waymo-traffic-fiasco/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Google Vids now lets you star in your own AI videos",
+      "link": "https://techcrunch.com/2026/07/16/google-vids-now-lets-you-star-in-your-own-ai-videos/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Founders Fund hires former OpenAI exec Ryan Beiermeister (and not because of her ‘Mafia’ skills)",
+      "link": "https://techcrunch.com/2026/07/16/founders-fund-hires-former-openai-exec-ryan-beiermeister-and-not-because-of-her-mafia-skills/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Roblox launches an AI-powered game-creation feature in its mobile app",
+      "link": "https://techcrunch.com/2026/07/16/roblox-launches-an-ai-powered-game-creation-feature-in-its-mobile-app/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Why is OpenAI selling a ChatGPT basketball?",
+      "link": "https://techcrunch.com/2026/07/16/why-is-openai-selling-a-chatgpt-basketball/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Yes, you can now order DoorDash from the command line",
+      "link": "https://techcrunch.com/2026/07/16/yes-you-can-now-order-doordash-from-the-command-line/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Sheryl Sandberg leads $10 million investment in AI-powered vehicle inspection service",
+      "link": "https://techcrunch.com/2026/07/16/sheryl-sandberg-leads-10-million-investment-in-ai-powered-vehicle-inspection-service/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Coca-Cola suspended production at its Fairlife dairy after a ransomware attack",
+      "link": "https://techcrunch.com/2026/07/16/coca-cola-suspended-production-at-its-fairlife-dairy-after-a-ransomware-attack/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Oil giant BP shutters its corporate venture arm after 20 years",
+      "link": "https://techcrunch.com/2026/07/16/oil-giant-bp-shutters-its-corporate-venture-arm-after-20-years/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Uber’s $14.8B Delivery Hero deal would nearly double its global footprint",
+      "link": "https://techcrunch.com/2026/07/16/ubers-14-8b-delivery-hero-deal-would-nearly-double-its-global-footprint/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Newsletter platform Beehiiv now lets subscribers chat with each other, adds AI",
+      "link": "https://techcrunch.com/2026/07/16/newsletter-platform-beehiiv-now-lets-subscribers-chat-with-each-other-adds-ai/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "X cracks down on creators who steal content",
+      "link": "https://techcrunch.com/2026/07/16/x-cracks-down-on-creators-who-steal-content/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "Google’s AI Mode now lets you link and interact with select apps",
+      "link": "https://techcrunch.com/2026/07/16/googles-ai-mode-now-lets-you-link-and-interact-with-select-apps/",
+      "description": "",
+      "publish_time": "2026-07-16",
+      "content": "",
+      "priority": 1,
+      "source": "techcrunch",
+      "provenance": {}
+    },
+    {
+      "title": "New York governor says she’s using AI to analyze ‘every single rule’ in the state",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/966647/new-york-governor-kathy-hochul-ai-policies",
+      "description": "New York Governor Kathy Hochul might have just signed a moratorium on new AI data centers in the state, but she's not against using the technology herself. During an interview with Bloomberg's Odd Lots podcast, Hochul said that her team is using \"AI to analyze every single rule, regulation, [and] policy\" to check for outdated […]",
+      "publish_time": "2026-07-16T13:58:37-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "Google is renaming NotebookLM to Gemini Notebook",
+      "link": "https://www.theverge.com/tech/966112/google-gemini-notebook-notebooklm",
+      "description": "Google is giving its AI note-taking app a new name. The company announced on Thursday that NotebookLM is becoming Gemini Notebook, but will remain a standalone app even as it integrates more deeply across Gemini and Google Search. Google first revealed Gemini Notebook - then called Project Tailwind - in May 2023 before widely releasing […]",
+      "publish_time": "2026-07-16T12:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "Claude can now use your 1Password credentials for you",
+      "link": "https://www.theverge.com/tech/966442/1password-anthropic-claude-browser-integration",
+      "description": "1Password has launched a new browser integration for Claude that allows the Anthropic chatbot to access stored security credentials like usernames and passwords. The 1Password for Claude feature means that users can authorize Claude to complete multi-step tasks like booking travel and managing online accounts on their behalf without having to manually input their login […]",
+      "publish_time": "2026-07-16T09:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "Google ordered to open Android and Search to rivals in Europe",
+      "link": "https://www.theverge.com/policy/966438/eu-google-android-ai-interoperability-search-data-dma",
+      "description": "Google must give rival AI assistants and search engines greater access to key parts of Android and Google Search after the European Union ordered the company to comply with the bloc's digital antitrust rules. The two decisions, handed down Thursday, could weaken Google's control over two of the tech industry's most important platforms and have […]",
+      "publish_time": "2026-07-16T08:06:51-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "Computer cops",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/965066/ai-police-cops",
+      "description": "I stood before a hulking glass and brick structure in the heart of Fort Worth, Texas. Thousands gathered inside to see what had been billed as \"the future of policing in the digital age.\" As press, I was prohibited from entering, but from a number of nearby locations, I met with attendees who told me […]",
+      "publish_time": "2026-07-16T07:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "xAI sues a man for using Grok to generate CSAM ‘deepfakes’",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/966293/xai-grok-user-lawsuit-csam",
+      "description": "The Elon Musk-owned xAI is suing a South Carolina man who allegedly used the company's Grok AI chatbot to generate child sexual abuse material (CSAM). In a lawsuit reported earlier by Reuters, xAI claims Terry Wayne Harwood \"knowingly and intentionally used Grok to circumvent safeguards, alter nonconsensual images, and generate and distribute CSAM,\" breaching the […]",
+      "publish_time": "2026-07-15T17:33:20-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "AI slop movies are the new direct-to-video cash grabs",
+      "link": "https://www.theverge.com/entertainment/965616/ash-koosha-odysseus-the-fall-foundtain-zero-tilly-norwood",
+      "description": "This weekend, cinephiles across the world will march to their local theaters to feast their eyes on Christopher Nolan's new adaptation of The Odyssey. It's on track to rake in anywhere between $80-$100 million in just a few days. People are clearly excited to see how Nolan uses cutting-edge filmmaking tech to make the Homeric […]",
+      "publish_time": "2026-07-15T16:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "Suno snatched millions of songs from YouTube, Genius, and Deezer",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/966072/suno-ai-music-training-scraping-youtube-hack",
+      "description": "Suno data obtained in a hacking incident has exposed that the AI music generator was trained by scraping millions of songs and lyrics from online audio platforms, including YouTube Music, Deezer, and Genius, 404 Media reports. Given that Suno has avoided revealing what's in its training datasets and how they were acquired, this a rare […]",
+      "publish_time": "2026-07-15T13:48:01-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    },
+    {
+      "title": "OpenAI finally launches hardware… for Codex",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/965901/openai-hardware-codex-micro-launch",
+      "description": "OpenAI is finally releasing some hardware. No, it isn't the mysterious AI-powered device the company is developing with former Apple designer Jony Ive, a project already tangled up in a messy lawsuit. Instead, it's a product designed to be used with its coding platform, Codex. The device, a square-shaped block of buttons called Codex Micro, […]",
+      "publish_time": "2026-07-15T12:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "provenance": {}
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-07-17",
+    "reference_dt": "2026-07-17T17:30:57.957799+08:00",
+    "enabled": false,
+    "applied": false,
+    "skip_reason": "disabled",
+    "error": null,
+    "input_count": 24,
+    "prefiltered_count": 24,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 0,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 24,
+    "strict_final_count": 24,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "disabled",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "verify": [],
+      "priority_refill": [],
+      "secondary_refill": [],
+      "official_fallback": []
+    },
+    "parameters": {
+      "min_articles": 10,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 7,
+      "max_verify_calls": 6,
+      "max_refill_rounds": 1,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Tavily enrichment is disabled for this run."
+    ]
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "月之暗面发布全球最大开源模型Kimi K3",
+        "summary": "月之暗面发布开源大模型Kimi K3，参数规模达2.8万亿并支持100万词元超长上下文。",
+        "url": "https://news.aibase.com/zh/daily/29690"
+      },
+      {
+        "article_id": "a24",
+        "title": "OpenAI为Codex推出实体硬件Codex Micro",
+        "summary": "OpenAI为其编程平台Codex推出实体硬件Codex Micro，外形为方形按键模块。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/965901/openai-hardware-codex-micro-launch"
+      },
+      {
+        "article_id": "a17",
+        "title": "Google将NotebookLM更名为Gemini Notebook",
+        "summary": "Google宣布将AI笔记应用NotebookLM更名为Gemini Notebook，并继续作为独立应用运营。",
+        "url": "https://www.theverge.com/tech/966112/google-gemini-notebook-notebooklm"
+      },
+      {
+        "article_id": "a18",
+        "title": "Claude集成1Password可自动调用密码",
+        "summary": "密码管理工具1Password推出浏览器集成，允许Claude在授权后自动调用存储的账号密码完成任务。",
+        "url": "https://www.theverge.com/tech/966442/1password-anthropic-claude-browser-integration"
+      },
+      {
+        "article_id": "a15",
+        "title": "Google AI Mode新增应用联动交互",
+        "summary": "Google的AI Mode新增功能，支持用户将部分应用接入并与AI进行联动交互。",
+        "url": "https://techcrunch.com/2026/07/16/googles-ai-mode-now-lets-you-link-and-interact-with-select-apps/"
+      },
+      {
+        "article_id": "a4",
+        "title": "Google Vids上线AI个性化视频功能",
+        "summary": "Google Vids上线新功能，用户可通过AI生成由自己担任主角的个性化视频内容。",
+        "url": "https://techcrunch.com/2026/07/16/google-vids-now-lets-you-star-in-your-own-ai-videos/"
+      },
+      {
+        "article_id": "a6",
+        "title": "Roblox移动应用推出AI游戏创作功能",
+        "summary": "Roblox在其移动应用中上线AI驱动的游戏创作功能，帮助用户快速生成游戏内容。",
+        "url": "https://techcrunch.com/2026/07/16/roblox-launches-an-ai-powered-game-creation-feature-in-its-mobile-app/"
+      },
+      {
+        "article_id": "a23",
+        "title": "Suno被曝抓取数百万首歌曲训练模型",
+        "summary": "据报道AI音乐生成工具Suno曾通过抓取YouTube、Deezer等平台数百万首歌曲和歌词进行训练。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/966072/suno-ai-music-training-scraping-youtube-hack"
+      },
+      {
+        "article_id": "a21",
+        "title": "xAI起诉男子滥用Grok生成违法内容",
+        "summary": "xAI起诉一名南卡罗来纳州男子，指控其故意绕过安全限制使用Grok生成儿童性虐待深度伪造内容。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/966293/xai-grok-user-lawsuit-csam"
+      },
+      {
+        "article_id": "a19",
+        "title": "欧盟裁定Google须开放Android和Search接口",
+        "summary": "欧盟裁定Google必须向竞争对手开放Android和Google Search的部分核心接口。",
+        "url": "https://www.theverge.com/policy/966438/eu-google-android-ai-interoperability-search-data-dma"
+      }
+    ],
+    "discussion_topic": "如果AI助手能直接调用你的密码和账户完成订票等日常事务，你会放心把凭证交给它管理吗？",
+    "provider": "SiliconFlow",
+    "model": "Pro/moonshotai/Kimi-K2.6",
+    "input_fingerprint": "6d57279777743e9dc0d683757dbea8e4271fd86437c548c0a4179ad3a333bc09",
+    "prompt_fingerprint": "11cd56e029ffeea98986c9795f1f05863dc269b9ee205f701ad79909af107de7",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "ZhipuAI/GLM-5.2",
+        "status": "failed",
+        "error_kind": "SummaryQualityError"
+      },
+      {
+        "provider": "SiliconFlow",
+        "model": "Pro/moonshotai/Kimi-K2.6",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "validation_passed": true
+  }
+}
