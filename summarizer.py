@@ -39,6 +39,12 @@ def modelscope_request_options(model: str) -> dict[str, Any]:
     """Return verified ModelScope-specific generation controls for a model."""
     if model == "ZhipuAI/GLM-5.2":
         return {"extra_body": {"enable_thinking": False}}
+    if model == "Qwen/Qwen3.5-35B-A3B":
+        return {
+            "extra_body": {
+                "chat_template_kwargs": {"enable_thinking": False},
+            }
+        }
     return {}
 
 

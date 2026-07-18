@@ -12,10 +12,10 @@ def test_default_llm_models(monkeypatch, tmp_path) -> None:
 
     cfg = load_config(str(tmp_path / "missing-config.yaml"))
 
-    assert Settings().model == "ZhipuAI/GLM-5.2"
+    assert Settings().model == "Qwen/Qwen3.5-35B-A3B"
     assert Settings().modelscope_secondary_model == ""
     assert Settings().fallback_model == "Pro/moonshotai/Kimi-K2.6"
-    assert cfg.model == "ZhipuAI/GLM-5.2"
+    assert cfg.model == "Qwen/Qwen3.5-35B-A3B"
     assert cfg.modelscope_secondary_model == ""
     assert cfg.fallback_model == "Pro/moonshotai/Kimi-K2.6"
 

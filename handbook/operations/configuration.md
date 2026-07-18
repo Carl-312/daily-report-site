@@ -169,7 +169,7 @@ dist/     HTML 构建输出
 
 ```bash
 MODELSCOPE_API_KEY=sk-your-key
-MODELSCOPE_MODEL=ZhipuAI/GLM-5.2
+MODELSCOPE_MODEL=Qwen/Qwen3.5-35B-A3B
 MODELSCOPE_SECONDARY_MODEL=
 SILICONFLOW_MODEL=Pro/moonshotai/Kimi-K2.6
 SYFT_WEB_APP_URL=https://syft.example.com
@@ -178,13 +178,15 @@ AGIHUNT_API_KEY=
 TAVILY_API_KEY=
 ```
 
-AI 摘要的默认尝试顺序是：ModelScope `ZhipuAI/GLM-5.2` → SiliconFlow
+AI 摘要的默认尝试顺序是：ModelScope `Qwen/Qwen3.5-35B-A3B` → SiliconFlow
 `Pro/moonshotai/Kimi-K2.6`。只有显式设置 `MODELSCOPE_SECONDARY_MODEL` 时，才会在两者
 之间增加第二个 ModelScope 候选。
 
-当前状态（2026-07-14）：`ZhipuAI/GLM-5.2` 是约 753B 参数的当前旗舰。结构化摘要请求
-固定传入 `enable_thinking=false`，避免 2000 token 上限被 reasoning 消耗；相同 14 篇
-输入的本地真实请求已返回非空 `choices`、7 条摘要并通过完整 JSON/中文/来源合同。
+当前状态（2026-07-18）：ModelScope 官方 API-Inference 文档使用
+`Qwen/Qwen3.5-35B-A3B` 作为当前 OpenAI 兼容示例，GitHub smoke run `29635323864`
+已用仓库 Secret 验证非空 `choices`。结构化摘要请求通过 `chat_template_kwargs` 固定关闭
+thinking，避免 2000 token 上限被推理过程消耗。旧的 `ZhipuAI/GLM-5.2` 在两次生产尝试中
+连续返回空 `choices`，因此不再作为默认模型。
 `Tencent-Hunyuan/Hy3` 的非流式响应会拼接多个 JSON 对象，前三个对象为空
 `choices`，导致 OpenAI SDK 抛出 `JSONDecodeError`，因此不再作为默认备用模型。
 历史人工复核或离线回放仍只能验证契约与渲染，不能作为 API 成功证据。

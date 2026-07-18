@@ -131,6 +131,14 @@ def test_glm52_modelscope_request_disables_thinking() -> None:
     assert summarizer.modelscope_request_options("custom/model") == {}
 
 
+def test_qwen35_modelscope_request_disables_thinking() -> None:
+    assert summarizer.modelscope_request_options("Qwen/Qwen3.5-35B-A3B") == {
+        "extra_body": {
+            "chat_template_kwargs": {"enable_thinking": False},
+        }
+    }
+
+
 def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
     monkeypatch.setattr(
         summarizer,

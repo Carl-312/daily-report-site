@@ -72,7 +72,7 @@
 `MODELSCOPE_SECONDARY_MODEL` 是可选的非密钥配置，默认留空；只有经过真实 API 验证的
 模型才应显式设置。已知会返回协议异常或空 `choices` 的模型不得放入默认回退链。
 
-AGIHunt 的 source 默认关闭。手动灰度时设定 `enable_agihunt=true` 会传入
+官方 Agent API 的 `agihunt` source 默认关闭。手动灰度时设定 `enable_agihunt=true` 会传入
 `--agihunt on`；如果 `AGIHUNT_API_KEY` 缺失，workflow 会立即失败而不是将
 配置错误伪装为空来源。此开关不会改变定时生产任务的默认来源集合。
 

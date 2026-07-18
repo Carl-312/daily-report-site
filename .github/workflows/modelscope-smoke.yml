@@ -9,7 +9,7 @@ on:
       model:
         description: "Optional ModelScope model ID to probe"
         required: false
-        default: "ZhipuAI/GLM-5.2"
+        default: "Qwen/Qwen3.5-35B-A3B"
         type: string
 
 permissions:
