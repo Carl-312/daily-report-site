@@ -170,13 +170,13 @@ def test_gray_fixture_replays_default_budget_into_secondary_refill(
         ["reuters.com", "arstechnica.com"],
     ]
     assert report["priority_refilled_count"] == 2
-    assert report["secondary_refilled_count"] == 8
-    assert report["final_count"] == 10
-    assert report["stop_reason"] == "secondary_refill_complete"
+    assert report["secondary_refilled_count"] == 6
+    assert report["final_count"] == 8
+    assert report["stop_reason"] == "budget_exhausted_after_secondary_refill"
     assert report["accepted_by_stage_preview"]["secondary_refill"] == [
         "Salesforce launches AI workflow inspector",
-        "Adobe releases generative design monitor",
         "Oracle adds AI database tuning agent",
+        "ServiceNow ships AI helpdesk orchestrator",
     ]
 
 

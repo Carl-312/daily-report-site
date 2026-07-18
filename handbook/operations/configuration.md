@@ -42,7 +42,17 @@ enrichment:
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  priority_refill_queries:
+    - "OpenAI Anthropic xAI Google DeepMind frontier model launch research agent"
+    - "Qwen DeepSeek Kimi GLM Doubao Hunyuan ERNIE 中国 大模型 发布 开源 评测"
+    - "AI coding agent developer tools GitHub Cursor MCP open source model"
+    - "AI multimodal image video voice robotics autonomous model"
+    - "AI chip GPU compute data center cloud NVIDIA AMD Huawei"
+    - "AI funding acquisition regulation safety lawsuit model company"
   official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  official_fallback_queries:
+    - "official AI model release API research open source"
+    - "中国 大模型 官方 发布 API 开源"
   trusted_domains:
     priority_refill_media_whitelist:
       - thenextweb.com
@@ -136,7 +146,20 @@ enrichment.enabled: false
 - `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：调用预算，避免单次运行不可控；默认会从总预算中为 priority + secondary refill 预留调用空间。
 - `verify_search_depth`：verify 使用的 Tavily search depth，当前默认 `basic`。
 - `enable_official_fallback`：是否启用官方站点补量，默认不启用。
+- `priority_refill_queries` / `official_fallback_queries`：主题查询包；按报告日期确定性轮换，覆盖中美前沿模型、编程智能体、多模态/机器人、芯片算力以及商业/监管。单数字段保留作旧配置兼容。
 - `trusted_domains`：策略层域名集合，不是线上热修名单。
+
+### `editorial_catalog.yaml`
+
+该文件是选题与补量相关性判断的唯一结构化目录，维护：
+
+- 中英文 AI 核心词、机器人/自动驾驶/芯片/算力等相邻领域词；
+- 事件动作、对象与话题映射，用于跨来源、跨语言的同事件聚类；
+- 美国、中国和基础设施公司的规范实体、别名与稳定模型家族；
+- `requires_ai_context`，用于阻止只有 Apple、Microsoft 等泛科技公司名的新闻进入 AI 日报。
+
+新增公司或模型时优先补稳定家族和别名，不要逐个枚举短期版本号；`Qwen3.7`、`DeepSeek-V4`、
+`GLM-5` 一类数字后缀会由家族前缀识别。修改目录必须同步选择 fixture 与回放测试。
 
 术语约定：
 

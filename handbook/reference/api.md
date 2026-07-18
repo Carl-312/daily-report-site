@@ -45,8 +45,25 @@ python main.py test
 - `validate_summary_result(result, articles) -> None`
 - `render_summary_markdown(result) -> str`
 
-在线模型只返回紧凑 JSON；`SummaryDraft` 在本地严格校验后才与候选的私有来源
-URL 关联。摘要条目必须使用输入候选中已知的 `article_id`，数量不能超过独立日报上限，且每条源 URL 必须与引用的输入候选一致。每条 `summary` 优先为去除空白后的 50–65 个可见字符，低于 45 会被拒绝；为了保留完整、可独立理解的一句话可放宽至 95。它必须以 `。`、`！` 或 `？` 结尾，不得含冒号、省略号或“据报道”“消息称”“市场消息显示”等空泛来源措辞；离线回退同样执行该契约，不能靠截字通过。`summary` 是唯一的读者展示正文，renderer 不再拼接“标题：摘要”。同一个 `article_id` 可以出现在多个条目中，以支持聚合链接拆分；这些规则由本地代码校验，不由提示词单独保证。读者页面由 renderer 确定性生成，不显示 `article_id` 或来源 URL。
+### `utils/summary_selection.py`
+
+- `select_summary_candidates(articles, limit) -> list[dict]`
+- `select_summary_candidates_with_diagnostics(articles, limit) -> SummarySelection`
+- `select_summary_candidates_v1(articles, limit) -> list[dict]`（仅历史重放）
+- `article_reference_map(articles) -> dict[str, dict]`
+- `article_source_label(article) -> str`
+
+`SummarySelection` 同时返回短名单和 JSON-safe 诊断。当前 `source_balanced_v2` 在模型前执行结构化相关性分级、跨语种事件聚类、来源/主体/模型家族配额与话题软分散；`SummaryResult.selection_diagnostics` 发布前必须从候选快照重算一致。
+
+在线模型只返回 `items[{article_id, summary}]` 紧凑 JSON；互动问题使用本地默认值，历史响应中的 title 仅作兼容输入且不会被信任。`SummaryDraft` 在本地严格校验后才与候选的私有标题和 URL 关联。模型输出必须逐项覆盖短名单且不得重复。每条 `summary` 优先为去除空白后的 35–60 个可见字符，30–80 为硬范围。它必须以 `。`、`！` 或 `？` 结尾，不得含冒号、省略号、空泛来源措辞或内部趋势信号；离线回退同样执行该契约，不能靠截字通过。读者页面由 renderer 确定性生成，不显示 `article_id`、来源 URL、排名、热度或升降状态；来源行只列实际入选来源。
+
+### `utils/editorial_catalog.py`
+
+- `load_editorial_catalog() -> EditorialCatalog`
+- `analyze_editorial_text(text) -> EditorialAnalysis`
+- `analyze_article(article) -> EditorialAnalysis`
+
+目录由 `editorial_catalog.yaml` 提供。`EditorialAnalysis` 输出相关性等级、主要/被提及主体、模型家族、事件动作/对象、话题和地区，供 enrichment 与 summary selection 共用。
 
 ### `utils/dedupe.py`
 

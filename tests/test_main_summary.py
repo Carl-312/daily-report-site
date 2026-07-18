@@ -89,3 +89,41 @@ def test_summarize_or_offline_uses_offline_when_no_provider_key(monkeypatch) -> 
 
     assert content == "offline content"
     assert calls == ["offline_summary"]
+
+
+def test_source_attribution_lists_only_selected_sources() -> None:
+    articles = [
+        {
+            "title": "Trending candidate",
+            "link": "https://agihunt.info/story",
+            "source": "agihunt_trending",
+        },
+        {
+            "title": "Selected TechCrunch candidate",
+            "link": "https://techcrunch.com/story",
+            "source": "techcrunch",
+        },
+        {
+            "title": "Unselected Verge candidate",
+            "link": "https://theverge.com/story",
+            "source": "theverge",
+        },
+    ]
+    result = _valid_summary_result().model_copy(
+        update={
+            "items": (
+                SummaryItem(
+                    article_id="a2",
+                    title="Selected TechCrunch candidate",
+                    summary="TechCrunch 的候选新闻已被本地短名单选中并进入最终日报正文。",
+                    url="https://techcrunch.com/story",
+                ),
+            )
+        }
+    )
+
+    attribution = daily_main.selected_source_attribution_line(result, articles)
+
+    assert attribution == "> 入选来源：TechCrunch。"
+    assert "AGI HUNT" not in attribution
+    assert "The Verge" not in attribution

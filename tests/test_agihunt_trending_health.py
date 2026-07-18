@@ -7,7 +7,6 @@ from scripts.agihunt_trending_health import evaluate_trending_run
 
 def article(rank: int) -> dict:
     state = "up" if rank == 1 else "new"
-    movement = "↑10" if rank == 1 else "新上榜"
     return {
         "title": f"趋势 {rank}",
         "link": f"https://agihunt.info/?day=2026-07-18&t=Trend+{rank}",
@@ -26,7 +25,6 @@ def article(rank: int) -> dict:
             "trend_state": state,
             "trend_delta": "10" if rank == 1 else "0",
             "trend_term_en": f"Trend {rank}",
-            "trend_badge": f"〔AGI趋势 #{rank}｜热度14.9｜{movement}〕",
         },
     }
 
@@ -71,14 +69,7 @@ def test_health_accepts_a_complete_trending_snapshot(tmp_path) -> None:
         json.dumps(
             {
                 "articles": articles,
-                "summary": {
-                    "items": [
-                        {
-                            "url": articles[0]["link"],
-                            "display_badge": articles[0]["provenance"]["trend_badge"],
-                        }
-                    ]
-                },
+                "summary": {"items": [{"url": articles[0]["link"]}]},
             }
         ),
         encoding="utf-8",

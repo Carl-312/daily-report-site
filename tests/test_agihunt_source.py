@@ -30,6 +30,7 @@ from sources.agihunt import (
     AgihuntSource,
 )
 from utils.run_contracts import RunDeadlineExceeded
+from utils.summary_contracts import SummaryItem, SummaryResult
 
 
 REFERENCE = ZoneInfo("Asia/Shanghai")
@@ -702,18 +703,37 @@ def test_one_run_agihunt_override_does_not_mutate_config_sources() -> None:
 
 
 def test_agihunt_attribution_is_added_without_changing_summary_facts() -> None:
+    result = SummaryResult(
+        policy="offline",
+        items=(
+            SummaryItem(
+                article_id="a1",
+                title="测试新闻",
+                summary="测试新闻摘要完整说明主体动作与当前结果。",
+                url="https://example.test/story",
+            ),
+        ),
+        discussion_topic="你最关注哪条AI新闻？",
+        provider="test",
+        model="test",
+        input_fingerprint="input",
+        prompt_fingerprint="prompt",
+    )
     content = daily_main.compose_report_content(
         "日报标题",
         "1. [原帖](https://example.test/story)：摘要",
         [
             {
+                "title": "测试新闻",
+                "link": "https://example.test/story",
                 "source": "agihunt",
                 "provenance": {"provider": AGIHUNT_SOURCE_LABEL},
             }
         ],
+        result,
     )
 
-    assert "候选来源：AGI HUNT · agihunt.info" in content
+    assert "入选来源：AGI HUNT · agihunt.info" in content
     assert "[原帖](https://example.test/story)" in content
 
 

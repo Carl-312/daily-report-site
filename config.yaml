@@ -64,7 +64,7 @@ agihunt_trending:
 
 limits:
   max_articles: 14
-  # 独立新闻条数上限；不再与抓取候选数绑定，同一聚合链接可拆出多条新闻
+  # 确定性短名单上限；每个 article_id 只能生成一条摘要
   max_summary_items: 10
 
 summarize:
@@ -96,7 +96,17 @@ enrichment:
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  priority_refill_queries:
+    - "OpenAI Anthropic xAI Google DeepMind frontier model launch research agent"
+    - "Qwen DeepSeek Kimi GLM Doubao Hunyuan ERNIE 中国 大模型 发布 开源 评测"
+    - "AI coding agent developer tools GitHub Cursor MCP open source model"
+    - "AI multimodal image video voice robotics autonomous model"
+    - "AI chip GPU compute data center cloud NVIDIA AMD Huawei"
+    - "AI funding acquisition regulation safety lawsuit model company"
   official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  official_fallback_queries:
+    - "official AI model release API research open source"
+    - "中国 大模型 官方 发布 API 开源"
   trusted_domains:
     priority_refill_media_whitelist:
       - thenextweb.com
@@ -107,3 +117,11 @@ enrichment:
     official_fallback_domains:
       - openai.com
       - anthropic.com
+      - ai.google.dev
+      - x.ai
+      - deepseek.com
+      - qwenlm.github.io
+      - bigmodel.cn
+      - moonshot.cn
+      - volcengine.com
+      - tencent.com

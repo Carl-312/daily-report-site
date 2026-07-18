@@ -28,7 +28,7 @@ if str(_REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPOSITORY_ROOT))
 
 from config import Settings, load_config
-from main import agihunt_attribution_line, stage_and_publish_run
+from main import selected_source_attribution_line, stage_and_publish_run
 from sources import Article, fetch_batch
 from summarizer import offline_summary_result, summarize_result
 from utils.dedupe import dedupe
@@ -400,7 +400,7 @@ def run_isolated_gray(
             None,
             (
                 title,
-                agihunt_attribution_line(article_dicts),
+                selected_source_attribution_line(summary_result, article_dicts),
                 render_summary_markdown(summary_result),
             ),
         )

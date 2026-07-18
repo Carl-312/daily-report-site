@@ -134,7 +134,6 @@ def test_source_renders_once_and_maps_all_fifteen_articles() -> None:
         "trend_state": "up",
         "trend_delta": "10",
         "trend_term_en": "Trend 1 & launch",
-        "trend_badge": "〔AGI趋势 #1｜热度15.0｜↑10〕",
         "observed_at": "2026-07-18T08:36:00+08:00",
         "publish_time_semantics": "trend_observed_at",
         "chrome_version": "Google Chrome 150.0.0.0",

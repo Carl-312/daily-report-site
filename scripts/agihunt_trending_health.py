@@ -19,7 +19,6 @@ if str(_REPOSITORY_ROOT) not in sys.path:
 from scripts.agihunt_gray_health import _diagnostic_details, find_latest_manifest
 from sources.agihunt_trending import AGIHUNT_TRENDING_SOURCE_LABEL
 from utils.storage import atomic_write_text
-from utils.summary_contracts import article_display_badge
 
 
 def evaluate_trending_run(
@@ -78,7 +77,6 @@ def evaluate_trending_run(
     ranks: list[int] = []
     term_keys: set[str] = set()
     article_links: set[str] = set()
-    badges_by_link: dict[str, str] = {}
     for article in articles:
         if not isinstance(article, dict):
             errors.append("Trending article snapshot must be an object")
@@ -116,10 +114,6 @@ def evaluate_trending_run(
         if not term_key or term_key in term_keys:
             errors.append("Trending English title keys must be present and unique")
         term_keys.add(term_key)
-        badge = article_display_badge(article)
-        if not badge:
-            errors.append("Trending article must contain a safe display badge")
-        badges_by_link[link] = badge
     if ranks != list(range(1, 16)):
         errors.append("Trending ranks must be contiguous from 1 through 15")
 
@@ -139,14 +133,8 @@ def evaluate_trending_run(
             errors.append("Trending candidates are missing from generated data")
         summary = payload.get("summary", {})
         for item in summary.get("items", []) if isinstance(summary, dict) else []:
-            if not isinstance(item, dict):
-                continue
-            url = str(item.get("url") or "")
-            if (
-                url in badges_by_link
-                and item.get("display_badge") != badges_by_link[url]
-            ):
-                errors.append("summary Trending badge does not match source provenance")
+            if isinstance(item, dict) and "display_badge" in item:
+                errors.append("summary must not carry a reader-facing Trending badge")
 
     publication = manifest.get("publication")
     checks["publication_status"] = (

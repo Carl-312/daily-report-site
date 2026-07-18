@@ -1,6 +1,6 @@
 # 当前选题与趋势展示问题
 
-状态：已确认，尚未修复。本文只定义问题和目标边界，不代表实现方案已经完成。
+状态：`source_balanced_v2` 已实现，并通过冻结快照回归与 2026-07-18 真实在线重跑。
 
 ## 运行证据
 
@@ -38,3 +38,50 @@
 - 公开页面不再出现 `AGI趋势 #`、`热度`、`↑`、`↓`、`新上榜` 等内部标签。
 - 私有快照继续保存完整趋势信号，便于复盘选题。
 - 公开来源说明只列最终入选新闻的真实来源。
+
+## 已落地方案
+
+选题与写作已经拆开。`utils/summary_selection.py` 在请求模型之前执行可重放的
+`source_balanced_v2` 短名单策略：
+
+1. `editorial_catalog.yaml` 统一维护中美公司、稳定模型家族、双语别名、AI/相邻领域词、事件动作和对象；宽泛科技公司只有同时出现 AI、模型、芯片、算力、机器人或自动驾驶上下文才达到选题门槛；
+2. 先按相关性 0–3 分级，再以主体+动作+对象/模型/数字保守聚合同一事件，阻止跨来源、跨语言改写同时入选；
+3. 为每个合格来源保留一条；单一来源最多 60%，主要主体最多 2 条，被提及主体最多 3 条，同一模型家族最多 1 条；
+4. 候选确实不足时按模型家族、被提及主体、主要主体、来源上限的固定顺序放宽，并把每次放宽写入诊断；
+5. 话题只作软分散，相关性和新闻优先级仍优先；短名单保留原候选快照中的 `article_id`，发布前可完整重放。
+
+模型不再负责选题、去重、来源配额、条数或排序。简化后的 prompt 只要求它按输入顺序为每个
+`article_id` 写一条中文事实句；输出仅需 `article_id + summary`。本地契约要求输出 ID 与短名单
+逐项完全一致，少一条、重复一条、换成另一条或改变顺序都会阻断发布。旧响应中的 `title` 只为
+回放兼容而接受，正式标题始终从本地候选绑定；模型输入也删掉了已经完成使命的 priority 和
+publish_time，只保留 ID、标题、事实描述与必须继续可见的私有 trend_signal。
+
+`SummaryItem.display_badge`、badge 生成函数及 renderer 拼接路径已删除。rank、heat、state、delta
+仍保存在候选 provenance，也继续以 `trend_signal` 进入模型输入；本地摘要校验额外拒绝趋势标签
+泄漏。公开来源行改为根据最终 `SummaryResult.items` 反查来源，格式为“入选来源”，不再扫描所有
+候选。
+
+`SummaryResult.selection_diagnostics` 记录目录版本、合格/核心候选数、事件簇、来源/主体/模型/
+话题/地区分布、配额放宽和逐条选题元数据；发布校验会从完整候选重新计算并要求逐字段一致。
+`source_balanced_v1` 仍可重放旧产物，但不再用于新日报。
+
+## 回归证据
+
+- 用本文所述 2026-07-18 的 36 条生产候选重放 10 条短名单，结果固定为 Trending 6 条、
+  TechCrunch 2 条、The Verge 2 条，不再是单一来源；
+- v2 在同一快照中识别并折叠 Apple/OpenAI 诉讼与 Zoox 召回两个跨来源事件簇；最终 10 条仍为
+  Trending 6 条、TechCrunch 2 条、The Verge 2 条，覆盖 8 个话题分类，Claude、Gemini、
+  Grok、Kimi 各 1 条且无配额放宽；
+- v2 固定短名单为 `a1/a2/a4/a6/a9/a14/a33/a16/a17/a30`，中国前沿模型由 Kimi K3 进入，
+  泛科技公司仅在满足 AI 上下文时参与；
+- 测试覆盖了短名单被替换、遗漏或重复时发布校验失败；
+- 测试覆盖了低信息空壳来源不会为了凑多样性挤掉合格候选；
+- 2026-07-18 已发布 Markdown 中的历史趋势标签已移除，summary JSON 不再保存
+  `display_badge`；完整趋势字段仍留在 article provenance。
+- 真实在线 run `45b9f28149ab4c3d915dfa98f6dcf03a` 抓取 36 条候选，ModelScope
+  `Qwen/Qwen3.5-35B-A3B` 在一次契约修复后生成并发布 10 条；短名单与冻结回放完全一致；
+- 新产物的最大被提及主体由旧版 Anthropic 4 条降为 xAI/Anthropic 各 2 条，同一模型家族由
+  Claude 3 条降为 Claude、Grok、Kimi、Gemini 各 1 条；重复事件拒绝 2 条，且
+  `quota_relaxations=[]`；
+- `data/content/dist` 兼容镜像与权威 edition 的 SHA-256 一致，公开 Markdown/HTML 均未出现
+  rank、heat、state、delta 或趋势 badge。

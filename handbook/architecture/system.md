@@ -25,6 +25,9 @@ config.yaml + .env
   optional Tavily enrichment (default off)
         │
         ▼
+  editorial catalog + story clustering + v2 shortlist
+        │  relevance / entity / model / topic / source diagnostics
+        ▼
   staged JSON checkpoint + enrichment report
         │
         ▼
@@ -70,27 +73,43 @@ config.yaml + .env
 3. 标题完全归一化相同，或跨来源明显改写且相似度达到阈值时合并。
 4. 先按 source priority 排序，重复时保留优先级更高的候选。
 
-这一步只减少重复输入，不负责判断新闻是否“值得报道”；更深的主体/主题配额仍属于后续质量策略。
+这一步只处理 URL 和标题层面的明显重复；跨语言同事件、AI 相关性、主体和模型家族配额由后续
+`source_balanced_v2` 选择层处理。
 
 ### 4. 可选 enrichment 层
 
 `utils/news_enrichment.py` 位于去重之后，不是 source registry 的替代品。Tavily 默认关闭；显式开启时按 verify、priority refill、secondary refill 和可选 official fallback 分阶段运行，并在 JSON 中写入预算、请求结果、接受/拒绝原因和 `stop_reason`。
 
-enrichment 的失败语义是 fail-open：请求失败时尽可能保留已抓取的 deduped candidates，并记录诊断；它不能为了达到目标条数而绕过时间、相关性或去重门槛。当前开关、参数和灰度边界见[ Tavily 运行手册](../operations/tavily.md)。
+enrichment 的失败语义是 fail-open：请求失败时尽可能保留已抓取的 deduped candidates，并记录诊断；它不能为了达到目标条数而绕过时间、相关性或去重门槛。补量检索词按日期从中美前沿模型、编程智能体、多模态/机器人、芯片算力和商业/监管等查询包中确定性轮换，结果仍需通过统一的结构化相关性门槛。当前开关、参数和灰度边界见[ Tavily 运行手册](../operations/tavily.md)。
 
 ### 5. 摘要边界
 
 `summarizer.py` 负责 prompt、provider fallback、在线响应解析和离线结果生成；`utils/summary_contracts.py` 负责稳定数据模型与本地 renderer。
 
-摘要输入会被注入稳定的 `a1`、`a2`… `article_id`，并要求模型返回紧凑 JSON。这里的 ID 是私有“来源引用”，不是新闻条目 ID：聚合日报、专题页等一个来源可以支撑多条独立新闻。发布时本地 renderer 会隐藏 ID 和来源 URL；发布前仍必须满足：
+摘要前先由 `utils/summary_selection.py` 执行确定性的 `source_balanced_v2` 策略。
+`editorial_catalog.yaml` 集中维护双语 AI 术语、相邻领域词、事件动作、对象、公司别名和稳定模型家族；
+未知数字版本可由家族前缀识别，不必每天硬编码。候选按 0–3 级相关性判断：直接模型/前沿 AI 为
+3，明确 AI 上下文或机器人、自动驾驶、芯片、算力为 2，只有泛科技公司名为 1。Apple、Microsoft
+等宽泛科技主体必须同时出现 AI、模型、芯片、算力、机器人或自动驾驶上下文，不能靠公司名入选。
 
-- 输出数量在独立日报上限 `max_summary_items` 内，不再与 `len(articles)` 绑定
-- 每个 ID 来自输入；同一个 ID 可以重复引用，但每条必须是不同的可回溯事实
-- 条目的 title、summary 非空
+选择层先用“共享两个主体与动作”或“共享主体、动作及对象/模型/数字”保守聚合同一事件，再为来源
+预留席位，并依次约束单一来源 60%、主要主体最多 2 条、被提及主体最多 3 条、同一模型家族最多
+1 条；候选不足时按模型家族、被提及主体、主要主体、来源上限的固定顺序放宽并写入诊断。话题计数
+只做软排序，相关性和新闻优先级仍更强。`source_balanced_v1` 仅保留用于历史产物重放。
+
+短名单保留原快照中稳定的 `a1`、`a2`… `article_id`，模型只逐条改写，不再选题。发布时本地
+renderer 会隐藏 ID 和来源 URL；发布前仍必须满足：
+
+- 输出 ID 与本地短名单逐项一致，不得遗漏、重复、替换或改序
+- 每个 ID 来自输入，条数不超过 `max_summary_items`
+- 模型只生成 summary；title 和 URL 均从本地候选绑定
 - 条目的 URL 与其来源候选 URL 一致
+- 多来源合格候选存在时，最终结果不得退化为单一来源
+- `selection_diagnostics` 必须能由完整候选快照重算并逐字段一致
+- rank、heat、state、delta 不得进入读者正文
 - Markdown 只由通过 `SummaryResult` 校验的结果渲染
 
-输入去重与输出拆分是两个边界：`dedupe()` 仍然阻止同一抓取故事重复进入候选集，但不再阻止摘要器从一个合法的聚合来源拆出多条新闻。模型不能新增来源、URL 或事实；它只能重新组织输入来源中可支持的内容。
+`dedupe()` 先阻止明显重复输入，v2 story cluster 再合并跨来源、跨语言的同一事件，selection 最后决定报道集合。一个候选固定对应一条摘要，避免弱模型靠重复引用同一 ID 扩写新闻。模型不能新增来源、URL 或事实；它只能重新组织对应候选中可支持的内容。
 
 在线模型失败或质量校验失败时，生产路径拒绝用未经质量保证的离线文本替代；明确的 `--offline` 才使用确定性离线结果。
 

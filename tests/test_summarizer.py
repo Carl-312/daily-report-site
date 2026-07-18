@@ -10,8 +10,6 @@ import summarizer
 from utils.summary_contracts import (
     SUMMARY_MAX_VISIBLE_CHARS,
     SUMMARY_MIN_VISIBLE_CHARS,
-    SUMMARY_TARGET_MIN_VISIBLE_CHARS,
-    SUMMARY_TARGET_MAX_VISIBLE_CHARS,
     reader_summary_issues,
     summary_visible_character_count,
 )
@@ -282,6 +280,7 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
     assert result.model == "Tencent-Hunyuan/Hy3"
     assert [attempt.status for attempt in result.attempts] == ["failed", "ok"]
     assert result.items[0].article_id == "a1"
+    assert result.items[0].title == "Story"
     assert result.items[0].url == "https://example.test/story"
     assert result.validation_passed is True
 
@@ -292,24 +291,45 @@ def test_validate_summary_quality_accepts_complete_chinese_digest() -> None:
     )
 
 
+def test_validate_summary_quality_accepts_the_minimal_small_model_shape() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "summary": (
+                        "人工智能公司发布面向开发者的新模型能力，"
+                        "并在本周开始逐步开放相关工具和测试资格。"
+                    ),
+                }
+            ]
+        },
+        ensure_ascii=False,
+    )
+
+    draft = summarizer.validate_summary_quality(
+        content, expected_items=1, expected_article_ids=("a1",)
+    )
+
+    assert draft.items[0].title == ""
+    assert draft.discussion_topic == "你最关注哪条AI新闻？"
+
+
 def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     prompt = (Path(__file__).resolve().parents[1] / "prompts" / "daily.md").read_text(
         encoding="utf-8"
     )
 
     assert (
-        f"优先约 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–{SUMMARY_TARGET_MAX_VISIBLE_CHARS}"
-        in prompt
+        f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符" in prompt
     )
-    assert f"硬性不得少于 {SUMMARY_MIN_VISIBLE_CHARS} 个字符" in prompt
-    assert f"不得超过 {SUMMARY_MAX_VISIBLE_CHARS} 个字符" in prompt
-    assert "不得依赖“标题：摘要”的写法" in prompt
-    assert "禁止在中途截断、使用省略号或使用 `：`" in prompt
-    assert "候选含 `trend_signal` 时，把它作为主要选题信号" in prompt
-    assert "禁止使用“据报道”“报道称”“消息称”“据称”" in prompt
-    assert "“消息显示”“市场消息显示”" in prompt
-    assert "明确主体 + 可核实动作 + 关键结果或当前状态" in prompt
-    assert "合格成品风格示例" not in prompt
+    assert "每条输入必须输出一次" in prompt
+    assert "保持 `article_id` 和顺序" in prompt
+    assert "输入已经由程序完成选题、去重、排序和来源配额" in prompt
+    assert "不输出标题" in prompt
+    assert "不要复述 `trend_signal`" in prompt
+    assert "把它作为主要选题信号" not in prompt
+    assert len(prompt.splitlines()) <= 12
 
 
 def test_validate_summary_quality_uses_independent_daily_limit() -> None:
@@ -322,7 +342,7 @@ def test_validate_summary_quality_uses_independent_daily_limit() -> None:
         )
 
 
-def test_summarize_result_allows_multiple_news_from_source_candidates(
+def test_summarize_result_rejects_missing_or_duplicate_selected_candidates(
     monkeypatch,
 ) -> None:
     monkeypatch.setattr(summarizer, "get_config", _llm_config)
@@ -345,10 +365,8 @@ def test_summarize_result_allows_multiple_news_from_source_candidates(
         for index in range(4)
     ]
 
-    result = summarizer.summarize_result(articles, stream=False)
-
-    assert len(result.items) == 10
-    assert [item.article_id for item in result.items].count("a1") == 4
+    with pytest.raises(RuntimeError, match="cover every selected candidate"):
+        summarizer.summarize_result(articles, stream=False)
 
 
 def test_offline_summary_does_not_expand_candidate_count() -> None:
@@ -387,9 +405,7 @@ def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None
         {
             "article_id": "a1",
             "title": "AI launch",
-            "publish_time": "",
             "description": "new capability",
-            "priority": 0,
         }
     ]
 
@@ -567,9 +583,8 @@ def test_summary_provider_repairs_one_reader_contract_failure(
     assert result.provider == "ModelScope"
     assert len(calls) == 2
     repair_message = calls[1]["messages"][-1]["content"]
-    assert "硬性范围为 45–95" in repair_message
-    assert "据报道" in repair_message
-    assert "市场消息显示" in repair_message
+    assert "30–80 个可见字符" in repair_message
+    assert "逐条保留输入 article_id 和顺序" in repair_message
 
 
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (

@@ -15,7 +15,7 @@ def run_domain_refill_stage(
     base_articles: list[dict[str, Any]],
     prior_candidates: list[dict[str, Any]],
     include_domains: list[str],
-    query: str,
+    query: str | list[str],
     stage_name: str,
     settings: Any,
     session: requests.Session,
@@ -45,12 +45,20 @@ def run_domain_refill_stage(
     refill_runs: list[dict[str, Any]] = []
     near_duplicate_rejected_count = 0
     story_cluster_rejected_count = 0
+    query_pack = (
+        [query.strip()]
+        if isinstance(query, str) and query.strip()
+        else [str(item).strip() for item in query if str(item).strip()]
+        if isinstance(query, list)
+        else []
+    )
 
     if (
         settings.max_refill_rounds <= 0
         or remaining_budget <= 0
         or needed_count <= 0
         or not include_domains
+        or not query_pack
     ):
         return empty_refill_result(remaining_budget)
 
@@ -66,12 +74,15 @@ def run_domain_refill_stage(
         window_hours=request_window_hours,
     )
     rounds_budget = min(settings.max_refill_rounds, remaining_budget)
+    stage_offset = 1 if stage_name == "secondary_refill" else 0
+    query_seed = reference_dt.date().toordinal() + stage_offset
     for round_index in range(rounds_budget):
         needed_before_round = max(0, needed_count - len(accepted_candidates))
         if needed_before_round <= 0:
             break
+        round_query = query_pack[(query_seed + round_index) % len(query_pack)]
         payload = {
-            "query": query,
+            "query": round_query,
             "topic": "news",
             "search_depth": REFILL_SEARCH_DEPTH,
             "max_results": settings.refill_max_results,
@@ -217,7 +228,7 @@ def run_domain_refill_stage(
             {
                 "stage": stage_name,
                 "round": round_index + 1,
-                "query": query,
+                "query": round_query,
                 "search_depth": REFILL_SEARCH_DEPTH,
                 "max_results": settings.refill_max_results,
                 "include_domains": include_domains,
@@ -243,7 +254,14 @@ def run_domain_refill_stage(
         accepted_candidates.extend(round_accepted)
         near_duplicate_rejected_count += round_near_duplicate_rejected
         story_cluster_rejected_count += round_story_cluster_rejected
-        if error or len(accepted_candidates) >= needed_count or not round_accepted:
+        exhausted_distinct_queries = round_index + 1 >= min(
+            rounds_budget, len(query_pack)
+        )
+        if (
+            error
+            or len(accepted_candidates) >= needed_count
+            or (not round_accepted and exhausted_distinct_queries)
+        ):
             break
 
     return {
