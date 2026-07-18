@@ -327,6 +327,53 @@ def validate_summary_quality(
     return draft
 
 
+def _validate_summary_with_one_repair(
+    client: OpenAI,
+    params: dict[str, Any],
+    content: str,
+    *,
+    expected_items: int,
+    expected_article_ids: set[str],
+) -> SummaryDraft:
+    """Retry one non-empty response only when its reader summary is invalid."""
+
+    try:
+        return validate_summary_quality(
+            content,
+            expected_items=expected_items,
+            expected_article_ids=expected_article_ids,
+        )
+    except SummaryQualityError as exc:
+        # Do not spend another request on empty output, schema drift, unknown
+        # IDs, or other structural failures. A focused repair is useful only
+        # when the provider returned a complete JSON draft whose reader-facing
+        # sentence missed the local editorial contract.
+        if not content.strip() or not re.search(r"\bitem \d+ summary\b", str(exc)):
+            raise
+
+        repair_instruction = (
+            "上一版 JSON 未通过本地摘要契约："
+            f"{exc}。请重新输出完整 JSON 对象，不要解释，也不要只返回修改项。"
+            f"每条 summary 的可见字符硬性范围为 {SUMMARY_MIN_VISIBLE_CHARS}–"
+            f"{SUMMARY_MAX_VISIBLE_CHARS}，目标为 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–"
+            f"{SUMMARY_TARGET_MAX_VISIBLE_CHARS}；必须是完整单句，并继续禁止冒号、"
+            "省略号以及‘据报道’‘报道称’‘消息称’‘据称’等空泛来源措辞。"
+        )
+        repair_params = dict(params)
+        repair_params["messages"] = [
+            *params["messages"],
+            {"role": "assistant", "content": content},
+            {"role": "user", "content": repair_instruction},
+        ]
+        print("\n   ↻ Provider output missed the summary contract; repairing once")
+        repaired_content = _summarize_sync(client, repair_params)
+        return validate_summary_quality(
+            repaired_content,
+            expected_items=expected_items,
+            expected_article_ids=expected_article_ids,
+        )
+
+
 def _provider_candidates() -> list[dict[str, str]]:
     """Build provider candidates in priority order."""
     cfg = get_config()
@@ -507,7 +554,9 @@ def summarize_result(
             if provider["name"].startswith("ModelScope"):
                 params.update(modelscope_request_options(provider["model"]))
             content = _summarize_sync(client, params)
-            draft = validate_summary_quality(
+            draft = _validate_summary_with_one_repair(
+                client,
+                params,
                 content,
                 expected_items=_summary_limit(cfg),
                 expected_article_ids={article["article_id"] for article in compressed},

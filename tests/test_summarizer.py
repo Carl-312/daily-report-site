@@ -293,8 +293,8 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
         f"优先约 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–{SUMMARY_TARGET_MAX_VISIBLE_CHARS}"
         in prompt
     )
-    assert f"通常不得少于 {SUMMARY_MIN_VISIBLE_CHARS} 个字符" in prompt
-    assert f"放宽至 {SUMMARY_MAX_VISIBLE_CHARS} 个字符" in prompt
+    assert f"硬性不得少于 {SUMMARY_MIN_VISIBLE_CHARS} 个字符" in prompt
+    assert f"不得超过 {SUMMARY_MAX_VISIBLE_CHARS} 个字符" in prompt
     assert "不得依赖“标题：摘要”的写法" in prompt
     assert "禁止在中途截断、使用省略号或使用 `：`" in prompt
     assert "候选含 `trend_signal` 时，把它作为主要选题信号" in prompt
@@ -518,6 +518,49 @@ def test_validate_summary_quality_rejects_vague_reporting_attribution() -> None:
 
     with pytest.raises(summarizer.SummaryQualityError, match="vague reporting"):
         summarizer.validate_summary_quality(content, expected_items=1)
+
+
+def test_summary_provider_repairs_one_reader_contract_failure(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        summarizer,
+        "get_config",
+        lambda: _llm_config(modelscope_secondary_model="", fallback_api_key=""),
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(summarizer, "create_client", lambda *_args: "client")
+    responses = [
+        json.dumps(
+            {
+                "items": [
+                    {
+                        "article_id": "a1",
+                        "title": "人工智能产品更新",
+                        "summary": "人工智能公司发布新模型，并逐步开放更多核心能力。",
+                    }
+                ],
+                "discussion_topic": "你最关注哪条AI新闻？",
+            },
+            ensure_ascii=False,
+        ),
+        _valid_summary(),
+    ]
+    calls: list[dict] = []
+
+    def fake_summarize_sync(_client, params):
+        calls.append(params)
+        return responses.pop(0)
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+
+    result = summarizer.summarize_result([{"title": "Story"}], stream=False)
+
+    assert result.provider == "ModelScope"
+    assert len(calls) == 2
+    repair_message = calls[1]["messages"][-1]["content"]
+    assert "硬性范围为 45–95" in repair_message
+    assert "据报道" in repair_message
 
 
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (
