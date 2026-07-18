@@ -42,7 +42,10 @@ def _valid_summary(item_count: int = 1) -> str:
                 {
                     "article_id": f"a{index}",
                     "title": f"第{index}条人工智能产品更新",
-                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
+                    "summary": (
+                        "发布重要产品更新，新增多项面向开发者的核心能力，"
+                        "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+                    ),
                 }
                 for index in range(1, item_count + 1)
             ],
@@ -59,7 +62,10 @@ def _summary_with_sources(source_ids: list[str]) -> str:
                 {
                     "article_id": source_id,
                     "title": f"第{index}条独立AI新闻",
-                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
+                    "summary": (
+                        "发布重要产品更新，新增多项面向开发者的核心能力，"
+                        "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+                    ),
                 }
                 for index, source_id in enumerate(source_ids, 1)
             ],
@@ -73,7 +79,8 @@ def _rendered_summary(item_count: int = 1) -> str:
     lines = []
     for index in range(1, item_count + 1):
         lines.append(
-            f"{index}. 发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。"
+            f"{index}. 发布重要产品更新，新增多项面向开发者的核心能力，"
+            "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
         )
     lines.extend(["", "💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！"])
     return "\n".join(lines)
@@ -290,9 +297,11 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     assert f"放宽至 {SUMMARY_MAX_VISIBLE_CHARS} 个字符" in prompt
     assert "不得依赖“标题：摘要”的写法" in prompt
     assert "禁止在中途截断、使用省略号或使用 `：`" in prompt
-    assert "Hugging Face首席执行官表示，企业正逐渐放弃租赁模式" in prompt
+    assert "候选含 `trend_signal` 时，把它作为主要选题信号" in prompt
+    assert "禁止使用“据报道”“报道称”“消息称”“据称”" in prompt
+    assert "Hugging Face首席执行官表示，越来越多企业正放弃长期租赁模式" in prompt
     assert "苹果正式起诉OpenAI，指控其涉嫌窃取" in prompt
-    assert "Meta因遭遇广泛用户反对，已紧急移除Instagram平台" in prompt
+    assert "Meta在遭遇大规模用户反对后，已紧急移除Instagram平台" in prompt
 
 
 def test_validate_summary_quality_uses_independent_daily_limit() -> None:
@@ -339,7 +348,8 @@ def test_offline_summary_does_not_expand_candidate_count() -> None:
         {
             "title": f"Story {index}",
             "description": (
-                f"第{index}条测试新闻发布新功能，面向开发者开放使用并提升工作效率。"
+                f"第{index}条测试新闻发布多项新功能，面向开发者开放核心能力，"
+                "并通过更稳定的执行效果提升团队工作效率和复杂任务交付质量。"
             ),
             "link": f"https://example.test/{index}",
         }
@@ -376,6 +386,37 @@ def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None
     ]
 
 
+def test_compress_articles_exposes_trending_rank_and_heat_to_the_editor(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+
+    compressed = summarizer.compress_articles(
+        [
+            {
+                "title": "Kimi K3 enters AGI Hunt Trending",
+                "description": "A ranked trend candidate",
+                "link": "https://agihunt.info/private-source",
+                "source": "agihunt_trending",
+                "provenance": {
+                    "trend_rank": "2",
+                    "trend_heat": "14.9",
+                    "trend_state": "up",
+                    "trend_delta": "7",
+                },
+            }
+        ]
+    )
+
+    assert compressed[0]["trend_signal"] == {
+        "rank": 2,
+        "heat": 14.9,
+        "state": "up",
+        "delta": 7,
+    }
+    assert "link" not in compressed[0]
+
+
 def test_validate_summary_quality_rejects_unknown_article_id() -> None:
     with pytest.raises(summarizer.SummaryQualityError, match="unknown article_id"):
         summarizer.validate_summary_quality(
@@ -385,7 +426,10 @@ def test_validate_summary_quality_rejects_unknown_article_id() -> None:
                         {
                             "article_id": "a9",
                             "title": "人工智能产品更新",
-                            "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
+                            "summary": (
+                                "发布重要产品更新，新增多项面向开发者的核心能力，"
+                                "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+                            ),
                         }
                     ],
                     "discussion_topic": "你最关注哪条AI新闻？",
@@ -404,12 +448,18 @@ def test_validate_summary_quality_allows_duplicate_article_id() -> None:
                 {
                     "article_id": "a1",
                     "title": "人工智能产品更新",
-                    "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
+                    "summary": (
+                        "发布重要产品更新，新增多项面向开发者的核心能力，"
+                        "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+                    ),
                 },
                 {
                     "article_id": "a1",
                     "title": "人工智能商业进展",
-                    "summary": "带来新的行业应用机会，推动市场持续发展并进一步提升实际应用价值。",
+                    "summary": (
+                        "带来新的行业应用机会，推动市场持续发展并完善关键产品能力，"
+                        "进一步提升企业用户的实际部署与应用价值。"
+                    ),
                 },
             ],
             "discussion_topic": "你最关注哪条AI新闻？",
@@ -448,6 +498,28 @@ def test_validate_summary_quality_rejects_summary_outside_complete_sentence_rang
         summarizer.validate_summary_quality(content, expected_items=1)
 
 
+def test_validate_summary_quality_rejects_vague_reporting_attribution() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "title": "人工智能产品更新",
+                    "summary": (
+                        "据报道，某人工智能公司发布面向开发者的新模型，"
+                        "并计划在未来数周逐步开放更多核心能力和配套工具。"
+                    ),
+                }
+            ],
+            "discussion_topic": "你最关注哪条AI新闻？",
+        },
+        ensure_ascii=False,
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="vague reporting"):
+        summarizer.validate_summary_quality(content, expected_items=1)
+
+
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (
     None
 ):
@@ -457,7 +529,7 @@ def test_offline_summary_preserves_a_complete_source_sentence_without_truncation
                 "title": "AI 产品发布",
                 "description": (
                     "该产品发布了多项新能力，并通过更快的推理速度和更低成本，"
-                    "帮助开发团队提升日常工作效率。"
+                    "帮助开发团队提升日常工作效率并优化复杂任务的交付质量。"
                 ),
                 "link": "https://example.test/story",
             }
@@ -468,7 +540,7 @@ def test_offline_summary_preserves_a_complete_source_sentence_without_truncation
 
     assert summary == (
         "该产品发布了多项新能力，并通过更快的推理速度和更低成本，"
-        "帮助开发团队提升日常工作效率。"
+        "帮助开发团队提升日常工作效率并优化复杂任务的交付质量。"
     )
     assert (
         SUMMARY_MIN_VISIBLE_CHARS
@@ -488,7 +560,8 @@ def test_offline_summary_turns_a_colon_headline_into_a_complete_sentence() -> No
             {
                 "title": "Sam Altman：模型终于会做设计了",
                 "description": (
-                    "Sam Altman表示，模型在设计任务上的表现已好到令他感到惊讶。"
+                    "Sam Altman表示，模型在复杂设计任务上的表现已明显改善，"
+                    "目前的完成质量和执行稳定性都令他感到惊讶。"
                 ),
                 "link": "https://example.test/story",
             }
@@ -497,7 +570,10 @@ def test_offline_summary_turns_a_colon_headline_into_a_complete_sentence() -> No
 
     summary = result.items[0].summary
 
-    assert summary == "Sam Altman表示，模型在设计任务上的表现已好到令他感到惊讶。"
+    assert summary == (
+        "Sam Altman表示，模型在复杂设计任务上的表现已明显改善，"
+        "目前的完成质量和执行稳定性都令他感到惊讶。"
+    )
     assert "：" not in summary
     assert "…" not in summary
     assert reader_summary_issues(summary) == ()
@@ -509,7 +585,8 @@ def test_offline_summary_expands_a_compressed_headline_without_clipping() -> Non
             {
                 "title": "LLM电脑操控能力飞跃引争议",
                 "description": (
-                    "近期LLM在电脑操控能力上出现显著跃迁，但实际体验与能力宣传仍存在明显分歧。"
+                    "近期LLM在电脑操控能力上出现显著跃迁，但不同场景下的实际体验、"
+                    "执行稳定性与能力宣传仍存在明显分歧。"
                 ),
                 "link": "https://example.test/story",
             }
@@ -520,7 +597,7 @@ def test_offline_summary_expands_a_compressed_headline_without_clipping() -> Non
 
     assert (
         summary
-        == "近期LLM在电脑操控能力上出现显著跃迁，但实际体验与能力宣传仍存在明显分歧。"
+        == "近期LLM在电脑操控能力上出现显著跃迁，但不同场景下的实际体验、执行稳定性与能力宣传仍存在明显分歧。"
     )
     assert reader_summary_issues(summary) == ()
 

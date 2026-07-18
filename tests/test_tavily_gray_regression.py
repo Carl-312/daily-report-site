@@ -267,9 +267,15 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         {
             "title": "OpenAI releases AI source story",
             "link": "https://example.com/source-story",
-            "description": "OpenAI发布新的人工智能能力，面向开发者提供更完整的模型使用支持。",
+            "description": (
+                "OpenAI发布新的人工智能能力，面向开发者提供更完整的模型使用支持，"
+                "并提升复杂业务场景中的部署与评估效率。"
+            ),
             "publish_time": "2026-05-11",
-            "content": "OpenAI发布新的人工智能能力，面向开发者提供更完整的模型使用支持。",
+            "content": (
+                "OpenAI发布新的人工智能能力，面向开发者提供更完整的模型使用支持，"
+                "并提升复杂业务场景中的部署与评估效率。"
+            ),
             "priority": 1,
             "source": "techcrunch",
         }
@@ -279,18 +285,30 @@ def test_run_pipeline_saves_and_summarizes_tavily_refill_articles(
         {
             "title": "OpenAI launches AI evaluation console",
             "link": "https://thenextweb.com/news/openai-evaluation-console",
-            "description": "OpenAI推出人工智能评估控制台，帮助开发者系统验证模型输出质量。",
+            "description": (
+                "OpenAI推出人工智能评估控制台，帮助开发者系统验证模型输出质量，"
+                "并在部署前识别复杂任务中的稳定性问题。"
+            ),
             "publish_time": "2026-05-11T12:00:00Z",
-            "content": "OpenAI推出人工智能评估控制台，帮助开发者系统验证模型输出质量。",
+            "content": (
+                "OpenAI推出人工智能评估控制台，帮助开发者系统验证模型输出质量，"
+                "并在部署前识别复杂任务中的稳定性问题。"
+            ),
             "priority": 0,
             "source": "thenextweb.com",
         },
         {
             "title": "Mistral releases AI inference debugger",
             "link": "https://reuters.com/news/mistral-inference-debugger",
-            "description": "Mistral发布人工智能推理调试工具，帮助团队定位模型服务运行问题。",
+            "description": (
+                "Mistral发布人工智能推理调试工具，帮助团队定位模型服务运行问题，"
+                "并缩短复杂生产环境中的故障排查时间。"
+            ),
             "publish_time": "2026-05-11T12:00:00Z",
-            "content": "Mistral发布人工智能推理调试工具，帮助团队定位模型服务运行问题。",
+            "content": (
+                "Mistral发布人工智能推理调试工具，帮助团队定位模型服务运行问题，"
+                "并缩短复杂生产环境中的故障排查时间。"
+            ),
             "priority": 0,
             "source": "reuters.com",
         },

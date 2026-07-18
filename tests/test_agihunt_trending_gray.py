@@ -16,7 +16,14 @@ from scripts.agihunt_trending_gray import (
 )
 from sources.base import Article
 from utils.run_contracts import ArticleSnapshot, Diagnostic, RunClock, SourceRunResult
-from utils.summary_contracts import SummaryAttempt, SummaryItem, SummaryResult
+from utils.summary_contracts import (
+    SUMMARY_MIN_VISIBLE_CHARS,
+    SUMMARY_TARGET_MAX_VISIBLE_CHARS,
+    SUMMARY_TARGET_MIN_VISIBLE_CHARS,
+    SummaryAttempt,
+    SummaryItem,
+    SummaryResult,
+)
 
 
 NOW = datetime(2026, 7, 14, 9, 0, tzinfo=ZoneInfo("Asia/Shanghai"))
@@ -45,7 +52,10 @@ def agihunt_article() -> Article:
     return Article(
         title="AGIHunt fixture release",
         link="https://example.test/original-post",
-        description="AGIHunt灰度测试新闻发布多项新能力，帮助开发者显著提升日常工作效率。",
+        description=(
+            "AGIHunt灰度测试新闻发布多项面向开发者的新能力，"
+            "帮助团队显著提升日常工作效率并拓展复杂业务场景的实际应用。"
+        ),
         publish_time="2026-07-14T01:00:00+00:00",
         priority=3,
         source="agihunt",
@@ -176,11 +186,13 @@ def test_isolated_gray_writes_private_evidence_without_touching_public_paths(
     }
     assert verification["reader_visibility"]["safe"] is True
     assert verification["summary_length"]["qualified"] is True
-    assert verification["summary_length"]["hard_minimum"] == 30
+    assert verification["summary_length"]["hard_minimum"] == SUMMARY_MIN_VISIBLE_CHARS
     assert verification["summary_length"]["preferred_target_met"] is True
     assert verification["summary_length"]["complete_sentence_met"] is True
     assert all(
-        35 <= item["visible_characters"] <= 50
+        SUMMARY_TARGET_MIN_VISIBLE_CHARS
+        <= item["visible_characters"]
+        <= SUMMARY_TARGET_MAX_VISIBLE_CHARS
         for item in verification["summary_length"]["items"]
     )
     assert verification["request_budget"]["session_network_requests"] == 3

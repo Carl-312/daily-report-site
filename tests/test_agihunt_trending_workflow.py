@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from config import load_config
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,4 +17,13 @@ def test_deploy_workflow_exposes_a_single_render_trending_gray_run() -> None:
     assert "AGIHUNT_TRENDING_CHROME_BIN" in workflow
     assert "scripts/agihunt_trending_health.py" in workflow
     assert "agihunt-trending-health.json" in workflow
+    assert "continue-on-error: true" in workflow
+    assert "AGI Hunt Trending will degrade without blocking other sources" in workflow
     assert "setup-chrome" not in workflow
+
+
+def test_production_config_enables_only_the_rendered_trending_source() -> None:
+    config = load_config(str(REPO_ROOT / "config.yaml"))
+
+    assert config.sources["agihunt_trending"] is True
+    assert config.sources["agihunt"] is False

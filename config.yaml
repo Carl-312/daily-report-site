@@ -1,8 +1,8 @@
 sources:
-  # 默认关闭；仅在本地/Actions 灰度中显式启用 AGI Hunt 来源。
+  # 官方 Agent API 仍只用于本地/Actions 灰度。
   agihunt: false
-  # 独立的首页 Trending DOM 新闻源；灰度时用 --agihunt-trending on。
-  agihunt_trending: false
+  # 生产主队列：每天单次渲染首页右栏；失败时按来源级 degraded 继续。
+  agihunt_trending: true
   aibase: true
   techcrunch: true
   theverge: true

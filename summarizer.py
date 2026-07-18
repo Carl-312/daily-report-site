@@ -75,16 +75,47 @@ def compress_articles(articles: list[dict]) -> list[dict]:
     cfg = get_config()
     compressed = []
     for index, a in enumerate(articles, 1):
-        compressed.append(
-            {
-                "article_id": article_id_for_index(index),
-                "title": (a.get("title") or "")[: cfg.title_max],
-                "publish_time": a.get("publish_time") or "",
-                "description": (a.get("description") or "")[: cfg.desc_max],
-                "priority": a.get("priority", 0),
-            }
-        )
+        item = {
+            "article_id": article_id_for_index(index),
+            "title": (a.get("title") or "")[: cfg.title_max],
+            "publish_time": a.get("publish_time") or "",
+            "description": (a.get("description") or "")[: cfg.desc_max],
+            "priority": a.get("priority", 0),
+        }
+        trend_signal = _trend_editorial_signal(a)
+        if trend_signal is not None:
+            item["trend_signal"] = trend_signal
+        compressed.append(item)
     return compressed
+
+
+def _trend_editorial_signal(article: dict) -> dict[str, int | float | str] | None:
+    """Expose validated Trending rank/heat to the editor without source URLs."""
+
+    if str(article.get("source") or "") != "agihunt_trending":
+        return None
+    provenance = article.get("provenance")
+    if not isinstance(provenance, dict):
+        return None
+    try:
+        rank = int(provenance.get("trend_rank", ""))
+        heat = float(provenance.get("trend_heat", ""))
+    except (TypeError, ValueError):
+        return None
+    if rank < 1 or heat < 0:
+        return None
+
+    signal: dict[str, int | float | str] = {"rank": rank, "heat": heat}
+    state = str(provenance.get("trend_state") or "")
+    if state in {"up", "down", "new", "steady"}:
+        signal["state"] = state
+    try:
+        delta = int(provenance.get("trend_delta", ""))
+    except (TypeError, ValueError):
+        delta = -1
+    if delta >= 0:
+        signal["delta"] = delta
+    return signal
 
 
 def _count_cjk(text: str) -> int:
@@ -197,7 +228,7 @@ def _offline_candidate_rank(source: str, text: str) -> tuple[int, int, int]:
     if SUMMARY_TARGET_MIN_VISIBLE_CHARS <= length <= SUMMARY_TARGET_MAX_VISIBLE_CHARS:
         return (0, abs(length - target_midpoint), source_rank)
     if length > SUMMARY_TARGET_MAX_VISIBLE_CHARS:
-        # A complete, source-faithful 51–80-character sentence is preferable
+        # A complete, source-faithful 66–95-character sentence is preferable
         # to reverting to a bare headline when no normal-length source fact
         # exists.
         return (1, length - SUMMARY_TARGET_MAX_VISIBLE_CHARS, source_rank)

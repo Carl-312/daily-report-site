@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from utils.summary_contracts import (
     SUMMARY_MAX_VISIBLE_CHARS,
+    SUMMARY_MIN_VISIBLE_CHARS,
     SummaryItem,
     SummaryResult,
     fingerprint_summary_input,
@@ -86,7 +87,10 @@ def test_offline_summary_result_keeps_article_provenance() -> None:
         [
             {
                 "title": "AI launch",
-                "description": "该产品发布新能力，帮助开发者提升日常工作效率并拓展应用场景。",
+                "description": (
+                    "该产品发布多项核心能力，帮助开发者提升日常工作效率，"
+                    "并进一步拓展团队在复杂业务场景中的实际应用范围。"
+                ),
                 "link": "https://example.test/a",
                 "priority": 1,
             }
@@ -103,7 +107,7 @@ def test_trending_badge_is_bound_and_rendered_locally() -> None:
         "title": "月之暗面 Kimi K3 发布引关注",
         "description": (
             "月之暗面发布 Kimi K3，并在多项评测中获得关注，"
-            "其定价和实际能力也引发开发者讨论。"
+            "其定价、实际能力和后续开放计划也引发开发者持续讨论。"
         ),
         "link": "https://agihunt.info/?day=2026-07-18&t=Moonshot+Kimi+K3",
         "priority": 4,
@@ -129,13 +133,19 @@ def test_summary_contract_allows_multiple_items_from_one_source() -> None:
             SummaryItem(
                 article_id="a1",
                 title="AI launch",
-                summary="发布重要的新能力，推动行业实际应用持续扩展并提升开发者效率。",
+                summary=(
+                    "发布多项面向开发者的重要能力，推动行业实际应用持续扩展，"
+                    "并进一步提升团队在复杂任务中的执行效率。"
+                ),
                 url="https://example.test/a",
             ),
             SummaryItem(
                 article_id="a1",
                 title="AI launch again",
-                summary="重复发布新能力，推动相关行业应用持续扩展并提升实际工作效率。",
+                summary=(
+                    "继续发布面向开发者的新能力，推动相关行业应用持续扩展，"
+                    "并进一步提升企业团队的部署效率和实际工作质量。"
+                ),
                 url="https://example.test/a",
             ),
         ),
@@ -213,10 +223,24 @@ def test_summary_contract_rejects_colon_and_truncated_reader_text() -> None:
 
 
 def test_reader_summary_contract_accepts_complete_sentence_above_target_range() -> None:
-    summary = "近期LLM在电脑操控能力上出现显著跃迁，实际体验仍存在明显分歧。"
+    summary = (
+        "近期LLM在电脑操控能力上出现显著跃迁，但不同场景下的实际体验、"
+        "执行稳定性与能力宣传仍存在明显分歧。"
+    )
 
-    assert summary_visible_character_count(summary) > 30
+    assert summary_visible_character_count(summary) >= SUMMARY_MIN_VISIBLE_CHARS
     assert reader_summary_issues(summary) == ()
+
+
+def test_reader_summary_contract_rejects_vague_reporting_attribution() -> None:
+    summary = (
+        "据报道，某人工智能公司发布面向开发者的新模型，"
+        "并计划在未来数周逐步开放更多核心能力和配套工具。"
+    )
+
+    assert "must not use a vague reporting attribution" in reader_summary_issues(
+        summary
+    )
 
 
 def test_summary_contract_still_rejects_source_url_mismatch() -> None:

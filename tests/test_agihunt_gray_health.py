@@ -11,6 +11,13 @@ from config import Settings
 from sources.base import Article
 from scripts.agihunt_gray_health import AGIHUNT_LABEL, evaluate_shadow_run
 from utils.run_contracts import ArticleSnapshot, RunClock, SourceRunResult
+from utils.summary_contracts import SUMMARY_MAX_VISIBLE_CHARS
+
+
+VALID_SUMMARY = (
+    "发布重要产品更新，新增多项面向开发者的核心能力，"
+    "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+)
 
 
 def source_result(*, requests: int = 5) -> dict:
@@ -55,7 +62,7 @@ def prepare_artifacts(tmp_path) -> tuple[dict, object, object]:
                     "items": [
                         {
                             "article_id": "a1",
-                            "summary": "发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。",
+                            "summary": VALID_SUMMARY,
                             "url": "https://example.test/original-post",
                         }
                     ],
@@ -67,7 +74,7 @@ def prepare_artifacts(tmp_path) -> tuple[dict, object, object]:
     (content_dir / "2026-07-13.md").write_text(
         (
             f"日报\n\n{AGIHUNT_LABEL}\n\n"
-            "1. 发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。\n"
+            f"1. {VALID_SUMMARY}\n"
         ),
         encoding="utf-8",
     )
@@ -87,7 +94,7 @@ def test_gray_health_accepts_a_complete_agihunt_shadow(tmp_path) -> None:
     assert result["healthy"] is True
     assert result["checks"]["network_requests"] == "5"
     assert result["checks"]["summary_length"] == [
-        {"article_id": "a1", "visible_characters": 32}
+        {"article_id": "a1", "visible_characters": 50}
     ]
 
 
@@ -117,13 +124,18 @@ def test_gray_health_rejects_oversized_summary(tmp_path) -> None:
     manifest, data_dir, content_dir = prepare_artifacts(tmp_path)
     payload_path = data_dir / "2026-07-13.json"
     payload = json.loads(payload_path.read_text(encoding="utf-8"))
-    payload["summary"]["items"][0]["summary"] = "中" * 80 + "。"
+    payload["summary"]["items"][0]["summary"] = (
+        "中" * SUMMARY_MAX_VISIBLE_CHARS + "。"
+    )
     payload_path.write_text(json.dumps(payload), encoding="utf-8")
 
     result = evaluate_shadow_run(manifest, data_dir=data_dir, content_dir=content_dir)
 
     assert result["healthy"] is False
-    assert any("maximum is 80" in error for error in result["errors"])
+    assert any(
+        f"maximum is {SUMMARY_MAX_VISIBLE_CHARS}" in error
+        for error in result["errors"]
+    )
 
 
 def test_gray_health_rejects_rendered_title_summary_colon_format(tmp_path) -> None:
@@ -131,7 +143,7 @@ def test_gray_health_rejects_rendered_title_summary_colon_format(tmp_path) -> No
     (content_dir / "2026-07-13.md").write_text(
         (
             f"日报\n\n{AGIHUNT_LABEL}\n\n"
-            "1. 人工智能产品更新：发布重要产品更新，推动行业应用持续扩展并提升开发者实际工作效率。\n"
+            f"1. 人工智能产品更新：{VALID_SUMMARY}\n"
         ),
         encoding="utf-8",
     )
@@ -154,7 +166,10 @@ def test_full_offline_pipeline_produces_a_healthy_agihunt_shadow(
     article = Article(
         title="AGIHunt fixture story",
         link="https://example.test/original-post",
-        description="AGIHunt灰度测试新闻发布新能力，帮助开发者提升日常工作效率。",
+        description=(
+            "AGIHunt灰度测试新闻发布多项面向开发者的新能力，"
+            "帮助团队显著提升日常工作效率并拓展复杂业务场景的实际应用。"
+        ),
         publish_time=f"{report_date}T07:00:00+08:00",
         priority=3,
         source="agihunt",

@@ -25,7 +25,7 @@ on:
         default: false
         type: boolean
       enable_agihunt_trending:
-        description: "Enable the rendered AGI Hunt Trending source for this run"
+        description: "Force-enable the production AGI Hunt Trending source for this run"
         required: false
         default: false
         type: boolean
@@ -126,11 +126,11 @@ jobs:
             SOURCE_ARGS+=(--agihunt-trending on)
             CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
             if [ -z "$CHROME_BIN" ]; then
-              echo "::error::A supported Chrome executable is required for AGI Hunt Trending"
-              exit 1
+              echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
+            else
+              export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
+              "$CHROME_BIN" --version
             fi
-            export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
-            "$CHROME_BIN" --version
             echo "AGI Hunt Trending explicitly enabled for this run"
           fi
 
@@ -149,7 +149,8 @@ jobs:
           --content-dir content --output agihunt-gray-health.json
 
       - name: Validate AGI Hunt Trending health
-        if: ${{ inputs.enable_agihunt_trending && success() }}
+        if: ${{ !inputs.skip_generate && success() }}
+        continue-on-error: true
         run: >
           python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
           --output agihunt-trending-health.json
@@ -273,6 +274,7 @@ jobs:
           path: |
             daily_update.log
             *.log
+            agihunt-trending-health.json
             .archive-staging/archive-manifest.json
           if-no-files-found: ignore
 

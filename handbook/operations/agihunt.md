@@ -1,12 +1,14 @@
 # AGI Hunt 新闻源运行手册
 
-项目包含两个相互独立、默认关闭的 AGI Hunt 来源：
+项目包含两个相互独立的 AGI Hunt 来源：
 
 - `agihunt`：官方 Agent API 的频道热榜，通过 `--agihunt on` 灰度；
 - `agihunt_trending`：Headless Chrome 单次渲染首页后，从右栏 DOM 提取 15 条
-  Trending，通过 `--agihunt-trending on` 灰度。
+  Trending，已作为生产主队列来源默认启用。
 
-两者不能静默互相降级或冒充；`config.yaml` 中对应开关在完成灰度前必须保持 `false`。
+两者不能静默互相降级或冒充。官方 Agent API 的 `sources.agihunt` 保持 `false`；
+首页 DOM 来源的 `sources.agihunt_trending` 为 `true`，其失败只降低本轮来源状态，不阻塞
+其他成功来源继续生成日报。
 
 ## 首页 Trending 独立源
 
@@ -25,26 +27,27 @@ python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
 浏览器按环境变量 `AGIHUNT_TRENDING_CHROME_BIN`、配置项
 `agihunt_trending.chrome_binary`、`google-chrome`、`google-chrome-stable`、`chromium`
 的顺序查找。抓取结果保留 `trend_rank`、`trend_heat`、`trend_state`、`trend_delta`、
-`trend_term_en`、实际 `observed_at` 和 DOM SHA-256；不会保存完整 DOM。摘要模型看不到这些
-字段，读者标签由本地 provenance 确定性绑定，例如：
+`trend_term_en`、实际 `observed_at` 和 DOM SHA-256；不会保存完整 DOM。摘要模型只接收
+结构化的 `rank`、`heat`、`state`、`delta` 选题信号，以排名为主、热度为辅；读者标签仍由
+本地 provenance 确定性绑定，例如：
 
 ```text
 〔AGI趋势 #1｜热度14.9｜↑10〕
 ```
 
-GitHub Actions 手动运行 **Daily Report Deploy** 时，设置
-`enable_agihunt_trending=true`、`publish=false`。工作流使用 Ubuntu 24.04 自带 Chrome，传入
-`--agihunt-trending on`，并在同一次抓取后读取 manifest 执行健康检查，不会为了验证再渲染
-第二次页面。预览 artifact 应包含 `agihunt-trending-health.json`。
+GitHub Actions 的定时生产任务会按 `config.yaml` 自动启用该来源。手动运行
+**Daily Report Deploy** 时，`enable_agihunt_trending=true` 仅用于强制覆盖；健康检查读取同一次
+抓取的 manifest，不会为了验证再渲染第二次页面。健康检查失败使用 `continue-on-error`，其 JSON
+会随日志 artifact 保留，但不会阻止其他来源生成和发布。
 
 定时任务当前在北京时间 08:36 发起；Trending 数据代表实际运行时刻的当日快照，不是自然日
 最终榜。GitHub 调度延迟时以 `observed_at` 为准。Chrome 缺失、Cloudflare 验证页、DOM 结构
 漂移、少于 10 条、排名不连续或字段缺失都会让该 source 明确失败；其他来源成功时，日报仍可
 按 degraded 状态继续生成。
 
-首页在 `robots.txt` 中允许访问，但 SPA 渲染过程中会由页面自身加载后端数据。生产启用前仍应
-取得站方对这种每日一次、带明确 User-Agent、仅作引用的自动化访问确认；不得增加详情页批量
-抓取或绕过页面直接探测 `/api/`。
+首页在 `robots.txt` 中允许访问，但 SPA 渲染过程中会由页面自身加载后端数据。生产访问严格
+保持每日一次、带明确 User-Agent、仅作引用；不得增加详情页批量抓取、绕过页面直接探测
+`/api/`，或在健康检查中再次渲染。
 
 ## 当前验证状态（2026-07-14）
 
@@ -69,6 +72,9 @@ GitHub Actions 手动运行 **Daily Report Deploy** 时，设置
 - 后续 ModelScope 连通修复已用 `ZhipuAI/GLM-5.2` 和 `enable_thinking=false` 完成
   14 篇真实输入验证：响应包含非空 `choices`，7 条摘要通过完整合同。这个新结果证明当前
   摘要 API 路径可用，但不会把早期 `editorial_review` 产物追溯改写为 AI 结果。
+- [首页 Trending GitHub 验证 run `29634059214`](https://github.com/Carl-312/daily-report-site/actions/runs/29634059214)
+  使用 runner 预装 Chrome 单次渲染首页，15/15 条候选通过 DOM 契约，7 条入选摘要均保留本地
+  排名与热度标签，且 `publish=false` 未改写生产页面。
 - 最新健康产物位于
   `tmp/agihunt-trending-gray-2026-07-14-prompt-examples-reviewed-replay-v1/`。它明确记录
   `summary_mode: reviewed`、摘要 `policy: offline`、`provider: editorial_review` 和
@@ -129,7 +135,7 @@ python scripts/agihunt_trending_gray.py \
 - `agihunt-trending-candidates.private.json`：标题、摘要、发布时间、原帖 URL、
   `channel_hot` / 频道 provenance、请求计数，以及 Trending、分页和日期能力边界；
 - `agihunt-trending-verification.json`：灰度健康、候选数量、`publish=false` 状态、每条摘要
-  35–50 个可见字符的优先目标、30 字最低要求、80 字完整单句上限（无冒号、无省略号、
+  50–65 个可见字符的优先目标、45 字最低要求、95 字完整单句上限（无冒号、无省略号、
   无截断）、摘要 provenance，以及读者 HTML 中未暴露原帖 URL 或 `article_id` 的检查结果。
 
 ## 本地 shadow
@@ -171,7 +177,8 @@ python main.py run --offline --agihunt on --enrichment off
 ## 回滚
 
 - 本地或灰度立即使用 `--agihunt off`。
-- 首页 Trending 使用 `--agihunt-trending off`，并保持
-  `sources.agihunt_trending: false`。
+- 首页 Trending 可单次使用 `--agihunt-trending off`；生产回滚时把
+  `sources.agihunt_trending` 恢复为 `false`。
 - 生产配置保持或恢复 `sources.agihunt: false`；次级来源会继续运行。
-- AGIHunt source 的短暂失败只会使本轮标为 degraded；staged publication 门禁仍保护上一版公开 edition。
+- 任一 AGI Hunt source 的短暂失败只会使本轮标为 degraded；只要其他来源和摘要成功，
+  staged publication 仍可完成，所有来源均失败时则保护上一版公开 edition。

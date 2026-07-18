@@ -15,7 +15,9 @@ from sources.agihunt_trending import (
     AgihuntTrendingSource,
     parse_trending_dom,
 )
+from sources.base import Article
 from utils.headless_chrome import RenderedDom
+from utils.publish_policy import decide_publication
 
 
 NOW = datetime(2026, 7, 18, 8, 36, tzinfo=ZoneInfo("Asia/Shanghai"))
@@ -191,6 +193,61 @@ def test_registry_uses_the_trending_specific_candidate_cap(
     assert outcomes[0].source == "agihunt_trending"
     assert outcomes[0].status == "ok"
     assert outcomes[0].accepted_count == 15
+
+
+def test_trending_fetch_failure_does_not_block_the_production_queue(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class FailingTrendingSource:
+        last_attempts = 1
+        last_fetched_count = 0
+        last_diagnostics = ()
+
+        def fetch(self, **_kwargs):
+            raise AgihuntTrendingDomError("fixture DOM drift")
+
+    class HealthySource:
+        last_attempts = 1
+        last_fetched_count = 1
+        last_status = "ok"
+        last_diagnostics = ()
+
+        def fetch(self, **_kwargs):
+            return [
+                Article(
+                    title="Healthy fallback source",
+                    link="https://example.test/fallback",
+                    description="Fallback source remains available",
+                    source="aibase",
+                )
+            ]
+
+    monkeypatch.setattr(
+        source_registry,
+        "AgihuntTrendingSource",
+        lambda **_kwargs: FailingTrendingSource(),
+    )
+    monkeypatch.setitem(source_registry.REGISTRY, "aibase", HealthySource)
+
+    articles, outcomes = source_registry.fetch_batch(
+        {"agihunt_trending": True, "aibase": True},
+        agihunt_trending_settings=settings(),
+        reference_dt=NOW,
+    )
+
+    assert len(articles) == 1
+    assert [(outcome.source, outcome.status) for outcome in outcomes] == [
+        ("agihunt_trending", "failed"),
+        ("aibase", "ok"),
+    ]
+    decision = decide_publication(
+        articles_count=len(articles),
+        source_results=outcomes,
+        summary_succeeded=True,
+        build_succeeded=True,
+    )
+    assert decision.publish is True
+    assert decision.status == "degraded"
 
 
 def test_one_run_trending_override_does_not_mutate_config_sources() -> None:

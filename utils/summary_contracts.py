@@ -16,6 +16,15 @@ _URL = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
 _ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
 _SUMMARY_COLON = re.compile(r"[:：]")
 _SUMMARY_TRUNCATION = re.compile(r"(?:…|\.{3,})")
+_VAGUE_REPORTING_ATTRIBUTION = re.compile(
+    r"(?:"
+    r"据(?:公开|媒体|外媒|多方|相关|最新)?报道|据悉|据称|"
+    r"(?:有)?报道称|(?:有)?消息称|"
+    r"消息人士(?:称|透露|表示)|"
+    r"(?:外媒|媒体)(?:报道称|报道|称)|"
+    r"传闻称|网传"
+    r")"
+)
 _SUMMARY_SENTENCE_ENDINGS = frozenset("。！？")
 _TREND_BADGE = re.compile(
     r"〔AGI趋势 #(?:[1-9]|1\d|20)｜热度\d+(?:\.\d+)?｜"
@@ -24,16 +33,16 @@ _TREND_BADGE = re.compile(
 
 # A reader-facing daily-news sentence normally needs enough room for its
 # subject, action, and one useful qualifier. The approved editorial examples
-# land in the 35–50-character range, so do not let a headline-shaped
-# 20-character fragment pass as a finished digest. Whitespace is not
+# now target the 50–65-character range, so do not let a headline-shaped
+# fragment pass as a finished digest. Whitespace is not
 # reader-visible and therefore does not count; all other Unicode characters
 # (including punctuation and product names) do. Keep these values beside the
 # shared result contract so online, offline, replay, and gray paths cannot
 # silently diverge.
-SUMMARY_MIN_VISIBLE_CHARS = 30
-SUMMARY_TARGET_MIN_VISIBLE_CHARS = 35
-SUMMARY_TARGET_MAX_VISIBLE_CHARS = 50
-SUMMARY_MAX_VISIBLE_CHARS = 80
+SUMMARY_MIN_VISIBLE_CHARS = 45
+SUMMARY_TARGET_MIN_VISIBLE_CHARS = 50
+SUMMARY_TARGET_MAX_VISIBLE_CHARS = 65
+SUMMARY_MAX_VISIBLE_CHARS = 95
 
 
 class SummaryItem(StrictFrozenModel):
@@ -115,6 +124,8 @@ def reader_summary_issues(value: str) -> tuple[str, ...]:
         issues.append("must not contain a colon")
     if _SUMMARY_TRUNCATION.search(normalized):
         issues.append("must not contain a truncation marker")
+    if _VAGUE_REPORTING_ATTRIBUTION.search(normalized):
+        issues.append("must not use a vague reporting attribution")
     if normalized[-1] not in _SUMMARY_SENTENCE_ENDINGS:
         issues.append("must end with a complete sentence ending")
     elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in normalized[:-1]):
