@@ -233,14 +233,15 @@ def test_reader_summary_contract_accepts_complete_sentence_above_target_range() 
 
 
 def test_reader_summary_contract_rejects_vague_reporting_attribution() -> None:
-    summary = (
-        "据报道，某人工智能公司发布面向开发者的新模型，"
-        "并计划在未来数周逐步开放更多核心能力和配套工具。"
-    )
+    for attribution in ("据报道", "市场消息显示", "知情人士称"):
+        summary = (
+            f"{attribution}，某人工智能公司发布面向开发者的新模型，"
+            "并计划在未来数周逐步开放更多核心能力和配套工具。"
+        )
 
-    assert "must not use a vague reporting attribution" in reader_summary_issues(
-        summary
-    )
+        assert "must not use a vague reporting attribution" in reader_summary_issues(
+            summary
+        )
 
 
 def test_summary_contract_still_rejects_source_url_mismatch() -> None:

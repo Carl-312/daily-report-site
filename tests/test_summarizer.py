@@ -307,9 +307,9 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     assert "禁止在中途截断、使用省略号或使用 `：`" in prompt
     assert "候选含 `trend_signal` 时，把它作为主要选题信号" in prompt
     assert "禁止使用“据报道”“报道称”“消息称”“据称”" in prompt
-    assert "Hugging Face首席执行官表示，越来越多企业正放弃长期租赁模式" in prompt
-    assert "苹果正式起诉OpenAI，指控其涉嫌窃取" in prompt
-    assert "Meta在遭遇大规模用户反对后，已紧急移除Instagram平台" in prompt
+    assert "“消息显示”“市场消息显示”" in prompt
+    assert "明确主体 + 可核实动作 + 关键结果或当前状态" in prompt
+    assert "合格成品风格示例" not in prompt
 
 
 def test_validate_summary_quality_uses_independent_daily_limit() -> None:
@@ -569,6 +569,7 @@ def test_summary_provider_repairs_one_reader_contract_failure(
     repair_message = calls[1]["messages"][-1]["content"]
     assert "硬性范围为 45–95" in repair_message
     assert "据报道" in repair_message
+    assert "市场消息显示" in repair_message
 
 
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (

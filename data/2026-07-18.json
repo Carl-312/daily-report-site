@@ -679,49 +679,49 @@
       {
         "article_id": "a1",
         "title": "xAI 2T 模型下周完成初训",
-        "summary": "马斯克宣布 xAI 的 2T 参数大模型将于下周完成初始训练，并宣称该版本在各项能力上全面超越现有的 1.5T 版本。",
+        "summary": "马斯克表示，xAI 的 2T 参数模型预计将于下周完成初始训练，其各项能力届时将超过现有的 1.5T 参数版本。",
         "url": "https://agihunt.info/?day=2026-07-18&t=xAI%27s+2T+model+pretrains",
         "display_badge": "〔AGI趋势 #1｜热度7.8｜新上榜〕"
       },
       {
         "article_id": "a2",
         "title": "Anthropic 放宽访问额度",
-        "summary": "Anthropic 为改善用户体验宣布放宽套餐用量限制，并向开源贡献者赠送 Claude Max 高级服务权限。",
+        "summary": "Anthropic 宣布放宽此前影响使用体验的套餐用量限制，并向开源贡献者赠送 Claude Max 服务权限。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Anthropic+loosens+limits",
         "display_badge": "〔AGI趋势 #2｜热度12.4｜↑9〕"
       },
       {
         "article_id": "a3",
         "title": "Claude 生命科学黑客松收官",
-        "summary": "Anthropic 举办的生命科学黑客松圆满落幕，脑癌变异筛选工具 NCypher 成功夺得 Research 赛道冠军殊荣。",
+        "summary": "Anthropic 的 Built with Claude 生命科学黑客松结束，脑癌变异筛选工具 NCypher 获得 Research 赛道冠军。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Claude+LifeSci+hackathon",
         "display_badge": "〔AGI趋势 #3｜热度11.8｜↑4〕"
       },
       {
         "article_id": "a4",
         "title": "OpenAI 再遭 Apple 起诉",
-        "summary": "苹果公司正式对 OpenAI 提起诉讼，指控其窃取核心商业机密并要求法院采取进一步限制措施保护研发成果。",
+        "summary": "Apple 再次起诉 OpenAI，现有趋势信息尚未披露本案涉及的具体指控、诉讼请求以及后续的案件进展。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Apple+sues+OpenAI+again",
         "display_badge": "〔AGI趋势 #4｜热度7.0｜↓1〕"
       },
       {
         "article_id": "a5",
         "title": "Fable 5 纳入 Max/Team 套餐",
-        "summary": "Claude 官方宣布自七月二十日起将 Fable 5 功能正式纳入所有 Max 和 Team Premium 订阅套餐中。",
+        "summary": "Claude 官方宣布，从 7 月 20 日起，Fable 5 将纳入全部 Max 与 Team Premium 订阅套餐范围。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Fable+5+joins+Max+plans",
         "display_badge": "〔AGI趋势 #5｜热度11.5｜新上榜〕"
       },
       {
         "article_id": "a6",
         "title": "Meta 洽租 Anthropic 百亿算力",
-        "summary": "市场消息显示 Meta 正与 Anthropic 商谈租赁 AI 算力事宜，潜在交易规模高达一百亿美元左右。",
+        "summary": "Meta 正与 Anthropic 商谈租赁人工智能算力，潜在交易规模约为 100 亿美元，双方合作仍处于洽谈阶段。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Meta%27s+%2410B+compute+deal",
         "display_badge": "〔AGI趋势 #6｜热度6.4｜↓4〕"
       },
       {
         "article_id": "a7",
         "title": "世界首届人形机器人格斗赛",
-        "summary": "中国成功举办世界首个全尺寸人形机器人格斗锦标赛，现场多个精彩对决瞬间引发全球广泛关注热议。",
+        "summary": "中国举办世界首个全尺寸人形机器人格斗锦标赛，本届赛事现场安排了多场由全尺寸人形机器人参与的公开格斗对决。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Humanoid+fighting+debut",
         "display_badge": "〔AGI趋势 #7｜热度6.5｜↓3〕"
       }

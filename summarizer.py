@@ -363,7 +363,8 @@ def _validate_summary_with_one_repair(
             f"每条 summary 的可见字符硬性范围为 {SUMMARY_MIN_VISIBLE_CHARS}–"
             f"{SUMMARY_MAX_VISIBLE_CHARS}，目标为 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–"
             f"{SUMMARY_TARGET_MAX_VISIBLE_CHARS}；必须是完整单句，并继续禁止冒号、"
-            "省略号以及‘据报道’‘报道称’‘消息称’‘据称’等空泛来源措辞。"
+            "省略号以及‘据报道’‘报道称’‘消息称’‘消息显示’‘市场消息显示’"
+            "‘据称’等空泛来源措辞。"
         )
         repair_params = dict(params)
         repair_params["messages"] = [
