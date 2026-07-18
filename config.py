@@ -7,7 +7,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 import re
-from typing import Dict, List
+from typing import Dict, List, Literal
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 from dotenv import load_dotenv
 import yaml
@@ -115,6 +115,44 @@ class AgihuntSettings(BaseModel):
         return normalized
 
 
+class AgihuntTrendingSettings(BaseModel):
+    """Deterministic rendered-page settings for AGI Hunt Trending."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    page_url: str = Field(default="https://agihunt.info/")
+    window: Literal["1d"] = "1d"
+    language: Literal["zh-CN", "en"] = "zh-CN"
+    timezone: str = Field(default="Asia/Shanghai")
+    day_offset: int = Field(default=0, ge=-1, le=0)
+    expected_articles: int = Field(default=15, ge=10, le=20)
+    minimum_articles: int = Field(default=10, ge=1, le=20)
+    max_articles: int = Field(default=15, ge=1, le=20)
+    render_timeout_seconds: float = Field(default=30, gt=0, le=60)
+    virtual_time_budget_ms: int = Field(default=12000, ge=1000, le=30000)
+    max_dom_bytes: int = Field(default=2_000_000, ge=100_000, le=10_000_000)
+    chrome_binary: str = Field(default="")
+    source_priority: int = Field(default=3, ge=1, le=9)
+
+    @field_validator("page_url")
+    @classmethod
+    def validate_page_url(cls, value: str) -> str:
+        normalized = value.strip()
+        if not normalized.startswith("https://"):
+            raise ValueError("agihunt_trending page_url must use https")
+        return normalized
+
+    @model_validator(mode="after")
+    def validate_article_contract(self) -> "AgihuntTrendingSettings":
+        if self.minimum_articles > self.expected_articles:
+            raise ValueError(
+                "agihunt_trending minimum_articles exceeds expected_articles"
+            )
+        if self.max_articles > self.expected_articles:
+            raise ValueError("agihunt_trending max_articles exceeds expected_articles")
+        return self
+
+
 class Settings(BaseModel):
     """Application settings with validation"""
 
@@ -173,6 +211,9 @@ class Settings(BaseModel):
     # AGIHunt (optional; key is environment-only)
     agihunt_api_key: str = Field(default="", description="AGIHunt API Key")
     agihunt: AgihuntSettings = Field(default_factory=AgihuntSettings)
+    agihunt_trending: AgihuntTrendingSettings = Field(
+        default_factory=AgihuntTrendingSettings
+    )
 
     # Tavily (optional)
     tavily_api_key: str = Field(default="", description="Tavily API Key")
@@ -294,6 +335,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 "publication_root": output_cfg.get("publication_root", ".publication"),
                 "run_deadline_minutes": cfg.get("run", {}).get("deadline_minutes", 20),
                 "agihunt": cfg.get("agihunt", {}),
+                "agihunt_trending": cfg.get("agihunt_trending", {}),
                 "enrichment": cfg.get("enrichment", {}),
             }
 

@@ -24,6 +24,11 @@ on:
         required: false
         default: false
         type: boolean
+      enable_agihunt_trending:
+        description: "Enable the rendered AGI Hunt Trending source for this run"
+        required: false
+        default: false
+        type: boolean
       publish:
         description: "Commit generated content and deploy to the production Pages site"
         required: false
@@ -45,7 +50,7 @@ concurrency:
 
 jobs:
   generate-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       pages_enabled: ${{ steps.pages-check.outputs.enabled }}
       publish: ${{ steps.publish-mode.outputs.publish }}
@@ -86,6 +91,7 @@ jobs:
         env:
           ENABLE_TAVILY: ${{ inputs.enable_tavily || false }}
           ENABLE_AGIHUNT: ${{ inputs.enable_agihunt || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ inputs.enable_agihunt_trending || false }}
           PUBLISH_MODE: ${{ steps.publish-mode.outputs.publish }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
@@ -104,7 +110,7 @@ jobs:
           fi
 
           if [ "$ENABLE_AGIHUNT" = "true" ]; then
-            SOURCE_ARGS=(--agihunt on)
+            SOURCE_ARGS+=(--agihunt on)
             if [ "$PUBLISH_MODE" = "true" ]; then
               echo "::error::AGIHunt can only be enabled through a publish=false shadow run"
               exit 1
@@ -114,6 +120,18 @@ jobs:
               exit 1
             fi
             echo "AGIHunt explicitly enabled for this shadow run"
+          fi
+
+          if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
+            SOURCE_ARGS+=(--agihunt-trending on)
+            CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
+            if [ -z "$CHROME_BIN" ]; then
+              echo "::error::A supported Chrome executable is required for AGI Hunt Trending"
+              exit 1
+            fi
+            export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
+            "$CHROME_BIN" --version
+            echo "AGI Hunt Trending explicitly enabled for this run"
           fi
 
           if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
@@ -129,6 +147,12 @@ jobs:
         run: >
           python scripts/agihunt_gray_health.py --runs-dir .runs --data-dir data
           --content-dir content --output agihunt-gray-health.json
+
+      - name: Validate AGI Hunt Trending health
+        if: ${{ inputs.enable_agihunt_trending && success() }}
+        run: >
+          python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
+          --output agihunt-trending-health.json
 
       - name: Build site from retained content
         if: ${{ inputs.skip_generate }}
@@ -162,6 +186,7 @@ jobs:
             content/
             dist/
             agihunt-gray-health.json
+            agihunt-trending-health.json
             daily_update.log
             *.log
           if-no-files-found: ignore

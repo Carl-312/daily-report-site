@@ -98,6 +98,30 @@ def test_offline_summary_result_keeps_article_provenance() -> None:
     assert result.items[0].url == "https://example.test/a"
 
 
+def test_trending_badge_is_bound_and_rendered_locally() -> None:
+    article = {
+        "title": "月之暗面 Kimi K3 发布引关注",
+        "description": (
+            "月之暗面发布 Kimi K3，并在多项评测中获得关注，"
+            "其定价和实际能力也引发开发者讨论。"
+        ),
+        "link": "https://agihunt.info/?day=2026-07-18&t=Moonshot+Kimi+K3",
+        "priority": 4,
+        "source": "agihunt_trending",
+        "provenance": {
+            "trend_badge": "〔AGI趋势 #1｜热度14.9｜↑10〕",
+        },
+    }
+
+    result = offline_summary_result([article])
+
+    assert result.items[0].display_badge == "〔AGI趋势 #1｜热度14.9｜↑10〕"
+    assert render_summary_markdown(result).startswith(
+        "1. 〔AGI趋势 #1｜热度14.9｜↑10〕"
+    )
+    validate_summary_result(result, [article])
+
+
 def test_summary_contract_allows_multiple_items_from_one_source() -> None:
     result = SummaryResult(
         policy="required_ai",

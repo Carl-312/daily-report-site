@@ -21,6 +21,7 @@ from utils.summary_contracts import (
     SummaryDraft,
     SummaryItem,
     SummaryResult,
+    article_display_badge,
     article_id_for_index,
     fingerprint_summary_input,
     reader_summary_issues,
@@ -395,6 +396,7 @@ def _parse_summary_result(
                 title=item.title.replace("\n", " ").strip(),
                 summary=item.summary.replace("\n", " ").strip(),
                 url=url.strip(),
+                display_badge=article_display_badge(article),
             )
         )
 
@@ -561,6 +563,7 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
         SummaryAttempt,
         SummaryItem,
         SummaryResult,
+        article_display_badge,
         fingerprint_summary_input,
     )
 
@@ -576,6 +579,7 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
             title=(article.get("title") or "").replace("\n", "").strip(),
             summary=_offline_summary_text(article),
             url=article.get("link") or "",
+            display_badge=article_display_badge(article),
         )
         for index, article in enumerate(selected, 1)
     )

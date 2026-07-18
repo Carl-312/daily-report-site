@@ -17,6 +17,10 @@ _ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
 _SUMMARY_COLON = re.compile(r"[:：]")
 _SUMMARY_TRUNCATION = re.compile(r"(?:…|\.{3,})")
 _SUMMARY_SENTENCE_ENDINGS = frozenset("。！？")
+_TREND_BADGE = re.compile(
+    r"〔AGI趋势 #(?:[1-9]|1\d|20)｜热度\d+(?:\.\d+)?｜"
+    r"(?:↑\d+|↓\d+|新上榜|—)〕"
+)
 
 # A reader-facing daily-news sentence normally needs enough room for its
 # subject, action, and one useful qualifier. The approved editorial examples
@@ -39,6 +43,7 @@ class SummaryItem(StrictFrozenModel):
     title: str
     summary: str
     url: str
+    display_badge: str = ""
 
 
 class SummaryDraftItem(StrictFrozenModel):
@@ -117,6 +122,18 @@ def reader_summary_issues(value: str) -> tuple[str, ...]:
     return tuple(issues)
 
 
+def article_display_badge(article: dict) -> str:
+    """Return a safe, locally bound display badge for a Trending article."""
+
+    if str(article.get("source") or "") != "agihunt_trending":
+        return ""
+    provenance = article.get("provenance")
+    if not isinstance(provenance, dict):
+        return ""
+    badge = str(provenance.get("trend_badge") or "").strip()
+    return badge if _TREND_BADGE.fullmatch(badge) else ""
+
+
 def validate_summary_result(
     result: SummaryResult, articles: list[dict], *, max_items: int = 10
 ) -> None:
@@ -145,6 +162,10 @@ def validate_summary_result(
         if item.url.strip() != expected_url:
             raise ValueError(
                 f"summary article_id {item.article_id} has a mismatched source URL"
+            )
+        if item.display_badge != article_display_badge(article):
+            raise ValueError(
+                f"summary article_id {item.article_id} has a mismatched display badge"
             )
         if not item.title.strip() or not item.summary.strip():
             raise ValueError(
@@ -183,7 +204,8 @@ def render_summary_markdown(result: SummaryResult) -> str:
         # internal avoids the old "title：summary" duplication and guarantees
         # that the renderer never introduces a colon-shaped split.
         summary = public_text(item.summary).replace("：", "，").replace(":", "，")
-        lines.append(f"{index}. {summary}")
+        badge = html.escape(public_text(item.display_badge))
+        lines.append(f"{index}. {badge}{summary}")
     lines.extend(
         ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
     )

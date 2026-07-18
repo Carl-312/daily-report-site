@@ -83,3 +83,39 @@ def test_default_agihunt_candidate_pool_has_room_for_deduplication() -> None:
     assert (
         len(settings.core_channels) + 1
     ) * settings.per_channel_limit > settings.max_articles
+
+
+def test_agihunt_trending_policy_loads_without_a_secret(monkeypatch, tmp_path) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(
+        """
+sources:
+  agihunt_trending: false
+agihunt_trending:
+  day_offset: -1
+  max_articles: 12
+  expected_articles: 15
+  minimum_articles: 10
+  virtual_time_budget_ms: 9000
+""",
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("AGIHUNT_API_KEY", raising=False)
+
+    cfg = load_config(str(config_path))
+
+    assert cfg.sources["agihunt_trending"] is False
+    assert cfg.agihunt_trending.day_offset == -1
+    assert cfg.agihunt_trending.max_articles == 12
+    assert cfg.agihunt_trending.virtual_time_budget_ms == 9000
+    assert cfg.agihunt_api_key == ""
+
+
+def test_agihunt_trending_rejects_an_impossible_article_contract() -> None:
+    with pytest.raises(ValueError, match="minimum_articles"):
+        Settings(
+            agihunt_trending={
+                "minimum_articles": 16,
+                "expected_articles": 15,
+            }
+        )

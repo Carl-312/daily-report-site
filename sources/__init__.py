@@ -8,7 +8,7 @@ from datetime import datetime
 from time import perf_counter
 from typing import Dict, List, Type
 
-from config import AgihuntSettings
+from config import AgihuntSettings, AgihuntTrendingSettings
 from .base import BaseSource, Article
 from utils.run_contracts import (
     ArticleSnapshot,
@@ -21,6 +21,7 @@ from .techcrunch import TechCrunchSource
 from .theverge import TheVergeSource
 from .syft import SyftSource
 from .agihunt import AgihuntSource
+from .agihunt_trending import AgihuntTrendingSource
 
 # Registry of available sources
 REGISTRY: Dict[str, Type[BaseSource]] = {
@@ -29,6 +30,7 @@ REGISTRY: Dict[str, Type[BaseSource]] = {
     "theverge": TheVergeSource,
     "syft": SyftSource,
     "agihunt": AgihuntSource,
+    "agihunt_trending": AgihuntTrendingSource,
 }
 
 
@@ -48,6 +50,8 @@ def fetch_batch(
     agihunt_api_key: str = "",
     agihunt_settings: AgihuntSettings | None = None,
     agihunt_max_articles: int | None = None,
+    agihunt_trending_settings: AgihuntTrendingSettings | None = None,
+    agihunt_trending_max_articles: int | None = None,
     reference_dt: datetime | None = None,
     deadline_at: datetime | None = None,
 ) -> tuple[List[Article], tuple[SourceRunResult, ...]]:
@@ -63,6 +67,8 @@ def fetch_batch(
         agihunt_settings: Non-secret AGIHunt client and selection settings
         agihunt_max_articles: AGIHunt-only candidate cap; other sources keep
             ``max_articles`` so widening AGIHunt does not broaden every source.
+        agihunt_trending_settings: Rendered-page Trending source settings.
+        agihunt_trending_max_articles: Trending-only candidate cap.
 
     Returns:
         Combined list of articles from all sources
@@ -103,6 +109,13 @@ def fetch_batch(
                 source_max_articles = (
                     agihunt_max_articles
                     if agihunt_max_articles is not None
+                    else max_articles
+                )
+            elif name == "agihunt_trending":
+                source = AgihuntTrendingSource(settings=agihunt_trending_settings)
+                source_max_articles = (
+                    agihunt_trending_max_articles
+                    if agihunt_trending_max_articles is not None
                     else max_articles
                 )
             else:
@@ -187,6 +200,8 @@ def fetch_all(
     agihunt_api_key: str = "",
     agihunt_settings: AgihuntSettings | None = None,
     agihunt_max_articles: int | None = None,
+    agihunt_trending_settings: AgihuntTrendingSettings | None = None,
+    agihunt_trending_max_articles: int | None = None,
     reference_dt: datetime | None = None,
     deadline_at: datetime | None = None,
 ) -> List[Article]:
@@ -199,6 +214,8 @@ def fetch_all(
         agihunt_api_key=agihunt_api_key,
         agihunt_settings=agihunt_settings,
         agihunt_max_articles=agihunt_max_articles,
+        agihunt_trending_settings=agihunt_trending_settings,
+        agihunt_trending_max_articles=agihunt_trending_max_articles,
         reference_dt=reference_dt,
         deadline_at=deadline_at,
     )
@@ -217,4 +234,5 @@ __all__ = [
     "TheVergeSource",
     "SyftSource",
     "AgihuntSource",
+    "AgihuntTrendingSource",
 ]

@@ -59,12 +59,16 @@ def resolve_enrichment_enabled(cfg, mode: str) -> bool:
 
 
 def resolve_enabled_sources(cfg, args) -> dict[str, bool]:
-    """Apply one-run AGIHunt shadow overrides without changing config.yaml."""
+    """Apply one-run AGI Hunt overrides without changing config.yaml."""
 
     sources = dict(getattr(cfg, "sources", {}))
-    mode = getattr(args, "agihunt", "auto")
-    if mode != "auto":
-        sources["agihunt"] = mode == "on"
+    for argument, source in (
+        ("agihunt", "agihunt"),
+        ("agihunt_trending", "agihunt_trending"),
+    ):
+        mode = getattr(args, argument, "auto")
+        if mode != "auto":
+            sources[source] = mode == "on"
     return sources
 
 
@@ -433,6 +437,10 @@ def cmd_run(args):
             agihunt_max_articles=getattr(
                 getattr(cfg, "agihunt", None), "max_articles", None
             ),
+            agihunt_trending_settings=getattr(cfg, "agihunt_trending", None),
+            agihunt_trending_max_articles=getattr(
+                getattr(cfg, "agihunt_trending", None), "max_articles", None
+            ),
             reference_dt=clock.cutoff_at,
             deadline_at=clock.deadline_at,
         )
@@ -552,6 +560,10 @@ def cmd_fetch(args):
             agihunt_settings=getattr(cfg, "agihunt", None),
             agihunt_max_articles=getattr(
                 getattr(cfg, "agihunt", None), "max_articles", None
+            ),
+            agihunt_trending_settings=getattr(cfg, "agihunt_trending", None),
+            agihunt_trending_max_articles=getattr(
+                getattr(cfg, "agihunt_trending", None), "max_articles", None
             ),
             reference_dt=clock.cutoff_at,
             deadline_at=clock.deadline_at,
@@ -726,6 +738,12 @@ def main():
         default="auto",
         help="Enable, disable, or follow config for the AGIHunt source",
     )
+    p_run.add_argument(
+        "--agihunt-trending",
+        choices=("auto", "on", "off"),
+        default="auto",
+        help="Enable, disable, or follow config for AGI Hunt Trending",
+    )
     p_run.set_defaults(func=cmd_run)
 
     # fetch command
@@ -741,6 +759,12 @@ def main():
         choices=("auto", "on", "off"),
         default="auto",
         help="Enable, disable, or follow config for the AGIHunt source",
+    )
+    p_fetch.add_argument(
+        "--agihunt-trending",
+        choices=("auto", "on", "off"),
+        default="auto",
+        help="Enable, disable, or follow config for AGI Hunt Trending",
     )
     p_fetch.set_defaults(func=cmd_fetch)
 
