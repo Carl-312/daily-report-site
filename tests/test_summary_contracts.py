@@ -102,7 +102,7 @@ def test_offline_summary_result_keeps_article_provenance() -> None:
     assert result.items[0].url == "https://example.test/a"
 
 
-def test_trending_badge_is_bound_and_rendered_locally() -> None:
+def test_trending_signal_stays_private_and_is_not_rendered() -> None:
     article = {
         "title": "月之暗面 Kimi K3 发布引关注",
         "description": (
@@ -113,17 +113,28 @@ def test_trending_badge_is_bound_and_rendered_locally() -> None:
         "priority": 4,
         "source": "agihunt_trending",
         "provenance": {
-            "trend_badge": "〔AGI趋势 #1｜热度14.9｜↑10〕",
+            "trend_rank": "1",
+            "trend_heat": "14.9",
+            "trend_state": "up",
+            "trend_delta": "10",
         },
     }
 
     result = offline_summary_result([article])
 
-    assert result.items[0].display_badge == "〔AGI趋势 #1｜热度14.9｜↑10〕"
-    assert render_summary_markdown(result).startswith(
-        "1. 〔AGI趋势 #1｜热度14.9｜↑10〕"
-    )
+    assert "display_badge" not in result.items[0].model_dump()
+    rendered = render_summary_markdown(result)
+    assert rendered.startswith("1. 月之暗面发布 Kimi K3")
+    assert "AGI趋势" not in rendered
+    assert "热度" not in rendered
+    assert "↑" not in rendered
     validate_summary_result(result, [article])
+
+    legacy_item = result.items[0].model_copy(
+        update={"summary": f"〔AGI趋势 #1｜热度14.9｜↑10〕{result.items[0].summary}"}
+    )
+    legacy_result = result.model_copy(update={"items": (legacy_item,)})
+    assert "AGI趋势" not in render_summary_markdown(legacy_result)
 
 
 def test_summary_contract_allows_multiple_items_from_one_source() -> None:
@@ -242,6 +253,15 @@ def test_reader_summary_contract_rejects_vague_reporting_attribution() -> None:
         assert "must not use a vague reporting attribution" in reader_summary_issues(
             summary
         )
+
+
+def test_reader_summary_contract_rejects_internal_trend_signals() -> None:
+    summary = (
+        "某公司发布面向开发者的新模型能力，内部榜单显示热度14.9并标记为新上榜，"
+        "相关能力现已开放测试。"
+    )
+
+    assert "must not expose internal trend signals" in reader_summary_issues(summary)
 
 
 def test_summary_contract_still_rejects_source_url_mismatch() -> None:

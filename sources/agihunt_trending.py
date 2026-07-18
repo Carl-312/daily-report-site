@@ -161,16 +161,6 @@ def _query_url(page_url: str, **values: str) -> str:
     )
 
 
-def _trend_badge(trend: TrendItem) -> str:
-    movement = {
-        "new": "新上榜",
-        "steady": "—",
-        "up": f"↑{trend.delta}",
-        "down": f"↓{trend.delta}",
-    }[trend.state]
-    return f"〔AGI趋势 #{trend.rank}｜热度{trend.heat}｜{movement}〕"
-
-
 class AgihuntTrendingSource(BaseSource):
     """Fetch exactly one rendered daily Trending snapshot."""
 
@@ -295,7 +285,6 @@ class AgihuntTrendingSource(BaseSource):
                 "trend_state": trend.state,
                 "trend_delta": str(trend.delta),
                 "trend_term_en": trend.term_en,
-                "trend_badge": _trend_badge(trend),
                 "observed_at": observed_at.isoformat(timespec="seconds"),
                 "publish_time_semantics": "trend_observed_at",
                 "chrome_version": rendered.chrome_version,

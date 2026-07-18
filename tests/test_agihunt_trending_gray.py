@@ -24,6 +24,10 @@ from utils.summary_contracts import (
     SummaryItem,
     SummaryResult,
 )
+from utils.summary_selection import (
+    SUMMARY_SELECTION_POLICY,
+    select_summary_candidates_with_diagnostics,
+)
 
 
 NOW = datetime(2026, 7, 14, 9, 0, tzinfo=ZoneInfo("Asia/Shanghai"))
@@ -230,6 +234,7 @@ def test_isolated_gray_can_use_an_ai_summary_for_prompt_validation(
         captured.update(
             {"articles": articles, "stream": stream, "deadline_at": deadline_at}
         )
+        selection = select_summary_candidates_with_diagnostics(articles, 10)
         return SummaryResult(
             policy="required_ai",
             items=(
@@ -245,6 +250,9 @@ def test_isolated_gray_can_use_an_ai_summary_for_prompt_validation(
             model="fixture-model",
             input_fingerprint="fixture-input",
             prompt_fingerprint="fixture-prompt",
+            selection_policy=SUMMARY_SELECTION_POLICY,
+            candidate_article_ids=("a1",),
+            selection_diagnostics=selection.diagnostics,
             attempts=(
                 SummaryAttempt(
                     provider="fixture_ai",
@@ -316,6 +324,7 @@ def test_isolated_gray_can_validate_a_reviewed_source_faithful_summary(
 
     def reviewed_summary(articles, limit):
         reviewed.update({"articles": articles, "limit": limit})
+        selection = select_summary_candidates_with_diagnostics(articles, limit)
         return SummaryResult(
             policy="offline",
             items=(
@@ -331,6 +340,9 @@ def test_isolated_gray_can_validate_a_reviewed_source_faithful_summary(
             model="source_faithful",
             input_fingerprint="fixture-input",
             prompt_fingerprint="fixture-reviewed",
+            selection_policy=SUMMARY_SELECTION_POLICY,
+            candidate_article_ids=("a1",),
+            selection_diagnostics=selection.diagnostics,
             attempts=(
                 SummaryAttempt(
                     provider="editorial_review",

@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 import requests
 
 from sources.base import Article
+from utils.editorial_catalog import analyze_editorial_text
 from utils.enrichment_policy import decide_enrichment
 from utils.enrichment_transport import (
     TavilyTransport,
@@ -37,20 +38,6 @@ REFILL_STAGE_NAMES = (
     "official_fallback",
 )
 
-AI_NEIGHBOR_TITLE_RE = re.compile(
-    r"\b(autonomous|autonomy|self-driving|self driving|automation|"
-    r"semiconductor|semiconductors|chip|chips|gpu|gpus|accelerator|"
-    r"accelerators|nvidia|data center|datacenter)\b|"
-    r"(自动驾驶|无人驾驶|自动化|芯片|半导体|算力|数据中心)",
-    re.IGNORECASE,
-)
-STRICT_AI_TITLE_RE = re.compile(
-    r"\b(ai|openai|anthropic|claude|chatgpt|llm|agent|agents|"
-    r"assistant|copilot|sora|generative|inference|developer tools|"
-    r"machine learning|deep learning|robot|robotics)\b|"
-    r"(人工智能|大模型|模型|智能体|机器人|开发者工具|生成式AI|生成式人工智能)",
-    re.IGNORECASE,
-)
 NON_WORD_RE = re.compile(r"[^\w\s]+", re.UNICODE)
 SPACE_RE = re.compile(r"\s+")
 TRAILING_SOURCE_SUFFIX_RE = re.compile(r"\s+-\s+[A-Za-z0-9&.' ]+$")
@@ -202,6 +189,19 @@ def refill_request_window_hours(settings: Any) -> int:
     return configured_hours
 
 
+def configured_query_pack(
+    settings: Any, *, plural_name: str, singular_name: str
+) -> list[str]:
+    """Use structured query packs while preserving singular config replay."""
+
+    configured = getattr(settings, plural_name, None) or []
+    queries = [str(query).strip() for query in configured if str(query).strip()]
+    if queries:
+        return queries
+    singular = str(getattr(settings, singular_name, "") or "").strip()
+    return [singular] if singular else []
+
+
 def is_aggregate_like(article: dict[str, Any]) -> bool:
     source = (article.get("source", "") or "").strip().lower()
     title = (article.get("title", "") or "").strip().lower()
@@ -213,13 +213,14 @@ def is_aggregate_like(article: dict[str, Any]) -> bool:
 
 
 def ai_title_relevant(title: str) -> bool:
-    return bool(STRICT_AI_TITLE_RE.search(title or ""))
+    return analyze_editorial_text(title).relevance_level >= 2
 
 
 def classify_prefilter_bucket(title: str) -> str:
-    if ai_title_relevant(title):
+    analysis = analyze_editorial_text(title)
+    if analysis.relevance_level >= 3 or analysis.core_ai_signal:
         return "core_ai"
-    if AI_NEIGHBOR_TITLE_RE.search(title or ""):
+    if analysis.relevance_level >= 2 or analysis.neighbor_signal:
         return "ai_neighbor"
     return "generic_or_low_signal"
 
@@ -1108,7 +1109,11 @@ def enrich_articles_with_tavily(
                 include_domains=list(
                     settings.trusted_domains.priority_refill_media_whitelist
                 ),
-                query=settings.priority_refill_query,
+                query=configured_query_pack(
+                    settings,
+                    plural_name="priority_refill_queries",
+                    singular_name="priority_refill_query",
+                ),
                 stage_name="priority_refill",
                 settings=settings,
                 session=session,
@@ -1149,7 +1154,11 @@ def enrich_articles_with_tavily(
                 include_domains=list(
                     settings.trusted_domains.secondary_refill_candidate_domains
                 ),
-                query=settings.priority_refill_query,
+                query=configured_query_pack(
+                    settings,
+                    plural_name="priority_refill_queries",
+                    singular_name="priority_refill_query",
+                ),
                 stage_name="secondary_refill",
                 settings=settings,
                 session=session,
@@ -1203,7 +1212,11 @@ def enrich_articles_with_tavily(
                 include_domains=list(
                     settings.trusted_domains.official_fallback_domains
                 ),
-                query=settings.official_fallback_query,
+                query=configured_query_pack(
+                    settings,
+                    plural_name="official_fallback_queries",
+                    singular_name="official_fallback_query",
+                ),
                 stage_name="official_fallback",
                 settings=settings,
                 session=session,

@@ -270,12 +270,22 @@ class EnrichmentSettings(BaseModel):
     priority_refill_query: str = Field(
         default="OpenAI Anthropic AI model launch startup funding developer tools"
     )
+    priority_refill_queries: List[str] = Field(default_factory=list)
     official_fallback_query: str = Field(
         default="OpenAI Anthropic AI model launch startup funding developer tools"
     )
+    official_fallback_queries: List[str] = Field(default_factory=list)
     trusted_domains: EnrichmentTrustedDomains = Field(
         default_factory=EnrichmentTrustedDomains
     )
+
+    @field_validator("priority_refill_queries", "official_fallback_queries")
+    @classmethod
+    def validate_query_packs(cls, values: List[str]) -> List[str]:
+        normalized = [value.strip() for value in values if value.strip()]
+        if len(normalized) != len(set(normalized)):
+            raise ValueError("enrichment query packs must be unique")
+        return normalized
 
 
 Settings.model_rebuild()

@@ -6,9 +6,19 @@ import hashlib
 import html
 import json
 import re
-from typing import Literal
+from typing import Any, Literal
+
+from pydantic import Field
 
 from utils.run_contracts import StrictFrozenModel
+from utils.summary_selection import (
+    SUMMARY_SELECTION_POLICY,
+    SUMMARY_SELECTION_POLICY_V1,
+    article_id_for_index as article_id_for_index,
+    article_reference_map,
+    select_summary_candidates_v1,
+    select_summary_candidates_with_diagnostics,
+)
 
 
 _MARKDOWN_LINK = re.compile(r"\[([^\]]+)\]\([^)]*\)")
@@ -27,23 +37,25 @@ _VAGUE_REPORTING_ATTRIBUTION = re.compile(
     r")"
 )
 _SUMMARY_SENTENCE_ENDINGS = frozenset("。！？")
-_TREND_BADGE = re.compile(
-    r"〔AGI趋势 #(?:[1-9]|1\d|20)｜热度\d+(?:\.\d+)?｜"
-    r"(?:↑\d+|↓\d+|新上榜|—)〕"
+_INTERNAL_TREND_SIGNAL = re.compile(
+    r"(?:AGI\s*趋势|热度\s*\d|[↑↓]\s*\d|新上榜|"
+    r"\btrend_(?:rank|heat|state|delta)\b)",
+    re.IGNORECASE,
 )
+_INTERNAL_TREND_BADGE = re.compile(r"〔\s*AGI\s*趋势\s*#?\d+[^〕]*〕\s*", re.IGNORECASE)
 
 # A reader-facing daily-news sentence normally needs enough room for its
-# subject, action, and one useful qualifier. The approved editorial examples
-# now target the 50–65-character range, so do not let a headline-shaped
-# fragment pass as a finished digest. Whitespace is not
+# subject, action, and one useful qualifier. Prefer 35–60 visible characters,
+# while the wider 30–80 hard range lets a small model preserve a complete fact
+# without padding or clipping. Whitespace is not
 # reader-visible and therefore does not count; all other Unicode characters
 # (including punctuation and product names) do. Keep these values beside the
 # shared result contract so online, offline, replay, and gray paths cannot
 # silently diverge.
-SUMMARY_MIN_VISIBLE_CHARS = 45
-SUMMARY_TARGET_MIN_VISIBLE_CHARS = 50
-SUMMARY_TARGET_MAX_VISIBLE_CHARS = 65
-SUMMARY_MAX_VISIBLE_CHARS = 95
+SUMMARY_MIN_VISIBLE_CHARS = 30
+SUMMARY_TARGET_MIN_VISIBLE_CHARS = 35
+SUMMARY_TARGET_MAX_VISIBLE_CHARS = 60
+SUMMARY_MAX_VISIBLE_CHARS = 80
 
 
 class SummaryItem(StrictFrozenModel):
@@ -53,14 +65,15 @@ class SummaryItem(StrictFrozenModel):
     title: str
     summary: str
     url: str
-    display_badge: str = ""
 
 
 class SummaryDraftItem(StrictFrozenModel):
     """Model-facing item shape before source provenance is joined locally."""
 
     article_id: str
-    title: str
+    # Accepted only for replay compatibility with older model responses.  New
+    # prompts omit it, and trusted source titles are always joined locally.
+    title: str = ""
     summary: str
 
 
@@ -68,7 +81,7 @@ class SummaryDraft(StrictFrozenModel):
     """Minimal JSON contract required from an LLM daily-summary response."""
 
     items: tuple[SummaryDraftItem, ...]
-    discussion_topic: str
+    discussion_topic: str = "你最关注哪条AI新闻？"
 
 
 class SummaryAttempt(StrictFrozenModel):
@@ -87,14 +100,12 @@ class SummaryResult(StrictFrozenModel):
     input_fingerprint: str
     prompt_fingerprint: str
     attempts: tuple[SummaryAttempt, ...] = ()
+    selection_policy: Literal["legacy", "source_balanced_v1", "source_balanced_v2"] = (
+        "legacy"
+    )
+    candidate_article_ids: tuple[str, ...] = ()
+    selection_diagnostics: dict[str, Any] = Field(default_factory=dict)
     validation_passed: bool = True
-
-
-def article_id_for_index(index: int) -> str:
-    """Return the compact, deterministic ID used inside one candidate snapshot."""
-    if index < 1:
-        raise ValueError("article index must be positive")
-    return f"a{index}"
 
 
 def summary_visible_character_count(value: str) -> int:
@@ -127,23 +138,13 @@ def reader_summary_issues(value: str) -> tuple[str, ...]:
         issues.append("must not contain a truncation marker")
     if _VAGUE_REPORTING_ATTRIBUTION.search(normalized):
         issues.append("must not use a vague reporting attribution")
+    if _INTERNAL_TREND_SIGNAL.search(normalized):
+        issues.append("must not expose internal trend signals")
     if normalized[-1] not in _SUMMARY_SENTENCE_ENDINGS:
         issues.append("must end with a complete sentence ending")
     elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in normalized[:-1]):
         issues.append("must contain exactly one reader sentence")
     return tuple(issues)
-
-
-def article_display_badge(article: dict) -> str:
-    """Return a safe, locally bound display badge for a Trending article."""
-
-    if str(article.get("source") or "") != "agihunt_trending":
-        return ""
-    provenance = article.get("provenance")
-    if not isinstance(provenance, dict):
-        return ""
-    badge = str(provenance.get("trend_badge") or "").strip()
-    return badge if _TREND_BADGE.fullmatch(badge) else ""
 
 
 def validate_summary_result(
@@ -161,10 +162,35 @@ def validate_summary_result(
             f"summary has {len(result.items)} items, maximum allowed is {max_items}"
         )
 
-    expected_articles = {
-        article_id_for_index(index): article
-        for index, article in enumerate(articles, 1)
-    }
+    expected_articles = article_reference_map(articles)
+    if _INTERNAL_TREND_SIGNAL.search(result.discussion_topic):
+        raise ValueError("summary discussion topic exposes internal trend signals")
+    if result.selection_policy in {
+        SUMMARY_SELECTION_POLICY_V1,
+        SUMMARY_SELECTION_POLICY,
+    }:
+        if result.selection_policy == SUMMARY_SELECTION_POLICY_V1:
+            expected_selection = select_summary_candidates_v1(articles, max_items)
+            expected_diagnostics = None
+        else:
+            selection = select_summary_candidates_with_diagnostics(articles, max_items)
+            expected_selection = list(selection.articles)
+            expected_diagnostics = selection.diagnostics
+        expected_candidate_ids = tuple(
+            str(article["article_id"]) for article in expected_selection
+        )
+        if result.candidate_article_ids != expected_candidate_ids:
+            raise ValueError("summary candidate selection does not match local policy")
+        output_ids = tuple(item.article_id for item in result.items)
+        if output_ids != result.candidate_article_ids:
+            raise ValueError(
+                "summary must cover every selected candidate exactly once and in order"
+            )
+        if (
+            expected_diagnostics is not None
+            and result.selection_diagnostics != expected_diagnostics
+        ):
+            raise ValueError("summary selection diagnostics do not match local policy")
     for item in result.items:
         if item.article_id not in expected_articles:
             raise ValueError(f"summary references unknown article_id {item.article_id}")
@@ -174,10 +200,6 @@ def validate_summary_result(
         if item.url.strip() != expected_url:
             raise ValueError(
                 f"summary article_id {item.article_id} has a mismatched source URL"
-            )
-        if item.display_badge != article_display_badge(article):
-            raise ValueError(
-                f"summary article_id {item.article_id} has a mismatched display badge"
             )
         if not item.title.strip() or not item.summary.strip():
             raise ValueError(
@@ -204,7 +226,8 @@ def render_summary_markdown(result: SummaryResult) -> str:
     """Render reader-facing Markdown without exposing source IDs or URLs."""
 
     def public_text(value: str) -> str:
-        without_ids = _ARTICLE_ID.sub("", value)
+        without_trends = _INTERNAL_TREND_BADGE.sub("", value)
+        without_ids = _ARTICLE_ID.sub("", without_trends)
         without_links = _MARKDOWN_LINK.sub(r"\1", without_ids)
         without_urls = _URL.sub("", without_links)
         compact = " ".join(without_urls.replace("\n", " ").split())
@@ -216,8 +239,7 @@ def render_summary_markdown(result: SummaryResult) -> str:
         # internal avoids the old "title：summary" duplication and guarantees
         # that the renderer never introduces a colon-shaped split.
         summary = public_text(item.summary).replace("：", "，").replace(":", "，")
-        badge = html.escape(public_text(item.display_badge))
-        lines.append(f"{index}. {badge}{summary}")
+        lines.append(f"{index}. {summary}")
     lines.extend(
         ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
     )

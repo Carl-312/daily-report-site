@@ -48,6 +48,11 @@ from utils.summary_contracts import (
     render_summary_markdown,
     validate_summary_result,
 )
+from utils.summary_selection import (
+    SUMMARY_SELECTION_POLICY,
+    article_reference_map,
+    article_source_label,
+)
 
 
 def resolve_enrichment_enabled(cfg, mode: str) -> bool:
@@ -72,31 +77,37 @@ def resolve_enabled_sources(cfg, args) -> dict[str, bool]:
     return sources
 
 
-def agihunt_attribution_line(articles: list[Article | dict]) -> str:
-    """Render a compact public attribution only when AGIHunt supplied input."""
+def selected_source_attribution_line(
+    result: SummaryResult, articles: list[Article | dict]
+) -> str:
+    """List only the sources that actually support published summary items."""
 
-    for article in articles:
-        if isinstance(article, Article):
-            source = article.source
-            provenance = article.provenance
-        else:
-            source = str(article.get("source", ""))
-            provenance = article.get("provenance", {})
-        provider = (
-            provenance.get("provider", "") if isinstance(provenance, dict) else ""
-        )
-        if source == "agihunt" or provider == "AGI HUNT · agihunt.info":
-            return "> 候选来源：AGI HUNT · agihunt.info。"
-    return ""
+    article_dicts = [
+        article.to_dict() if isinstance(article, Article) else article
+        for article in articles
+    ]
+    references = article_reference_map(article_dicts)
+    labels: list[str] = []
+    for item in result.items:
+        article = references.get(item.article_id)
+        if article is None:
+            continue
+        label = article_source_label(article)
+        if label and label not in labels:
+            labels.append(label)
+    return f"> 入选来源：{'、'.join(labels)}。" if labels else ""
 
 
 def compose_report_content(
-    title: str, content: str, articles: list[Article | dict]
+    title: str,
+    content: str,
+    articles: list[Article | dict],
+    summary_result: SummaryResult,
 ) -> str:
     """Keep source attribution outside the summary model's factual output."""
 
     parts = [title]
-    attribution = agihunt_attribution_line(articles)
+    attribution = selected_source_attribution_line(summary_result, articles)
     if attribution:
         parts.append(attribution)
     parts.append(content)
@@ -214,6 +225,10 @@ def stage_and_publish_run(
     summary_payload = report.get("summary")
     if summary_payload is not None:
         summary_result = SummaryResult.model_validate(summary_payload)
+        if summary_result.selection_policy != SUMMARY_SELECTION_POLICY:
+            raise ValueError(
+                "publication requires the deterministic summary selection policy"
+            )
         validate_summary_result(
             summary_result,
             report["articles"],
@@ -487,7 +502,7 @@ def cmd_run(args):
     except TypeError:  # Compatibility with legacy helper/test doubles.
         title_date = today_cn()
     title = f"🔥（{title_date}）每日AI资讯一览✨"
-    full_content = compose_report_content(title, content, articles_dict)
+    full_content = compose_report_content(title, content, articles_dict, summary_result)
 
     # 5. Stage JSON, Markdown, and the complete static site, then promote.
     print("\n🏗️  Building staged site and publishing complete edition...")
@@ -651,7 +666,7 @@ def cmd_summarize(args):
     except TypeError:
         title_date = today_cn()
     title = f"🔥（{title_date}）每日AI资讯一览✨"
-    full_content = compose_report_content(title, content, articles)
+    full_content = compose_report_content(title, content, articles, summary_result)
 
     report = dict(data)
     report["articles"] = articles

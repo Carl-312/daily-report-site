@@ -14,7 +14,9 @@
 - enrichment 的 transport、policy、verification、refill 已分别落在独立模块，主编排仍通过稳定边界调用。
 - 部分来源降级、全源失败、重复等价输入 no-op、来源有限重试。
 - 离线结构化摘要与 replay 元数据。
-- 摘要来源契约：数量受独立 `max_summary_items` 限制；`article_id` 必须来自输入，允许同一来源支撑多条新闻；源 URL、标题和摘要均在本地校验，发布前再次复核。
+- 摘要来源契约：代码先以 `source_balanced_v2` 生成短名单；模型逐项覆盖且不得重复 `article_id`；源 URL、标题、摘要、来源分布与内部趋势信号均在发布前复核。
+- 结构化选题目录：双语 AI 术语、中美公司、稳定模型家族、动作/对象和宽泛科技主体的上下文要求由同一目录驱动；未知数字版本可按家族识别。
+- 深层去重与集中度：跨来源/跨语言同事件在摘要前聚类；来源、主要/被提及主体、模型家族、话题和地区分布写入可重放诊断，配额放宽必须可见。
 - 输入 URL/故事去重：移除跟踪参数和片段，拦截明显跨来源标题改写，不依赖 LLM 扩展候选。
 - 静态站点列表渲染：紧凑有序列表和无链接摘要均保留，不会因 HTML 转换正则过窄而生成空正文。
 
@@ -29,7 +31,20 @@
 
 这些检查只证明当前测试矩阵通过，不是 merge 授权。
 
-## 最新验证证据（2026-07-13）
+## 最新验证证据（2026-07-18）
+
+- 本地门禁：`ruff check .`、`ruff format --check .`、`git diff --check` 全绿，pytest
+  `198 passed`（仅既有 Pydantic V2 弃用 warning）。
+- 真实在线 run `45b9f28149ab4c3d915dfa98f6dcf03a`：36 条候选通过
+  `source_balanced_v2` 选出 10 个独立事件，ModelScope `Qwen/Qwen3.5-35B-A3B` 在一次本地
+  契约修复后发布成功；Tavily 依生产默认保持关闭。
+- 入选来源为 AGI Hunt 6、TechCrunch 2、The Verge 2；事件聚类拒绝 Apple/OpenAI 诉讼和
+  Zoox 召回的各一条跨源重复；8 个话题分类，Claude/Grok/Kimi/Gemini 各 1 条，无配额放宽。
+- 新版最大被提及主体为 xAI/Anthropic 各 2 条；旧版 Anthropic 4 条、Claude 3 条的集中度已下降。
+- `SummaryResult` 从落盘 JSON 重放校验通过；权威 edition 与 `data/content/dist` 镜像哈希一致；
+  正式 Markdown/HTML 均无内部趋势信号。
+
+## 历史验证证据（2026-07-13）
 
 - 本地：`ruff check .`、`ruff format --check .`、`git diff --check` 全绿，pytest `86 passed`（仅既有 Pydantic 弃用 warning）。
 - [GitHub Actions preview run `29238871654`](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654)：提交 `adc9bf0`，输入 `skip_generate=false`、`enable_tavily=false`、`publish=false`；2 条候选生成 2 条摘要，`a1/a2` 映射通过，artifact 成功，deploy job 跳过，未发布 Pages。
@@ -60,4 +75,4 @@ PR #8、#9 已通过 CI 后合并；后续生产变更仍应先走灰度 PR 和 
 - `0ee5ebe`：修复紧凑有序列表渲染丢失摘要条目的问题，并增加构建回归测试。
 
 ---
-*最后更新：2026-07-13*
+*最后更新：2026-07-18*

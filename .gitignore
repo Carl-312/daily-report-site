@@ -22,6 +22,9 @@ Thumbs.db
 dist/
 .publication/
 .runs/
+.data.mirror-*/
+.content.mirror-*/
+.dist.mirror-*/
 agihunt-gray-health.json
 .archive-staging/
 archive/

@@ -1,0 +1,499 @@
+schema_version: 1
+as_of: 2026-07-18
+
+core_ai_terms:
+  - AI
+  - artificial intelligence
+  - generative AI
+  - foundation model
+  - large language model
+  - LLM
+  - multimodal
+  - machine learning
+  - deep learning
+  - reasoning model
+  - agentic
+  - AI agent
+  - 人工智能
+  - 生成式人工智能
+  - 生成式AI
+  - 基础模型
+  - 大模型
+  - 多模态
+  - 机器学习
+  - 深度学习
+  - 推理模型
+  - 智能体
+
+neighbor_terms:
+  - robot
+  - robotics
+  - humanoid
+  - autonomous
+  - self-driving
+  - robotaxi
+  - inference
+  - GPU
+  - accelerator
+  - semiconductor
+  - chip
+  - compute
+  - data center
+  - 机器人
+  - 人形机器人
+  - 自动驾驶
+  - 无人驾驶
+  - 推理
+  - 芯片
+  - 半导体
+  - 加速器
+  - 算力
+  - 数据中心
+
+actions:
+  lawsuit: [sue, sues, sued, suing, lawsuit, legal action, court, 起诉, 诉讼, 法院, 告上法庭]
+  recall: [recall, recalls, recalled, software recall, 召回]
+  release: [release, releases, released, launch, launches, launched, unveil, unveils, introduced, debut, 发布, 上线, 推出, 亮相, 开放]
+  train: [pretrain, pretraining, training, trained, 预训练, 训练, 初训]
+  benchmark: [benchmark, evaluation, eval, ranking, tops, score, scores, 评测, 测评, 榜单, 登顶, 测试]
+  access: [access, limit, limits, subscription, plan, plans, pricing, available, availability, 放宽, 限额, 套餐, 订阅, 定价, 可用]
+  integrate: [integration, integrates, integrated, connect, connects, MCP, credentials, 接入, 集成, 连接, 凭据]
+  funding: [funding, fundraise, raise, raises, valuation, investment, financing, 融资, 估值, 投资]
+  deal: [deal, partnership, partner, lease, acquisition, acquire, merger, 洽谈, 交易, 合作, 租赁, 收购, 并购]
+  policy: [regulation, regulator, ordered, law, policy, ban, moratorium, comply, 监管, 法规, 政策, 禁令, 管控, 合规]
+  security: [security, safety, vulnerability, bug, likeness, deepfake, nudify, 安全, 漏洞, 故障, 形象检测, 深度伪造, 脱衣]
+  research: [research, paper, study, hackathon, 研究, 论文, 黑客松, 科研]
+  rename: [rename, renamed, rebrand, 更名, 改名]
+
+objects:
+  robotaxi: [robotaxi, self-driving taxi, autonomous taxi, 自驾车, 自动驾驶出租车, 无人出租车]
+  app_store: [app store, application store, 应用商店]
+  data_center: [data center, datacenter, AI compute, 数据中心, 算力]
+  credentials: [credential, credentials, password, passwords, 凭据, 密码]
+  likeness: [likeness, deepfake, AI形象, 形象检测, 数字替身]
+  notebook: [NotebookLM, Gemini Notebook, AI notebook, AI笔记]
+  humanoid: [humanoid, humanoid robot, 人形机器人]
+  browser_agent: [browser agent, computer use, 浏览器智能体, 电脑操控]
+  coding_agent: [coding agent, code agent, AI programmer, 编程智能体, AI程序员]
+  open_source: [open source, open-source, 开源]
+
+topics:
+  legal_policy: [lawsuit, policy]
+  safety_security: [recall, security]
+  research_benchmark: [research, benchmark]
+  infrastructure: [funding, deal]
+  product_access: [access, integrate, rename]
+  model_release: [release, train]
+
+entities:
+  - id: openai
+    name: OpenAI
+    region: us
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [OpenAI]
+    models:
+      - id: gpt
+        aliases: [GPT, ChatGPT]
+      - id: codex
+        aliases: [OpenAI Codex, Codex]
+      - id: sora
+        aliases: [Sora]
+      - id: gpt_image
+        aliases: [GPT Image, DALL-E, DALL·E]
+
+  - id: anthropic
+    name: Anthropic
+    region: us
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [Anthropic]
+    models:
+      - id: claude
+        aliases: [Claude, Claude Opus, Claude Sonnet, Claude Haiku, Fable, Mythos]
+
+  - id: google
+    name: Google DeepMind
+    region: us
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Google DeepMind, DeepMind, Google]
+    models:
+      - id: gemini
+        aliases: [Gemini]
+      - id: gemma
+        aliases: [Gemma]
+      - id: veo
+        aliases: [Veo]
+      - id: imagen
+        aliases: [Imagen, Nano Banana]
+      - id: lyria
+        aliases: [Lyria]
+
+  - id: meta
+    name: Meta
+    region: us
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Meta, Facebook]
+    models:
+      - id: llama
+        aliases: [Llama]
+
+  - id: xai
+    name: xAI
+    region: us
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [xAI]
+    models:
+      - id: grok
+        aliases: [Grok]
+
+  - id: microsoft
+    name: Microsoft
+    region: us
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Microsoft, 微软]
+    models:
+      - id: phi
+        aliases: [Microsoft Phi, Phi model, Phi-3, Phi-4]
+      - id: copilot
+        aliases: [Microsoft Copilot, GitHub Copilot, Copilot]
+
+  - id: amazon
+    name: Amazon
+    region: us
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Amazon, AWS, 亚马逊]
+    models:
+      - id: nova
+        aliases: [Amazon Nova, AWS Nova]
+
+  - id: nvidia
+    name: NVIDIA
+    region: us
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [NVIDIA, 英伟达]
+    models:
+      - id: nemotron
+        aliases: [Nemotron]
+
+  - id: alibaba
+    name: Alibaba
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Alibaba, Alibaba Cloud, 阿里巴巴, 阿里云]
+    models:
+      - id: qwen
+        aliases: [Qwen, 通义千问]
+      - id: wan
+        aliases: [Wan2, Wan 2, 通义万相]
+
+  - id: deepseek
+    name: DeepSeek
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [DeepSeek, 深度求索]
+    models:
+      - id: deepseek
+        aliases: [DeepSeek]
+
+  - id: moonshot
+    name: Moonshot AI
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [Moonshot AI, Moonshot, 月之暗面]
+    models:
+      - id: kimi
+        aliases: [Kimi]
+
+  - id: zhipu
+    name: Zhipu AI
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [Zhipu AI, ZhipuAI, 智谱AI, 智谱]
+    models:
+      - id: glm
+        aliases: [ChatGLM, GLM, AutoGLM]
+      - id: cogview
+        aliases: [CogView, CogVideo]
+
+  - id: bytedance
+    name: ByteDance
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [ByteDance, 字节跳动, 火山引擎, Volcano Engine]
+    models:
+      - id: doubao
+        aliases: [Doubao, Doubao Seed, Doubao-Seed, 豆包]
+      - id: seedream
+        aliases: [Seedream]
+      - id: seedance
+        aliases: [Seedance]
+
+  - id: tencent
+    name: Tencent
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Tencent, 腾讯, 腾讯云]
+    models:
+      - id: hunyuan
+        aliases: [Hunyuan, 腾讯混元, 混元大模型]
+
+  - id: baidu
+    name: Baidu
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Baidu, 百度, 百度智能云]
+    models:
+      - id: ernie
+        aliases: [ERNIE, ERNIE Bot, 文心一言, 文心大模型]
+
+  - id: minimax
+    name: MiniMax
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [MiniMax, 稀宇科技]
+    models:
+      - id: minimax
+        aliases: [MiniMax]
+      - id: hailuo
+        aliases: [Hailuo, 海螺AI, 海螺视频]
+
+  - id: stepfun
+    name: StepFun
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [StepFun, 阶跃星辰]
+    models:
+      - id: step
+        aliases: [Step 3, Step-3, Step 2, Step-2, 阶跃大模型]
+
+  - id: 01ai
+    name: 01.AI
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [01.AI, 01AI, 零一万物]
+    models:
+      - id: yi
+        aliases: [Yi-Large, Yi-Lightning, Yi model]
+
+  - id: baichuan
+    name: Baichuan AI
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: false
+    aliases: [Baichuan AI, Baichuan, 百川智能]
+    models:
+      - id: baichuan
+        aliases: [Baichuan]
+
+  - id: huawei
+    name: Huawei
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Huawei, 华为, 华为云]
+    models:
+      - id: pangu
+        aliases: [Pangu, 盘古大模型]
+
+  - id: xiaomi
+    name: Xiaomi
+    region: cn
+    tier: frontier_lab
+    requires_ai_context: true
+    aliases: [Xiaomi, 小米]
+    models:
+      - id: mimo
+        aliases: [MiMo]
+
+  - id: amd
+    name: AMD
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: true
+    aliases: [AMD]
+    models: []
+
+  - id: intel
+    name: Intel
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: true
+    aliases: [Intel, 英特尔]
+    models: []
+
+  - id: tsmc
+    name: TSMC
+    region: other
+    tier: ai_infrastructure
+    requires_ai_context: true
+    aliases: [TSMC, 台积电]
+    models: []
+
+  - id: broadcom
+    name: Broadcom
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: true
+    aliases: [Broadcom, 博通]
+    models: []
+
+  - id: cambricon
+    name: Cambricon
+    region: cn
+    tier: ai_infrastructure
+    requires_ai_context: true
+    aliases: [Cambricon, 寒武纪]
+    models: []
+
+  - id: coreweave
+    name: CoreWeave
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: false
+    aliases: [CoreWeave]
+    models: []
+
+  - id: databricks
+    name: Databricks
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: false
+    aliases: [Databricks]
+    models: []
+
+  - id: snowflake
+    name: Snowflake
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: true
+    aliases: [Snowflake]
+    models: []
+
+  - id: huggingface
+    name: Hugging Face
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: false
+    aliases: [Hugging Face]
+    models: []
+
+  - id: scale_ai
+    name: Scale AI
+    region: us
+    tier: ai_infrastructure
+    requires_ai_context: false
+    aliases: [Scale AI]
+    models: []
+
+  - id: apple
+    name: Apple
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Apple, 苹果]
+    models: []
+
+  - id: tesla
+    name: Tesla
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Tesla, 特斯拉]
+    models: []
+
+  - id: tiktok
+    name: TikTok
+    region: other
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [TikTok, 抖音]
+    models: []
+
+  - id: samsung
+    name: Samsung
+    region: other
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Samsung, 三星]
+    models: []
+
+  - id: zoox
+    name: Zoox
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Zoox]
+    models: []
+
+  - id: waymo
+    name: Waymo
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Waymo]
+    models: []
+
+  - id: figure
+    name: Figure AI
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Figure AI, Figure robot]
+    models: []
+
+  - id: agility
+    name: Agility Robotics
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Agility Robotics]
+    models: []
+
+  - id: unitree
+    name: Unitree
+    region: cn
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Unitree, 宇树科技, 宇树机器人]
+    models: []
+
+  - id: ubtech
+    name: UBTECH
+    region: cn
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [UBTECH, 优必选]
+    models: []
+
+  - id: github
+    name: GitHub
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [GitHub]
+    models: []
+
+  - id: anysphere
+    name: Anysphere
+    region: us
+    tier: broad_tech
+    requires_ai_context: true
+    aliases: [Anysphere, Cursor]
+    models: []

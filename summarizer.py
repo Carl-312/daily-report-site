@@ -21,13 +21,17 @@ from utils.summary_contracts import (
     SummaryDraft,
     SummaryItem,
     SummaryResult,
-    article_display_badge,
-    article_id_for_index,
     fingerprint_summary_input,
     reader_summary_issues,
     render_summary_markdown,
     summary_visible_character_count,
     validate_summary_result,
+)
+from utils.summary_selection import (
+    SUMMARY_SELECTION_POLICY,
+    article_reference_id,
+    article_reference_map,
+    select_summary_candidates_with_diagnostics,
 )
 
 
@@ -82,11 +86,9 @@ def compress_articles(articles: list[dict]) -> list[dict]:
     compressed = []
     for index, a in enumerate(articles, 1):
         item = {
-            "article_id": article_id_for_index(index),
+            "article_id": article_reference_id(a, index),
             "title": (a.get("title") or "")[: cfg.title_max],
-            "publish_time": a.get("publish_time") or "",
             "description": (a.get("description") or "")[: cfg.desc_max],
-            "priority": a.get("priority", 0),
         }
         trend_signal = _trend_editorial_signal(a)
         if trend_signal is not None:
@@ -275,7 +277,7 @@ def _parse_summary_draft(content: str) -> SummaryDraft:
 def validate_summary_quality(
     content: str,
     expected_items: int = 10,
-    expected_article_ids: set[str] | None = None,
+    expected_article_ids: set[str] | tuple[str, ...] | None = None,
 ) -> SummaryDraft:
     """Validate the compact JSON output before joining private source metadata."""
     draft = _parse_summary_draft(content)
@@ -301,7 +303,7 @@ def validate_summary_quality(
     if _contains_public_article_id(discussion_topic):
         raise SummaryQualityError("interaction topic exposes an article_id")
 
-    visible_text = "\n".join(f"{item.title} {item.summary}" for item in draft.items)
+    visible_text = "\n".join(item.summary for item in draft.items)
     searchable_chars = re.findall(r"[\u4e00-\u9fffA-Za-z]", visible_text)
     chinese_ratio = _count_cjk(visible_text) / max(1, len(searchable_chars))
     if chinese_ratio < 0.45:
@@ -318,18 +320,28 @@ def validate_summary_quality(
                 raise SummaryQualityError(
                     f"item {index} references unknown article_id {article_id}"
                 )
-        if not title or not summary:
-            raise SummaryQualityError(f"item {index} is missing a title or summary")
-        if _count_cjk(f"{title}{summary}") < 8:
+        if not summary:
+            raise SummaryQualityError(f"item {index} is missing a summary")
+        if _count_cjk(summary) < 8:
             raise SummaryQualityError(
                 f"item {index} does not contain enough Chinese content"
             )
-        if _contains_public_link(title) or _contains_public_link(summary):
+        if _contains_public_link(summary):
             raise SummaryQualityError(f"item {index} contains a link")
-        if _contains_public_article_id(title) or _contains_public_article_id(summary):
+        if _contains_public_article_id(summary):
+            raise SummaryQualityError(f"item {index} exposes an article_id")
+        if title and _contains_public_link(title):
+            raise SummaryQualityError(f"item {index} contains a link")
+        if title and _contains_public_article_id(title):
             raise SummaryQualityError(f"item {index} exposes an article_id")
         if issues := reader_summary_issues(summary):
             raise SummaryQualityError(f"item {index} summary " + "; ".join(issues))
+    if isinstance(expected_article_ids, tuple):
+        output_ids = tuple(item.article_id.strip() for item in draft.items)
+        if output_ids != expected_article_ids:
+            raise SummaryQualityError(
+                "summary must cover every selected candidate exactly once and in order"
+            )
     return draft
 
 
@@ -339,7 +351,7 @@ def _validate_summary_with_one_repair(
     content: str,
     *,
     expected_items: int,
-    expected_article_ids: set[str],
+    expected_article_ids: tuple[str, ...],
 ) -> SummaryDraft:
     """Retry one non-empty response only when its reader summary is invalid."""
 
@@ -350,21 +362,20 @@ def _validate_summary_with_one_repair(
             expected_article_ids=expected_article_ids,
         )
     except SummaryQualityError as exc:
-        # Do not spend another request on empty output, schema drift, unknown
-        # IDs, or other structural failures. A focused repair is useful only
-        # when the provider returned a complete JSON draft whose reader-facing
-        # sentence missed the local editorial contract.
-        if not content.strip() or not re.search(r"\bitem \d+ summary\b", str(exc)):
+        # Do not spend another request on empty output, schema drift, or unknown
+        # IDs. A focused repair is useful for a complete JSON draft that either
+        # missed one selected ID or missed the reader sentence contract.
+        repairable = re.search(r"\bitem \d+ summary\b", str(exc)) or (
+            "cover every selected candidate" in str(exc)
+        )
+        if not content.strip() or not repairable:
             raise
 
         repair_instruction = (
-            "上一版 JSON 未通过本地摘要契约："
-            f"{exc}。请重新输出完整 JSON 对象，不要解释，也不要只返回修改项。"
-            f"每条 summary 的可见字符硬性范围为 {SUMMARY_MIN_VISIBLE_CHARS}–"
-            f"{SUMMARY_MAX_VISIBLE_CHARS}，目标为 {SUMMARY_TARGET_MIN_VISIBLE_CHARS}–"
-            f"{SUMMARY_TARGET_MAX_VISIBLE_CHARS}；必须是完整单句，并继续禁止冒号、"
-            "省略号以及‘据报道’‘报道称’‘消息称’‘消息显示’‘市场消息显示’"
-            "‘据称’等空泛来源措辞。"
+            f"上一版 JSON 未通过本地检查：{exc}。重新输出完整 JSON；逐条保留输入 "
+            "article_id 和顺序，每条 summary 以 45–65 个可见字符为目标，硬性保持在 "
+            f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符；"
+            "写成完整中文单句，不要解释。"
         )
         repair_params = dict(params)
         repair_params["messages"] = [
@@ -459,14 +470,12 @@ def _parse_summary_result(
     input_fingerprint: str,
     prompt_fingerprint: str,
     attempts: tuple[SummaryAttempt, ...],
+    selection_diagnostics: dict[str, Any],
 ) -> SummaryResult:
     """Join validated model output to private source provenance."""
 
     items: list[SummaryItem] = []
-    articles_by_id = {
-        article_id_for_index(index): article
-        for index, article in enumerate(articles, 1)
-    }
+    articles_by_id = article_reference_map(articles)
     for item in draft.items:
         article_id = item.article_id.strip()
         article = articles_by_id.get(article_id)
@@ -478,10 +487,9 @@ def _parse_summary_result(
         items.append(
             SummaryItem(
                 article_id=article_id,
-                title=item.title.replace("\n", " ").strip(),
+                title=str(article.get("title") or "").replace("\n", " ").strip(),
                 summary=item.summary.replace("\n", " ").strip(),
                 url=url.strip(),
-                display_badge=article_display_badge(article),
             )
         )
 
@@ -494,6 +502,12 @@ def _parse_summary_result(
         input_fingerprint=input_fingerprint,
         prompt_fingerprint=prompt_fingerprint,
         attempts=attempts,
+        selection_policy=SUMMARY_SELECTION_POLICY,
+        candidate_article_ids=tuple(
+            article_reference_id(article, index)
+            for index, article in enumerate(articles, 1)
+        ),
+        selection_diagnostics=selection_diagnostics,
     )
 
 
@@ -523,7 +537,11 @@ def summarize_result(
         raise ValueError(
             "No LLM provider API key found. Set MODELSCOPE_API_KEY or SILICONFLOW_API_KEY."
         )
-    compressed = compress_articles(articles)
+    selection = select_summary_candidates_with_diagnostics(
+        articles, _summary_limit(cfg)
+    )
+    selected_articles = list(selection.articles)
+    compressed = compress_articles(selected_articles)
     system_prompt = load_prompt()
     input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
         compressed, system_prompt
@@ -566,7 +584,9 @@ def summarize_result(
                 params,
                 content,
                 expected_items=_summary_limit(cfg),
-                expected_article_ids={article["article_id"] for article in compressed},
+                expected_article_ids=tuple(
+                    article["article_id"] for article in compressed
+                ),
             )
             attempts.append(
                 SummaryAttempt(
@@ -577,13 +597,14 @@ def summarize_result(
             )
             result = _parse_summary_result(
                 draft,
-                articles,
+                selected_articles,
                 policy="required_ai",
                 provider=provider["name"],
                 model=provider["model"],
                 input_fingerprint=input_fingerprint,
                 prompt_fingerprint=prompt_fingerprint,
                 attempts=tuple(attempts),
+                selection_diagnostics=selection.diagnostics,
             )
             validate_summary_result(result, articles, max_items=_summary_limit(cfg))
             print(
@@ -650,23 +671,21 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
         SummaryAttempt,
         SummaryItem,
         SummaryResult,
-        article_display_badge,
         fingerprint_summary_input,
     )
 
-    sorted_articles = sorted(articles, key=lambda x: x.get("priority", 0), reverse=True)
-    limit = min(len(sorted_articles), max(0, limit))
-    selected = sorted_articles[:limit]
+    selection = select_summary_candidates_with_diagnostics(articles, max(0, limit))
+    selected = list(selection.articles)
+    limit = len(selected)
     input_fingerprint, prompt_fingerprint = fingerprint_summary_input(
         selected, "offline"
     )
     items = tuple(
         SummaryItem(
-            article_id=article_id_for_index(index),
+            article_id=article_reference_id(article, index),
             title=(article.get("title") or "").replace("\n", "").strip(),
             summary=_offline_summary_text(article),
             url=article.get("link") or "",
-            display_badge=article_display_badge(article),
         )
         for index, article in enumerate(selected, 1)
     )
@@ -681,8 +700,14 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
         attempts=(
             SummaryAttempt(provider="local", model="deterministic", status="ok"),
         ),
+        selection_policy=SUMMARY_SELECTION_POLICY,
+        candidate_article_ids=tuple(
+            article_reference_id(article, index)
+            for index, article in enumerate(selected, 1)
+        ),
+        selection_diagnostics=selection.diagnostics,
     )
-    validate_summary_result(result, selected, max_items=limit or 1)
+    validate_summary_result(result, articles, max_items=max(1, limit))
     return result
 
 

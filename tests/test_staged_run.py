@@ -7,6 +7,7 @@ import pytest
 import build
 from main import stage_and_publish_run
 from utils.publication import create_run_workspace
+from utils.summary_contracts import SummaryItem, SummaryResult
 
 
 def test_build_failure_does_not_overwrite_public_report_artifacts(
@@ -81,3 +82,45 @@ def test_equivalent_edition_is_a_noop_without_rebuilding_site(
     assert second == (first_json, first_markdown)
     assert first_json.stat().st_mtime_ns == before_json
     assert first_markdown.stat().st_mtime_ns == before_markdown
+
+
+def test_publication_rejects_a_legacy_model_selected_summary(tmp_path) -> None:
+    cfg = SimpleNamespace(
+        data_dir=str(tmp_path / "data"),
+        content_dir=str(tmp_path / "content"),
+        site_dir=str(tmp_path / "dist"),
+        max_summary_items=10,
+    )
+    articles = [
+        {
+            "title": "Candidate",
+            "link": "https://example.test/candidate",
+            "description": "候选包含足够事实，可供摘要程序稳定生成一条完整新闻。",
+            "source": "one",
+        }
+    ]
+    legacy = SummaryResult(
+        policy="required_ai",
+        items=(
+            SummaryItem(
+                article_id="a1",
+                title="Candidate",
+                summary="候选包含足够事实，可供摘要程序稳定生成一条完整新闻并绑定来源。",
+                url="https://example.test/candidate",
+            ),
+        ),
+        discussion_topic="你最关注哪条AI新闻？",
+        provider="fixture",
+        model="fixture",
+        input_fingerprint="input",
+        prompt_fingerprint="prompt",
+    )
+
+    with pytest.raises(ValueError, match="deterministic summary selection policy"):
+        stage_and_publish_run(
+            cfg,
+            create_run_workspace(tmp_path / ".runs", "2026-07-10", "legacy"),
+            "2026-07-10",
+            {"articles": articles, "summary": legacy.model_dump(mode="json")},
+            "candidate markdown",
+        )

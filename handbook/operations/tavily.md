@@ -154,7 +154,17 @@ enrichment:
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  priority_refill_queries:
+    - "OpenAI Anthropic xAI Google DeepMind frontier model launch research agent"
+    - "Qwen DeepSeek Kimi GLM Doubao Hunyuan ERNIE 中国 大模型 发布 开源 评测"
+    - "AI coding agent developer tools GitHub Cursor MCP open source model"
+    - "AI multimodal image video voice robotics autonomous model"
+    - "AI chip GPU compute data center cloud NVIDIA AMD Huawei"
+    - "AI funding acquisition regulation safety lawsuit model company"
   official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  official_fallback_queries:
+    - "official AI model release API research open source"
+    - "中国 大模型 官方 发布 API 开源"
   trusted_domains:
     priority_refill_media_whitelist:
       - thenextweb.com
@@ -180,6 +190,7 @@ enrichment:
 - `verify_search_depth: basic`: verify 用低成本路径。
 - `enable_fuzzy_second_pass: false`: Phase 0 没证明 fuzzy 有收益。
 - `enable_official_fallback: false`: 官方域名补充仍需显式开启。
+- `priority_refill_queries` / `official_fallback_queries`: 按报告日期确定性轮换的主题查询包；单数字段只用于旧配置兼容。查询包扩大中美模型与公司覆盖，但所有结果仍要通过统一 AI 上下文、时间窗和去重门槛。
 
 ### CLI 开关
 

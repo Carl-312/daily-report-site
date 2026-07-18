@@ -120,6 +120,56 @@ enrichment:
     ]
 
 
+def test_refill_query_pack_rotates_deterministically_by_report_day(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    queries = ["OpenAI frontier model", "Qwen DeepSeek 中国 大模型"]
+    seen_payloads: list[dict] = []
+
+    def fake_search(_session, _api_key, payload):
+        seen_payloads.append(payload)
+        return {
+            "latency_ms": 10.0,
+            "response": {
+                "results": [
+                    make_tavily_result(
+                        "Qwen releases a new AI reasoning model",
+                        "thenextweb.com",
+                        "qwen-reasoning",
+                    )
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+    reference_dt = datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE)
+    settings = cfg.enrichment.model_copy(
+        update={
+            "enabled": True,
+            "max_total_calls": 1,
+            "max_verify_calls": 0,
+            "max_refill_rounds": 1,
+            "min_articles": 1,
+            "priority_refill_queries": queries,
+        }
+    )
+
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=settings,
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=reference_dt,
+    )
+
+    expected_query = queries[reference_dt.date().toordinal() % len(queries)]
+    assert seen_payloads[0]["query"] == expected_query
+    assert result["report"]["priority_refill_runs"][0]["query"] == expected_query
+    assert result["report"]["final_count"] == 1
+
+
 def test_enrichment_timeout_preserves_original_articles(monkeypatch) -> None:
     cfg = load_project_config()
 

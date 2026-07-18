@@ -2,6 +2,7 @@
 
 ## 当前证据入口
 
+- [当前选题与趋势展示问题](current-selection-and-presentation-issues.md)：多来源成稿退化和内部趋势标签外泄
 - [日报质量审计](daily-product-quality-audit.md)：按日期记录重复、扩展、发布和产物问题
 - [可靠性验收](acceptance.md)：测试、灰度运行和交付门禁证据
 - [稳定性改进分析](improvement-analysis.md)：风险分层、根因和后续路线
