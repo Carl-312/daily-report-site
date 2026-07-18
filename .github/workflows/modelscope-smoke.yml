@@ -5,6 +5,12 @@ env:
 
 on:
   workflow_dispatch:
+    inputs:
+      model:
+        description: "Optional ModelScope model ID to probe"
+        required: false
+        default: "ZhipuAI/GLM-5.2"
+        type: string
 
 permissions:
   contents: read
@@ -44,4 +50,5 @@ jobs:
       - name: Verify non-empty ModelScope chat completion
         env:
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
+          MODELSCOPE_MODEL: ${{ inputs.model }}
         run: python scripts/modelscope_smoke.py
