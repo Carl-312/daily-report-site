@@ -5,7 +5,7 @@
       "title": "xAI 2T 模型下周完成初训",
       "link": "https://agihunt.info/?day=2026-07-18&t=xAI%27s+2T+model+pretrains",
       "description": "马斯克称 xAI 的 2T 参数模型下周完成初始训练，并表示比 1.5T 版本在各方面都更好。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 4,
       "source": "agihunt_trending",
@@ -19,16 +19,16 @@
         "trend_state": "new",
         "trend_delta": "0",
         "trend_term_en": "xAI's 2T model pretrains",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Anthropic 放宽访问额度",
       "link": "https://agihunt.info/?day=2026-07-18&t=Anthropic+loosens+limits",
       "description": "Anthropic 称过去几周的访问限制拖累体验，宣布放宽套餐用量，并向开源贡献者赠送 Claude Max。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 4,
       "source": "agihunt_trending",
@@ -42,16 +42,16 @@
         "trend_state": "up",
         "trend_delta": "9",
         "trend_term_en": "Anthropic loosens limits",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Claude 生命科学黑客松收官",
       "link": "https://agihunt.info/?day=2026-07-18&t=Claude+LifeSci+hackathon",
       "description": "Anthropic 的 Built with Claude 生命科学黑客松落幕，脑癌变异筛选工具 NCypher 夺得 Research 赛道冠军。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 4,
       "source": "agihunt_trending",
@@ -65,16 +65,16 @@
         "trend_state": "up",
         "trend_delta": "4",
         "trend_term_en": "Claude LifeSci hackathon",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "OpenAI 再遭 Apple 起诉",
       "link": "https://agihunt.info/?day=2026-07-18&t=Apple+sues+OpenAI+again",
       "description": "Fireship 视频提到，OpenAI 再度被告上法庭，这次原告是 Apple。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -88,16 +88,16 @@
         "trend_state": "down",
         "trend_delta": "1",
         "trend_term_en": "Apple sues OpenAI again",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Fable 5 纳入 Max/Team 套餐",
       "link": "https://agihunt.info/?day=2026-07-18&t=Fable+5+joins+Max+plans",
       "description": "Claude 官方宣布，自 7 月 20 日起 Fable 5 将纳入所有 Max 和 Team Premium 套餐。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -111,16 +111,16 @@
         "trend_state": "new",
         "trend_delta": "0",
         "trend_term_en": "Fable 5 joins Max plans",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Meta 洽租 Anthropic 百亿算力",
       "link": "https://agihunt.info/?day=2026-07-18&t=Meta%27s+%2410B+compute+deal",
       "description": "据报道，Meta 正与 Anthropic 商谈租赁 AI 算力，交易规模约 100 亿美元。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -134,16 +134,16 @@
         "trend_state": "down",
         "trend_delta": "4",
         "trend_term_en": "Meta's $10B compute deal",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "世界首届人形机器人格斗赛",
       "link": "https://agihunt.info/?day=2026-07-18&t=Humanoid+fighting+debut",
       "description": "中国举办了世界首个全尺寸人形机器人格斗锦标赛，现场爆出多个名场面。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -157,16 +157,16 @@
         "trend_state": "down",
         "trend_delta": "3",
         "trend_term_en": "Humanoid fighting debut",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "八天内四个前沿模型连发",
       "link": "https://agihunt.info/?day=2026-07-18&t=4+frontier+models+in+8d",
       "description": "马斯克转述称，过去 8 天里有 4 个前沿模型密集发布，凸显前沿竞争白热化。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -180,16 +180,16 @@
         "trend_state": "new",
         "trend_delta": "0",
         "trend_term_en": "4 frontier models in 8d",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Grok 4.5 任务成本骤降",
       "link": "https://agihunt.info/?day=2026-07-18&t=Grok+4.5+costs+plunge",
       "description": "Polymarket 与 Artificial Analysis 数据显示，Grok 4.5 在 Intelligence Index 任务上的单次成本大幅下降，效率碾压对手。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -203,16 +203,16 @@
         "trend_state": "steady",
         "trend_delta": "0",
         "trend_term_en": "Grok 4.5 costs plunge",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Zoox 召回全美自驾车",
       "link": "https://agihunt.info/?day=2026-07-18&t=Zoox+recalls+all+US+AVs",
       "description": "亚马逊旗下 Zoox 召回美国境内全部 105 辆自动驾驶出租车。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 3,
       "source": "agihunt_trending",
@@ -226,16 +226,16 @@
         "trend_state": "down",
         "trend_delta": "5",
         "trend_term_en": "Zoox recalls all US AVs",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "AI 数据中心电工年薪 28 万美元",
       "link": "https://agihunt.info/?day=2026-07-18&t=Electricians+earn+%24280K",
       "description": "Polymarket 转述市场消息称，负责 AI 数据中心施工维护的电工年薪可达 28 万美元。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 2,
       "source": "agihunt_trending",
@@ -249,16 +249,16 @@
         "trend_state": "up",
         "trend_delta": "4",
         "trend_term_en": "Electricians earn $280K",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "白宫 Gold Eagle 管控前沿模型",
       "link": "https://agihunt.info/?day=2026-07-18&t=Gold+Eagle+frontier+curb",
       "description": "据 CNBC，白宫启动 \"Gold Eagle\" 机制，意图收紧前沿模型的访问权限。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 2,
       "source": "agihunt_trending",
@@ -272,16 +272,16 @@
         "trend_state": "down",
         "trend_delta": "6",
         "trend_term_en": "Gold Eagle frontier curb",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "亚洲模型占 OpenRouter 六成用量",
       "link": "https://agihunt.info/?day=2026-07-18&t=Asian+models+60%25+usage",
       "description": "数据显示，来自亚洲的 AI 模型已约占 OpenRouter 平台 60% 的 token 用量。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 2,
       "source": "agihunt_trending",
@@ -295,16 +295,16 @@
         "trend_state": "new",
         "trend_delta": "0",
         "trend_term_en": "Asian models 60% usage",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Kimi K3 登顶 Next.js 评测",
       "link": "https://agihunt.info/?day=2026-07-18&t=Kimi+K3+tops+Next.js+eval",
       "description": "月之暗面 Kimi K3 在 Next.js 评测中登顶第一，连美国 AI 负责人 David Sacks 也给出评价。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 2,
       "source": "agihunt_trending",
@@ -318,16 +318,16 @@
         "trend_state": "down",
         "trend_delta": "13",
         "trend_term_en": "Kimi K3 tops Next.js eval",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
       "title": "Hermes 接入 Unreal 引擎 MCP",
       "link": "https://agihunt.info/?day=2026-07-18&t=Hermes+taps+Unreal+MCP",
       "description": "NousResearch 为官方 Epic Games MCP 增加了可选的 Hermes Agent 接入。",
-      "publish_time": "2026-07-18T17:02:55+08:00",
+      "publish_time": "2026-07-18T18:40:54+08:00",
       "content": "",
       "priority": 2,
       "source": "agihunt_trending",
@@ -341,9 +341,9 @@
         "trend_state": "new",
         "trend_delta": "0",
         "trend_term_en": "Hermes taps Unreal MCP",
-        "observed_at": "2026-07-18T17:02:55+08:00",
+        "observed_at": "2026-07-18T18:40:54+08:00",
         "publish_time_semantics": "trend_observed_at",
-        "chrome_version": "Google Chrome 148.0.7736.0 canary"
+        "chrome_version": "Google Chrome 150.0.7871.114"
       }
     },
     {
@@ -559,7 +559,7 @@
   ],
   "enrichment": {
     "report_date": "2026-07-18",
-    "reference_dt": "2026-07-18T17:02:55.754472+08:00",
+    "reference_dt": "2026-07-18T18:40:54.328980+08:00",
     "enabled": false,
     "applied": false,
     "skip_reason": "disabled",
@@ -678,7 +678,7 @@
       {
         "article_id": "a2",
         "title": "Anthropic 放宽访问额度",
-        "summary": "Anthropic宣布放宽套餐用量并赠送Claude Max给开源贡献者以改善体验。",
+        "summary": "Anthropic宣布放宽套餐用量并赠送Claude Max，以改善过去几周受限的体验。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Anthropic+loosens+limits"
       },
       {
@@ -690,25 +690,25 @@
       {
         "article_id": "a6",
         "title": "Meta 洽租 Anthropic 百亿算力",
-        "summary": "Meta正与Anthropic商谈租赁约100亿美元的AI算力资源。",
+        "summary": "Meta正与Anthropic商谈租赁百亿美元规模的AI算力资源。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Meta%27s+%2410B+compute+deal"
       },
       {
         "article_id": "a9",
         "title": "Grok 4.5 任务成本骤降",
-        "summary": "数据显示Grok 4.5在任务成本大幅下降，效率碾压竞争对手。",
+        "summary": "数据显示Grok 4.5在任务成本大幅下降的同时效率碾压竞争对手。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Grok+4.5+costs+plunge"
       },
       {
         "article_id": "a14",
         "title": "Kimi K3 登顶 Next.js 评测",
-        "summary": "月之暗面Kimi K3登顶Next.js评测榜首，获美国AI负责人评价。",
+        "summary": "月之暗面Kimi K3登顶Next.js评测榜首，获美国AI负责人David Sacks评价。",
         "url": "https://agihunt.info/?day=2026-07-18&t=Kimi+K3+tops+Next.js+eval"
       },
       {
         "article_id": "a33",
         "title": "Google is renaming NotebookLM to Gemini Notebook",
-        "summary": "Google宣布将笔记应用NotebookLM更名为Gemini Notebook且保持独立运行。",
+        "summary": "Google宣布将笔记应用NotebookLM更名为Gemini Notebook，仍保持独立运行。",
         "url": "https://www.theverge.com/tech/966112/google-gemini-notebook-notebooklm"
       },
       {
@@ -720,13 +720,13 @@
       {
         "article_id": "a17",
         "title": "Databricks hits $188B valuation, extending its run as AI’s favorite second act",
-        "summary": "Databricks估值达到1880亿美元，延续其作为人工智能热门标的的地位。",
+        "summary": "Databricks估值达到1880亿美元，延续其作为人工智能领域热门第二阶段的地位。",
         "url": "https://techcrunch.com/2026/07/17/databricks-hits-188b-valuation-extending-its-run-as-ais-favorite-second-act/"
       },
       {
         "article_id": "a30",
         "title": "TikTok is testing an AI likeness detection tool",
-        "summary": "TikTok开始测试可选的AI形象检测工具供创作者举报疑似内容。",
+        "summary": "TikTok开始测试可选的AI形象检测工具，允许创作者举报相关侵权内容。",
         "url": "https://www.theverge.com/tech/967486/tiktok-ai-likeness-detection-tool"
       }
     ],
