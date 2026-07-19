@@ -89,11 +89,22 @@ def _normalize_word(value: str) -> str:
 
 
 def _identity_terms(value: Any) -> set[str]:
+    terms: set[str] = set()
+    for token in _WORD_RE.findall(compact_text(value)):
+        for part in (token, *re.split(r"[-.]", token)):
+            normalized = _normalize_word(part)
+            if normalized and normalized not in _QUERY_FILLER_TERMS:
+                terms.add(normalized)
+    return terms
+
+
+def _version_terms(terms: set[str]) -> set[str]:
+    """Return model/hardware identifiers such as K3, V4 and B300."""
+
     return {
-        normalized
-        for token in _WORD_RE.findall(compact_text(value))
-        if (normalized := _normalize_word(token))
-        and normalized not in _QUERY_FILLER_TERMS
+        term
+        for term in terms
+        if re.search(r"[a-z]", term, re.IGNORECASE) and re.search(r"\d", term)
     }
 
 
@@ -126,6 +137,9 @@ def _result_matches_lead(result: dict[str, Any], lead: dict[str, Any]) -> bool:
     result_title = compact_text(result.get("title"))
     lead_terms = _identity_terms(lead_identity)
     title_terms = _identity_terms(result_title)
+    required_versions = _version_terms(lead_terms)
+    if required_versions and not required_versions.issubset(title_terms):
+        return False
     if lead_terms and lead_terms & title_terms:
         return True
 

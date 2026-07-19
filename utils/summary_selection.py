@@ -18,6 +18,7 @@ from urllib.parse import urlsplit
 from utils.editorial_catalog import (
     EditorialAnalysis,
     analyze_article,
+    analyze_editorial_text,
     load_editorial_catalog,
 )
 
@@ -361,7 +362,19 @@ def _story_relation(
         right.analysis.mentioned_entities
     )
     shared_actions = set(left.analysis.action_keys) & set(right.analysis.action_keys)
-    if len(shared_entities) >= 2 and shared_actions:
+    same_primary_entity = bool(left.analysis.primary_entity) and (
+        left.analysis.primary_entity == right.analysis.primary_entity
+    )
+    left_title_analysis = analyze_editorial_text(str(left.article.get("title") or ""))
+    right_title_analysis = analyze_editorial_text(str(right.article.get("title") or ""))
+    shared_title_entities = set(left_title_analysis.mentioned_entities) & set(
+        right_title_analysis.mentioned_entities
+    )
+    if (
+        (same_primary_entity or len(shared_title_entities) >= 2)
+        and len(shared_entities) >= 2
+        and shared_actions
+    ):
         return "shared_entities_action"
     if not shared_entities or not shared_actions:
         return None
@@ -372,12 +385,12 @@ def _story_relation(
         set(left.analysis.model_aliases)
         & set(right.analysis.model_aliases) - _GENERIC_MODEL_ALIASES
     )
-    if shared_objects:
-        return "shared_entity_action_object"
     if shared_model_aliases:
         return "shared_entity_action_model"
     if shared_numbers:
         return "shared_entity_action_number"
+    if same_primary_entity and shared_objects:
+        return "shared_entity_action_object"
     return None
 
 
@@ -572,12 +585,9 @@ def select_summary_candidates_with_diagnostics(
         for candidate in representatives
         if candidate.analysis.relevance_level >= 2
     ]
-    target_before_relevance = min(limit, len(representatives))
-    candidates = (
-        core_candidates
-        if len(core_candidates) >= target_before_relevance
-        else representatives
-    )
+    # Once at least one core AI story exists, never fill the remaining quota
+    # with generic technology content.  A shorter edition is intentional.
+    candidates = core_candidates or representatives
     target = min(limit, len(candidates))
 
     source_groups: list[str] = []

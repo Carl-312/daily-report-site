@@ -157,10 +157,12 @@ def test_lead_resolution_rejects_a_nearby_story_with_a_different_subject(
     monkeypatch,
 ) -> None:
     unrelated = _evidence("axios.com", "kimi-k3", 0.96)
-    unrelated["title"] = "Kimi K3 closes the gap with leading US models"
+    unrelated["title"] = (
+        "Claude Code and DeepSeek powered a Chinese cyber espionage campaign"
+    )
     unrelated["content"] = (
-        "The Kimi article briefly mentions that DeepSeek may release another "
-        "model, but it provides no direct DeepSeek V4 announcement or details."
+        "The security report says DeepSeek-v4-pro was used inside an intrusion, "
+        "but it provides no direct DeepSeek V4 release announcement or details."
     )
 
     def fake_search(_session, _api_key, _payload):

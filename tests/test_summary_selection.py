@@ -136,6 +136,26 @@ def test_selection_prefers_an_explicit_ai_story_within_one_source() -> None:
     assert [article["article_id"] for article in selected] == ["a2"]
 
 
+def test_selection_does_not_fill_an_ai_edition_with_generic_technology() -> None:
+    articles = [
+        {
+            "title": "OpenAI launches an AI agent for software developers",
+            "description": "The product update documents the new agent workflow.",
+            "source": "ai-news",
+        },
+        {
+            "title": "The apps and gadgets every reader needs this week",
+            "description": "A general list of consumer applications and hardware.",
+            "source": "tech-news",
+        },
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 8)
+
+    assert [article["article_id"] for article in selection.articles] == ["a1"]
+    assert selection.diagnostics["selected_count"] == 1
+
+
 def test_summary_gate_requires_the_exact_local_shortlist() -> None:
     articles = _production_articles()
     selected = select_summary_candidates(articles, 10)
