@@ -97,6 +97,78 @@ def _rendered_summary(item_count: int = 1) -> str:
     return "\n".join(lines)
 
 
+def test_source_grounding_rejects_an_invented_legal_claim() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "summary": (
+                        "苹果公司正式起诉OpenAI，并指控其侵犯知识产权，双方进入公开法律对抗。"
+                    ),
+                    "why_it_matters": "这场诉讼可能改变两家公司未来的产品竞争关系。",
+                }
+            ],
+            "discussion_topic": "你如何看待这场诉讼？",
+        },
+        ensure_ascii=False,
+    )
+    draft = summarizer.validate_summary_quality(
+        content,
+        expected_items=1,
+        expected_article_ids=("a1",),
+        require_impact=True,
+    )
+
+    with pytest.raises(
+        summarizer.SummaryQualityError,
+        match="unsupported source claim intellectual_property",
+    ):
+        summarizer.validate_summary_source_grounding(
+            draft,
+            {
+                "a1": {
+                    "title": "Apple sues OpenAI",
+                    "description": "Apple is suing OpenAI in a public legal fight.",
+                }
+            },
+        )
+
+
+def test_source_grounding_accepts_a_claim_present_in_the_article() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "summary": (
+                        "苹果公司正式起诉OpenAI，并指控其侵犯知识产权，双方进入公开法律对抗。"
+                    ),
+                    "why_it_matters": "这场诉讼可能改变两家公司未来的产品竞争关系。",
+                }
+            ],
+            "discussion_topic": "你如何看待这场诉讼？",
+        },
+        ensure_ascii=False,
+    )
+    draft = summarizer.validate_summary_quality(
+        content,
+        expected_items=1,
+        expected_article_ids=("a1",),
+        require_impact=True,
+    )
+
+    summarizer.validate_summary_source_grounding(
+        draft,
+        {
+            "a1": {
+                "title": "Apple sues OpenAI over intellectual property",
+                "description": "The complaint alleges an intellectual property violation.",
+            }
+        },
+    )
+
+
 def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
     monkeypatch,
 ) -> None:

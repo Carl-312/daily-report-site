@@ -154,6 +154,39 @@ _COMPACT_HEADLINE_REWRITES = (
     ("能力飞跃", "能力显著跃迁"),
     ("引争议", "引发业界争议"),
 )
+_SOURCE_CLAIM_ANCHORS = (
+    (
+        "intellectual_property",
+        re.compile(r"知识产权|版权|专利|商标"),
+        re.compile(
+            r"知识产权|版权|专利|商标|intellectual\s+property|copyright|patent|trademark",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "unfair_competition",
+        re.compile(r"不正当竞争|不公平竞争"),
+        re.compile(
+            r"不正当竞争|不公平竞争|unfair\s+competition|anti-?competitive",
+            re.IGNORECASE,
+        ),
+    ),
+    (
+        "antitrust",
+        re.compile(r"反垄断|垄断行为"),
+        re.compile(r"反垄断|垄断行为|antitrust|monopol", re.IGNORECASE),
+    ),
+    (
+        "acquisition",
+        re.compile(r"收购|并购"),
+        re.compile(r"收购|并购|acquir|acquisition|buyout", re.IGNORECASE),
+    ),
+    (
+        "funding_or_valuation",
+        re.compile(r"融资|估值"),
+        re.compile(r"融资|估值|funding|fundrais|valu(?:e|ed|ation)", re.IGNORECASE),
+    ),
+)
 
 
 def _strip_json_fence(content: str) -> str:
@@ -360,6 +393,29 @@ def validate_summary_quality(
     return draft
 
 
+def validate_summary_source_grounding(
+    draft: SummaryDraft,
+    articles_by_id: dict[str, dict],
+) -> None:
+    """Reject a small set of high-risk claims absent from source evidence."""
+
+    for index, item in enumerate(draft.items, 1):
+        article = articles_by_id.get(item.article_id.strip())
+        if article is None:
+            continue
+        source_text = " ".join(
+            str(article.get(field) or "")
+            for field in ("title", "description", "content")
+        )
+        for code, output_pattern, source_pattern in _SOURCE_CLAIM_ANCHORS:
+            if output_pattern.search(item.summary) and not source_pattern.search(
+                source_text
+            ):
+                raise SummaryQualityError(
+                    f"item {index} summary has unsupported source claim {code}"
+                )
+
+
 def _validate_summary_with_one_repair(
     client: OpenAI,
     params: dict[str, Any],
@@ -367,16 +423,19 @@ def _validate_summary_with_one_repair(
     *,
     expected_items: int,
     expected_article_ids: tuple[str, ...],
+    articles_by_id: dict[str, dict],
 ) -> SummaryDraft:
     """Retry one non-empty response only when its reader summary is invalid."""
 
     try:
-        return validate_summary_quality(
+        draft = validate_summary_quality(
             content,
             expected_items=expected_items,
             expected_article_ids=expected_article_ids,
             require_impact=True,
         )
+        validate_summary_source_grounding(draft, articles_by_id)
+        return draft
     except SummaryQualityError as exc:
         # Do not spend another request on empty output, schema drift, or unknown
         # IDs. A focused repair is useful for a complete JSON draft that either
@@ -392,6 +451,7 @@ def _validate_summary_with_one_repair(
             "article_id 和顺序，每条 summary 以 45–65 个可见字符为目标，硬性保持在 "
             f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符；"
             "写成完整中文单句；why_it_matters 用 15–70 个可见字符说明影响，"
+            "不得补写输入未出现的诉因、知识产权、不正当竞争、反垄断、收购、融资或估值；"
             "不要解释 JSON 之外的内容。"
         )
         repair_params = dict(params)
@@ -402,12 +462,14 @@ def _validate_summary_with_one_repair(
         ]
         print("\n   ↻ Provider output missed the summary contract; repairing once")
         repaired_content = _summarize_sync(client, repair_params)
-        return validate_summary_quality(
+        draft = validate_summary_quality(
             repaired_content,
             expected_items=expected_items,
             expected_article_ids=expected_article_ids,
             require_impact=True,
         )
+        validate_summary_source_grounding(draft, articles_by_id)
+        return draft
 
 
 def _provider_candidates() -> list[dict[str, str]]:
@@ -611,6 +673,7 @@ def summarize_result(
                 expected_article_ids=tuple(
                     article["article_id"] for article in compressed
                 ),
+                articles_by_id=article_reference_map(selected_articles),
             )
             attempts.append(
                 SummaryAttempt(
