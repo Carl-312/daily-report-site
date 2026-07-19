@@ -130,6 +130,7 @@ def evaluate_shadow_run(
     data_path = data_dir / f"{report_date}.json"
     content_path = content_dir / f"{report_date}.md"
     summary_items: list[Any] = []
+    summary_presentation = "legacy"
     checks["data_path"] = str(data_path)
     checks["content_path"] = str(content_path)
     if not data_path.is_file():
@@ -150,6 +151,7 @@ def evaluate_shadow_run(
             if not isinstance(summary, dict):
                 errors.append("generated summary must be an object")
             else:
+                summary_presentation = str(summary.get("presentation") or "legacy")
                 summary_items = summary.get("items", [])
                 if not isinstance(summary_items, list):
                     errors.append("generated summary items must be a list")
@@ -198,11 +200,12 @@ def evaluate_shadow_run(
         markdown = content_path.read_text(encoding="utf-8")
         if AGIHUNT_LABEL not in markdown:
             errors.append("generated Markdown report is missing AGIHunt attribution")
-        rendered_items = [
-            line.split(". ", 1)[1]
-            for line in markdown.splitlines()
-            if line[:1].isdigit() and ". " in line
-        ]
+        rendered_items: list[str] = []
+        for line in markdown.splitlines():
+            if line.startswith("发生了什么："):
+                rendered_items.append(line.split("发生了什么：", 1)[1])
+            elif line[:1].isdigit() and ". " in line:
+                rendered_items.append(line.split(". ", 1)[1])
         rendered_formats = [
             {"index": index, "issues": list(reader_summary_issues(item))}
             for index, item in enumerate(rendered_items, 1)
@@ -210,6 +213,14 @@ def evaluate_shadow_run(
         checks["rendered_summary_format"] = rendered_formats
         if summary_items and len(rendered_items) != len(summary_items):
             errors.append("generated Markdown item count must match the summary")
+        if summary_presentation == "fact_impact_v1":
+            for item in summary_items:
+                if isinstance(item, dict) and is_http_url(item.get("url")):
+                    if item["url"] not in markdown:
+                        errors.append(
+                            "generated Markdown is missing a direct source link"
+                        )
+                        break
         for item in rendered_formats:
             if item["issues"]:
                 errors.append(

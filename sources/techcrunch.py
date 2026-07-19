@@ -110,6 +110,14 @@ class TechCrunchSource(BaseSource):
                     if self._is_recent(publish_time, reference_dt=reference_dt)
                     else 0,
                     source=self.name,
+                    kind="lead",
+                    evidence_status="unresolved",
+                    confidence="signal",
+                    provenance={
+                        "input_kind": "lead",
+                        "retrieval": "homepage_title_only",
+                        "publish_time_semantics": "url_date",
+                    },
                 )
             )
 

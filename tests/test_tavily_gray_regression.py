@@ -129,8 +129,21 @@ def test_gray_fixture_replays_default_budget_into_secondary_refill(
 
     monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
 
+    legacy_articles = [
+        {
+            **article,
+            "description": article.get("description")
+            or "Legacy replay evidence text keeps this direct story in verify mode.",
+            "publish_time": (
+                fixture["report_date"]
+                if article.get("publish_time") == "未知时间"
+                else article.get("publish_time")
+            ),
+        }
+        for article in fixture["articles"]
+    ]
     result = enrich_articles_with_tavily(
-        fixture["articles"],
+        legacy_articles,
         report_date=fixture["report_date"],
         settings=cfg.enrichment.model_copy(
             update={
@@ -164,19 +177,18 @@ def test_gray_fixture_replays_default_budget_into_secondary_refill(
     assert report["verify_calls"] == 5
     assert len(verify_payloads) == 5
     assert report["verify_skipped_due_budget"] == 7
+    assert report["preserved_budget_count"] == 7
     assert report["refill_calls"] == 2
     assert refill_domain_groups == [
         ["thenextweb.com", "venturebeat.com"],
         ["reuters.com", "arstechnica.com"],
     ]
     assert report["priority_refilled_count"] == 2
-    assert report["secondary_refilled_count"] == 6
-    assert report["final_count"] == 8
-    assert report["stop_reason"] == "budget_exhausted_after_secondary_refill"
+    assert report["secondary_refilled_count"] == 1
+    assert report["final_count"] == 10
+    assert report["stop_reason"] == "secondary_refill_complete"
     assert report["accepted_by_stage_preview"]["secondary_refill"] == [
         "Salesforce launches AI workflow inspector",
-        "Oracle adds AI database tuning agent",
-        "ServiceNow ships AI helpdesk orchestrator",
     ]
 
 

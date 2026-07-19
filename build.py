@@ -185,11 +185,9 @@ def _sanitize_link_schemes(value: str) -> str:
 
 
 def _strip_reader_links(value: str) -> str:
-    """Remove source links and internal IDs while keeping reader-facing labels."""
+    """Remove private IDs while preserving locally bound evidence links."""
     without_ids = _ARTICLE_ID.sub("", value)
-    without_markdown_links = _MARKDOWN_LINK.sub(r"\1", without_ids)
-    without_urls = _PUBLIC_URL.sub("", without_markdown_links)
-    return re.sub(r"\s+([，。！？；：])", r"\1", without_urls)
+    return re.sub(r"\s+([，。！？；：])", r"\1", without_ids)
 
 
 def parse_frontmatter(content: str) -> tuple[dict[str, str], str]:

@@ -62,6 +62,13 @@ def classify_request_outcome(error: Exception | None) -> str:
     if isinstance(error, requests.Timeout):
         return "timeout"
     if isinstance(error, requests.HTTPError):
+        status = getattr(getattr(error, "response", None), "status_code", None)
+        if status in {401, 403}:
+            return "authentication_error"
+        if status in {400, 404, 405, 422}:
+            return "invalid_request"
+        if status == 429:
+            return "rate_limited"
         return "http_error"
     if isinstance(error, requests.ConnectionError):
         return "connection_error"

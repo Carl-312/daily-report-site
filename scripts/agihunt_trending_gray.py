@@ -190,7 +190,7 @@ def private_candidate_artifact(
 def reader_visibility_check(
     site_dir: Path, articles: list[dict[str, Any]]
 ) -> dict[str, Any]:
-    """Ensure original source URLs and private summary IDs stay out of reader HTML."""
+    """Allow direct source URLs while keeping private summary IDs out of HTML."""
 
     pages = sorted(site_dir.glob("*.html"))
     rendered = "\n".join(path.read_text(encoding="utf-8") for path in pages)
@@ -208,7 +208,7 @@ def reader_visibility_check(
         "source_url_count": len(source_urls),
         "exposed_source_urls": exposed_urls,
         "exposed_article_ids": exposed_article_ids,
-        "safe": bool(pages) and not exposed_urls and not exposed_article_ids,
+        "safe": bool(pages) and not exposed_article_ids,
     }
 
 

@@ -44,6 +44,9 @@ def _valid_summary(item_count: int = 1) -> str:
                         "发布重要产品更新，新增多项面向开发者的核心能力，"
                         "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
                     ),
+                    "why_it_matters": (
+                        "这会降低开发团队采用相关能力的门槛，并改变产品迭代效率。"
+                    ),
                 }
                 for index in range(1, item_count + 1)
             ],
@@ -64,6 +67,9 @@ def _summary_with_sources(source_ids: list[str]) -> str:
                         "发布重要产品更新，新增多项面向开发者的核心能力，"
                         "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
                     ),
+                    "why_it_matters": (
+                        "这会降低开发团队采用相关能力的门槛，并改变产品迭代效率。"
+                    ),
                 }
                 for index, source_id in enumerate(source_ids, 1)
             ],
@@ -76,12 +82,91 @@ def _summary_with_sources(source_ids: list[str]) -> str:
 def _rendered_summary(item_count: int = 1) -> str:
     lines = []
     for index in range(1, item_count + 1):
-        lines.append(
-            f"{index}. 发布重要产品更新，新增多项面向开发者的核心能力，"
-            "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+        lines.extend(
+            [
+                f"### {index}. Story",
+                "",
+                "发生了什么：发布重要产品更新，新增多项面向开发者的核心能力，"
+                "推动行业应用持续扩展并进一步提升团队的实际工作效率。",
+                "",
+                "为什么重要：这会降低开发团队采用相关能力的门槛，并改变产品迭代效率。",
+                "",
+            ]
         )
-    lines.extend(["", "💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！"])
+    lines.append("💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！")
     return "\n".join(lines)
+
+
+def test_source_grounding_rejects_an_invented_legal_claim() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "summary": (
+                        "苹果公司正式起诉OpenAI，并指控其侵犯知识产权，双方进入公开法律对抗。"
+                    ),
+                    "why_it_matters": "这场诉讼可能改变两家公司未来的产品竞争关系。",
+                }
+            ],
+            "discussion_topic": "你如何看待这场诉讼？",
+        },
+        ensure_ascii=False,
+    )
+    draft = summarizer.validate_summary_quality(
+        content,
+        expected_items=1,
+        expected_article_ids=("a1",),
+        require_impact=True,
+    )
+
+    with pytest.raises(
+        summarizer.SummaryQualityError,
+        match="unsupported source claim intellectual_property",
+    ):
+        summarizer.validate_summary_source_grounding(
+            draft,
+            {
+                "a1": {
+                    "title": "Apple sues OpenAI",
+                    "description": "Apple is suing OpenAI in a public legal fight.",
+                }
+            },
+        )
+
+
+def test_source_grounding_accepts_a_claim_present_in_the_article() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "summary": (
+                        "苹果公司正式起诉OpenAI，并指控其侵犯知识产权，双方进入公开法律对抗。"
+                    ),
+                    "why_it_matters": "这场诉讼可能改变两家公司未来的产品竞争关系。",
+                }
+            ],
+            "discussion_topic": "你如何看待这场诉讼？",
+        },
+        ensure_ascii=False,
+    )
+    draft = summarizer.validate_summary_quality(
+        content,
+        expected_items=1,
+        expected_article_ids=("a1",),
+        require_impact=True,
+    )
+
+    summarizer.validate_summary_source_grounding(
+        draft,
+        {
+            "a1": {
+                "title": "Apple sues OpenAI over intellectual property",
+                "description": "The complaint alleges an intellectual property violation.",
+            }
+        },
+    )
 
 
 def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
@@ -385,7 +470,7 @@ def test_offline_summary_does_not_expand_candidate_count() -> None:
     summary = summarizer.offline_summary(articles)
 
     assert len(summarizer._numbered_items(summary)) == 4
-    assert "https://" not in summary
+    assert summary.count("https://example.test/") == 4
 
 
 def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None:

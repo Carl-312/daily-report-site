@@ -214,7 +214,7 @@ def test_isolated_gray_writes_private_evidence_without_touching_public_paths(
     assert private_artifact["summary"]["items"][0]["article_id"] == "a1"
     assert private_artifact["summary"]["items"][0]["url"] == article.link
     reader_html = (output_root / "site" / "2026-07-14.html").read_text(encoding="utf-8")
-    assert article.link not in reader_html
+    assert article.link in reader_html
     assert "a1" not in reader_html
 
 

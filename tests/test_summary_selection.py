@@ -17,7 +17,9 @@ from utils.summary_selection import (
 )
 
 
-SNAPSHOT = Path(__file__).resolve().parents[1] / "data" / "2026-07-18.json"
+SNAPSHOT = (
+    Path(__file__).resolve().parent / "fixtures" / "summary-selection-2026-07-18.json"
+)
 VALID_SUMMARY = (
     "该候选清楚说明了新闻主体、已经发生的动作以及目前可确认的结果，"
     "并保留原始信息中的事实状态。"
@@ -132,6 +134,52 @@ def test_selection_prefers_an_explicit_ai_story_within_one_source() -> None:
     selected = select_summary_candidates(articles, 1)
 
     assert [article["article_id"] for article in selected] == ["a2"]
+
+
+def test_selection_does_not_fill_an_ai_edition_with_generic_technology() -> None:
+    articles = [
+        {
+            "title": "OpenAI launches an AI agent for software developers",
+            "description": "The product update documents the new agent workflow.",
+            "source": "ai-news",
+        },
+        {
+            "title": "The apps and gadgets every reader needs this week",
+            "description": "A general list of consumer applications and hardware.",
+            "source": "tech-news",
+        },
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 8)
+
+    assert [article["article_id"] for article in selection.articles] == ["a1"]
+    assert selection.diagnostics["selected_count"] == 1
+
+
+def test_selection_keeps_distinct_stories_that_only_share_body_entities() -> None:
+    articles = [
+        {
+            "title": "Kimi K3 model release draws attention in Silicon Valley",
+            "description": (
+                "Moonshot released Kimi K3 and compared its coding results with "
+                "OpenAI and Anthropic models."
+            ),
+            "source": "source-one",
+        },
+        {
+            "title": "Open-weight models turn inference into a control point",
+            "description": (
+                "An industry analysis compares OpenAI and Anthropic pricing and "
+                "explains why model routing changes infrastructure control."
+            ),
+            "source": "source-two",
+        },
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 8)
+
+    assert len(selection.articles) == 2
+    assert selection.diagnostics["duplicate_story_rejected_count"] == 0
 
 
 def test_summary_gate_requires_the_exact_local_shortlist() -> None:

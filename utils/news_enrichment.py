@@ -25,6 +25,7 @@ from utils.enrichment_transport import (
     classify_request_outcome as classify_transport_outcome,
 )
 from utils.run_contracts import RunDeadlineExceeded, scrub_diagnostic
+from utils.story_quality import partition_articles_for_publication
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
 TAVILY_SEARCH_URL = "https://api.tavily.com/search"
@@ -516,6 +517,8 @@ def _search_tavily_with_deadline(
 
 
 def classify_request_outcome(error: Exception | None) -> str:
+    if isinstance(error, RunDeadlineExceeded):
+        return "deadline_exceeded"
     return classify_transport_outcome(error)
 
 
@@ -674,6 +677,16 @@ def build_initial_report(
         "skip_reason": None,
         "error": None,
         "input_count": len(articles),
+        "input_story_count": 0,
+        "input_lead_count": 0,
+        "lead_resolution_calls": 0,
+        "lead_resolved_count": 0,
+        "lead_unresolved_count": 0,
+        "lead_resolution_runs": [],
+        "lead_terminal_error_code": None,
+        "observation_signals": [],
+        "publishability_rejected": [],
+        "stage_failures": [],
         "prefiltered_count": len(articles),
         "prefilter_stats": {},
         "prefilter_bucket_counts": empty_prefilter_bucket_counts(),
@@ -691,6 +704,7 @@ def build_initial_report(
         "neighbor_candidates_outside_24h_count": 0,
         "neighbor_candidates_no_match_count": 0,
         "preserved_error_count": 0,
+        "preserved_budget_count": 0,
         "priority_refilled_count": 0,
         "secondary_refilled_count": 0,
         "media_refilled_count": 0,
@@ -743,6 +757,12 @@ def build_initial_report(
             ),
             "verify_search_depth": settings.verify_search_depth,
             "verify_max_results": VERIFY_MAX_RESULTS,
+            "max_lead_candidates": int(getattr(settings, "max_lead_candidates", 5)),
+            "lead_search_rounds": int(getattr(settings, "lead_search_rounds", 2)),
+            "lead_search_depth": str(
+                getattr(settings, "lead_search_depth", "advanced")
+            ),
+            "lead_max_age_hours": int(getattr(settings, "lead_max_age_hours", 72)),
             "priority_refill_media_whitelist": list(
                 settings.trusted_domains.priority_refill_media_whitelist
             ),
@@ -763,6 +783,36 @@ def build_initial_report(
         },
         "notes": [],
     }
+
+
+def update_stage_failures(report: dict[str, Any]) -> None:
+    """Expose stable, non-secret error codes for reader-visible diagnostics."""
+
+    counts: dict[tuple[str, str], int] = {}
+    skip_reason = report.get("skip_reason")
+    if skip_reason == "missing_api_key":
+        counts[("enrichment", "missing_api_key")] = 1
+    elif skip_reason == "enrichment_error":
+        counts[
+            ("enrichment", str(report.get("terminal_error_code") or "enrichment_error"))
+        ] = 1
+    for report_key, default_stage in (
+        ("lead_resolution_runs", "lead_resolution"),
+        ("verify_runs", "verify"),
+        ("priority_refill_runs", "priority_refill"),
+        ("secondary_refill_runs", "secondary_refill"),
+        ("official_fallback_runs", "official_fallback"),
+    ):
+        for run in report.get(report_key, []) or []:
+            outcome = str(run.get("request_outcome") or "")
+            if not outcome or outcome == "success":
+                continue
+            stage = str(run.get("stage") or default_stage)
+            counts[(stage, outcome)] = counts.get((stage, outcome), 0) + 1
+    report["stage_failures"] = [
+        {"stage": stage, "code": code, "count": count}
+        for (stage, code), count in sorted(counts.items())
+    ]
 
 
 def sample_titles(candidates: list[dict[str, Any]], limit: int = 3) -> list[str]:
@@ -947,13 +997,20 @@ def planned_refill_stage_count(settings: Any) -> int:
     return stage_count
 
 
-def reserved_refill_call_budget(settings: Any) -> int:
+def reserved_refill_call_budget(
+    settings: Any, available_budget: int | None = None
+) -> int:
     if settings.max_refill_rounds <= 0 or settings.min_articles <= 1:
         return 0
     desired_refill_calls = settings.max_refill_rounds * planned_refill_stage_count(
         settings
     )
-    max_total_calls = max(0, settings.max_total_calls)
+    max_total_calls = max(
+        0,
+        settings.max_total_calls
+        if available_budget is None
+        else min(settings.max_total_calls, available_budget),
+    )
     if settings.max_verify_calls > 0:
         max_reservable_calls = max(0, max_total_calls - 1)
     else:
@@ -994,6 +1051,10 @@ def enrich_articles_with_tavily(
         enabled=enabled,
         settings=settings,
     )
+    input_partition = partition_articles_for_publication(article_dicts)
+    report["input_story_count"] = len(input_partition["stories"])
+    report["input_lead_count"] = len(input_partition["leads"])
+    report["publishability_rejected"] = input_partition["rejected"]
 
     decision = decide_enrichment(enabled=enabled, api_key=tavily_api_key)
     if not decision.apply:
@@ -1011,17 +1072,72 @@ def enrich_articles_with_tavily(
             "secondary_refill": [],
             "official_fallback": [],
         }
-        return {"articles": article_dicts, "report": report}
+        report["observation_signals"] = [
+            {
+                "title": str(lead.get("title") or "").strip(),
+                "source": str(lead.get("source") or "").strip(),
+                "signal_url": str(lead.get("link") or "").strip(),
+                "reason": decision.skip_reason or "enrichment_skipped",
+            }
+            for lead in input_partition["leads"]
+        ]
+        report["lead_unresolved_count"] = len(report["observation_signals"])
+        report["final_count"] = len(input_partition["stories"])
+        report["strict_final_count"] = report["final_count"]
+        update_stage_failures(report)
+        return {"articles": input_partition["stories"], "report": report}
 
     session = requests.Session()
     session.trust_env = settings.trust_env
 
     try:
-        prefilter = build_prefilter_summary(article_dicts)
+        from utils.lead_resolution import run_lead_resolution_stage
+
+        lead_resolution = run_lead_resolution_stage(
+            leads=input_partition["leads"],
+            settings=settings,
+            session=session,
+            api_key=tavily_api_key,
+            reference_dt=reference_dt,
+            remaining_budget=max(0, int(settings.max_total_calls)),
+            deadline_at=deadline_at,
+        )
+        report["lead_resolution_calls"] = lead_resolution["calls"]
+        report["lead_resolution_runs"] = lead_resolution["runs"]
+        report["lead_terminal_error_code"] = lead_resolution["terminal_error_code"]
+        report["lead_resolved_count"] = len(lead_resolution["resolved_articles"])
+        report["lead_unresolved_count"] = len(lead_resolution["unresolved_leads"])
+        report["observation_signals"] = lead_resolution["unresolved_leads"]
+        report["total_calls"] = lead_resolution["calls"]
+        working_articles = (
+            input_partition["stories"] + lead_resolution["resolved_articles"]
+        )
+
+        prefilter = build_prefilter_summary(working_articles)
         prefilter_clusters = annotate_story_clusters(prefilter["prefilter_candidates"])
         verify_view = collapse_prefilter_candidates_for_verify(
             prefilter_clusters["annotated_candidates"]
         )
+        preverified_candidates = []
+        for candidate in verify_view["verify_candidates"]:
+            article = candidate.get("article", {})
+            provenance = article.get("provenance")
+            provenance = provenance if isinstance(provenance, dict) else {}
+            if provenance.get("resolution_stage") == "tavily_lead_resolution" or (
+                article.get("kind") == "story"
+                and article.get("evidence_status") in {"direct", "corroborated"}
+            ):
+                # A direct URL, source publication time and evidence text have
+                # already passed the Story gate. Searching the title again adds
+                # cost and can incorrectly discard a valid source article when
+                # Tavily happens to return a nearby story.
+                preverified_candidates.append(candidate)
+        preverified_ids = {id(candidate) for candidate in preverified_candidates}
+        verify_view["verify_candidates"] = [
+            candidate
+            for candidate in verify_view["verify_candidates"]
+            if id(candidate) not in preverified_ids
+        ]
 
         report["applied"] = True
         report["prefiltered_count"] = prefilter["prefiltered_count"]
@@ -1045,7 +1161,7 @@ def enrich_articles_with_tavily(
         report["notes"].append(
             "Local prefilter completed before any Tavily refill attempt."
         )
-        if not article_dicts:
+        if not working_articles:
             report["notes"].append(
                 "Upstream sources returned zero deduped articles, so any final output must come from Tavily refill."
             )
@@ -1056,19 +1172,29 @@ def enrich_articles_with_tavily(
             session=session,
             api_key=tavily_api_key,
             reference_dt=reference_dt,
+            remaining_budget=lead_resolution["remaining_budget"],
             deadline_at=deadline_at,
         )
         baseline_verify_calls = min(
             len(prefilter_clusters["annotated_candidates"]),
-            max(0, min(settings.max_verify_calls, settings.max_total_calls)),
+            max(
+                0,
+                min(
+                    settings.max_verify_calls,
+                    lead_resolution["remaining_budget"],
+                ),
+            ),
         )
         report["verify_saved_calls"] = max(
             0, baseline_verify_calls - verify["verify_calls"]
         )
         report["verify_calls"] = verify["verify_calls"]
-        report["total_calls"] = verify["verify_calls"]
-        report["verified_count"] = len(verify["verified_articles"])
+        report["total_calls"] += verify["verify_calls"]
+        report["verified_count"] = len(verify["verified_articles"]) + len(
+            preverified_candidates
+        )
         report["preserved_error_count"] = len(verify["preserved_error_articles"])
+        report["preserved_budget_count"] = len(verify["preserved_budget_articles"])
         report["verify_budget"] = verify["verify_budget"]
         report["reserved_refill_calls"] = verify["reserved_refill_calls"]
         report["verify_skipped_due_budget"] = verify["verify_skipped_due_budget"]
@@ -1093,8 +1219,14 @@ def enrich_articles_with_tavily(
             and candidate.get("validation_outcome") == "no_match"
         )
 
+        preverified_articles = [
+            dict(candidate["article"]) for candidate in preverified_candidates
+        ]
         verified_output_articles = (
-            verify["preserved_error_articles"] + verify["verified_articles"]
+            preverified_articles
+            + verify["preserved_budget_articles"]
+            + verify["preserved_error_articles"]
+            + verify["verified_articles"]
         )
         report["refill_needed_count"] = max(
             0, settings.min_articles - len(verified_output_articles)
@@ -1104,7 +1236,7 @@ def enrich_articles_with_tavily(
         priority_refill = empty_refill_result(remaining_budget)
         if report["refill_needed_count"] > 0:
             priority_refill = run_domain_refill_stage(
-                base_articles=article_dicts,
+                base_articles=working_articles,
                 prior_candidates=verified_output_articles,
                 include_domains=list(
                     settings.trusted_domains.priority_refill_media_whitelist
@@ -1147,7 +1279,7 @@ def enrich_articles_with_tavily(
         )
         if remaining_budget > 0 and secondary_needed_count > 0:
             secondary_refill = run_domain_refill_stage(
-                base_articles=article_dicts,
+                base_articles=working_articles,
                 prior_candidates=(
                     verified_output_articles + priority_refill["accepted_candidates"]
                 ),
@@ -1203,7 +1335,7 @@ def enrich_articles_with_tavily(
             and official_needed_count > 0
         ):
             official = run_domain_refill_stage(
-                base_articles=article_dicts,
+                base_articles=working_articles,
                 prior_candidates=(
                     verified_output_articles
                     + priority_refill["accepted_candidates"]
@@ -1246,11 +1378,16 @@ def enrich_articles_with_tavily(
             + secondary_candidates
             + official_candidates
         )
+        final_partition = partition_articles_for_publication(final_articles)
+        final_articles = final_partition["stories"]
+        report["publishability_rejected"].extend(final_partition["rejected"])
         report["final_count"] = len(final_articles)
         report["refill_remaining_count"] = max(
             0, settings.min_articles - report["final_count"]
         )
         report["accepted_by_stage_preview"] = {
+            "evidence_gate": sample_titles(preverified_articles),
+            "preserved_budget": sample_titles(verify["preserved_budget_articles"]),
             "preserved_errors": sample_titles(verify["preserved_error_articles"]),
             "verify": sample_titles(verify["verified_articles"]),
             "priority_refill": sample_titles(priority_refill["accepted_candidates"]),
@@ -1286,14 +1423,18 @@ def enrich_articles_with_tavily(
             report["notes"].append(
                 "Verify request errors preserved the original deduped articles to keep fail-open behavior."
             )
+        if verify["preserved_budget_articles"]:
+            report["notes"].append(
+                "Verify budget exhaustion preserved direct source stories instead of dropping them."
+            )
         report["notes"].append("Exact verify and staged refill completed.")
+        update_stage_failures(report)
         return {"articles": final_articles, "report": report}
-    except RunDeadlineExceeded:
-        raise
     except Exception as exc:
         report["applied"] = False
         report["skip_reason"] = "enrichment_error"
         report["error"] = scrub_diagnostic(str(exc), settings)
+        report["terminal_error_code"] = classify_request_outcome(exc)
         report["stop_reason"] = "enrichment_error"
         report["notes"].append(
             "The pipeline fell back to the deduped articles after an enrichment error."
@@ -1304,4 +1445,17 @@ def enrich_articles_with_tavily(
             "secondary_refill": [],
             "official_fallback": [],
         }
-        return {"articles": article_dicts, "report": report}
+        report["observation_signals"] = [
+            {
+                "title": str(lead.get("title") or "").strip(),
+                "source": str(lead.get("source") or "").strip(),
+                "signal_url": str(lead.get("link") or "").strip(),
+                "reason": "enrichment_error",
+            }
+            for lead in input_partition["leads"]
+        ]
+        report["lead_unresolved_count"] = len(report["observation_signals"])
+        report["final_count"] = len(input_partition["stories"])
+        report["strict_final_count"] = report["final_count"]
+        update_stage_failures(report)
+        return {"articles": input_partition["stories"], "report": report}

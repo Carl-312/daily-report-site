@@ -38,6 +38,14 @@ from utils.publication import (
     recover_incomplete_promotions,
 )
 from utils.publish_policy import decide_publication
+from utils.pipeline_diagnostics import (
+    collect_pipeline_diagnostics,
+    render_pipeline_diagnostics_markdown,
+)
+from utils.story_quality import (
+    partition_articles_for_publication,
+    remove_recent_exact_duplicates,
+)
 from summarizer import (
     summarize_result,
     offline_summary,
@@ -103,14 +111,29 @@ def compose_report_content(
     content: str,
     articles: list[Article | dict],
     summary_result: SummaryResult,
+    *,
+    observation_signals: list[dict] | tuple[dict, ...] = (),
+    pipeline_diagnostics: dict | None = None,
 ) -> str:
-    """Keep source attribution outside the summary model's factual output."""
+    """Compose the report with unresolved signals separated from main news."""
 
     parts = [title]
     attribution = selected_source_attribution_line(summary_result, articles)
     if attribution:
         parts.append(attribution)
     parts.append(content)
+    if observation_signals:
+        lines = [
+            "## 观察信号（未证实）",
+            "以下线索未解析到足够的直接证据，不计入主新闻。",
+        ]
+        for signal in observation_signals[:5]:
+            title = " ".join(str(signal.get("title") or "").split())
+            if title:
+                lines.append(f"- {title.replace('#', '＃')}")
+        parts.append("\n\n".join([lines[0], "\n".join(lines[1:])]))
+    if pipeline_diagnostics is not None:
+        parts.append(render_pipeline_diagnostics_markdown(pipeline_diagnostics))
     return "\n\n".join(parts)
 
 
@@ -145,8 +168,40 @@ def apply_enrichment(cfg, args, articles, date_str: str, clock: RunClock | None 
             ).parameters.values()
         )
     ):
-        kwargs["deadline_at"] = clock.deadline_at
-    result = enrich_articles_with_tavily(articles, **kwargs)
+        reserve_seconds = int(
+            getattr(cfg.enrichment, "enrichment_deadline_reserve_seconds", 240)
+        )
+        kwargs["deadline_at"] = clock.deadline_at - timedelta(seconds=reserve_seconds)
+    try:
+        result = enrich_articles_with_tavily(articles, **kwargs)
+    except Exception as exc:
+        # Enrichment is explicitly non-blocking. Preserve direct stories and a
+        # stable error code even if an unexpected implementation error escapes
+        # the enrichment module's own fail-open boundary.
+        partition = partition_articles_for_publication(list(articles))
+        result = {
+            "articles": partition["stories"],
+            "report": {
+                "enabled": enabled,
+                "applied": False,
+                "skip_reason": "enrichment_error",
+                "stop_reason": "enrichment_error",
+                "error": scrub_diagnostic(str(exc), cfg),
+                "total_calls": 0,
+                "observation_signals": [
+                    {
+                        "title": str(lead.get("title") or "").strip(),
+                        "source": str(lead.get("source") or "").strip(),
+                        "signal_url": str(lead.get("link") or "").strip(),
+                        "reason": "enrichment_error",
+                    }
+                    for lead in partition["leads"]
+                ],
+                "stage_failures": [
+                    {"stage": "enrichment", "code": "unexpected_error", "count": 1}
+                ],
+            },
+        }
     report = result["report"]
     print(
         f"   Applied: {report.get('applied')} | "
@@ -240,6 +295,10 @@ def stage_and_publish_run(
         source_results=tuple(source_results),
         summary_succeeded=True,
         build_succeeded=True,
+        allow_empty=bool(
+            report.get("enrichment", {}).get("observation_signals")
+            or report.get("enrichment", {}).get("recent_dedupe", {}).get("removed")
+        ),
     )
     if not decision.publish:
         raise RuntimeError(f"publication blocked: {decision.reason}")
@@ -475,12 +534,20 @@ def cmd_run(args):
     print(f"   Remaining: {len(articles)} unique articles")
 
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
-    try:
-        enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
-    except Exception as exc:
-        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
-        raise
+    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
     articles_dict = enrichment_result["articles"]
+    recent_dedupe = remove_recent_exact_duplicates(
+        articles_dict,
+        data_dir=cfg.data_dir,
+        report_date=date_str,
+        window_days=3,
+    )
+    articles_dict = recent_dedupe["articles"]
+    enrichment_result["report"]["recent_dedupe"] = {
+        "window_days": 3,
+        "checked_days": recent_dedupe["checked_days"],
+        "removed": recent_dedupe["removed"],
+    }
 
     # 3. Summarize
     print("\n🤖 Generating summary...")
@@ -502,7 +569,19 @@ def cmd_run(args):
     except TypeError:  # Compatibility with legacy helper/test doubles.
         title_date = today_cn()
     title = f"🔥（{title_date}）每日AI资讯一览✨"
-    full_content = compose_report_content(title, content, articles_dict, summary_result)
+    pipeline_diagnostics = collect_pipeline_diagnostics(
+        source_results=source_results,
+        enrichment_report=enrichment_result["report"],
+        summary_result=summary_result,
+    )
+    full_content = compose_report_content(
+        title,
+        content,
+        articles_dict,
+        summary_result,
+        observation_signals=enrichment_result["report"].get("observation_signals", []),
+        pipeline_diagnostics=pipeline_diagnostics,
+    )
 
     # 5. Stage JSON, Markdown, and the complete static site, then promote.
     print("\n🏗️  Building staged site and publishing complete edition...")
@@ -516,6 +595,7 @@ def cmd_run(args):
                 "articles": articles_dict,
                 "enrichment": enrichment_result["report"],
                 "summary": summary_result.model_dump(mode="json"),
+                "pipeline_diagnostics": pipeline_diagnostics,
             },
             full_content,
             source_results,
@@ -547,7 +627,8 @@ def cmd_run(args):
 
     print("\n" + "=" * 50)
     print("✅ Done!")
-    print(f"   Articles: {len(articles)}")
+    print(f"   Fetched candidates: {len(articles)}")
+    print(f"   Published stories: {len(articles_dict)}")
     print(f"   JSON: {json_path}")
     print(f"   Markdown: {md_path}")
     print(f"   HTML: {cfg.site_dir}/")
@@ -595,12 +676,24 @@ def cmd_fetch(args):
 
     articles = dedupe(articles)
     articles_dict = [a.to_dict() if isinstance(a, Article) else a for a in articles]
-    try:
-        enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
-    except Exception as exc:
-        record_blocked_run(cfg, workspace, manifest, sources=source_results, error=exc)
-        raise
+    enrichment_result = apply_enrichment(cfg, args, articles_dict, date_str, clock)
     articles_dict = enrichment_result["articles"]
+    recent_dedupe = remove_recent_exact_duplicates(
+        articles_dict,
+        data_dir=cfg.data_dir,
+        report_date=date_str,
+        window_days=3,
+    )
+    articles_dict = recent_dedupe["articles"]
+    enrichment_result["report"]["recent_dedupe"] = {
+        "window_days": 3,
+        "checked_days": recent_dedupe["checked_days"],
+        "removed": recent_dedupe["removed"],
+    }
+    pipeline_diagnostics = collect_pipeline_diagnostics(
+        source_results=source_results,
+        enrichment_report=enrichment_result["report"],
+    )
 
     try:
         json_path = save_json(
@@ -610,6 +703,7 @@ def cmd_fetch(args):
                 "date": date_str,
                 "articles": articles_dict,
                 "enrichment": enrichment_result["report"],
+                "pipeline_diagnostics": pipeline_diagnostics,
             },
         )
     except Exception as exc:
@@ -666,11 +760,24 @@ def cmd_summarize(args):
     except TypeError:
         title_date = today_cn()
     title = f"🔥（{title_date}）每日AI资讯一览✨"
-    full_content = compose_report_content(title, content, articles, summary_result)
+    enrichment_report = data.get("enrichment", {})
+    pipeline_diagnostics = collect_pipeline_diagnostics(
+        enrichment_report=enrichment_report,
+        summary_result=summary_result,
+    )
+    full_content = compose_report_content(
+        title,
+        content,
+        articles,
+        summary_result,
+        observation_signals=enrichment_report.get("observation_signals", []),
+        pipeline_diagnostics=pipeline_diagnostics,
+    )
 
     report = dict(data)
     report["articles"] = articles
     report["summary"] = summary_result.model_dump(mode="json")
+    report["pipeline_diagnostics"] = pipeline_diagnostics
     try:
         _json_path, md_path = stage_and_publish_run(
             cfg,

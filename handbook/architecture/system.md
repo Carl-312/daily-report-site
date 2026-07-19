@@ -22,7 +22,7 @@ config.yaml + .env
   URL / story dedupe ──► canonical candidates
         │
         ▼
-  optional Tavily enrichment (default off)
+  Lead/Story gate + Tavily enrichment (default on, fail-open)
         │
         ▼
   editorial catalog + story clustering + v2 shortlist
@@ -78,7 +78,9 @@ config.yaml + .env
 
 ### 4. 可选 enrichment 层
 
-`utils/news_enrichment.py` 位于去重之后，不是 source registry 的替代品。Tavily 默认关闭；显式开启时按 verify、priority refill、secondary refill 和可选 official fallback 分阶段运行，并在 JSON 中写入预算、请求结果、接受/拒绝原因和 `stop_reason`。
+`utils/news_enrichment.py` 位于去重之后，不是 source registry 的替代品。当前 Tavily 默认开启：
+先把 Trending/title-only lead 做有限两轮解析，直接 Story 通过本地证据门槛，必要时再进入受控
+verify/refill；JSON 记录预算、请求结果、接受/拒绝原因和 `stop_reason`。
 
 enrichment 的失败语义是 fail-open：请求失败时尽可能保留已抓取的 deduped candidates，并记录诊断；它不能为了达到目标条数而绕过时间、相关性或去重门槛。补量检索词按日期从中美前沿模型、编程智能体、多模态/机器人、芯片算力和商业/监管等查询包中确定性轮换，结果仍需通过统一的结构化相关性门槛。当前开关、参数和灰度边界见[ Tavily 运行手册](../operations/tavily.md)。
 

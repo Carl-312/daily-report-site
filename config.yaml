@@ -64,15 +64,15 @@ agihunt_trending:
 
 limits:
   max_articles: 14
-  # 确定性短名单上限；每个 article_id 只能生成一条摘要
-  max_summary_items: 10
+  # 5–8 条是目标区间；这是上限，证据不足时允许更少。
+  max_summary_items: 8
 
 summarize:
   prompt_path: prompts/daily.md
   prefer_chinese: true
   compress:
     title_max: 200     # 增加字符限制，适应中文混合英文新闻
-    desc_max: 400      # 避免描述信息被过早截断
+    desc_max: 1200     # 保留多轮证据中的关键事实，避免再次压成标题
 
 output:
   json_dir: data
@@ -84,15 +84,26 @@ run:
   deadline_minutes: 20
 
 enrichment:
-  enabled: false
+  # 定时任务默认启用；缺少密钥或 Tavily 失败时仅跳过增强，不阻断发布。
+  enabled: true
   trust_env: true
-  min_articles: 10
+  min_articles: 5
   strict_hours: 24
-  max_total_calls: 7
-  max_verify_calls: 6
+  # 最多解析 5 条重要线索，每条 2 轮；余量用于直接文章验证和少量补充。
+  max_total_calls: 15
+  max_verify_calls: 3
   max_refill_rounds: 1
   refill_max_results: 8
   verify_search_depth: basic
+  max_lead_candidates: 5
+  lead_search_rounds: 2
+  lead_max_results: 5
+  lead_search_depth: advanced
+  lead_max_age_hours: 72
+  lead_min_evidence_chars: 80
+  lead_evidence_chars_per_source: 600
+  # Tavily 是非阻塞阶段，至少给摘要、构建和发布保留 4 分钟。
+  enrichment_deadline_reserve_seconds: 240
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"

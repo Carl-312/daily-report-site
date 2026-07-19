@@ -85,6 +85,17 @@ def test_default_agihunt_candidate_pool_has_room_for_deduplication() -> None:
     ) * settings.per_channel_limit > settings.max_articles
 
 
+def test_default_enrichment_resolves_a_few_leads_with_bounded_rounds() -> None:
+    settings = Settings().enrichment
+
+    assert settings.enabled is True
+    assert settings.max_total_calls == 15
+    assert settings.max_lead_candidates == 5
+    assert settings.lead_search_rounds == 2
+    assert settings.lead_search_depth == "advanced"
+    assert settings.enrichment_deadline_reserve_seconds == 240
+
+
 def test_agihunt_trending_policy_loads_without_a_secret(monkeypatch, tmp_path) -> None:
     config_path = tmp_path / "config.yaml"
     config_path.write_text(

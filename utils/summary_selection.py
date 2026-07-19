@@ -18,6 +18,7 @@ from urllib.parse import urlsplit
 from utils.editorial_catalog import (
     EditorialAnalysis,
     analyze_article,
+    analyze_editorial_text,
     load_editorial_catalog,
 )
 
@@ -113,6 +114,13 @@ def article_source_label(article: dict) -> str:
 def candidate_has_enough_facts(article: dict) -> bool:
     """Apply a small, explainable content floor before promising diversity."""
 
+    if str(article.get("kind") or "story").strip().lower() != "story":
+        return False
+    if str(article.get("evidence_status") or "direct").strip().lower() in {
+        "unresolved",
+        "signal",
+    }:
+        return False
     title = "".join(str(article.get("title") or "").split())
     if not title:
         return False
@@ -187,10 +195,17 @@ def select_summary_candidates_v1(articles: list[dict], limit: int) -> list[dict]
         (_candidate_v1(article, index) for index, article in enumerate(articles, 1)),
         key=_base_order_v1,
     )
-    qualified_candidates = [item for item in ranked_candidates if item.qualified]
+    story_candidates = [
+        item
+        for item in ranked_candidates
+        if str(item.article.get("kind") or "story").strip().lower() == "story"
+    ]
+    qualified_candidates = [item for item in story_candidates if item.qualified]
     # A low-information fallback keeps tiny tests/manual inputs usable, but it
     # never competes with a candidate that passed the content floor.
-    candidates = qualified_candidates or ranked_candidates
+    candidates = qualified_candidates or story_candidates
+    if not candidates:
+        return []
     target = min(limit, len(candidates))
     qualified_groups: list[str] = []
     for candidate in candidates:
@@ -347,7 +362,32 @@ def _story_relation(
         right.analysis.mentioned_entities
     )
     shared_actions = set(left.analysis.action_keys) & set(right.analysis.action_keys)
-    if len(shared_entities) >= 2 and shared_actions:
+    same_primary_entity = bool(left.analysis.primary_entity) and (
+        left.analysis.primary_entity == right.analysis.primary_entity
+    )
+    left_title_analysis = analyze_editorial_text(str(left.article.get("title") or ""))
+    right_title_analysis = analyze_editorial_text(str(right.article.get("title") or ""))
+    shared_title_entities = set(left_title_analysis.mentioned_entities) & set(
+        right_title_analysis.mentioned_entities
+    )
+    shared_title_models = set(left_title_analysis.model_aliases) & set(
+        right_title_analysis.model_aliases
+    )
+    left_title_numbers = set(_NUMBER_KEY.findall(str(left.article.get("title") or "")))
+    right_title_numbers = set(
+        _NUMBER_KEY.findall(str(right.article.get("title") or ""))
+    )
+    if not (
+        shared_title_entities
+        or shared_title_models
+        or left_title_numbers & right_title_numbers
+    ):
+        return None
+    if (
+        (same_primary_entity or len(shared_title_entities) >= 2)
+        and len(shared_entities) >= 2
+        and shared_actions
+    ):
         return "shared_entities_action"
     if not shared_entities or not shared_actions:
         return None
@@ -358,12 +398,12 @@ def _story_relation(
         set(left.analysis.model_aliases)
         & set(right.analysis.model_aliases) - _GENERIC_MODEL_ALIASES
     )
-    if shared_objects:
-        return "shared_entity_action_object"
     if shared_model_aliases:
         return "shared_entity_action_model"
     if shared_numbers:
         return "shared_entity_action_number"
+    if same_primary_entity and shared_objects:
+        return "shared_entity_action_object"
     return None
 
 
@@ -545,20 +585,22 @@ def select_summary_candidates_with_diagnostics(
         ),
         key=_base_order_v2,
     )
-    qualified = [candidate for candidate in ranked if candidate.qualified]
-    base_candidates = qualified or ranked
+    story_candidates = [
+        candidate
+        for candidate in ranked
+        if str(candidate.article.get("kind") or "story").strip().lower() == "story"
+    ]
+    qualified = [candidate for candidate in story_candidates if candidate.qualified]
+    base_candidates = qualified or story_candidates
     representatives, story_clusters = _collapse_story_clusters(base_candidates)
     core_candidates = [
         candidate
         for candidate in representatives
         if candidate.analysis.relevance_level >= 2
     ]
-    target_before_relevance = min(limit, len(representatives))
-    candidates = (
-        core_candidates
-        if len(core_candidates) >= target_before_relevance
-        else representatives
-    )
+    # Once at least one core AI story exists, never fill the remaining quota
+    # with generic technology content.  A shorter edition is intentional.
+    candidates = core_candidates or representatives
     target = min(limit, len(candidates))
 
     source_groups: list[str] = []
