@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import re
 from datetime import date, datetime, timedelta
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
@@ -81,9 +82,15 @@ def _has_real_publish_time(article: dict[str, Any]) -> bool:
         datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         try:
-            datetime.strptime(value[:10], "%Y-%m-%d")
-        except ValueError:
-            return False
+            # Tavily news results commonly use RFC 2822 dates such as
+            # ``Sat, 18 Jul 2026 20:54:42 GMT``.  They are real source times,
+            # not trend observation timestamps, so accept them explicitly.
+            parsedate_to_datetime(value)
+        except (TypeError, ValueError):
+            try:
+                datetime.strptime(value[:10], "%Y-%m-%d")
+            except ValueError:
+                return False
     return True
 
 

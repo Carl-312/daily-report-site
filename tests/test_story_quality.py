@@ -37,6 +37,23 @@ def test_trending_and_title_only_techcrunch_are_leads() -> None:
     ]
 
 
+def test_tavily_rfc2822_publish_time_is_a_real_story_time() -> None:
+    article = {
+        "title": "Direct Tavily result",
+        "link": "https://example.com/news/direct-result",
+        "description": "The article contains direct evidence for the reported change.",
+        "publish_time": "Sat, 18 Jul 2026 20:54:42 GMT",
+        "source": "example.com",
+        "kind": "story",
+        "evidence_status": "corroborated",
+    }
+
+    result = partition_articles_for_publication([article])
+
+    assert result["stories"] == [article]
+    assert result["leads"] == []
+
+
 def test_recent_exact_selected_url_is_removed(tmp_path) -> None:
     (tmp_path / "2026-07-18.json").write_text(
         json.dumps(

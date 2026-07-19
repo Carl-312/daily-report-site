@@ -139,7 +139,10 @@ def test_lead_resolution_failure_preserves_direct_story_and_surfaces_codes(
 
     assert result["articles"] == [direct_story]
     assert result["report"]["lead_unresolved_count"] == 1
-    assert result["report"]["preserved_budget_count"] == 1
+    assert result["report"]["preserved_budget_count"] == 0
+    assert result["report"]["accepted_by_stage_preview"]["evidence_gate"] == [
+        direct_story["title"]
+    ]
     assert result["report"]["stage_failures"] == [
         {"stage": "lead_resolution", "code": "timeout", "count": 2}
     ]
@@ -148,3 +151,35 @@ def test_lead_resolution_failure_preserves_direct_story_and_surfaces_codes(
     rendered = render_pipeline_diagnostics_markdown(diagnostics)
     assert "`enrichment.lead_resolution`：`timeout` ×2" in rendered
     assert "sensitive transport detail" not in rendered
+
+
+def test_lead_resolution_rejects_a_nearby_story_with_a_different_subject(
+    monkeypatch,
+) -> None:
+    unrelated = _evidence("axios.com", "kimi-k3", 0.96)
+    unrelated["title"] = "Kimi K3 closes the gap with leading US models"
+    unrelated["content"] = (
+        "The Kimi article briefly mentions that DeepSeek may release another "
+        "model, but it provides no direct DeepSeek V4 announcement or details."
+    )
+
+    def fake_search(_session, _api_key, _payload):
+        return {"latency_ms": 12.0, "response": {"results": [unrelated]}}
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+    result = enrich_articles_with_tavily(
+        [_lead()],
+        report_date="2026-07-19",
+        settings=_settings(),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert result["articles"] == []
+    assert result["report"]["lead_resolved_count"] == 0
+    assert result["report"]["lead_unresolved_count"] == 1
+    assert all(
+        run["rejected_irrelevant_count"] == 1
+        for run in result["report"]["lead_resolution_runs"]
+    )

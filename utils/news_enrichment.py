@@ -1118,15 +1118,20 @@ def enrich_articles_with_tavily(
         verify_view = collapse_prefilter_candidates_for_verify(
             prefilter_clusters["annotated_candidates"]
         )
-        preverified_candidates = [
-            candidate
-            for candidate in verify_view["verify_candidates"]
-            if (
-                isinstance(candidate.get("article", {}).get("provenance"), dict)
-                and candidate["article"]["provenance"].get("resolution_stage")
-                == "tavily_lead_resolution"
-            )
-        ]
+        preverified_candidates = []
+        for candidate in verify_view["verify_candidates"]:
+            article = candidate.get("article", {})
+            provenance = article.get("provenance")
+            provenance = provenance if isinstance(provenance, dict) else {}
+            if provenance.get("resolution_stage") == "tavily_lead_resolution" or (
+                article.get("kind") == "story"
+                and article.get("evidence_status") in {"direct", "corroborated"}
+            ):
+                # A direct URL, source publication time and evidence text have
+                # already passed the Story gate. Searching the title again adds
+                # cost and can incorrectly discard a valid source article when
+                # Tavily happens to return a nearby story.
+                preverified_candidates.append(candidate)
         preverified_ids = {id(candidate) for candidate in preverified_candidates}
         verify_view["verify_candidates"] = [
             candidate
@@ -1381,6 +1386,7 @@ def enrich_articles_with_tavily(
             0, settings.min_articles - report["final_count"]
         )
         report["accepted_by_stage_preview"] = {
+            "evidence_gate": sample_titles(preverified_articles),
             "preserved_budget": sample_titles(verify["preserved_budget_articles"]),
             "preserved_errors": sample_titles(verify["preserved_error_articles"]),
             "verify": sample_titles(verify["verified_articles"]),

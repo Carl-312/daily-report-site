@@ -14,6 +14,8 @@ def test_deploy_workflow_exposes_a_single_render_trending_gray_run() -> None:
     assert "enable_agihunt_trending:" in workflow
     assert "runs-on: ubuntu-24.04" in workflow
     assert "SOURCE_ARGS+=(--agihunt-trending on)" in workflow
+    assert "SOURCE_ARGS+=(--agihunt-trending off)" in workflow
+    assert 'GITHUB_EVENT_NAME" = "workflow_dispatch' in workflow
     assert "AGIHUNT_TRENDING_CHROME_BIN" in workflow
     assert "scripts/agihunt_trending_health.py" in workflow
     assert "agihunt-trending-health.json" in workflow

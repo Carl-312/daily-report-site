@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
+import re
 from typing import Any
 
 import requests
@@ -28,6 +29,41 @@ _EXCLUDED_DISCOVERY_DOMAINS = [
     "youtube.com",
 ]
 
+_WORD_RE = re.compile(r"[a-z0-9]+(?:[.+#-][a-z0-9]+)*", re.IGNORECASE)
+_CJK_RE = re.compile(r"[\u4e00-\u9fff]{2,}")
+_QUERY_FILLER_TERMS = {
+    "a",
+    "an",
+    "and",
+    "announcement",
+    "are",
+    "at",
+    "by",
+    "detail",
+    "for",
+    "from",
+    "funding",
+    "hot",
+    "impact",
+    "in",
+    "is",
+    "list",
+    "of",
+    "official",
+    "on",
+    "or",
+    "pricing",
+    "rumored",
+    "soon",
+    "the",
+    "to",
+    "top",
+    "vs",
+    "was",
+    "were",
+    "with",
+}
+
 
 def _safe_int(value: Any, default: int) -> int:
     try:
@@ -41,6 +77,63 @@ def _safe_float(value: Any, default: float = 0.0) -> float:
         return float(value)
     except (TypeError, ValueError):
         return default
+
+
+def _normalize_word(value: str) -> str:
+    word = value.lower().strip("-.")
+    if word.endswith("ies") and len(word) > 4:
+        return f"{word[:-3]}y"
+    if word.endswith("s") and not word.endswith("ss") and len(word) > 4:
+        return word[:-1]
+    return word
+
+
+def _identity_terms(value: Any) -> set[str]:
+    return {
+        normalized
+        for token in _WORD_RE.findall(compact_text(value))
+        if (normalized := _normalize_word(token))
+        and normalized not in _QUERY_FILLER_TERMS
+    }
+
+
+def _result_matches_lead(result: dict[str, Any], lead: dict[str, Any]) -> bool:
+    """Require the direct story title to preserve the lead's identity.
+
+    Tavily relevance scores are query-relative, but a result can still be a
+    nearby story (for example Kimi coverage returned for a DeepSeek lead).
+    A title-level identity overlap is a small deterministic guard against
+    silently changing the subject while resolving a lead.
+    """
+
+    from utils.news_enrichment import canonical_url
+
+    expected_url = canonical_url(compact_text(lead.get("link")))
+    result_url = canonical_url(compact_text(result.get("url")))
+    if expected_url and result_url and expected_url == result_url:
+        return True
+
+    provenance = lead.get("provenance")
+    provenance = provenance if isinstance(provenance, dict) else {}
+    lead_identity = " ".join(
+        part
+        for part in (
+            compact_text(lead.get("title")),
+            compact_text(provenance.get("trend_term_en")),
+        )
+        if part
+    )
+    result_title = compact_text(result.get("title"))
+    lead_terms = _identity_terms(lead_identity)
+    title_terms = _identity_terms(result_title)
+    if lead_terms and lead_terms & title_terms:
+        return True
+
+    lead_cjk = _CJK_RE.findall(lead_identity)
+    result_cjk = _CJK_RE.findall(result_title)
+    return any(
+        left in right or right in left for left in lead_cjk for right in result_cjk
+    )
 
 
 def _lead_order(lead: dict[str, Any], index: int) -> tuple[int, int, int, int]:
@@ -255,7 +348,11 @@ def run_lead_resolution_stage(
             used_calls += 1
 
             accepted_this_round = 0
+            rejected_irrelevant_count = 0
             for result in results:
+                if not _result_matches_lead(result, lead):
+                    rejected_irrelevant_count += 1
+                    continue
                 normalized = _normalize_evidence(
                     result,
                     reference_dt=reference_dt,
@@ -285,6 +382,7 @@ def run_lead_resolution_stage(
                     "latency_ms": latency_ms,
                     "result_count": len(results),
                     "accepted_evidence_count": accepted_this_round,
+                    "rejected_irrelevant_count": rejected_irrelevant_count,
                     "request_outcome": outcome,
                     "error_code": outcome if outcome != "success" else None,
                 }

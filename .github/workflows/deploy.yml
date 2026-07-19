@@ -124,16 +124,21 @@ jobs:
             echo "AGIHunt explicitly enabled for this shadow run"
           fi
 
-          if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
-            SOURCE_ARGS+=(--agihunt-trending on)
-            CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
-            if [ -z "$CHROME_BIN" ]; then
-              echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
+              SOURCE_ARGS+=(--agihunt-trending on)
+              CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
+              if [ -z "$CHROME_BIN" ]; then
+                echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
+              else
+                export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
+                "$CHROME_BIN" --version
+              fi
+              echo "AGI Hunt Trending explicitly enabled for this run"
             else
-              export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
-              "$CHROME_BIN" --version
+              SOURCE_ARGS+=(--agihunt-trending off)
+              echo "AGI Hunt Trending explicitly disabled for this manual run"
             fi
-            echo "AGI Hunt Trending explicitly enabled for this run"
           fi
 
           if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
@@ -151,7 +156,7 @@ jobs:
           --content-dir content --output agihunt-gray-health.json
 
       - name: Validate AGI Hunt Trending health
-        if: ${{ !inputs.skip_generate && success() }}
+        if: ${{ !inputs.skip_generate && success() && (github.event_name != 'workflow_dispatch' || inputs.enable_agihunt_trending) }}
         continue-on-error: true
         run: >
           python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
