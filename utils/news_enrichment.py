@@ -51,6 +51,20 @@ STRICT_AI_TITLE_RE = re.compile(
     r"(人工智能|大模型|模型|智能体|机器人|开发者工具|生成式AI|生成式人工智能)",
     re.IGNORECASE,
 )
+REFILL_ENTITY_PATTERNS = {
+    "openai": re.compile(r"\b(openai|chatgpt|sora|codex)\b", re.IGNORECASE),
+    "anthropic": re.compile(r"\b(anthropic|claude)\b", re.IGNORECASE),
+    "google": re.compile(r"\b(google|deepmind|gemini)\b", re.IGNORECASE),
+    "microsoft": re.compile(r"\b(microsoft|copilot)\b", re.IGNORECASE),
+    "meta": re.compile(r"\b(meta|llama)\b", re.IGNORECASE),
+    "nvidia": re.compile(r"\bnvidia\b", re.IGNORECASE),
+    "amazon": re.compile(r"\b(amazon|aws)\b", re.IGNORECASE),
+    "apple": re.compile(r"\bapple\b", re.IGNORECASE),
+    "mistral": re.compile(r"\bmistral\b", re.IGNORECASE),
+    "cohere": re.compile(r"\bcohere\b", re.IGNORECASE),
+    "perplexity": re.compile(r"\bperplexity\b", re.IGNORECASE),
+    "hugging-face": re.compile(r"\bhugging face\b", re.IGNORECASE),
+}
 NON_WORD_RE = re.compile(r"[^\w\s]+", re.UNICODE)
 SPACE_RE = re.compile(r"\s+")
 TRAILING_SOURCE_SUFFIX_RE = re.compile(r"\s+-\s+[A-Za-z0-9&.' ]+$")
@@ -214,6 +228,36 @@ def is_aggregate_like(article: dict[str, Any]) -> bool:
 
 def ai_title_relevant(title: str) -> bool:
     return bool(STRICT_AI_TITLE_RE.search(title or ""))
+
+
+def refill_title_relevant(title: str) -> bool:
+    """Allow core AI and explicitly scoped AI-neighbor topics during refill."""
+    return ai_title_relevant(title) or bool(AI_NEIGHBOR_TITLE_RE.search(title or ""))
+
+
+def headline_entities(title: str) -> set[str]:
+    """Identify high-frequency subjects for deterministic refill quotas."""
+    return {
+        entity
+        for entity, pattern in REFILL_ENTITY_PATTERNS.items()
+        if pattern.search(title or "")
+    }
+
+
+def configured_refill_queries(
+    settings: Any,
+    *,
+    stage_name: str,
+    fallback_query: str,
+) -> list[str]:
+    field_name = {
+        "priority_refill": "priority_refill_queries",
+        "secondary_refill": "secondary_refill_queries",
+        "official_fallback": "official_fallback_queries",
+    }[stage_name]
+    configured = getattr(settings, field_name, None) or []
+    queries = [str(query).strip() for query in configured if str(query).strip()]
+    return queries or [fallback_query]
 
 
 def classify_prefilter_bucket(title: str) -> str:
@@ -688,6 +732,7 @@ def build_initial_report(
         "verified_count": 0,
         "neighbor_candidates_verified_count": 0,
         "neighbor_candidates_outside_24h_count": 0,
+        "neighbor_candidates_outside_strict_window_count": 0,
         "neighbor_candidates_no_match_count": 0,
         "preserved_error_count": 0,
         "priority_refilled_count": 0,
@@ -698,6 +743,8 @@ def build_initial_report(
         "refill_remaining_count": 0,
         "near_duplicate_rejected_count": 0,
         "story_cluster_rejected_count": 0,
+        "domain_quota_rejected_count": 0,
+        "entity_quota_rejected_count": 0,
         "secondary_duplicate_slip_count": 0,
         "final_count": len(articles),
         "strict_final_count": len(articles),
@@ -740,6 +787,17 @@ def build_initial_report(
             "refill_search_window_hours": getattr(
                 settings, "refill_search_window_hours", 24
             ),
+            "priority_refill_queries": list(
+                getattr(settings, "priority_refill_queries", []) or []
+            ),
+            "secondary_refill_queries": list(
+                getattr(settings, "secondary_refill_queries", []) or []
+            ),
+            "official_fallback_queries": list(
+                getattr(settings, "official_fallback_queries", []) or []
+            ),
+            "max_refill_per_domain": getattr(settings, "max_refill_per_domain", 0),
+            "max_refill_per_entity": getattr(settings, "max_refill_per_entity", 0),
             "verify_search_depth": settings.verify_search_depth,
             "verify_max_results": VERIFY_MAX_RESULTS,
             "priority_refill_media_whitelist": list(
@@ -789,6 +847,8 @@ def empty_refill_result(remaining_budget: int) -> dict[str, Any]:
         "media_refilled_count": 0,
         "near_duplicate_rejected_count": 0,
         "story_cluster_rejected_count": 0,
+        "domain_quota_rejected_count": 0,
+        "entity_quota_rejected_count": 0,
         "duplicate_slip_count": 0,
         "remaining_budget_after_refill": remaining_budget,
     }
@@ -1085,6 +1145,12 @@ def enrich_articles_with_tavily(
             if candidate.get("prefilter_bucket") == "ai_neighbor"
             and candidate.get("validation_outcome") == "outside_24h"
         )
+        report["neighbor_candidates_outside_strict_window_count"] = sum(
+            1
+            for candidate in verify["rejected_candidates"]
+            if candidate.get("prefilter_bucket") == "ai_neighbor"
+            and candidate.get("within_strict_window") is False
+        )
         report["neighbor_candidates_no_match_count"] = sum(
             1
             for candidate in verify["rejected_candidates"]
@@ -1109,6 +1175,11 @@ def enrich_articles_with_tavily(
                     settings.trusted_domains.priority_refill_media_whitelist
                 ),
                 query=settings.priority_refill_query,
+                queries=configured_refill_queries(
+                    settings,
+                    stage_name="priority_refill",
+                    fallback_query=settings.priority_refill_query,
+                ),
                 stage_name="priority_refill",
                 settings=settings,
                 session=session,
@@ -1127,6 +1198,12 @@ def enrich_articles_with_tavily(
         ]
         report["story_cluster_rejected_count"] = priority_refill[
             "story_cluster_rejected_count"
+        ]
+        report["domain_quota_rejected_count"] = priority_refill[
+            "domain_quota_rejected_count"
+        ]
+        report["entity_quota_rejected_count"] = priority_refill[
+            "entity_quota_rejected_count"
         ]
         report["priority_refill_runs"] = priority_refill["refill_runs"]
         report["priority_refilled_candidates"] = priority_refill["accepted_candidates"]
@@ -1150,6 +1227,11 @@ def enrich_articles_with_tavily(
                     settings.trusted_domains.secondary_refill_candidate_domains
                 ),
                 query=settings.priority_refill_query,
+                queries=configured_refill_queries(
+                    settings,
+                    stage_name="secondary_refill",
+                    fallback_query=settings.priority_refill_query,
+                ),
                 stage_name="secondary_refill",
                 settings=settings,
                 session=session,
@@ -1172,6 +1254,12 @@ def enrich_articles_with_tavily(
             ]
             report["story_cluster_rejected_count"] += secondary_refill[
                 "story_cluster_rejected_count"
+            ]
+            report["domain_quota_rejected_count"] += secondary_refill[
+                "domain_quota_rejected_count"
+            ]
+            report["entity_quota_rejected_count"] += secondary_refill[
+                "entity_quota_rejected_count"
             ]
             report["secondary_duplicate_slip_count"] = secondary_refill[
                 "duplicate_slip_count"
@@ -1204,6 +1292,11 @@ def enrich_articles_with_tavily(
                     settings.trusted_domains.official_fallback_domains
                 ),
                 query=settings.official_fallback_query,
+                queries=configured_refill_queries(
+                    settings,
+                    stage_name="official_fallback",
+                    fallback_query=settings.official_fallback_query,
+                ),
                 stage_name="official_fallback",
                 settings=settings,
                 session=session,
@@ -1222,6 +1315,12 @@ def enrich_articles_with_tavily(
             ]
             report["story_cluster_rejected_count"] += official[
                 "story_cluster_rejected_count"
+            ]
+            report["domain_quota_rejected_count"] += official[
+                "domain_quota_rejected_count"
+            ]
+            report["entity_quota_rejected_count"] += official[
+                "entity_quota_rejected_count"
             ]
             report["official_fallback_runs"] = official["refill_runs"]
             report["official_refilled_candidates"] = official_candidates

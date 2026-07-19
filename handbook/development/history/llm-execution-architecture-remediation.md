@@ -1,4 +1,4 @@
-# LLM 执行架构修复方案
+# LLM 执行架构修复方案（历史实施记录）
 
 - 状态：核心修复已实施；2026-07-15 已为精确 Kimi K2.7 capability 实现并验证 buffered stream
 - 创建日期：2026-07-14
@@ -44,7 +44,7 @@
 
 ### 1. `stream` 是伪参数
 
-[`summarizer.summarize_result()`](../../summarizer.py) 声明 `stream: bool = True`，但函数入口立即
+[`summarizer.summarize_result()`](../../../summarizer.py) 声明 `stream: bool = True`，但函数入口立即
 执行 `del stream`，请求参数随后固定为 `stream=False`。`main.py` 仍传入 `stream=True`，调用方
 看到的接口语义和实际网络行为相反。
 
@@ -68,8 +68,8 @@
 
 ### 3. `retryable` 只有记录语义，没有执行语义
 
-[`utils/llm_compat.py`](../../utils/llm_compat.py) 能对部分异常生成 `retryable`，attempt artifact
-也会保存该字段；但 [`summarizer.py`](../../summarizer.py) 对每个 provider 只调用一次，请求失败
+[`utils/llm_compat.py`](../../../utils/llm_compat.py) 能对部分异常生成 `retryable`，attempt artifact
+也会保存该字段；但 [`summarizer.py`](../../../summarizer.py) 对每个 provider 只调用一次，请求失败
 后直接进入下一个 provider。`create_client()` 同时固定 `max_retries=0`，因此修复前没有任何同模型
 重试。
 
@@ -168,7 +168,7 @@ llm:
 1. 从 `summarize_result()`、`summarize()` 及其调用方移除 `stream` 参数。
 2. 删除 `del stream`、调用方的 `stream=True/False` 和未使用的 `_summarize_stream()`。
 3. 将 `_summarize_sync()` 重命名为表达协议结果的 `_request_non_stream_completion()`。
-4. 更新 [`handbook/reference/api.md`](../reference/api.md)，不再对外宣称可选择流式输出。
+4. 更新 [`handbook/reference/api.md`](../../reference/api.md)，不再对外宣称可选择流式输出。
 
 这一步不改变实际生产网络请求，属于行为保持型接口修复。
 
@@ -187,7 +187,7 @@ buffered stream collector。它满足：
 流式传输只改变“响应怎样到达”，不能改变“何时允许发布”。
 
 实现与 live 证据见
-[ModelScope Kimi K2.7 Code 流式日报契约验证](kimi-k27-modelscope-live-validation.md)。该实现不代表
+[ModelScope Kimi K2.7 Code 流式日报契约验证](../kimi-k27-modelscope-live-validation.md)。该实现不代表
 Hy3 或其他模型自动获得流式准入；每个 `(provider, base_url, model)` 仍需独立探针和 capability。
 
 ## 双预算修复

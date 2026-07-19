@@ -1,4 +1,4 @@
-# 小米 MiMo 日报契约可行性实验
+# 小米 MiMo 日报契约可行性实验（历史）
 
 - 实验日期：2026-07-15
 - endpoint：`https://api.xiaomimimo.com/v1`

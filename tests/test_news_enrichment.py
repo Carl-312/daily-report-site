@@ -880,3 +880,120 @@ def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
     assert result["report"]["secondary_refilled_count"] == 6
     assert result["report"]["final_count"] == 6
     assert result["report"]["stop_reason"] == "budget_exhausted_after_secondary_refill"
+
+
+def test_diversified_refill_rotates_queries_and_accepts_36h_candidates(
+    monkeypatch,
+) -> None:
+    cfg = load_project_config()
+    seen_queries: list[str] = []
+
+    def fake_search(session, api_key, payload):
+        seen_queries.append(payload["query"])
+        if payload["query"] == "first narrow query":
+            return {"latency_ms": 5.0, "response": {"results": []}}
+        return {
+            "latency_ms": 6.0,
+            "response": {
+                "results": [
+                    {
+                        **make_tavily_result(
+                            "OpenAI launches AI coding workspace",
+                            "thenextweb.com",
+                            "openai-coding-workspace-36h",
+                        ),
+                        "published_date": "2026-04-01T00:00:00Z",
+                    },
+                    {
+                        **make_tavily_result(
+                            "Nvidia unveils new data center GPU",
+                            "venturebeat.com",
+                            "nvidia-data-center-gpu-36h",
+                        ),
+                        "published_date": "2026-04-01T00:00:00Z",
+                    },
+                ]
+            },
+        }
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-02",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "strict_hours": 36,
+                "max_total_calls": 4,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 2,
+                "min_articles": 2,
+                "priority_refill_queries": [
+                    "first narrow query",
+                    "second broad query",
+                ],
+                "max_refill_per_domain": 1,
+                "max_refill_per_entity": 1,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 2, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert seen_queries == ["first narrow query", "second broad query"]
+    assert result["report"]["priority_refilled_count"] == 2
+    assert result["report"]["final_count"] == 2
+    candidates = result["report"]["priority_refill_runs"][1]["candidate_results"]
+    assert all(candidate["within_24h"] is False for candidate in candidates)
+    assert all(candidate["within_strict_window"] is True for candidate in candidates)
+
+
+def test_refill_entity_quota_prevents_single_subject_output(monkeypatch) -> None:
+    cfg = load_project_config()
+    results = [
+        make_tavily_result(
+            title,
+            "thenextweb.com" if index % 2 else "venturebeat.com",
+            f"openai-story-{index}",
+        )
+        for index, title in enumerate(
+            [
+                "OpenAI launches AI coding workspace",
+                "ChatGPT adds enterprise AI controls",
+                "OpenAI releases Codex agent tools",
+            ]
+        )
+    ]
+
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda session, api_key, payload: {
+            "latency_ms": 5.0,
+            "response": {"results": results},
+        },
+    )
+    result = enrich_articles_with_tavily(
+        [],
+        report_date="2026-04-01",
+        settings=cfg.enrichment.model_copy(
+            update={
+                "enabled": True,
+                "max_total_calls": 1,
+                "max_verify_calls": 0,
+                "max_refill_rounds": 1,
+                "min_articles": 3,
+                "max_refill_per_domain": 0,
+                "max_refill_per_entity": 1,
+            }
+        ),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+    )
+
+    assert result["report"]["priority_refilled_count"] == 1
+    assert result["report"]["entity_quota_rejected_count"] == 2
+    rejected = result["report"]["priority_refill_runs"][0]["candidate_results"][1:]
+    assert all(candidate["entity_quota_reached"] is True for candidate in rejected)

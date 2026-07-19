@@ -1,4 +1,4 @@
-# ModelScope Kimi K2.7 Code 实验记录
+# ModelScope Kimi K2.7 Code 实验记录（历史）
 
 - 实验日期：2026-07-15
 - 目标模型：`moonshotai/Kimi-K2.7-Code:Moonshot`
@@ -86,7 +86,7 @@
 
 ## 关联资料
 
-- [详细 live 验证与指标](kimi-k27-modelscope-live-validation.md)
+- [详细 live 验证与指标](../kimi-k27-modelscope-live-validation.md)
 - [Kimi K2.7 与 Hy3 旧实验](kimi-k27-hy3-feasibility.md)
 - [LLM thinking、JSON 输出与代码定稿分析](llm-thinking-json-feasibility.md)
 - [ModelScope Kimi K2.7 Code 模型页](https://www.modelscope.cn/models/moonshotai/Kimi-K2.7-Code/summary)

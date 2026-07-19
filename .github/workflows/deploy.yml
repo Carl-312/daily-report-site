@@ -168,10 +168,12 @@ jobs:
           retention-days: 7
 
       - name: Prepare release archive assets
+        continue-on-error: true
         if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         run: python scripts/manage_retention.py bundle --keep-days "$RETENTION_DAYS" --staging-dir .archive-staging
 
       - name: Ensure archive release exists
+        continue-on-error: true
         if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
         env:
           GH_TOKEN: ${{ github.token }}
@@ -182,6 +184,7 @@ jobs:
               --notes "Long-term archive for generated data/ and content/ artifacts."
 
       - name: Upload archive assets to GitHub Release
+        continue-on-error: true
         if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main' && hashFiles('.archive-staging/*.tar.gz') != ''
         env:
           GH_TOKEN: ${{ github.token }}
@@ -190,10 +193,12 @@ jobs:
           gh release upload "$ARCHIVE_TAG" .archive-staging/archive-manifest.json --clobber
 
       - name: Prune generated content outside retention window
+        continue-on-error: true
         if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         run: python scripts/manage_retention.py prune --keep-days "$RETENTION_DAYS"
 
       - name: Commit and push retained generated content
+        continue-on-error: true
         if: steps.publish-mode.outputs.publish == 'true' && github.ref == 'refs/heads/main'
         run: |
           git config user.name "GitHub Actions Bot"
@@ -241,6 +246,7 @@ jobs:
           path: ${{ steps.public-edition.outputs.site_dir }}
 
       - name: Upload run logs (optional)
+        continue-on-error: true
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -248,8 +254,10 @@ jobs:
           path: |
             daily_update.log
             *.log
+            .runs/**/summary-attempts.json
             .archive-staging/archive-manifest.json
           if-no-files-found: ignore
+          include-hidden-files: true
 
   deploy:
     if: github.ref == 'refs/heads/main' && needs.generate-and-deploy.outputs.publish == 'true' && needs.generate-and-deploy.outputs.pages_enabled == 'true'

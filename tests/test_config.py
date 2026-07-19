@@ -57,6 +57,11 @@ def test_repository_config_loads_endpoint_scoped_llm_capabilities(monkeypatch) -
         "https://api-inference.modelscope.cn/v1",
         "moonshotai/Kimi-K2.7-Code:Moonshot",
     )
+    siliconflow = cfg.llm.capability_for(
+        "siliconflow",
+        "https://api.siliconflow.cn/v1",
+        "Pro/moonshotai/Kimi-K2.6",
+    )
 
     assert glm.thinking_control_parameter == "enable_thinking"
     assert glm.thinking_control_value is False
@@ -74,6 +79,14 @@ def test_repository_config_loads_endpoint_scoped_llm_capabilities(monkeypatch) -
     assert kimi.supports_temperature is False
     assert kimi.request_mode == "prompt_only"
     assert kimi.verification_sample_count == 4
+    assert siliconflow.execution.max_attempts == 2
+    assert siliconflow.execution.provider_budget_seconds == 365
+    assert set(siliconflow.execution.retryable_codes) == {
+        "timeout",
+        "network_connection",
+        "network_dns",
+        "http_5xx",
+    }
     assert cfg.llm.compatible_output_contract is True
     assert all(
         capability.model != "deepseek-ai/DeepSeek-V4-Pro"

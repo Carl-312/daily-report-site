@@ -121,6 +121,14 @@ def source_distribution(
     return dict(sorted(Counter(sources).items()))
 
 
+def final_source_distribution(report_payload: dict[str, Any]) -> dict[str, int]:
+    sources = [
+        article.get("source") or UNKNOWN
+        for article in as_list(report_payload.get("articles"))
+    ]
+    return dict(sorted(Counter(sources).items()))
+
+
 def aggregate_title_count(enrichment: dict[str, Any]) -> int:
     candidates = artifact_candidates(enrichment)
     counted = sum(1 for candidate in candidates if candidate.get("aggregate_like"))
@@ -182,7 +190,24 @@ def summarize_refill_stage(enrichment: dict[str, Any], stage: str) -> dict[str, 
         "outside_window_rejected_count": sum(
             1
             for candidate in rejected_candidates
-            if candidate.get("within_24h") is False
+            if candidate.get("within_strict_window", candidate.get("within_24h"))
+            is False
+        ),
+        "domain_quota_rejected_count": sum(
+            1
+            for candidate in rejected_candidates
+            if candidate.get(
+                "domain_quota_rejected", candidate.get("domain_quota_reached")
+            )
+            is True
+        ),
+        "entity_quota_rejected_count": sum(
+            1
+            for candidate in rejected_candidates
+            if candidate.get(
+                "entity_quota_rejected", candidate.get("entity_quota_reached")
+            )
+            is True
         ),
         "lenient_candidate_count": len(lenient_candidates),
         "proven_within_lenient_window_count": sum(
@@ -540,6 +565,8 @@ def build_scorecard(
         },
         "output": {
             "article_count": len(as_list(report_payload.get("articles"))),
+            "source_distribution": final_source_distribution(report_payload),
+            "unique_source_count": len(final_source_distribution(report_payload)),
             "final_count": final_count,
             "strict_final_count": lenient_diagnostics["strict_final_count"],
             "min_articles": min_articles,
@@ -620,6 +647,7 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         f"| verified_count | {markdown_value(verify['verified_count'])} |",
         f"| preserved_error_count | {markdown_value(verify['preserved_error_count'])} |",
         f"| final_count | {markdown_value(output['final_count'])} |",
+        f"| unique_source_count | {markdown_value(output['unique_source_count'])} |",
         f"| strict_final_count | {markdown_value(output['strict_final_count'])} |",
         f"| min_articles | {markdown_value(output['min_articles'])} |",
         f"| refill_remaining_count | {markdown_value(output['refill_remaining_count'])} |",
@@ -628,12 +656,12 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
         "",
         "## Stage Outcomes",
         "",
-        "| Stage | Calls | Results | Accepted | Missing Date Rate | Request Outcomes |",
-        "|---|---:|---:|---:|---:|---|",
+        "| Stage | Calls | Results | Accepted | Domain Quota | Entity Quota | Missing Date Rate | Request Outcomes |",
+        "|---|---:|---:|---:|---:|---:|---:|---|",
         (
             "| verify | "
             f"{markdown_value(verify['calls'])} | - | "
-            f"{markdown_value(verify['verified_count'])} | - | "
+            f"{markdown_value(verify['verified_count'])} | - | - | - | "
             f"{markdown_value(verify['request_outcomes'])} |"
         ),
     ]
@@ -644,6 +672,8 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
             f"| {stage} | {markdown_value(summary['calls'])} | "
             f"{markdown_value(summary['result_count'])} | "
             f"{markdown_value(summary['accepted_count'])} | "
+            f"{markdown_value(summary['domain_quota_rejected_count'])} | "
+            f"{markdown_value(summary['entity_quota_rejected_count'])} | "
             f"{markdown_value(summary['published_date_missing_rate'])} | "
             f"{markdown_value(summary['request_outcomes'])} |"
         )
@@ -683,6 +713,7 @@ def render_scorecard_markdown(scorecard: dict[str, Any]) -> str:
             "",
             "## Stage Preview",
             "",
+            f"- Final source distribution: {markdown_value(output['source_distribution'])}",
             f"- Accepted: {markdown_value(output['accepted_by_stage_preview'])}",
             f"- Verify rejected: {markdown_value(verify['rejected_preview'])}",
         ]

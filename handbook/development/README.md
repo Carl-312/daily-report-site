@@ -1,23 +1,25 @@
 # 开发指南
 
-按改动类型选择入口：
+## 当前进度
 
-- [贡献与交付规范](contributing.md)：分支、提交、CI、PR 和安全边界
-- [迭代工作流](iteration-workflow.md)：从证据、假设到灰度验证的固定步骤
-- [扩展新闻源](source-adapters.md)：新增 source 的接口、测试和配置方式
-- [AGIHunt 主来源接入规划](agihunt-primary-source-plan.md)：官方 Agent API、重要性筛选、授权与灰度启用方案
-- [LLM API 兼容性与输出契约改造计划](llm-api-compatibility-plan.md)：多模型响应分层、必要/候选约束、阶段实施与回归矩阵
-- [LLM 执行架构修复方案](llm-execution-architecture-remediation.md)：移除伪 stream 接口、拆分时间与 token 预算、增加可观测的同模型重试
-- [LLM thinking、JSON 输出与代码定稿可行性分析](llm-thinking-json-feasibility.md)：逐模型判断何时能开 thinking、Structured Outputs 的独立边界，以及由代码定稿日报的推荐架构
-- [ModelScope Kimi K2.7 Code 流式日报契约验证](kimi-k27-modelscope-live-validation.md)：官方流式协议映射、reasoning/content 隔离、完整日报 live 结果与 shadow 准入结论
-- [ModelScope Kimi K2.7 Code 实验记录](kimi-k27-modelscope-experiment-record.md)：本次实验的目标、推进过程、实现改动、验证结果与后续建议概览
-- [小米 MiMo 日报契约可行性实验](xiaomi-mimo-daily-feasibility.md)：OpenAI 兼容验证、V2.5/Pro 的 Non-think 与 Think 对照，以及日报准入结论
-- [接口参考](../reference/api.md)：调用边界和结果模型
-- [架构说明](../architecture/README.md)：确认改动所在层级
+- LLM 执行层已支持 endpoint/model 级 `non_stream` 与安全 `buffered_stream`，统一经过 JSON、来源、质量和发布门禁。
+- ModelScope Kimi K2.7 Code 已完成 2026-07-15 live 验证，当前为 **shadow-ready、fallback-not-ready**。
+- 默认生产模型顺序未改变；thinking、Structured Outputs 和新模型能力仍按精确路由独立验证，不做模型名推断。
+
+## 当前文档
+
+- [贡献与交付规范](contributing.md)：分支、提交、CI、PR 与安全边界
+- [迭代工作流](iteration-workflow.md)：证据、假设、实现和灰度验证流程
+- [扩展新闻源](source-adapters.md)：source 接口、测试与配置约定
+- [LLM 执行架构](llm-execution.md)：交付模式、双预算、重试和 publication gate
+- [MiMo 分级验收契约建议](mimo-adaptive-contract-proposal.md)：逐条隔离编辑问题、保留来源与安全硬门禁
+- [Kimi K2.7 最新验证](kimi-k27-modelscope-live-validation.md)：流式协议、live 结果与 shadow 准入结论
+- [历史规划与实验](history/README.md)：已完成、已替代或暂未准入的阶段性资料
+
+接口边界见[接口参考](../reference/api.md)，系统分层见[架构说明](../architecture/README.md)。
 
 ## 开发原则
 
-1. 先修复最小的边界契约，再考虑提示词或策略扩展。
-2. 每个独立变更都应可单独验证；代码、测试、运行手册和质量证据同步更新。
-3. 灰度验证只使用非 `main` 分支或 `publish=false`；未经明确验收不得发布 Pages。
-4. 兼容入口可以保留，但内容只维护一份，其他位置使用指向 canonical 文档的短指针。
+1. 先修复边界契约，再扩展提示词或策略。
+2. 代码、测试、运行手册和质量证据同步更新。
+3. 未经明确验收的模型和数据源只进入隔离 smoke/shadow，不进入默认生产链。

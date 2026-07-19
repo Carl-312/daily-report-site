@@ -122,7 +122,7 @@ python main.py run --offline --agihunt on --enrichment off
 
 单次灰度健康的最低条件：AGIHunt source 没有认证/兼容性错误、物理请求数不超过 5、所有最终链接是 HTTP(S) 原帖链接、日报 Markdown 显示 `AGI HUNT · agihunt.info` 归因、摘要 URL 与输入候选 URL 一致，且 staged publication 正常完成。自动 health gate 会检查这些可机器验证的条件；人工仍需检查选题质量。`enable_agihunt=true` 但 Secret 缺失时 workflow 会明确失败，不会产生误导性的健康产物。
 
-完成单次接线验证后，仍需至少连续 7 天 `publish=false` shadow，比较频道覆盖、独立故事数、实体集中度、时效、链接可用性和人工重要新闻命中率。只有这段证据满足[接入规划](../development/agihunt-primary-source-plan.md)的 Phase 2 通过条件，才可以把 `sources.agihunt` 改为 `true` 并考虑生产启用。
+完成单次接线验证后，仍需至少连续 7 天 `publish=false` shadow，比较频道覆盖、独立故事数、实体集中度、时效、链接可用性和人工重要新闻命中率。只有这段证据满足[接入规划](../development/history/agihunt-primary-source-plan.md)的 Phase 2 通过条件，才可以把 `sources.agihunt` 改为 `true` 并考虑生产启用。
 
 ## 回滚
 

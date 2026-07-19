@@ -341,9 +341,14 @@ class EnrichmentSettings(BaseModel):
     priority_refill_query: str = Field(
         default="OpenAI Anthropic AI model launch startup funding developer tools"
     )
+    priority_refill_queries: List[str] = Field(default_factory=list)
+    secondary_refill_queries: List[str] = Field(default_factory=list)
     official_fallback_query: str = Field(
         default="OpenAI Anthropic AI model launch startup funding developer tools"
     )
+    official_fallback_queries: List[str] = Field(default_factory=list)
+    max_refill_per_domain: int = Field(default=0)
+    max_refill_per_entity: int = Field(default=0)
     trusted_domains: EnrichmentTrustedDomains = Field(
         default_factory=EnrichmentTrustedDomains
     )
@@ -404,6 +409,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                     "site_dir", output_cfg.get("docs_dir", "dist")
                 ),
                 "publication_root": output_cfg.get("publication_root", ".publication"),
+                "runs_dir": output_cfg.get("runs_dir", ".runs"),
                 "run_deadline_minutes": cfg.get("run", {}).get("deadline_minutes", 20),
                 "llm": cfg.get("llm", {}),
                 "agihunt": cfg.get("agihunt", {}),

@@ -30,7 +30,10 @@ def run_verify_stage(
         within_strict_hours,
     )
 
-    start_date, end_date = report_window(reference_dt)
+    start_date, end_date = report_window(
+        reference_dt,
+        window_hours=settings.strict_hours,
+    )
     reserved_refill_calls = reserved_refill_call_budget(settings)
     verify_budget = max(
         0,
@@ -67,6 +70,7 @@ def run_verify_stage(
         matched_published_date = None
         title_similarity_value = None
         within_window = None
+        within_24h = None
         error = None
         error_obj: Exception | None = None
         latency_ms = None
@@ -98,6 +102,11 @@ def run_verify_stage(
                     reference_dt=reference_dt,
                     strict_hours=settings.strict_hours,
                 )
+                within_24h = within_strict_hours(
+                    matched_published_date,
+                    reference_dt=reference_dt,
+                    strict_hours=24,
+                )
         except RunDeadlineExceeded:
             raise
         except Exception as exc:
@@ -113,7 +122,7 @@ def run_verify_stage(
         elif not matched:
             validation_outcome = "no_match"
         elif within_window is False:
-            validation_outcome = "outside_24h"
+            validation_outcome = f"outside_{settings.strict_hours}h"
         else:
             validation_outcome = "missing_published_date"
         verify_runs.append(
@@ -125,7 +134,9 @@ def run_verify_stage(
                 "latency_ms": latency_ms,
                 "result_count": len(results),
                 "matched": matched,
-                "within_24h": within_window,
+                "within_24h": within_24h,
+                "within_strict_window": within_window,
+                "strict_window_hours": settings.strict_hours,
                 "matched_url": matched_url,
                 "matched_title": matched_title,
                 "matched_published_date": matched_published_date,
@@ -144,7 +155,9 @@ def run_verify_stage(
             "prefilter_bucket": prefilter_bucket,
             "matched_url": matched_url,
             "matched_title": matched_title,
-            "within_24h": within_window,
+            "within_24h": within_24h,
+            "within_strict_window": within_window,
+            "strict_window_hours": settings.strict_hours,
             "title_similarity": title_similarity_value,
             "cluster_id": candidate.get("cluster_id"),
             "cluster_role": candidate.get("cluster_role"),
@@ -159,7 +172,7 @@ def run_verify_stage(
         if request_outcome == "success" and not matched:
             candidate_summary["rejection_reason"] = "no_match"
         elif request_outcome == "success" and within_window is False:
-            candidate_summary["rejection_reason"] = "outside_24h"
+            candidate_summary["rejection_reason"] = f"outside_{settings.strict_hours}h"
         elif request_outcome == "success" and within_window is None:
             candidate_summary["rejection_reason"] = "missing_published_date"
 

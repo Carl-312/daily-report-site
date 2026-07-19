@@ -14,9 +14,9 @@
 
 旧文档仍作为历史设计和实验记录保留；后续判断当前状态时，以本文为准。
 
-本文状态基准：`2026-07-13`。历史结论仍基于 `2026-05-11` Tavily
-GitHub Actions 灰度 artifact；当前 Tavily 仍默认关闭，2026-07-13 的最新
-摘要契约预览使用 `enable_tavily=false`，不作为 Tavily live 验证样本。
+本文状态基准：`2026-07-15`。生产默认仍关闭 Tavily；隔离的 Tavily Gray
+已进入 `gray_4_36h_diversified_refill`，用于验证 36 小时时效、多查询轮换、
+来源/主体配额和多厂商 official fallback。该实验不改变生产默认配置。
 
 ## 一句话结论
 
@@ -154,7 +154,12 @@ enrichment:
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  priority_refill_queries: []
+  secondary_refill_queries: []
   official_fallback_query: "OpenAI Anthropic AI model launch startup funding developer tools"
+  official_fallback_queries: []
+  max_refill_per_domain: 0
+  max_refill_per_entity: 0
   trusted_domains:
     priority_refill_media_whitelist:
       - thenextweb.com
@@ -180,6 +185,20 @@ enrichment:
 - `verify_search_depth: basic`: verify 用低成本路径。
 - `enable_fuzzy_second_pass: false`: Phase 0 没证明 fuzzy 有收益。
 - `enable_official_fallback: false`: 官方域名补充仍需显式开启。
+- `*_refill_queries: []`: 为空时兼容旧的单查询配置；灰度可配置多查询并按轮次轮换。
+- `max_refill_per_domain/entity: 0`: 生产默认不启用配额；灰度设为 `2`，避免补全结果继续集中于同一媒体或厂商。
+
+### 当前隔离灰度组合（2026-07-15）
+
+`.github/workflows/tavily-gray.yml` 只在隔离 artifact 中覆盖以下参数：
+
+- 严格时效从 24 小时放宽到 36 小时，72 小时仅保留为搜索与诊断窗口。
+- 总预算 12 次、verify 上限 6 次、每个 refill stage 最多 2 轮。
+- priority、secondary、official fallback 使用彼此不同的查询组合。
+- refill 每个域名最多 2 条、每个高频主体最多 2 条。
+- official fallback 在灰度中开启，并扩展到 OpenAI、Anthropic、Google、Microsoft、Meta、Nvidia 官方域名。
+- 灰度执行 `main.py fetch --enrichment on`，直接消费 main 的 fetch、dedupe、RunClock、deadline、manifest 和 JSON checkpoint 契约；不再运行离线摘要。
+- checkpoint 写入 artifact 私有目录，收集步骤不再读取仓库根目录的同日正式 JSON，避免失败运行串档。
 
 ### CLI 开关
 

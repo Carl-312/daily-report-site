@@ -1,0 +1,491 @@
+{
+  "schema_version": 1,
+  "source_type": "live_experiment",
+  "created_at": "2026-07-15T05:33:22.684781+00:00",
+  "branch": "experiment/mimo-adaptive-contract-20260715",
+  "endpoint": "https://api.xiaomimimo.com/v1",
+  "input_path": "data/2026-07-14.json",
+  "input_date": "2026-07-14",
+  "input_articles": 14,
+  "input_fingerprint": "640fc3649314cb321c0e1fffc5d997e6d8575bcc8de67f60d07a1e9a4da68c27",
+  "prompt_fingerprint": "8da86eb039da18ae4e4758868a1eefc3c15e82988b378bce54a4a7d958033878",
+  "request": {
+    "models": [
+      "mimo-v2.5",
+      "mimo-v2.5-pro"
+    ],
+    "samples_per_model": 3,
+    "requests_planned": 6,
+    "request_budget": 6,
+    "request_mode": "json_object",
+    "thinking": "disabled",
+    "max_completion_tokens": 4000,
+    "temperature": 0.2,
+    "timeout_seconds": 120.0
+  },
+  "comparison": {
+    "completed_requests": 6,
+    "atomic_publishable": 0,
+    "adaptive_publishable": 6,
+    "absolute_gain": 6
+  },
+  "results": [
+    {
+      "model": "mimo-v2.5",
+      "sample": 1,
+      "status": "completed",
+      "elapsed_ms": 8607,
+      "telemetry": {
+        "http_status": 200,
+        "request_id": null,
+        "content_length": 1112,
+        "reasoning_length": 0,
+        "finish_reason": "stop",
+        "prompt_tokens": 1656,
+        "completion_tokens": 477,
+        "reasoning_tokens": 0,
+        "total_tokens": 2133,
+        "response_sha256": "8b5de5ec4fc589b4092d72bdde9386770fc01307abdb678993fc2c4762e252ae"
+      },
+      "atomic_gate": {
+        "status": "failed",
+        "received_items": 0,
+        "accepted_items": 0,
+        "quarantined_items": 0,
+        "capped_items": 0,
+        "diagnostics": [
+          "contract_shape:item=0"
+        ]
+      },
+      "adaptive_gate": {
+        "status": "publishable",
+        "received_items": 14,
+        "accepted_items": 10,
+        "quarantined_items": 1,
+        "capped_items": 3,
+        "diagnostics": [
+          "quality_length:item=12:visible=27",
+          "items_capped:count=3"
+        ],
+        "accepted_output": {
+          "items": [
+            {
+              "article_id": "a1",
+              "summary": "据报道，AI智能体开发商Nous Research正在洽谈新一轮融资，估值可能达到15亿美元。"
+            },
+            {
+              "article_id": "a2",
+              "summary": "微软CEO萨提亚·纳德拉向使用AI的公司发出警告，强调了AI部署中的潜在风险。"
+            },
+            {
+              "article_id": "a3",
+              "summary": "苹果公司称，一名前员工在跳槽至OpenAI后，利用一个罕见漏洞下载了机密文件。"
+            },
+            {
+              "article_id": "a4",
+              "summary": "苹果公司对OpenAI提起的商业秘密诉讼中，包含多项令人震惊的指控细节。"
+            },
+            {
+              "article_id": "a5",
+              "summary": "一篇报道探讨了AI是否应该被用于帮助人们逃避杀害配偶的罪责，引发了伦理讨论。"
+            },
+            {
+              "article_id": "a6",
+              "summary": "OpenAI首席执行官山姆·奥特曼关于太空数据中心的言论，与许多专家的现有观点一致。"
+            },
+            {
+              "article_id": "a7",
+              "summary": "Uber的机器人出租车游说行动，使其与Waymo在自动驾驶领域产生了直接竞争。"
+            },
+            {
+              "article_id": "a8",
+              "summary": "洛杉矶警察局因对公民自由和隐私的“严重担忧”，终止了与监控巨头Flock的合同。"
+            },
+            {
+              "article_id": "a9",
+              "summary": "报道分析了为何上一波科技行业的成功者们，在已经富有和成功后，仍在继续努力奋斗。"
+            },
+            {
+              "article_id": "a10",
+              "summary": "Uber产品负责人谈及酒店业务、机器人出租车，并解释了公司为何不想成为“为所有人提供一切”的平台。"
+            }
+          ],
+          "discussion_topic": "在AI技术快速发展的今天，你认为科技公司最应该优先解决的是技术突破、商业竞争还是伦理风险？"
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.5",
+      "sample": 2,
+      "status": "completed",
+      "elapsed_ms": 4445,
+      "telemetry": {
+        "http_status": 200,
+        "request_id": null,
+        "content_length": 627,
+        "reasoning_length": 0,
+        "finish_reason": "stop",
+        "prompt_tokens": 1656,
+        "completion_tokens": 267,
+        "reasoning_tokens": 0,
+        "total_tokens": 1923,
+        "response_sha256": "f0910266b375fcfa4904366661c208c361d54ecf5f83bebed2d170e44759e230"
+      },
+      "atomic_gate": {
+        "status": "failed",
+        "received_items": 0,
+        "accepted_items": 0,
+        "quarantined_items": 0,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=8:visible=27"
+        ]
+      },
+      "adaptive_gate": {
+        "status": "publishable",
+        "received_items": 8,
+        "accepted_items": 7,
+        "quarantined_items": 1,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=8:visible=27"
+        ],
+        "accepted_output": {
+          "items": [
+            {
+              "article_id": "a1",
+              "summary": "据报道，AI智能体开发商Nous Research正在洽谈新一轮融资，估值可能达到15亿美元。"
+            },
+            {
+              "article_id": "a2",
+              "summary": "微软CEO萨提亚·纳德拉向使用AI的公司发出警告，强调了AI应用中的潜在风险。"
+            },
+            {
+              "article_id": "a3",
+              "summary": "苹果公司称，一名前员工在跳槽至OpenAI后，利用一个罕见漏洞下载了机密文件。"
+            },
+            {
+              "article_id": "a4",
+              "summary": "苹果在起诉OpenAI的商业秘密诉讼中，提出了多项令人震惊的指控。"
+            },
+            {
+              "article_id": "a6",
+              "summary": "OpenAI首席执行官山姆·奥特曼关于太空数据中心的言论，与许多专家的现有观点不谋而合。"
+            },
+            {
+              "article_id": "a7",
+              "summary": "Uber的机器人出租车游说行动，使其与Waymo在自动驾驶领域形成直接竞争。"
+            },
+            {
+              "article_id": "a11",
+              "summary": "视频生成初创公司PixVerse完成4.39亿美元融资，估值飙升至20亿美元以上。"
+            }
+          ],
+          "discussion_topic": "你认为AI技术发展带来的最大风险是什么？"
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.5",
+      "sample": 3,
+      "status": "completed",
+      "elapsed_ms": 5513,
+      "telemetry": {
+        "http_status": 200,
+        "request_id": null,
+        "content_length": 757,
+        "reasoning_length": 0,
+        "finish_reason": "stop",
+        "prompt_tokens": 1656,
+        "completion_tokens": 326,
+        "reasoning_tokens": 0,
+        "total_tokens": 1982,
+        "response_sha256": "115c5b06738bdd538df624f58b4d8d73228b9f9b6a85bcda669a02710ec439ef"
+      },
+      "atomic_gate": {
+        "status": "failed",
+        "received_items": 0,
+        "accepted_items": 0,
+        "quarantined_items": 0,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=7:visible=28"
+        ]
+      },
+      "adaptive_gate": {
+        "status": "publishable",
+        "received_items": 10,
+        "accepted_items": 8,
+        "quarantined_items": 2,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=7:visible=28",
+          "quality_length:item=9:visible=24"
+        ],
+        "accepted_output": {
+          "items": [
+            {
+              "article_id": "a1",
+              "summary": "据报道，AI智能体开发商Nous Research正在洽谈新一轮融资，估值可能达到15亿美元。"
+            },
+            {
+              "article_id": "a2",
+              "summary": "微软首席执行官萨提亚·纳德拉向使用人工智能的公司发出了一项令人震惊的警告。"
+            },
+            {
+              "article_id": "a3",
+              "summary": "苹果公司表示，一名前员工在跳槽至OpenAI后，利用一个罕见漏洞下载了机密文件。"
+            },
+            {
+              "article_id": "a4",
+              "summary": "苹果在针对OpenAI的商业秘密诉讼中，提出了多项令人震惊的指控。"
+            },
+            {
+              "article_id": "a6",
+              "summary": "山姆·奥特曼关于太空数据中心的言论，与大多数专家已有的看法一致。"
+            },
+            {
+              "article_id": "a11",
+              "summary": "视频生成初创公司PixVerse完成4.39亿美元融资，估值飙升至20亿美元以上。"
+            },
+            {
+              "article_id": "a8",
+              "summary": "洛杉矶警察局因对公民自由和隐私的“严重关切”，让与监控巨头Flock的合同到期。"
+            },
+            {
+              "article_id": "a13",
+              "summary": "投资者推动通用聚变公司在上市首日股价飙升，成为首家上市的聚变能公司。"
+            }
+          ],
+          "discussion_topic": "你认为AI技术的快速发展，对商业竞争和个人隐私带来了哪些最显著的挑战？"
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.5-pro",
+      "sample": 1,
+      "status": "completed",
+      "elapsed_ms": 5641,
+      "telemetry": {
+        "http_status": 200,
+        "request_id": null,
+        "content_length": 678,
+        "reasoning_length": 0,
+        "finish_reason": "stop",
+        "prompt_tokens": 1656,
+        "completion_tokens": 274,
+        "reasoning_tokens": 0,
+        "total_tokens": 1930,
+        "response_sha256": "606ecc0d549e9732aafb571e855de3e7516f24b549c1c0e6f58eac14c3e10f32"
+      },
+      "atomic_gate": {
+        "status": "failed",
+        "received_items": 0,
+        "accepted_items": 0,
+        "quarantined_items": 0,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=4:visible=29"
+        ]
+      },
+      "adaptive_gate": {
+        "status": "publishable",
+        "received_items": 9,
+        "accepted_items": 7,
+        "quarantined_items": 2,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=4:visible=29",
+          "quality_length:item=8:visible=22"
+        ],
+        "accepted_output": {
+          "items": [
+            {
+              "article_id": "a11",
+              "summary": "视频生成初创公司PixVerse完成4.39亿美元融资，估值突破20亿美元。"
+            },
+            {
+              "article_id": "a1",
+              "summary": "AI智能体开发公司Nous Research正以15亿美元估值洽谈新一轮融资。"
+            },
+            {
+              "article_id": "a3",
+              "summary": "苹果指控一名前员工在离职加入OpenAI后，利用一个罕见漏洞下载了机密文件。"
+            },
+            {
+              "article_id": "a2",
+              "summary": "微软CEO萨提亚·纳德拉对使用人工智能的公司发出了令人震惊的警告。"
+            },
+            {
+              "article_id": "a7",
+              "summary": "Uber的自动驾驶出租车游说活动使其与Waymo产生了直接竞争。"
+            },
+            {
+              "article_id": "a6",
+              "summary": "Sam Altman关于太空数据中心的言论，反映了多数专家的普遍看法。"
+            },
+            {
+              "article_id": "a13",
+              "summary": "首家上市的聚变能源公司General Fusion在首日交易中股价大涨。"
+            }
+          ],
+          "discussion_topic": "在AI技术快速发展的今天，你认为企业应如何平衡创新与数据安全、商业机密保护之间的关系？"
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.5-pro",
+      "sample": 2,
+      "status": "completed",
+      "elapsed_ms": 5315,
+      "telemetry": {
+        "http_status": 200,
+        "request_id": null,
+        "content_length": 688,
+        "reasoning_length": 0,
+        "finish_reason": "stop",
+        "prompt_tokens": 1656,
+        "completion_tokens": 278,
+        "reasoning_tokens": 0,
+        "total_tokens": 1934,
+        "response_sha256": "e46ceee869a3b3e80f3b2dad0632162ee793a7b69cd15c0748eaf66aa320d7f2"
+      },
+      "atomic_gate": {
+        "status": "failed",
+        "received_items": 0,
+        "accepted_items": 0,
+        "quarantined_items": 0,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=4:visible=29"
+        ]
+      },
+      "adaptive_gate": {
+        "status": "publishable",
+        "received_items": 9,
+        "accepted_items": 7,
+        "quarantined_items": 2,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=4:visible=29",
+          "quality_length:item=7:visible=26"
+        ],
+        "accepted_output": {
+          "items": [
+            {
+              "article_id": "a11",
+              "summary": "视频生成初创公司PixVerse完成4.39亿美元融资，估值突破20亿美元。"
+            },
+            {
+              "article_id": "a1",
+              "summary": "AI智能体开发公司Nous Research正洽谈新一轮融资，估值达15亿美元。"
+            },
+            {
+              "article_id": "a3",
+              "summary": "苹果指控一名前员工在离职加入OpenAI后，利用一个罕见漏洞下载了机密文件。"
+            },
+            {
+              "article_id": "a2",
+              "summary": "微软CEO萨提亚·纳德拉向使用人工智能的公司发出了一个令人震惊的警告。"
+            },
+            {
+              "article_id": "a7",
+              "summary": "Uber的自动驾驶出租车游说活动使其与Waymo产生了直接竞争。"
+            },
+            {
+              "article_id": "a13",
+              "summary": "首家上市的聚变能源公司General Fusion在首日交易中股价飙升。"
+            },
+            {
+              "article_id": "a6",
+              "summary": "Sam Altman关于太空数据中心的言论，是大多数专家已经认同的观点。"
+            }
+          ],
+          "discussion_topic": "在AI技术快速发展的今天，你认为企业应如何平衡技术创新与数据安全、商业秘密保护之间的关系？"
+        }
+      }
+    },
+    {
+      "model": "mimo-v2.5-pro",
+      "sample": 3,
+      "status": "completed",
+      "elapsed_ms": 8946,
+      "telemetry": {
+        "http_status": 200,
+        "request_id": null,
+        "content_length": 767,
+        "reasoning_length": 0,
+        "finish_reason": "stop",
+        "prompt_tokens": 1656,
+        "completion_tokens": 313,
+        "reasoning_tokens": 0,
+        "total_tokens": 1969,
+        "response_sha256": "58c88600ac2ce17e81c3e03bce4fb12e6ea88020ff379025292a9f840ca77b28"
+      },
+      "atomic_gate": {
+        "status": "failed",
+        "received_items": 0,
+        "accepted_items": 0,
+        "quarantined_items": 0,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=4:visible=29"
+        ]
+      },
+      "adaptive_gate": {
+        "status": "publishable",
+        "received_items": 10,
+        "accepted_items": 8,
+        "quarantined_items": 2,
+        "capped_items": 0,
+        "diagnostics": [
+          "quality_length:item=4:visible=29",
+          "quality_length:item=7:visible=26"
+        ],
+        "accepted_output": {
+          "items": [
+            {
+              "article_id": "a11",
+              "summary": "视频生成初创公司PixVerse完成4.39亿美元融资，估值突破20亿美元。"
+            },
+            {
+              "article_id": "a1",
+              "summary": "AI智能体开发公司Nous Research正在进行新一轮融资谈判，估值达15亿美元。"
+            },
+            {
+              "article_id": "a3",
+              "summary": "苹果公司指控一名前员工在离职加入OpenAI后，利用一个罕见的系统漏洞下载了机密文件。"
+            },
+            {
+              "article_id": "a2",
+              "summary": "微软CEO萨提亚·纳德拉向使用人工智能的公司发出了一个令人震惊的警告。"
+            },
+            {
+              "article_id": "a7",
+              "summary": "Uber的自动驾驶出租车游说活动使其与Waymo的竞争关系趋于紧张。"
+            },
+            {
+              "article_id": "a13",
+              "summary": "首家上市的聚变能源公司General Fusion在首日交易中股价大涨。"
+            },
+            {
+              "article_id": "a8",
+              "summary": "洛杉矶警察局因对公民自由和隐私的严重担忧，终止了与监控巨头Flock的合同。"
+            },
+            {
+              "article_id": "a6",
+              "summary": "Sam Altman关于太空数据中心的言论，反映了大多数专家的普遍看法。"
+            }
+          ],
+          "discussion_topic": "在AI技术快速发展的今天，你认为企业应如何平衡技术创新与数据安全、隐私保护之间的关系？"
+        }
+      }
+    }
+  ],
+  "privacy": {
+    "api_key_persisted": false,
+    "reasoning_text_persisted": false,
+    "rejected_summary_text_persisted": false,
+    "accepted_summary_text_persisted": true
+  }
+}

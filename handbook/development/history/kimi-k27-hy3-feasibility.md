@@ -1,8 +1,8 @@
-# Kimi K2.7 与 Hy3 日报契约可行性实验
+# Kimi K2.7 与 Hy3 日报契约可行性实验（历史）
 
 > 历史结论（2026-07-14）：本文保留当日非流式探针事实。Kimi K2.7 的 ModelScope 路由已于
 > 2026-07-15 恢复，并通过 buffered stream 完整日报验证；最新结论见
-> [ModelScope Kimi K2.7 Code 流式日报契约验证](kimi-k27-modelscope-live-validation.md)。Hy3 结论未变。
+> [ModelScope Kimi K2.7 Code 流式日报契约验证](../kimi-k27-modelscope-live-validation.md)。Hy3 结论未变。
 
 ## 结论
 

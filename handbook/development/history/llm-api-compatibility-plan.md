@@ -1,4 +1,4 @@
-# LLM API 兼容性与输出契约改造计划
+# LLM API 兼容性与输出契约改造计划（历史）
 
 - 状态：实施中；`feat/llm-api-compatibility` 已完成协议/attempt 核心与首轮 live 验证，长期质量样本和小流量观察仍待后续完成
 - 创建日期：2026-07-14
@@ -48,12 +48,12 @@
 
 | 位置 | 当前职责 | 审计结论 |
 | --- | --- | --- |
-| [`prompts/daily.md`](../../prompts/daily.md) | 要求模型只返回 JSON，并描述条数、中文、字数、标点和来源规则 | 同时包含质量目标与具体渲染实现约束 |
-| [`summarizer.py`](../../summarizer.py) | provider 回退、请求、正文提取、JSON 解析和首次质量校验 | 多层失败共用相近异常；只读取 `choices[0].message.content` |
-| [`utils/summary_contracts.py`](../../utils/summary_contracts.py) | Pydantic 模型、可见字符规则、来源复核和确定性 Markdown 渲染 | 本地 Schema 严格，但没有发送给 provider |
-| [`main.py`](../../main.py) | 在线/离线策略、持久化、发布前复核 | 在线失败后拒绝自动离线替代；显式离线仍可发布并保留 policy |
-| [`scripts/modelscope_smoke.py`](../../scripts/modelscope_smoke.py) | ModelScope 最小连通性和错误分类 | 只验证主模型有非空正文，不验证日报契约 |
-| [`scripts/agihunt_trending_gray.py`](../../scripts/agihunt_trending_gray.py) | 隔离的 AI/offline/reviewed 灰度和 provenance 检查 | 已明确禁止把 offline/reviewed 标为 AI |
+| [`prompts/daily.md`](../../../prompts/daily.md) | 要求模型只返回 JSON，并描述条数、中文、字数、标点和来源规则 | 同时包含质量目标与具体渲染实现约束 |
+| [`summarizer.py`](../../../summarizer.py) | provider 回退、请求、正文提取、JSON 解析和首次质量校验 | 多层失败共用相近异常；只读取 `choices[0].message.content` |
+| [`utils/summary_contracts.py`](../../../utils/summary_contracts.py) | Pydantic 模型、可见字符规则、来源复核和确定性 Markdown 渲染 | 本地 Schema 严格，但没有发送给 provider |
+| [`main.py`](../../../main.py) | 在线/离线策略、持久化、发布前复核 | 在线失败后拒绝自动离线替代；显式离线仍可发布并保留 policy |
+| [`scripts/modelscope_smoke.py`](../../../scripts/modelscope_smoke.py) | ModelScope 最小连通性和错误分类 | 只验证主模型有非空正文，不验证日报契约 |
+| [`scripts/agihunt_trending_gray.py`](../../../scripts/agihunt_trending_gray.py) | 隔离的 AI/offline/reviewed 灰度和 provenance 检查 | 已明确禁止把 offline/reviewed 标为 AI |
 
 当前 Pydantic `SummaryDraft` 生成的 Schema 具有以下特征：
 
@@ -530,7 +530,7 @@ shadow runner 同时计算候选规则，便于比较而不立即改变发布行
 
 - [OpenAI Python SDK 错误处理](https://github.com/openai/openai-python#handling-errors)
 - [OpenAI Python Structured Outputs parsing helpers](https://github.com/openai/openai-python/blob/main/helpers.md)
-- [当前摘要与发布架构](../architecture/system.md)
-- [运行故障排查](../operations/troubleshooting.md)
-- [质量验收记录](../quality/acceptance.md)
+- [当前摘要与发布架构](../../architecture/system.md)
+- [运行故障排查](../../operations/troubleshooting.md)
+- [质量验收记录](../../quality/acceptance.md)
 - [AGIHunt 主来源接入规划](agihunt-primary-source-plan.md)

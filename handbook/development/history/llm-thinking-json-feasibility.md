@@ -1,4 +1,4 @@
-# LLM thinking、JSON 输出与代码定稿可行性分析
+# LLM thinking、JSON 输出与代码定稿可行性分析（历史）
 
 - 状态：设计结论；不直接修改生产模型或发布门禁
 - 评估日期：2026-07-15
@@ -57,18 +57,18 @@
 
 对应代码证据：
 
-- [`compress_articles()`](../../summarizer.py) 在请求前分配确定性的 `article_id`，模型看不到发布 URL。
-- [`model_request_options()`](../../summarizer.py) 只发送 capability 明确允许的 thinking 或
+- [`compress_articles()`](../../../summarizer.py) 在请求前分配确定性的 `article_id`，模型看不到发布 URL。
+- [`model_request_options()`](../../../summarizer.py) 只发送 capability 明确允许的 thinking 或
   `response_format` 参数；不会按模型名猜能力。
-- [`request_chat_completion()`](../../utils/llm_compat.py) 先校验 HTTP body 是单一 JSON 文档；
-  [`_extract_final_text()`](../../utils/llm_compat.py) 将 reasoning 与最终 `content` 分开，拒绝
+- [`request_chat_completion()`](../../../utils/llm_compat.py) 先校验 HTTP body 是单一 JSON 文档；
+  [`_extract_final_text()`](../../../utils/llm_compat.py) 将 reasoning 与最终 `content` 分开，拒绝
   `reasoning_only`、空 choices、refusal 和 `finish_reason=length`。
-- [`extract_single_json_object()`](../../utils/llm_compat.py) 拒绝多个根 JSON，不会猜“最后一份才是答案”。
-- [`SummaryDraft`](../../utils/summary_contracts.py) 只接受模型生成的 `article_id`、`summary` 和
-  `discussion_topic`；[`_parse_summary_result()`](../../summarizer.py) 再从本地输入绑定标题和 URL。
-- [`validate_summary_result()`](../../utils/summary_contracts.py) 限制条数、来源 ID、URL、单句、
+- [`extract_single_json_object()`](../../../utils/llm_compat.py) 拒绝多个根 JSON，不会猜“最后一份才是答案”。
+- [`SummaryDraft`](../../../utils/summary_contracts.py) 只接受模型生成的 `article_id`、`summary` 和
+  `discussion_topic`；[`_parse_summary_result()`](../../../summarizer.py) 再从本地输入绑定标题和 URL。
+- [`validate_summary_result()`](../../../utils/summary_contracts.py) 限制条数、来源 ID、URL、单句、
   30–80 可见字符和完整句末标点。
-- [`render_summary_markdown()`](../../utils/summary_contracts.py) 负责编号和最终读者文本，模型不负责
+- [`render_summary_markdown()`](../../../utils/summary_contracts.py) 负责编号和最终读者文本，模型不负责
   Markdown、链接或展示格式。
 
 因此，用户设想的“让模型输出 JSON，再用代码规则把最后日报清晰定稿”不仅可行，而且已经是当前
@@ -324,8 +324,8 @@ Schema 必须另外验证，不能复用 Think 成功作为证据：
 ## 关联历史文档
 
 - [LLM API 兼容性与输出契约改造计划](llm-api-compatibility-plan.md)
-- [LLM API 兼容性运行手册](../operations/llm-api-compatibility.md)
-- [LLM 执行架构修复方案](llm-execution-architecture-remediation.md)
+- [LLM API 兼容性运行手册](../../operations/llm-api-compatibility.md)
+- [LLM 执行架构](../llm-execution.md)
 - [DeepSeek-V4-Pro 日报契约系统评估](deepseek-v4-pro-feasibility.md)
 - [Kimi K2.7 与 Hy3 日报契约可行性实验](kimi-k27-hy3-feasibility.md)
-- [日报正式与灰度产物质量审计](../quality/daily-product-quality-audit.md)
+- [日报正式与灰度产物质量审计](../../quality/daily-product-quality-audit.md)

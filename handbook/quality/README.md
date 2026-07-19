@@ -2,6 +2,7 @@
 
 ## 当前证据入口
 
+- [2026-07-19 日报内容价值分析](2026-07-19-content-value-analysis.md)：基于当天抓取元数据定位低信息密度根因，并提出 lead → Story 的最小架构改造
 - [日报质量审计](daily-product-quality-audit.md)：按日期记录重复、扩展、发布和产物问题
 - [可靠性验收](acceptance.md)：测试、灰度运行和交付门禁证据
 - [稳定性改进分析](improvement-analysis.md)：风险分层、根因和后续路线

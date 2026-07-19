@@ -1,4 +1,4 @@
-# AGIHunt 作为每日 AI 新闻主来源的接入规划
+# AGIHunt 作为每日 AI 新闻主来源的接入规划（历史）
 
 - 状态：Phase 1 关闭态实现已完成本地验证；Phase 0 真实样本为 1/2 天，Phase 2
   GitHub shadow 为 1/7 天且健康；实现以 `sources.agihunt: false` 的关闭态合入，后续
@@ -206,7 +206,7 @@ AGIHunt health gate 通过，但主 ModelScope 与 Hunyuan 尝试均因空摘要
 ## 相关资料
 
 - [AGIHunt Agent API skill](https://agihunt.info/agent/v1/skill.md)
-- [当前系统架构](../architecture/system.md)
-- [现有 source 扩展约定](source-adapters.md)
-- [Tavily 运行与灰度边界](../operations/tavily.md)
-- [日报质量审计](../quality/daily-product-quality-audit.md)
+- [当前系统架构](../../architecture/system.md)
+- [现有 source 扩展约定](../source-adapters.md)
+- [Tavily 运行与灰度边界](../../operations/tavily.md)
+- [日报质量审计](../../quality/daily-product-quality-audit.md)
