@@ -303,7 +303,20 @@ def run_lead_resolution_stage(
             indexed_leads, key=lambda item: _lead_order(item[1], item[0])
         )
     ]
-    selected_leads = ranked_leads[: int(getattr(settings, "max_lead_candidates", 5))]
+    max_leads = int(getattr(settings, "max_lead_candidates", 5))
+    selected_leads: list[dict[str, Any]] = []
+    seen_primary_entities: set[str] = set()
+    deferred_reasons: dict[int, str] = {}
+    for lead in ranked_leads:
+        primary_entity = analyze_article(lead).primary_entity
+        if primary_entity and primary_entity in seen_primary_entities:
+            deferred_reasons[id(lead)] = "lead_duplicate_entity"
+            continue
+        if len(selected_leads) >= max_leads:
+            continue
+        selected_leads.append(lead)
+        if primary_entity:
+            seen_primary_entities.add(primary_entity)
     max_rounds = int(getattr(settings, "lead_search_rounds", 2))
     start_date, end_date = report_window(
         reference_dt,
@@ -430,7 +443,7 @@ def run_lead_resolution_stage(
             if deadline_exhausted and lead in selected_leads
             else f"lead_resolution_{terminal_error_code}"
             if terminal_error_code and lead in selected_leads
-            else "lead_candidate_limit",
+            else deferred_reasons.get(id(lead), "lead_candidate_limit"),
         )
         for lead in leads
         if id(lead) not in processed_lead_ids

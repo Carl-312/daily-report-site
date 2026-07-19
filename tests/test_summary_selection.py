@@ -156,6 +156,32 @@ def test_selection_does_not_fill_an_ai_edition_with_generic_technology() -> None
     assert selection.diagnostics["selected_count"] == 1
 
 
+def test_selection_keeps_distinct_stories_that_only_share_body_entities() -> None:
+    articles = [
+        {
+            "title": "Kimi K3 model release draws attention in Silicon Valley",
+            "description": (
+                "Moonshot released Kimi K3 and compared its coding results with "
+                "OpenAI and Anthropic models."
+            ),
+            "source": "source-one",
+        },
+        {
+            "title": "Open-weight models turn inference into a control point",
+            "description": (
+                "An industry analysis compares OpenAI and Anthropic pricing and "
+                "explains why model routing changes infrastructure control."
+            ),
+            "source": "source-two",
+        },
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 8)
+
+    assert len(selection.articles) == 2
+    assert selection.diagnostics["duplicate_story_rejected_count"] == 0
+
+
 def test_summary_gate_requires_the_exact_local_shortlist() -> None:
     articles = _production_articles()
     selected = select_summary_candidates(articles, 10)

@@ -370,6 +370,19 @@ def _story_relation(
     shared_title_entities = set(left_title_analysis.mentioned_entities) & set(
         right_title_analysis.mentioned_entities
     )
+    shared_title_models = set(left_title_analysis.model_aliases) & set(
+        right_title_analysis.model_aliases
+    )
+    left_title_numbers = set(_NUMBER_KEY.findall(str(left.article.get("title") or "")))
+    right_title_numbers = set(
+        _NUMBER_KEY.findall(str(right.article.get("title") or ""))
+    )
+    if not (
+        shared_title_entities
+        or shared_title_models
+        or left_title_numbers & right_title_numbers
+    ):
+        return None
     if (
         (same_primary_entity or len(shared_title_entities) >= 2)
         and len(shared_entities) >= 2

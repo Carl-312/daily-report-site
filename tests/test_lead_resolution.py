@@ -185,3 +185,50 @@ def test_lead_resolution_rejects_a_nearby_story_with_a_different_subject(
         run["rejected_irrelevant_count"] == 1
         for run in result["report"]["lead_resolution_runs"]
     )
+
+
+def test_lead_resolution_spends_rounds_on_distinct_primary_entities(
+    monkeypatch,
+) -> None:
+    kimi = _lead()
+    kimi.update(
+        {
+            "title": "Kimi K3 tops the coding leaderboard",
+            "description": "A trend signal about the Kimi K3 model release.",
+        }
+    )
+    kimi["provenance"] = {
+        **kimi["provenance"],
+        "trend_rank": "1",
+        "trend_term_en": "Kimi K3 coding leaderboard",
+    }
+    duplicate_kimi = {
+        **kimi,
+        "title": "Kimi: threat or menace?",
+        "provenance": {**kimi["provenance"], "trend_rank": "2"},
+    }
+
+    def fake_search(_session, _api_key, payload):
+        if "Kimi" in payload["query"]:
+            evidence = _evidence("reuters.com", "kimi-k3", 0.93)
+            evidence["title"] = "Kimi K3 model release and benchmark details"
+        else:
+            evidence = _evidence("reuters.com", "deepseek-v4", 0.93)
+        return {"latency_ms": 12.0, "response": {"results": [evidence]}}
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+    result = enrich_articles_with_tavily(
+        [kimi, duplicate_kimi, _lead()],
+        report_date="2026-07-19",
+        settings=_settings(max_total_calls=4, max_lead_candidates=2),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert result["report"]["lead_resolution_calls"] == 4
+    assert result["report"]["lead_resolved_count"] == 2
+    assert any(
+        signal["reason"] == "lead_duplicate_entity"
+        for signal in result["report"]["observation_signals"]
+    )
