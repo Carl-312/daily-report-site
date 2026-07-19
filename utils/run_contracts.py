@@ -131,6 +131,9 @@ class ArticleSnapshot(StrictFrozenModel):
     content: str = ""
     priority: int = 0
     source: str = ""
+    kind: str = "story"
+    evidence_status: str = "direct"
+    confidence: str = "reported"
     provenance: dict[str, str] = Field(default_factory=dict)
 
 

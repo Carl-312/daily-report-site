@@ -17,7 +17,9 @@ from utils.summary_selection import (
 )
 
 
-SNAPSHOT = Path(__file__).resolve().parents[1] / "data" / "2026-07-18.json"
+SNAPSHOT = (
+    Path(__file__).resolve().parent / "fixtures" / "summary-selection-2026-07-18.json"
+)
 VALID_SUMMARY = (
     "该候选清楚说明了新闻主体、已经发生的动作以及目前可确认的结果，"
     "并保留原始信息中的事实状态。"

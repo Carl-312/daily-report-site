@@ -27,3 +27,13 @@ def test_production_config_enables_only_the_rendered_trending_source() -> None:
 
     assert config.sources["agihunt_trending"] is True
     assert config.sources["agihunt"] is False
+    assert config.enrichment.enabled is True
+
+
+def test_scheduled_workflow_injects_tavily_secret_without_manual_gate() -> None:
+    workflow = (REPO_ROOT / ".github" / "workflows" / "deploy.yml").read_text(
+        encoding="utf-8"
+    )
+
+    assert "TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}" in workflow
+    assert "inputs.enable_tavily && secrets.TAVILY_API_KEY" not in workflow

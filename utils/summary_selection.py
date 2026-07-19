@@ -113,6 +113,13 @@ def article_source_label(article: dict) -> str:
 def candidate_has_enough_facts(article: dict) -> bool:
     """Apply a small, explainable content floor before promising diversity."""
 
+    if str(article.get("kind") or "story").strip().lower() != "story":
+        return False
+    if str(article.get("evidence_status") or "direct").strip().lower() in {
+        "unresolved",
+        "signal",
+    }:
+        return False
     title = "".join(str(article.get("title") or "").split())
     if not title:
         return False
@@ -187,10 +194,17 @@ def select_summary_candidates_v1(articles: list[dict], limit: int) -> list[dict]
         (_candidate_v1(article, index) for index, article in enumerate(articles, 1)),
         key=_base_order_v1,
     )
-    qualified_candidates = [item for item in ranked_candidates if item.qualified]
+    story_candidates = [
+        item
+        for item in ranked_candidates
+        if str(item.article.get("kind") or "story").strip().lower() == "story"
+    ]
+    qualified_candidates = [item for item in story_candidates if item.qualified]
     # A low-information fallback keeps tiny tests/manual inputs usable, but it
     # never competes with a candidate that passed the content floor.
-    candidates = qualified_candidates or ranked_candidates
+    candidates = qualified_candidates or story_candidates
+    if not candidates:
+        return []
     target = min(limit, len(candidates))
     qualified_groups: list[str] = []
     for candidate in candidates:
@@ -545,8 +559,13 @@ def select_summary_candidates_with_diagnostics(
         ),
         key=_base_order_v2,
     )
-    qualified = [candidate for candidate in ranked if candidate.qualified]
-    base_candidates = qualified or ranked
+    story_candidates = [
+        candidate
+        for candidate in ranked
+        if str(candidate.article.get("kind") or "story").strip().lower() == "story"
+    ]
+    qualified = [candidate for candidate in story_candidates if candidate.qualified]
+    base_candidates = qualified or story_candidates
     representatives, story_clusters = _collapse_story_clusters(base_candidates)
     core_candidates = [
         candidate

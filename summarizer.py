@@ -22,6 +22,7 @@ from utils.summary_contracts import (
     SummaryItem,
     SummaryResult,
     fingerprint_summary_input,
+    impact_summary_issues,
     reader_summary_issues,
     render_summary_markdown,
     summary_visible_character_count,
@@ -31,6 +32,7 @@ from utils.summary_selection import (
     SUMMARY_SELECTION_POLICY,
     article_reference_id,
     article_reference_map,
+    article_source_label,
     select_summary_candidates_with_diagnostics,
 )
 
@@ -136,6 +138,8 @@ def _numbered_items(content: str) -> list[str]:
     items = []
     for line in content.splitlines():
         match = re.match(r"^\s*\d+[.、]\s+(.+?)\s*$", line)
+        if not match:
+            match = re.match(r"^\s*#{1,6}\s+\d+[.、]\s+(.+?)\s*$", line)
         if match:
             items.append(match.group(1))
     return items
@@ -278,6 +282,8 @@ def validate_summary_quality(
     content: str,
     expected_items: int = 10,
     expected_article_ids: set[str] | tuple[str, ...] | None = None,
+    *,
+    require_impact: bool = False,
 ) -> SummaryDraft:
     """Validate the compact JSON output before joining private source metadata."""
     draft = _parse_summary_draft(content)
@@ -315,6 +321,7 @@ def validate_summary_quality(
         article_id = item.article_id.strip()
         title = item.title.strip()
         summary = item.summary.strip()
+        impact = item.why_it_matters.strip()
         if expected_article_ids is not None:
             if article_id not in expected_article_ids:
                 raise SummaryQualityError(
@@ -336,6 +343,14 @@ def validate_summary_quality(
             raise SummaryQualityError(f"item {index} exposes an article_id")
         if issues := reader_summary_issues(summary):
             raise SummaryQualityError(f"item {index} summary " + "; ".join(issues))
+        if require_impact and not impact:
+            raise SummaryQualityError(f"item {index} is missing why_it_matters")
+        if impact and _contains_public_link(impact):
+            raise SummaryQualityError(f"item {index} impact contains a link")
+        if impact and _contains_public_article_id(impact):
+            raise SummaryQualityError(f"item {index} impact exposes an article_id")
+        if impact and (issues := impact_summary_issues(impact)):
+            raise SummaryQualityError(f"item {index} impact " + "; ".join(issues))
     if isinstance(expected_article_ids, tuple):
         output_ids = tuple(item.article_id.strip() for item in draft.items)
         if output_ids != expected_article_ids:
@@ -360,14 +375,15 @@ def _validate_summary_with_one_repair(
             content,
             expected_items=expected_items,
             expected_article_ids=expected_article_ids,
+            require_impact=True,
         )
     except SummaryQualityError as exc:
         # Do not spend another request on empty output, schema drift, or unknown
         # IDs. A focused repair is useful for a complete JSON draft that either
         # missed one selected ID or missed the reader sentence contract.
-        repairable = re.search(r"\bitem \d+ summary\b", str(exc)) or (
-            "cover every selected candidate" in str(exc)
-        )
+        repairable = re.search(
+            r"\bitem \d+ (?:summary|impact|is missing why_it_matters)\b", str(exc)
+        ) or ("cover every selected candidate" in str(exc))
         if not content.strip() or not repairable:
             raise
 
@@ -375,7 +391,8 @@ def _validate_summary_with_one_repair(
             f"上一版 JSON 未通过本地检查：{exc}。重新输出完整 JSON；逐条保留输入 "
             "article_id 和顺序，每条 summary 以 45–65 个可见字符为目标，硬性保持在 "
             f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符；"
-            "写成完整中文单句，不要解释。"
+            "写成完整中文单句；why_it_matters 用 15–70 个可见字符说明影响，"
+            "不要解释 JSON 之外的内容。"
         )
         repair_params = dict(params)
         repair_params["messages"] = [
@@ -389,6 +406,7 @@ def _validate_summary_with_one_repair(
             repaired_content,
             expected_items=expected_items,
             expected_article_ids=expected_article_ids,
+            require_impact=True,
         )
 
 
@@ -490,6 +508,10 @@ def _parse_summary_result(
                 title=str(article.get("title") or "").replace("\n", " ").strip(),
                 summary=item.summary.replace("\n", " ").strip(),
                 url=url.strip(),
+                why_it_matters=item.why_it_matters.replace("\n", " ").strip(),
+                source_label=article_source_label(article),
+                published_at=str(article.get("publish_time") or "").strip(),
+                confidence=str(article.get("confidence") or "reported").strip(),
             )
         )
 
@@ -508,6 +530,7 @@ def _parse_summary_result(
             for index, article in enumerate(articles, 1)
         ),
         selection_diagnostics=selection_diagnostics,
+        presentation="fact_impact_v1",
     )
 
 
@@ -529,6 +552,7 @@ def summarize_result(
             input_fingerprint=input_fingerprint,
             prompt_fingerprint=prompt_fingerprint,
             attempts=(),
+            presentation="fact_impact_v1",
         )
 
     cfg = get_config()
@@ -686,6 +710,9 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
             title=(article.get("title") or "").replace("\n", "").strip(),
             summary=_offline_summary_text(article),
             url=article.get("link") or "",
+            source_label=article_source_label(article),
+            published_at=str(article.get("publish_time") or "").strip(),
+            confidence=str(article.get("confidence") or "reported").strip(),
         )
         for index, article in enumerate(selected, 1)
     )

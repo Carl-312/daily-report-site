@@ -5,10 +5,12 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import requests
+import pytest
 
 from config import load_config
 from utils import news_enrichment
 from utils.news_enrichment import enrich_articles_with_tavily
+from utils.enrichment_transport import classify_request_outcome
 
 
 REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
@@ -54,6 +56,23 @@ def make_tavily_result(title: str, domain: str, slug: str) -> dict:
         "content": f"{title} content",
         "score": 0.9,
     }
+
+
+@pytest.mark.parametrize(
+    ("status", "expected"),
+    [
+        (401, "authentication_error"),
+        (422, "invalid_request"),
+        (429, "rate_limited"),
+        (503, "http_error"),
+    ],
+)
+def test_tavily_http_failures_have_actionable_codes(status, expected) -> None:
+    response = requests.Response()
+    response.status_code = status
+    error = requests.HTTPError(f"HTTP {status}", response=response)
+
+    assert classify_request_outcome(error) == expected
 
 
 def test_enrichment_disabled_returns_original_articles() -> None:
@@ -927,6 +946,7 @@ def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
         ["thenextweb.com", "venturebeat.com"],
         ["reuters.com", "arstechnica.com"],
     ]
-    assert result["report"]["secondary_refilled_count"] == 6
-    assert result["report"]["final_count"] == 6
-    assert result["report"]["stop_reason"] == "budget_exhausted_after_secondary_refill"
+    assert result["report"]["preserved_budget_count"] == 7
+    assert result["report"]["secondary_refilled_count"] == 3
+    assert result["report"]["final_count"] == 10
+    assert result["report"]["stop_reason"] == "secondary_refill_complete"

@@ -17,6 +17,7 @@ def run_verify_stage(
     session: requests.Session,
     api_key: str,
     reference_dt: datetime,
+    remaining_budget: int | None = None,
     deadline_at: datetime | None = None,
 ) -> dict[str, Any]:
     from utils.news_enrichment import (
@@ -31,17 +32,27 @@ def run_verify_stage(
     )
 
     start_date, end_date = report_window(reference_dt)
-    reserved_refill_calls = reserved_refill_call_budget(settings)
+    available_budget = (
+        max(0, settings.max_total_calls)
+        if remaining_budget is None
+        else max(0, min(settings.max_total_calls, remaining_budget))
+    )
+    reserved_refill_calls = reserved_refill_call_budget(
+        settings, available_budget=available_budget
+    )
     verify_budget = max(
         0,
         min(
             settings.max_verify_calls,
-            max(0, settings.max_total_calls - reserved_refill_calls),
+            max(0, available_budget - reserved_refill_calls),
         ),
     )
     verify_runs: list[dict[str, Any]] = []
     verified_articles: list[dict[str, Any]] = []
     preserved_error_articles: list[dict[str, Any]] = []
+    preserved_budget_articles = [
+        dict(candidate["article"]) for candidate in candidates[verify_budget:]
+    ]
     verified_candidates: list[dict[str, Any]] = []
     rejected_candidates: list[dict[str, Any]] = []
 
@@ -182,6 +193,7 @@ def run_verify_stage(
         "verify_runs": verify_runs,
         "verified_articles": verified_articles,
         "preserved_error_articles": preserved_error_articles,
+        "preserved_budget_articles": preserved_budget_articles,
         "verified_candidates": verified_candidates,
         "rejected_candidates": rejected_candidates,
     }

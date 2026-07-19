@@ -275,6 +275,9 @@ class AgihuntTrendingSource(BaseSource):
             publish_time=observed_at.isoformat(timespec="seconds"),
             priority=priority,
             source=self.name,
+            kind="lead",
+            evidence_status="unresolved",
+            confidence="signal",
             provenance={
                 "provider": AGIHUNT_TRENDING_SOURCE_LABEL,
                 "retrieval": "homepage_trending_dom",

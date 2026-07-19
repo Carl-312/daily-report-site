@@ -20,11 +20,12 @@ def decide_publication(
     source_results: tuple[SourceRunResult, ...],
     summary_succeeded: bool,
     build_succeeded: bool,
+    allow_empty: bool = False,
 ) -> PublishDecision:
     """Decide whether a complete staged edition is eligible for promotion."""
     if source_results and all(result.status == "failed" for result in source_results):
         return PublishDecision("failed", False, "all_enabled_sources_failed")
-    if articles_count <= 0:
+    if articles_count <= 0 and not allow_empty:
         return PublishDecision("failed", False, "no_accepted_articles")
     if not summary_succeeded:
         return PublishDecision("failed", False, "summary_failed")

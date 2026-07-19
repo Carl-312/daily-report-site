@@ -22,7 +22,7 @@ summarize:
   prefer_chinese: true
   compress:
     title_max: 200
-    desc_max: 400
+    desc_max: 1200
 
 output:
   json_dir: data
@@ -30,15 +30,20 @@ output:
   site_dir: dist
 
 enrichment:
-  enabled: false
+  enabled: true
   trust_env: true
-  min_articles: 10
+  min_articles: 5
   strict_hours: 24
-  max_total_calls: 7
-  max_verify_calls: 6
+  max_total_calls: 15
+  max_verify_calls: 3
   max_refill_rounds: 1
   refill_max_results: 8
   verify_search_depth: basic
+  max_lead_candidates: 5
+  lead_search_rounds: 2
+  lead_search_depth: advanced
+  lead_max_age_hours: 72
+  enrichment_deadline_reserve_seconds: 240
   enable_fuzzy_second_pass: false
   enable_official_fallback: false
   priority_refill_query: "OpenAI Anthropic AI model launch startup funding developer tools"
@@ -132,18 +137,21 @@ agihunt:
 
 Tavily 是 post-fetch enrichment 层，位于 source 抓取、去重之后，不是 `sources/` 下的新默认 source。
 
-默认必须保持：
+生产默认：
 
 ```yaml
-enrichment.enabled: false
+enrichment.enabled: true
 ```
 
 字段含义：
 
-- `enabled`：默认是否启用 Tavily。当前 PR 不默认开启。
-- `min_articles`：目标文章数，不代表一定补满。
+- `enabled`：默认是否启用 Tavily；缺少密钥时会降级并输出 `missing_api_key`，不会阻断已有直接故事。
+- `min_articles`：主新闻最低目标，当前为 5，不代表一定补满。
 - `strict_hours`：严格时间窗，当前目标是 24 小时，不为凑数量放宽。
-- `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：调用预算，避免单次运行不可控；默认会从总预算中为 priority + secondary refill 预留调用空间。
+- `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：总调用、直接文章验证和补量预算；未用完的 verify 预算不会导致直接故事被删除。
+- `max_lead_candidates` / `lead_search_rounds`：最多解析的重要线索数和每条搜索轮次；默认是 5 × 2。
+- `lead_search_depth` / `lead_max_age_hours`：lead 解析使用 advanced 搜索和 72 小时候选时间窗，最终普通 refill 仍使用更严格窗口。
+- `enrichment_deadline_reserve_seconds`：在全局截止前为摘要、构建和发布保留的秒数。
 - `verify_search_depth`：verify 使用的 Tavily search depth，当前默认 `basic`。
 - `enable_official_fallback`：是否启用官方站点补量，默认不启用。
 - `priority_refill_queries` / `official_fallback_queries`：主题查询包；按报告日期确定性轮换，覆盖中美前沿模型、编程智能体、多模态/机器人、芯片算力以及商业/监管。单数字段保留作旧配置兼容。
@@ -241,7 +249,8 @@ python3 main.py fetch --agihunt on --enrichment off
 python3 main.py run --offline --agihunt on --enrichment off
 ```
 
-`--enrichment auto` 会跟随 `config.yaml`，因此在默认 `enrichment.enabled: false` 下不会启用 Tavily。
+`--enrichment auto` 会跟随 `config.yaml`；当前默认 `enrichment.enabled: true`，
+缺少 `TAVILY_API_KEY` 时会安全降级并在日报底部显示 `missing_api_key`。
 
 ## 相关文档
 

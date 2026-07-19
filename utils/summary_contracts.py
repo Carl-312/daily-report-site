@@ -7,6 +7,7 @@ import html
 import json
 import re
 from typing import Any, Literal
+from urllib.parse import quote, urlparse
 
 from pydantic import Field
 
@@ -56,6 +57,8 @@ SUMMARY_MIN_VISIBLE_CHARS = 30
 SUMMARY_TARGET_MIN_VISIBLE_CHARS = 35
 SUMMARY_TARGET_MAX_VISIBLE_CHARS = 60
 SUMMARY_MAX_VISIBLE_CHARS = 80
+IMPACT_MIN_VISIBLE_CHARS = 15
+IMPACT_MAX_VISIBLE_CHARS = 70
 
 
 class SummaryItem(StrictFrozenModel):
@@ -65,6 +68,10 @@ class SummaryItem(StrictFrozenModel):
     title: str
     summary: str
     url: str
+    why_it_matters: str = ""
+    source_label: str = ""
+    published_at: str = ""
+    confidence: str = ""
 
 
 class SummaryDraftItem(StrictFrozenModel):
@@ -75,6 +82,7 @@ class SummaryDraftItem(StrictFrozenModel):
     # prompts omit it, and trusted source titles are always joined locally.
     title: str = ""
     summary: str
+    why_it_matters: str = ""
 
 
 class SummaryDraft(StrictFrozenModel):
@@ -106,6 +114,7 @@ class SummaryResult(StrictFrozenModel):
     candidate_article_ids: tuple[str, ...] = ()
     selection_diagnostics: dict[str, Any] = Field(default_factory=dict)
     validation_passed: bool = True
+    presentation: Literal["legacy", "fact_impact_v1"] = "legacy"
 
 
 def summary_visible_character_count(value: str) -> int:
@@ -140,6 +149,32 @@ def reader_summary_issues(value: str) -> tuple[str, ...]:
         issues.append("must not use a vague reporting attribution")
     if _INTERNAL_TREND_SIGNAL.search(normalized):
         issues.append("must not expose internal trend signals")
+    if normalized[-1] not in _SUMMARY_SENTENCE_ENDINGS:
+        issues.append("must end with a complete sentence ending")
+    elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in normalized[:-1]):
+        issues.append("must contain exactly one reader sentence")
+    return tuple(issues)
+
+
+def impact_summary_issues(value: str) -> tuple[str, ...]:
+    """Validate one concise consequence sentence separately from the news fact."""
+
+    normalized = " ".join(value.split())
+    if not normalized:
+        return ("must not be empty",)
+    issues: list[str] = []
+    visible = summary_visible_character_count(normalized)
+    if visible < IMPACT_MIN_VISIBLE_CHARS:
+        issues.append(
+            f"has {visible} visible characters; expected at least "
+            f"{IMPACT_MIN_VISIBLE_CHARS}"
+        )
+    if visible > IMPACT_MAX_VISIBLE_CHARS:
+        issues.append(
+            f"has {visible} visible characters; maximum is {IMPACT_MAX_VISIBLE_CHARS}"
+        )
+    if _SUMMARY_TRUNCATION.search(normalized):
+        issues.append("must not contain a truncation marker")
     if normalized[-1] not in _SUMMARY_SENTENCE_ENDINGS:
         issues.append("must end with a complete sentence ending")
     elif any(character in _SUMMARY_SENTENCE_ENDINGS for character in normalized[:-1]):
@@ -209,6 +244,16 @@ def validate_summary_result(
             raise ValueError(
                 f"summary article_id {item.article_id} " + "; ".join(issues)
             )
+        if result.presentation == "fact_impact_v1" and not item.why_it_matters.strip():
+            raise ValueError(
+                f"summary article_id {item.article_id} is missing why_it_matters"
+            )
+        if item.why_it_matters and (
+            issues := impact_summary_issues(item.why_it_matters)
+        ):
+            raise ValueError(
+                f"summary article_id {item.article_id} impact " + "; ".join(issues)
+            )
 
 
 def fingerprint_summary_input(articles: list[dict], prompt: str) -> tuple[str, str]:
@@ -223,7 +268,7 @@ def fingerprint_summary_input(articles: list[dict], prompt: str) -> tuple[str, s
 
 
 def render_summary_markdown(result: SummaryResult) -> str:
-    """Render reader-facing Markdown without exposing source IDs or URLs."""
+    """Render fact, consequence and locally bound direct evidence."""
 
     def public_text(value: str) -> str:
         without_trends = _INTERNAL_TREND_BADGE.sub("", value)
@@ -233,14 +278,46 @@ def render_summary_markdown(result: SummaryResult) -> str:
         compact = " ".join(without_urls.replace("\n", " ").split())
         return re.sub(r"\s+([，。！？；：])", r"\1", compact)
 
-    lines = []
+    def safe_url(value: str) -> str:
+        try:
+            parsed = urlparse(value.strip())
+        except ValueError:
+            return ""
+        if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+            return ""
+        return quote(value.strip(), safe=":/?&=%#@+;,.-_~")
+
+    lines: list[str] = []
+    if not result.items:
+        lines.append("今日没有达到直接证据门槛的主新闻。")
     for index, item in enumerate(result.items, 1):
-        # `summary` is the complete reader-facing sentence. Keeping `title`
-        # internal avoids the old "title：summary" duplication and guarantees
-        # that the renderer never introduces a colon-shaped split.
+        title = public_text(item.title).replace("#", "＃")
         summary = public_text(item.summary).replace("：", "，").replace(":", "，")
-        lines.append(f"{index}. {summary}")
-    lines.extend(
-        ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
-    )
+        impact = public_text(item.why_it_matters)
+        lines.extend([f"### {index}. {title}", "", f"发生了什么：{summary}"])
+        if impact:
+            lines.extend(["", f"为什么重要：{impact}"])
+        url = safe_url(item.url)
+        source_label = public_text(item.source_label) or (
+            urlparse(url).netloc.removeprefix("www.") if url else ""
+        )
+        source_bits: list[str] = []
+        if url and source_label:
+            safe_label = source_label.replace("[", "［").replace("]", "］")
+            source_bits.append(f"[{safe_label}]({url})")
+        elif source_label:
+            source_bits.append(source_label)
+        if item.published_at:
+            source_bits.append(public_text(item.published_at))
+        confidence_labels = {
+            "corroborated": "多源印证",
+            "reported": "单源报道",
+            "direct": "直接来源",
+        }
+        if source_bits and item.confidence in confidence_labels:
+            source_bits.append(confidence_labels[item.confidence])
+        if source_bits:
+            lines.extend(["", "来源：" + " · ".join(source_bits)])
+        lines.append("")
+    lines.extend([f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"])
     return "\n".join(lines)

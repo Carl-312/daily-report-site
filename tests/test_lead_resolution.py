@@ -1,0 +1,150 @@
+from __future__ import annotations
+
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+import requests
+
+from config import load_config
+from utils import news_enrichment
+from utils.news_enrichment import enrich_articles_with_tavily
+from utils.pipeline_diagnostics import (
+    collect_pipeline_diagnostics,
+    render_pipeline_diagnostics_markdown,
+)
+
+
+REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
+REFERENCE = datetime(2026, 7, 19, 12, 0, tzinfo=REPORT_TIMEZONE)
+
+
+def _settings(**updates):
+    return load_config().enrichment.model_copy(
+        update={
+            "enabled": True,
+            "max_total_calls": 2,
+            "max_lead_candidates": 1,
+            "lead_search_rounds": 2,
+            "max_verify_calls": 0,
+            "max_refill_rounds": 0,
+            "min_articles": 1,
+            **updates,
+        }
+    )
+
+
+def _lead() -> dict:
+    return {
+        "title": "DeepSeek V4 发布窗口与能力细节引发关注",
+        "link": "https://agihunt.info/?day=2026-07-19&t=DeepSeek+V4",
+        "description": "趋势页称 DeepSeek V4 接近发布，但没有给出原始报道。",
+        "publish_time": "2026-07-19T08:36:00+08:00",
+        "priority": 4,
+        "source": "agihunt_trending",
+        "kind": "lead",
+        "evidence_status": "unresolved",
+        "confidence": "signal",
+        "provenance": {
+            "trend_rank": "1",
+            "trend_term_en": "DeepSeek V4",
+            "publish_time_semantics": "trend_observed_at",
+        },
+    }
+
+
+def _evidence(domain: str, slug: str, score: float) -> dict:
+    return {
+        "title": "DeepSeek V4 model release details and API availability",
+        "url": f"https://{domain}/ai/{slug}",
+        "published_date": "2026-07-19T02:00:00Z",
+        "content": (
+            "DeepSeek is preparing a V4 model release with new reasoning and API "
+            "capabilities. The report identifies the release status, deployment "
+            "scope, developer access, pricing context, and remaining uncertainty."
+        ),
+        "raw_content": (
+            "Additional source text explains the product changes, rollout sequence, "
+            "technical constraints, and the evidence behind the reported timeline."
+        ),
+        "score": score,
+    }
+
+
+def test_important_lead_uses_two_tavily_rounds_and_becomes_a_story(
+    monkeypatch,
+) -> None:
+    payloads: list[dict] = []
+
+    def fake_search(_session, _api_key, payload):
+        payloads.append(payload)
+        result = (
+            _evidence("reuters.com", "deepseek-v4", 0.93)
+            if len(payloads) == 1
+            else _evidence("deepseek.com", "v4-release", 0.88)
+        )
+        return {"latency_ms": 12.0, "response": {"results": [result]}}
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
+    result = enrich_articles_with_tavily(
+        [_lead()],
+        report_date="2026-07-19",
+        settings=_settings(),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert len(payloads) == 2
+    assert all(payload["search_depth"] == "advanced" for payload in payloads)
+    assert all(payload["include_raw_content"] == "text" for payload in payloads)
+    assert result["report"]["lead_resolution_calls"] == 2
+    assert result["report"]["lead_resolved_count"] == 1
+    assert result["report"]["lead_unresolved_count"] == 0
+    assert len(result["articles"]) == 1
+    story = result["articles"][0]
+    assert story["kind"] == "story"
+    assert story["confidence"] == "corroborated"
+    assert story["link"] == "https://reuters.com/ai/deepseek-v4"
+    assert "reuters.com" in story["description"]
+    assert "deepseek.com" in story["description"]
+    assert story["provenance"]["resolution_stage"] == "tavily_lead_resolution"
+
+
+def test_lead_resolution_failure_preserves_direct_story_and_surfaces_codes(
+    monkeypatch,
+) -> None:
+    direct_story = {
+        "title": "OpenAI publishes a direct product update",
+        "link": "https://openai.com/index/product-update",
+        "description": "The official post documents the shipped capability and rollout.",
+        "publish_time": "2026-07-19T01:00:00Z",
+        "source": "openai.com",
+        "kind": "story",
+        "evidence_status": "direct",
+        "confidence": "reported",
+    }
+
+    def fail_search(*_args, **_kwargs):
+        raise requests.Timeout("sensitive transport detail must stay private")
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fail_search)
+    result = enrich_articles_with_tavily(
+        [direct_story, _lead()],
+        report_date="2026-07-19",
+        settings=_settings(),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert result["articles"] == [direct_story]
+    assert result["report"]["lead_unresolved_count"] == 1
+    assert result["report"]["preserved_budget_count"] == 1
+    assert result["report"]["stage_failures"] == [
+        {"stage": "lead_resolution", "code": "timeout", "count": 2}
+    ]
+
+    diagnostics = collect_pipeline_diagnostics(enrichment_report=result["report"])
+    rendered = render_pipeline_diagnostics_markdown(diagnostics)
+    assert "`enrichment.lead_resolution`：`timeout` ×2" in rendered
+    assert "sensitive transport detail" not in rendered

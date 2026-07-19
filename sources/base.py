@@ -25,6 +25,9 @@ class Article:
     content: str = ""
     priority: int = 0
     source: str = ""
+    kind: str = "story"
+    evidence_status: str = "direct"
+    confidence: str = "reported"
     provenance: dict[str, str] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
@@ -36,6 +39,9 @@ class Article:
             "content": self.content,
             "priority": self.priority,
             "source": self.source,
+            "kind": self.kind,
+            "evidence_status": self.evidence_status,
+            "confidence": self.confidence,
             "provenance": dict(self.provenance),
         }
 
