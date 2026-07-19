@@ -232,3 +232,43 @@ def test_lead_resolution_spends_rounds_on_distinct_primary_entities(
         signal["reason"] == "lead_duplicate_entity"
         for signal in result["report"]["observation_signals"]
     )
+
+
+def test_generic_ai_word_cannot_resolve_a_different_event(monkeypatch) -> None:
+    lead = _lead()
+    lead.update(
+        {
+            "title": "AI intelligence costs are falling faster than PCs",
+            "description": "A chart claims AI intelligence is getting cheaper.",
+        }
+    )
+    lead["provenance"] = {
+        **lead["provenance"],
+        "trend_term_en": "AI costs plunge past PCs",
+    }
+    nearby = _evidence("axios.com", "ai-shopping-agents", 0.94)
+    nearby["title"] = "Retailers embrace AI as shopping bots become buyers"
+
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: {
+            "latency_ms": 12.0,
+            "response": {"results": [nearby]},
+        },
+    )
+    result = enrich_articles_with_tavily(
+        [lead],
+        report_date="2026-07-19",
+        settings=_settings(),
+        tavily_api_key="test-key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert result["articles"] == []
+    assert result["report"]["lead_resolved_count"] == 0
+    assert all(
+        run["rejected_irrelevant_count"] == 1
+        for run in result["report"]["lead_resolution_runs"]
+    )

@@ -39,3 +39,5 @@ def test_scheduled_workflow_injects_tavily_secret_without_manual_gate() -> None:
 
     assert "TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}" in workflow
     assert "inputs.enable_tavily && secrets.TAVILY_API_KEY" not in workflow
+    assert "ENRICHMENT_ARGS=(--enrichment off)" in workflow
+    assert 'GITHUB_EVENT_NAME" = "workflow_dispatch' in workflow

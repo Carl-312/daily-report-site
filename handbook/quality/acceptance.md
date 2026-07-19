@@ -1,8 +1,8 @@
 # 每日新闻可靠性验收记录
 
 **生产分支：** `main`
-**PR：** #8、#9 已合并
-**状态：** 摘要/输入契约和静态列表渲染修复已进入生产；2026-07-13 页面已完成撤换并通过最终 Action 重跑
+**PR：** #8、#9 已合并；#13 为本轮 draft
+**状态：** 既有生产契约保持；Lead/Story 与多轮补证改造已完成非发布预览，待 #13 合并
 
 ## 已验证能力
 
@@ -31,7 +31,20 @@
 
 这些检查只证明当前测试矩阵通过，不是 merge 授权。
 
-## 最新验证证据（2026-07-18）
+## 最新验证证据（2026-07-19）
+
+- 本地门禁：`ruff check .`、`ruff format --check .`、`git diff --check` 全绿，pytest
+  `214 passed`（仅既有 Pydantic V2 弃用 warning）。
+- [GitHub Actions preview run `29677644899`](https://github.com/Carl-312/daily-report-site/actions/runs/29677644899)
+  在 `publish=false` 下使用有效仓库 Secret 完成 10 次 Tavily advanced 调用：22 条输入分成
+  4 条 Story / 18 条 lead，5 条不同主体 lead 各搜索 2 轮，直接 Story 的冗余 verify 为 0。
+- 预览 artifact 的正式短名单为 6 个独立事件、4 个来源；未解析 lead 只出现在“观察信号（未证实）”，
+  每条正文均显示“发生了什么 / 为什么重要 / 直接来源 / 发布时间 / 置信度”。
+- AGI Hunt Trending 实际返回 13/15，health 检查留下非阻塞 `exit code 1` 注解；workflow 总结仍为
+  success，日报页尾显示 `fetch.agihunt_trending / agihunt_trending_unexpected_count`，deploy 跳过。
+- 预览发现的型号漂移、通用 `AI` 误匹配和跨事件误聚类已转成确定性回归；最终提交未执行生产发布。
+
+## 历史验证证据（2026-07-18）
 
 - 本地门禁：`ruff check .`、`ruff format --check .`、`git diff --check` 全绿，pytest
   `198 passed`（仅既有 Pydantic V2 弃用 warning）。
@@ -75,4 +88,4 @@ PR #8、#9 已通过 CI 后合并；后续生产变更仍应先走灰度 PR 和 
 - `0ee5ebe`：修复紧凑有序列表渲染丢失摘要条目的问题，并增加构建回归测试。
 
 ---
-*最后更新：2026-07-18*
+*最后更新：2026-07-19*

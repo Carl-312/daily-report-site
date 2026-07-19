@@ -33,6 +33,7 @@ _WORD_RE = re.compile(r"[a-z0-9]+(?:[.+#-][a-z0-9]+)*", re.IGNORECASE)
 _CJK_RE = re.compile(r"[\u4e00-\u9fff]{2,}")
 _QUERY_FILLER_TERMS = {
     "a",
+    "ai",
     "an",
     "and",
     "announcement",
@@ -140,7 +141,9 @@ def _result_matches_lead(result: dict[str, Any], lead: dict[str, Any]) -> bool:
     required_versions = _version_terms(lead_terms)
     if required_versions and not required_versions.issubset(title_terms):
         return False
-    if lead_terms and lead_terms & title_terms:
+    title_overlap = lead_terms & title_terms
+    minimum_overlap = 2 if len(lead_terms) >= 2 else 1
+    if len(title_overlap) >= minimum_overlap:
         return True
 
     lead_cjk = _CJK_RE.findall(lead_identity)

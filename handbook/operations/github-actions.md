@@ -42,7 +42,7 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 可对单次手动运行启用 Tavily enrichment；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本
+- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本
 - 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
@@ -102,7 +102,9 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 | --- | --- |
 | `TAVILY_API_KEY` | Tavily Search API Key |
 
-该 secret 只在手动触发 `Daily Report Deploy` 且 `enable_tavily=true` 时注入。未配置时，手动开启 Tavily 的运行仍会完成，并在日志中提示回退到去重后的原始文章。不要把真实 secret 写进文档、测试、fixture 或示例提交。
+该 secret 注入生成任务；定时任务按 `config.yaml` 的默认开启策略使用它，手动任务由
+`enable_tavily` 显式决定 `--enrichment on/off`。未配置时，开启 Tavily 的运行仍会完成，并在
+页尾输出稳定诊断码。不要把真实 secret 写进文档、测试、fixture 或示例提交。
 
 ### Workflow 权限
 
@@ -141,11 +143,12 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 `dist/2026-07-10.html`。PR #8 仍为 OPEN/Draft（head
 `gsd/daily-news-reliability`，base `main`）；本次 run 未发布 Pages，生产 URL 未变。
 
-手动触发时保持 `enable_tavily=false` 会沿用默认路径，不显式启用 Tavily；设为 `true` 时运行 `python main.py run --enrichment on`，用于验证生产 runner 的 Tavily 接线。
+手动触发时 `enable_tavily=false` 运行 `--enrichment off`，设为 `true` 时运行
+`--enrichment on`。定时任务不加覆盖参数，跟随 `config.yaml`（当前默认开启）。
 
 Tavily 灰度限制：
 
-- 定时任务不会因为存在 `TAVILY_API_KEY` secret 就自动启用 Tavily。
+- 定时任务按 `config.yaml` 决定 Tavily 是否启用；Secret 本身不改变配置。
 - `skip_generate=true` 只执行 `python main.py build`，不会验证 enrichment。
 - 非 `main` 分支可用于手动验证命令和日志，但不会回写生成的 `data/` / `content/`，也不会发布 Pages。
 - 单次 live 结果只能作为接线样本，不作为默认开启或修改 `trusted_domains` 的稳定证据。

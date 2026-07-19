@@ -102,12 +102,17 @@ jobs:
         run: |
           ENRICHMENT_ARGS=()
           SOURCE_ARGS=()
-          if [ "$ENABLE_TAVILY" = "true" ]; then
-            ENRICHMENT_ARGS=(--enrichment on)
-            if [ -z "$TAVILY_API_KEY" ]; then
-              echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$ENABLE_TAVILY" = "true" ]; then
+              ENRICHMENT_ARGS=(--enrichment on)
+              if [ -z "$TAVILY_API_KEY" ]; then
+                echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
+              else
+                echo "Tavily enrichment explicitly enabled for this manual run"
+              fi
             else
-              echo "Tavily enrichment explicitly enabled for this manual run"
+              ENRICHMENT_ARGS=(--enrichment off)
+              echo "Tavily enrichment explicitly disabled for this manual run"
             fi
           fi
 

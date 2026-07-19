@@ -31,6 +31,8 @@ title/trending lead → 2-round resolution ──┤
 
 - `enrichment.enabled: true`，GitHub Actions 定时任务直接注入 `TAVILY_API_KEY`。
 - 最多处理 5 条重要 lead，每条最多 2 轮 advanced search；总预算 15 次。
+- 同一主要主体只占一个 lead 槽；型号（如 `V4`、`K3`）必须出现在证据标题中，除直接
+  URL 命中外，标题至少命中两个非通用事件词，避免相邻新闻替换原线索。
 - 搜索请求使用 `chunks_per_source=3` 与 `include_raw_content=text`，只接收带直接
   HTTP(S) 文章 URL、真实 `published_date` 和足够正文证据的结果。
 - Tavily answer 不进入事实文本；证据来自具体 search result。
@@ -39,8 +41,10 @@ title/trending lead → 2-round resolution ──┤
 - enrichment 使用软截止并为摘要、构建、发布保留 240 秒；超时、HTTP、连接或
   未知错误均 fail-open 到已有直接故事。
 - 公开页面只显示稳定错误码；异常详情保留在 Actions 日志和 JSON 诊断中。
+- 已通过 [GitHub Actions preview `29677644899`](https://github.com/Carl-312/daily-report-site/actions/runs/29677644899)
+  验证仓库 Secret、10 次两轮请求、fail-open 和 preview artifact 接线；该 run 未发布 Pages。
 
-当前仍需完成一次功能分支 live run 和合并后的连续 7 天质量验收。
+当前仍需完成合并后的连续 7 天质量验收。
 
 ## 历史结论（2026-07-13）
 
