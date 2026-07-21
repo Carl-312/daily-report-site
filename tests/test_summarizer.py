@@ -197,6 +197,15 @@ def test_source_grounding_rejects_a_number_missing_from_evidence() -> None:
         )
 
 
+def test_number_grounding_normalizes_abbreviations_units_and_english_words() -> None:
+    supported = summarizer._normalized_number_claims(
+        "The company raised $15M after six months; another deal was $1.5 billion."
+    )
+
+    assert {"15000000", "6", "1500000000"} <= supported
+    assert summarizer._normalized_number_claims("1500万、6个月、15亿元") <= supported
+
+
 def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
     monkeypatch,
 ) -> None:
