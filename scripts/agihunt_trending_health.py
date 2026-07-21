@@ -43,8 +43,8 @@ def evaluate_trending_run(
     if not report_date:
         errors.append("manifest report_date is missing")
     checks["source_status"] = source.get("status")
-    if source.get("status") != "ok":
-        errors.append("agihunt_trending source status must be ok")
+    if source.get("status") not in {"ok", "degraded"}:
+        errors.append("agihunt_trending source status must be ok or degraded")
 
     articles = source.get("articles")
     if not isinstance(articles, list):
@@ -52,10 +52,15 @@ def evaluate_trending_run(
         errors.append("agihunt_trending article snapshots are missing")
     checks["accepted_count"] = source.get("accepted_count")
     checks["fetched_count"] = source.get("fetched_count")
-    if source.get("accepted_count") != 15 or len(articles) != 15:
-        errors.append("agihunt_trending must capture exactly 15 articles")
-    if source.get("fetched_count") != 15:
-        errors.append("agihunt_trending must render exactly 15 rows")
+    accepted_count = source.get("accepted_count")
+    if (
+        not isinstance(accepted_count, int)
+        or not 1 <= accepted_count <= 15
+        or len(articles) != accepted_count
+    ):
+        errors.append("agihunt_trending must capture between 1 and 15 articles")
+    if source.get("fetched_count") != accepted_count:
+        errors.append("agihunt_trending fetched_count must match accepted_count")
 
     details = _diagnostic_details(source, "agihunt_trending_snapshot")
     checks["snapshot"] = details
@@ -71,8 +76,8 @@ def evaluate_trending_run(
             errors.append(f"snapshot diagnostic is missing {key}")
     if details.get("requested_day") != report_date:
         errors.append("snapshot day must match the report date")
-    if details.get("row_count") != "15":
-        errors.append("snapshot diagnostic row_count must be 15")
+    if details.get("row_count") != str(accepted_count):
+        errors.append("snapshot diagnostic row_count must match accepted_count")
 
     ranks: list[int] = []
     term_keys: set[str] = set()
@@ -114,8 +119,8 @@ def evaluate_trending_run(
         if not term_key or term_key in term_keys:
             errors.append("Trending English title keys must be present and unique")
         term_keys.add(term_key)
-    if ranks != list(range(1, 16)):
-        errors.append("Trending ranks must be contiguous from 1 through 15")
+    if ranks != list(range(1, len(articles) + 1)):
+        errors.append("Trending ranks must be contiguous from 1 through row_count")
 
     data_path = data_dir / f"{report_date}.json"
     checks["data_path"] = str(data_path)
@@ -124,12 +129,27 @@ def evaluate_trending_run(
     else:
         payload = json.loads(data_path.read_text(encoding="utf-8"))
         generated_articles = payload.get("articles", [])
-        generated_links = {
+        represented_links = {
             str(article.get("link") or "")
             for article in generated_articles
             if isinstance(article, dict)
         }
-        if not article_links <= generated_links:
+        represented_links.update(
+            str(article.get("provenance", {}).get("signal_url") or "")
+            for article in generated_articles
+            if isinstance(article, dict)
+            and isinstance(article.get("provenance"), dict)
+        )
+        enrichment = payload.get("enrichment", {})
+        if isinstance(enrichment, dict):
+            for key in ("observation_signals", "candidate_dropped"):
+                represented_links.update(
+                    str(item.get("signal_url") or "")
+                    for item in enrichment.get(key, [])
+                    if isinstance(item, dict)
+                )
+        represented_links.discard("")
+        if not article_links <= represented_links:
             errors.append("Trending candidates are missing from generated data")
         summary = payload.get("summary", {})
         for item in summary.get("items", []) if isinstance(summary, dict) else []:

@@ -156,6 +156,38 @@ def test_selection_does_not_fill_an_ai_edition_with_generic_technology() -> None
     assert selection.diagnostics["selected_count"] == 1
 
 
+def test_tavily_navigation_text_cannot_turn_a_generic_event_into_ai_news() -> None:
+    articles = [
+        {
+            "title": "OpenAI launches an AI agent for developers",
+            "description": "The release documents the agent workflow.",
+            "source": "ai-news",
+            "provenance": {
+                "selection_title": "OpenAI launches an AI agent for developers",
+                "selection_description": "The release documents the agent workflow.",
+                "selection_content": "",
+            },
+        },
+        {
+            "title": "Hackers exploit two WordPress vulnerabilities",
+            "description": (
+                "The article describes remote code execution. Navigation: Google "
+                "Meta Microsoft AI Robotics Security."
+            ),
+            "source": "generic-tech",
+            "provenance": {
+                "selection_title": "Hackers exploit two WordPress vulnerabilities",
+                "selection_description": "",
+                "selection_content": "",
+            },
+        },
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 10)
+
+    assert [article["article_id"] for article in selection.articles] == ["a1"]
+
+
 def test_selection_keeps_distinct_stories_that_only_share_body_entities() -> None:
     articles = [
         {

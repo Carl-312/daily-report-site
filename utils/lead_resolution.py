@@ -459,15 +459,27 @@ def run_candidate_enrichment_stage(
     from utils.story_quality import article_is_lead
 
     queue = build_candidate_queue(candidates)
-    states = [
-        {
-            "article": candidate,
-            "is_lead": article_is_lead(candidate),
-            "evidence": [],
-            "processed": False,
-        }
-        for candidate in queue
-    ]
+    states: list[dict[str, Any]] = []
+    for candidate in queue:
+        snapshot = dict(candidate)
+        provenance = snapshot.get("provenance")
+        provenance = dict(provenance) if isinstance(provenance, dict) else {}
+        provenance.update(
+            {
+                "selection_title": compact_text(candidate.get("title")),
+                "selection_description": compact_text(candidate.get("description")),
+                "selection_content": compact_text(candidate.get("content")),
+            }
+        )
+        snapshot["provenance"] = provenance
+        states.append(
+            {
+                "article": snapshot,
+                "is_lead": article_is_lead(snapshot),
+                "evidence": [],
+                "processed": False,
+            }
+        )
     max_rounds = min(2, max(1, int(getattr(settings, "lead_search_rounds", 2))))
     start_date, end_date = report_window(
         reference_dt,

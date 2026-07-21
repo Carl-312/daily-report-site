@@ -327,6 +327,20 @@ def _number_keys(article: dict) -> tuple[str, ...]:
 def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
     provenance = article.get("provenance")
     provenance = provenance if isinstance(provenance, dict) else {}
+    if "selection_title" in provenance:
+        analysis = analyze_editorial_text(
+            str(provenance.get("selection_title") or ""),
+            "\n".join(
+                part
+                for part in (
+                    str(provenance.get("selection_description") or "").strip(),
+                    str(provenance.get("selection_content") or "").strip(),
+                )
+                if part
+            ),
+        )
+    else:
+        analysis = analyze_article(article)
     return _EditorialCandidate(
         article_id=article_reference_id(article, index),
         original_index=index,
@@ -336,7 +350,7 @@ def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
         priority=_safe_int(article.get("priority"), 0),
         trend_rank=_safe_int(provenance.get("trend_rank"), 1_000_000),
         trend_heat=_safe_float(provenance.get("trend_heat"), 0.0),
-        analysis=analyze_article(article),
+        analysis=analysis,
         number_keys=_number_keys(article),
     )
 
