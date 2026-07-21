@@ -64,8 +64,8 @@ agihunt_trending:
 
 limits:
   max_articles: 14
-  # 5–8 条是目标区间；这是上限，证据不足时允许更少。
-  max_summary_items: 8
+  # 每日目标与发布上限均为 10 条；证据不足时允许更少。
+  max_summary_items: 10
 
 summarize:
   prompt_path: prompts/daily.md

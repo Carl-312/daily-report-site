@@ -16,6 +16,7 @@ sources:
 
 limits:
   max_articles: 14
+  max_summary_items: 10
 
 summarize:
   prompt_path: prompts/daily.md
@@ -122,6 +123,11 @@ agihunt:
 
 控制除 AGIHunt 外每个 source 进入摘要与构建流程的文章上限。AGIHunt 使用其自身的
 `agihunt.max_articles`，以免为了扩大其候选池而无意增加其他来源的抓取量。
+
+### `limits.max_summary_items`
+
+每日公开主新闻的产品目标和发布上限均为 10 条，当前配置固定为
+`max_summary_items: 10`。证据合格候选不足 10 条时发布短版，不降低证据门槛，也不从抓取候选队列外补量。
 
 ### `summarize.prompt_path`
 

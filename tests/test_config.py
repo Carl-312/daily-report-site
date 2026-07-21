@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from config import Settings, load_config
+
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_default_llm_models(monkeypatch, tmp_path) -> None:
@@ -18,6 +23,11 @@ def test_default_llm_models(monkeypatch, tmp_path) -> None:
     assert cfg.model == "Qwen/Qwen3.5-35B-A3B"
     assert cfg.modelscope_secondary_model == ""
     assert cfg.fallback_model == "Pro/moonshotai/Kimi-K2.6"
+
+
+def test_repository_daily_summary_target_is_ten() -> None:
+    assert Settings().max_summary_items == 10
+    assert load_config(str(REPO_ROOT / "config.yaml")).max_summary_items == 10
 
 
 def test_llm_model_env_overrides(monkeypatch, tmp_path) -> None:

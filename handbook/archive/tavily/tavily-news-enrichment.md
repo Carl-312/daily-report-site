@@ -778,7 +778,7 @@ def enrich_articles_with_tavily(articles, report_dt, min_articles, strict_hours)
 }
 ```
 
-这样即使后续出现“为什么今天只有 8 条”之类的问题，也能快速定位是源不足、严格校验淘汰，还是 Tavily 搜索不足。
+这样即使后续出现“为什么今天不足 10 条”之类的问题，也能快速定位是源不足、严格校验淘汰，还是 Tavily 搜索不足。
 
 ## 失败与降级策略
 
