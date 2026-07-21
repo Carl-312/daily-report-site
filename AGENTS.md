@@ -29,7 +29,7 @@
 ## 当前交付状态（2026-07-21）
 
 - 当前实现分支：`agent/content-value-enrichment`
-- 当前提交：`0cbaef35569fcecf1620a0eae25379bf071f450e`
+- 当前在线灰度源提交：`0cbaef35569fcecf1620a0eae25379bf071f450e`（后续纯文档提交不会改写该在线产物）
 - Draft PR：[#14](https://github.com/Carl-312/daily-report-site/pull/14)
 - 状态：正式灰度已通过并在线；尚未合并或发布到生产 `main`。
 - 正式灰度：[`daily-report-site-gray`](https://carl-312.github.io/daily-report-site-gray/)，独立仓库
