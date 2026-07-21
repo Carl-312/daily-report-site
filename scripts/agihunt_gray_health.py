@@ -196,8 +196,15 @@ def evaluate_shadow_run(
         errors.append("generated Markdown report is missing")
     else:
         markdown = content_path.read_text(encoding="utf-8")
-        if AGIHUNT_LABEL in markdown:
-            errors.append("generated Markdown must keep source attribution private")
+        attribution_lines = [
+            line for line in markdown.splitlines() if line.startswith("入选来源：")
+        ]
+        checks["source_attribution"] = attribution_lines
+        if len(attribution_lines) != 1:
+            errors.append(
+                "generated Markdown must contain exactly one selected-source "
+                "attribution line"
+            )
         rendered_items: list[str] = []
         for line in markdown.splitlines():
             if line.startswith("发生了什么："):

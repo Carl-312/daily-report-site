@@ -97,17 +97,24 @@ def article_source_label(article: dict) -> str:
     """Return a truthful reader-facing label for one selected candidate."""
 
     source = str(article.get("source") or "").strip().lower()
+    hostname = (urlsplit(str(article.get("link") or "")).hostname or "").lower()
     labels = {
         "agihunt": "AGI HUNT · agihunt.info",
         "agihunt_trending": "AGI HUNT · agihunt.info",
         "aibase": "AIBase",
         "techcrunch": "TechCrunch",
+        "techcrunch.com": "TechCrunch",
         "theverge": "The Verge",
+        "theverge.com": "The Verge",
+        "www.theverge.com": "The Verge",
+        "reuters.com": "Reuters",
+        "www.reuters.com": "Reuters",
+        "nypost.com": "New York Post",
+        "www.nypost.com": "New York Post",
         "syft": "Syft",
     }
-    if source in labels:
-        return labels[source]
-    hostname = (urlsplit(str(article.get("link") or "")).hostname or "").lower()
+    if source in labels or hostname in labels:
+        return labels.get(source) or labels[hostname]
     return hostname.removeprefix("www.") or source
 
 

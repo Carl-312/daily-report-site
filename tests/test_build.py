@@ -24,6 +24,10 @@ date: 2026-03-25
 
 1. 第一条
 2. 第二条
+
+💬 互动话题：你最关注哪条AI新闻？
+
+入选来源：TechCrunch、The Verge。
 """,
         encoding="utf-8",
     )
@@ -47,6 +51,8 @@ date: 2026-03-25
     html = (output_dir / "2026-03-25.html").read_text(encoding="utf-8")
     assert "<p>1. 第一条</p>" in html
     assert "<p>2. 第二条</p>" in html
+    assert '<p class="discussion-topic">💬 互动话题：你最关注哪条AI新闻？</p>' in html
+    assert '<p class="source-attribution">入选来源：TechCrunch、The Verge。</p>' in html
 
 
 def test_build_article_preserves_safe_source_links_and_strips_private_ids(

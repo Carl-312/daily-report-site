@@ -285,5 +285,9 @@ def render_summary_markdown(result: SummaryResult) -> str:
         impact = public_text(item.why_it_matters)
         sentences = f"{summary}{impact}" if impact else summary
         lines.append(f"{index}. {sentences}")
-    lines.extend([f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"])
+    # A blank line is required here: without it, Markdown treats the topic as
+    # part of the final numbered item and renders both inside one paragraph.
+    lines.extend(
+        ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
+    )
     return "\n".join(lines)

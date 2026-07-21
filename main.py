@@ -100,7 +100,7 @@ def selected_source_attribution_line(
         label = article_source_label(article)
         if label and label not in labels:
             labels.append(label)
-    return f"> 入选来源：{'、'.join(labels)}。" if labels else ""
+    return f"入选来源：{'、'.join(labels)}。" if labels else ""
 
 
 def compose_report_content(
@@ -112,9 +112,10 @@ def compose_report_content(
     observation_signals: list[dict] | tuple[dict, ...] = (),
     pipeline_diagnostics: dict | None = None,
 ) -> str:
-    """Compose the public report; provenance and diagnostics stay in JSON."""
+    """Compose the public report with selected-source attribution at the end."""
 
-    return "\n\n".join([title, content])
+    attribution = selected_source_attribution_line(summary_result, articles)
+    return "\n\n".join(part for part in (title, content, attribution) if part)
 
 
 def create_run_clock(cfg) -> RunClock:

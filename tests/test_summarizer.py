@@ -87,7 +87,7 @@ def _rendered_summary(item_count: int = 1) -> str:
             "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
             "这会降低开发团队采用相关能力的门槛，并改变产品迭代效率。"
         )
-    lines.append("💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！")
+    lines.extend(["", "💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！"])
     return "\n".join(lines)
 
 

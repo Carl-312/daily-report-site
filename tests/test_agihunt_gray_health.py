@@ -72,7 +72,7 @@ def prepare_artifacts(tmp_path) -> tuple[dict, object, object]:
         encoding="utf-8",
     )
     (content_dir / "2026-07-13.md").write_text(
-        (f"日报\n\n1. {VALID_SUMMARY}\n"),
+        (f"日报\n\n1. {VALID_SUMMARY}\n\n入选来源：AGI HUNT · agihunt.info。\n"),
         encoding="utf-8",
     )
     manifest = {
@@ -93,6 +93,22 @@ def test_gray_health_accepts_a_complete_agihunt_shadow(tmp_path) -> None:
     assert result["checks"]["summary_length"] == [
         {"article_id": "a1", "visible_characters": 50}
     ]
+    assert result["checks"]["source_attribution"] == [
+        "入选来源：AGI HUNT · agihunt.info。"
+    ]
+
+
+def test_gray_health_rejects_a_missing_source_attribution(tmp_path) -> None:
+    manifest, data_dir, content_dir = prepare_artifacts(tmp_path)
+    (content_dir / "2026-07-13.md").write_text(
+        (f"日报\n\n1. {VALID_SUMMARY}\n"),
+        encoding="utf-8",
+    )
+
+    result = evaluate_shadow_run(manifest, data_dir=data_dir, content_dir=content_dir)
+
+    assert result["healthy"] is False
+    assert any("selected-source attribution" in error for error in result["errors"])
 
 
 def test_gray_health_rejects_request_budget_exhaustion(tmp_path) -> None:
@@ -135,7 +151,10 @@ def test_gray_health_rejects_oversized_summary(tmp_path) -> None:
 def test_gray_health_rejects_rendered_title_summary_colon_format(tmp_path) -> None:
     manifest, data_dir, content_dir = prepare_artifacts(tmp_path)
     (content_dir / "2026-07-13.md").write_text(
-        (f"日报\n\n1. 人工智能产品更新：{VALID_SUMMARY}\n"),
+        (
+            f"日报\n\n1. 人工智能产品更新：{VALID_SUMMARY}"
+            "\n\n入选来源：AGI HUNT · agihunt.info。\n"
+        ),
         encoding="utf-8",
     )
 

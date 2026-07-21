@@ -37,6 +37,7 @@ def test_structured_summary_renders_only_reader_text_without_private_metadata() 
 
     assert render_summary_markdown(result) == (
         "1. 人工智能产品发布新能力，帮助开发者提升工作效率。\n"
+        "\n"
         "💬 互动话题：你会如何使用这项能力？"
     )
 
