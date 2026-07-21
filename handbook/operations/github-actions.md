@@ -42,7 +42,7 @@
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
 - 触发：`workflow_dispatch`、定时任务
-- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本
+- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本；`deploy_gray_pages` 将通过门禁的 preview artifact 发布到独立灰度 Pages
 - 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
 - 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
 - Python：`3.12`
@@ -54,6 +54,7 @@
   4. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
   5. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
   6. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
+  7. 手动 `deploy_gray_pages=true` 时，要求 `publish=false`、`skip_generate=false`、Tavily 与 Trending 同时开启；Trending health 改为硬门禁，通过后才将同一份 preview artifact 的 `dist/` 推送到独立灰度 Pages 仓库
 
 ## 必要配置
 
@@ -66,6 +67,7 @@
 | `MODELSCOPE_API_KEY` | ModelScope API Key |
 | `SILICONFLOW_API_KEY` | SiliconFlow API Key（可选，用作 LLM 备用供应商） |
 | `AGIHUNT_API_KEY` | AGIHunt Agent API Key（只在 `enable_agihunt=true` 时注入） |
+| `GRAY_PAGES_DEPLOY_KEY` | 只允许写入 `daily-report-site-gray` 的 SSH deploy key，用于正式灰度 Pages |
 
 两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
@@ -121,6 +123,26 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 ### GitHub Pages
 
 进入 `Settings -> Pages`，`Source` 选择 `GitHub Actions`。
+
+当前仓库的生产 Pages 仍为 `https://carl-312.github.io/daily-report-site/`。GitHub Pages
+每个仓库只能有一个站点，因此正式灰度发布到独立公开仓库
+`Carl-312/daily-report-site-gray` 的 `gh-pages` 分支，对应
+`https://carl-312.github.io/daily-report-site-gray/`。灰度 job 不调用 `actions/deploy-pages`，
+不使用生产 `github-pages` environment，也不改写本仓库的 Pages artifact。
+
+正式灰度手动输入固定为：
+
+```text
+skip_generate=false
+enable_tavily=true
+enable_agihunt=false
+enable_agihunt_trending=true
+publish=false
+deploy_gray_pages=true
+```
+
+灰度站点根目录的 `gray-build.json` 保留 source repository、commit、Actions run ID
+和 artifact 名，用于追溯当前在线灰度版本。
 
 ## 保留策略说明
 
@@ -182,7 +204,7 @@ GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavi
 - `main` 上是否只保留最近 7 天的 `data/` / `content/`
 - 手动设置 `enable_tavily=true` 时，日志是否显示 `--enrichment on`
 - `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
-- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且数量不超过 `max_summary_items`
+- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且在证据充足时达到每日目标 10 条、始终不超过 `max_summary_items=10`
 - 聚合来源是否能拆出多条有独立标题和摘要的新闻，同时没有重复事实
 - AGIHunt gray 时 `scripts/agihunt_gray_health.py` 已通过，preview artifact 根目录的
   去敏 `agihunt-gray-health.json` 显示健康；health gate 已核对 manifest 与 provenance
