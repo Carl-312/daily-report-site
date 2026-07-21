@@ -81,7 +81,7 @@ JSON、artifact 或日志；最终是否达标仍以真实 GitHub Actions previe
 ### 线上预览验证
 
 功能分支已执行多次 `publish=false` 预览，最终用于产物审查的是
-[Actions run `29677644899`](https://github.com/Carl-312/daily-report-site/actions/runs/29677644899)：
+2026-07-19 Actions preview（运行记录已于 2026-07-21 按灰度清理删除）：
 
 - 22 条输入被分成 4 条直接 Story 与 18 条 lead；5 条不同主体的高优先级 lead 各执行
   2 轮 advanced search，共 10 次 Tavily 调用，未再对已过 Story 门槛的直接报道做冗余复搜。

@@ -32,6 +32,19 @@
 非 `main` 分支以及手动 `publish=false` 运行只上传
 `daily-report-preview-<run_id>`，不会发布 Pages。
 
+## 独立正式灰度
+
+正式灰度不占用生产仓库的 Pages 配置。通过门禁的 preview `dist/` 会被推送到
+`Carl-312/daily-report-site-gray` 的 `gh-pages` 分支，在
+[`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
+与生产站并行。灰度发布必须满足 `publish=false`、`skip_generate=false`、Tavily on、
+Trending on 与 Trending health 硬门禁；它不调用生产 `deploy-pages` job。
+
+当前在线灰度对应提交 `0cbaef3`、源运行
+[`29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019) 和灰度 Pages 运行
+[`29818600100`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29818600100)。
+`gray-build.json` 是线上版本的权威追溯入口。
+
 ### 3. 验证结果
 
 部署成功后访问：

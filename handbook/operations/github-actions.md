@@ -80,8 +80,7 @@
 
 ### 2026-07-14 AGIHunt shadow 状态
 
-`AGIHUNT_API_KEY` 已配置为 Actions Secret 并成功用于非发布 shadow。最新的
-[run `29301983421`](https://github.com/Carl-312/daily-report-site/actions/runs/29301983421)
+`AGIHUNT_API_KEY` 已配置为 Actions Secret 并成功用于非发布 shadow。当时的第 1 天运行
 使用 `enable_agihunt=true`、`enable_tavily=false`、`publish=false`，通过生成与 health
 gate；preview artifact 根目录的 `agihunt-gray-health.json` 记录 `healthy: true`、
 source `ok`、13 个接受候选、5 次物理请求和 `publication_status: published`。该
@@ -90,13 +89,13 @@ source `ok`、13 个接受候选、5 次物理请求和 `publication_status: pub
 
 此结果是 7 天观察的第 1 天。历史运行中，ModelScope endpoint/token 不支持 Kimi K2.7
 Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/Hy3` 完成一次
-`publish=false` GitHub 灰度：
-[run `29305758611`](https://github.com/Carl-312/daily-report-site/actions/runs/29305758611)
-成功完成 health gate，仍为 source `ok`、13 个接受候选、5 次物理请求，且没有发布或回写。
+`publish=false` GitHub 灰度，成功完成 health gate，仍为 source `ok`、13 个接受候选、
+5 次物理请求，且没有发布或回写。
 但摘要 provenance 记录当时的主 ModelScope 与 `Tencent-Hunyuan/Hy3` 都因空摘要触发
 `SummaryQualityError`，最终使用 SiliconFlow `Pro/moonshotai/Kimi-K2.6`。因此该模型
 尝试不计为可用验证，也不新增 7 天 shadow 的通过日。Hy3 现已从默认回退链移除；这不
 改变 AGIHunt 的独立灰度门槛。
+上述早期 shadow 的 GitHub Actions 运行记录已于 2026-07-21 按灰度清理删除。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 
@@ -143,6 +142,18 @@ deploy_gray_pages=true
 
 灰度站点根目录的 `gray-build.json` 保留 source repository、commit、Actions run ID
 和 artifact 名，用于追溯当前在线灰度版本。
+
+### 当前正式灰度（2026-07-21）
+
+- 源提交：`0cbaef35569fcecf1620a0eae25379bf071f450e`
+- 源运行：[`29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019)
+- preview artifact：`daily-report-preview-29818465019`
+- 灰度 Pages 运行：[`29818600100`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29818600100)
+- 在线站点：[`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
+
+该运行发布 10 条新闻，Trending health 通过，生产 deploy 跳过。页面的互动话题独立成段，
+页尾“入选来源”按最终入选条目由代码生成。灰度清理后，GitHub 仅保留上述源运行、
+灰度 Pages 运行及对应 deployment；旧灰度运行和失活 deployment 已删除。
 
 ## 保留策略说明
 

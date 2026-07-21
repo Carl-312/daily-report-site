@@ -64,8 +64,8 @@ title/trending lead → 2-round resolution ──┤
 - enrichment 使用软截止并为摘要、构建、发布保留 240 秒；超时、HTTP、连接或
   未知错误均 fail-open 到已有直接故事。
 - 公开页面只显示稳定错误码；异常详情保留在 Actions 日志和 JSON 诊断中。
-- 已通过 [GitHub Actions preview `29677644899`](https://github.com/Carl-312/daily-report-site/actions/runs/29677644899)
-  验证仓库 Secret、10 次两轮请求、fail-open 和 preview artifact 接线；该 run 未发布 Pages。
+- 2026-07-19 的历史 preview 验证了仓库 Secret、10 次两轮请求、fail-open 和 preview
+  artifact 接线；该运行记录已于 2026-07-21 按灰度清理删除。
 
 本节之后涉及 verify、trusted-domain refill、`min_articles` 和公开诊断的内容均为历史记录，不再
 描述 2026-07-21 生产路径。

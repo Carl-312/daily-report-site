@@ -1,8 +1,9 @@
 # 每日新闻可靠性验收记录
 
 **生产分支：** `main`
-**PR：** #8、#9 已合并；#13 为本轮 draft
-**状态：** 既有生产契约保持；Lead/Story 与多轮补证改造已完成非发布预览，待 #13 合并
+**当前灰度分支：** `agent/content-value-enrichment`
+**PR：** [#14](https://github.com/Carl-312/daily-report-site/pull/14) 为当前 Draft
+**状态：** Lead/Story 证据增强、10 条产品口径与独立 Pages 正式灰度已通过；生产保持不变，待维护者决定是否合并
 
 ## 已验证能力
 
@@ -31,12 +32,33 @@
 
 这些检查只证明当前测试矩阵通过，不是 merge 授权。
 
-## 最新验证证据（2026-07-19）
+## 最新验证证据（2026-07-21）
+
+- 验证提交为 `0cbaef35569fcecf1620a0eae25379bf071f450e`；本地门禁为 `211 passed`，
+  `ruff check .`、`ruff format --check .`、`git diff --check` 和 `compileall` 全绿，
+  仅有已知 Pydantic V2 弃用 warning。
+- [push CI `29818445035`](https://github.com/Carl-312/daily-report-site/actions/runs/29818445035)
+  与 [PR CI `29818447823`](https://github.com/Carl-312/daily-report-site/actions/runs/29818447823)
+  的 `p0-contract`、`quality`、`gray-scenarios`、`final-regression` 全部通过。
+- [正式灰度源运行 `29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019)
+  以 `publish=false`、Tavily on、Trending on 生成 10 条新闻，Trending health 为健康，生产
+  `deploy` 明确跳过。
+- [灰度 Pages 运行 `29818600100`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29818600100)
+  将同一 preview artifact 发布到
+  [`daily-report-site-gray`](https://carl-312.github.io/daily-report-site-gray/)。线上与下载产物 HTML
+  SHA-256 一致；日报页有 10 个编号段落、1 个独立互动区块和 1 个以最终入选条目
+  反查生成的来源区块。
+- `gray-build.json` 指向源仓库、上述提交、源运行与
+  `daily-report-preview-29818465019`，channel 为 `formal_gray`。
+- 2026-07-21 清理后，GitHub 仅保留这一套正式灰度运行与 deployment；旧灰度运行证据
+  已从 GitHub 删除，不再作为可点击验收依据。
+
+## 历史验证证据（2026-07-19）
 
 - 本地门禁：`ruff check .`、`ruff format --check .`、`git diff --check` 全绿，pytest
   `214 passed`（仅既有 Pydantic V2 弃用 warning）。
-- [GitHub Actions preview run `29677644899`](https://github.com/Carl-312/daily-report-site/actions/runs/29677644899)
-  在 `publish=false` 下使用有效仓库 Secret 完成 10 次 Tavily advanced 调用：22 条输入分成
+- 当时的 GitHub Actions preview（运行记录已于 2026-07-21 按灰度清理删除）在
+  `publish=false` 下使用有效仓库 Secret 完成 10 次 Tavily advanced 调用：22 条输入分成
   4 条 Story / 18 条 lead，5 条不同主体 lead 各搜索 2 轮，直接 Story 的冗余 verify 为 0。
 - 预览 artifact 的正式短名单为 6 个独立事件、4 个来源；未解析 lead 只出现在“观察信号（未证实）”，
   每条正文均显示“发生了什么 / 为什么重要 / 直接来源 / 发布时间 / 置信度”。
