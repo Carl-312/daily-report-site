@@ -127,3 +127,20 @@ def test_source_attribution_lists_only_selected_sources() -> None:
     assert attribution == "> 入选来源：TechCrunch。"
     assert "AGI HUNT" not in attribution
     assert "The Verge" not in attribution
+
+
+def test_public_report_omits_private_titles_sources_signals_and_diagnostics() -> None:
+    result = _valid_summary_result()
+    content = daily_main.compose_report_content(
+        "日报标题",
+        "1. 中文事实句。中文意义句。",
+        [{"title": "English original headline", "source": "example"}],
+        result,
+        observation_signals=[{"title": "Private signal"}],
+        pipeline_diagnostics={"status": "degraded"},
+    )
+
+    assert content == "日报标题\n\n1. 中文事实句。中文意义句。"
+    assert "English original headline" not in content
+    assert "Private signal" not in content
+    assert "degraded" not in content

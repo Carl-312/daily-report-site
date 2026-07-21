@@ -137,19 +137,23 @@ def test_lead_resolution_failure_preserves_direct_story_and_surfaces_codes(
         reference_dt=REFERENCE,
     )
 
-    assert result["articles"] == [direct_story]
+    assert len(result["articles"]) == 1
+    kept = result["articles"][0]
+    for field in ("title", "link", "description", "publish_time", "source"):
+        assert kept[field] == direct_story[field]
+    assert kept["evidence"][0]["origin"] == "fetch"
     assert result["report"]["lead_unresolved_count"] == 1
     assert result["report"]["preserved_budget_count"] == 0
-    assert result["report"]["accepted_by_stage_preview"]["evidence_gate"] == [
+    assert result["report"]["accepted_by_stage_preview"]["candidate_enrichment"] == [
         direct_story["title"]
     ]
     assert result["report"]["stage_failures"] == [
-        {"stage": "lead_resolution", "code": "timeout", "count": 2}
+        {"stage": "candidate_enrichment", "code": "timeout", "count": 2}
     ]
 
     diagnostics = collect_pipeline_diagnostics(enrichment_report=result["report"])
     rendered = render_pipeline_diagnostics_markdown(diagnostics)
-    assert "`enrichment.lead_resolution`：`timeout` ×2" in rendered
+    assert "`enrichment.candidate_enrichment`：`timeout` ×2" in rendered
     assert "sensitive transport detail" not in rendered
 
 
@@ -227,11 +231,8 @@ def test_lead_resolution_spends_rounds_on_distinct_primary_entities(
     )
 
     assert result["report"]["lead_resolution_calls"] == 4
-    assert result["report"]["lead_resolved_count"] == 2
-    assert any(
-        signal["reason"] == "lead_duplicate_entity"
-        for signal in result["report"]["observation_signals"]
-    )
+    assert result["report"]["lead_resolved_count"] == 3
+    assert result["report"]["observation_signals"] == []
 
 
 def test_generic_ai_word_cannot_resolve_a_different_event(monkeypatch) -> None:

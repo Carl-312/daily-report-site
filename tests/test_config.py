@@ -85,12 +85,15 @@ def test_default_agihunt_candidate_pool_has_room_for_deduplication() -> None:
     ) * settings.per_channel_limit > settings.max_articles
 
 
-def test_default_enrichment_resolves_a_few_leads_with_bounded_rounds() -> None:
+def test_default_enrichment_uses_the_candidate_queue_budget_without_refill() -> None:
     settings = Settings().enrichment
 
     assert settings.enabled is True
-    assert settings.max_total_calls == 15
-    assert settings.max_lead_candidates == 5
+    assert settings.max_total_calls == 30
+    assert settings.min_articles == 0
+    assert settings.max_verify_calls == 0
+    assert settings.max_refill_rounds == 0
+    assert settings.max_lead_candidates == 10
     assert settings.lead_search_rounds == 2
     assert settings.lead_search_depth == "advanced"
     assert settings.enrichment_deadline_reserve_seconds == 240

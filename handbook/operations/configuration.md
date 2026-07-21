@@ -32,14 +32,14 @@ output:
 enrichment:
   enabled: true
   trust_env: true
-  min_articles: 5
+  min_articles: 0
   strict_hours: 24
-  max_total_calls: 15
-  max_verify_calls: 3
-  max_refill_rounds: 1
+  max_total_calls: 30
+  max_verify_calls: 0
+  max_refill_rounds: 0
   refill_max_results: 8
   verify_search_depth: basic
-  max_lead_candidates: 5
+  max_lead_candidates: 10
   lead_search_rounds: 2
   lead_search_depth: advanced
   lead_max_age_hours: 72
@@ -146,16 +146,14 @@ enrichment.enabled: true
 字段含义：
 
 - `enabled`：默认是否启用 Tavily；缺少密钥时会降级并输出 `missing_api_key`，不会阻断已有直接故事。
-- `min_articles`：主新闻最低目标，当前为 5，不代表一定补满。
+- `min_articles`：旧版补量兼容字段；当前为 0，主新闻不设最低条数。
 - `strict_hours`：严格时间窗，当前目标是 24 小时，不为凑数量放宽。
-- `max_total_calls` / `max_verify_calls` / `max_refill_rounds`：总调用、直接文章验证和补量预算；未用完的 verify 预算不会导致直接故事被删除。
-- `max_lead_candidates` / `lead_search_rounds`：最多解析的重要线索数和每条搜索轮次；默认是 5 × 2。
-- `lead_search_depth` / `lead_max_age_hours`：lead 解析使用 advanced 搜索和 72 小时候选时间窗，最终普通 refill 仍使用更严格窗口。
+- `max_total_calls`：每日 Tavily 硬上限 30 次；候选先各执行第一轮，剩余预算再执行第二轮。
+- `max_verify_calls` / `max_refill_rounds`：旧版兼容字段，生产值均为 0。
+- `lead_search_rounds`：Lead 与直接 Story 的统一搜索轮次上限，当前为 2。
+- `lead_search_depth` / `lead_max_age_hours`：候选增强使用 advanced 搜索和 72 小时时间窗。
 - `enrichment_deadline_reserve_seconds`：在全局截止前为摘要、构建和发布保留的秒数。
-- `verify_search_depth`：verify 使用的 Tavily search depth，当前默认 `basic`。
-- `enable_official_fallback`：是否启用官方站点补量，默认不启用。
-- `priority_refill_queries` / `official_fallback_queries`：主题查询包；按报告日期确定性轮换，覆盖中美前沿模型、编程智能体、多模态/机器人、芯片算力以及商业/监管。单数字段保留作旧配置兼容。
-- `trusted_domains`：策略层域名集合，不是线上热修名单。
+- `verify_search_depth`、`enable_official_fallback`、refill query 与 `trusted_domains`：仅为旧配置和历史工具兼容，生产候选队列不读取这些字段。
 
 ### `editorial_catalog.yaml`
 
@@ -171,9 +169,8 @@ enrichment.enabled: true
 
 术语约定：
 
-- `verify`：验证已有 source 候选。
-- `refill`：在 verify / preserved 后不足时按可信域名补量；priority 不足时再进入 secondary，达到 `min_articles` 后停止。
-- `official_fallback`：官方站点补量，默认不启用。
+- `candidate_enrichment`：只处理抓取元数据队列中的 Lead 和直接 Story。
+- `refill` / `official_fallback`：历史术语，当前生产路径不执行。
 - `fail-open`：Tavily 出错时保住现有抓取和落盘。
 
 ## 路径约定

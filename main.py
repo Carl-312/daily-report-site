@@ -38,10 +38,7 @@ from utils.publication import (
     recover_incomplete_promotions,
 )
 from utils.publish_policy import decide_publication
-from utils.pipeline_diagnostics import (
-    collect_pipeline_diagnostics,
-    render_pipeline_diagnostics_markdown,
-)
+from utils.pipeline_diagnostics import collect_pipeline_diagnostics
 from utils.story_quality import (
     partition_articles_for_publication,
     remove_recent_exact_duplicates,
@@ -115,26 +112,9 @@ def compose_report_content(
     observation_signals: list[dict] | tuple[dict, ...] = (),
     pipeline_diagnostics: dict | None = None,
 ) -> str:
-    """Compose the report with unresolved signals separated from main news."""
+    """Compose the public report; provenance and diagnostics stay in JSON."""
 
-    parts = [title]
-    attribution = selected_source_attribution_line(summary_result, articles)
-    if attribution:
-        parts.append(attribution)
-    parts.append(content)
-    if observation_signals:
-        lines = [
-            "## 观察信号（未证实）",
-            "以下线索未解析到足够的直接证据，不计入主新闻。",
-        ]
-        for signal in observation_signals[:5]:
-            title = " ".join(str(signal.get("title") or "").split())
-            if title:
-                lines.append(f"- {title.replace('#', '＃')}")
-        parts.append("\n\n".join([lines[0], "\n".join(lines[1:])]))
-    if pipeline_diagnostics is not None:
-        parts.append(render_pipeline_diagnostics_markdown(pipeline_diagnostics))
-    return "\n\n".join(parts)
+    return "\n\n".join([title, content])
 
 
 def create_run_clock(cfg) -> RunClock:
@@ -295,10 +275,7 @@ def stage_and_publish_run(
         source_results=tuple(source_results),
         summary_succeeded=True,
         build_succeeded=True,
-        allow_empty=bool(
-            report.get("enrichment", {}).get("observation_signals")
-            or report.get("enrichment", {}).get("recent_dedupe", {}).get("removed")
-        ),
+        allow_empty=True,
     )
     if not decision.publish:
         raise RuntimeError(f"publication blocked: {decision.reason}")

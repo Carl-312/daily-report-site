@@ -72,7 +72,7 @@ def prepare_artifacts(tmp_path) -> tuple[dict, object, object]:
         encoding="utf-8",
     )
     (content_dir / "2026-07-13.md").write_text(
-        (f"日报\n\n{AGIHUNT_LABEL}\n\n1. {VALID_SUMMARY}\n"),
+        (f"日报\n\n1. {VALID_SUMMARY}\n"),
         encoding="utf-8",
     )
     manifest = {
@@ -135,7 +135,7 @@ def test_gray_health_rejects_oversized_summary(tmp_path) -> None:
 def test_gray_health_rejects_rendered_title_summary_colon_format(tmp_path) -> None:
     manifest, data_dir, content_dir = prepare_artifacts(tmp_path)
     (content_dir / "2026-07-13.md").write_text(
-        (f"日报\n\n{AGIHUNT_LABEL}\n\n1. 人工智能产品更新：{VALID_SUMMARY}\n"),
+        (f"日报\n\n1. 人工智能产品更新：{VALID_SUMMARY}\n"),
         encoding="utf-8",
     )
 

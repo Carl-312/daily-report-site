@@ -109,11 +109,10 @@ tests/      pytest 测试
 Tavily 相关 PR 必须保持以下语义：
 
 - Tavily 是 post-fetch enrichment，不是默认 source 替代品。
-- 默认配置保持 `enrichment.enabled: false`，除非已有多日证据和维护者明确决定默认开启。
-- `verify` 只验证已有 source 候选；`refill` 只在不足时按可信域名补量。
-- `official_fallback` 是官方站点补量，默认不启用。
-- `strict_hours` 当前目标是 24 小时，不为凑数量放宽。
-- `trusted_domains` 是策略层，不是单日故障的热修名单。
+- 默认配置为 `enrichment.enabled: true`；缺少 key 时安全降级。
+- Tavily 只处理抓取元数据候选队列，不得通过 refill 或 fallback 引入独立新闻。
+- Lead 补证失败不得进入主新闻；直接 Story 增强失败保留原内容。
+- 每条最多两轮、每日最多 30 次，且不因已有 10 条新闻提前停止。
 - Tavily timeout、HTTP error、connection error 或 key 缺失时必须 fail-open：主流程完成，已有 deduped articles 尽量保留，JSON 诊断记录失败。
 
 本地验证建议：
@@ -125,7 +124,9 @@ TAVILY_API_KEY=... python3 main.py run --offline --enrichment on
 python3 main.py run --offline --enrichment off
 ```
 
-检查 `data/YYYY-MM-DD.json` 中的 `enrichment` 字段，重点看 `enabled`、`applied`、`skip_reason`、`error`、`verify_calls`、`refill_calls`、`fallback_calls`、`preserved_error_count`、`final_count`、`stop_reason` 和各 stage 的 `request_outcome`。
+检查 `data/YYYY-MM-DD.json` 中的 `enrichment` 字段，重点看 `enabled`、`applied`、`skip_reason`、
+`error`、`candidate_queue_count`、`candidate_processed_count`、`candidate_enrichment_calls`、
+`total_calls`、`final_count`、`stop_reason` 和各轮 `request_outcome`；`refill_calls` 必须为 0。
 
 ## 文档规范
 
