@@ -100,9 +100,9 @@ def compress_articles(articles: list[dict]) -> list[dict]:
                     "title": str(entry.get("title") or "")[: cfg.title_max],
                     "url": str(entry.get("url") or ""),
                     "published_date": str(entry.get("published_date") or ""),
-                    "snippet": str(
-                        entry.get("snippet") or entry.get("text") or ""
-                    )[: cfg.desc_max],
+                    "snippet": str(entry.get("snippet") or entry.get("text") or "")[
+                        : cfg.desc_max
+                    ],
                 }
                 for entry in evidence[:3]
                 if isinstance(entry, dict)

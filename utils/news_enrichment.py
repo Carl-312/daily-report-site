@@ -796,17 +796,19 @@ def update_stage_failures(report: dict[str, Any]) -> None:
         counts[
             ("enrichment", str(report.get("terminal_error_code") or "enrichment_error"))
         ] = 1
-    run_groups = [
-        ("candidate_enrichment_runs", "candidate_enrichment")
-    ] if report.get("candidate_enrichment_runs") else [
-        ("lead_resolution_runs", "lead_resolution")
-    ]
-    run_groups.extend((
-        ("verify_runs", "verify"),
-        ("priority_refill_runs", "priority_refill"),
-        ("secondary_refill_runs", "secondary_refill"),
-        ("official_fallback_runs", "official_fallback"),
-    ))
+    run_groups = (
+        [("candidate_enrichment_runs", "candidate_enrichment")]
+        if report.get("candidate_enrichment_runs")
+        else [("lead_resolution_runs", "lead_resolution")]
+    )
+    run_groups.extend(
+        (
+            ("verify_runs", "verify"),
+            ("priority_refill_runs", "priority_refill"),
+            ("secondary_refill_runs", "secondary_refill"),
+            ("official_fallback_runs", "official_fallback"),
+        )
+    )
     for report_key, default_stage in run_groups:
         for run in report.get(report_key, []) or []:
             outcome = str(run.get("request_outcome") or "")
@@ -1049,7 +1051,10 @@ def enrich_articles_with_tavily(
 ) -> dict[str, Any]:
     """Enrich the fetch-selected queue without introducing refill stories."""
 
-    from utils.lead_resolution import build_candidate_queue, run_candidate_enrichment_stage
+    from utils.lead_resolution import (
+        build_candidate_queue,
+        run_candidate_enrichment_stage,
+    )
 
     article_dicts = [article_to_dict(article) for article in articles]
     reference_dt = reference_dt or datetime.now(tz=REPORT_TIMEZONE)
@@ -1095,7 +1100,9 @@ def enrich_articles_with_tavily(
         report["lead_unresolved_count"] = len(leads)
         report["final_count"] = len(stories)
         report["strict_final_count"] = len(stories)
-        report["accepted_by_stage_preview"] = {"fetch_story_fail_open": sample_titles(stories)}
+        report["accepted_by_stage_preview"] = {
+            "fetch_story_fail_open": sample_titles(stories)
+        }
         report["notes"].append(
             "Tavily was skipped; direct fetched stories were preserved and leads remained private."
         )
@@ -1126,9 +1133,7 @@ def enrich_articles_with_tavily(
                 "lead_resolution_calls": stage["lead_calls"],
                 "story_enrichment_calls": stage["story_calls"],
                 "lead_resolution_runs": [
-                    run
-                    for run in stage["runs"]
-                    if run.get("candidate_kind") == "lead"
+                    run for run in stage["runs"] if run.get("candidate_kind") == "lead"
                 ],
                 "lead_resolved_count": sum(
                     article.get("provenance", {}).get("resolution_stage")
@@ -1153,12 +1158,12 @@ def enrich_articles_with_tavily(
                 },
             }
         )
-        max_rounds = min(
-            2, max(1, int(getattr(settings, "lead_search_rounds", 2)))
-        )
+        max_rounds = min(2, max(1, int(getattr(settings, "lead_search_rounds", 2))))
         complete_call_count = stage["queue_count"] * max_rounds
         if stage["terminal_error_code"]:
-            report["stop_reason"] = f"candidate_enrichment_{stage['terminal_error_code']}"
+            report["stop_reason"] = (
+                f"candidate_enrichment_{stage['terminal_error_code']}"
+            )
         elif stage["deadline_exhausted"]:
             report["stop_reason"] = "enrichment_deadline_exceeded"
         elif stage["calls"] < complete_call_count and stage["remaining_budget"] <= 0:

@@ -222,7 +222,9 @@ def evaluate_shadow_run(
                 and is_http_url(item.get("url"))
                 and item["url"] in markdown
             ):
-                errors.append("generated Markdown must keep direct source links private")
+                errors.append(
+                    "generated Markdown must keep direct source links private"
+                )
                 break
         if "观察信号" in markdown or "运行诊断" in markdown:
             errors.append("generated Markdown exposes private pipeline metadata")

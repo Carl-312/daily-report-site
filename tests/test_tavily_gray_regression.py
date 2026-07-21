@@ -14,7 +14,9 @@ TZ = ZoneInfo("Asia/Shanghai")
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_historical_gray_fixture_now_uses_only_its_metadata_candidates(monkeypatch) -> None:
+def test_historical_gray_fixture_now_uses_only_its_metadata_candidates(
+    monkeypatch,
+) -> None:
     fixture = json.loads(
         (ROOT / "tests/fixtures/tavily-gray-2026-05-11/report-minimal.json").read_text(
             encoding="utf-8"

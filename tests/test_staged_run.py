@@ -109,9 +109,10 @@ def test_zero_story_run_publishes_a_same_day_empty_edition(tmp_path) -> None:
     )
 
     assert json_path.name == "2026-07-21.json"
-    assert markdown_path.read_text(encoding="utf-8").find(
-        "今日没有达到证据门槛的主新闻"
-    ) != -1
+    assert (
+        markdown_path.read_text(encoding="utf-8").find("今日没有达到证据门槛的主新闻")
+        != -1
+    )
 
 
 def test_publication_rejects_a_legacy_model_selected_summary(tmp_path) -> None:

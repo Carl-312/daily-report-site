@@ -431,9 +431,7 @@ def _enriched_direct_story(
     enriched["provenance"] = provenance
     domains = {item.get("domain") for item in selected if item.get("domain")}
     if evidence:
-        enriched["evidence_status"] = (
-            "corroborated" if len(domains) >= 2 else "direct"
-        )
+        enriched["evidence_status"] = "corroborated" if len(domains) >= 2 else "direct"
         enriched["confidence"] = enriched["evidence_status"]
     enriched["kind"] = "story"
     return enriched
@@ -504,7 +502,9 @@ def run_candidate_enrichment_stage(
                 else _followup_query(article, evidence)
             )
             if not state["is_lead"] and round_index == 1:
-                query = f"{compact_text(article.get('title'))} {compact_text(article.get('link'))}"[:400]
+                query = f"{compact_text(article.get('title'))} {compact_text(article.get('link'))}"[
+                    :400
+                ]
             payload = {
                 "query": query,
                 "topic": "news",

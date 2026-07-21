@@ -94,7 +94,9 @@ def test_health_rejects_rank_drift(tmp_path) -> None:
     result = evaluate_trending_run(manifest(articles), data_dir=data_dir)
 
     assert result["healthy"] is False
-    assert "Trending ranks must be contiguous from 1 through row_count" in result["errors"]
+    assert (
+        "Trending ranks must be contiguous from 1 through row_count" in result["errors"]
+    )
 
 
 def test_health_accepts_a_partial_degraded_snapshot_with_private_destinations(

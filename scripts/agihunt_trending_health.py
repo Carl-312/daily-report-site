@@ -137,8 +137,7 @@ def evaluate_trending_run(
         represented_links.update(
             str(article.get("provenance", {}).get("signal_url") or "")
             for article in generated_articles
-            if isinstance(article, dict)
-            and isinstance(article.get("provenance"), dict)
+            if isinstance(article, dict) and isinstance(article.get("provenance"), dict)
         )
         enrichment = payload.get("enrichment", {})
         if isinstance(enrichment, dict):

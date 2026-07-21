@@ -14,9 +14,7 @@ from utils.summary_contracts import (
 from summarizer import offline_summary_result
 
 
-def test_structured_summary_renders_only_reader_text_without_private_metadata() -> (
-    None
-):
+def test_structured_summary_renders_only_reader_text_without_private_metadata() -> None:
     input_hash, prompt_hash = fingerprint_summary_input(
         [{"title": "AI launch", "link": "https://example.test/a"}], "prompt"
     )

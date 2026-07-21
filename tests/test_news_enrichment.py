@@ -100,7 +100,9 @@ def test_empty_metadata_queue_never_calls_tavily_or_refill(monkeypatch) -> None:
     monkeypatch.setattr(
         news_enrichment,
         "search_tavily",
-        lambda *_args, **_kwargs: (_ for _ in ()).throw(AssertionError("unexpected call")),
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("unexpected call")
+        ),
     )
     enriched = enrich_articles_with_tavily(
         [],
@@ -117,9 +119,12 @@ def test_empty_metadata_queue_never_calls_tavily_or_refill(monkeypatch) -> None:
 
 
 def test_every_candidate_gets_round_one_before_any_round_two(monkeypatch) -> None:
-    candidates = [story(index, entity=entity) for index, entity in enumerate(
-        ("OpenAI", "Anthropic", "Google", "Microsoft"), 1
-    )]
+    candidates = [
+        story(index, entity=entity)
+        for index, entity in enumerate(
+            ("OpenAI", "Anthropic", "Google", "Microsoft"), 1
+        )
+    ]
     queries: list[str] = []
 
     def fake_search(_session, _api_key, payload):
@@ -138,7 +143,10 @@ def test_every_candidate_gets_round_one_before_any_round_two(monkeypatch) -> Non
     )
 
     assert len(queries) == 6
-    assert all(candidate["link"] in queries[index] for index, candidate in enumerate(candidates))
+    assert all(
+        candidate["link"] in queries[index]
+        for index, candidate in enumerate(candidates)
+    )
     assert enriched["report"]["candidate_processed_count"] == 4
     assert enriched["report"]["total_calls"] == 6
     assert enriched["report"]["refill_calls"] == 0
@@ -202,7 +210,9 @@ def test_lead_without_same_event_evidence_never_enters_main_news(monkeypatch) ->
     )
 
 
-def test_evidence_packet_is_structured_bounded_and_keeps_story_identity(monkeypatch) -> None:
+def test_evidence_packet_is_structured_bounded_and_keeps_story_identity(
+    monkeypatch,
+) -> None:
     direct = story(1)
     calls = 0
 
@@ -213,7 +223,9 @@ def test_evidence_packet_is_structured_bounded_and_keeps_story_identity(monkeypa
             "latency_ms": 5.0,
             "response": {
                 "results": [
-                    result_for(direct, suffix=f"{calls}-{index}", score=0.9 - index / 100)
+                    result_for(
+                        direct, suffix=f"{calls}-{index}", score=0.9 - index / 100
+                    )
                     for index in range(4)
                 ]
             },
