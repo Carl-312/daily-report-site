@@ -148,7 +148,8 @@ enrichment.enabled: true
 - `enabled`：默认是否启用 Tavily；缺少密钥时会降级并输出 `missing_api_key`，不会阻断已有直接故事。
 - `min_articles`：旧版补量兼容字段；当前为 0，主新闻不设最低条数。
 - `strict_hours`：严格时间窗，当前目标是 24 小时，不为凑数量放宽。
-- `max_total_calls`：每日 Tavily 硬上限 30 次；候选先各执行第一轮，剩余预算再执行第二轮。
+- `max_total_calls`：每日 Tavily 硬上限 30 次，同时限制正式候选队列最多 30 条；候选先各执行
+  第一轮，剩余预算再执行第二轮。
 - `max_verify_calls` / `max_refill_rounds`：旧版兼容字段，生产值均为 0。
 - `lead_search_rounds`：Lead 与直接 Story 的统一搜索轮次上限，当前为 2。
 - `lead_search_depth` / `lead_max_age_hours`：候选增强使用 advanced 搜索和 72 小时时间窗。

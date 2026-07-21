@@ -257,3 +257,29 @@ def test_daily_budget_is_hard_capped_at_thirty(monkeypatch) -> None:
     assert enriched["report"]["candidate_processed_count"] == 20
     assert len(enriched["articles"]) == 20
     assert enriched["report"]["refill_calls"] == 0
+
+
+def test_metadata_admission_caps_the_queue_so_every_candidate_is_searched(
+    monkeypatch,
+) -> None:
+    candidates = [story(index, entity=f"Vendor{index}") for index in range(31)]
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: {"latency_ms": 1.0, "response": {"results": []}},
+    )
+    enriched = enrich_articles_with_tavily(
+        candidates,
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=30),
+        tavily_api_key="key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert enriched["report"]["input_count"] == 31
+    assert enriched["report"]["candidate_queue_count"] == 30
+    assert enriched["report"]["candidate_processed_count"] == 30
+    assert enriched["report"]["candidate_dropped_count"] == 1
+    assert enriched["report"]["total_calls"] == 30
+    assert len(enriched["articles"]) == 30

@@ -6,6 +6,7 @@ Summarizes news articles into daily reports.
 from __future__ import annotations
 import json
 from datetime import datetime
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 import re
 from typing import Any
@@ -202,15 +203,37 @@ _SOURCE_CLAIM_ANCHORS = (
     ),
 )
 _ARABIC_NUMBER_CLAIM = re.compile(
-    r"(?<![A-Za-z0-9])\d+(?:[,.，]\d+)*(?:\.\d+)?(?:%|％|万|亿|百万|千万)?"
+    r"(?<![A-Za-z0-9])"
+    r"(?P<number>\d+(?:[,.，]\d+)*)"
+    r"\s*(?P<unit>trillion|billion|million|thousand|%|％|万|亿|百万|千万)?",
+    re.IGNORECASE,
 )
+_NUMBER_MULTIPLIERS = {
+    "thousand": Decimal("1000"),
+    "万": Decimal("10000"),
+    "million": Decimal("1000000"),
+    "百万": Decimal("1000000"),
+    "千万": Decimal("10000000"),
+    "亿": Decimal("100000000"),
+    "billion": Decimal("1000000000"),
+    "trillion": Decimal("1000000000000"),
+}
 
 
 def _normalized_number_claims(value: str) -> set[str]:
-    return {
-        match.group(0).replace(",", "").replace("，", "").replace("％", "%")
-        for match in _ARABIC_NUMBER_CLAIM.finditer(value)
-    }
+    claims: set[str] = set()
+    for match in _ARABIC_NUMBER_CLAIM.finditer(value):
+        raw_number = match.group("number").replace(",", "").replace("，", "")
+        unit = (match.group("unit") or "").lower().replace("％", "%")
+        try:
+            number = Decimal(raw_number)
+        except InvalidOperation:
+            continue
+        if unit in _NUMBER_MULTIPLIERS:
+            number *= _NUMBER_MULTIPLIERS[unit]
+        normalized = format(number.normalize(), "f")
+        claims.add(f"{normalized}%" if unit == "%" else normalized)
+    return claims
 
 
 def _strip_json_fence(content: str) -> str:

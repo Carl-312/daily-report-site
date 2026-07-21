@@ -1049,7 +1049,7 @@ def enrich_articles_with_tavily(
 ) -> dict[str, Any]:
     """Enrich the fetch-selected queue without introducing refill stories."""
 
-    from utils.lead_resolution import run_candidate_enrichment_stage
+    from utils.lead_resolution import build_candidate_queue, run_candidate_enrichment_stage
 
     article_dicts = [article_to_dict(article) for article in articles]
     reference_dt = reference_dt or datetime.now(tz=REPORT_TIMEZONE)
@@ -1063,13 +1063,21 @@ def enrich_articles_with_tavily(
     partition = partition_articles_for_publication(article_dicts)
     stories = partition["stories"]
     leads = partition["leads"]
-    candidates = stories + leads
+    all_candidates = build_candidate_queue(stories + leads)
+    daily_budget = max(0, min(30, int(settings.max_total_calls)))
+    candidates = all_candidates[:daily_budget]
+    dropped_candidates = all_candidates[daily_budget:]
     report.update(
         {
             "input_story_count": len(stories),
             "input_lead_count": len(leads),
             "publishability_rejected": partition["rejected"],
             "candidate_queue_count": len(candidates),
+            "candidate_dropped_count": len(dropped_candidates),
+            "candidate_dropped": [
+                observation_signal(candidate, "candidate_daily_budget_cap")
+                for candidate in dropped_candidates
+            ],
             "candidate_processed_count": 0,
             "candidate_enrichment_calls": 0,
             "candidate_enrichment_runs": [],
@@ -1103,7 +1111,7 @@ def enrich_articles_with_tavily(
             session=session,
             api_key=tavily_api_key,
             reference_dt=reference_dt,
-            remaining_budget=max(0, min(30, int(settings.max_total_calls))),
+            remaining_budget=daily_budget,
             deadline_at=deadline_at,
         )
         final_partition = partition_articles_for_publication(stage["articles"])
