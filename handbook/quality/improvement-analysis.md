@@ -26,7 +26,7 @@
 - `summarizer.py` 已为候选注入短 `article_id`，`SummaryResult` 和本地 renderer 负责摘要来源、独立条数上限与源 URL 校验；一个来源可被多个独立新闻条目引用。
 - `utils/dedupe.py` 已做 canonical URL、跟踪参数/片段清理和明显跨来源故事去重，并按优先级保留候选。
 
-提交 `adc9bf0` 的本地回归为 `85 passed`，2026-07-13 的 [Actions preview run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 验证了旧版 2 条输入生成 2 条摘要。本轮改造后，摘要数量改由独立 `max_summary_items` 控制，允许聚合来源拆分；仍需通过当天产物审查防止不同条目重复同一事实。
+提交 `adc9bf0` 的本地回归为 `85 passed`，2026-07-13 的 [Actions preview run 29238871654](https://github.com/Carl-312/daily-report-site/actions/runs/29238871654) 验证了旧版 2 条输入生成 2 条摘要。本轮改造后，摘要的每日目标和上限由 `max_summary_items=10` 统一控制，候选不足时允许更少；仍需通过当天产物审查防止不同条目重复同一事实。
 
 ## 2. 分析范围
 

@@ -8,6 +8,7 @@ import build
 from main import stage_and_publish_run
 from utils.publication import create_run_workspace
 from utils.summary_contracts import SummaryItem, SummaryResult
+from summarizer import offline_summary_result
 
 
 def test_build_failure_does_not_overwrite_public_report_artifacts(
@@ -82,6 +83,36 @@ def test_equivalent_edition_is_a_noop_without_rebuilding_site(
     assert second == (first_json, first_markdown)
     assert first_json.stat().st_mtime_ns == before_json
     assert first_markdown.stat().st_mtime_ns == before_markdown
+
+
+def test_zero_story_run_publishes_a_same_day_empty_edition(tmp_path) -> None:
+    cfg = SimpleNamespace(
+        data_dir=str(tmp_path / "data"),
+        content_dir=str(tmp_path / "content"),
+        site_dir=str(tmp_path / "dist"),
+        max_summary_items=10,
+    )
+    summary = offline_summary_result([])
+    markdown = "🔥（2026年07月21日）每日AI资讯一览✨\n\n今日没有达到证据门槛的主新闻。"
+
+    json_path, markdown_path = stage_and_publish_run(
+        cfg,
+        create_run_workspace(tmp_path / ".runs", "2026-07-21", "empty"),
+        "2026-07-21",
+        {
+            "date": "2026-07-21",
+            "articles": [],
+            "enrichment": {"final_count": 0},
+            "summary": summary.model_dump(mode="json"),
+        },
+        markdown,
+    )
+
+    assert json_path.name == "2026-07-21.json"
+    assert (
+        markdown_path.read_text(encoding="utf-8").find("今日没有达到证据门槛的主新闻")
+        != -1
+    )
 
 
 def test_publication_rejects_a_legacy_model_selected_summary(tmp_path) -> None:

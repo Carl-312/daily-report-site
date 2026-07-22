@@ -224,6 +224,13 @@ def convert_ol_to_paragraphs(html: str) -> str:
     return re.sub(r"<ol>(.+?)</ol>", replace_ol, html, flags=re.DOTALL)
 
 
+def decorate_report_footer(html: str) -> str:
+    """Give deterministic report-footer lines their own visual roles."""
+
+    html = html.replace("<p>💬 互动话题：", '<p class="discussion-topic">💬 互动话题：')
+    return html.replace("<p>入选来源：", '<p class="source-attribution">入选来源：')
+
+
 def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
     """Build a single article HTML from a markdown file."""
     content = md_path.read_text(encoding="utf-8")
@@ -235,6 +242,7 @@ def build_article(md_path: Path, base_path: str = "") -> dict[str, str]:
         extensions=["tables", "fenced_code", "codehilite", "toc"],
     )
     html_content = convert_ol_to_paragraphs(html_content)
+    html_content = decorate_report_footer(html_content)
     html_content = _sanitize_link_schemes(html_content)
 
     date = meta.get("date") or md_path.stem

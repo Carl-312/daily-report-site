@@ -15,7 +15,7 @@ on:
         default: false
         type: boolean
       enable_tavily:
-        description: "Force-enable Tavily enrichment (scheduled runs follow config.yaml)"
+        description: "Force-enable Tavily enrichment (scheduled gray runs always enable it)"
         required: false
         default: false
         type: boolean
@@ -34,10 +34,17 @@ on:
         required: false
         default: false
         type: boolean
+      deploy_gray_pages:
+        description: "Deploy an accepted publish=false preview to the isolated gray Pages site"
+        required: false
+        default: false
+        type: boolean
   schedule:
-    # GitHub Actions cron uses UTC. Use a non-zero minute to reduce schedule delays
-    # that commonly happen around the start of the hour. 00:36 UTC = 08:36 Asia/Shanghai.
+    # Production generation remains at 00:36 UTC (08:36 Asia/Shanghai).
     - cron: "36 0 * * *"
+    # Generate and deploy the formal gray edition every day at 14:00 Shanghai time.
+    - cron: "0 14 * * *"
+      timezone: "Asia/Shanghai"
 
 permissions:
   contents: write
@@ -65,8 +72,24 @@ jobs:
         id: publish-mode
         shell: bash
         env:
-          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.publish) }}
+          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event.schedule == '36 0 * * *' || inputs.publish) }}
+          REQUEST_GRAY_PAGES: ${{ github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages || false }}
+          SKIP_GENERATE: ${{ inputs.skip_generate || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
         run: |
+          if [ "$REQUEST_GRAY_PAGES" = "true" ]; then
+            if [ "$SHOULD_PUBLISH" = "true" ]; then
+              echo "::error::Gray Pages and production Pages cannot be deployed in the same run"
+              exit 1
+            fi
+            if [ "$SKIP_GENERATE" = "true" ] || [ "$ENABLE_TAVILY" != "true" ] || [ "$ENABLE_AGIHUNT_TRENDING" != "true" ]; then
+              echo "::error::Formal gray Pages requires skip_generate=false, enable_tavily=true, enable_agihunt_trending=true, publish=false"
+              exit 1
+            fi
+            echo "Formal gray Pages deployment requested"
+          fi
+
           if [ "$SHOULD_PUBLISH" = "true" ]; then
             echo "publish=true" >> "$GITHUB_OUTPUT"
             echo "Publishing generated content and GitHub Pages deployment is enabled"
@@ -89,31 +112,29 @@ jobs:
         if: ${{ !inputs.skip_generate }}
         shell: bash
         env:
-          ENABLE_TAVILY: ${{ inputs.enable_tavily || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
           ENABLE_AGIHUNT: ${{ inputs.enable_agihunt || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ inputs.enable_agihunt_trending || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
           PUBLISH_MODE: ${{ steps.publish-mode.outputs.publish }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           AGIHUNT_API_KEY: ${{ secrets.AGIHUNT_API_KEY }}
-          # Scheduled runs use config.yaml's default-on enrichment. A missing
-          # secret is fail-open and appears as a stable page diagnostic code.
+          # Scheduled gray runs force-enable enrichment. A missing secret is
+          # fail-open and appears as a stable page diagnostic code.
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: |
           ENRICHMENT_ARGS=()
           SOURCE_ARGS=()
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ "$ENABLE_TAVILY" = "true" ]; then
-              ENRICHMENT_ARGS=(--enrichment on)
-              if [ -z "$TAVILY_API_KEY" ]; then
-                echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
-              else
-                echo "Tavily enrichment explicitly enabled for this manual run"
-              fi
+          if [ "$ENABLE_TAVILY" = "true" ]; then
+            ENRICHMENT_ARGS=(--enrichment on)
+            if [ -z "$TAVILY_API_KEY" ]; then
+              echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
             else
-              ENRICHMENT_ARGS=(--enrichment off)
-              echo "Tavily enrichment explicitly disabled for this manual run"
+              echo "Tavily enrichment enabled for this run"
             fi
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            ENRICHMENT_ARGS=(--enrichment off)
+            echo "Tavily enrichment explicitly disabled for this manual run"
           fi
 
           if [ "$ENABLE_AGIHUNT" = "true" ]; then
@@ -129,21 +150,19 @@ jobs:
             echo "AGIHunt explicitly enabled for this shadow run"
           fi
 
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
-              SOURCE_ARGS+=(--agihunt-trending on)
-              CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
-              if [ -z "$CHROME_BIN" ]; then
-                echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
-              else
-                export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
-                "$CHROME_BIN" --version
-              fi
-              echo "AGI Hunt Trending explicitly enabled for this run"
+          if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
+            SOURCE_ARGS+=(--agihunt-trending on)
+            CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
+            if [ -z "$CHROME_BIN" ]; then
+              echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
             else
-              SOURCE_ARGS+=(--agihunt-trending off)
-              echo "AGI Hunt Trending explicitly disabled for this manual run"
+              export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
+              "$CHROME_BIN" --version
             fi
+            echo "AGI Hunt Trending explicitly enabled for this run"
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            SOURCE_ARGS+=(--agihunt-trending off)
+            echo "AGI Hunt Trending explicitly disabled for this manual run"
           fi
 
           if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
@@ -162,7 +181,7 @@ jobs:
 
       - name: Validate AGI Hunt Trending health
         if: ${{ !inputs.skip_generate && success() && (github.event_name != 'workflow_dispatch' || inputs.enable_agihunt_trending) }}
-        continue-on-error: true
+        continue-on-error: ${{ github.event.schedule != '0 14 * * *' && !inputs.deploy_gray_pages }}
         run: >
           python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
           --output agihunt-trending-health.json
@@ -302,3 +321,89 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-gray-pages:
+    if: >-
+      (github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages) &&
+      needs.generate-and-deploy.result == 'success' &&
+      needs.generate-and-deploy.outputs.publish != 'true'
+    environment:
+      name: gray-pages
+      url: https://carl-312.github.io/daily-report-site-gray/
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    needs: generate-and-deploy
+
+    steps:
+      - name: Download the accepted preview artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: daily-report-preview-${{ github.run_id }}
+          path: preview
+
+      - name: Validate gray site payload
+        shell: bash
+        run: |
+          test -f preview/dist/index.html
+          test -f preview/agihunt-trending-health.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          health = json.loads(
+              Path("preview/agihunt-trending-health.json").read_text(encoding="utf-8")
+          )
+          if health.get("healthy") is not True:
+              raise SystemExit("AGI Hunt Trending health did not pass")
+          PY
+
+      - name: Configure isolated gray Pages deploy key
+        shell: bash
+        env:
+          GRAY_PAGES_DEPLOY_KEY: ${{ secrets.GRAY_PAGES_DEPLOY_KEY }}
+        run: |
+          if [ -z "$GRAY_PAGES_DEPLOY_KEY" ]; then
+            echo "::error::GRAY_PAGES_DEPLOY_KEY is required"
+            exit 1
+          fi
+          install -d -m 0700 "$HOME/.ssh"
+          install -m 0600 /dev/null "$HOME/.ssh/gray_pages_deploy_key"
+          printf '%s\n' "$GRAY_PAGES_DEPLOY_KEY" > "$HOME/.ssh/gray_pages_deploy_key"
+          ssh-keyscan -t ed25519 github.com > "$HOME/.ssh/known_hosts"
+
+      - name: Deploy the preview dist to isolated Pages repository
+        shell: bash
+        env:
+          GRAY_PAGES_REPOSITORY: Carl-312/daily-report-site-gray
+        run: |
+          export GIT_SSH_COMMAND="ssh -i $HOME/.ssh/gray_pages_deploy_key -o IdentitiesOnly=yes"
+          git init gray-site
+          git -C gray-site remote add origin "git@github.com:$GRAY_PAGES_REPOSITORY.git"
+          if git -C gray-site fetch --depth=1 origin gh-pages; then
+            git -C gray-site checkout -B gh-pages FETCH_HEAD
+          else
+            git -C gray-site checkout --orphan gh-pages
+          fi
+
+          rsync --archive --delete --exclude=.git preview/dist/ gray-site/
+          touch gray-site/.nojekyll
+          cat > gray-site/gray-build.json <<EOF
+          {
+            "source_repository": "${GITHUB_REPOSITORY}",
+            "source_sha": "${GITHUB_SHA}",
+            "source_run_id": "${GITHUB_RUN_ID}",
+            "source_artifact": "daily-report-preview-${GITHUB_RUN_ID}",
+            "channel": "formal_gray"
+          }
+          EOF
+
+          git -C gray-site config user.name "GitHub Actions Bot"
+          git -C gray-site config user.email "actions@github.com"
+          git -C gray-site add -A
+          if git -C gray-site diff --cached --quiet; then
+            echo "Gray Pages already matches this artifact"
+          else
+            git -C gray-site commit -m "Gray preview from ${GITHUB_REPOSITORY}@${GITHUB_SHA}"
+            git -C gray-site push origin HEAD:gh-pages
+          fi

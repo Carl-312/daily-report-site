@@ -258,6 +258,23 @@ section h2 {
   color: var(--text-secondary);
 }
 
+.markdown-body .discussion-topic {
+  margin: 2rem 0 0;
+  padding: 1rem 1.125rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.markdown-body .source-attribution {
+  margin: 1.25rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
 .markdown-body ul,
 .markdown-body ol {
   margin: 1rem 0;

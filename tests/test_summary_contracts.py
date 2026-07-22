@@ -14,9 +14,7 @@ from utils.summary_contracts import (
 from summarizer import offline_summary_result
 
 
-def test_structured_summary_renders_fact_and_direct_source_without_article_ids() -> (
-    None
-):
+def test_structured_summary_renders_only_reader_text_without_private_metadata() -> None:
     input_hash, prompt_hash = fingerprint_summary_input(
         [{"title": "AI launch", "link": "https://example.test/a"}], "prompt"
     )
@@ -38,9 +36,8 @@ def test_structured_summary_renders_fact_and_direct_source_without_article_ids()
     )
 
     assert render_summary_markdown(result) == (
-        "### 1. AI launch\n\n"
-        "发生了什么：人工智能产品发布新能力，帮助开发者提升工作效率。\n\n"
-        "来源：[example.test](https://example.test/a)\n\n"
+        "1. 人工智能产品发布新能力，帮助开发者提升工作效率。\n"
+        "\n"
         "💬 互动话题：你会如何使用这项能力？"
     )
 
@@ -65,12 +62,11 @@ def test_renderer_removes_links_from_untrusted_offline_text() -> None:
 
     rendered = render_summary_markdown(result)
 
-    assert rendered.count("https://") == 1
-    assert "[example.test](https://example.test/a)" in rendered
+    assert "https://" not in rendered
     assert "www.example.test" not in rendered
     assert "[a1]" not in rendered
-    assert "### 1. AI launch" in rendered
-    assert "发生了什么：详情见，发布了新能力。" in rendered
+    assert "AI launch" not in rendered
+    assert "1. 详情见，发布了新能力。" in rendered
 
 
 def test_summary_fingerprints_are_stable_for_identical_input() -> None:
@@ -128,8 +124,7 @@ def test_trending_signal_stays_private_and_is_not_rendered() -> None:
 
     assert "display_badge" not in result.items[0].model_dump()
     rendered = render_summary_markdown(result)
-    assert rendered.startswith("### 1. 月之暗面 Kimi K3 发布引关注")
-    assert "发生了什么：月之暗面发布 Kimi K3" in rendered
+    assert rendered.startswith("1. 月之暗面发布 Kimi K3")
     assert "AGI趋势" not in rendered
     assert "热度" not in rendered
     assert "↑" not in rendered

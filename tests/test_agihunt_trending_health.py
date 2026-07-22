@@ -94,4 +94,43 @@ def test_health_rejects_rank_drift(tmp_path) -> None:
     result = evaluate_trending_run(manifest(articles), data_dir=data_dir)
 
     assert result["healthy"] is False
-    assert "Trending ranks must be contiguous from 1 through 15" in result["errors"]
+    assert (
+        "Trending ranks must be contiguous from 1 through row_count" in result["errors"]
+    )
+
+
+def test_health_accepts_a_partial_degraded_snapshot_with_private_destinations(
+    tmp_path,
+) -> None:
+    articles = [article(rank) for rank in range(1, 13)]
+    run_manifest = manifest(articles)
+    source = run_manifest["sources"][0]
+    source.update(
+        {
+            "status": "degraded",
+            "accepted_count": 12,
+            "fetched_count": 12,
+        }
+    )
+    source["diagnostics"][0]["details"][1] = ["row_count", "12"]
+    data_dir = tmp_path / "data"
+    data_dir.mkdir()
+    (data_dir / "2026-07-18.json").write_text(
+        json.dumps(
+            {
+                "articles": [],
+                "enrichment": {
+                    "observation_signals": [
+                        {"signal_url": item["link"]} for item in articles[:11]
+                    ],
+                    "candidate_dropped": [{"signal_url": articles[11]["link"]}],
+                },
+                "summary": {"items": []},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = evaluate_trending_run(run_manifest, data_dir=data_dir)
+
+    assert result["healthy"] is True

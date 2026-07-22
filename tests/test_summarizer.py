@@ -82,18 +82,12 @@ def _summary_with_sources(source_ids: list[str]) -> str:
 def _rendered_summary(item_count: int = 1) -> str:
     lines = []
     for index in range(1, item_count + 1):
-        lines.extend(
-            [
-                f"### {index}. Story",
-                "",
-                "发生了什么：发布重要产品更新，新增多项面向开发者的核心能力，"
-                "推动行业应用持续扩展并进一步提升团队的实际工作效率。",
-                "",
-                "为什么重要：这会降低开发团队采用相关能力的门槛，并改变产品迭代效率。",
-                "",
-            ]
+        lines.append(
+            f"{index}. 发布重要产品更新，新增多项面向开发者的核心能力，"
+            "推动行业应用持续扩展并进一步提升团队的实际工作效率。"
+            "这会降低开发团队采用相关能力的门槛，并改变产品迭代效率。"
         )
-    lines.append("💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！")
+    lines.extend(["", "💬 互动话题：你最关注哪条AI新闻？欢迎留言分享你的看法！"])
     return "\n".join(lines)
 
 
@@ -167,6 +161,49 @@ def test_source_grounding_accepts_a_claim_present_in_the_article() -> None:
             }
         },
     )
+
+
+def test_source_grounding_rejects_a_number_missing_from_evidence() -> None:
+    content = json.dumps(
+        {
+            "items": [
+                {
+                    "article_id": "a1",
+                    "summary": (
+                        "该公司发布开发者工具，并宣布投入500亿美元扩大产品覆盖范围。"
+                    ),
+                    "why_it_matters": "这会提高企业采用相关开发能力的成本门槛。",
+                }
+            ]
+        },
+        ensure_ascii=False,
+    )
+    draft = summarizer.validate_summary_quality(
+        content,
+        expected_items=1,
+        expected_article_ids=("a1",),
+        require_impact=True,
+    )
+
+    with pytest.raises(summarizer.SummaryQualityError, match="unsupported numeric"):
+        summarizer.validate_summary_source_grounding(
+            draft,
+            {
+                "a1": {
+                    "title": "Company releases developer tools",
+                    "description": "The company released tools for teams.",
+                }
+            },
+        )
+
+
+def test_number_grounding_normalizes_abbreviations_units_and_english_words() -> None:
+    supported = summarizer._normalized_number_claims(
+        "The company raised $15M after six months; another deal was $1.5 billion."
+    )
+
+    assert {"15000000", "6", "1500000000"} <= supported
+    assert summarizer._normalized_number_claims("1500万、6个月、15亿元") <= supported
 
 
 def test_provider_candidates_use_modelscope_secondary_before_siliconflow(
@@ -470,7 +507,7 @@ def test_offline_summary_does_not_expand_candidate_count() -> None:
     summary = summarizer.offline_summary(articles)
 
     assert len(summarizer._numbered_items(summary)) == 4
-    assert summary.count("https://example.test/") == 4
+    assert "https://example.test/" not in summary
 
 
 def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None:

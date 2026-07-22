@@ -702,7 +702,7 @@ def test_one_run_agihunt_override_does_not_mutate_config_sources() -> None:
     assert config.sources["agihunt"] is False
 
 
-def test_agihunt_attribution_is_added_without_changing_summary_facts() -> None:
+def test_agihunt_public_markdown_shows_source_label_without_private_metadata() -> None:
     result = SummaryResult(
         policy="offline",
         items=(
@@ -733,7 +733,7 @@ def test_agihunt_attribution_is_added_without_changing_summary_facts() -> None:
         result,
     )
 
-    assert "入选来源：AGI HUNT · agihunt.info" in content
+    assert "入选来源：AGI HUNT · agihunt.info。" in content
     assert "[原帖](https://example.test/story)" in content
 
 

@@ -28,7 +28,7 @@ if str(_REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPOSITORY_ROOT))
 
 from config import Settings, load_config
-from main import selected_source_attribution_line, stage_and_publish_run
+from main import compose_report_content, stage_and_publish_run
 from sources import Article, fetch_batch
 from summarizer import offline_summary_result, summarize_result
 from utils.dedupe import dedupe
@@ -190,7 +190,7 @@ def private_candidate_artifact(
 def reader_visibility_check(
     site_dir: Path, articles: list[dict[str, Any]]
 ) -> dict[str, Any]:
-    """Allow direct source URLs while keeping private summary IDs out of HTML."""
+    """Keep direct source URLs and private summary IDs out of reader HTML."""
 
     pages = sorted(site_dir.glob("*.html"))
     rendered = "\n".join(path.read_text(encoding="utf-8") for path in pages)
@@ -208,7 +208,7 @@ def reader_visibility_check(
         "source_url_count": len(source_urls),
         "exposed_source_urls": exposed_urls,
         "exposed_article_ids": exposed_article_ids,
-        "safe": bool(pages) and not exposed_article_ids,
+        "safe": bool(pages) and not exposed_article_ids and not exposed_urls,
     }
 
 
@@ -395,15 +395,11 @@ def run_isolated_gray(
         raise RuntimeError("AGIHunt exploration request budget exceeded")
 
     title = f"🔥（{clock.report_date_cn}）每日AI资讯一览✨"
-    public_content = "\n\n".join(
-        filter(
-            None,
-            (
-                title,
-                selected_source_attribution_line(summary_result, article_dicts),
-                render_summary_markdown(summary_result),
-            ),
-        )
+    public_content = compose_report_content(
+        title,
+        render_summary_markdown(summary_result),
+        article_dicts,
+        summary_result,
     )
     stage_and_publish_run(
         cfg,

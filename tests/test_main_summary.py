@@ -124,6 +124,70 @@ def test_source_attribution_lists_only_selected_sources() -> None:
 
     attribution = daily_main.selected_source_attribution_line(result, articles)
 
-    assert attribution == "> 入选来源：TechCrunch。"
+    assert attribution == "入选来源：TechCrunch。"
     assert "AGI HUNT" not in attribution
     assert "The Verge" not in attribution
+
+
+def test_source_attribution_turns_selected_domains_into_reader_labels() -> None:
+    result = _valid_summary_result().model_copy(
+        update={
+            "items": (
+                SummaryItem(
+                    article_id="a1",
+                    title="Selected Reuters candidate",
+                    summary="Reuters 的候选新闻已进入最终日报正文。",
+                    url="https://www.reuters.com/story",
+                ),
+                SummaryItem(
+                    article_id="a2",
+                    title="Selected New York Post candidate",
+                    summary="New York Post 的候选新闻已进入最终日报正文。",
+                    url="https://nypost.com/story",
+                ),
+            )
+        }
+    )
+
+    attribution = daily_main.selected_source_attribution_line(
+        result,
+        [
+            {
+                "title": "Selected Reuters candidate",
+                "source": "www.reuters.com",
+                "link": "https://www.reuters.com/story",
+            },
+            {
+                "title": "Selected New York Post candidate",
+                "source": "nypost.com",
+                "link": "https://nypost.com/story",
+            },
+        ],
+    )
+
+    assert attribution == "入选来源：Reuters、New York Post。"
+
+
+def test_public_report_appends_selected_sources_but_omits_private_diagnostics() -> None:
+    result = _valid_summary_result()
+    content = daily_main.compose_report_content(
+        "日报标题",
+        "1. 中文事实句。中文意义句。",
+        [
+            {
+                "title": "English original headline",
+                "source": "techcrunch",
+                "link": "",
+            }
+        ],
+        result,
+        observation_signals=[{"title": "Private signal"}],
+        pipeline_diagnostics={"status": "degraded"},
+    )
+
+    assert content == (
+        "日报标题\n\n1. 中文事实句。中文意义句。\n\n入选来源：TechCrunch。"
+    )
+    assert "English original headline" not in content
+    assert "Private signal" not in content
+    assert "degraded" not in content

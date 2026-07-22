@@ -97,17 +97,24 @@ def article_source_label(article: dict) -> str:
     """Return a truthful reader-facing label for one selected candidate."""
 
     source = str(article.get("source") or "").strip().lower()
+    hostname = (urlsplit(str(article.get("link") or "")).hostname or "").lower()
     labels = {
         "agihunt": "AGI HUNT · agihunt.info",
         "agihunt_trending": "AGI HUNT · agihunt.info",
         "aibase": "AIBase",
         "techcrunch": "TechCrunch",
+        "techcrunch.com": "TechCrunch",
         "theverge": "The Verge",
+        "theverge.com": "The Verge",
+        "www.theverge.com": "The Verge",
+        "reuters.com": "Reuters",
+        "www.reuters.com": "Reuters",
+        "nypost.com": "New York Post",
+        "www.nypost.com": "New York Post",
         "syft": "Syft",
     }
-    if source in labels:
-        return labels[source]
-    hostname = (urlsplit(str(article.get("link") or "")).hostname or "").lower()
+    if source in labels or hostname in labels:
+        return labels.get(source) or labels[hostname]
     return hostname.removeprefix("www.") or source
 
 
@@ -327,6 +334,20 @@ def _number_keys(article: dict) -> tuple[str, ...]:
 def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
     provenance = article.get("provenance")
     provenance = provenance if isinstance(provenance, dict) else {}
+    if "selection_title" in provenance:
+        analysis = analyze_editorial_text(
+            str(provenance.get("selection_title") or ""),
+            "\n".join(
+                part
+                for part in (
+                    str(provenance.get("selection_description") or "").strip(),
+                    str(provenance.get("selection_content") or "").strip(),
+                )
+                if part
+            ),
+        )
+    else:
+        analysis = analyze_article(article)
     return _EditorialCandidate(
         article_id=article_reference_id(article, index),
         original_index=index,
@@ -336,7 +357,7 @@ def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
         priority=_safe_int(article.get("priority"), 0),
         trend_rank=_safe_int(provenance.get("trend_rank"), 1_000_000),
         trend_heat=_safe_float(provenance.get("trend_heat"), 0.0),
-        analysis=analyze_article(article),
+        analysis=analysis,
         number_keys=_number_keys(article),
     )
 

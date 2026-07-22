@@ -7,7 +7,6 @@ import html
 import json
 import re
 from typing import Any, Literal
-from urllib.parse import quote, urlparse
 
 from pydantic import Field
 
@@ -268,7 +267,7 @@ def fingerprint_summary_input(articles: list[dict], prompt: str) -> tuple[str, s
 
 
 def render_summary_markdown(result: SummaryResult) -> str:
-    """Render fact, consequence and locally bound direct evidence."""
+    """Render only the reader-facing Chinese fact and consequence sentences."""
 
     def public_text(value: str) -> str:
         without_trends = _INTERNAL_TREND_BADGE.sub("", value)
@@ -278,46 +277,17 @@ def render_summary_markdown(result: SummaryResult) -> str:
         compact = " ".join(without_urls.replace("\n", " ").split())
         return re.sub(r"\s+([，。！？；：])", r"\1", compact)
 
-    def safe_url(value: str) -> str:
-        try:
-            parsed = urlparse(value.strip())
-        except ValueError:
-            return ""
-        if parsed.scheme not in {"http", "https"} or not parsed.netloc:
-            return ""
-        return quote(value.strip(), safe=":/?&=%#@+;,.-_~")
-
     lines: list[str] = []
     if not result.items:
-        lines.append("今日没有达到直接证据门槛的主新闻。")
+        lines.append("今日没有达到证据门槛的主新闻。")
     for index, item in enumerate(result.items, 1):
-        title = public_text(item.title).replace("#", "＃")
         summary = public_text(item.summary).replace("：", "，").replace(":", "，")
         impact = public_text(item.why_it_matters)
-        lines.extend([f"### {index}. {title}", "", f"发生了什么：{summary}"])
-        if impact:
-            lines.extend(["", f"为什么重要：{impact}"])
-        url = safe_url(item.url)
-        source_label = public_text(item.source_label) or (
-            urlparse(url).netloc.removeprefix("www.") if url else ""
-        )
-        source_bits: list[str] = []
-        if url and source_label:
-            safe_label = source_label.replace("[", "［").replace("]", "］")
-            source_bits.append(f"[{safe_label}]({url})")
-        elif source_label:
-            source_bits.append(source_label)
-        if item.published_at:
-            source_bits.append(public_text(item.published_at))
-        confidence_labels = {
-            "corroborated": "多源印证",
-            "reported": "单源报道",
-            "direct": "直接来源",
-        }
-        if source_bits and item.confidence in confidence_labels:
-            source_bits.append(confidence_labels[item.confidence])
-        if source_bits:
-            lines.extend(["", "来源：" + " · ".join(source_bits)])
-        lines.append("")
-    lines.extend([f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"])
+        sentences = f"{summary}{impact}" if impact else summary
+        lines.append(f"{index}. {sentences}")
+    # A blank line is required here: without it, Markdown treats the topic as
+    # part of the final numbered item and renders both inside one paragraph.
+    lines.extend(
+        ["", f"💬 互动话题：{html.escape(public_text(result.discussion_topic))}"]
+    )
     return "\n".join(lines)

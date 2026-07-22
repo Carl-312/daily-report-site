@@ -41,11 +41,11 @@ python scripts/manage_retention.py bundle --keep-days 7
 
 ### 摘要来源映射、条数或字数超限
 
-当前契约先按 `max_summary_items` 生成确定性短名单；没有候选时应显示“暂无新闻”。模型必须按原顺序对每个短名单 `article_id` 输出一次，不能遗漏、重复、新增来源或编造事实。ID 与 URL 只保存在内部 `SummaryResult`/JSON 溯源数据，读者页面不会显示它们。
+当前契约先按 `max_summary_items=10` 生成确定性短名单，每日目标和上限均为 10 条；证据合格候选不足时允许更少，没有候选时应显示“暂无新闻”。模型必须按原顺序对每个短名单 `article_id` 输出一次，不能遗漏、重复、新增来源或编造事实。ID 与 URL 只保存在内部 `SummaryResult`/JSON 溯源数据，读者页面不会显示它们。
 
 排查当天 `data/YYYY-MM-DD.json`：
 
-- 看 `summary.items` 数量是否不超过 `max_summary_items`，并与 `candidate_article_ids` 数量一致。
+- 看 `summary.items` 数量是否在证据充足时达到 10 条、始终不超过 `max_summary_items=10`，并与 `candidate_article_ids` 数量一致。
 - 看 `summary.items[*].article_id` 是否与 `candidate_article_ids` 完全一致；重复、遗漏和改序都会阻断发布。
 - 看 `summary.selection_policy` 是否为 `source_balanced_v2`，并检查 `selection_diagnostics`：
   - `story_clusters` / `duplicate_story_rejected_count` 解释哪些跨源事件被合并；

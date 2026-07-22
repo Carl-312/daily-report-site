@@ -41,19 +41,20 @@
 
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
-- 触发：`workflow_dispatch`、定时任务
-- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本
-- 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
-- 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
+- 触发：`workflow_dispatch`、生产定时任务、每日正式灰度定时任务
+- 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本；`deploy_gray_pages` 将通过门禁的 preview artifact 发布到独立灰度 Pages
+- 定时：生产任务保留 `36 0 * * *`（UTC，对应上海时间 `08:36`）；正式灰度使用 `0 14 * * *` 和 `timezone: Asia/Shanghai`，每天上海时间 `14:00` 触发，页面在生成和健康检查通过后更新
+- 说明：14:00 定时事件只发布独立灰度 Pages，不提交生成内容、不归档、不触发生产 Pages；GitHub Actions 在整点高负载时可能延迟启动
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`
 - 关键步骤：
   1. 运行 `python main.py run` 或 `python main.py run --offline`
   2. `skip_generate=true` 时改为运行 `python main.py build`
   3. 摘要阶段必须满足独立新闻条数上限与来源 `article_id` 契约；失败时不生成越界或无输入映射的日报，同一来源可支撑多条独立新闻
-  4. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
-  5. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
+  4. 非 `main` 分支、`main` 上手动 `publish=false`，以及每日定时灰度，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布生产 Pages
+  5. 仅当 `main` 且为 `08:36` 生产定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
   6. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
+  7. 每日定时任务自动采用正式灰度输入；手动 `deploy_gray_pages=true` 时仍要求 `publish=false`、`skip_generate=false`、Tavily 与 Trending 同时开启。两种入口都以 Trending health 为硬门禁，通过后才将同一份 preview artifact 的 `dist/` 推送到独立灰度 Pages 仓库
 
 ## 必要配置
 
@@ -66,6 +67,7 @@
 | `MODELSCOPE_API_KEY` | ModelScope API Key |
 | `SILICONFLOW_API_KEY` | SiliconFlow API Key（可选，用作 LLM 备用供应商） |
 | `AGIHUNT_API_KEY` | AGIHunt Agent API Key（只在 `enable_agihunt=true` 时注入） |
+| `GRAY_PAGES_DEPLOY_KEY` | 只允许写入 `daily-report-site-gray` 的 SSH deploy key，用于正式灰度 Pages |
 
 两个 secret 都未配置时，部署 workflow 会自动退回离线模式。
 
@@ -78,8 +80,7 @@
 
 ### 2026-07-14 AGIHunt shadow 状态
 
-`AGIHUNT_API_KEY` 已配置为 Actions Secret 并成功用于非发布 shadow。最新的
-[run `29301983421`](https://github.com/Carl-312/daily-report-site/actions/runs/29301983421)
+`AGIHUNT_API_KEY` 已配置为 Actions Secret 并成功用于非发布 shadow。当时的第 1 天运行
 使用 `enable_agihunt=true`、`enable_tavily=false`、`publish=false`，通过生成与 health
 gate；preview artifact 根目录的 `agihunt-gray-health.json` 记录 `healthy: true`、
 source `ok`、13 个接受候选、5 次物理请求和 `publication_status: published`。该
@@ -88,13 +89,13 @@ source `ok`、13 个接受候选、5 次物理请求和 `publication_status: pub
 
 此结果是 7 天观察的第 1 天。历史运行中，ModelScope endpoint/token 不支持 Kimi K2.7
 Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/Hy3` 完成一次
-`publish=false` GitHub 灰度：
-[run `29305758611`](https://github.com/Carl-312/daily-report-site/actions/runs/29305758611)
-成功完成 health gate，仍为 source `ok`、13 个接受候选、5 次物理请求，且没有发布或回写。
+`publish=false` GitHub 灰度，成功完成 health gate，仍为 source `ok`、13 个接受候选、
+5 次物理请求，且没有发布或回写。
 但摘要 provenance 记录当时的主 ModelScope 与 `Tencent-Hunyuan/Hy3` 都因空摘要触发
 `SummaryQualityError`，最终使用 SiliconFlow `Pro/moonshotai/Kimi-K2.6`。因此该模型
 尝试不计为可用验证，也不新增 7 天 shadow 的通过日。Hy3 现已从默认回退链移除；这不
 改变 AGIHunt 的独立灰度门槛。
+上述早期 shadow 的 GitHub Actions 运行记录已于 2026-07-21 按灰度清理删除。
 
 如果要手动灰度验证 Tavily enrichment，可额外配置：
 
@@ -102,7 +103,7 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 | --- | --- |
 | `TAVILY_API_KEY` | Tavily Search API Key |
 
-该 secret 注入生成任务；定时任务按 `config.yaml` 的默认开启策略使用它，手动任务由
+该 secret 注入生成任务；每日定时灰度强制使用 `--enrichment on`，手动任务由
 `enable_tavily` 显式决定 `--enrichment on/off`。未配置时，开启 Tavily 的运行仍会完成，并在
 页尾输出稳定诊断码。不要把真实 secret 写进文档、测试、fixture 或示例提交。
 
@@ -121,6 +122,41 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 ### GitHub Pages
 
 进入 `Settings -> Pages`，`Source` 选择 `GitHub Actions`。
+
+当前仓库的生产 Pages 仍为 `https://carl-312.github.io/daily-report-site/`。GitHub Pages
+每个仓库只能有一个站点，因此正式灰度发布到独立公开仓库
+`Carl-312/daily-report-site-gray` 的 `gh-pages` 分支，对应
+`https://carl-312.github.io/daily-report-site-gray/`。灰度 job 不调用 `actions/deploy-pages`，
+不使用生产 `github-pages` environment，也不改写本仓库的 Pages artifact。
+
+正式灰度手动输入固定为：
+
+```text
+skip_generate=false
+enable_tavily=true
+enable_agihunt=false
+enable_agihunt_trending=true
+publish=false
+deploy_gray_pages=true
+```
+
+每日定时入口等价于上述正式灰度输入（`enable_agihunt=false`），无需人工提供
+`workflow_dispatch` inputs；它不会隐式取得生产发布权限。
+
+灰度站点根目录的 `gray-build.json` 保留 source repository、commit、Actions run ID
+和 artifact 名，用于追溯当前在线灰度版本。
+
+### 当前正式灰度（2026-07-21）
+
+- 源提交：`0cbaef35569fcecf1620a0eae25379bf071f450e`
+- 源运行：[`29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019)
+- preview artifact：`daily-report-preview-29818465019`
+- 灰度 Pages 运行：[`29818600100`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29818600100)
+- 在线站点：[`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
+
+该运行发布 10 条新闻，Trending health 通过，生产 deploy 跳过。页面的互动话题独立成段，
+页尾“入选来源”按最终入选条目由代码生成。灰度清理后，GitHub 仅保留上述源运行、
+灰度 Pages 运行及对应 deployment；旧灰度运行和失活 deployment 已删除。
 
 ## 保留策略说明
 
@@ -182,7 +218,7 @@ GitHub Pages。它验证的是摘要边界和灰度生成链路，不代表 Tavi
 - `main` 上是否只保留最近 7 天的 `data/` / `content/`
 - 手动设置 `enable_tavily=true` 时，日志是否显示 `--enrichment on`
 - `data/YYYY-MM-DD.json` 是否包含可复盘的 `enrichment` 诊断
-- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且数量不超过 `max_summary_items`
+- `data/YYYY-MM-DD.json` 中 `summary.items[*].article_id` 是否均来自 `articles`，且在证据充足时达到每日目标 10 条、始终不超过 `max_summary_items=10`
 - 聚合来源是否能拆出多条有独立标题和摘要的新闻，同时没有重复事实
 - AGIHunt gray 时 `scripts/agihunt_gray_health.py` 已通过，preview artifact 根目录的
   去敏 `agihunt-gray-health.json` 显示健康；health gate 已核对 manifest 与 provenance

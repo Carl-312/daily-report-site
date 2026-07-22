@@ -6,6 +6,7 @@ Summarizes news articles into daily reports.
 from __future__ import annotations
 import json
 from datetime import datetime
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 import re
 from typing import Any
@@ -92,6 +93,20 @@ def compress_articles(articles: list[dict]) -> list[dict]:
             "title": (a.get("title") or "")[: cfg.title_max],
             "description": (a.get("description") or "")[: cfg.desc_max],
         }
+        evidence = a.get("evidence")
+        if isinstance(evidence, list):
+            item["evidence"] = [
+                {
+                    "title": str(entry.get("title") or "")[: cfg.title_max],
+                    "url": str(entry.get("url") or ""),
+                    "published_date": str(entry.get("published_date") or ""),
+                    "snippet": str(entry.get("snippet") or entry.get("text") or "")[
+                        : cfg.desc_max
+                    ],
+                }
+                for entry in evidence[:3]
+                if isinstance(entry, dict)
+            ]
         trend_signal = _trend_editorial_signal(a)
         if trend_signal is not None:
             item["trend_signal"] = trend_signal
@@ -187,6 +202,77 @@ _SOURCE_CLAIM_ANCHORS = (
         re.compile(r"融资|估值|funding|fundrais|valu(?:e|ed|ation)", re.IGNORECASE),
     ),
 )
+_ARABIC_NUMBER_CLAIM = re.compile(
+    r"(?<![A-Za-z0-9])"
+    r"(?P<number>\d+(?:[,.，]\d+)*)"
+    r"\s*(?P<unit>trillion|billion|million|thousand|bn|k|m|b|%|％|万|亿|百万|千万)?",
+    re.IGNORECASE,
+)
+_NUMBER_MULTIPLIERS = {
+    "k": Decimal("1000"),
+    "thousand": Decimal("1000"),
+    "万": Decimal("10000"),
+    "million": Decimal("1000000"),
+    "m": Decimal("1000000"),
+    "百万": Decimal("1000000"),
+    "千万": Decimal("10000000"),
+    "亿": Decimal("100000000"),
+    "billion": Decimal("1000000000"),
+    "b": Decimal("1000000000"),
+    "bn": Decimal("1000000000"),
+    "trillion": Decimal("1000000000000"),
+}
+_ENGLISH_NUMBER_WORDS = {
+    word: str(number)
+    for number, word in enumerate(
+        (
+            "zero",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen",
+            "twenty",
+        )
+    )
+    if word != "one"
+}
+_ENGLISH_NUMBER_WORD = re.compile(
+    r"\b(?:" + "|".join(_ENGLISH_NUMBER_WORDS) + r")\b", re.IGNORECASE
+)
+
+
+def _normalized_number_claims(value: str) -> set[str]:
+    claims = {
+        _ENGLISH_NUMBER_WORDS[match.group(0).lower()]
+        for match in _ENGLISH_NUMBER_WORD.finditer(value)
+    }
+    for match in _ARABIC_NUMBER_CLAIM.finditer(value):
+        raw_number = match.group("number").replace(",", "").replace("，", "")
+        unit = (match.group("unit") or "").lower().replace("％", "%")
+        try:
+            number = Decimal(raw_number)
+        except InvalidOperation:
+            continue
+        if unit in _NUMBER_MULTIPLIERS:
+            number *= _NUMBER_MULTIPLIERS[unit]
+        normalized = format(number.normalize(), "f")
+        claims.add(f"{normalized}%" if unit == "%" else normalized)
+    return claims
 
 
 def _strip_json_fence(content: str) -> str:
@@ -407,6 +493,36 @@ def validate_summary_source_grounding(
             str(article.get(field) or "")
             for field in ("title", "description", "content")
         )
+        evidence = article.get("evidence")
+        if isinstance(evidence, list):
+            source_text = " ".join(
+                [
+                    source_text,
+                    *(
+                        " ".join(
+                            str(entry.get(field) or "")
+                            for field in (
+                                "title",
+                                "published_date",
+                                "snippet",
+                                "text",
+                            )
+                        )
+                        for entry in evidence
+                        if isinstance(entry, dict)
+                    ),
+                ]
+            )
+        supported_numbers = _normalized_number_claims(source_text)
+        output_numbers = _normalized_number_claims(
+            f"{item.summary} {item.why_it_matters}"
+        )
+        unsupported_numbers = sorted(output_numbers - supported_numbers)
+        if unsupported_numbers:
+            raise SummaryQualityError(
+                f"item {index} has unsupported numeric claims: "
+                + ", ".join(unsupported_numbers)
+            )
         for code, output_pattern, source_pattern in _SOURCE_CLAIM_ANCHORS:
             if output_pattern.search(item.summary) and not source_pattern.search(
                 source_text
@@ -747,8 +863,6 @@ def _summarize_stream(client: OpenAI, params: dict) -> str:
 
 def offline_summary(articles: list[dict], limit: int = 10) -> str:
     """Offline fallback rendered with the same private-provenance policy."""
-    if not articles:
-        return "暂无新闻"
     return render_summary_markdown(offline_summary_result(articles, limit=limit))
 
 

@@ -1,952 +1,297 @@
 from __future__ import annotations
 
 from datetime import datetime
-from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import requests
-import pytest
 
 from config import load_config
 from utils import news_enrichment
 from utils.news_enrichment import enrich_articles_with_tavily
-from utils.enrichment_transport import classify_request_outcome
 
 
-REPORT_TIMEZONE = ZoneInfo("Asia/Shanghai")
-REPO_ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = REPO_ROOT / "config.yaml"
+TZ = ZoneInfo("Asia/Shanghai")
+REFERENCE = datetime(2026, 7, 21, 12, 0, tzinfo=TZ)
 
 
-def load_project_config():
-    return load_config(str(CONFIG_PATH))
-
-
-def sample_articles() -> list[dict]:
-    return [
-        {
-            "title": "OpenAI releases new developer tools",
-            "link": "https://example.com/openai-devtools",
-            "description": "Example description",
-            "publish_time": "2026-04-01",
-            "content": "",
-            "priority": 1,
-            "source": "techcrunch",
-        }
-    ]
-
-
-def make_article(title: str, link: str = "https://example.com/story") -> dict:
-    return {
-        "title": title,
-        "link": link,
-        "description": "Example description",
-        "publish_time": "2026-04-01",
-        "content": "",
-        "priority": 1,
-        "source": "example",
-    }
-
-
-def make_tavily_result(title: str, domain: str, slug: str) -> dict:
-    return {
-        "title": title,
-        "url": f"https://{domain}/news/{slug}",
-        "published_date": "2026-04-01T03:00:00Z",
-        "content": f"{title} content",
-        "score": 0.9,
-    }
-
-
-@pytest.mark.parametrize(
-    ("status", "expected"),
-    [
-        (401, "authentication_error"),
-        (422, "invalid_request"),
-        (429, "rate_limited"),
-        (503, "http_error"),
-    ],
-)
-def test_tavily_http_failures_have_actionable_codes(status, expected) -> None:
-    response = requests.Response()
-    response.status_code = status
-    error = requests.HTTPError(f"HTTP {status}", response=response)
-
-    assert classify_request_outcome(error) == expected
-
-
-def test_enrichment_disabled_returns_original_articles() -> None:
-    cfg = load_project_config()
-
-    result = enrich_articles_with_tavily(
-        sample_articles(),
-        report_date="2026-04-01",
-        settings=cfg.enrichment,
-        tavily_api_key="",
-        enabled=False,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["articles"] == sample_articles()
-    assert result["report"]["skip_reason"] == "disabled"
-    assert result["report"]["applied"] is False
-
-
-def test_enrichment_missing_api_key_falls_back_safely() -> None:
-    cfg = load_project_config()
-
-    result = enrich_articles_with_tavily(
-        sample_articles(),
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(update={"enabled": True}),
-        tavily_api_key="",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["articles"] == sample_articles()
-    assert result["report"]["skip_reason"] == "missing_api_key"
-    assert result["report"]["stop_reason"] == "missing_api_key"
-    assert result["report"]["applied"] is False
-
-
-def test_load_config_reads_enrichment_settings(tmp_path: Path, monkeypatch) -> None:
-    config_path = tmp_path / "config.yaml"
-    config_path.write_text(
-        """
-sources:
-  techcrunch: true
-enrichment:
-  enabled: true
-  trust_env: false
-  max_total_calls: 9
-  trusted_domains:
-    priority_refill_media_whitelist:
-      - thenextweb.com
-""",
-        encoding="utf-8",
-    )
-    monkeypatch.setenv("TAVILY_API_KEY", "test-key")
-
-    cfg = load_config(str(config_path))
-
-    assert cfg.tavily_api_key == "test-key"
-    assert cfg.enrichment.enabled is True
-    assert cfg.enrichment.trust_env is False
-    assert cfg.enrichment.max_total_calls == 9
-    assert cfg.enrichment.trusted_domains.priority_refill_media_whitelist == [
-        "thenextweb.com"
-    ]
-
-
-def test_refill_query_pack_rotates_deterministically_by_report_day(
-    monkeypatch,
-) -> None:
-    cfg = load_project_config()
-    queries = ["OpenAI frontier model", "Qwen DeepSeek 中国 大模型"]
-    seen_payloads: list[dict] = []
-
-    def fake_search(_session, _api_key, payload):
-        seen_payloads.append(payload)
-        return {
-            "latency_ms": 10.0,
-            "response": {
-                "results": [
-                    make_tavily_result(
-                        "Qwen releases a new AI reasoning model",
-                        "thenextweb.com",
-                        "qwen-reasoning",
-                    )
-                ]
-            },
-        }
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-    reference_dt = datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE)
-    settings = cfg.enrichment.model_copy(
+def settings(**updates):
+    return load_config().enrichment.model_copy(
         update={
             "enabled": True,
-            "max_total_calls": 1,
-            "max_verify_calls": 0,
-            "max_refill_rounds": 1,
-            "min_articles": 1,
-            "priority_refill_queries": queries,
+            "max_total_calls": 30,
+            "lead_search_rounds": 2,
+            **updates,
         }
     )
 
-    result = enrich_articles_with_tavily(
+
+def story(index: int, *, entity: str = "OpenAI") -> dict:
+    return {
+        "title": f"{entity} releases developer model update {index}",
+        "link": f"https://example.com/news/{entity.lower()}-{index}",
+        "description": (
+            f"{entity} released update {index} with documented rollout scope, "
+            "developer access details, measured results, and current limitations."
+        ),
+        "publish_time": "2026-07-21T02:00:00Z",
+        "content": "",
+        "priority": 3,
+        "source": "example.com",
+        "kind": "story",
+        "evidence_status": "direct",
+        "confidence": "direct",
+    }
+
+
+def lead(title: str = "DeepSeek V4 release details") -> dict:
+    return {
+        "title": title,
+        "link": "https://agihunt.info/?day=2026-07-21&t=DeepSeek+V4",
+        "description": "A trend signal without a direct source article.",
+        "publish_time": "2026-07-21T08:00:00+08:00",
+        "priority": 4,
+        "source": "agihunt_trending",
+        "kind": "lead",
+        "evidence_status": "unresolved",
+        "confidence": "signal",
+        "provenance": {
+            "trend_rank": "1",
+            "trend_term_en": "DeepSeek V4",
+            "publish_time_semantics": "trend_observed_at",
+        },
+    }
+
+
+def result_for(article: dict, *, suffix: str = "evidence", score: float = 0.9) -> dict:
+    return {
+        "title": article["title"],
+        "url": f"https://wire.example.com/news/{suffix}",
+        "published_date": "2026-07-21T03:00:00Z",
+        "content": (
+            f"{article['title']} is documented with specific product scope, "
+            "release timing, numeric results, rollout limits, and user impact."
+        ),
+        "raw_content": "Additional direct article body supplies background and constraints.",
+        "score": score,
+    }
+
+
+def test_disabled_or_missing_key_preserves_stories_and_keeps_leads_private() -> None:
+    direct = story(1)
+    signal = lead()
+    for enabled, key, reason in (
+        (False, "key", "disabled"),
+        (True, "", "missing_api_key"),
+    ):
+        enriched = enrich_articles_with_tavily(
+            [direct, signal],
+            report_date="2026-07-21",
+            settings=settings(),
+            tavily_api_key=key,
+            enabled=enabled,
+            reference_dt=REFERENCE,
+        )
+        assert enriched["articles"] == [direct]
+        assert enriched["report"]["skip_reason"] == reason
+        assert enriched["report"]["observation_signals"][0]["title"] == signal["title"]
+
+
+def test_empty_metadata_queue_never_calls_tavily_or_refill(monkeypatch) -> None:
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            AssertionError("unexpected call")
+        ),
+    )
+    enriched = enrich_articles_with_tavily(
         [],
-        report_date="2026-04-01",
-        settings=settings,
-        tavily_api_key="test-key",
+        report_date="2026-07-21",
+        settings=settings(),
+        tavily_api_key="key",
         enabled=True,
-        reference_dt=reference_dt,
+        reference_dt=REFERENCE,
     )
+    assert enriched["articles"] == []
+    assert enriched["report"]["total_calls"] == 0
+    assert enriched["report"]["refill_calls"] == 0
+    assert enriched["report"]["stop_reason"] == "candidate_queue_exhausted"
 
-    expected_query = queries[reference_dt.date().toordinal() % len(queries)]
-    assert seen_payloads[0]["query"] == expected_query
-    assert result["report"]["priority_refill_runs"][0]["query"] == expected_query
-    assert result["report"]["final_count"] == 1
 
-
-def test_enrichment_timeout_preserves_original_articles(monkeypatch) -> None:
-    cfg = load_project_config()
-
-    def raise_timeout(*args, **kwargs):
-        raise requests.Timeout("simulated timeout")
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", raise_timeout)
-
-    result = enrich_articles_with_tavily(
-        sample_articles(),
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(update={"enabled": True}),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["articles"] == sample_articles()
-    assert result["report"]["applied"] is True
-    assert result["report"]["skip_reason"] is None
-    assert result["report"]["verify_calls"] == 1
-    assert result["report"]["preserved_error_count"] == 1
-    assert result["report"]["final_count"] == 1
-    assert result["report"]["parameters"]["trust_env"] is True
-    assert result["report"]["verify_runs"][0]["request_outcome"] == "timeout"
-    assert result["report"]["verify_runs"][0]["validation_outcome"] == "not_evaluated"
-    assert result["report"]["accepted_by_stage_preview"]["preserved_errors"] == [
-        "OpenAI releases new developer tools"
+def test_every_candidate_gets_round_one_before_any_round_two(monkeypatch) -> None:
+    candidates = [
+        story(index, entity=entity)
+        for index, entity in enumerate(
+            ("OpenAI", "Anthropic", "Google", "Microsoft"), 1
+        )
     ]
-    assert result["report"]["rejected_candidates"][0]["request_outcome"] == "timeout"
-    assert (
-        result["report"]["rejected_candidates"][0]["validation_outcome"]
-        == "not_evaluated"
-    )
-    assert result["report"]["rejected_candidates"][0]["rejection_reason"] is None
+    queries: list[str] = []
 
-
-def test_enrichment_session_trust_env_follows_settings(monkeypatch) -> None:
-    cfg = load_project_config()
-    seen: list[bool] = []
-
-    def capture_session(session, api_key, payload):
-        seen.append(session.trust_env)
-        raise requests.Timeout("simulated timeout")
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", capture_session)
-
-    enrich_articles_with_tavily(
-        sample_articles(),
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={"enabled": True, "trust_env": False}
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert seen
-    assert all(value is False for value in seen)
-
-
-def test_enrichment_below_min_stop_reason_when_official_fallback_disabled(
-    monkeypatch,
-) -> None:
-    cfg = load_project_config()
-
-    def fake_search(session, api_key, payload):
-        include_domains = payload.get("include_domains") or []
-        if "thenextweb.com" in include_domains or "venturebeat.com" in include_domains:
-            return {"latency_ms": 10.0, "response": {"results": []}}
-        if "reuters.com" in include_domains or "arstechnica.com" in include_domains:
-            return {
-                "latency_ms": 12.0,
-                "response": {
-                    "results": [
-                        {
-                            "title": "Anthropic expands enterprise AI revenue",
-                            "url": "https://www.reuters.com/business/anthropic-expands-enterprise-ai-revenue-2026-04-01/",
-                            "published_date": "2026-04-01T04:00:00Z",
-                            "content": "Example content",
-                            "score": 0.9,
-                        }
-                    ]
-                },
-            }
-        raise AssertionError(f"Unexpected payload: {payload}")
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(update={"enabled": True}),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["report"]["input_count"] == 0
-    assert result["report"]["secondary_refilled_count"] == 1
-    assert (
-        result["report"]["stop_reason"]
-        == "below_min_articles_after_secondary_refill_official_fallback_disabled"
-    )
-    assert (
-        "Upstream sources returned zero deduped articles, so any final output must come from Tavily refill."
-        in result["report"]["notes"]
-    )
-
-
-def test_verify_rejects_matched_article_outside_24h(monkeypatch) -> None:
-    cfg = load_project_config()
-    article = sample_articles()[0]
-
-    def fake_search(session, api_key, payload):
-        assert payload["query"] == f'"{article["title"]}"'
-        return {
-            "latency_ms": 10.0,
-            "response": {
-                "results": [
-                    {
-                        "title": article["title"],
-                        "url": article["link"],
-                        "published_date": "2026-03-31T03:00:00Z",
-                        "content": "Matched story outside the strict window.",
-                        "score": 0.99,
-                    }
-                ]
-            },
-        }
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [article],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 1,
-                "max_verify_calls": 1,
-                "min_articles": 1,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["articles"] == []
-    assert result["report"]["final_count"] == 0
-    assert result["report"]["verify_runs"][0]["request_outcome"] == "success"
-    assert result["report"]["verify_runs"][0]["matched"] is True
-    assert result["report"]["verify_runs"][0]["within_24h"] is False
-    assert result["report"]["verify_runs"][0]["validation_outcome"] == "outside_24h"
-    assert (
-        result["report"]["rejected_candidates"][0]["rejection_reason"] == "outside_24h"
-    )
-
-
-def test_verify_rejects_matched_article_missing_published_date(monkeypatch) -> None:
-    cfg = load_project_config()
-    article = sample_articles()[0]
-
-    def fake_search(session, api_key, payload):
-        assert payload["query"] == f'"{article["title"]}"'
-        return {
-            "latency_ms": 10.0,
-            "response": {
-                "results": [
-                    {
-                        "title": article["title"],
-                        "url": article["link"],
-                        "published_date": None,
-                        "content": "Matched story with missing date metadata.",
-                        "score": 0.99,
-                    }
-                ]
-            },
-        }
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [article],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 1,
-                "max_verify_calls": 1,
-                "min_articles": 1,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["articles"] == []
-    assert result["report"]["final_count"] == 0
-    assert result["report"]["verify_runs"][0]["request_outcome"] == "success"
-    assert result["report"]["verify_runs"][0]["matched"] is True
-    assert result["report"]["verify_runs"][0]["within_24h"] is None
-    assert (
-        result["report"]["verify_runs"][0]["validation_outcome"]
-        == "missing_published_date"
-    )
-    assert (
-        result["report"]["rejected_candidates"][0]["rejection_reason"]
-        == "missing_published_date"
-    )
-
-
-def test_prefilter_keeps_ai_neighbor_in_lower_priority_bucket(monkeypatch) -> None:
-    cfg = load_project_config()
-    neighbor_title = (
-        "California adopts new rules allowing manufacturers to test and deploy "
-        "heavy-duty autonomous vehicles"
-    )
-    seen_queries: list[str] = []
-
-    def fake_search(session, api_key, payload):
-        seen_queries.append(payload["query"])
+    def fake_search(_session, _api_key, payload):
+        assert "include_domains" not in payload
+        queries.append(payload["query"])
         return {"latency_ms": 5.0, "response": {"results": []}}
 
     monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [make_article(neighbor_title)],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 1,
-                "max_verify_calls": 1,
-                "max_refill_rounds": 0,
-                "min_articles": 0,
-            }
-        ),
-        tavily_api_key="test-key",
+    enriched = enrich_articles_with_tavily(
+        candidates,
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=6),
+        tavily_api_key="key",
         enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+        reference_dt=REFERENCE,
     )
 
-    assert result["report"]["prefilter_stats"]["excluded_non_ai_relevant"] == 0
-    assert result["report"]["prefilter_bucket_counts"]["ai_neighbor"] == 1
-    assert (
-        result["report"]["prefilter_candidates"][0]["prefilter_bucket"] == "ai_neighbor"
+    assert len(queries) == 6
+    assert all(
+        candidate["link"] in queries[index]
+        for index, candidate in enumerate(candidates)
     )
-    assert seen_queries == [f'"{neighbor_title}"']
+    assert enriched["report"]["candidate_processed_count"] == 4
+    assert enriched["report"]["total_calls"] == 6
+    assert enriched["report"]["refill_calls"] == 0
+    assert enriched["report"]["stop_reason"] == "budget_exhausted"
 
 
-def test_verify_order_prioritizes_core_ai_then_neighbors_then_low_signal(
+def test_direct_story_failure_keeps_original_identity_and_content(monkeypatch) -> None:
+    direct = story(1)
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(requests.Timeout("private")),
+    )
+    enriched = enrich_articles_with_tavily(
+        [direct],
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=2),
+        tavily_api_key="key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+    kept = enriched["articles"][0]
+    for field in ("title", "link", "description", "publish_time", "source"):
+        assert kept[field] == direct[field]
+    assert kept["evidence"][0]["origin"] == "fetch"
+    assert enriched["report"]["total_calls"] == 2
+    assert enriched["report"]["refill_calls"] == 0
+
+
+def test_lead_without_same_event_evidence_never_enters_main_news(monkeypatch) -> None:
+    signal = lead("OpenAI launches a new coding agent")
+    unrelated = {
+        "title": "ServiceNow launches a workflow agent with OpenAI integration",
+        "url": "https://example.net/news/servicenow-workflow-agent",
+        "published_date": "2026-07-21T03:00:00Z",
+        "content": "ServiceNow launched a workflow product for enterprise customers.",
+        "score": 0.99,
+    }
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: {
+            "latency_ms": 5.0,
+            "response": {"results": [unrelated]},
+        },
+    )
+    enriched = enrich_articles_with_tavily(
+        [signal],
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=2),
+        tavily_api_key="key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+    assert enriched["articles"] == []
+    assert enriched["report"]["lead_resolved_count"] == 0
+    assert enriched["report"]["lead_unresolved_count"] == 1
+    assert all(
+        run["rejected_irrelevant_count"] == 1
+        for run in enriched["report"]["candidate_enrichment_runs"]
+    )
+
+
+def test_evidence_packet_is_structured_bounded_and_keeps_story_identity(
     monkeypatch,
 ) -> None:
-    cfg = load_project_config()
-    low_signal_title = "Startup funding round reshapes enterprise software market"
-    neighbor_title = (
-        "California adopts new rules allowing manufacturers to test and deploy "
-        "heavy-duty autonomous vehicles"
-    )
-    core_ai_title = "OpenAI launches AI agents for developer tools"
-    seen_queries: list[str] = []
+    direct = story(1)
+    calls = 0
 
-    def fake_search(session, api_key, payload):
-        seen_queries.append(payload["query"])
-        return {"latency_ms": 5.0, "response": {"results": []}}
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [
-            make_article(low_signal_title, "https://example.com/low-signal"),
-            make_article(neighbor_title, "https://example.com/neighbor"),
-            make_article(core_ai_title, "https://example.com/core-ai"),
-        ],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 3,
-                "max_verify_calls": 3,
-                "max_refill_rounds": 0,
-                "min_articles": 0,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["report"]["prefilter_bucket_counts"] == {
-        "core_ai": 1,
-        "ai_neighbor": 1,
-        "generic_or_low_signal": 1,
-    }
-    bucket_by_title = {
-        candidate["title"]: candidate["prefilter_bucket"]
-        for candidate in result["report"]["prefilter_candidates"]
-    }
-    assert bucket_by_title == {
-        core_ai_title: "core_ai",
-        neighbor_title: "ai_neighbor",
-        low_signal_title: "generic_or_low_signal",
-    }
-    assert seen_queries == [
-        f'"{core_ai_title}"',
-        f'"{neighbor_title}"',
-        f'"{low_signal_title}"',
-    ]
-
-
-def test_aggregate_like_article_is_hard_rejected_before_verify(monkeypatch) -> None:
-    cfg = load_project_config()
-    aggregate_article = {
-        **make_article(
-            "AI日报：OpenAI 发布新模型；Anthropic 获融资；Google 推出 AI 功能",
-            "https://example.com/ai-daily-roundup",
-        ),
-        "source": "aibase",
-    }
-
-    def fail_if_called(*args, **kwargs):
-        raise AssertionError("Aggregate-like articles must not enter Tavily verify")
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fail_if_called)
-
-    result = enrich_articles_with_tavily(
-        [aggregate_article],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 1,
-                "max_verify_calls": 1,
-                "max_refill_rounds": 0,
-                "min_articles": 0,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["report"]["prefilter_stats"]["excluded_aggregate_like"] == 1
-    assert result["report"]["prefiltered_count"] == 0
-    assert result["report"]["verify_calls"] == 0
-    assert result["report"]["excluded_prefilter_candidates"][0]["exclude_reasons"] == [
-        "aggregate_like"
-    ]
-
-
-def test_refill_keeps_strict_ai_title_relevance_gate(monkeypatch) -> None:
-    cfg = load_project_config()
-
-    def fake_search(session, api_key, payload):
-        assert payload.get("include_domains") == ["thenextweb.com", "venturebeat.com"]
+    def fake_search(_session, _api_key, _payload):
+        nonlocal calls
+        calls += 1
         return {
-            "latency_ms": 10.0,
+            "latency_ms": 5.0,
             "response": {
                 "results": [
-                    {
-                        "title": "Startup funding round reshapes enterprise software market",
-                        "url": "https://thenextweb.com/news/startup-funding-enterprise-software",
-                        "published_date": "2026-04-01T03:30:00Z",
-                        "content": "Low-signal startup funding item without a strong AI title.",
-                        "score": 0.92,
-                    }
+                    result_for(
+                        direct, suffix=f"{calls}-{index}", score=0.9 - index / 100
+                    )
+                    for index in range(4)
                 ]
             },
         }
 
     monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 1,
-                "max_verify_calls": 0,
-                "max_refill_rounds": 1,
-                "min_articles": 1,
-            }
-        ),
-        tavily_api_key="test-key",
+    enriched = enrich_articles_with_tavily(
+        [direct],
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=2),
+        tavily_api_key="key",
         enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+        reference_dt=REFERENCE,
+    )
+    item = enriched["articles"][0]
+    assert item["title"] == direct["title"]
+    assert item["link"] == direct["link"]
+    assert len(item["evidence"]) == 3
+    assert all(
+        {"title", "url", "published_date", "snippet"} <= set(evidence)
+        for evidence in item["evidence"]
     )
 
-    candidate = result["report"]["priority_refill_runs"][0]["candidate_results"][0]
-    assert result["report"]["priority_refilled_count"] == 0
-    assert result["report"]["final_count"] == 0
-    assert candidate["within_24h"] is True
-    assert candidate["ai_title_relevant"] is False
-    assert candidate["accepted"] is False
 
-
-def test_refill_lenient_diagnostics_do_not_pollute_strict_output(monkeypatch) -> None:
-    cfg = load_project_config()
-    seen_payloads: list[dict] = []
-
-    def fake_search(session, api_key, payload):
-        seen_payloads.append(payload)
-        return {
-            "latency_ms": 10.0,
-            "response": {
-                "results": [
-                    {
-                        "title": "OpenAI launches AI coding workspace",
-                        "url": "https://thenextweb.com/news/openai-coding-workspace",
-                        "published_date": "2026-04-01T03:00:00Z",
-                        "content": "Strictly valid AI item.",
-                        "score": 0.98,
-                    },
-                    {
-                        "title": "Anthropic releases Claude developer console",
-                        "url": "https://venturebeat.com/news/claude-developer-console",
-                        "published_date": None,
-                        "content": "Missing date metadata.",
-                        "score": 0.94,
-                    },
-                    {
-                        "title": "Startup funding round reshapes enterprise software market",
-                        "url": "https://thenextweb.com/news/startup-funding-enterprise-software",
-                        "published_date": "2026-03-30T04:00:00Z",
-                        "content": "Inside 72h but not an AI title.",
-                        "score": 0.9,
-                    },
-                    {
-                        "title": "OpenAI launches AI coding workspace",
-                        "url": "https://thenextweb.com/news/openai-coding-workspace-copy",
-                        "published_date": "2026-04-01T04:00:00Z",
-                        "content": "Duplicate title inside 72h.",
-                        "score": 0.89,
-                    },
-                    {
-                        "title": "Mistral debuts AI inference platform",
-                        "url": "https://venturebeat.com/news/mistral-inference-platform",
-                        "published_date": "2026-03-28T03:00:00Z",
-                        "content": "Explicitly outside 72h.",
-                        "score": 0.88,
-                    },
-                ]
-            },
-        }
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 1,
-                "max_verify_calls": 0,
-                "max_refill_rounds": 1,
-                "min_articles": 1,
-                "refill_search_window_hours": 72,
-                "lenient_refill_diagnostics_enabled": True,
-                "lenient_refill_window_hours": 72,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+def test_daily_budget_is_hard_capped_at_thirty(monkeypatch) -> None:
+    candidates = [story(index, entity=f"Vendor{index}") for index in range(20)]
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: {"latency_ms": 1.0, "response": {"results": []}},
     )
-
-    report = result["report"]
-    candidates = report["priority_refill_runs"][0]["candidate_results"]
-
-    assert seen_payloads[0]["start_date"] == "2026-03-29"
-    assert seen_payloads[0]["end_date"] == "2026-04-01"
-    assert report["final_count"] == 1
-    assert report["strict_final_count"] == 1
-    assert report["strict_refill_accepted_count"] == 1
-    assert len(candidates) == 5
-    assert candidates[1]["lenient_candidate"] is True
-    assert candidates[1]["accepted"] is False
-    assert candidates[4]["lenient_candidate"] is False
-    assert candidates[4]["lenient_rejection_reason"] == "outside_72h"
-    assert report["lenient_refill_diagnostics"]["enabled"] is True
-    assert report["lenient_refill_diagnostics"]["request_window_hours"] == 72
-    assert report["lenient_refill_diagnostics"]["start_date"] == "2026-03-29"
-    assert report["lenient_candidate_count"] == 4
-    assert report["proven_within_72h_count"] == 3
-    assert report["missing_date_unproven_count"] == 1
-    assert report["outside_72h_rejected_count"] == 1
-    assert report["lenient_non_ai_count"] == 1
-    assert report["lenient_duplicate_or_cluster_count"] == 1
-    assert len(report["lenient_selected_preview"]) == 4
+    enriched = enrich_articles_with_tavily(
+        candidates,
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=30),
+        tavily_api_key="key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+    assert enriched["report"]["total_calls"] == 30
+    assert enriched["report"]["candidate_processed_count"] == 20
+    assert len(enriched["articles"]) == 20
+    assert enriched["report"]["refill_calls"] == 0
 
 
-def test_refill_is_skipped_when_verify_already_satisfies_minimum(
+def test_metadata_admission_caps_the_queue_so_every_candidate_is_searched(
     monkeypatch,
 ) -> None:
-    cfg = load_project_config()
-    articles = [
-        make_article(
-            "OpenAI launches AI coding workspace",
-            "https://example.com/openai-workspace",
-        ),
-        make_article(
-            "Anthropic releases Claude enterprise console",
-            "https://example.com/anthropic-console",
-        ),
-    ]
-    seen_payloads: list[dict] = []
-
-    def fake_search(session, api_key, payload):
-        seen_payloads.append(payload)
-        title = payload["query"].strip('"')
-        matching_article = next(
-            article for article in articles if article["title"] == title
-        )
-        return {
-            "latency_ms": 10.0,
-            "response": {
-                "results": [
-                    {
-                        "title": matching_article["title"],
-                        "url": matching_article["link"],
-                        "published_date": "2026-04-01T03:00:00Z",
-                        "content": "Verified source article.",
-                        "score": 0.99,
-                    }
-                ]
-            },
-        }
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        articles,
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 4,
-                "max_verify_calls": 4,
-                "max_refill_rounds": 1,
-                "min_articles": 2,
-            }
-        ),
-        tavily_api_key="test-key",
+    candidates = [story(index, entity=f"Vendor{index}") for index in range(31)]
+    monkeypatch.setattr(
+        news_enrichment,
+        "search_tavily",
+        lambda *_args, **_kwargs: {"latency_ms": 1.0, "response": {"results": []}},
+    )
+    enriched = enrich_articles_with_tavily(
+        candidates,
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=30),
+        tavily_api_key="key",
         enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
+        reference_dt=REFERENCE,
     )
 
-    assert result["report"]["verified_count"] == 2
-    assert result["report"]["refill_needed_count"] == 0
-    assert result["report"]["refill_calls"] == 0
-    assert result["report"]["priority_refill_runs"] == []
-    assert result["report"]["final_count"] == 2
-    assert result["report"]["stop_reason"] == "min_articles_satisfied_after_verify"
-    assert all("include_domains" not in payload for payload in seen_payloads)
-
-
-def test_refill_uses_staged_tavily_calls_until_minimum_is_met(
-    monkeypatch,
-) -> None:
-    cfg = load_project_config()
-    priority_results = [
-        make_tavily_result(
-            "OpenAI launches AI coding workspace",
-            "thenextweb.com",
-            "openai-coding-workspace",
-        ),
-        make_tavily_result(
-            "Anthropic releases Claude enterprise console",
-            "venturebeat.com",
-            "claude-enterprise-console",
-        ),
-        make_tavily_result(
-            "Mistral debuts AI inference platform",
-            "thenextweb.com",
-            "mistral-inference-platform",
-        ),
-        make_tavily_result(
-            "Nvidia introduces robotics foundation model",
-            "venturebeat.com",
-            "nvidia-robotics-foundation",
-        ),
-    ]
-    secondary_results = [
-        make_tavily_result(
-            "Hugging Face ships AI dataset tools",
-            "reuters.com",
-            "hugging-face-dataset-tools",
-        ),
-        make_tavily_result(
-            "Perplexity launches AI shopping assistant",
-            "arstechnica.com",
-            "perplexity-shopping-assistant",
-        ),
-        make_tavily_result(
-            "Microsoft unveils Copilot security agent",
-            "reuters.com",
-            "copilot-security-agent",
-        ),
-        make_tavily_result(
-            "Google DeepMind updates Gemini robotics system",
-            "arstechnica.com",
-            "gemini-robotics-system",
-        ),
-        make_tavily_result(
-            "Databricks adds machine learning governance",
-            "reuters.com",
-            "databricks-ml-governance",
-        ),
-        make_tavily_result(
-            "Meta releases Llama developer assistant",
-            "arstechnica.com",
-            "llama-developer-assistant",
-        ),
-        make_tavily_result(
-            "Amazon launches AI warehouse robot",
-            "reuters.com",
-            "amazon-warehouse-robot",
-        ),
-        make_tavily_result(
-            "Cohere ships enterprise LLM connectors",
-            "arstechnica.com",
-            "cohere-llm-connectors",
-        ),
-    ]
-    seen_domain_groups: list[list[str]] = []
-
-    def fake_search(session, api_key, payload):
-        include_domains = payload.get("include_domains") or []
-        seen_domain_groups.append(include_domains)
-        if include_domains == ["thenextweb.com", "venturebeat.com"]:
-            return {"latency_ms": 10.0, "response": {"results": priority_results}}
-        if include_domains == ["reuters.com", "arstechnica.com"]:
-            return {"latency_ms": 12.0, "response": {"results": secondary_results}}
-        raise AssertionError(f"Unexpected payload: {payload}")
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        [],
-        report_date="2026-04-01",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 3,
-                "max_verify_calls": 0,
-                "max_refill_rounds": 1,
-                "min_articles": 10,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 4, 1, 12, 0, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert seen_domain_groups == [
-        ["thenextweb.com", "venturebeat.com"],
-        ["reuters.com", "arstechnica.com"],
-    ]
-    assert result["report"]["refill_needed_count"] == 10
-    assert result["report"]["priority_refilled_count"] == 4
-    assert result["report"]["secondary_refilled_count"] == 6
-    assert result["report"]["refill_calls"] == 2
-    assert result["report"]["total_calls"] == 2
-    assert result["report"]["final_count"] == 10
-    assert result["report"]["refill_remaining_count"] == 0
-    assert result["report"]["stop_reason"] == "secondary_refill_complete"
-    assert result["report"]["secondary_refill_runs"][0]["needed_before"] == 6
-    assert result["report"]["secondary_refill_runs"][0]["remaining_needed_after"] == 0
-    assert len(result["report"]["secondary_refill_runs"][0]["candidate_results"]) == 6
-
-
-def test_default_budget_reserves_secondary_refill_capacity_when_below_min(
-    monkeypatch,
-) -> None:
-    cfg = load_project_config()
-    source_titles = [
-        "OpenAI debuts AI agent workspace for finance teams",
-        "Anthropic expands Claude tools for legal research",
-        "Google DeepMind updates Gemini robotics controller",
-        "Microsoft ships Copilot assistant for security teams",
-        "Meta releases Llama model tuning toolkit",
-        "Mistral launches AI inference service for developers",
-        "Cohere adds enterprise retrieval agents",
-        "Perplexity unveils AI shopping assistant",
-        "Databricks upgrades machine learning governance",
-        "Nvidia introduces robotics foundation model",
-        "Amazon tests warehouse AI robot fleet",
-        "Hugging Face publishes dataset quality tools",
-    ]
-    articles = [
-        make_article(title, f"https://example.com/story-{index}")
-        for index, title in enumerate(source_titles)
-    ]
-    secondary_titles = [
-        "Anthropic launches Claude memory controls",
-        "OpenAI releases Codex browser automation",
-        "Google ships Gemini data analysis agents",
-        "Microsoft adds Copilot model routing",
-        "Mistral debuts enterprise AI search",
-        "Nvidia updates robotics AI simulation",
-    ]
-    secondary_results = [
-        make_tavily_result(
-            title,
-            "reuters.com" if index % 2 else "arstechnica.com",
-            f"secondary-ai-story-{index}",
-        )
-        for index, title in enumerate(secondary_titles)
-    ]
-    for result in secondary_results:
-        result["published_date"] = "2026-05-11T12:00:00Z"
-    seen_domain_groups: list[list[str]] = []
-
-    def fake_search(session, api_key, payload):
-        include_domains = payload.get("include_domains")
-        if not include_domains:
-            return {"latency_ms": 5.0, "response": {"results": []}}
-        seen_domain_groups.append(include_domains)
-        if include_domains == ["thenextweb.com", "venturebeat.com"]:
-            return {"latency_ms": 10.0, "response": {"results": []}}
-        if include_domains == ["reuters.com", "arstechnica.com"]:
-            return {"latency_ms": 12.0, "response": {"results": secondary_results}}
-        raise AssertionError(f"Unexpected payload: {payload}")
-
-    monkeypatch.setattr(news_enrichment, "search_tavily", fake_search)
-
-    result = enrich_articles_with_tavily(
-        articles,
-        report_date="2026-05-11",
-        settings=cfg.enrichment.model_copy(
-            update={
-                "enabled": True,
-                "max_total_calls": 7,
-                "max_verify_calls": 6,
-                "max_refill_rounds": 1,
-                "min_articles": 10,
-            }
-        ),
-        tavily_api_key="test-key",
-        enabled=True,
-        reference_dt=datetime(2026, 5, 11, 21, 54, tzinfo=REPORT_TIMEZONE),
-    )
-
-    assert result["report"]["reserved_refill_calls"] == 2
-    assert result["report"]["verify_budget"] == 5
-    assert result["report"]["verify_calls"] == 5
-    assert result["report"]["refill_calls"] == 2
-    assert seen_domain_groups == [
-        ["thenextweb.com", "venturebeat.com"],
-        ["reuters.com", "arstechnica.com"],
-    ]
-    assert result["report"]["preserved_budget_count"] == 7
-    assert result["report"]["secondary_refilled_count"] == 3
-    assert result["report"]["final_count"] == 10
-    assert result["report"]["stop_reason"] == "secondary_refill_complete"
+    assert enriched["report"]["input_count"] == 31
+    assert enriched["report"]["candidate_queue_count"] == 30
+    assert enriched["report"]["candidate_processed_count"] == 30
+    assert enriched["report"]["candidate_dropped_count"] == 1
+    assert enriched["report"]["total_calls"] == 30
+    assert len(enriched["articles"]) == 30
