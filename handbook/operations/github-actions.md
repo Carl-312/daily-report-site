@@ -43,8 +43,8 @@
 
 - 触发：`workflow_dispatch`、生产定时任务、每日正式灰度定时任务
 - 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本；`deploy_gray_pages` 将通过门禁的 preview artifact 发布到独立灰度 Pages
-- 定时：生产任务保留 `36 0 * * *`（UTC，对应上海时间 `08:36`）；正式灰度使用 `0 14 * * *` 和 `timezone: Asia/Shanghai`，每天上海时间 `14:00` 触发，页面在生成和健康检查通过后更新
-- 说明：14:00 定时事件只发布独立灰度 Pages，不提交生成内容、不归档、不触发生产 Pages；GitHub Actions 在整点高负载时可能延迟启动
+- 定时：生产任务保留 `36 0 * * *`（UTC，对应上海时间 `08:36`）；正式灰度使用 `5 14 * * *` 和 `timezone: Asia/Shanghai`，每天上海时间 `14:05` 触发，页面在生成和健康检查通过后更新
+- 说明：14:05 定时事件避开整点高负载，只发布独立灰度 Pages，不提交生成内容、不归档、不触发生产 Pages；GitHub Actions schedule 仍可能延迟启动
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`
 - 关键步骤：

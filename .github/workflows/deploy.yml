@@ -42,8 +42,8 @@ on:
   schedule:
     # Production generation remains at 00:36 UTC (08:36 Asia/Shanghai).
     - cron: "36 0 * * *"
-    # Generate and deploy the formal gray edition every day at 14:00 Shanghai time.
-    - cron: "0 14 * * *"
+    # Generate and deploy the formal gray edition every day at 14:05 Shanghai time.
+    - cron: "5 14 * * *"
       timezone: "Asia/Shanghai"
 
 permissions:
@@ -73,10 +73,10 @@ jobs:
         shell: bash
         env:
           SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event.schedule == '36 0 * * *' || inputs.publish) }}
-          REQUEST_GRAY_PAGES: ${{ github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages || false }}
+          REQUEST_GRAY_PAGES: ${{ github.event.schedule == '5 14 * * *' || inputs.deploy_gray_pages || false }}
           SKIP_GENERATE: ${{ inputs.skip_generate || false }}
-          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '5 14 * * *' || inputs.enable_tavily || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '5 14 * * *' || inputs.enable_agihunt_trending || false }}
         run: |
           if [ "$REQUEST_GRAY_PAGES" = "true" ]; then
             if [ "$SHOULD_PUBLISH" = "true" ]; then
@@ -112,9 +112,9 @@ jobs:
         if: ${{ !inputs.skip_generate }}
         shell: bash
         env:
-          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '5 14 * * *' || inputs.enable_tavily || false }}
           ENABLE_AGIHUNT: ${{ inputs.enable_agihunt || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '5 14 * * *' || inputs.enable_agihunt_trending || false }}
           PUBLISH_MODE: ${{ steps.publish-mode.outputs.publish }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
@@ -181,7 +181,7 @@ jobs:
 
       - name: Validate AGI Hunt Trending health
         if: ${{ !inputs.skip_generate && success() && (github.event_name != 'workflow_dispatch' || inputs.enable_agihunt_trending) }}
-        continue-on-error: ${{ github.event.schedule != '0 14 * * *' && !inputs.deploy_gray_pages }}
+        continue-on-error: ${{ github.event.schedule != '5 14 * * *' && !inputs.deploy_gray_pages }}
         run: >
           python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
           --output agihunt-trending-health.json
@@ -324,7 +324,7 @@ jobs:
 
   deploy-gray-pages:
     if: >-
-      (github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages) &&
+      (github.event.schedule == '5 14 * * *' || inputs.deploy_gray_pages) &&
       needs.generate-and-deploy.result == 'success' &&
       needs.generate-and-deploy.outputs.publish != 'true'
     environment:
