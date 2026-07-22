@@ -15,7 +15,7 @@ on:
         default: false
         type: boolean
       enable_tavily:
-        description: "Force-enable Tavily enrichment (scheduled runs follow config.yaml)"
+        description: "Force-enable Tavily enrichment (scheduled gray runs always enable it)"
         required: false
         default: false
         type: boolean
@@ -40,9 +40,11 @@ on:
         default: false
         type: boolean
   schedule:
-    # GitHub Actions cron uses UTC. Use a non-zero minute to reduce schedule delays
-    # that commonly happen around the start of the hour. 00:36 UTC = 08:36 Asia/Shanghai.
+    # Production generation remains at 00:36 UTC (08:36 Asia/Shanghai).
     - cron: "36 0 * * *"
+    # Generate and deploy the formal gray edition every day at 14:00 Shanghai time.
+    - cron: "0 14 * * *"
+      timezone: "Asia/Shanghai"
 
 permissions:
   contents: write
@@ -70,11 +72,11 @@ jobs:
         id: publish-mode
         shell: bash
         env:
-          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'schedule' || inputs.publish) }}
-          REQUEST_GRAY_PAGES: ${{ inputs.deploy_gray_pages || false }}
+          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event.schedule == '36 0 * * *' || inputs.publish) }}
+          REQUEST_GRAY_PAGES: ${{ github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages || false }}
           SKIP_GENERATE: ${{ inputs.skip_generate || false }}
-          ENABLE_TAVILY: ${{ inputs.enable_tavily || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ inputs.enable_agihunt_trending || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
         run: |
           if [ "$REQUEST_GRAY_PAGES" = "true" ]; then
             if [ "$SHOULD_PUBLISH" = "true" ]; then
@@ -110,31 +112,29 @@ jobs:
         if: ${{ !inputs.skip_generate }}
         shell: bash
         env:
-          ENABLE_TAVILY: ${{ inputs.enable_tavily || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
           ENABLE_AGIHUNT: ${{ inputs.enable_agihunt || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ inputs.enable_agihunt_trending || false }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
           PUBLISH_MODE: ${{ steps.publish-mode.outputs.publish }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           AGIHUNT_API_KEY: ${{ secrets.AGIHUNT_API_KEY }}
-          # Scheduled runs use config.yaml's default-on enrichment. A missing
-          # secret is fail-open and appears as a stable page diagnostic code.
+          # Scheduled gray runs force-enable enrichment. A missing secret is
+          # fail-open and appears as a stable page diagnostic code.
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: |
           ENRICHMENT_ARGS=()
           SOURCE_ARGS=()
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ "$ENABLE_TAVILY" = "true" ]; then
-              ENRICHMENT_ARGS=(--enrichment on)
-              if [ -z "$TAVILY_API_KEY" ]; then
-                echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
-              else
-                echo "Tavily enrichment explicitly enabled for this manual run"
-              fi
+          if [ "$ENABLE_TAVILY" = "true" ]; then
+            ENRICHMENT_ARGS=(--enrichment on)
+            if [ -z "$TAVILY_API_KEY" ]; then
+              echo "Warning: TAVILY_API_KEY not set; Tavily enrichment will safely fall back to deduped articles"
             else
-              ENRICHMENT_ARGS=(--enrichment off)
-              echo "Tavily enrichment explicitly disabled for this manual run"
+              echo "Tavily enrichment enabled for this run"
             fi
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            ENRICHMENT_ARGS=(--enrichment off)
+            echo "Tavily enrichment explicitly disabled for this manual run"
           fi
 
           if [ "$ENABLE_AGIHUNT" = "true" ]; then
@@ -150,21 +150,19 @@ jobs:
             echo "AGIHunt explicitly enabled for this shadow run"
           fi
 
-          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
-            if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
-              SOURCE_ARGS+=(--agihunt-trending on)
-              CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
-              if [ -z "$CHROME_BIN" ]; then
-                echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
-              else
-                export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
-                "$CHROME_BIN" --version
-              fi
-              echo "AGI Hunt Trending explicitly enabled for this run"
+          if [ "$ENABLE_AGIHUNT_TRENDING" = "true" ]; then
+            SOURCE_ARGS+=(--agihunt-trending on)
+            CHROME_BIN=$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || true)
+            if [ -z "$CHROME_BIN" ]; then
+              echo "::warning::Chrome is unavailable; AGI Hunt Trending will degrade without blocking other sources"
             else
-              SOURCE_ARGS+=(--agihunt-trending off)
-              echo "AGI Hunt Trending explicitly disabled for this manual run"
+              export AGIHUNT_TRENDING_CHROME_BIN="$CHROME_BIN"
+              "$CHROME_BIN" --version
             fi
+            echo "AGI Hunt Trending explicitly enabled for this run"
+          elif [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            SOURCE_ARGS+=(--agihunt-trending off)
+            echo "AGI Hunt Trending explicitly disabled for this manual run"
           fi
 
           if [ -z "$MODELSCOPE_API_KEY" ] && [ -z "$SILICONFLOW_API_KEY" ]; then
@@ -183,7 +181,7 @@ jobs:
 
       - name: Validate AGI Hunt Trending health
         if: ${{ !inputs.skip_generate && success() && (github.event_name != 'workflow_dispatch' || inputs.enable_agihunt_trending) }}
-        continue-on-error: ${{ github.event_name != 'workflow_dispatch' || !inputs.deploy_gray_pages }}
+        continue-on-error: ${{ github.event.schedule != '0 14 * * *' && !inputs.deploy_gray_pages }}
         run: >
           python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
           --output agihunt-trending-health.json
@@ -326,8 +324,7 @@ jobs:
 
   deploy-gray-pages:
     if: >-
-      github.event_name == 'workflow_dispatch' &&
-      inputs.deploy_gray_pages &&
+      (github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages) &&
       needs.generate-and-deploy.result == 'success' &&
       needs.generate-and-deploy.outputs.publish != 'true'
     environment:

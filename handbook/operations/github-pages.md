@@ -39,6 +39,8 @@
 [`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
 与生产站并行。灰度发布必须满足 `publish=false`、`skip_generate=false`、Tavily on、
 Trending on 与 Trending health 硬门禁；它不调用生产 `deploy-pages` job。
+每日 `14:00`（`Asia/Shanghai`）定时入口会自动执行同一套正式灰度门禁并更新该站点；
+它不改变既有 `08:36` 生产定时发布或 `main` 上显式的手动 `publish=true` 边界。
 
 当前在线灰度对应提交 `0cbaef3`、源运行
 [`29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019) 和灰度 Pages 运行

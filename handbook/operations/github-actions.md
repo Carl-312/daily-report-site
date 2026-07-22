@@ -41,20 +41,20 @@
 
 用途：生成日报、归档历史产物、清理热数据并部署 Pages。
 
-- 触发：`workflow_dispatch`、定时任务
+- 触发：`workflow_dispatch`、生产定时任务、每日正式灰度定时任务
 - 手动输入：`skip_generate` 可只重建站点；`enable_tavily` 与 `enable_agihunt_trending` 分别显式启用/关闭本次 Tavily 和 Trending；`enable_agihunt` 可对单次非生产运行启用 AGIHunt shadow source；`publish` 明确控制是否发布生产版本；`deploy_gray_pages` 将通过门禁的 preview artifact 发布到独立灰度 Pages
-- 定时：GitHub Actions cron 使用 UTC，当前配置为 `36 0 * * *`，对应北京时间 `08:36`
-- 说明：刻意避开整点，降低 GitHub Actions `schedule` 在高峰期延迟触发的概率
+- 定时：生产任务保留 `36 0 * * *`（UTC，对应上海时间 `08:36`）；正式灰度使用 `0 14 * * *` 和 `timezone: Asia/Shanghai`，每天上海时间 `14:00` 触发，页面在生成和健康检查通过后更新
+- 说明：14:00 定时事件只发布独立灰度 Pages，不提交生成内容、不归档、不触发生产 Pages；GitHub Actions 在整点高负载时可能延迟启动
 - Python：`3.12`
 - 安装：`pip install -r requirements.txt`
 - 关键步骤：
   1. 运行 `python main.py run` 或 `python main.py run --offline`
   2. `skip_generate=true` 时改为运行 `python main.py build`
   3. 摘要阶段必须满足独立新闻条数上限与来源 `article_id` 契约；失败时不生成越界或无输入映射的日报，同一来源可支撑多条独立新闻
-  4. 非 `main` 分支，或 `main` 上手动 `publish=false`，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布 Pages
-  5. 仅当 `main` 且为定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
+  4. 非 `main` 分支、`main` 上手动 `publish=false`，以及每日定时灰度，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布生产 Pages
+  5. 仅当 `main` 且为 `08:36` 生产定时任务或手动 `publish=true` 时，执行归档、清理并提交保留后的 `data/` / `content/`
   6. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
-  7. 手动 `deploy_gray_pages=true` 时，要求 `publish=false`、`skip_generate=false`、Tavily 与 Trending 同时开启；Trending health 改为硬门禁，通过后才将同一份 preview artifact 的 `dist/` 推送到独立灰度 Pages 仓库
+  7. 每日定时任务自动采用正式灰度输入；手动 `deploy_gray_pages=true` 时仍要求 `publish=false`、`skip_generate=false`、Tavily 与 Trending 同时开启。两种入口都以 Trending health 为硬门禁，通过后才将同一份 preview artifact 的 `dist/` 推送到独立灰度 Pages 仓库
 
 ## 必要配置
 
@@ -103,7 +103,7 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 | --- | --- |
 | `TAVILY_API_KEY` | Tavily Search API Key |
 
-该 secret 注入生成任务；定时任务按 `config.yaml` 的默认开启策略使用它，手动任务由
+该 secret 注入生成任务；每日定时灰度强制使用 `--enrichment on`，手动任务由
 `enable_tavily` 显式决定 `--enrichment on/off`。未配置时，开启 Tavily 的运行仍会完成，并在
 页尾输出稳定诊断码。不要把真实 secret 写进文档、测试、fixture 或示例提交。
 
@@ -139,6 +139,9 @@ enable_agihunt_trending=true
 publish=false
 deploy_gray_pages=true
 ```
+
+每日定时入口等价于上述正式灰度输入（`enable_agihunt=false`），无需人工提供
+`workflow_dispatch` inputs；它不会隐式取得生产发布权限。
 
 灰度站点根目录的 `gray-build.json` 保留 source repository、commit、Actions run ID
 和 artifact 名，用于追溯当前在线灰度版本。

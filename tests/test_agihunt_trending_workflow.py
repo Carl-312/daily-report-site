@@ -20,7 +20,7 @@ def test_deploy_workflow_exposes_a_single_render_trending_gray_run() -> None:
     assert "scripts/agihunt_trending_health.py" in workflow
     assert "agihunt-trending-health.json" in workflow
     assert (
-        "continue-on-error: ${{ github.event_name != 'workflow_dispatch' || "
+        "continue-on-error: ${{ github.event.schedule != '0 14 * * *' && "
         "!inputs.deploy_gray_pages }}" in workflow
     )
     assert "AGI Hunt Trending will degrade without blocking other sources" in workflow
@@ -42,8 +42,26 @@ def test_scheduled_workflow_injects_tavily_secret_without_manual_gate() -> None:
 
     assert "TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}" in workflow
     assert "inputs.enable_tavily && secrets.TAVILY_API_KEY" not in workflow
+    assert "github.event.schedule == '0 14 * * *' || inputs.enable_tavily" in workflow
     assert "ENRICHMENT_ARGS=(--enrichment off)" in workflow
-    assert 'GITHUB_EVENT_NAME" = "workflow_dispatch' in workflow
+
+
+def test_daily_schedule_deploys_gray_pages_at_1400_asia_shanghai() -> None:
+    workflow = (REPO_ROOT / ".github" / "workflows" / "deploy.yml").read_text(
+        encoding="utf-8"
+    )
+
+    assert 'cron: "0 14 * * *"' in workflow
+    assert 'timezone: "Asia/Shanghai"' in workflow
+    assert (
+        "github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages" in workflow
+    )
+    assert "github.event.schedule == '36 0 * * *' || inputs.publish" in workflow
+    assert "github.event.schedule == '0 14 * * *' || inputs.enable_tavily" in workflow
+    assert (
+        "github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending"
+        in workflow
+    )
 
 
 def test_formal_gray_pages_is_isolated_and_requires_full_live_inputs() -> None:
