@@ -29,7 +29,7 @@
 3. 仅在 publish mode 下，在 `main` 分支上上传选定的 `dist/` 为 Pages artifact
 4. 由满足 `main`、`publish=true` 且 Pages 已启用条件的 `deploy` job 发布
 
-非 `main` 分支以及手动 `publish=false` 运行只上传
+非 `main` 分支以及手动非生产模式只上传
 `daily-report-preview-<run_id>`，不会发布 Pages。
 
 ## 独立正式灰度
@@ -37,10 +37,10 @@
 正式灰度不占用生产仓库的 Pages 配置。通过门禁的 preview `dist/` 会被推送到
 `Carl-312/daily-report-site-gray` 的 `gh-pages` 分支，在
 [`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
-与生产站并行。灰度发布必须满足 `publish=false`、`skip_generate=false`、Tavily on、
-Trending on 与 Trending health 硬门禁；它不调用生产 `deploy-pages` job。
+与生产站并行。手动 `run_mode=formal_gray` 与每日定时入口都会固定采用非生产、完整生成、
+Tavily on、Trending on 与 Trending health 硬门禁；它不调用生产 `deploy-pages` job。
 每日 `14:05`（`Asia/Shanghai`）定时入口会自动执行同一套正式灰度门禁并更新该站点；
-它不改变既有 `08:36` 生产定时发布或 `main` 上显式的手动 `publish=true` 边界。
+它不改变既有 `08:36` 生产定时发布或 `main` 上显式的手动 `run_mode=production` 边界。
 
 当前在线灰度对应提交 `0cbaef3`、源运行
 [`29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019) 和灰度 Pages 运行
