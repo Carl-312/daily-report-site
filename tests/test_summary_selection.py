@@ -71,9 +71,9 @@ def test_issue_snapshot_selects_a_source_balanced_shortlist() -> None:
         "a9",
         "a14",
         "a33",
+        "a30",
         "a16",
         "a17",
-        "a30",
     ]
     assert selected_source_counts(selected) == {
         "agihunt": 6,
@@ -102,6 +102,163 @@ def test_issue_snapshot_selects_a_source_balanced_shortlist() -> None:
     assert max(diagnostics["primary_entity_counts"].values()) <= 2
     assert max(diagnostics["model_family_counts"].values()) <= 1
     assert diagnostics["quota_relaxations"] == []
+
+
+def _tie_candidate(
+    title: str,
+    *,
+    link: str,
+    publish_time: str,
+    priority: int = 1,
+    evidence: list[dict] | None = None,
+    provenance: dict | None = None,
+) -> dict:
+    return {
+        "title": title,
+        "description": (
+            "The AI report documents a concrete product change and its current result."
+        ),
+        "link": link,
+        "publish_time": publish_time,
+        "priority": priority,
+        "source": "same-source",
+        "evidence_status": "direct",
+        "confidence": "reported",
+        "provenance": provenance or {},
+        "evidence": evidence or [],
+    }
+
+
+def test_equal_candidates_prefer_more_distinct_direct_evidence_domains() -> None:
+    articles = [
+        _tie_candidate(
+            "AI assistant Alpha launches a workflow update",
+            link="https://news.example/alpha",
+            publish_time="2026-07-22T10:00:00Z",
+            evidence=[
+                {"url": "https://www.news.example/alpha-copy"},
+                {"url": "https://news.example/alpha-second-copy"},
+            ],
+        ),
+        _tie_candidate(
+            "AI assistant Beta launches a workflow update",
+            link="https://news.example/beta",
+            publish_time="2026-07-21T10:00:00Z",
+            evidence=[
+                {"url": "https://reuters.com/technology/beta"},
+                {"url": "https://www.reuters.com/technology/beta-copy"},
+            ],
+        ),
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 1)
+
+    assert [article["article_id"] for article in selection.articles] == ["a2"]
+    assert selection.diagnostics["selected_metadata"][0]["evidence_domain_count"] == 2
+
+
+def test_equal_evidence_candidates_prefer_newer_real_source_time() -> None:
+    articles = [
+        _tie_candidate(
+            "AI assistant Alpha launches a workflow update",
+            link="https://news.example/alpha",
+            publish_time="Mon, 20 Jul 2026 10:00:00 GMT",
+        ),
+        _tie_candidate(
+            "AI assistant Beta launches a workflow update",
+            link="https://news.example/beta",
+            publish_time="2026-07-22T10:00:00+00:00",
+        ),
+    ]
+
+    selection = select_summary_candidates_with_diagnostics(articles, 1)
+
+    assert [article["article_id"] for article in selection.articles] == ["a2"]
+    assert selection.diagnostics["selected_metadata"][0]["publish_time"] == (
+        "2026-07-22T10:00:00Z"
+    )
+
+
+def test_trending_observation_time_cannot_win_the_freshness_tiebreak() -> None:
+    articles = [
+        _tie_candidate(
+            "AI assistant Alpha launches a workflow update",
+            link="https://news.example/alpha",
+            publish_time="2026-07-23T10:00:00Z",
+            provenance={"publish_time_semantics": "trend_observed_at"},
+        ),
+        _tie_candidate(
+            "AI assistant Beta launches a workflow update",
+            link="https://news.example/beta",
+            publish_time="2026-07-20T10:00:00Z",
+        ),
+    ]
+
+    selected = select_summary_candidates(articles, 1)
+
+    assert [article["article_id"] for article in selected] == ["a2"]
+
+
+def test_evidence_and_freshness_never_override_relevance_or_priority() -> None:
+    strong_metadata = [
+        {"url": "https://reuters.com/technology/corroboration"},
+        {"url": "https://apnews.com/article/corroboration"},
+    ]
+    lower_relevance = _tie_candidate(
+        "AI startup publishes an industry workflow analysis",
+        link="https://news.example/lower-relevance",
+        publish_time="2026-07-23T10:00:00Z",
+        priority=5,
+        evidence=strong_metadata,
+    )
+    higher_relevance = _tie_candidate(
+        "OpenAI launches a new GPT model for developers",
+        link="https://news.example/higher-relevance",
+        publish_time="2026-07-20T10:00:00Z",
+        priority=1,
+    )
+    selected = select_summary_candidates([lower_relevance, higher_relevance], 1)
+    assert [article["article_id"] for article in selected] == ["a2"]
+
+    high_priority = _tie_candidate(
+        "AI assistant Gamma launches a workflow update",
+        link="https://news.example/high-priority",
+        publish_time="2026-07-20T10:00:00Z",
+        priority=5,
+    )
+    low_priority = _tie_candidate(
+        "AI assistant Delta launches a workflow update",
+        link="https://news.example/low-priority",
+        publish_time="2026-07-23T10:00:00Z",
+        priority=1,
+        evidence=strong_metadata,
+    )
+    selected = select_summary_candidates([high_priority, low_priority], 1)
+    assert [article["article_id"] for article in selected] == ["a1"]
+
+
+def test_single_source_story_remains_eligible_but_signal_does_not() -> None:
+    articles = [
+        _tie_candidate(
+            "AI assistant Alpha launches a workflow update",
+            link="https://news.example/alpha",
+            publish_time="2026-07-22T10:00:00Z",
+        ),
+        {
+            **_tie_candidate(
+                "AI assistant Beta launches a workflow update",
+                link="https://news.example/beta",
+                publish_time="2026-07-23T10:00:00Z",
+                evidence=[{"url": "https://reuters.com/technology/beta"}],
+            ),
+            "evidence_status": "signal",
+            "confidence": "signal",
+        },
+    ]
+
+    selected = select_summary_candidates(articles, 2)
+
+    assert [article["article_id"] for article in selected] == ["a1"]
 
 
 def test_selection_does_not_promise_diversity_for_an_empty_stub_source() -> None:

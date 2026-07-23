@@ -9,41 +9,22 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      skip_generate:
-        description: "Rebuild from current retained content without generating today's report"
-        required: false
-        default: false
-        type: boolean
-      enable_tavily:
-        description: "Force-enable Tavily enrichment (scheduled gray runs always enable it)"
-        required: false
-        default: false
-        type: boolean
-      enable_agihunt:
-        description: "Manually enable AGIHunt as a shadow source for this run"
-        required: false
-        default: false
-        type: boolean
-      enable_agihunt_trending:
-        description: "Force-enable the production AGI Hunt Trending source for this run"
-        required: false
-        default: false
-        type: boolean
-      publish:
-        description: "Commit generated content and deploy to the production Pages site"
-        required: false
-        default: false
-        type: boolean
-      deploy_gray_pages:
-        description: "Deploy an accepted publish=false preview to the isolated gray Pages site"
-        required: false
-        default: false
-        type: boolean
+      run_mode:
+        description: "Choose one validated run mode"
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - formal_gray
+          - agihunt_shadow
+          - rebuild_preview
+          - production
   schedule:
     # Production generation remains at 00:36 UTC (08:36 Asia/Shanghai).
     - cron: "36 0 * * *"
-    # Generate and deploy the formal gray edition every day at 14:00 Shanghai time.
-    - cron: "0 14 * * *"
+    # Generate and deploy the formal gray edition every day at 14:05 Shanghai time.
+    - cron: "5 14 * * *"
       timezone: "Asia/Shanghai"
 
 permissions:
@@ -72,11 +53,11 @@ jobs:
         id: publish-mode
         shell: bash
         env:
-          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event.schedule == '36 0 * * *' || inputs.publish) }}
-          REQUEST_GRAY_PAGES: ${{ github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages || false }}
-          SKIP_GENERATE: ${{ inputs.skip_generate || false }}
-          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
+          SHOULD_PUBLISH: ${{ github.ref == 'refs/heads/main' && (github.event.schedule == '36 0 * * *' || inputs.run_mode == 'production') }}
+          REQUEST_GRAY_PAGES: ${{ github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray' }}
+          SKIP_GENERATE: ${{ inputs.run_mode == 'rebuild_preview' }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray' }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray' }}
         run: |
           if [ "$REQUEST_GRAY_PAGES" = "true" ]; then
             if [ "$SHOULD_PUBLISH" = "true" ]; then
@@ -84,7 +65,7 @@ jobs:
               exit 1
             fi
             if [ "$SKIP_GENERATE" = "true" ] || [ "$ENABLE_TAVILY" != "true" ] || [ "$ENABLE_AGIHUNT_TRENDING" != "true" ]; then
-              echo "::error::Formal gray Pages requires skip_generate=false, enable_tavily=true, enable_agihunt_trending=true, publish=false"
+              echo "::error::Formal gray mode invariant failed"
               exit 1
             fi
             echo "Formal gray Pages deployment requested"
@@ -109,16 +90,16 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Generate daily report
-        if: ${{ !inputs.skip_generate }}
+        if: ${{ inputs.run_mode != 'rebuild_preview' }}
         shell: bash
         env:
-          ENABLE_TAVILY: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_tavily || false }}
-          ENABLE_AGIHUNT: ${{ inputs.enable_agihunt || false }}
-          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '0 14 * * *' || inputs.enable_agihunt_trending || false }}
+          ENABLE_TAVILY: ${{ github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray' }}
+          ENABLE_AGIHUNT: ${{ inputs.run_mode == 'agihunt_shadow' }}
+          ENABLE_AGIHUNT_TRENDING: ${{ github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray' }}
           PUBLISH_MODE: ${{ steps.publish-mode.outputs.publish }}
           MODELSCOPE_API_KEY: ${{ secrets.MODELSCOPE_API_KEY }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
-          AGIHUNT_API_KEY: ${{ secrets.AGIHUNT_API_KEY }}
+          AGIHUNT_API_KEY: ${{ inputs.run_mode == 'agihunt_shadow' && secrets.AGIHUNT_API_KEY || '' }}
           # Scheduled gray runs force-enable enrichment. A missing secret is
           # fail-open and appears as a stable page diagnostic code.
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
@@ -174,20 +155,26 @@ jobs:
           fi
 
       - name: Validate AGIHunt shadow health
-        if: ${{ inputs.enable_agihunt && success() }}
+        if: ${{ inputs.run_mode == 'agihunt_shadow' && success() }}
         run: >
           python scripts/agihunt_gray_health.py --runs-dir .runs --data-dir data
           --content-dir content --output agihunt-gray-health.json
 
       - name: Validate AGI Hunt Trending health
-        if: ${{ !inputs.skip_generate && success() && (github.event_name != 'workflow_dispatch' || inputs.enable_agihunt_trending) }}
-        continue-on-error: ${{ github.event.schedule != '0 14 * * *' && !inputs.deploy_gray_pages }}
+        if: ${{ inputs.run_mode != 'rebuild_preview' && success() && (github.event_name != 'workflow_dispatch' || inputs.run_mode == 'formal_gray') }}
+        continue-on-error: ${{ github.event.schedule != '5 14 * * *' && inputs.run_mode != 'formal_gray' }}
         run: >
           python scripts/agihunt_trending_health.py --runs-dir .runs --data-dir data
           --output agihunt-trending-health.json
 
+      - name: Validate formal gray publication health
+        if: ${{ success() && (github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray') }}
+        run: >
+          python scripts/formal_gray_health.py --runs-dir .runs --data-dir data
+          --content-dir content --output formal-gray-health.json
+
       - name: Build site from retained content
-        if: ${{ inputs.skip_generate }}
+        if: ${{ inputs.run_mode == 'rebuild_preview' }}
         run: python main.py build
 
       - name: Resolve one public site edition
@@ -219,6 +206,7 @@ jobs:
             dist/
             agihunt-gray-health.json
             agihunt-trending-health.json
+            formal-gray-health.json
             daily_update.log
             *.log
           if-no-files-found: ignore
@@ -306,6 +294,7 @@ jobs:
             daily_update.log
             *.log
             agihunt-trending-health.json
+            formal-gray-health.json
             .archive-staging/archive-manifest.json
           if-no-files-found: ignore
 
@@ -324,7 +313,7 @@ jobs:
 
   deploy-gray-pages:
     if: >-
-      (github.event.schedule == '0 14 * * *' || inputs.deploy_gray_pages) &&
+      (github.event.schedule == '5 14 * * *' || inputs.run_mode == 'formal_gray') &&
       needs.generate-and-deploy.result == 'success' &&
       needs.generate-and-deploy.outputs.publish != 'true'
     environment:
@@ -347,6 +336,7 @@ jobs:
         run: |
           test -f preview/dist/index.html
           test -f preview/agihunt-trending-health.json
+          test -f preview/formal-gray-health.json
           python - <<'PY'
           import json
           from pathlib import Path
@@ -356,6 +346,11 @@ jobs:
           )
           if health.get("healthy") is not True:
               raise SystemExit("AGI Hunt Trending health did not pass")
+          formal_health = json.loads(
+              Path("preview/formal-gray-health.json").read_text(encoding="utf-8")
+          )
+          if formal_health.get("healthy") is not True:
+              raise SystemExit("Formal gray publication health did not pass")
           PY
 
       - name: Configure isolated gray Pages deploy key

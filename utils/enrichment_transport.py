@@ -65,6 +65,8 @@ def classify_request_outcome(error: Exception | None) -> str:
         status = getattr(getattr(error, "response", None), "status_code", None)
         if status in {401, 403}:
             return "authentication_error"
+        if status in {432, 433}:
+            return "usage_limit_exceeded"
         if status in {400, 404, 405, 422}:
             return "invalid_request"
         if status == 429:

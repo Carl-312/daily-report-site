@@ -450,6 +450,8 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     assert "输入已经由程序完成选题、去重、排序和来源配额" in prompt
     assert "不输出标题" in prompt
     assert "不要复述 `trend_signal`" in prompt
+    assert "`evidence_status`、`confidence`、`publish_time`" in prompt
+    assert "不得把证据域数量写成新闻事实" in prompt
     assert "把它作为主要选题信号" not in prompt
     assert len(prompt.splitlines()) <= 12
 
@@ -528,8 +530,105 @@ def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None
             "article_id": "a1",
             "title": "AI launch",
             "description": "new capability",
+            "evidence_status": "direct",
+            "confidence": "reported",
+            "publish_time": "",
+            "evidence_domain_count": 1,
         }
     ]
+
+
+def test_compress_articles_exposes_private_editorial_metadata(monkeypatch) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+
+    compressed = summarizer.compress_articles(
+        [
+            {
+                "title": "AI launch",
+                "description": "new capability",
+                "link": "https://www.example.test/private-source",
+                "publish_time": "Tue, 21 Jul 2026 16:58:25 GMT",
+                "evidence_status": "corroborated",
+                "confidence": "corroborated",
+                "evidence": [
+                    {
+                        "title": "Corroboration",
+                        "url": "https://reuters.com/technology/corroboration",
+                        "published_date": "2026-07-21",
+                        "snippet": "A second direct report.",
+                    },
+                    {
+                        "title": "Same domain",
+                        "url": "https://example.test/duplicate-domain",
+                        "published_date": "2026-07-21",
+                        "snippet": "The original domain again.",
+                    },
+                ],
+            }
+        ]
+    )
+
+    assert compressed[0]["evidence_status"] == "corroborated"
+    assert compressed[0]["confidence"] == "corroborated"
+    assert compressed[0]["publish_time"] == "2026-07-21T16:58:25Z"
+    assert compressed[0]["evidence_domain_count"] == 2
+    assert "link" not in compressed[0]
+
+
+def test_live_offline_and_publication_validation_share_the_p1_shortlist(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        summarizer, "get_config", lambda: _llm_config(max_summary_items=1)
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+    captured_input: dict = {}
+
+    def fake_summarize_sync(_client, params):
+        captured_input.update(json.loads(params["messages"][-1]["content"]))
+        return _summary_with_sources(["a2"])
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    articles = [
+        {
+            "title": "AI assistant Alpha launches a workflow update",
+            "description": (
+                "The AI report documents a concrete product change and its result."
+            ),
+            "link": "https://news.example/alpha",
+            "publish_time": "2026-07-22T10:00:00Z",
+            "priority": 1,
+            "source": "same-source",
+        },
+        {
+            "title": "AI assistant Beta launches a workflow update",
+            "description": (
+                "The AI report documents a concrete product change and its result."
+            ),
+            "link": "https://news.example/beta",
+            "publish_time": "2026-07-21T10:00:00Z",
+            "priority": 1,
+            "source": "same-source",
+            "evidence_status": "corroborated",
+            "confidence": "corroborated",
+            "evidence": [
+                {"url": "https://reuters.com/technology/beta", "snippet": "Report"}
+            ],
+        },
+    ]
+
+    live = summarizer.summarize_result(articles, stream=False)
+    offline = summarizer.offline_summary_result(articles, limit=1)
+
+    assert live.candidate_article_ids == offline.candidate_article_ids == ("a2",)
+    assert [item["article_id"] for item in captured_input["articles"]] == ["a2"]
+    assert captured_input["articles"][0]["evidence_domain_count"] == 2
+    assert live.selection_diagnostics == offline.selection_diagnostics
 
 
 def test_compress_articles_exposes_trending_rank_and_heat_to_the_editor(
@@ -707,6 +806,63 @@ def test_summary_provider_repairs_one_reader_contract_failure(
     repair_message = calls[1]["messages"][-1]["content"]
     assert "30–80 个可见字符" in repair_message
     assert "逐条保留输入 article_id 和顺序" in repair_message
+
+
+def test_summary_provider_repairs_grounding_failure_after_shape_repair(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        summarizer,
+        "get_config",
+        lambda: _llm_config(modelscope_secondary_model="", fallback_api_key=""),
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(summarizer, "create_client", lambda *_args: "client")
+    responses = [
+        json.dumps(
+            {
+                "items": [
+                    {
+                        "article_id": "a1",
+                        "summary": "人工智能公司发布新工具，并扩大产品能力。",
+                    }
+                ],
+                "discussion_topic": "你最关注哪条AI新闻？",
+            },
+            ensure_ascii=False,
+        ),
+        json.dumps(
+            {
+                "items": [
+                    {
+                        "article_id": "a1",
+                        "summary": (
+                            "人工智能公司发布开发者工具，并计划在未来5年扩大产品覆盖范围。"
+                        ),
+                        "why_it_matters": "这会改变开发团队采用相关能力的成本与效率。",
+                    }
+                ],
+                "discussion_topic": "你最关注哪条AI新闻？",
+            },
+            ensure_ascii=False,
+        ),
+        _valid_summary(),
+    ]
+    calls: list[dict] = []
+
+    def fake_summarize_sync(_client, params):
+        calls.append(params)
+        return responses.pop(0)
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+
+    result = summarizer.summarize_result([{"title": "Story"}], stream=False)
+
+    assert result.provider == "ModelScope"
+    assert len(calls) == 3
+    grounding_repair = calls[2]["messages"][-1]["content"]
+    assert "unsupported numeric claims: 5" in grounding_repair
+    assert "不要换成另一个数字" in grounding_repair
 
 
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (

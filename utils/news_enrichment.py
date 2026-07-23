@@ -1055,6 +1055,7 @@ def enrich_articles_with_tavily(
         build_candidate_queue,
         run_candidate_enrichment_stage,
     )
+    from utils.story_quality import article_is_lead
 
     article_dicts = [article_to_dict(article) for article in articles]
     reference_dt = reference_dt or datetime.now(tz=REPORT_TIMEZONE)
@@ -1071,17 +1072,31 @@ def enrich_articles_with_tavily(
     all_candidates = build_candidate_queue(stories + leads)
     daily_budget = max(0, min(30, int(settings.max_total_calls)))
     candidates = all_candidates[:daily_budget]
-    dropped_candidates = all_candidates[daily_budget:]
+    deferred_candidates = all_candidates[daily_budget:]
+    deferred_stories = [
+        candidate for candidate in deferred_candidates if not article_is_lead(candidate)
+    ]
+    dropped_leads = [
+        candidate for candidate in deferred_candidates if article_is_lead(candidate)
+    ]
     report.update(
         {
             "input_story_count": len(stories),
             "input_lead_count": len(leads),
             "publishability_rejected": partition["rejected"],
             "candidate_queue_count": len(candidates),
-            "candidate_dropped_count": len(dropped_candidates),
+            "candidate_dropped_count": len(dropped_leads),
             "candidate_dropped": [
                 observation_signal(candidate, "candidate_daily_budget_cap")
-                for candidate in dropped_candidates
+                for candidate in dropped_leads
+            ],
+            "candidate_unenriched_story_count": len(deferred_stories),
+            "candidate_unenriched_stories": [
+                observation_signal(
+                    candidate,
+                    "candidate_enrichment_budget_bypass",
+                )
+                for candidate in deferred_stories
             ],
             "candidate_processed_count": 0,
             "candidate_enrichment_calls": 0,
@@ -1122,7 +1137,7 @@ def enrich_articles_with_tavily(
             deadline_at=deadline_at,
         )
         final_partition = partition_articles_for_publication(stage["articles"])
-        final_articles = final_partition["stories"]
+        final_articles = final_partition["stories"] + deferred_stories
         report["publishability_rejected"].extend(final_partition["rejected"])
         report.update(
             {
@@ -1141,8 +1156,13 @@ def enrich_articles_with_tavily(
                     for article in final_articles
                     if isinstance(article.get("provenance"), dict)
                 ),
-                "lead_unresolved_count": len(stage["unresolved_leads"]),
-                "observation_signals": stage["unresolved_leads"],
+                "lead_unresolved_count": len(stage["unresolved_leads"])
+                + len(dropped_leads),
+                "observation_signals": stage["unresolved_leads"]
+                + [
+                    observation_signal(lead, "candidate_daily_budget_cap")
+                    for lead in dropped_leads
+                ],
                 "total_calls": stage["calls"],
                 "verify_calls": 0,
                 "refill_calls": 0,
@@ -1155,6 +1175,7 @@ def enrich_articles_with_tavily(
                 "terminal_error_code": stage["terminal_error_code"],
                 "accepted_by_stage_preview": {
                     "candidate_enrichment": sample_titles(final_articles),
+                    "direct_story_budget_bypass": sample_titles(deferred_stories),
                 },
             }
         )

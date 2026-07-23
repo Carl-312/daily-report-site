@@ -2,6 +2,7 @@
 
 ## 当前证据入口
 
+- [2026-07-22 正式灰度复盘与优化计划](2026-07-22-gray-review-and-optimization-plan.md)：核对当天在线灰度、后续失败运行、内容质量与不过拟合的三步优化顺序
 - [2026-07-19 内容价值分析与改造建议](2026-07-19-content-value-analysis.md)：从当天抓取证据出发，定义 Lead → Story、证据门槛和多轮事实补全
 - [当前选题与趋势展示问题](current-selection-and-presentation-issues.md)：多来源成稿退化和内部趋势标签外泄
 - [日报质量审计](daily-product-quality-audit.md)：按日期记录重复、扩展、发布和产物问题

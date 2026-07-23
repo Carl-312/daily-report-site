@@ -1,9 +1,9 @@
 # 每日新闻可靠性验收记录
 
 **生产分支：** `main`
-**当前灰度分支：** `agent/content-value-enrichment`
-**PR：** [#14](https://github.com/Carl-312/daily-report-site/pull/14) 为当前 Draft
-**状态：** Lead/Story 证据增强、10 条产品口径与独立 Pages 正式灰度已通过；生产保持不变，待维护者决定是否合并
+**当前灰度分支：** `agent/gray-schedule-1405`
+**PR：** [#15](https://github.com/Carl-312/daily-report-site/pull/15) 为当前 Draft
+**状态：** 2026-07-23 多来源、历史去重、摘要修复和独立 Pages 正式灰度已通过；生产保持不变，待维护者决定是否合并
 
 ## 已验证能力
 
@@ -32,7 +32,32 @@
 
 这些检查只证明当前测试矩阵通过，不是 merge 授权。
 
-## 最新验证证据（2026-07-21）
+## 最新验证证据（2026-07-23）
+
+- 验证提交为 `b4ed875edeb2471836fd66341186bd0572f40f2c`；本地门禁为 `230 passed`，
+  `ruff check .`、`ruff format --check .`、`git diff --check` 和 `compileall` 全绿，
+  仅有已知 Pydantic V2 弃用 warning。
+- [push CI `29996595082`](https://github.com/Carl-312/daily-report-site/actions/runs/29996595082)
+  与 [PR CI `29996597916`](https://github.com/Carl-312/daily-report-site/actions/runs/29996597916)
+  的 `p0-contract`、`quality`、`gray-scenarios`、`final-regression` 全部通过。
+- [正式灰度源运行 `29996599026`](https://github.com/Carl-312/daily-report-site/actions/runs/29996599026)
+  以 Tavily on、Trending on、`publish=false` 生成并通过完整灰度门禁。Tavily 首次请求返回
+  `usage_limit_exceeded` 后立即停止；24 条直接 Story 继续进入选题，最终
+  `source_balanced_v2` 发布 10 条，TechCrunch 6 条、The Verge 4 条。
+- staged edition 同时保留 `data/2026-07-22.json` 与 `data/2026-07-23.json`；
+  `recent_dedupe.checked_days` 包含 `2026-07-22`，移除 4 条昨日 URL，最终摘要与昨日 URL
+  零重合。`formal-gray-health.json` 为 `healthy=true`，摘要、来源分布、历史数据和
+  publication status 全部通过。
+- [灰度 Pages 运行 `29997299864`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29997299864)
+  发布到
+  [2026-07-23 灰度页](https://carl-312.github.io/daily-report-site-gray/2026-07-23.html)。
+  页面有 10 个编号段落、1 个互动区块和 1 个“入选来源”区块；线上 HTML 与 preview artifact
+  SHA-256 均为 `286b8787fb1f5fe8aa99902f1429b4f31fcf0ee9c35c28aecfe28b22528bfdcf`。
+- 灰度仓库提交 `2415ee5622f7ec01de1d13c7b2ffb659d3029202` 的 `gray-build.json`
+  指向源提交、源运行 `29996599026`、`daily-report-preview-29996599026` 和
+  `formal_gray` channel；生产 `deploy` 明确跳过。
+
+## 历史验证证据（2026-07-21）
 
 - 验证提交为 `0cbaef35569fcecf1620a0eae25379bf071f450e`；本地门禁为 `211 passed`，
   `ruff check .`、`ruff format --check .`、`git diff --check` 和 `compileall` 全绿，
@@ -110,4 +135,4 @@ PR #8、#9 已通过 CI 后合并；后续生产变更仍应先走灰度 PR 和 
 - `0ee5ebe`：修复紧凑有序列表渲染丢失摘要条目的问题，并增加构建回归测试。
 
 ---
-*最后更新：2026-07-19*
+*最后更新：2026-07-23*

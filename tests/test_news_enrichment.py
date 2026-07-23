@@ -292,6 +292,41 @@ def test_metadata_admission_caps_the_queue_so_every_candidate_is_searched(
     assert enriched["report"]["input_count"] == 31
     assert enriched["report"]["candidate_queue_count"] == 30
     assert enriched["report"]["candidate_processed_count"] == 30
-    assert enriched["report"]["candidate_dropped_count"] == 1
+    assert enriched["report"]["candidate_dropped_count"] == 0
+    assert enriched["report"]["candidate_unenriched_story_count"] == 1
     assert enriched["report"]["total_calls"] == 30
-    assert len(enriched["articles"]) == 30
+    assert len(enriched["articles"]) == 31
+
+
+def test_usage_limit_stops_requests_and_preserves_all_direct_stories(
+    monkeypatch,
+) -> None:
+    response = requests.Response()
+    response.status_code = 432
+    calls = 0
+
+    def fail_with_usage_limit(*_args, **_kwargs):
+        nonlocal calls
+        calls += 1
+        raise requests.HTTPError(response=response)
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fail_with_usage_limit)
+    direct_stories = [story(index, entity=f"Vendor{index}") for index in range(31)]
+    signal = lead()
+
+    enriched = enrich_articles_with_tavily(
+        [*direct_stories, signal],
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=30),
+        tavily_api_key="key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert calls == 1
+    assert len(enriched["articles"]) == 31
+    assert enriched["report"]["terminal_error_code"] == "usage_limit_exceeded"
+    assert enriched["report"]["stop_reason"] == (
+        "candidate_enrichment_usage_limit_exceeded"
+    )
+    assert enriched["report"]["lead_unresolved_count"] == 1
