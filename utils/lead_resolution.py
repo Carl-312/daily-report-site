@@ -558,6 +558,7 @@ def run_candidate_enrichment_stage(
                 "authentication_error",
                 "invalid_request",
                 "rate_limited",
+                "usage_limit_exceeded",
                 "deadline_exceeded",
             }:
                 terminal_error_code = outcome
@@ -744,6 +745,7 @@ def run_lead_resolution_stage(
                 "authentication_error",
                 "invalid_request",
                 "rate_limited",
+                "usage_limit_exceeded",
                 "deadline_exceeded",
             }:
                 terminal_error_code = outcome

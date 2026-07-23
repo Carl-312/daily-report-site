@@ -62,7 +62,11 @@ config.yaml + .env
 
 `sources/` 通过显式 registry 管理 source adapter；`fetch_batch()` 聚合来源结果，并将单源状态保留在 `SourceRunResult` 中。来源适配器负责 HTTP、解析、时间过滤和 `Article` 生成，不负责摘要或发布决策。
 
-当前 source 包括关闭态的主候选 `agihunt`、`aibase`、`techcrunch`、`theverge` 和可选的 `syft`。`agihunt` 只经官方 Agent API 读取日报诊断和有限频道候选，默认保持关闭直到多日 shadow 通过；新增 source 的接口和验证见[扩展新闻源](../development/source-adapters.md)。
+当前 source 包括关闭态的主候选 `agihunt`、`aibase`、`techcrunch`、`theverge` 和可选的 `syft`。
+`techcrunch` 与 `theverge` 分别读取官方 AI RSS/Atom feed，直接保存正文摘要和权威发布时间，
+即使 Tavily 不可用也能形成独立 Story。`agihunt` 只经官方 Agent API 读取日报诊断和有限频道
+候选，默认保持关闭直到多日 shadow 通过；新增 source 的接口和验证见
+[扩展新闻源](../development/source-adapters.md)。
 
 ### 3. 输入去重层
 
@@ -96,12 +100,13 @@ Tavily 结果应保存为每条候选最多三份直接来源组成的结构化 
 
 Tavily 前的候选顺序由确定性元数据队列决定，不引入 AI 预选：先做同事件去重，再按 AI 相关性、
 来源优先级、发布时间和趋势排名排序，并在队列前段做简单主体轮转。轮转只调整处理顺序，不禁止
-同一主体的多个独立事件。受每日 30 次硬预算约束，元数据层最多准入前 30 条正式候选，超出部分
-只写入私有诊断；Tavily 不得从队列外引入选题。
+同一主体的多个独立事件。每日最多执行 30 次 Tavily 请求；超出请求队列的直接 Story 仍保留原始
+来源证据并可进入选题，只有未补证的 Lead 继续留在私有诊断。Tavily 不得从来源队列外引入选题。
 
 enrichment 的失败语义是 fail-open：请求失败时保留已抓取的直接 Story，并记录诊断；Lead 补证失败
-只保留为私有 observation signal。生产路径不会为达到目标条数搜索候选队列外新闻。当前开关、参数
-和灰度边界见 [Tavily 运行手册](../operations/tavily.md)。
+只保留为私有 observation signal。HTTP 432/433 统一归类为 `usage_limit_exceeded` 并立即停止后续
+无效请求。生产路径不会为达到目标条数搜索来源队列外新闻。当前开关、参数和灰度边界见
+[Tavily 运行手册](../operations/tavily.md)。
 
 ### 5. 摘要边界
 
@@ -144,7 +149,8 @@ renderer 会隐藏 ID 和来源 URL；发布前仍必须满足：
 
 单次完整发布由 `stage_and_publish_run()` 完成：
 
-1. 在 run workspace 中准备完整 `data/content/site` edition。
+1. 把上一版 `data/content` 完整复制到 run workspace，再写入当天文件，准备完整
+   `data/content/site` edition。
 2. 写入 JSON、Markdown 并构建静态站点。
 3. 再次执行摘要契约和 publication policy。
 4. 通过后调用 `promote_staged_edition()` 切换 `.publication/current.json` 指针。

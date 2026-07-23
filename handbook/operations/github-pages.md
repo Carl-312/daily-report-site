@@ -38,7 +38,9 @@
 `Carl-312/daily-report-site-gray` 的 `gh-pages` 分支，在
 [`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
 与生产站并行。手动 `run_mode=formal_gray` 与每日定时入口都会固定采用非生产、完整生成、
-Tavily on、Trending on 与 Trending health 硬门禁；它不调用生产 `deploy-pages` job。
+Tavily on、Trending on、Trending health 与完整 formal-gray health 硬门禁；后者阻止历史
+data checkpoint 缺失、跨日重复、摘要映射异常，以及 enrichment 全失败后单一来源退化的产物。
+它不调用生产 `deploy-pages` job。
 每日 `14:05`（`Asia/Shanghai`）定时入口会自动执行同一套正式灰度门禁并更新该站点；
 它不改变既有 `08:36` 生产定时发布或 `main` 上显式的手动 `run_mode=production` 边界。
 

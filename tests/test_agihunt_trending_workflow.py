@@ -23,6 +23,8 @@ def test_deploy_workflow_exposes_a_single_render_trending_gray_run() -> None:
     assert "AGIHUNT_TRENDING_CHROME_BIN" in workflow
     assert "scripts/agihunt_trending_health.py" in workflow
     assert "agihunt-trending-health.json" in workflow
+    assert "scripts/formal_gray_health.py" in workflow
+    assert "formal-gray-health.json" in workflow
     assert (
         "continue-on-error: ${{ github.event.schedule != '5 14 * * *' && "
         "inputs.run_mode != 'formal_gray' }}" in workflow
@@ -82,7 +84,9 @@ def test_formal_gray_pages_is_isolated_and_requires_full_live_inputs() -> None:
     assert "needs.generate-and-deploy.outputs.publish != 'true'" in workflow
     assert "name: daily-report-preview-${{ github.run_id }}" in workflow
     assert "preview/agihunt-trending-health.json" in workflow
+    assert "preview/formal-gray-health.json" in workflow
     assert 'health.get("healthy") is not True' in workflow
+    assert 'formal_health.get("healthy") is not True' in workflow
     assert "Carl-312/daily-report-site-gray" in workflow
     assert "git -C gray-site push origin HEAD:gh-pages" in workflow
     assert "environment:\n      name: gray-pages" in workflow

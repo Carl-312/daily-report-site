@@ -54,7 +54,10 @@
   4. 非 `main` 分支、手动非生产模式以及每日定时灰度，上传 `daily-report-preview-<run_id>`，不回写、不归档、不发布生产 Pages
   5. 仅当 `main` 且为 `08:36` 生产定时任务或手动 `run_mode=production` 时，执行归档、清理并提交保留后的 `data/` / `content/`
   6. 仅在上述生产模式且 Pages 已启用时，使用 `actions/upload-pages-artifact@v3` 和独立 `deploy` job 发布
-  7. 每日定时任务自动采用正式灰度参数；手动 `run_mode=formal_gray` 使用同一预设。两种入口都以 Trending health 为硬门禁，通过后才将同一份 preview artifact 的 `dist/` 推送到独立灰度 Pages 仓库
+  7. 每日定时任务自动采用正式灰度参数；手动 `run_mode=formal_gray` 使用同一预设。两种入口都
+     先执行 Trending health，再执行完整 formal-gray health：复核摘要契约、前一天 data checkpoint、
+     最近去重、来源分布，以及“全部 enrichment 请求失败且正文退化为单一来源”的组合故障。两项均
+     通过后才将同一份 preview artifact 的 `dist/` 推送到独立灰度 Pages 仓库
 
 ## 必要配置
 
@@ -106,6 +109,10 @@ Code provider，摘要安全回退到 SiliconFlow。随后对 `Tencent-Hunyuan/H
 该 secret 注入生成任务；每日定时灰度与手动 `run_mode=formal_gray` 强制使用
 `--enrichment on`，其他手动模式显式关闭。未配置时，开启 Tavily 的运行仍会完成，并在
 页尾输出稳定诊断码。不要把真实 secret 写进文档、测试、fixture 或示例提交。
+
+Tavily 的 HTTP 432/433 会记录为 `usage_limit_exceeded` 并终止本轮后续 Tavily 请求；已由
+TechCrunch/The Verge 官方 feed 获取的直接 Story 继续参与选题。正式灰度只有在直接来源仍能形成
+可验证的多来源正文时才允许此类 fail-open 产物覆盖灰度站。
 
 ### Workflow 权限
 
