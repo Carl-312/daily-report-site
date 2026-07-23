@@ -36,6 +36,10 @@ from utils.summary_selection import (
     article_source_label,
     select_summary_candidates_with_diagnostics,
 )
+from utils.story_quality import (
+    direct_evidence_domains,
+    normalized_source_publish_time,
+)
 
 
 class SummaryQualityError(ValueError):
@@ -92,6 +96,10 @@ def compress_articles(articles: list[dict]) -> list[dict]:
             "article_id": article_reference_id(a, index),
             "title": (a.get("title") or "")[: cfg.title_max],
             "description": (a.get("description") or "")[: cfg.desc_max],
+            "evidence_status": str(a.get("evidence_status") or "direct").strip(),
+            "confidence": str(a.get("confidence") or "reported").strip(),
+            "publish_time": normalized_source_publish_time(a),
+            "evidence_domain_count": len(direct_evidence_domains(a)),
         }
         evidence = a.get("evidence")
         if isinstance(evidence, list):
