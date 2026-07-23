@@ -141,17 +141,18 @@ run_mode=formal_gray
 灰度站点根目录的 `gray-build.json` 保留 source repository、commit、Actions run ID
 和 artifact 名，用于追溯当前在线灰度版本。
 
-### 当前正式灰度（2026-07-21）
+### 当前正式灰度（2026-07-22）
 
-- 源提交：`0cbaef35569fcecf1620a0eae25379bf071f450e`
-- 源运行：[`29818465019`](https://github.com/Carl-312/daily-report-site/actions/runs/29818465019)
-- preview artifact：`daily-report-preview-29818465019`
-- 灰度 Pages 运行：[`29818600100`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29818600100)
+- 源提交：`f12b7cbfee6fc91e18d82c96eeb4b43c154a291a`
+- 源运行：[`29898775847`](https://github.com/Carl-312/daily-report-site/actions/runs/29898775847)
+- preview artifact：`daily-report-preview-29898775847`
+- 灰度 Pages 运行：[`29898893738`](https://github.com/Carl-312/daily-report-site-gray/actions/runs/29898893738)
 - 在线站点：[`https://carl-312.github.io/daily-report-site-gray/`](https://carl-312.github.io/daily-report-site-gray/)
 
-该运行发布 10 条新闻，Trending health 通过，生产 deploy 跳过。页面的互动话题独立成段，
-页尾“入选来源”按最终入选条目由代码生成。灰度清理后，GitHub 仅保留上述源运行、
-灰度 Pages 运行及对应 deployment；旧灰度运行和失活 deployment 已删除。
+该运行发布 10 条新闻，Trending health 通过，生产 deploy 跳过。当天稍后的定时正式灰度
+[`29902885565`](https://github.com/Carl-312/daily-report-site/actions/runs/29902885565)
+在摘要阶段失败，灰度部署被跳过，因此在线站点仍保持上述 last-known-good。内容质量与后续
+优化见[当天复盘](../quality/2026-07-22-gray-review-and-optimization-plan.md)。
 
 ## 保留策略说明
 
@@ -162,8 +163,9 @@ run_mode=formal_gray
 
 当前最小方案只对 `data/` / `content/` 做长期归档；站点本身只展示仓库保留窗口内的内容。
 
-`workflow_dispatch` 在非 `main` 分支上仍可用于手动验证生成流程，但只上传预览 artifact，
-不会回写仓库、上传归档或发布 Pages。`production` 也只有在 `main` 上才取得发布权限。
+`workflow_dispatch` 在非 `main` 分支上仍可用于手动验证生成流程，不会回写仓库、上传归档或
+发布生产 Pages；其中显式 `run_mode=formal_gray` 会在 health gate 通过后发布到独立灰度
+Pages，其他非生产模式只上传预览 artifact。`production` 也只有在 `main` 上才取得生产发布权限。
 
 ### 2026-07-10 灰度证据
 
