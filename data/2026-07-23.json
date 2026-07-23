@@ -1,0 +1,1656 @@
+{
+  "date": "2026-07-23",
+  "articles": [
+    {
+      "title": "Claude Code Can Now Build and Test iOS Apps in Apple's Simulator - MacRumors",
+      "link": "https://www.macrumors.com/2026/07/21/claude-code-ios-simulator/",
+      "description": "[www.macrumors.com] Tuesday July 7, 2026 1:05 pm PDT by Juli Clover Anthropic today said it is bringing Claude Cowork to mobile and the web, with beta access rolling out to Max users first. Claude Cowork is a feature that lets Claude access local files and connected tools, then autonomously complete tasks on your behalf. Claude Cowork tasks can now be started and monitored on the web, desktop, and Claude mobile apps. Claude is able to work in the background... Read Full Article • 20 comments Top Rated Comments S Sp1281 3 hours ago at 04:50 pm I guess Im a developer now. Score: 14 Votes (Like | Disagree) CalMin 2 [9to5mac.com] > 3. Watch the app in the simulator pane: When the app launches in a simulator, the iOS Simulator pane opens next to the conversation. The first time Claude uses a device, the desktop app asks you to allow it; see Grant Claude access to a device. Claude installs the app, taps through it, and reads the screen to verify its own changes while you watch. Anthropic explains that “the simulator pane drives the simulator directly, so it doesn’t need computer use and never takes over your screen or hides your other windows.” From the CLI, however, “Claude reaches the iOS Simulator through computer use",
+      "publish_time": "Tue, 21 Jul 2026 23:46:35 GMT",
+      "content": "[www.macrumors.com] Tuesday July 7, 2026 1:05 pm PDT by Juli Clover Anthropic today said it is bringing Claude Cowork to mobile and the web, with beta access rolling out to Max users first. Claude Cowork is a feature that lets Claude access local files and connected tools, then autonomously complete tasks on your behalf. Claude Cowork tasks can now be started and monitored on the web, desktop, and Claude mobile apps. Claude is able to work in the background... Read Full Article • 20 comments Top Rated Comments S Sp1281 3 hours ago at 04:50 pm I guess Im a developer now. Score: 14 Votes (Like | Disagree) CalMin 2 [9to5mac.com] > 3. Watch the app in the simulator pane: When the app launches in a simulator, the iOS Simulator pane opens next to the conversation. The first time Claude uses a device, the desktop app asks you to allow it; see Grant Claude access to a device. Claude installs the app, taps through it, and reads the screen to verify its own changes while you watch. Anthropic explains that “the simulator pane drives the simulator directly, so it doesn’t need computer use and never takes over your screen or hides your other windows.” From the CLI, however, “Claude reaches the iOS Simulator through computer use",
+      "priority": 4,
+      "source": "www.macrumors.com",
+      "kind": "story",
+      "evidence_status": "corroborated",
+      "confidence": "corroborated",
+      "provenance": {
+        "provider": "AGI HUNT · agihunt.info",
+        "retrieval": "homepage_trending_dom",
+        "trend_day": "2026-07-23",
+        "trend_window": "1d",
+        "trend_rank": "2",
+        "trend_heat": "14.2",
+        "trend_state": "down",
+        "trend_delta": "1",
+        "trend_term_en": "Claude Security beta for Claude Code",
+        "observed_at": "2026-07-23T11:54:59+08:00",
+        "publish_time_semantics": "source_published_at",
+        "chrome_version": "Google Chrome 150.0.7871.114",
+        "selection_title": "Claude Code 安全扫描插件上线",
+        "selection_description": "Anthropic 为 Claude Code 推出 Claude Security 插件,进入 beta 阶段。",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_lead_resolution",
+        "lead_title": "Claude Code 安全扫描插件上线",
+        "lead_source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Claude+Security+beta+for+Claude+Code",
+        "evidence_count": "2",
+        "evidence_domains": "9to5mac.com,www.macrumors.com",
+        "evidence_urls": "https://www.macrumors.com/2026/07/21/claude-code-ios-simulator/|https://9to5mac.com/2026/07/21/claude-code-brings-live-ios-app-testing-into-its-mac-app/"
+      },
+      "evidence": [
+        {
+          "title": "Claude Code Can Now Build and Test iOS Apps in Apple's Simulator - MacRumors",
+          "url": "https://www.macrumors.com/2026/07/21/claude-code-ios-simulator/",
+          "domain": "www.macrumors.com",
+          "published_date": "Tue, 21 Jul 2026 23:46:35 GMT",
+          "text": "Tuesday July 7, 2026 1:05 pm PDT by Juli Clover Anthropic today said it is bringing Claude Cowork to mobile and the web, with beta access rolling out to Max users first. Claude Cowork is a feature that lets Claude access local files and connected tools, then autonomously complete tasks on your behalf. Claude Cowork tasks can now be started and monitored on the web, desktop, and Claude mobile apps. Claude is able to work in the background... Read Full Article • 20 comments Top Rated Comments S Sp1281 3 hours ago at 04:50 pm I guess Im a developer now. Score: 14 Votes (Like | Disagree) CalMin 2",
+          "snippet": "Tuesday July 7, 2026 1:05 pm PDT by Juli Clover Anthropic today said it is bringing Claude Cowork to mobile and the web, with beta access rolling out to Max users first. Claude Cowork is a feature that lets Claude access local files and connected tools, then autonomously complete tasks on your behalf. Claude Cowork tasks can now be started and monitored on the web, desktop, and Claude mobile apps. Claude is able to work in the background... Read Full Article • 20 comments Top Rated Comments S Sp1281 3 hours ago at 04:50 pm I guess Im a developer now. Score: 14 Votes (Like | Disagree) CalMin 2",
+          "score": 0.45754927,
+          "origin": "tavily"
+        },
+        {
+          "title": "Claude Code brings live iOS app testing into its Mac app - 9to5Mac",
+          "url": "https://9to5mac.com/2026/07/21/claude-code-brings-live-ios-app-testing-into-its-mac-app/",
+          "domain": "9to5mac.com",
+          "published_date": "Wed, 22 Jul 2026 00:52:43 GMT",
+          "text": "> 3. Watch the app in the simulator pane: When the app launches in a simulator, the iOS Simulator pane opens next to the conversation. The first time Claude uses a device, the desktop app asks you to allow it; see Grant Claude access to a device. Claude installs the app, taps through it, and reads the screen to verify its own changes while you watch. Anthropic explains that “the simulator pane drives the simulator directly, so it doesn’t need computer use and never takes over your screen or hides your other windows.” From the CLI, however, “Claude reaches the iOS Simulator through computer use",
+          "snippet": "> 3. Watch the app in the simulator pane: When the app launches in a simulator, the iOS Simulator pane opens next to the conversation. The first time Claude uses a device, the desktop app asks you to allow it; see Grant Claude access to a device. Claude installs the app, taps through it, and reads the screen to verify its own changes while you watch. Anthropic explains that “the simulator pane drives the simulator directly, so it doesn’t need computer use and never takes over your screen or hides your other windows.” From the CLI, however, “Claude reaches the iOS Simulator through computer use",
+          "score": 0.25516772,
+          "origin": "tavily"
+        }
+      ]
+    },
+    {
+      "title": "AMD commits up to $5 billion to Anthropic",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/969285/amd-anthropic-ai-infrastructure-deal",
+      "description": "AMD says it's going to invest up to $5 billion in Anthropic, while helping to expand the AI company's computing power, according to an announcement on Wednesday. As part of the new partnership, Anthropic will deploy up to 2 gigawatts of AMD's Instinct MI450 AI GPUs using the chipmaker's new Helios rack-scale system, as reported […]",
+      "publish_time": "2026-07-22T10:44:27-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "AMD commits up to $5 billion to Anthropic",
+        "selection_description": "AMD says it's going to invest up to $5 billion in Anthropic, while helping to expand the AI company's computing power, according to an announcement on Wednesday. As part of the new partnership, Anthropic will deploy up to 2 gigawatts of AMD's Instinct MI450 AI GPUs using the chipmaker's new Helios rack-scale system, as reported […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/969285/amd-anthropic-ai-infrastructure-deal"
+      },
+      "evidence": [
+        {
+          "title": "AMD commits up to $5 billion to Anthropic",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/969285/amd-anthropic-ai-infrastructure-deal",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-22T10:44:27-04:00",
+          "text": "AMD says it's going to invest up to $5 billion in Anthropic, while helping to expand the AI company's computing power, according to an announcement on Wednesday. As part of the new partnership, Anthropic will deploy up to 2 gigawatts of AMD's Instinct MI450 AI GPUs using the chipmaker's new Helios rack-scale system, as reported […]",
+          "snippet": "AMD says it's going to invest up to $5 billion in Anthropic, while helping to expand the AI company's computing power, according to an announcement on Wednesday. As part of the new partnership, Anthropic will deploy up to 2 gigawatts of AMD's Instinct MI450 AI GPUs using the chipmaker's new Helios rack-scale system, as reported […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Google launches a cheaper alternative to large AI security models like Mythos",
+      "link": "https://www.theverge.com/tech/968572/google-gemini-flash-cyber-ai-security-model",
+      "description": "Google is launching Gemini 3.6 Flash alongside a new security model dedicated to quickly finding and patching security vulnerabilities. In a blog post on Tuesday, Google describes Gemini 3.5 Flash Cyber as a \"cost-efficient and highly capable alternative\" to larger, more expensive AI systems, such as the one offered by Anthropic's Mythos. The cybersecurity model […]",
+      "publish_time": "2026-07-21T11:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Google launches a cheaper alternative to large AI security models like Mythos",
+        "selection_description": "Google is launching Gemini 3.6 Flash alongside a new security model dedicated to quickly finding and patching security vulnerabilities. In a blog post on Tuesday, Google describes Gemini 3.5 Flash Cyber as a \"cost-efficient and highly capable alternative\" to larger, more expensive AI systems, such as the one offered by Anthropic's Mythos. The cybersecurity model […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/968572/google-gemini-flash-cyber-ai-security-model"
+      },
+      "evidence": [
+        {
+          "title": "Google launches a cheaper alternative to large AI security models like Mythos",
+          "url": "https://www.theverge.com/tech/968572/google-gemini-flash-cyber-ai-security-model",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-21T11:00:00-04:00",
+          "text": "Google is launching Gemini 3.6 Flash alongside a new security model dedicated to quickly finding and patching security vulnerabilities. In a blog post on Tuesday, Google describes Gemini 3.5 Flash Cyber as a \"cost-efficient and highly capable alternative\" to larger, more expensive AI systems, such as the one offered by Anthropic's Mythos. The cybersecurity model […]",
+          "snippet": "Google is launching Gemini 3.6 Flash alongside a new security model dedicated to quickly finding and patching security vulnerabilities. In a blog post on Tuesday, Google describes Gemini 3.5 Flash Cyber as a \"cost-efficient and highly capable alternative\" to larger, more expensive AI systems, such as the one offered by Anthropic's Mythos. The cybersecurity model […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Meta made its own AI detection system. It should have just used Google’s",
+      "link": "https://www.theverge.com/tech/968680/meta-ai-detection-labeling-content-seal-watermarks-synthid",
+      "description": "IIn March, Meta's Oversight Board called on the company to \"meet its public commitments and employ its own tools\" to help quell the spread of deceptive generative AI content across platforms. Meta responded in July by introducing Content Seal - an invisible watermarking technology that flags images generated by the company's new AI model. But […]",
+      "publish_time": "2026-07-22T07:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Meta made its own AI detection system. It should have just used Google’s",
+        "selection_description": "IIn March, Meta's Oversight Board called on the company to \"meet its public commitments and employ its own tools\" to help quell the spread of deceptive generative AI content across platforms. Meta responded in July by introducing Content Seal - an invisible watermarking technology that flags images generated by the company's new AI model. But […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/968680/meta-ai-detection-labeling-content-seal-watermarks-synthid"
+      },
+      "evidence": [
+        {
+          "title": "Meta made its own AI detection system. It should have just used Google’s",
+          "url": "https://www.theverge.com/tech/968680/meta-ai-detection-labeling-content-seal-watermarks-synthid",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-22T07:00:00-04:00",
+          "text": "IIn March, Meta's Oversight Board called on the company to \"meet its public commitments and employ its own tools\" to help quell the spread of deceptive generative AI content across platforms. Meta responded in July by introducing Content Seal - an invisible watermarking technology that flags images generated by the company's new AI model. But […]",
+          "snippet": "IIn March, Meta's Oversight Board called on the company to \"meet its public commitments and employ its own tools\" to help quell the spread of deceptive generative AI content across platforms. Meta responded in July by introducing Content Seal - an invisible watermarking technology that flags images generated by the company's new AI model. But […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Utility companies promise to spare us from AI’s energy bill",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/969137/us-utility-ai-electricty-data-center-rate-pledge-trump",
+      "description": "In the face of backlash to concerns the AI boom will increase consumer electricity bills, the largest utility companies and data center developers in the US are now promising to do something about it. The Wall Street Journal reports that nearly 200 organizations have signed President Donald Trump's \"rate payer protection pledge\" that's meant to […]",
+      "publish_time": "2026-07-22T06:12:13-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Utility companies promise to spare us from AI’s energy bill",
+        "selection_description": "In the face of backlash to concerns the AI boom will increase consumer electricity bills, the largest utility companies and data center developers in the US are now promising to do something about it. The Wall Street Journal reports that nearly 200 organizations have signed President Donald Trump's \"rate payer protection pledge\" that's meant to […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/969137/us-utility-ai-electricty-data-center-rate-pledge-trump"
+      },
+      "evidence": [
+        {
+          "title": "Utility companies promise to spare us from AI’s energy bill",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/969137/us-utility-ai-electricty-data-center-rate-pledge-trump",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-22T06:12:13-04:00",
+          "text": "In the face of backlash to concerns the AI boom will increase consumer electricity bills, the largest utility companies and data center developers in the US are now promising to do something about it. The Wall Street Journal reports that nearly 200 organizations have signed President Donald Trump's \"rate payer protection pledge\" that's meant to […]",
+          "snippet": "In the face of backlash to concerns the AI boom will increase consumer electricity bills, the largest utility companies and data center developers in the US are now promising to do something about it. The Wall Street Journal reports that nearly 200 organizations have signed President Donald Trump's \"rate payer protection pledge\" that's meant to […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Here’s what Samsung’s smart glasses actually look like",
+      "link": "https://www.theverge.com/tech/969382/samsung-google-smart-glasses-gentle-monster-warby-parker",
+      "description": "Samsung has given us our first chance to check out its upcoming smart glasses in person, revealing two new designs and the first specs in the process, including an impressive 9-hour battery life. The glasses, developed in collaboration with Google and the eyewear brands Gentle Monster and Warby Parker, are due to launch this fall. […]",
+      "publish_time": "2026-07-22T12:35:34-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Here’s what Samsung’s smart glasses actually look like",
+        "selection_description": "Samsung has given us our first chance to check out its upcoming smart glasses in person, revealing two new designs and the first specs in the process, including an impressive 9-hour battery life. The glasses, developed in collaboration with Google and the eyewear brands Gentle Monster and Warby Parker, are due to launch this fall. […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/969382/samsung-google-smart-glasses-gentle-monster-warby-parker"
+      },
+      "evidence": [
+        {
+          "title": "Here’s what Samsung’s smart glasses actually look like",
+          "url": "https://www.theverge.com/tech/969382/samsung-google-smart-glasses-gentle-monster-warby-parker",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-22T12:35:34-04:00",
+          "text": "Samsung has given us our first chance to check out its upcoming smart glasses in person, revealing two new designs and the first specs in the process, including an impressive 9-hour battery life. The glasses, developed in collaboration with Google and the eyewear brands Gentle Monster and Warby Parker, are due to launch this fall. […]",
+          "snippet": "Samsung has given us our first chance to check out its upcoming smart glasses in person, revealing two new designs and the first specs in the process, including an impressive 9-hour battery life. The glasses, developed in collaboration with Google and the eyewear brands Gentle Monster and Warby Parker, are due to launch this fall. […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Halliday’s latest smart glasses feature a much-improved display",
+      "link": "https://www.theverge.com/tech/968255/halliday-gen-2-smart-glasses-hands-on-ai-wearables",
+      "description": "I first slipped on Halliday's original smart glasses at CES 2025. I was not a fan. The glasses had a tiny, movable display window embedded into the frame that was incredibly finicky to see, and my 30-minute demo left me with achy eyeballs. It was an interesting concept with terrible execution, especially compared to the […]",
+      "publish_time": "2026-07-21T09:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Halliday’s latest smart glasses feature a much-improved display",
+        "selection_description": "I first slipped on Halliday's original smart glasses at CES 2025. I was not a fan. The glasses had a tiny, movable display window embedded into the frame that was incredibly finicky to see, and my 30-minute demo left me with achy eyeballs. It was an interesting concept with terrible execution, especially compared to the […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/968255/halliday-gen-2-smart-glasses-hands-on-ai-wearables"
+      },
+      "evidence": [
+        {
+          "title": "Halliday’s latest smart glasses feature a much-improved display",
+          "url": "https://www.theverge.com/tech/968255/halliday-gen-2-smart-glasses-hands-on-ai-wearables",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-21T09:00:00-04:00",
+          "text": "I first slipped on Halliday's original smart glasses at CES 2025. I was not a fan. The glasses had a tiny, movable display window embedded into the frame that was incredibly finicky to see, and my 30-minute demo left me with achy eyeballs. It was an interesting concept with terrible execution, especially compared to the […]",
+          "snippet": "I first slipped on Halliday's original smart glasses at CES 2025. I was not a fan. The glasses had a tiny, movable display window embedded into the frame that was incredibly finicky to see, and my 30-minute demo left me with achy eyeballs. It was an interesting concept with terrible execution, especially compared to the […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-07-23",
+    "reference_dt": "2026-07-23T11:54:59.698441+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 39,
+    "input_story_count": 10,
+    "input_lead_count": 29,
+    "lead_resolution_calls": 22,
+    "lead_resolved_count": 1,
+    "lead_unresolved_count": 21,
+    "lead_resolution_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grok Build 接 Unity 做 3D 场景",
+        "query": "Grok Build 接 Unity 做 3D 场景 Grok Build ships 3D via Unity CLI Grok Build 接入 Unity 免费 CLI,可在一次会话内完成 3D 场景搭建并导出视频。",
+        "search_depth": "advanced",
+        "latency_ms": 4610.74,
+        "result_count": 1,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 1,
+        "rejected_invalid_count": 0,
+        "request_outcome": "success",
+        "error_code": null
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Code 安全扫描插件上线",
+        "query": "Claude Code 安全扫描插件上线 Claude Security beta for Claude Code Anthropic 为 Claude Code 推出 Claude Security 插件,进入 beta 阶段。",
+        "search_depth": "advanced",
+        "latency_ms": 1247.91,
+        "result_count": 5,
+        "accepted_evidence_count": 2,
+        "rejected_irrelevant_count": 3,
+        "rejected_invalid_count": 0,
+        "request_outcome": "success",
+        "error_code": null
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Moonshot 发布 Kimi K3 开权重",
+        "query": "Moonshot 发布 Kimi K3 开权重 Moonshot Kimi K3 open weights Moonshot 发布 2.8 万亿参数开权重模型 Kimi K3,Greg Brockman 称表现不错但蒸馏存疑。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 沙箱模型突破后真实入侵",
+        "query": "OpenAI 沙箱模型突破后真实入侵 OpenAI sandboxed model breached systems OpenAI 承认做基准测试的模型突破沙箱后,找到零日漏洞并入侵了真实系统。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Hugging Face 事件暴露治理失误",
+        "query": "Hugging Face 事件暴露治理失误 HF incident as governance failure OpenAI 与 Hugging Face 的模型评测安全事件被指更像治理失误,而非炒作。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "谷歌 AI 支出致现金流十余年首负",
+        "query": "谷歌 AI 支出致现金流十余年首负 Google FCF turns negative on AI spend AI 支出激增下,谷歌自由现金流十余年来首次转负,但云业务营收近乎翻倍。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "特斯拉 Optimus 产线开装",
+        "query": "特斯拉 Optimus 产线开装 Tesla Optimus lines installing 特斯拉披露 Optimus 已开始安装首条生产线,人形机器人量产很快启动。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "YC 定调 AI 转向物理世界",
+        "query": "YC 定调 AI 转向物理世界 YC: AI startups go physical YC 在新一轮 Requests for Startups 中指出,下一波 AI 创业将重建现实世界系统。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Kalanick 机器人公司融资 17 亿",
+        "query": "Kalanick 机器人公司融资 17 亿 Kalanick's Atoms raises $1.7B Uber 创始人 Travis Kalanick 的机器人公司 Atoms 完成 17 亿美元新融资。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "After shocking quarter, IBM insists that AI isn’t killing the mainframe",
+        "query": "After shocking quarter, IBM insists that AI isn’t killing the mainframe",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Travis Kalanick’s robotics company raises $1.7B, led by a16z",
+        "query": "Travis Kalanick’s robotics company raises $1.7B, led by a16z",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Arcee, a US open source AI lab, says Chinese models are not inherently dangerous",
+        "query": "Arcee, a US open source AI lab, says Chinese models are not inherently dangerous",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Science Corporation’s vision-restoring chip wins EU approval",
+        "query": "Science Corporation’s vision-restoring chip wins EU approval",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "SoundCloud acquires decentralized music platform Nina Protocol months after its shutdown",
+        "query": "SoundCloud acquires decentralized music platform Nina Protocol months after its shutdown",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Yope raises $12.3M to build a private social network without algorithms or ads",
+        "query": "Yope raises $12.3M to build a private social network without algorithms or ads",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Cascade raises $3.5M to help construction firms find and win projects",
+        "query": "Cascade raises $3.5M to help construction firms find and win projects",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The browser wars aren’t about search anymore — here are the best alternatives to Chrome and Safari",
+        "query": "The browser wars aren’t about search anymore — here are the best alternatives to Chrome and Safari",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude 接入经济指数数据集",
+        "query": "Claude 接入经济指数数据集 Claude answers via Economic Index Anthropic 现允许用户直接向 Claude 提问,基于公开的 Anthropic 经济指数数据集作答。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Treasury threatens sanctions after White House claims Moonshot distilled Anthropic’s Fable",
+        "query": "Treasury threatens sanctions after White House claims Moonshot distilled Anthropic’s Fable",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 上调 2030 算力至 7500 亿",
+        "query": "OpenAI 上调 2030 算力至 7500 亿 OpenAI raises 2030 compute to $750B OpenAI 据报将到 2030 年的算力支出预测上调至约 7500 亿美元。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google justifies its massive AI spending with a booming cloud business",
+        "query": "Google justifies its massive AI spending with a booming cloud business",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "特斯拉 Robotaxi 零事故",
+        "query": "特斯拉 Robotaxi 零事故 Tesla Robotaxi zero incidents 特斯拉称 Robotaxi 车队累计行驶超 38 万英里,无重大事故。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "lead_terminal_error_code": null,
+    "observation_signals": [
+      {
+        "title": "Grok Build 接 Unity 做 3D 场景",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Grok+Build+ships+3D+via+Unity+CLI",
+        "reason": "no_publishable_evidence"
+      },
+      {
+        "title": "Moonshot 发布 Kimi K3 开权重",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Moonshot+Kimi+K3+open+weights",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 沙箱模型突破后真实入侵",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=OpenAI+sandboxed+model+breached+systems",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Hugging Face 事件暴露治理失误",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=HF+incident+as+governance+failure",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "谷歌 AI 支出致现金流十余年首负",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Google+FCF+turns+negative+on+AI+spend",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "特斯拉 Optimus 产线开装",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Tesla+Optimus+lines+installing",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "YC 定调 AI 转向物理世界",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=YC%3A+AI+startups+go+physical",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Kalanick 机器人公司融资 17 亿",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Kalanick%27s+Atoms+raises+%241.7B",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "After shocking quarter, IBM insists that AI isn’t killing the mainframe",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/after-shocking-quarter-ibm-insists-that-ai-isnt-killing-the-mainframe/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Travis Kalanick’s robotics company raises $1.7B, led by a16z",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/travis-kalanicks-robotics-company-raises-1-7b-led-by-a16z/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Arcee, a US open source AI lab, says Chinese models are not inherently dangerous",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/arcee-a-us-open-source-ai-lab-says-chinese-models-are-not-inherently-dangerous/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Science Corporation’s vision-restoring chip wins EU approval",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/science-corporations-vision-restoring-chip-wins-eu-approval/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "SoundCloud acquires decentralized music platform Nina Protocol months after its shutdown",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/soundcloud-acquires-decentralized-music-platform-nina-protocol-months-after-its-shutdown/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Yope raises $12.3M to build a private social network without algorithms or ads",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/yope-raises-12-3m-to-build-a-private-social-network-without-algorithms-or-ads/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Cascade raises $3.5M to help construction firms find and win projects",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/cascade-raises-3-5m-to-help-construction-firms-find-and-win-projects/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "The browser wars aren’t about search anymore — here are the best alternatives to Chrome and Safari",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/as-the-browser-wars-heat-up-here-are-the-hottest-alternatives-to-chrome-and-safari-in-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude 接入经济指数数据集",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Claude+answers+via+Economic+Index",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Treasury threatens sanctions after White House claims Moonshot distilled Anthropic’s Fable",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/treasury-threatens-sanctions-after-white-house-claims-moonshot-distilled-anthropics-fable/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 上调 2030 算力至 7500 亿",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=OpenAI+raises+2030+compute+to+%24750B",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Google justifies its massive AI spending with a booming cloud business",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/google-justifies-its-massive-ai-spending-with-a-booming-cloud-business/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "特斯拉 Robotaxi 零事故",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Tesla+Robotaxi+zero+incidents",
+        "reason": "lead_resolution_request_failed"
+      }
+    ],
+    "publishability_rejected": [],
+    "stage_failures": [
+      {
+        "stage": "candidate_enrichment",
+        "code": "http_error",
+        "count": 28
+      }
+    ],
+    "prefiltered_count": 39,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 30,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "preserved_budget_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 9,
+    "strict_final_count": 9,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "budget_exhausted",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "candidate_enrichment": [
+        "Claude Code Can Now Build and Test iOS Apps in Apple's Simulator - MacRumors",
+        "AMD commits up to $5 billion to Anthropic",
+        "Google launches a cheaper alternative to large AI security models like Mythos"
+      ]
+    },
+    "parameters": {
+      "min_articles": 0,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 30,
+      "max_verify_calls": 0,
+      "max_refill_rounds": 0,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "max_lead_candidates": 10,
+      "lead_search_rounds": 2,
+      "lead_search_depth": "advanced",
+      "lead_max_age_hours": 72,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com",
+        "ai.google.dev",
+        "x.ai",
+        "deepseek.com",
+        "qwenlm.github.io",
+        "bigmodel.cn",
+        "moonshot.cn",
+        "volcengine.com",
+        "tencent.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Only fetched candidates were enriched; independent refill stages were not run."
+    ],
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 9,
+    "candidate_dropped": [
+      {
+        "title": "Social media addiction lawsuit against Meta is dropped",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/social-media-addiction-lawsuit-against-meta-is-dropped/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Anthropic’s $1.5 billion book piracy settlement approved by judge",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/968724/anthropic-authors-settlement-ai-copyright-approved",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "GPT-5.6 Pro 推翻数学猜想",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=GPT-5.6+Pro+disproves+conjecture",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "特斯拉 FSD 订阅破 148 万",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=Tesla+FSD+subscriptions+hit+1.48M",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI API 全账户设花费上限",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-23&t=OpenAI+API+hard+spend+limits+all",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Tesla spending skyrockets as Cybercab, Semi, Megapack production timeline slips",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/tesla-spending-skyrockets-as-cybercab-semi-megapack-production-timeline-slips/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "How OpenAI’s human mistake led to the AI-powered hack on Hugging Face",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/how-an-openais-human-mistake-led-to-the-ai-powered-hack-on-hugging-face/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI’s AI spending spree has ballooned to $750B",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/22/openais-ai-spending-spree-has-ballooned-to-750b/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI says it accidentally hacked Hugging Face with a new AI system",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/968988/openai-hugging-face-hack-ai",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
+    "candidate_enrichment_calls": 30,
+    "candidate_enrichment_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grok Build 接 Unity 做 3D 场景",
+        "query": "Grok Build 接 Unity 做 3D 场景 Grok Build ships 3D via Unity CLI Grok Build 接入 Unity 免费 CLI,可在一次会话内完成 3D 场景搭建并导出视频。",
+        "search_depth": "advanced",
+        "latency_ms": 4610.74,
+        "result_count": 1,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 1,
+        "rejected_invalid_count": 0,
+        "request_outcome": "success",
+        "error_code": null
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Code 安全扫描插件上线",
+        "query": "Claude Code 安全扫描插件上线 Claude Security beta for Claude Code Anthropic 为 Claude Code 推出 Claude Security 插件,进入 beta 阶段。",
+        "search_depth": "advanced",
+        "latency_ms": 1247.91,
+        "result_count": 5,
+        "accepted_evidence_count": 2,
+        "rejected_irrelevant_count": 3,
+        "rejected_invalid_count": 0,
+        "request_outcome": "success",
+        "error_code": null
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Moonshot 发布 Kimi K3 开权重",
+        "query": "Moonshot 发布 Kimi K3 开权重 Moonshot Kimi K3 open weights Moonshot 发布 2.8 万亿参数开权重模型 Kimi K3,Greg Brockman 称表现不错但蒸馏存疑。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 沙箱模型突破后真实入侵",
+        "query": "OpenAI 沙箱模型突破后真实入侵 OpenAI sandboxed model breached systems OpenAI 承认做基准测试的模型突破沙箱后,找到零日漏洞并入侵了真实系统。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Hugging Face 事件暴露治理失误",
+        "query": "Hugging Face 事件暴露治理失误 HF incident as governance failure OpenAI 与 Hugging Face 的模型评测安全事件被指更像治理失误,而非炒作。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "AMD commits up to $5 billion to Anthropic",
+        "query": "AMD commits up to $5 billion to Anthropic https://www.theverge.com/ai-artificial-intelligence/969285/amd-anthropic-ai-infrastructure-deal",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Google launches a cheaper alternative to large AI security models like Mythos",
+        "query": "Google launches a cheaper alternative to large AI security models like Mythos https://www.theverge.com/tech/968572/google-gemini-flash-cyber-ai-security-model",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "谷歌 AI 支出致现金流十余年首负",
+        "query": "谷歌 AI 支出致现金流十余年首负 Google FCF turns negative on AI spend AI 支出激增下,谷歌自由现金流十余年来首次转负,但云业务营收近乎翻倍。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "特斯拉 Optimus 产线开装",
+        "query": "特斯拉 Optimus 产线开装 Tesla Optimus lines installing 特斯拉披露 Optimus 已开始安装首条生产线,人形机器人量产很快启动。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "YC 定调 AI 转向物理世界",
+        "query": "YC 定调 AI 转向物理世界 YC: AI startups go physical YC 在新一轮 Requests for Startups 中指出,下一波 AI 创业将重建现实世界系统。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Kalanick 机器人公司融资 17 亿",
+        "query": "Kalanick 机器人公司融资 17 亿 Kalanick's Atoms raises $1.7B Uber 创始人 Travis Kalanick 的机器人公司 Atoms 完成 17 亿美元新融资。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Meta made its own AI detection system. It should have just used Google’s",
+        "query": "Meta made its own AI detection system. It should have just used Google’s https://www.theverge.com/tech/968680/meta-ai-detection-labeling-content-seal-watermarks-synthid",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Utility companies promise to spare us from AI’s energy bill",
+        "query": "Utility companies promise to spare us from AI’s energy bill https://www.theverge.com/ai-artificial-intelligence/969137/us-utility-ai-electricty-data-center-rate-pledge-trump",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "After shocking quarter, IBM insists that AI isn’t killing the mainframe",
+        "query": "After shocking quarter, IBM insists that AI isn’t killing the mainframe",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Travis Kalanick’s robotics company raises $1.7B, led by a16z",
+        "query": "Travis Kalanick’s robotics company raises $1.7B, led by a16z",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Arcee, a US open source AI lab, says Chinese models are not inherently dangerous",
+        "query": "Arcee, a US open source AI lab, says Chinese models are not inherently dangerous",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Science Corporation’s vision-restoring chip wins EU approval",
+        "query": "Science Corporation’s vision-restoring chip wins EU approval",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Neill Blomkamp’s new zombie AI ‘film’ is just slop warmed over",
+        "query": "Neill Blomkamp’s new zombie AI ‘film’ is just slop warmed over https://www.theverge.com/entertainment/968703/neill-blomkamps-nightborne-barley-studios-seedance",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Substack adds an AI detector to help spot blogs written by no one",
+        "query": "Substack adds an AI detector to help spot blogs written by no one https://www.theverge.com/ai-artificial-intelligence/968855/substack-pangram-ai-detecting-tool",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Here’s what Samsung’s smart glasses actually look like",
+        "query": "Here’s what Samsung’s smart glasses actually look like https://www.theverge.com/tech/969382/samsung-google-smart-glasses-gentle-monster-warby-parker",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "SoundCloud acquires decentralized music platform Nina Protocol months after its shutdown",
+        "query": "SoundCloud acquires decentralized music platform Nina Protocol months after its shutdown",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Yope raises $12.3M to build a private social network without algorithms or ads",
+        "query": "Yope raises $12.3M to build a private social network without algorithms or ads",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Cascade raises $3.5M to help construction firms find and win projects",
+        "query": "Cascade raises $3.5M to help construction firms find and win projects",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The browser wars aren’t about search anymore — here are the best alternatives to Chrome and Safari",
+        "query": "The browser wars aren’t about search anymore — here are the best alternatives to Chrome and Safari",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Halliday’s latest smart glasses feature a much-improved display",
+        "query": "Halliday’s latest smart glasses feature a much-improved display https://www.theverge.com/tech/968255/halliday-gen-2-smart-glasses-hands-on-ai-wearables",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude 接入经济指数数据集",
+        "query": "Claude 接入经济指数数据集 Claude answers via Economic Index Anthropic 现允许用户直接向 Claude 提问,基于公开的 Anthropic 经济指数数据集作答。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Treasury threatens sanctions after White House claims Moonshot distilled Anthropic’s Fable",
+        "query": "Treasury threatens sanctions after White House claims Moonshot distilled Anthropic’s Fable",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 上调 2030 算力至 7500 亿",
+        "query": "OpenAI 上调 2030 算力至 7500 亿 OpenAI raises 2030 compute to $750B OpenAI 据报将到 2030 年的算力支出预测上调至约 7500 亿美元。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google justifies its massive AI spending with a booming cloud business",
+        "query": "Google justifies its massive AI spending with a booming cloud business",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "特斯拉 Robotaxi 零事故",
+        "query": "特斯拉 Robotaxi 零事故 Tesla Robotaxi zero incidents 特斯拉称 Robotaxi 车队累计行驶超 38 万英里,无重大事故。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "story_enrichment_calls": 8,
+    "terminal_error_code": null,
+    "recent_dedupe": {
+      "window_days": 3,
+      "checked_days": [
+        "2026-07-22"
+      ],
+      "removed": [
+        {
+          "title": "Neill Blomkamp’s new zombie AI ‘film’ is just slop warmed over",
+          "url_key": "theverge.com/entertainment/968703/neill-blomkamps-nightborne-barley-studios-seedance",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Substack adds an AI detector to help spot blogs written by no one",
+          "url_key": "theverge.com/ai-artificial-intelligence/968855/substack-pangram-ai-detecting-tool",
+          "reason": "recent_exact_url"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "Claude Code Can Now Build and Test iOS Apps in Apple's Simulator - MacRumors",
+        "summary": "Anthropic将Claude Cowork扩展至移动端和网页版，Claude Code支持在Mac的iOS模拟器中构建测试应用。",
+        "url": "https://www.macrumors.com/2026/07/21/claude-code-ios-simulator/",
+        "why_it_matters": "降低iOS开发门槛，开发者可在桌面端直接测试应用。",
+        "source_label": "macrumors.com",
+        "published_at": "Tue, 21 Jul 2026 23:46:35 GMT",
+        "confidence": "corroborated"
+      },
+      {
+        "article_id": "a2",
+        "title": "AMD commits up to $5 billion to Anthropic",
+        "summary": "AMD承诺向Anthropic投资最高50亿美元，后者将部署最高2吉瓦的AMD Instinct MI450 AI GPU。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/969285/amd-anthropic-ai-infrastructure-deal",
+        "why_it_matters": "增强Anthropic算力基础，挑战英伟达在AI芯片领域的主导地位。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-22T10:44:27-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "Google launches a cheaper alternative to large AI security models like Mythos",
+        "summary": "Google推出Gemini 3.6 Flash及安全模型Gemini 3.5 Flash Cyber，定位为高价AI安全系统的低成本替代方案。",
+        "url": "https://www.theverge.com/tech/968572/google-gemini-flash-cyber-ai-security-model",
+        "why_it_matters": "降低企业使用AI进行安全漏洞检测的成本。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-21T11:00:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a4",
+        "title": "Meta made its own AI detection system. It should have just used Google’s",
+        "summary": "Meta七月推出Content Seal隐形水印技术，用于标记其新AI模型生成的图像。",
+        "url": "https://www.theverge.com/tech/968680/meta-ai-detection-labeling-content-seal-watermarks-synthid",
+        "why_it_matters": "回应平台治理要求，但自研水印效果可能不及现有行业方案。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-22T07:00:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a5",
+        "title": "Utility companies promise to spare us from AI’s energy bill",
+        "summary": "美国近200家电力公司与数据中心开发商签署费率纳税人保护承诺，称将避免AI发展推高消费者电费。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/969137/us-utility-ai-electricty-data-center-rate-pledge-trump",
+        "why_it_matters": "缓解公众对AI能耗导致电费上涨的担忧，为数据中心扩张争取政策支持。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-22T06:12:13-04:00",
+        "confidence": "reported"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？",
+    "provider": "SiliconFlow",
+    "model": "Pro/moonshotai/Kimi-K2.6",
+    "input_fingerprint": "6973b66be1ae0dfa0a90903e329db457110fc8433bb330eee702d797d44943a2",
+    "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "failed",
+        "error_kind": "SummaryQualityError"
+      },
+      {
+        "provider": "SiliconFlow",
+        "model": "Pro/moonshotai/Kimi-K2.6",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "selection_policy": "source_balanced_v2",
+    "candidate_article_ids": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5"
+    ],
+    "selection_diagnostics": {
+      "selection_policy": "source_balanced_v2",
+      "catalog_schema_version": 1,
+      "catalog_as_of": "2026-07-18",
+      "input_count": 7,
+      "qualified_count": 7,
+      "core_ai_input_count": 5,
+      "candidate_story_count": 7,
+      "selected_count": 5,
+      "unique_story_count": 5,
+      "duplicate_story_rejected_count": 0,
+      "story_clusters": [],
+      "source_counts": {
+        "theverge": 4,
+        "www.macrumors.com": 1
+      },
+      "primary_entity_counts": {
+        "amd": 1,
+        "anthropic": 1,
+        "google": 1,
+        "meta": 1
+      },
+      "mentioned_entity_counts": {
+        "amd": 1,
+        "anthropic": 3,
+        "google": 2,
+        "meta": 1
+      },
+      "model_family_counts": {
+        "claude": 2,
+        "gemini": 1
+      },
+      "topic_counts": {
+        "funding_business": 1,
+        "infrastructure": 1,
+        "other_ai": 1,
+        "safety_security": 2
+      },
+      "region_counts": {
+        "us": 4
+      },
+      "quota_relaxations": [
+        {
+          "article_id": "a3",
+          "constraints": [
+            "model_family",
+            "source_cap"
+          ]
+        }
+      ],
+      "selected_metadata": [
+        {
+          "article_id": "a1",
+          "relevance_level": 3,
+          "primary_entity": "anthropic",
+          "mentioned_entities": [
+            "anthropic"
+          ],
+          "model_families": [
+            "claude"
+          ],
+          "topic": "safety_security",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a2",
+          "relevance_level": 3,
+          "primary_entity": "amd",
+          "mentioned_entities": [
+            "amd",
+            "anthropic"
+          ],
+          "model_families": [],
+          "topic": "funding_business",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 3,
+          "primary_entity": "google",
+          "mentioned_entities": [
+            "google",
+            "anthropic"
+          ],
+          "model_families": [
+            "claude",
+            "gemini"
+          ],
+          "topic": "safety_security",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a4",
+          "relevance_level": 2,
+          "primary_entity": "meta",
+          "mentioned_entities": [
+            "meta",
+            "google"
+          ],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a5",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "infrastructure",
+          "regions": []
+        }
+      ]
+    },
+    "validation_passed": true,
+    "presentation": "fact_impact_v1"
+  },
+  "pipeline_diagnostics": {
+    "status": "degraded",
+    "failures": [
+      {
+        "stage": "enrichment.candidate_enrichment",
+        "code": "http_error",
+        "count": 28
+      },
+      {
+        "stage": "summary.ModelScope",
+        "code": "SummaryQualityError",
+        "count": 1
+      }
+    ]
+  }
+}
