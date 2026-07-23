@@ -262,6 +262,7 @@ _ENGLISH_NUMBER_WORDS = {
 _ENGLISH_NUMBER_WORD = re.compile(
     r"\b(?:" + "|".join(_ENGLISH_NUMBER_WORDS) + r")\b", re.IGNORECASE
 )
+_MAX_SUMMARY_REPAIR_ATTEMPTS = 2
 
 
 def _normalized_number_claims(value: str) -> set[str]:
@@ -549,51 +550,65 @@ def _validate_summary_with_one_repair(
     expected_article_ids: tuple[str, ...],
     articles_by_id: dict[str, dict],
 ) -> SummaryDraft:
-    """Retry one non-empty response only when its reader summary is invalid."""
+    """Repair a complete draft twice at most while preserving strict grounding."""
 
-    try:
-        draft = validate_summary_quality(
-            content,
-            expected_items=expected_items,
-            expected_article_ids=expected_article_ids,
-            require_impact=True,
-        )
-        validate_summary_source_grounding(draft, articles_by_id)
-        return draft
-    except SummaryQualityError as exc:
-        # Do not spend another request on empty output, schema drift, or unknown
-        # IDs. A focused repair is useful for a complete JSON draft that either
-        # missed one selected ID or missed the reader sentence contract.
-        repairable = re.search(
-            r"\bitem \d+ (?:summary|impact|is missing why_it_matters)\b", str(exc)
-        ) or ("cover every selected candidate" in str(exc))
-        if not content.strip() or not repairable:
-            raise
+    current_content = content
+    repair_messages = list(params["messages"])
+    for repair_attempt in range(_MAX_SUMMARY_REPAIR_ATTEMPTS + 1):
+        try:
+            draft = validate_summary_quality(
+                current_content,
+                expected_items=expected_items,
+                expected_article_ids=expected_article_ids,
+                require_impact=True,
+            )
+            validate_summary_source_grounding(draft, articles_by_id)
+            return draft
+        except SummaryQualityError as exc:
+            # Do not spend another request on empty output, schema drift, or
+            # unknown IDs. Two focused repairs cover the common sequence where
+            # the first pass fixes sentence shape but still introduces one
+            # unsupported numeric or high-risk source claim.
+            repairable = re.search(
+                r"\bitem \d+ (?:"
+                r"summary|impact|is missing why_it_matters|"
+                r"has unsupported numeric claims"
+                r")\b",
+                str(exc),
+            ) or ("cover every selected candidate" in str(exc))
+            if (
+                not current_content.strip()
+                or not repairable
+                or repair_attempt >= _MAX_SUMMARY_REPAIR_ATTEMPTS
+            ):
+                raise
 
-        repair_instruction = (
-            f"上一版 JSON 未通过本地检查：{exc}。重新输出完整 JSON；逐条保留输入 "
-            "article_id 和顺序，每条 summary 以 45–65 个可见字符为目标，硬性保持在 "
-            f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符；"
-            "写成完整中文单句；why_it_matters 用 15–70 个可见字符说明影响，"
-            "不得补写输入未出现的诉因、知识产权、不正当竞争、反垄断、收购、融资或估值；"
-            "不要解释 JSON 之外的内容。"
-        )
-        repair_params = dict(params)
-        repair_params["messages"] = [
-            *params["messages"],
-            {"role": "assistant", "content": content},
-            {"role": "user", "content": repair_instruction},
-        ]
-        print("\n   ↻ Provider output missed the summary contract; repairing once")
-        repaired_content = _summarize_sync(client, repair_params)
-        draft = validate_summary_quality(
-            repaired_content,
-            expected_items=expected_items,
-            expected_article_ids=expected_article_ids,
-            require_impact=True,
-        )
-        validate_summary_source_grounding(draft, articles_by_id)
-        return draft
+            repair_instruction = (
+                f"上一版 JSON 未通过本地检查：{exc}。重新输出完整 JSON；逐条保留输入 "
+                "article_id 和顺序，每条 summary 以 45–65 个可见字符为目标，硬性保持在 "
+                f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符；"
+                "写成完整中文单句；why_it_matters 用 15–70 个可见字符说明影响。"
+                "所有数字必须在对应输入的 title、description 或 evidence 中明确出现；"
+                "若错误指出 unsupported numeric claims，删除包含该数字的补充判断，"
+                "不要换成另一个数字。不得补写输入未出现的诉因、知识产权、不正当竞争、"
+                "反垄断、收购、融资或估值；若错误指出 unsupported source claim，"
+                "删除该措辞并只保留输入明确支持的动作。不要解释 JSON 之外的内容。"
+            )
+            repair_messages.extend(
+                [
+                    {"role": "assistant", "content": current_content},
+                    {"role": "user", "content": repair_instruction},
+                ]
+            )
+            repair_params = dict(params)
+            repair_params["messages"] = list(repair_messages)
+            print(
+                "\n   ↻ Provider output missed the summary contract; "
+                f"repairing ({repair_attempt + 1}/{_MAX_SUMMARY_REPAIR_ATTEMPTS})"
+            )
+            current_content = _summarize_sync(client, repair_params)
+
+    raise AssertionError("summary repair loop exited unexpectedly")
 
 
 def _provider_candidates() -> list[dict[str, str]]:

@@ -808,6 +808,63 @@ def test_summary_provider_repairs_one_reader_contract_failure(
     assert "逐条保留输入 article_id 和顺序" in repair_message
 
 
+def test_summary_provider_repairs_grounding_failure_after_shape_repair(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        summarizer,
+        "get_config",
+        lambda: _llm_config(modelscope_secondary_model="", fallback_api_key=""),
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(summarizer, "create_client", lambda *_args: "client")
+    responses = [
+        json.dumps(
+            {
+                "items": [
+                    {
+                        "article_id": "a1",
+                        "summary": "人工智能公司发布新工具，并扩大产品能力。",
+                    }
+                ],
+                "discussion_topic": "你最关注哪条AI新闻？",
+            },
+            ensure_ascii=False,
+        ),
+        json.dumps(
+            {
+                "items": [
+                    {
+                        "article_id": "a1",
+                        "summary": (
+                            "人工智能公司发布开发者工具，并计划在未来5年扩大产品覆盖范围。"
+                        ),
+                        "why_it_matters": "这会改变开发团队采用相关能力的成本与效率。",
+                    }
+                ],
+                "discussion_topic": "你最关注哪条AI新闻？",
+            },
+            ensure_ascii=False,
+        ),
+        _valid_summary(),
+    ]
+    calls: list[dict] = []
+
+    def fake_summarize_sync(_client, params):
+        calls.append(params)
+        return responses.pop(0)
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+
+    result = summarizer.summarize_result([{"title": "Story"}], stream=False)
+
+    assert result.provider == "ModelScope"
+    assert len(calls) == 3
+    grounding_repair = calls[2]["messages"][-1]["content"]
+    assert "unsupported numeric claims: 5" in grounding_repair
+    assert "不要换成另一个数字" in grounding_repair
+
+
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (
     None
 ):
