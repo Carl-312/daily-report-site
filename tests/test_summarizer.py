@@ -448,6 +448,7 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     assert "每条输入必须输出一次" in prompt
     assert "保持 `article_id` 和顺序" in prompt
     assert "输入已经由程序完成选题、去重、排序和来源配额" in prompt
+    assert "只写标题明确指向的一件" in prompt
     assert "不输出标题" in prompt
     assert "不要复述 `trend_signal`" in prompt
     assert "`evidence_status`、`confidence`、`publish_time`" in prompt

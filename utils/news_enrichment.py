@@ -1052,6 +1052,7 @@ def enrich_articles_with_tavily(
     """Enrich the fetch-selected queue without introducing refill stories."""
 
     from utils.lead_resolution import (
+        annotate_direct_stories_with_trending_signals,
         build_candidate_queue,
         run_candidate_enrichment_stage,
     )
@@ -1067,7 +1068,9 @@ def enrich_articles_with_tavily(
         settings=settings,
     )
     partition = partition_articles_for_publication(article_dicts)
-    stories = partition["stories"]
+    stories = annotate_direct_stories_with_trending_signals(
+        partition["stories"], partition["leads"]
+    )
     leads = partition["leads"]
     all_candidates = build_candidate_queue(stories + leads)
     daily_budget = max(0, min(30, int(settings.max_total_calls)))
@@ -1083,6 +1086,12 @@ def enrich_articles_with_tavily(
         {
             "input_story_count": len(stories),
             "input_lead_count": len(leads),
+            "trending_signal_match_count": sum(
+                article.get("provenance", {}).get("trend_signal_match")
+                == "direct_story_title"
+                for article in stories
+                if isinstance(article.get("provenance"), dict)
+            ),
             "publishability_rejected": partition["rejected"],
             "candidate_queue_count": len(candidates),
             "candidate_dropped_count": len(dropped_leads),
