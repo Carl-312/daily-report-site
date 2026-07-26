@@ -26,7 +26,7 @@ def _llm_config(**overrides):
         "fallback_api_base_url": "https://siliconflow.test/v1",
         "fallback_model": "Pro/moonshotai/Kimi-K2.6",
         "max_output": 2000,
-        "summary_request_timeout_seconds": 120,
+        "summary_request_timeout_seconds": 180,
         "summary_provider_budget_seconds": 240,
         "title_max": 150,
         "desc_max": 300,

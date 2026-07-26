@@ -31,9 +31,9 @@ def test_repository_daily_summary_target_is_ten() -> None:
 
     assert defaults.max_summary_items == 10
     assert repository.max_summary_items == 10
-    assert defaults.summary_request_timeout_seconds == 120
+    assert defaults.summary_request_timeout_seconds == 180
     assert defaults.summary_provider_budget_seconds == 240
-    assert repository.summary_request_timeout_seconds == 120
+    assert repository.summary_request_timeout_seconds == 180
     assert repository.summary_provider_budget_seconds == 240
 
 

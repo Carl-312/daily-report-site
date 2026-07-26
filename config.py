@@ -180,7 +180,7 @@ class Settings(BaseModel):
     )
 
     max_output: int = Field(default=2000, description="Max output tokens")
-    summary_request_timeout_seconds: float = Field(default=120, gt=0, le=300)
+    summary_request_timeout_seconds: float = Field(default=180, gt=0, le=300)
     summary_provider_budget_seconds: float = Field(default=240, gt=0, le=600)
 
     # Timezone
@@ -352,7 +352,7 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                     "prompt_path", "prompts/daily.md"
                 ),
                 "summary_request_timeout_seconds": cfg.get("summarize", {}).get(
-                    "request_timeout_seconds", 120
+                    "request_timeout_seconds", 180
                 ),
                 "summary_provider_budget_seconds": cfg.get("summarize", {}).get(
                     "provider_budget_seconds", 240
