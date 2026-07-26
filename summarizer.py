@@ -21,6 +21,7 @@ from utils.summary_contracts import (
     SUMMARY_TARGET_MAX_VISIBLE_CHARS,
     SummaryAttempt,
     SummaryDraft,
+    SummaryDraftItem,
     SummaryItem,
     SummaryResult,
     fingerprint_summary_input,
@@ -208,6 +209,11 @@ def _numbered_items(content: str) -> list[str]:
 _JSON_FENCE = re.compile(r"^```(?:json)?\s*(.*?)\s*```$", re.DOTALL | re.IGNORECASE)
 _PUBLIC_LINK = re.compile(r"(?:https?://|www\.)|\[[^\]]+\]\([^)]*\)", re.IGNORECASE)
 _PUBLIC_ARTICLE_ID = re.compile(r"\[a\d+\]", re.IGNORECASE)
+_REPAIRABLE_ITEM_ERROR = re.compile(
+    r"\bitem (?P<index>\d+) (?:"
+    r"summary|impact|is missing why_it_matters|has unsupported numeric claims"
+    r")\b"
+)
 _SOURCE_SENTENCE = re.compile(r"[^。！？]+[。！？]")
 _TITLE_SEPARATOR = re.compile(r"[:：]")
 _COMPACT_HEADLINE_REWRITES = (
@@ -443,6 +449,78 @@ def _parse_summary_draft(content: str) -> SummaryDraft:
         ) from exc
 
 
+def _targeted_repair_params(
+    params: dict[str, Any],
+    draft: SummaryDraft,
+    item_index: int,
+    article: dict,
+    error: SummaryQualityError,
+) -> dict[str, Any]:
+    """Build a small one-item repair request from the authoritative source."""
+
+    current_item = draft.items[item_index]
+    source_article = compress_articles([article])[0]
+    source_article["article_id"] = current_item.article_id
+    source_article.pop("trend_signal", None)
+    for evidence in source_article.get("evidence", []):
+        evidence.pop("url", None)
+
+    repair_params = dict(params)
+    repair_params["max_tokens"] = min(int(params.get("max_tokens", 512)), 512)
+    repair_params["temperature"] = 0.1
+    repair_params["messages"] = [
+        {
+            "role": "system",
+            "content": (
+                "只修复一条中文新闻摘要，只输出一个 JSON 对象："
+                f'{{"article_id":"{current_item.article_id}",'
+                '"summary":"事实句。","why_it_matters":"影响句。"}。'
+                "保持 article_id；summary 以 40–60 个可见字符为目标、硬性保持在 "
+                f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符，"
+                "why_it_matters 保持在 15–70 个可见字符。两者都必须是完整单句。"
+                "source_article 是唯一事实依据，不得补写数字、法律定性、融资、估值、"
+                "收购或其他未明确出现的事实。"
+            ),
+        },
+        {
+            "role": "user",
+            "content": json.dumps(
+                {
+                    "validation_error": str(error),
+                    "source_article": source_article,
+                    "current_item": current_item.model_dump(),
+                },
+                ensure_ascii=False,
+            ),
+        },
+    ]
+    return repair_params
+
+
+def _merge_targeted_repair(
+    draft: SummaryDraft,
+    item_index: int,
+    content: str,
+) -> str:
+    """Merge one repaired item locally while preserving order and topic."""
+
+    try:
+        repaired_item = SummaryDraftItem.model_validate_json(_strip_json_fence(content))
+    except ValueError as exc:
+        raise SummaryQualityError(
+            "targeted summary repair is not a valid item JSON object"
+        ) from exc
+    expected_article_id = draft.items[item_index].article_id
+    if repaired_item.article_id != expected_article_id:
+        raise SummaryQualityError("targeted summary repair changed article_id")
+    items = list(draft.items)
+    items[item_index] = repaired_item
+    return SummaryDraft(
+        items=tuple(items),
+        discussion_topic=draft.discussion_topic,
+    ).model_dump_json()
+
+
 def validate_summary_quality(
     content: str,
     expected_items: int = 10,
@@ -578,7 +656,7 @@ def validate_summary_source_grounding(
                 )
 
 
-def _validate_summary_with_one_repair(
+def _validate_summary_with_targeted_repairs(
     client: OpenAI,
     params: dict[str, Any],
     content: str,
@@ -588,10 +666,9 @@ def _validate_summary_with_one_repair(
     articles_by_id: dict[str, dict],
     next_request_timeout: Callable[[], float],
 ) -> SummaryDraft:
-    """Repair a complete draft twice at most while preserving strict grounding."""
+    """Repair one invalid item at a time while preserving strict grounding."""
 
     current_content = content
-    repair_messages = list(params["messages"])
     for repair_attempt in range(_MAX_SUMMARY_REPAIR_ATTEMPTS + 1):
         try:
             draft = validate_summary_quality(
@@ -603,51 +680,41 @@ def _validate_summary_with_one_repair(
             validate_summary_source_grounding(draft, articles_by_id)
             return draft
         except SummaryQualityError as exc:
-            # Do not spend another request on empty output, schema drift, or
-            # unknown IDs. Two focused repairs cover the common sequence where
-            # the first pass fixes sentence shape but still introduces one
-            # unsupported numeric or high-risk source claim.
-            repairable = re.search(
-                r"\bitem \d+ (?:"
-                r"summary|impact|is missing why_it_matters|"
-                r"has unsupported numeric claims"
-                r")\b",
-                str(exc),
-            ) or ("cover every selected candidate" in str(exc))
+            item_error = _REPAIRABLE_ITEM_ERROR.search(str(exc))
             if (
                 not current_content.strip()
-                or not repairable
+                or item_error is None
                 or repair_attempt >= _MAX_SUMMARY_REPAIR_ATTEMPTS
             ):
                 raise
 
-            repair_instruction = (
-                f"上一版 JSON 未通过本地检查：{exc}。重新输出完整 JSON；逐条保留输入 "
-                "article_id 和顺序，每条 summary 以 45–65 个可见字符为目标，硬性保持在 "
-                f"{SUMMARY_MIN_VISIBLE_CHARS}–{SUMMARY_MAX_VISIBLE_CHARS} 个可见字符；"
-                "写成完整中文单句；why_it_matters 用 15–70 个可见字符说明影响。"
-                "所有数字必须在对应输入的 title、description 或 evidence 中明确出现；"
-                "若错误指出 unsupported numeric claims，删除包含该数字的补充判断，"
-                "不要换成另一个数字。不得补写输入未出现的诉因、知识产权、不正当竞争、"
-                "反垄断、收购、融资或估值；若错误指出 unsupported source claim，"
-                "删除该措辞并只保留输入明确支持的动作。不要解释 JSON 之外的内容。"
-            )
-            repair_messages.extend(
-                [
-                    {"role": "assistant", "content": current_content},
-                    {"role": "user", "content": repair_instruction},
-                ]
-            )
-            repair_params = dict(params)
-            repair_params["messages"] = list(repair_messages)
+            draft = _parse_summary_draft(current_content)
+            item_index = int(item_error.group("index")) - 1
+            if not 0 <= item_index < len(draft.items):
+                raise
+            article = articles_by_id.get(draft.items[item_index].article_id)
+            if article is None:
+                raise
             print(
                 "\n   ↻ Provider output missed the summary contract; "
-                f"repairing ({repair_attempt + 1}/{_MAX_SUMMARY_REPAIR_ATTEMPTS})"
+                f"repairing item {item_index + 1} "
+                f"({repair_attempt + 1}/{_MAX_SUMMARY_REPAIR_ATTEMPTS})"
             )
-            current_content = _summarize_sync(
+            repaired_content = _summarize_sync(
                 client,
-                repair_params,
+                _targeted_repair_params(
+                    params,
+                    draft,
+                    item_index,
+                    article,
+                    exc,
+                ),
                 timeout_seconds=next_request_timeout(),
+            )
+            current_content = _merge_targeted_repair(
+                draft,
+                item_index,
+                repaired_content,
             )
 
     raise AssertionError("summary repair loop exited unexpectedly")
@@ -851,7 +918,7 @@ def summarize_result(
                 params,
                 timeout_seconds=next_request_timeout(),
             )
-            draft = _validate_summary_with_one_repair(
+            draft = _validate_summary_with_targeted_repairs(
                 client,
                 params,
                 content,

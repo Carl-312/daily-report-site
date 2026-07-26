@@ -59,6 +59,13 @@ def _valid_summary(item_count: int = 1) -> str:
     )
 
 
+def _valid_repair_item() -> str:
+    return json.dumps(
+        json.loads(_valid_summary())["items"][0],
+        ensure_ascii=False,
+    )
+
+
 def _summary_with_sources(source_ids: list[str]) -> str:
     return json.dumps(
         {
@@ -405,6 +412,27 @@ def test_summarize_sync_applies_transport_timeout() -> None:
 
     assert captured["timeout"] == 17.5
     assert captured["request"] == {"model": "model", "stream": False}
+
+
+def test_targeted_repair_preserves_other_items_and_discussion_topic() -> None:
+    draft = summarizer._parse_summary_draft(_valid_summary(item_count=2))
+    repaired = json.loads(_valid_repair_item())
+    repaired["summary"] = (
+        "人工智能公司发布新的开发工具，并面向开发者开放多项核心能力，"
+        "帮助团队提升复杂任务的实际交付效率。"
+    )
+
+    merged = summarizer._parse_summary_draft(
+        summarizer._merge_targeted_repair(
+            draft,
+            0,
+            json.dumps(repaired, ensure_ascii=False),
+        )
+    )
+
+    assert merged.items[0].summary == repaired["summary"]
+    assert merged.items[1] == draft.items[1]
+    assert merged.discussion_topic == draft.discussion_topic
 
 
 def test_summary_request_timeout_respects_all_three_budgets() -> None:
@@ -883,7 +911,7 @@ def test_summary_provider_repairs_one_reader_contract_failure(
             },
             ensure_ascii=False,
         ),
-        _valid_summary(),
+        _valid_repair_item(),
     ]
     calls: list[dict] = []
 
@@ -897,9 +925,12 @@ def test_summary_provider_repairs_one_reader_contract_failure(
 
     assert result.provider == "ModelScope"
     assert len(calls) == 2
-    repair_message = calls[1]["messages"][-1]["content"]
-    assert "30–80 个可见字符" in repair_message
-    assert "逐条保留输入 article_id 和顺序" in repair_message
+    repair_instruction = calls[1]["messages"][0]["content"]
+    repair_input = json.loads(calls[1]["messages"][-1]["content"])
+    assert "30–80 个可见字符" in repair_instruction
+    assert repair_input["source_article"]["article_id"] == "a1"
+    assert repair_input["current_item"]["article_id"] == "a1"
+    assert calls[1]["max_tokens"] == 512
 
 
 def test_summary_provider_repairs_grounding_failure_after_shape_repair(
@@ -927,20 +958,15 @@ def test_summary_provider_repairs_grounding_failure_after_shape_repair(
         ),
         json.dumps(
             {
-                "items": [
-                    {
-                        "article_id": "a1",
-                        "summary": (
-                            "人工智能公司发布开发者工具，并计划在未来5年扩大产品覆盖范围。"
-                        ),
-                        "why_it_matters": "这会改变开发团队采用相关能力的成本与效率。",
-                    }
-                ],
-                "discussion_topic": "你最关注哪条AI新闻？",
+                "article_id": "a1",
+                "summary": (
+                    "人工智能公司发布开发者工具，并计划在未来5年扩大产品覆盖范围。"
+                ),
+                "why_it_matters": "这会改变开发团队采用相关能力的成本与效率。",
             },
             ensure_ascii=False,
         ),
-        _valid_summary(),
+        _valid_repair_item(),
     ]
     calls: list[tuple[dict, float | None]] = []
     request_timeouts = iter((120.0, 80.0, 40.0))
@@ -961,9 +987,12 @@ def test_summary_provider_repairs_grounding_failure_after_shape_repair(
     assert result.provider == "ModelScope"
     assert len(calls) == 3
     assert [timeout for _params, timeout in calls] == [120.0, 80.0, 40.0]
-    grounding_repair = calls[2][0]["messages"][-1]["content"]
-    assert "unsupported numeric claims: 5" in grounding_repair
-    assert "不要换成另一个数字" in grounding_repair
+    grounding_repair = json.loads(calls[2][0]["messages"][-1]["content"])
+    assert (
+        grounding_repair["validation_error"]
+        == "item 1 has unsupported numeric claims: 5"
+    )
+    assert grounding_repair["source_article"]["article_id"] == "a1"
 
 
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (
