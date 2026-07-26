@@ -70,6 +70,9 @@ limits:
 summarize:
   prompt_path: prompts/daily.md
   prefer_chinese: true
+  # 三层时间预算：单请求 < 单 provider < 整次运行。
+  request_timeout_seconds: 120
+  provider_budget_seconds: 240
   compress:
     title_max: 200     # 增加字符限制，适应中文混合英文新闻
     desc_max: 1200     # 保留多轮证据中的关键事实，避免再次压成标题

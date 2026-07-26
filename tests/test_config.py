@@ -26,8 +26,15 @@ def test_default_llm_models(monkeypatch, tmp_path) -> None:
 
 
 def test_repository_daily_summary_target_is_ten() -> None:
-    assert Settings().max_summary_items == 10
-    assert load_config(str(REPO_ROOT / "config.yaml")).max_summary_items == 10
+    defaults = Settings()
+    repository = load_config(str(REPO_ROOT / "config.yaml"))
+
+    assert defaults.max_summary_items == 10
+    assert repository.max_summary_items == 10
+    assert defaults.summary_request_timeout_seconds == 120
+    assert defaults.summary_provider_budget_seconds == 240
+    assert repository.summary_request_timeout_seconds == 120
+    assert repository.summary_provider_budget_seconds == 240
 
 
 def test_llm_model_env_overrides(monkeypatch, tmp_path) -> None:
@@ -40,6 +47,33 @@ def test_llm_model_env_overrides(monkeypatch, tmp_path) -> None:
     assert cfg.model == "custom/modelscope"
     assert cfg.modelscope_secondary_model == "custom/modelscope-secondary"
     assert cfg.fallback_model == "custom/siliconflow"
+
+
+def test_summary_budgets_load_from_yaml_and_environment(monkeypatch, tmp_path) -> None:
+    config_path = tmp_path / "config.yaml"
+    config_path.write_text(
+        """
+summarize:
+  request_timeout_seconds: 75
+  provider_budget_seconds: 180
+""",
+        encoding="utf-8",
+    )
+    monkeypatch.delenv("SUMMARY_REQUEST_TIMEOUT_SECONDS", raising=False)
+    monkeypatch.delenv("SUMMARY_PROVIDER_BUDGET_SECONDS", raising=False)
+
+    cfg = load_config(str(config_path))
+
+    assert cfg.summary_request_timeout_seconds == 75
+    assert cfg.summary_provider_budget_seconds == 180
+
+    monkeypatch.setenv("SUMMARY_REQUEST_TIMEOUT_SECONDS", "60")
+    monkeypatch.setenv("SUMMARY_PROVIDER_BUDGET_SECONDS", "150")
+
+    overridden = load_config(str(config_path))
+
+    assert overridden.summary_request_timeout_seconds == 60
+    assert overridden.summary_provider_budget_seconds == 150
 
 
 def test_agihunt_secret_is_environment_only_and_policy_loads_from_yaml(

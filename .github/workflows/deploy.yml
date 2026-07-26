@@ -39,6 +39,7 @@ concurrency:
 jobs:
   generate-and-deploy:
     runs-on: ubuntu-24.04
+    timeout-minutes: 25
     outputs:
       pages_enabled: ${{ steps.pages-check.outputs.enabled }}
       publish: ${{ steps.publish-mode.outputs.publish }}

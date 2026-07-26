@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -25,6 +26,8 @@ def _llm_config(**overrides):
         "fallback_api_base_url": "https://siliconflow.test/v1",
         "fallback_model": "Pro/moonshotai/Kimi-K2.6",
         "max_output": 2000,
+        "summary_request_timeout_seconds": 120,
+        "summary_provider_budget_seconds": 240,
         "title_max": 150,
         "desc_max": 300,
         "prompt_path": "missing-prompt.md",
@@ -276,7 +279,7 @@ def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
     )
     captured: dict = {}
 
-    def fake_summarize_sync(_client, params):
+    def fake_summarize_sync(_client, params, **_kwargs):
         captured.update(params)
         return _valid_summary()
 
@@ -302,7 +305,7 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
     )
     calls: list[tuple[str, str]] = []
 
-    def fake_summarize_sync(client, params):
+    def fake_summarize_sync(client, params, **_kwargs):
         calls.append((client, params["model"]))
         if params["model"] == "Tencent-Hunyuan/Hy3":
             return _valid_summary()
@@ -334,7 +337,7 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     )
     calls: list[str] = []
 
-    def fake_summarize_sync(client, params):
+    def fake_summarize_sync(client, params, **_kwargs):
         calls.append(params["model"])
         if params["model"] == "ZhipuAI/GLM-5.2":
             return "  \n"
@@ -376,6 +379,96 @@ def test_summarize_sync_rejects_empty_message_content() -> None:
         summarizer._summarize_sync(client, {})
 
 
+def test_summarize_sync_applies_transport_timeout() -> None:
+    captured: dict = {}
+
+    class Client:
+        def __init__(self) -> None:
+            self.chat = SimpleNamespace(completions=SimpleNamespace(create=self.create))
+
+        def with_options(self, *, timeout):
+            captured["timeout"] = timeout
+            return self
+
+        @staticmethod
+        def create(**kwargs):
+            captured["request"] = kwargs
+            return SimpleNamespace(
+                choices=[SimpleNamespace(message=SimpleNamespace(content="ok"))]
+            )
+
+    summarizer._summarize_sync(
+        Client(),
+        {"model": "model"},
+        timeout_seconds=17.5,
+    )
+
+    assert captured["timeout"] == 17.5
+    assert captured["request"] == {"model": "model", "stream": False}
+
+
+def test_summary_request_timeout_respects_all_three_budgets() -> None:
+    now = datetime(2026, 7, 25, tzinfo=timezone.utc)
+
+    assert (
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=40),
+            provider_deadline_at=now + timedelta(seconds=90),
+            request_timeout_seconds=120,
+            now=now,
+        )
+        == 40
+    )
+    assert (
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=200),
+            provider_deadline_at=now + timedelta(seconds=30),
+            request_timeout_seconds=120,
+            now=now,
+        )
+        == 30
+    )
+    assert (
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=200),
+            provider_deadline_at=now + timedelta(seconds=180),
+            request_timeout_seconds=120,
+            now=now,
+        )
+        == 120
+    )
+
+
+def test_summary_provider_budget_is_capped_by_run_deadline() -> None:
+    now = datetime(2026, 7, 25, tzinfo=timezone.utc)
+
+    assert summarizer._summary_provider_deadline(
+        now + timedelta(seconds=600), 240, now=now
+    ) == now + timedelta(seconds=240)
+    assert summarizer._summary_provider_deadline(
+        now + timedelta(seconds=100), 240, now=now
+    ) == now + timedelta(seconds=100)
+
+
+def test_summary_request_timeout_distinguishes_run_and_provider_expiry() -> None:
+    now = datetime(2026, 7, 25, tzinfo=timezone.utc)
+
+    with pytest.raises(summarizer.RunDeadlineExceeded):
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now,
+            provider_deadline_at=now + timedelta(seconds=30),
+            request_timeout_seconds=120,
+            now=now,
+        )
+    with pytest.raises(summarizer.SummaryProviderBudgetExceeded):
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=30),
+            provider_deadline_at=now,
+            request_timeout_seconds=120,
+            now=now,
+        )
+
+
 def test_summarize_result_records_provider_attempts_and_article_provenance(
     monkeypatch,
 ) -> None:
@@ -387,7 +480,7 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
         lambda base_url, api_key: f"{base_url}|{api_key}",
     )
 
-    def fake_summarize_sync(client, params):
+    def fake_summarize_sync(client, params, **_kwargs):
         if params["model"] == "ZhipuAI/GLM-5.2":
             raise RuntimeError("primary unavailable")
         return _valid_summary()
@@ -480,7 +573,7 @@ def test_summarize_result_rejects_missing_or_duplicate_selected_candidates(
     monkeypatch.setattr(
         summarizer,
         "_summarize_sync",
-        lambda client, params: _summary_with_sources(
+        lambda client, params, **_kwargs: _summary_with_sources(
             ["a1", "a1", "a1", "a2", "a2", "a3", "a3", "a4", "a4", "a1"]
         ),
     )
@@ -590,7 +683,7 @@ def test_live_offline_and_publication_validation_share_the_p1_shortlist(
     )
     captured_input: dict = {}
 
-    def fake_summarize_sync(_client, params):
+    def fake_summarize_sync(_client, params, **_kwargs):
         captured_input.update(json.loads(params["messages"][-1]["content"]))
         return _summary_with_sources(["a2"])
 
@@ -794,7 +887,7 @@ def test_summary_provider_repairs_one_reader_contract_failure(
     ]
     calls: list[dict] = []
 
-    def fake_summarize_sync(_client, params):
+    def fake_summarize_sync(_client, params, **_kwargs):
         calls.append(params)
         return responses.pop(0)
 
@@ -849,10 +942,16 @@ def test_summary_provider_repairs_grounding_failure_after_shape_repair(
         ),
         _valid_summary(),
     ]
-    calls: list[dict] = []
+    calls: list[tuple[dict, float | None]] = []
+    request_timeouts = iter((120.0, 80.0, 40.0))
+    monkeypatch.setattr(
+        summarizer,
+        "_bounded_summary_request_timeout",
+        lambda **_kwargs: next(request_timeouts),
+    )
 
-    def fake_summarize_sync(_client, params):
-        calls.append(params)
+    def fake_summarize_sync(_client, params, *, timeout_seconds=None):
+        calls.append((params, timeout_seconds))
         return responses.pop(0)
 
     monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
@@ -861,7 +960,8 @@ def test_summary_provider_repairs_grounding_failure_after_shape_repair(
 
     assert result.provider == "ModelScope"
     assert len(calls) == 3
-    grounding_repair = calls[2]["messages"][-1]["content"]
+    assert [timeout for _params, timeout in calls] == [120.0, 80.0, 40.0]
+    grounding_repair = calls[2][0]["messages"][-1]["content"]
     assert "unsupported numeric claims: 5" in grounding_repair
     assert "不要换成另一个数字" in grounding_repair
 

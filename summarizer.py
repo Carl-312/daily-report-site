@@ -5,7 +5,8 @@ Summarizes news articles into daily reports.
 
 from __future__ import annotations
 import json
-from datetime import datetime
+from collections.abc import Callable
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 import re
@@ -46,6 +47,50 @@ class SummaryQualityError(ValueError):
     """Raised when an LLM response is not a usable Chinese daily summary."""
 
 
+class SummaryProviderBudgetExceeded(TimeoutError):
+    """Raised when one provider consumes its independent wall-clock budget."""
+
+
+def _summary_provider_deadline(
+    run_deadline_at: datetime | None,
+    provider_budget_seconds: float,
+    *,
+    now: datetime | None = None,
+) -> datetime:
+    """Return the earlier of the provider budget and immutable run deadline."""
+
+    clock_timezone = (
+        run_deadline_at.tzinfo if run_deadline_at is not None else timezone.utc
+    )
+    current = now or datetime.now(clock_timezone)
+    provider_deadline = current + timedelta(seconds=provider_budget_seconds)
+    if run_deadline_at is not None:
+        return min(provider_deadline, run_deadline_at)
+    return provider_deadline
+
+
+def _bounded_summary_request_timeout(
+    *,
+    run_deadline_at: datetime | None,
+    provider_deadline_at: datetime,
+    request_timeout_seconds: float,
+    now: datetime | None = None,
+) -> float:
+    """Bound one model request by request, provider, and run budgets."""
+
+    current = now or datetime.now(provider_deadline_at.tzinfo)
+    remaining = float(request_timeout_seconds)
+    if run_deadline_at is not None:
+        run_remaining = (run_deadline_at - current).total_seconds()
+        if run_remaining <= 0:
+            raise RunDeadlineExceeded("run deadline exceeded before summary request")
+        remaining = min(remaining, run_remaining)
+    provider_remaining = (provider_deadline_at - current).total_seconds()
+    if provider_remaining <= 0:
+        raise SummaryProviderBudgetExceeded("summary provider budget exhausted")
+    return min(remaining, provider_remaining)
+
+
 def modelscope_request_options(model: str) -> dict[str, Any]:
     """Return verified ModelScope-specific generation controls for a model."""
     if model == "ZhipuAI/GLM-5.2":
@@ -65,17 +110,9 @@ def _summary_limit(cfg=None) -> int:
     return max(1, int(getattr(cfg, "max_summary_items", 10)))
 
 
-def create_client(
-    base_url: str,
-    api_key: str,
-    *,
-    timeout: float | None = None,
-) -> OpenAI:
+def create_client(base_url: str, api_key: str) -> OpenAI:
     """Create OpenAI-compatible client."""
-    options = {"base_url": base_url, "api_key": api_key, "max_retries": 0}
-    if timeout is not None:
-        options["timeout"] = timeout
-    return OpenAI(**options)
+    return OpenAI(base_url=base_url, api_key=api_key, max_retries=0)
 
 
 def load_prompt(path: str = None) -> str:
@@ -549,6 +586,7 @@ def _validate_summary_with_one_repair(
     expected_items: int,
     expected_article_ids: tuple[str, ...],
     articles_by_id: dict[str, dict],
+    next_request_timeout: Callable[[], float],
 ) -> SummaryDraft:
     """Repair a complete draft twice at most while preserving strict grounding."""
 
@@ -606,7 +644,11 @@ def _validate_summary_with_one_repair(
                 "\n   ↻ Provider output missed the summary contract; "
                 f"repairing ({repair_attempt + 1}/{_MAX_SUMMARY_REPAIR_ATTEMPTS})"
             )
-            current_content = _summarize_sync(client, repair_params)
+            current_content = _summarize_sync(
+                client,
+                repair_params,
+                timeout_seconds=next_request_timeout(),
+            )
 
     raise AssertionError("summary repair loop exited unexpectedly")
 
@@ -776,19 +818,20 @@ def summarize_result(
     errors: list[str] = []
 
     for idx, provider in enumerate(providers):
-        remaining = None
-        if deadline_at is not None:
-            remaining = (deadline_at - datetime.now(deadline_at.tzinfo)).total_seconds()
-            if remaining <= 0:
-                raise RunDeadlineExceeded("run deadline exceeded before summary")
-        try:
-            client = (
-                create_client(provider["base_url"], provider["api_key"])
-                if remaining is None
-                else create_client(
-                    provider["base_url"], provider["api_key"], timeout=remaining
-                )
+        provider_deadline_at = _summary_provider_deadline(
+            deadline_at,
+            cfg.summary_provider_budget_seconds,
+        )
+
+        def next_request_timeout() -> float:
+            return _bounded_summary_request_timeout(
+                run_deadline_at=deadline_at,
+                provider_deadline_at=provider_deadline_at,
+                request_timeout_seconds=cfg.summary_request_timeout_seconds,
             )
+
+        try:
+            client = create_client(provider["base_url"], provider["api_key"])
             params: dict[str, Any] = {
                 "model": provider["model"],
                 "max_tokens": cfg.max_output,
@@ -803,7 +846,11 @@ def summarize_result(
             }
             if provider["name"].startswith("ModelScope"):
                 params.update(modelscope_request_options(provider["model"]))
-            content = _summarize_sync(client, params)
+            content = _summarize_sync(
+                client,
+                params,
+                timeout_seconds=next_request_timeout(),
+            )
             draft = _validate_summary_with_one_repair(
                 client,
                 params,
@@ -813,6 +860,7 @@ def summarize_result(
                     article["article_id"] for article in compressed
                 ),
                 articles_by_id=article_reference_map(selected_articles),
+                next_request_timeout=next_request_timeout,
             )
             attempts.append(
                 SummaryAttempt(
@@ -856,10 +904,21 @@ def summarize_result(
     raise RuntimeError("All LLM providers failed. " + " | ".join(errors))
 
 
-def _summarize_sync(client: OpenAI, params: dict) -> str:
+def _summarize_sync(
+    client: OpenAI,
+    params: dict,
+    *,
+    timeout_seconds: float | None = None,
+) -> str:
     """Non-streaming summarization"""
-    params["stream"] = False
-    response = client.chat.completions.create(**params)
+    request_params = dict(params)
+    request_params["stream"] = False
+    request_client = (
+        client.with_options(timeout=timeout_seconds)
+        if timeout_seconds is not None
+        else client
+    )
+    response = request_client.chat.completions.create(**request_params)
     if not response.choices:
         raise SummaryQualityError("provider returned an empty choices list")
     content = response.choices[0].message.content or ""
@@ -940,6 +999,7 @@ def offline_summary_result(articles: list[dict], limit: int = 10):
 
 def test_connection() -> bool:
     """Test API connection (primary first, then fallback)."""
+    cfg = get_config()
     providers = _provider_candidates()
 
     if not providers:
@@ -961,7 +1021,11 @@ def test_connection() -> bool:
             }
             if provider["name"].startswith("ModelScope"):
                 params.update(modelscope_request_options(provider["model"]))
-            content = _summarize_sync(client, params)
+            content = _summarize_sync(
+                client,
+                params,
+                timeout_seconds=cfg.summary_request_timeout_seconds,
+            )
             print("✅ API 连接成功！")
             print(f"   供应商: {provider['name']}")
             print(f"   模型: {provider['model']}")

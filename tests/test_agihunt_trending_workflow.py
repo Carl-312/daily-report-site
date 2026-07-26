@@ -33,6 +33,17 @@ def test_deploy_workflow_exposes_a_single_render_trending_gray_run() -> None:
     assert "setup-chrome" not in workflow
 
 
+def test_generation_job_has_a_hard_timeout() -> None:
+    workflow = (REPO_ROOT / ".github" / "workflows" / "deploy.yml").read_text(
+        encoding="utf-8"
+    )
+    generate_job = workflow.split("  generate-and-deploy:", 1)[1].split(
+        "\n  deploy:", 1
+    )[0]
+
+    assert "timeout-minutes: 25" in generate_job
+
+
 def test_production_config_enables_only_the_rendered_trending_source() -> None:
     config = load_config(str(REPO_ROOT / "config.yaml"))
 
