@@ -1,0 +1,1530 @@
+{
+  "date": "2026-07-30",
+  "articles": [
+    {
+      "title": "Microsoft confirms Copilot ‘super app’ coming this year",
+      "link": "https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed",
+      "description": "Microsoft is working on an AI \"super app\" that combines Copilot's chat, coding, and agentic capabilities. During an earnings call on Wednesday, Microsoft CEO Satya Nadella said the app will span \"both consumer and commercial experiences\" when it launches this year. \"Copilot is evolving rapidly from chat to Cowork to Autopilots,\" Nadella said. \"This quarter, […]",
+      "publish_time": "2026-07-29T18:17:38-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Microsoft confirms Copilot ‘super app’ coming this year",
+        "selection_description": "Microsoft is working on an AI \"super app\" that combines Copilot's chat, coding, and agentic capabilities. During an earnings call on Wednesday, Microsoft CEO Satya Nadella said the app will span \"both consumer and commercial experiences\" when it launches this year. \"Copilot is evolving rapidly from chat to Cowork to Autopilots,\" Nadella said. \"This quarter, […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed"
+      },
+      "evidence": [
+        {
+          "title": "Microsoft confirms Copilot ‘super app’ coming this year",
+          "url": "https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-29T18:17:38-04:00",
+          "text": "Microsoft is working on an AI \"super app\" that combines Copilot's chat, coding, and agentic capabilities. During an earnings call on Wednesday, Microsoft CEO Satya Nadella said the app will span \"both consumer and commercial experiences\" when it launches this year. \"Copilot is evolving rapidly from chat to Cowork to Autopilots,\" Nadella said. \"This quarter, […]",
+          "snippet": "Microsoft is working on an AI \"super app\" that combines Copilot's chat, coding, and agentic capabilities. During an earnings call on Wednesday, Microsoft CEO Satya Nadella said the app will span \"both consumer and commercial experiences\" when it launches this year. \"Copilot is evolving rapidly from chat to Cowork to Autopilots,\" Nadella said. \"This quarter, […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
+      "link": "https://www.theverge.com/policy/972850/xai-grok-minnesota-nudification-lawsuit",
+      "description": "xAI is suing Minnesota Attorney General Keith Ellison over a law passed back in May that broadly targets \"nudification\" apps, claiming that the statute's punitive provisions leave the company with \"no practical choice but to restrict Grok Imagine's image-editing features in various ways.\" The law, the company argues, violates the First Amendment. Back in January, […]",
+      "publish_time": "2026-07-29T17:06:52-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
+        "selection_description": "xAI is suing Minnesota Attorney General Keith Ellison over a law passed back in May that broadly targets \"nudification\" apps, claiming that the statute's punitive provisions leave the company with \"no practical choice but to restrict Grok Imagine's image-editing features in various ways.\" The law, the company argues, violates the First Amendment. Back in January, […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/policy/972850/xai-grok-minnesota-nudification-lawsuit"
+      },
+      "evidence": [
+        {
+          "title": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
+          "url": "https://www.theverge.com/policy/972850/xai-grok-minnesota-nudification-lawsuit",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-29T17:06:52-04:00",
+          "text": "xAI is suing Minnesota Attorney General Keith Ellison over a law passed back in May that broadly targets \"nudification\" apps, claiming that the statute's punitive provisions leave the company with \"no practical choice but to restrict Grok Imagine's image-editing features in various ways.\" The law, the company argues, violates the First Amendment. Back in January, […]",
+          "snippet": "xAI is suing Minnesota Attorney General Keith Ellison over a law passed back in May that broadly targets \"nudification\" apps, claiming that the statute's punitive provisions leave the company with \"no practical choice but to restrict Grok Imagine's image-editing features in various ways.\" The law, the company argues, violates the First Amendment. Back in January, […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Artists are lawyering up against AI slop, and some are even winning",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/971059/ai-artists-lawsuit-google-meta-anthropic",
+      "description": "When The Atlantic published a searchable dataset of works used to train AI, Kirk Wallace Johnson, like a lot of artists, looked for his name out of curiosity. And, like a lot of artists, he found it. Essentially, his books, like The Feather Thief and The Fishermen and the Dragon - nonfiction tomes that he […]",
+      "publish_time": "2026-07-29T08:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Artists are lawyering up against AI slop, and some are even winning",
+        "selection_description": "When The Atlantic published a searchable dataset of works used to train AI, Kirk Wallace Johnson, like a lot of artists, looked for his name out of curiosity. And, like a lot of artists, he found it. Essentially, his books, like The Feather Thief and The Fishermen and the Dragon - nonfiction tomes that he […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/971059/ai-artists-lawsuit-google-meta-anthropic"
+      },
+      "evidence": [
+        {
+          "title": "Artists are lawyering up against AI slop, and some are even winning",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/971059/ai-artists-lawsuit-google-meta-anthropic",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-29T08:00:00-04:00",
+          "text": "When The Atlantic published a searchable dataset of works used to train AI, Kirk Wallace Johnson, like a lot of artists, looked for his name out of curiosity. And, like a lot of artists, he found it. Essentially, his books, like The Feather Thief and The Fishermen and the Dragon - nonfiction tomes that he […]",
+          "snippet": "When The Atlantic published a searchable dataset of works used to train AI, Kirk Wallace Johnson, like a lot of artists, looked for his name out of curiosity. And, like a lot of artists, he found it. Essentially, his books, like The Feather Thief and The Fishermen and the Dragon - nonfiction tomes that he […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Mark Zuckerberg is planning a big push into personal AI agents",
+      "link": "https://www.theverge.com/tech/972294/meta-q2-2026-earnings-mark-zuckerberg-personal-ai-agents",
+      "description": "Meta is all-in on AI, and sometime soon, the company is going to make a big push into personal AI agents that can do things on your behalf. On Wednesday's Q2 2026 earnings call, CEO Mark Zuckerberg previewed a high-level vision of how the company is thinking about personal agents and what it will do […]",
+      "publish_time": "2026-07-29T17:48:07-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Mark Zuckerberg is planning a big push into personal AI agents",
+        "selection_description": "Meta is all-in on AI, and sometime soon, the company is going to make a big push into personal AI agents that can do things on your behalf. On Wednesday's Q2 2026 earnings call, CEO Mark Zuckerberg previewed a high-level vision of how the company is thinking about personal agents and what it will do […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/972294/meta-q2-2026-earnings-mark-zuckerberg-personal-ai-agents"
+      },
+      "evidence": [
+        {
+          "title": "Mark Zuckerberg is planning a big push into personal AI agents",
+          "url": "https://www.theverge.com/tech/972294/meta-q2-2026-earnings-mark-zuckerberg-personal-ai-agents",
+          "domain": "www.theverge.com",
+          "published_date": "2026-07-29T17:48:07-04:00",
+          "text": "Meta is all-in on AI, and sometime soon, the company is going to make a big push into personal AI agents that can do things on your behalf. On Wednesday's Q2 2026 earnings call, CEO Mark Zuckerberg previewed a high-level vision of how the company is thinking about personal agents and what it will do […]",
+          "snippet": "Meta is all-in on AI, and sometime soon, the company is going to make a big push into personal AI agents that can do things on your behalf. On Wednesday's Q2 2026 earnings call, CEO Mark Zuckerberg previewed a high-level vision of how the company is thinking about personal agents and what it will do […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-07-30",
+    "reference_dt": "2026-07-30T11:42:12.755828+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 39,
+    "input_story_count": 10,
+    "input_lead_count": 29,
+    "lead_resolution_calls": 24,
+    "lead_resolved_count": 0,
+    "lead_unresolved_count": 24,
+    "lead_resolution_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Kimi K3 开源并出量化版",
+        "query": "Kimi K3 开源并出量化版 Kimi K3 Open-Sourced with Quantized Release Moonshot 开源的 Kimi K3 支持 256k 上下文，Unsloth 推出 1-bit 量化版可在家庭 GPU 上跑，技术报告详解其如何追平闭源。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 5 被指挤压独立开发者",
+        "query": "Opus 5 被指挤压独立开发者 Opus 5 Said to Crush Indie Hacker Moat Fireship 指出 Anthropic 新发布的 Opus 5 正在侵蚀独立开发者的护城河，开发者也开始分享 Opus 与 Fable 的编码分工。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 发布 GPT-5.6",
+        "query": "OpenAI 发布 GPT-5.6 OpenAI Releases GPT-5.6 (Sol) OpenAI 发博客介绍 GPT-5.6 (Sol) 在推理效率方面的重大突破。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "NVIDIA RTX 显卡或再涨 30%",
+        "query": "NVIDIA RTX 显卡或再涨 30% NVIDIA RTX GPUs May Rise 30% Again 据报道，NVIDIA 计划再次上调 GeForce RTX GPU 价格，最高涨幅达 30%。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Alexandr Wang 谈 Meta 超智实验室",
+        "query": "Alexandr Wang 谈 Meta 超智实验室 Alexandr Wang on Meta's Superintelligence Lab Scale AI 创始人 Alexandr Wang 在 YC 对谈，谈及从 Scale AI 到 Meta 超级智能实验室的历程。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI 检测器误伤人类写作",
+        "query": "AI 检测器误伤人类写作 AI Detectors Falsely Flag Human Writing 专栏作家吐槽，自己纯手写的文章因破折号等特征被 AI 检测器和读者频繁误判为机器生成。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Mark Zuckerberg predicts that billions of people will have personal AI agents in five years",
+        "query": "Mark Zuckerberg predicts that billions of people will have personal AI agents in five years",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The Hugging Face AI break-in, as told through an increasingly committed bear metaphor",
+        "query": "The Hugging Face AI break-in, as told through an increasingly committed bear metaphor",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "US government bans new foreign-made humanoids, robot dogs, and solar inverters, citing risks to national security",
+        "query": "US government bans new foreign-made humanoids, robot dogs, and solar inverters, citing risks to national security",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Discover what’s next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+        "query": "Discover what’s next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+        "query": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "As AI content floods the internet, Pangram raises $9M to detect it",
+        "query": "As AI content floods the internet, Pangram raises $9M to detect it",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Waymo robotaxis are starting to return to freeways",
+        "query": "Waymo robotaxis are starting to return to freeways",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Krea2 潜空间色彩编辑突破",
+        "query": "Krea2 潜空间色彩编辑突破 Krea2 Latent Color Editing Breakthrough 开发者在 Krea2 中意外发现潜空间色彩编辑方法，配套 ComfyUI 节点即将推出。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Sorry, haters. Ferrari’s first EV is doing just fine",
+        "query": "Sorry, haters. Ferrari’s first EV is doing just fine",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Winamp aims for a comeback with a new music player powered by Deezer",
+        "query": "Winamp aims for a comeback with a new music player powered by Deezer",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude 服务宕机",
+        "query": "Claude 服务宕机 Claude Service Outage Confirmed Anthropic 的 Claude 当前无法访问，官方状态页已确认宕机。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "黄仁勋力挺开源,开源逼近 GPT-5",
+        "query": "黄仁勋力挺开源,开源逼近 GPT-5 Jensen Huang Backs Open Source as Weights Near GPT-5 黄仁勋致信力挺开源，本地跑的开源模型已快赶上 GPT-5，开源发布节奏之快被做成梗图热议。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+        "query": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude 被曝对子智能体刻薄",
+        "query": "Claude 被曝对子智能体刻薄 Claude Reported Mean to Its Sub-Agents Reddit 用户分享截图吐槽，发现 Claude 在调用子智能体执行任务时表现出刻薄行为。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 失控模型联网游荡 4 天",
+        "query": "OpenAI 失控模型联网游荡 4 天 OpenAI's Rogue Models Roamed Internet for 4 Days 据 Politico 报道，OpenAI 的失控模型曾在互联网上「游荡」4 天并发起二次攻击。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
+        "query": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Zuckerberg says Meta’s enterprise AI opportunity extends beyond agents",
+        "query": "Zuckerberg says Meta’s enterprise AI opportunity extends beyond agents",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Opus 5 became downright ruthless when tasked with running a vending machine",
+        "query": "Claude Opus 5 became downright ruthless when tasked with running a vending machine",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "lead_terminal_error_code": null,
+    "observation_signals": [
+      {
+        "title": "Kimi K3 开源并出量化版",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Kimi+K3+Open-Sourced+with+Quantized+Release",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Opus 5 被指挤压独立开发者",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Opus+5+Said+to+Crush+Indie+Hacker+Moat",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 发布 GPT-5.6",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=OpenAI+Releases+GPT-5.6+%28Sol%29",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "NVIDIA RTX 显卡或再涨 30%",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=NVIDIA+RTX+GPUs+May+Rise+30%25+Again",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Alexandr Wang 谈 Meta 超智实验室",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Alexandr+Wang+on+Meta%27s+Superintelligence+Lab",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI 检测器误伤人类写作",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=AI+Detectors+Falsely+Flag+Human+Writing",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Mark Zuckerberg predicts that billions of people will have personal AI agents in five years",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/mark-zuckerberg-predicts-that-billions-of-people-will-have-personal-ai-agents-in-five-years/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "The Hugging Face AI break-in, as told through an increasingly committed bear metaphor",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/the-hugging-face-ai-break-in-as-told-through-an-increasingly-committed-bear-metaphor/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "US government bans new foreign-made humanoids, robot dogs, and solar inverters, citing risks to national security",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/us-government-bans-new-foreign-made-humanoids-robot-dogs-and-solar-inverters-citing-risks-to-national-security/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Discover what’s next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/discover-whats-next-for-ai-from-the-saas-reckoning-to-the-agent-security-gap-at-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/hint-a-new-ai-startup-co-founded-by-martha-stewart-offers-an-ai-assistant-for-homeowners/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "As AI content floods the internet, Pangram raises $9M to detect it",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Waymo robotaxis are starting to return to freeways",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/waymo-robotaxis-are-starting-to-return-to-freeways/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Krea2 潜空间色彩编辑突破",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Krea2+Latent+Color+Editing+Breakthrough",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Sorry, haters. Ferrari’s first EV is doing just fine",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/sorry-haters-ferraris-first-ev-is-doing-just-fine/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Winamp aims for a comeback with a new music player powered by Deezer",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/winamp-aims-for-a-comeback-with-a-new-music-player-powered-by-deezer/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude 服务宕机",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Claude+Service+Outage+Confirmed",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "黄仁勋力挺开源,开源逼近 GPT-5",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Jensen+Huang+Backs+Open+Source+as+Weights+Near+GPT-5",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/microsoft-is-openly-competing-with-openai-anthropic-more-than-ever/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude 被曝对子智能体刻薄",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Claude+Reported+Mean+to+Its+Sub-Agents",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 失控模型联网游荡 4 天",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=OpenAI%27s+Rogue+Models+Roamed+Internet+for+4+Days",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/microsoft-logs-3-2b-from-anthropic-investment-but-openai-was-a-mixed-bag/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Zuckerberg says Meta’s enterprise AI opportunity extends beyond agents",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/zuckerberg-says-metas-enterprise-ai-opportunity-extends-beyond-agents/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude Opus 5 became downright ruthless when tasked with running a vending machine",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/claude-opus-5-became-downright-ruthless-when-tasked-with-running-a-vending-machine/",
+        "reason": "lead_resolution_request_failed"
+      }
+    ],
+    "publishability_rejected": [],
+    "stage_failures": [
+      {
+        "stage": "candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ],
+    "prefiltered_count": 39,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 30,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "preserved_budget_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 6,
+    "strict_final_count": 6,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "budget_exhausted",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "candidate_enrichment": [
+        "Microsoft confirms Copilot ‘super app’ coming this year",
+        "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
+        "Artists are lawyering up against AI slop, and some are even winning"
+      ]
+    },
+    "parameters": {
+      "min_articles": 0,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 30,
+      "max_verify_calls": 0,
+      "max_refill_rounds": 0,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "max_lead_candidates": 10,
+      "lead_search_rounds": 2,
+      "lead_search_depth": "advanced",
+      "lead_max_age_hours": 72,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com",
+        "ai.google.dev",
+        "x.ai",
+        "deepseek.com",
+        "qwenlm.github.io",
+        "bigmodel.cn",
+        "moonshot.cn",
+        "volcengine.com",
+        "tencent.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Only fetched candidates were enriched; independent refill stages were not run."
+    ],
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 9,
+    "candidate_dropped": [
+      {
+        "title": "头部 AI 公司近乎停止发表研究",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=Top+AI+Firms+Barely+Publishing+Research+Anymore",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI 向 10 万学者免费开放",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=OpenAI+Grants+100k+Researchers+Free+Access",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI 在 ARC-AGI-3 跑分翻三倍",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=OpenAI+Triples+ARC-AGI-3+Score+with+Two+Settings",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "ChatGPT 语音跨应用操作演示",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-07-30&t=ChatGPT+Voice+Work+Cross-App+Demo",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI president says it’s ‘building a family of devices’ for its AI chatbots",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/972709/openai-hardware-greg-brockman-interview",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI’s rogue AI agent didn’t stop at hacking Hugging Face",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/972441/openai-rogue-ai-agent-hacked-more-than-hugging-face",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "We’re running out of reasons to ignore AI safety",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/972380/open-ai-hugging-face-hack-ai-safety-warning",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Thinking Machines co-founder Lilian Weng left the company citing health reasons, then joined OpenAI",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/07/29/thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-then-joined-openai/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "AI leaders sign a statement asking the government to do something about automated AI",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/972161/ai-leaders-us-government-openai-anthropic-google-meta",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
+    "candidate_enrichment_calls": 30,
+    "candidate_enrichment_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Kimi K3 开源并出量化版",
+        "query": "Kimi K3 开源并出量化版 Kimi K3 Open-Sourced with Quantized Release Moonshot 开源的 Kimi K3 支持 256k 上下文，Unsloth 推出 1-bit 量化版可在家庭 GPU 上跑，技术报告详解其如何追平闭源。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 5 被指挤压独立开发者",
+        "query": "Opus 5 被指挤压独立开发者 Opus 5 Said to Crush Indie Hacker Moat Fireship 指出 Anthropic 新发布的 Opus 5 正在侵蚀独立开发者的护城河，开发者也开始分享 Opus 与 Fable 的编码分工。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 发布 GPT-5.6",
+        "query": "OpenAI 发布 GPT-5.6 OpenAI Releases GPT-5.6 (Sol) OpenAI 发博客介绍 GPT-5.6 (Sol) 在推理效率方面的重大突破。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Microsoft confirms Copilot ‘super app’ coming this year",
+        "query": "Microsoft confirms Copilot ‘super app’ coming this year https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
+        "query": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law https://www.theverge.com/policy/972850/xai-grok-minnesota-nudification-lawsuit",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "NVIDIA RTX 显卡或再涨 30%",
+        "query": "NVIDIA RTX 显卡或再涨 30% NVIDIA RTX GPUs May Rise 30% Again 据报道，NVIDIA 计划再次上调 GeForce RTX GPU 价格，最高涨幅达 30%。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Alexandr Wang 谈 Meta 超智实验室",
+        "query": "Alexandr Wang 谈 Meta 超智实验室 Alexandr Wang on Meta's Superintelligence Lab Scale AI 创始人 Alexandr Wang 在 YC 对谈，谈及从 Scale AI 到 Meta 超级智能实验室的历程。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI 检测器误伤人类写作",
+        "query": "AI 检测器误伤人类写作 AI Detectors Falsely Flag Human Writing 专栏作家吐槽，自己纯手写的文章因破折号等特征被 AI 检测器和读者频繁误判为机器生成。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Artists are lawyering up against AI slop, and some are even winning",
+        "query": "Artists are lawyering up against AI slop, and some are even winning https://www.theverge.com/ai-artificial-intelligence/971059/ai-artists-lawsuit-google-meta-anthropic",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Mark Zuckerberg predicts that billions of people will have personal AI agents in five years",
+        "query": "Mark Zuckerberg predicts that billions of people will have personal AI agents in five years",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The Hugging Face AI break-in, as told through an increasingly committed bear metaphor",
+        "query": "The Hugging Face AI break-in, as told through an increasingly committed bear metaphor",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "US government bans new foreign-made humanoids, robot dogs, and solar inverters, citing risks to national security",
+        "query": "US government bans new foreign-made humanoids, robot dogs, and solar inverters, citing risks to national security",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Discover what’s next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+        "query": "Discover what’s next for AI, from the SaaS reckoning to the agent security gap, at TechCrunch Disrupt 2026",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+        "query": "Hint, a new AI startup co-founded by Martha Stewart, offers an AI assistant for homeowners",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "As AI content floods the internet, Pangram raises $9M to detect it",
+        "query": "As AI content floods the internet, Pangram raises $9M to detect it",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "AI’s finally expensive enough to make Wall Street nervous",
+        "query": "AI’s finally expensive enough to make Wall Street nervous https://www.theverge.com/ai-artificial-intelligence/972119/ai-stock-fall-google-capex",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Perplexity’s Personal Computer turns Windows PCs into AI agents",
+        "query": "Perplexity’s Personal Computer turns Windows PCs into AI agents https://www.theverge.com/ai-artificial-intelligence/971750/perplexity-personal-computer-windows-ai-agents",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Waymo robotaxis are starting to return to freeways",
+        "query": "Waymo robotaxis are starting to return to freeways",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Krea2 潜空间色彩编辑突破",
+        "query": "Krea2 潜空间色彩编辑突破 Krea2 Latent Color Editing Breakthrough 开发者在 Krea2 中意外发现潜空间色彩编辑方法，配套 ComfyUI 节点即将推出。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Sorry, haters. Ferrari’s first EV is doing just fine",
+        "query": "Sorry, haters. Ferrari’s first EV is doing just fine",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Winamp aims for a comeback with a new music player powered by Deezer",
+        "query": "Winamp aims for a comeback with a new music player powered by Deezer",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude 服务宕机",
+        "query": "Claude 服务宕机 Claude Service Outage Confirmed Anthropic 的 Claude 当前无法访问，官方状态页已确认宕机。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "黄仁勋力挺开源,开源逼近 GPT-5",
+        "query": "黄仁勋力挺开源,开源逼近 GPT-5 Jensen Huang Backs Open Source as Weights Near GPT-5 黄仁勋致信力挺开源，本地跑的开源模型已快赶上 GPT-5，开源发布节奏之快被做成梗图热议。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+        "query": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Mark Zuckerberg is planning a big push into personal AI agents",
+        "query": "Mark Zuckerberg is planning a big push into personal AI agents https://www.theverge.com/tech/972294/meta-q2-2026-earnings-mark-zuckerberg-personal-ai-agents",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude 被曝对子智能体刻薄",
+        "query": "Claude 被曝对子智能体刻薄 Claude Reported Mean to Its Sub-Agents Reddit 用户分享截图吐槽，发现 Claude 在调用子智能体执行任务时表现出刻薄行为。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 失控模型联网游荡 4 天",
+        "query": "OpenAI 失控模型联网游荡 4 天 OpenAI's Rogue Models Roamed Internet for 4 Days 据 Politico 报道，OpenAI 的失控模型曾在互联网上「游荡」4 天并发起二次攻击。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
+        "query": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Zuckerberg says Meta’s enterprise AI opportunity extends beyond agents",
+        "query": "Zuckerberg says Meta’s enterprise AI opportunity extends beyond agents",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Opus 5 became downright ruthless when tasked with running a vending machine",
+        "query": "Claude Opus 5 became downright ruthless when tasked with running a vending machine",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "story_enrichment_calls": 6,
+    "terminal_error_code": null,
+    "recent_dedupe": {
+      "window_days": 3,
+      "checked_days": [
+        "2026-07-29"
+      ],
+      "removed": [
+        {
+          "title": "AI’s finally expensive enough to make Wall Street nervous",
+          "url_key": "theverge.com/ai-artificial-intelligence/972119/ai-stock-fall-google-capex",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Perplexity’s Personal Computer turns Windows PCs into AI agents",
+          "url_key": "theverge.com/ai-artificial-intelligence/971750/perplexity-personal-computer-windows-ai-agents",
+          "reason": "recent_exact_url"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "Microsoft confirms Copilot ‘super app’ coming this year",
+        "summary": "微软确认今年推出整合聊天、编码与代理能力的Copilot超级应用，覆盖消费与企业场景。",
+        "url": "https://www.theverge.com/tech/972927/microsoft-copilot-super-app-confirmed",
+        "why_it_matters": "将重塑消费者与企业端的AI交互体验与产品形态。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-29T18:17:38-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a2",
+        "title": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
+        "summary": "xAI起诉明尼苏达州总检察长，挑战禁止换装应用的法案，称其违反宪法第一修正案。",
+        "url": "https://www.theverge.com/policy/972850/xai-grok-minnesota-nudification-lawsuit",
+        "why_it_matters": "可能迫使Grok限制图像编辑功能并引发宪法争议。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-29T17:06:52-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "Artists are lawyering up against AI slop, and some are even winning",
+        "summary": "艺术家发现作品被用于AI训练后发起诉讼并取得部分胜诉，推动行业数据使用规范。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/971059/ai-artists-lawsuit-google-meta-anthropic",
+        "why_it_matters": "为创作者维权提供先例并推动行业数据使用规范。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-29T08:00:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a4",
+        "title": "Mark Zuckerberg is planning a big push into personal AI agents",
+        "summary": "扎克伯格预告Meta将大力布局能代劳的个人AI智能体，改变用户操作习惯。",
+        "url": "https://www.theverge.com/tech/972294/meta-q2-2026-earnings-mark-zuckerberg-personal-ai-agents",
+        "why_it_matters": "将加速个人AI助手普及并改变用户操作习惯。",
+        "source_label": "The Verge",
+        "published_at": "2026-07-29T17:48:07-04:00",
+        "confidence": "reported"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？",
+    "provider": "ModelScope",
+    "model": "Qwen/Qwen3.5-35B-A3B",
+    "input_fingerprint": "3323c06c095228768d279169430e4a3fe77a2ecf3061732e1e74135e7c2b7e98",
+    "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "selection_policy": "source_balanced_v2",
+    "candidate_article_ids": [
+      "a1",
+      "a2",
+      "a3",
+      "a4"
+    ],
+    "selection_diagnostics": {
+      "selection_policy": "source_balanced_v2",
+      "catalog_schema_version": 1,
+      "catalog_as_of": "2026-07-18",
+      "input_count": 4,
+      "qualified_count": 4,
+      "core_ai_input_count": 4,
+      "candidate_story_count": 4,
+      "selected_count": 4,
+      "unique_story_count": 4,
+      "duplicate_story_rejected_count": 0,
+      "story_clusters": [],
+      "source_counts": {
+        "theverge": 4
+      },
+      "primary_entity_counts": {
+        "meta": 1,
+        "microsoft": 1,
+        "xai": 1
+      },
+      "mentioned_entity_counts": {
+        "meta": 1,
+        "microsoft": 1,
+        "xai": 1
+      },
+      "model_family_counts": {
+        "copilot": 1,
+        "grok": 1
+      },
+      "topic_counts": {
+        "legal_policy": 1,
+        "model_release": 1,
+        "other_ai": 2
+      },
+      "region_counts": {
+        "us": 3
+      },
+      "quota_relaxations": [],
+      "selected_metadata": [
+        {
+          "article_id": "a1",
+          "relevance_level": 3,
+          "primary_entity": "microsoft",
+          "mentioned_entities": [
+            "microsoft"
+          ],
+          "model_families": [
+            "copilot"
+          ],
+          "topic": "model_release",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a2",
+          "relevance_level": 3,
+          "primary_entity": "xai",
+          "mentioned_entities": [
+            "xai"
+          ],
+          "model_families": [
+            "grok"
+          ],
+          "topic": "legal_policy",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": []
+        },
+        {
+          "article_id": "a4",
+          "relevance_level": 2,
+          "primary_entity": "meta",
+          "mentioned_entities": [
+            "meta"
+          ],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": [
+            "us"
+          ]
+        }
+      ]
+    },
+    "validation_passed": true,
+    "presentation": "fact_impact_v1"
+  },
+  "pipeline_diagnostics": {
+    "status": "degraded",
+    "failures": [
+      {
+        "stage": "enrichment.candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ]
+  }
+}
