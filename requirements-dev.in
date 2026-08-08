@@ -1,0 +1,7 @@
+# Development dependencies extend the exact runtime lock.
+-r requirements.txt
+
+# Ruff upgrades are deliberate because minor releases may introduce new rules.
+ruff==0.15.22
+pytest>=9.1,<10
+pytest-cov>=7.1,<8

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
@@ -70,28 +70,69 @@ def is_direct_evidence_url(value: str) -> bool:
     return (parsed.path or "/") not in {"", "/"}
 
 
-def _has_real_publish_time(article: dict[str, Any]) -> bool:
+def direct_evidence_domains(article: dict[str, Any]) -> tuple[str, ...]:
+    """Return distinct normalized domains backed by direct story URLs."""
+
+    urls = [compact_text(article.get("link"))]
+    evidence = article.get("evidence")
+    if isinstance(evidence, list):
+        urls.extend(
+            compact_text(item.get("url")) for item in evidence if isinstance(item, dict)
+        )
+
+    domains: set[str] = set()
+    for url in urls:
+        if not is_direct_evidence_url(url):
+            continue
+        try:
+            hostname = (urlparse(url).hostname or "").lower().removeprefix("www.")
+        except ValueError:
+            continue
+        if hostname:
+            domains.add(hostname)
+    return tuple(sorted(domains))
+
+
+def source_publish_datetime(article: dict[str, Any]) -> datetime | None:
+    """Parse a real source publication time and reject observation timestamps."""
+
     provenance = article.get("provenance")
     provenance = provenance if isinstance(provenance, dict) else {}
     if provenance.get("publish_time_semantics") == "trend_observed_at":
-        return False
+        return None
     value = compact_text(article.get("publish_time"))
     if not value or value.lower() in {"unknown", "未知", "未知时间", "none"}:
-        return False
+        return None
     try:
-        datetime.fromisoformat(value.replace("Z", "+00:00"))
+        published = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
         try:
             # Tavily news results commonly use RFC 2822 dates such as
-            # ``Sat, 18 Jul 2026 20:54:42 GMT``.  They are real source times,
-            # not trend observation timestamps, so accept them explicitly.
-            parsedate_to_datetime(value)
+            # ``Sat, 18 Jul 2026 20:54:42 GMT``.
+            published = parsedate_to_datetime(value)
         except (TypeError, ValueError):
             try:
-                datetime.strptime(value[:10], "%Y-%m-%d")
+                # Preserve compatibility with adapters that append an
+                # unrecognized timezone label after a valid ISO date.
+                published = datetime.strptime(value[:10], "%Y-%m-%d")
             except ValueError:
-                return False
-    return True
+                return None
+    if published.tzinfo is None:
+        published = published.replace(tzinfo=timezone.utc)
+    return published.astimezone(timezone.utc)
+
+
+def normalized_source_publish_time(article: dict[str, Any]) -> str:
+    """Return one stable UTC timestamp for selection and model metadata."""
+
+    published = source_publish_datetime(article)
+    if published is None:
+        return ""
+    return published.isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def _has_real_publish_time(article: dict[str, Any]) -> bool:
+    return source_publish_datetime(article) is not None
 
 
 def article_is_lead(article: dict[str, Any]) -> bool:

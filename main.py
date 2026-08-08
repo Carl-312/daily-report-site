@@ -289,7 +289,10 @@ def stage_and_publish_run(
     staged_content.mkdir(parents=True, exist_ok=True)
     publication_root = resolve_publication_root(cfg)
     current = read_current_edition(publication_root)
+    public_data = current.data_dir if current else Path(cfg.data_dir)
     public_content = current.content_dir if current else Path(cfg.content_dir)
+    if public_data.exists():
+        shutil.copytree(public_data, staged_data, dirs_exist_ok=True)
     if public_content.exists():
         shutil.copytree(public_content, staged_content, dirs_exist_ok=True)
     staged_json = save_json(str(staged_data), date_str, report)

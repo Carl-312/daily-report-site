@@ -180,6 +180,8 @@ class Settings(BaseModel):
     )
 
     max_output: int = Field(default=2000, description="Max output tokens")
+    summary_request_timeout_seconds: float = Field(default=180, gt=0, le=300)
+    summary_provider_budget_seconds: float = Field(default=240, gt=0, le=600)
 
     # Timezone
     timezone: str = Field(default="Asia/Shanghai")
@@ -325,6 +327,10 @@ def load_config(config_path: str = "config.yaml") -> Settings:
         "agihunt_api_key": os.getenv("AGIHUNT_API_KEY", ""),
         "tavily_api_key": os.getenv("TAVILY_API_KEY", ""),
     }
+    if value := os.getenv("SUMMARY_REQUEST_TIMEOUT_SECONDS"):
+        env_settings["summary_request_timeout_seconds"] = float(value)
+    if value := os.getenv("SUMMARY_PROVIDER_BUDGET_SECONDS"):
+        env_settings["summary_provider_budget_seconds"] = float(value)
 
     # Load from YAML if exists
     yaml_settings = {}
@@ -344,6 +350,12 @@ def load_config(config_path: str = "config.yaml") -> Settings:
                 .get("desc_max", 300),
                 "prompt_path": cfg.get("summarize", {}).get(
                     "prompt_path", "prompts/daily.md"
+                ),
+                "summary_request_timeout_seconds": cfg.get("summarize", {}).get(
+                    "request_timeout_seconds", 180
+                ),
+                "summary_provider_budget_seconds": cfg.get("summarize", {}).get(
+                    "provider_budget_seconds", 240
                 ),
                 "data_dir": output_cfg.get("json_dir", "data"),
                 "content_dir": output_cfg.get("md_dir", "content"),
