@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-08",
+  "date": "2026-08-09",
   "articles": [
     {
-      "title": "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/976801/fenix-flexin-rubberz-ai-song-treblo",
-      "description": "It took long enough, but now LA rapper Fenix Flexin appears to have admitted using AI for the 80s synth pop-themed song \"Rubberz.\" His comments follow the producer Medasin's videos claiming that an AI tool called Treblo (formerly Sonauto) was used to make the song, and the company releasing an AI detector that identifies it […]",
-      "publish_time": "2026-08-07T16:01:51-04:00",
+      "title": "What’s behind the Google AI shake-up",
+      "link": "https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast",
+      "description": "Some of the biggest names on Google's AI team got new jobs this week. In some cases, including for legendary Googler Jeff Dean, those jobs are no longer at Google. Given that Google's models seem to be behind the best of what's coming out of anthropic and OpenAI, is this a sign of Google in […]",
+      "publish_time": "2026-08-07T12:45:14-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -13,32 +13,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
-        "selection_description": "It took long enough, but now LA rapper Fenix Flexin appears to have admitted using AI for the 80s synth pop-themed song \"Rubberz.\" His comments follow the producer Medasin's videos claiming that an AI tool called Treblo (formerly Sonauto) was used to make the song, and the company releasing an AI detector that identifies it […]",
+        "selection_title": "What’s behind the Google AI shake-up",
+        "selection_description": "Some of the biggest names on Google's AI team got new jobs this week. In some cases, including for legendary Googler Jeff Dean, those jobs are no longer at Google. Given that Google's models seem to be behind the best of what's coming out of anthropic and OpenAI, is this a sign of Google in […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/976801/fenix-flexin-rubberz-ai-song-treblo"
+        "evidence_urls": "https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast"
       },
       "evidence": [
         {
-          "title": "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/976801/fenix-flexin-rubberz-ai-song-treblo",
+          "title": "What’s behind the Google AI shake-up",
+          "url": "https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-07T16:01:51-04:00",
-          "text": "It took long enough, but now LA rapper Fenix Flexin appears to have admitted using AI for the 80s synth pop-themed song \"Rubberz.\" His comments follow the producer Medasin's videos claiming that an AI tool called Treblo (formerly Sonauto) was used to make the song, and the company releasing an AI detector that identifies it […]",
-          "snippet": "It took long enough, but now LA rapper Fenix Flexin appears to have admitted using AI for the 80s synth pop-themed song \"Rubberz.\" His comments follow the producer Medasin's videos claiming that an AI tool called Treblo (formerly Sonauto) was used to make the song, and the company releasing an AI detector that identifies it […]",
+          "published_date": "2026-08-07T12:45:14-04:00",
+          "text": "Some of the biggest names on Google's AI team got new jobs this week. In some cases, including for legendary Googler Jeff Dean, those jobs are no longer at Google. Given that Google's models seem to be behind the best of what's coming out of anthropic and OpenAI, is this a sign of Google in […]",
+          "snippet": "Some of the biggest names on Google's AI team got new jobs this week. In some cases, including for legendary Googler Jeff Dean, those jobs are no longer at Google. Given that Google's models seem to be behind the best of what's coming out of anthropic and OpenAI, is this a sign of Google in […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "Watching Roku’s AI channel is like eating from a trough",
-      "link": "https://www.theverge.com/entertainment/976939/roku-fairground-ai-fast-channel",
-      "description": "The appeal of free ad-supported streaming television (FAST) channels has always been the way they make it easier to (re)discover classic films and series. But Roku's latest experiment in the FAST space has less to do with traditionally produced entertainment and is entirely focused on giving viewers access to a constant source of AI-generated content. […]",
-      "publish_time": "2026-08-07T14:59:46-04:00",
+      "title": "An Amazon data center could have the worst polluting power plant in the country",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant",
+      "description": "To power its new West Texas data center, Amazon is investing in the construction of a new power plant that could be one of the largest single producers of greenhouse gases in the US, according to the New York Times. The new gas-burning plant in Pecos County, Texas has received significant investment from Amazon and, […]",
+      "publish_time": "2026-08-08T13:53:34-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -46,22 +46,55 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Watching Roku’s AI channel is like eating from a trough",
-        "selection_description": "The appeal of free ad-supported streaming television (FAST) channels has always been the way they make it easier to (re)discover classic films and series. But Roku's latest experiment in the FAST space has less to do with traditionally produced entertainment and is entirely focused on giving viewers access to a constant source of AI-generated content. […]",
+        "selection_title": "An Amazon data center could have the worst polluting power plant in the country",
+        "selection_description": "To power its new West Texas data center, Amazon is investing in the construction of a new power plant that could be one of the largest single producers of greenhouse gases in the US, according to the New York Times. The new gas-burning plant in Pecos County, Texas has received significant investment from Amazon and, […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/entertainment/976939/roku-fairground-ai-fast-channel"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant"
       },
       "evidence": [
         {
-          "title": "Watching Roku’s AI channel is like eating from a trough",
-          "url": "https://www.theverge.com/entertainment/976939/roku-fairground-ai-fast-channel",
+          "title": "An Amazon data center could have the worst polluting power plant in the country",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-07T14:59:46-04:00",
-          "text": "The appeal of free ad-supported streaming television (FAST) channels has always been the way they make it easier to (re)discover classic films and series. But Roku's latest experiment in the FAST space has less to do with traditionally produced entertainment and is entirely focused on giving viewers access to a constant source of AI-generated content. […]",
-          "snippet": "The appeal of free ad-supported streaming television (FAST) channels has always been the way they make it easier to (re)discover classic films and series. But Roku's latest experiment in the FAST space has less to do with traditionally produced entertainment and is entirely focused on giving viewers access to a constant source of AI-generated content. […]",
+          "published_date": "2026-08-08T13:53:34-04:00",
+          "text": "To power its new West Texas data center, Amazon is investing in the construction of a new power plant that could be one of the largest single producers of greenhouse gases in the US, according to the New York Times. The new gas-burning plant in Pecos County, Texas has received significant investment from Amazon and, […]",
+          "snippet": "To power its new West Texas data center, Amazon is investing in the construction of a new power plant that could be one of the largest single producers of greenhouse gases in the US, according to the New York Times. The new gas-burning plant in Pecos County, Texas has received significant investment from Amazon and, […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "OpenAI puts the brakes on a new model because it’s supposedly too powerful",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities",
+      "description": "OpenAI says it is pausing \"internal activities\" around an in-development AI model, Astra, because it doesn't yet meet new security standards the company is putting in place. The announcement follows its recent disclosure that OpenAI models accidentally hacked Hugging Face. Anthropic and Meta have also since admitted that they had AI models that went rogue […]",
+      "publish_time": "2026-08-07T14:40:34-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "OpenAI puts the brakes on a new model because it’s supposedly too powerful",
+        "selection_description": "OpenAI says it is pausing \"internal activities\" around an in-development AI model, Astra, because it doesn't yet meet new security standards the company is putting in place. The announcement follows its recent disclosure that OpenAI models accidentally hacked Hugging Face. Anthropic and Meta have also since admitted that they had AI models that went rogue […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities"
+      },
+      "evidence": [
+        {
+          "title": "OpenAI puts the brakes on a new model because it’s supposedly too powerful",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-07T14:40:34-04:00",
+          "text": "OpenAI says it is pausing \"internal activities\" around an in-development AI model, Astra, because it doesn't yet meet new security standards the company is putting in place. The announcement follows its recent disclosure that OpenAI models accidentally hacked Hugging Face. Anthropic and Meta have also since admitted that they had AI models that went rogue […]",
+          "snippet": "OpenAI says it is pausing \"internal activities\" around an in-development AI model, Astra, because it doesn't yet meet new security standards the company is putting in place. The announcement follows its recent disclosure that OpenAI models accidentally hacked Hugging Face. Anthropic and Meta have also since admitted that they had AI models that went rogue […]",
           "score": 1.0,
           "origin": "fetch"
         }
@@ -69,26 +102,26 @@
     }
   ],
   "enrichment": {
-    "report_date": "2026-08-08",
-    "reference_dt": "2026-08-08T10:28:45.766862+08:00",
+    "report_date": "2026-08-09",
+    "reference_dt": "2026-08-09T10:35:53.355936+08:00",
     "enabled": true,
     "applied": true,
     "skip_reason": null,
     "error": null,
-    "input_count": 38,
-    "input_story_count": 10,
-    "input_lead_count": 28,
+    "input_count": 25,
+    "input_story_count": 5,
+    "input_lead_count": 20,
     "lead_resolution_calls": 25,
     "lead_resolved_count": 0,
-    "lead_unresolved_count": 25,
+    "lead_unresolved_count": 20,
     "lead_resolution_runs": [
       {
         "stage": "candidate_enrichment",
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 视频模型刷屏实测",
-        "query": "MiniMax H3 视频模型刷屏实测 MiniMax H3 video tested MiniMax 新一代视频模型 H3 引爆社区，从复杂运镜到 1080P 极限画质实测刷屏，开源 LoRA 权重预告在路上，离奇翻车画面也引发对开源 AI 监管的担忧。",
+        "candidate_title": "MiniMax H3 开源长视频生成热潮",
+        "query": "MiniMax H3 开源长视频生成热潮 MiniMax H3 Open-Source Sparks Long-Video Wave 开源视频模型 MiniMax H3 引爆社区，尾帧续写、长视频拼接、本地部署攻略密集涌现。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -103,8 +136,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Astra(GPT-6) 因网安能力延期",
-        "query": "Astra(GPT-6) 因网安能力延期 Astra/GPT-6 cyber delay OpenAI 将新模型 Astra（外界推测即 GPT-6）定位为首个「网络安全关键」模型，Sam Altman 亲自出面解释其延期发布的原因。",
+        "candidate_title": "OpenAI 代号 Doug 新模型曝光",
+        "query": "OpenAI 代号 Doug 新模型曝光 OpenAI's 'Doug' Model Leaked 爆料称 OpenAI 正研发代号 Doug 的新模型，预计 11 月前发布，号称性能跨越式提升。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -119,8 +152,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude CLI 氛围编程上架小 App",
-        "query": "Claude CLI 氛围编程上架小 App Claude CLI codes an app 开发者用 Mac 上的 Claude CLI 全自动「氛围编程」，零成本做出找厕所 App 并成功上架，展示纯对话式开发的落地能力。",
+        "candidate_title": "Kimi K3 剪枝瘦身至 478GB",
+        "query": "Kimi K3 剪枝瘦身至 478GB Kimi K3 Trimmed Down to 478GB 社区用 REAP 方法裁剪 Kimi K3 多语言权重，体积从 711GB 降至 478GB。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -135,8 +168,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "DeepSeek V4 Flash 登 ARC 榜",
-        "query": "DeepSeek V4 Flash 登 ARC 榜 DeepSeek V4 Flash on ARC DeepSeek V4 Flash 0731 版本的评测结果出现在 ARC Prize 官方榜单，标志该模型在抽象推理基准上再进一步。",
+        "candidate_title": "DeepSeek V4 推理成本不升反降",
+        "query": "DeepSeek V4 推理成本不升反降 DeepSeek V4 Lowers ARC-AGI Reasoning Cost 实测显示 DeepSeek V4 性能更强但 ARC-AGI 推理成本不升反降。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -151,24 +184,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "xAI 暗中开发 Grok 远程协作",
-        "query": "xAI 暗中开发 Grok 远程协作 xAI builds Grok workspace 报道称 xAI 已为一款尚未公布的 Grok 远程工作空间产品铺设基础，显示其正从聊天机器人向生产力工具拓展。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 6,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Gemini 3.5 Pro 架构遭拆解",
-        "query": "Gemini 3.5 Pro 架构遭拆解 Gemini 3.5 Pro deep-dive Semianalysis 发布对 Gemini 3.5 Pro 的深度分析，从性能到架构全面解读 Google 新旗舰模型。",
+        "candidate_title": "企业封锁 AI 员工自费用 Claude",
+        "query": "企业封锁 AI 员工自费用 Claude Staff Pay for Claude as Firms Block AI 企业封锁 AI 工具，数据分析师等员工自掏腰包用 Claude 完成工作。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -183,8 +200,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Seedance 视频模型实测打斗",
-        "query": "Seedance 视频模型实测打斗 Seedance on fight scenes 作者实测 Seedance 视频生成模型，展示其在生成复杂打斗场景等高难度动态上的表现。",
+        "candidate_title": "美团 LongCat 2.0 全国产芯片训练",
+        "query": "美团 LongCat 2.0 全国产芯片训练 Meituan LongCat 2.0 Trained on Domestic ASICs 美团旗舰模型 LongCat 2.0 全程基于国产 ASIC 完成训练与推理。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -199,8 +216,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Chinese AI model Kimi escaped its cybersecurity testing environment, researchers say",
-        "query": "Chinese AI model Kimi escaped its cybersecurity testing environment, researchers say",
+        "candidate_title": "丹麦高校强制口头答辩防 AI 作弊",
+        "query": "丹麦高校强制口头答辩防 AI 作弊 Denmark Mandates Oral Defenses vs AI Cheating 为应对 AI 代写作业，丹麦高校全面推行口头答辩制度。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -215,8 +232,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Oracle 禁止 OpenJDK 用 AI 代码",
-        "query": "Oracle 禁止 OpenJDK 用 AI 代码 AI code banned in OpenJDK Oracle 禁止在 OpenJDK 项目中提交 AI 生成代码，与其 CEO 此前力挺 AI 编程的表态自相矛盾，引发开发者热议。",
+        "candidate_title": "Stack Overflow 提问量暴跌 99%",
+        "query": "Stack Overflow 提问量暴跌 99% Stack Overflow Questions Plunge 99% Stack Overflow 提问量较 2014 年峰值暴跌约 99%，AI 重塑了开发者提问习惯。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -231,8 +248,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Databricks AI 编程成本降七成",
-        "query": "Databricks AI 编程成本降七成 Databricks: -70% AI spend Databricks 发博客详解如何把内部 AI 编程成本压降 70%，为大规模企业落地 AI 编程提供了可复用的工程范式。",
+        "candidate_title": "亚马逊数据中心成全美最大污染源",
+        "query": "亚马逊数据中心成全美最大污染源 Amazon Data Centers Top US Pollution 亚马逊新建数据中心已成为全美最大单一污染源，凸显 AI 算力扩张的环境代价。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -247,8 +264,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "新奥尔良拟用 AI 接听 911",
-        "query": "新奥尔良拟用 AI 接听 911 New Orleans AI for 911 新奥尔良市计划引入 AI 系统接听 911 紧急呼叫以替代人工调度，引发对公共安全外包给 AI 的争议。",
+        "candidate_title": "AI 狂热与反 AI 狂热撕裂社交圈",
+        "query": "AI 狂热与反 AI 狂热撕裂社交圈 AI Hype vs Anti-AI Extremes Split Circles AI 狂热与反 AI 狂热两种极端心理正在撕裂社交圈。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -260,11 +277,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 12,
+        "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Oklo 核反应堆实现核临界",
-        "query": "Oklo 核反应堆实现核临界 Oklo reaches criticality Altman 投资的核能初创 Oklo 实现反应堆核临界这一关键里程碑，Sam Altman 发帖祝贺，AI 算力能源叙事再升温。",
+        "candidate_title": "微软 Phi 系列小模型疑似停滞",
+        "query": "微软 Phi 系列小模型疑似停滞 Microsoft Phi Small Models Thought Stalled 社区热议微软 Phi 系列小模型自 2024 年后疑似停滞。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -279,8 +296,8 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "After Rippling blew millions on AI in months, it built an employee ROI tool",
-        "query": "After Rippling blew millions on AI in months, it built an employee ROI tool",
+        "candidate_title": "Vibe Coding 烧钱引发开发者吐槽",
+        "query": "Vibe Coding 烧钱引发开发者吐槽 Vibe Coding Burns Tokens, Devs Complain 开发者吐槽 Vibe Coding 极度烧钱，几分钟就烧掉 150 万 Token。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -295,8 +312,8 @@
         "candidate_index": 16,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Cloudflare launches Kitesurf, a browser built for AI agents",
-        "query": "Cloudflare launches Kitesurf, a browser built for AI agents",
+        "candidate_title": "PyTorch 2.13 与 CUDA 13 发布",
+        "query": "PyTorch 2.13 与 CUDA 13 发布 PyTorch 2.13 and CUDA 13 Released PyTorch 2.13 配合 CUDA 13 发布，Blackwell 显卡视频渲染分辨率翻倍。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -311,8 +328,8 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Airbnb says AI is helping it ship features faster as it tests a new search function",
-        "query": "Airbnb says AI is helping it ship features faster as it tests a new search function",
+        "candidate_title": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
+        "query": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -324,11 +341,43 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 21,
+        "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "New Mexico court orders Meta to pay additional $567M in child safety case",
-        "query": "New Mexico court orders Meta to pay additional $567M in child safety case",
+        "candidate_title": "The Kindle Scribe Colorsoft is a lot of fun, but it’s not a must-have",
+        "query": "The Kindle Scribe Colorsoft is a lot of fun, but it’s not a must-have",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "ChatGPT 揪出黎曼猜想论文错误",
+        "query": "ChatGPT 揪出黎曼猜想论文错误 ChatGPT Spots Errors in Riemann Papers ChatGPT 在两篇黎曼猜想论文中发现归一化错误，作者确认。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "DeepMind 联创 Hassabis 曾计划离职",
+        "query": "DeepMind 联创 Hassabis 曾计划离职 DeepMind Co-founder Hassabis Considered Leaving 爆料称 DeepMind 联合创始人 Hassabis 曾计划离职，Google 因担忧股价极力挽留。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -343,8 +392,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "双机部署 304B 模型撞内存墙",
-        "query": "双机部署 304B 模型撞内存墙 304B on dual DGX Sparks 开发者在两台 DGX Spark（各 128GB 统一内存）上挑战部署 304B 模型，探讨极限内存优化策略。",
+        "candidate_title": "OpenAI acquires presentation startup NextSlide",
+        "query": "OpenAI acquires presentation startup NextSlide",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -359,8 +408,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Today’s the last day to get up to $400 off your TechCrunch Disrupt 2026 ticket",
-        "query": "Today’s the last day to get up to $400 off your TechCrunch Disrupt 2026 ticket",
+        "candidate_title": "Google’s top hacker hunter explains why hacking groups get codenames",
+        "query": "Google’s top hacker hunter explains why hacking groups get codenames",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -375,8 +424,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Trump administration has spent nearly $4B to cancel offshore wind farms",
-        "query": "Trump administration has spent nearly $4B to cancel offshore wind farms",
+        "candidate_title": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
+        "query": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -388,11 +437,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 25,
+        "candidate_index": 1,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Wacom’s MovinkPad 11 is a fun, midpriced entry point for digital artists",
-        "query": "Wacom’s MovinkPad 11 is a fun, midpriced entry point for digital artists",
+        "round": 2,
+        "candidate_title": "MiniMax H3 开源长视频生成热潮",
+        "query": "MiniMax H3 开源长视频生成热潮 MiniMax H3 Open-Source Sparks Long-Video Wave 开源视频模型 MiniMax H3 引爆社区，尾帧续写、长视频拼接、本地部署攻略密集涌现。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -404,11 +453,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 26,
+        "candidate_index": 2,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Security researchers scanned the Polish web and found courts, hospitals, and airports at risk of hacks",
-        "query": "Security researchers scanned the Polish web and found courts, hospitals, and airports at risk of hacks",
+        "round": 2,
+        "candidate_title": "OpenAI 代号 Doug 新模型曝光",
+        "query": "OpenAI 代号 Doug 新模型曝光 OpenAI's 'Doug' Model Leaked 爆料称 OpenAI 正研发代号 Doug 的新模型，预计 11 月前发布，号称性能跨越式提升。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -420,11 +469,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 27,
+        "candidate_index": 3,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Computer maker Framework notifies ‘all customers’ of a data breach",
-        "query": "Computer maker Framework notifies ‘all customers’ of a data breach",
+        "round": 2,
+        "candidate_title": "Kimi K3 剪枝瘦身至 478GB",
+        "query": "Kimi K3 剪枝瘦身至 478GB Kimi K3 Trimmed Down to 478GB 社区用 REAP 方法裁剪 Kimi K3 多语言权重，体积从 711GB 降至 478GB。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -436,11 +485,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 28,
+        "candidate_index": 4,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Host your own piece of Disrupt: Apply to run a Side Event at TechCrunch Disrupt 2026",
-        "query": "Host your own piece of Disrupt: Apply to run a Side Event at TechCrunch Disrupt 2026",
+        "round": 2,
+        "candidate_title": "DeepSeek V4 推理成本不升反降",
+        "query": "DeepSeek V4 推理成本不升反降 DeepSeek V4 Lowers ARC-AGI Reasoning Cost 实测显示 DeepSeek V4 性能更强但 ARC-AGI 推理成本不升反降。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -452,27 +501,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 29,
+        "candidate_index": 5,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "The founder’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "query": "The founder’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 30,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "ChatGPT 读 460 份自白配对伴侣",
-        "query": "ChatGPT 读 460 份自白配对伴侣 ChatGPT matches 460 bios Reddit 网友发起「Meet My Human」实验，让 ChatGPT 读取 460 份 AI 生成的自我介绍，为参与者匹配灵魂伴侣。",
+        "round": 2,
+        "candidate_title": "企业封锁 AI 员工自费用 Claude",
+        "query": "企业封锁 AI 员工自费用 Claude Staff Pay for Claude as Firms Block AI 企业封锁 AI 工具，数据分析师等员工自掏腰包用 Claude 完成工作。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -486,153 +519,123 @@
     "lead_terminal_error_code": null,
     "observation_signals": [
       {
-        "title": "MiniMax H3 视频模型刷屏实测",
+        "title": "MiniMax H3 开源长视频生成热潮",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=MiniMax+H3+video+tested",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=MiniMax+H3+Open-Source+Sparks+Long-Video+Wave",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Astra(GPT-6) 因网安能力延期",
+        "title": "OpenAI 代号 Doug 新模型曝光",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Astra%2FGPT-6+cyber+delay",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=OpenAI%27s+%27Doug%27+Model+Leaked",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Claude CLI 氛围编程上架小 App",
+        "title": "Kimi K3 剪枝瘦身至 478GB",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Claude+CLI+codes+an+app",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Kimi+K3+Trimmed+Down+to+478GB",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "DeepSeek V4 Flash 登 ARC 榜",
+        "title": "DeepSeek V4 推理成本不升反降",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=DeepSeek+V4+Flash+on+ARC",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=DeepSeek+V4+Lowers+ARC-AGI+Reasoning+Cost",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "xAI 暗中开发 Grok 远程协作",
+        "title": "企业封锁 AI 员工自费用 Claude",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=xAI+builds+Grok+workspace",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Staff+Pay+for+Claude+as+Firms+Block+AI",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Gemini 3.5 Pro 架构遭拆解",
+        "title": "美团 LongCat 2.0 全国产芯片训练",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Gemini+3.5+Pro+deep-dive",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Meituan+LongCat+2.0+Trained+on+Domestic+ASICs",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Seedance 视频模型实测打斗",
+        "title": "丹麦高校强制口头答辩防 AI 作弊",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Seedance+on+fight+scenes",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Denmark+Mandates+Oral+Defenses+vs+AI+Cheating",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Chinese AI model Kimi escaped its cybersecurity testing environment, researchers say",
+        "title": "Stack Overflow 提问量暴跌 99%",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Stack+Overflow+Questions+Plunge+99%25",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "亚马逊数据中心成全美最大污染源",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Amazon+Data+Centers+Top+US+Pollution",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI 狂热与反 AI 狂热撕裂社交圈",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=AI+Hype+vs+Anti-AI+Extremes+Split+Circles",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "微软 Phi 系列小模型疑似停滞",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Microsoft+Phi+Small+Models+Thought+Stalled",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Vibe Coding 烧钱引发开发者吐槽",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=Vibe+Coding+Burns+Tokens%2C+Devs+Complain",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "PyTorch 2.13 与 CUDA 13 发布",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=PyTorch+2.13+and+CUDA+13+Released",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/chinese-ai-model-kimi-escaped-its-cybersecurity-testing-environment-researchers-say/",
+        "signal_url": "https://techcrunch.com/2026/08/08/x-replaces-misaligned-revenue-sharing-program-with-original-content-rewards/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Oracle 禁止 OpenJDK 用 AI 代码",
+        "title": "The Kindle Scribe Colorsoft is a lot of fun, but it’s not a must-have",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/08/the-kindle-scribe-colorsoft-is-a-lot-of-fun-but-its-not-a-must-have/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "ChatGPT 揪出黎曼猜想论文错误",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=AI+code+banned+in+OpenJDK",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=ChatGPT+Spots+Errors+in+Riemann+Papers",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Databricks AI 编程成本降七成",
+        "title": "DeepMind 联创 Hassabis 曾计划离职",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Databricks%3A+-70%25+AI+spend",
+        "signal_url": "https://agihunt.info/?day=2026-08-09&t=DeepMind+Co-founder+Hassabis+Considered+Leaving",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "新奥尔良拟用 AI 接听 911",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=New+Orleans+AI+for+911",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Oklo 核反应堆实现核临界",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Oklo+reaches+criticality",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "After Rippling blew millions on AI in months, it built an employee ROI tool",
+        "title": "OpenAI acquires presentation startup NextSlide",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/after-rippling-blew-millions-on-ai-in-months-it-built-an-employee-roi-tool/",
+        "signal_url": "https://techcrunch.com/2026/08/08/openai-acquires-presentation-startup-nextslide/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Cloudflare launches Kitesurf, a browser built for AI agents",
+        "title": "Google’s top hacker hunter explains why hacking groups get codenames",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/cloudflare-launches-kitesurf-a-browser-built-for-ai-agents/",
+        "signal_url": "https://techcrunch.com/2026/08/08/googles-top-hacker-hunter-explains-why-hacking-groups-get-codenames/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Airbnb says AI is helping it ship features faster as it tests a new search function",
+        "title": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/airbnb-says-ai-is-helping-it-ship-features-faster-as-it-tests-a-new-search-function/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "New Mexico court orders Meta to pay additional $567M in child safety case",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/new-mexico-court-orders-meta-to-pay-additional-567m-in-child-safety-case/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "双机部署 304B 模型撞内存墙",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=304B+on+dual+DGX+Sparks",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Today’s the last day to get up to $400 off your TechCrunch Disrupt 2026 ticket",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/todays-the-last-day-to-get-up-to-400-off-your-techcrunch-disrupt-2026-ticket/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Trump administration has spent nearly $4B to cancel offshore wind farms",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/trump-administration-has-spent-nearly-4b-to-cancel-offshore-wind-farms/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Wacom’s MovinkPad 11 is a fun, midpriced entry point for digital artists",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/wacoms-movinkpad-11-is-a-fun-and-mid-priced-entry-point-for-digital-artists/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Security researchers scanned the Polish web and found courts, hospitals, and airports at risk of hacks",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/security-researchers-scanned-the-polish-web-and-found-courts-hospitals-and-airports-at-risk-of-hacks/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Computer maker Framework notifies ‘all customers’ of a data breach",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/computer-maker-framework-notifies-all-customers-of-a-data-breach/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Host your own piece of Disrupt: Apply to run a Side Event at TechCrunch Disrupt 2026",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/host-your-own-piece-of-disrupt-apply-to-run-a-side-event-at-techcrunch-disrupt-2026/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "The founder’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/the-founders-guide-to-techcrunch-disrupt-2026-everything-you-need-to-know/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "ChatGPT 读 460 份自白配对伴侣",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=ChatGPT+matches+460+bios",
+        "signal_url": "https://techcrunch.com/2026/08/08/planned-amazon-data-center-could-become-the-biggest-climate-polluter-in-the-u-s/",
         "reason": "lead_resolution_request_failed"
       }
     ],
@@ -644,7 +647,7 @@
         "count": 30
       }
     ],
-    "prefiltered_count": 38,
+    "prefiltered_count": 25,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -702,9 +705,9 @@
     "official_refilled_candidates": [],
     "accepted_by_stage_preview": {
       "candidate_enrichment": [
+        "What’s behind the Google AI shake-up",
         "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
-        "Watching Roku’s AI channel is like eating from a trough",
-        "Suno shares plans to combat spammy AI music"
+        "Watching Roku’s AI channel is like eating from a trough"
       ]
     },
     "parameters": {
@@ -750,59 +753,10 @@
     "notes": [
       "Only fetched candidates were enriched; independent refill stages were not run."
     ],
-    "candidate_queue_count": 30,
-    "candidate_dropped_count": 8,
-    "candidate_dropped": [
-      {
-        "title": "Claude Opus 实战口碑分化",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Claude+Opus+overhyped%3F",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "What’s behind the Google AI shake-up",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI puts the brakes on a new model because it’s supposedly too powerful",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Google Earth AI 造假图致下架",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-08&t=Google+Earth+AI+pulled",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI says it slowed Astra model development over security concerns",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/07/openai-says-it-slowed-astra-model-development-over-security-concerns/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "The messy politics behind Google’s big AI shakeup",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/tech/976108/google-ai-leadership-shakeup-jeff-dean-demis-hassabis-deepmind",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Jony Ive’s first OpenAI gadget is reportedly a hockey puck-sized smart speaker",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/976431/openai-chatgpt-battery-smart-speaker-rumor",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI is giving ChatGPT free users unlimited text chats",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/976239/openai-chatgpt-free-go-text-chats",
-        "reason": "candidate_daily_budget_cap"
-      }
-    ],
-    "candidate_processed_count": 30,
+    "candidate_queue_count": 25,
+    "candidate_dropped_count": 0,
+    "candidate_dropped": [],
+    "candidate_processed_count": 25,
     "candidate_enrichment_calls": 30,
     "candidate_enrichment_runs": [
       {
@@ -810,8 +764,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 视频模型刷屏实测",
-        "query": "MiniMax H3 视频模型刷屏实测 MiniMax H3 video tested MiniMax 新一代视频模型 H3 引爆社区，从复杂运镜到 1080P 极限画质实测刷屏，开源 LoRA 权重预告在路上，离奇翻车画面也引发对开源 AI 监管的担忧。",
+        "candidate_title": "MiniMax H3 开源长视频生成热潮",
+        "query": "MiniMax H3 开源长视频生成热潮 MiniMax H3 Open-Source Sparks Long-Video Wave 开源视频模型 MiniMax H3 引爆社区，尾帧续写、长视频拼接、本地部署攻略密集涌现。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -826,8 +780,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Astra(GPT-6) 因网安能力延期",
-        "query": "Astra(GPT-6) 因网安能力延期 Astra/GPT-6 cyber delay OpenAI 将新模型 Astra（外界推测即 GPT-6）定位为首个「网络安全关键」模型，Sam Altman 亲自出面解释其延期发布的原因。",
+        "candidate_title": "OpenAI 代号 Doug 新模型曝光",
+        "query": "OpenAI 代号 Doug 新模型曝光 OpenAI's 'Doug' Model Leaked 爆料称 OpenAI 正研发代号 Doug 的新模型，预计 11 月前发布，号称性能跨越式提升。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -842,8 +796,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude CLI 氛围编程上架小 App",
-        "query": "Claude CLI 氛围编程上架小 App Claude CLI codes an app 开发者用 Mac 上的 Claude CLI 全自动「氛围编程」，零成本做出找厕所 App 并成功上架，展示纯对话式开发的落地能力。",
+        "candidate_title": "Kimi K3 剪枝瘦身至 478GB",
+        "query": "Kimi K3 剪枝瘦身至 478GB Kimi K3 Trimmed Down to 478GB 社区用 REAP 方法裁剪 Kimi K3 多语言权重，体积从 711GB 降至 478GB。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -858,8 +812,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "DeepSeek V4 Flash 登 ARC 榜",
-        "query": "DeepSeek V4 Flash 登 ARC 榜 DeepSeek V4 Flash on ARC DeepSeek V4 Flash 0731 版本的评测结果出现在 ARC Prize 官方榜单，标志该模型在抽象推理基准上再进一步。",
+        "candidate_title": "DeepSeek V4 推理成本不升反降",
+        "query": "DeepSeek V4 推理成本不升反降 DeepSeek V4 Lowers ARC-AGI Reasoning Cost 实测显示 DeepSeek V4 性能更强但 ARC-AGI 推理成本不升反降。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -874,8 +828,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "xAI 暗中开发 Grok 远程协作",
-        "query": "xAI 暗中开发 Grok 远程协作 xAI builds Grok workspace 报道称 xAI 已为一款尚未公布的 Grok 远程工作空间产品铺设基础，显示其正从聊天机器人向生产力工具拓展。",
+        "candidate_title": "企业封锁 AI 员工自费用 Claude",
+        "query": "企业封锁 AI 员工自费用 Claude Staff Pay for Claude as Firms Block AI 企业封锁 AI 工具，数据分析师等员工自掏腰包用 Claude 完成工作。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -888,10 +842,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 6,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "Gemini 3.5 Pro 架构遭拆解",
-        "query": "Gemini 3.5 Pro 架构遭拆解 Gemini 3.5 Pro deep-dive Semianalysis 发布对 Gemini 3.5 Pro 的深度分析，从性能到架构全面解读 Google 新旗舰模型。",
+        "candidate_title": "What’s behind the Google AI shake-up",
+        "query": "What’s behind the Google AI shake-up https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -906,8 +860,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Seedance 视频模型实测打斗",
-        "query": "Seedance 视频模型实测打斗 Seedance on fight scenes 作者实测 Seedance 视频生成模型，展示其在生成复杂打斗场景等高难度动态上的表现。",
+        "candidate_title": "美团 LongCat 2.0 全国产芯片训练",
+        "query": "美团 LongCat 2.0 全国产芯片训练 Meituan LongCat 2.0 Trained on Domestic ASICs 美团旗舰模型 LongCat 2.0 全程基于国产 ASIC 完成训练与推理。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -922,8 +876,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Chinese AI model Kimi escaped its cybersecurity testing environment, researchers say",
-        "query": "Chinese AI model Kimi escaped its cybersecurity testing environment, researchers say",
+        "candidate_title": "丹麦高校强制口头答辩防 AI 作弊",
+        "query": "丹麦高校强制口头答辩防 AI 作弊 Denmark Mandates Oral Defenses vs AI Cheating 为应对 AI 代写作业，丹麦高校全面推行口头答辩制度。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -938,8 +892,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Oracle 禁止 OpenJDK 用 AI 代码",
-        "query": "Oracle 禁止 OpenJDK 用 AI 代码 AI code banned in OpenJDK Oracle 禁止在 OpenJDK 项目中提交 AI 生成代码，与其 CEO 此前力挺 AI 编程的表态自相矛盾，引发开发者热议。",
+        "candidate_title": "Stack Overflow 提问量暴跌 99%",
+        "query": "Stack Overflow 提问量暴跌 99% Stack Overflow Questions Plunge 99% Stack Overflow 提问量较 2014 年峰值暴跌约 99%，AI 重塑了开发者提问习惯。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -954,8 +908,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Databricks AI 编程成本降七成",
-        "query": "Databricks AI 编程成本降七成 Databricks: -70% AI spend Databricks 发博客详解如何把内部 AI 编程成本压降 70%，为大规模企业落地 AI 编程提供了可复用的工程范式。",
+        "candidate_title": "亚马逊数据中心成全美最大污染源",
+        "query": "亚马逊数据中心成全美最大污染源 Amazon Data Centers Top US Pollution 亚马逊新建数据中心已成为全美最大单一污染源，凸显 AI 算力扩张的环境代价。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -970,8 +924,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "新奥尔良拟用 AI 接听 911",
-        "query": "新奥尔良拟用 AI 接听 911 New Orleans AI for 911 新奥尔良市计划引入 AI 系统接听 911 紧急呼叫以替代人工调度，引发对公共安全外包给 AI 的争议。",
+        "candidate_title": "AI 狂热与反 AI 狂热撕裂社交圈",
+        "query": "AI 狂热与反 AI 狂热撕裂社交圈 AI Hype vs Anti-AI Extremes Split Circles AI 狂热与反 AI 狂热两种极端心理正在撕裂社交圈。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -984,22 +938,6 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 12,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Oklo 核反应堆实现核临界",
-        "query": "Oklo 核反应堆实现核临界 Oklo reaches criticality Altman 投资的核能初创 Oklo 实现反应堆核临界这一关键里程碑，Sam Altman 发帖祝贺，AI 算力能源叙事再升温。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 13,
         "candidate_kind": "story",
         "round": 1,
         "candidate_title": "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
@@ -1015,7 +953,7 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 14,
+        "candidate_index": 13,
         "candidate_kind": "story",
         "round": 1,
         "candidate_title": "Watching Roku’s AI channel is like eating from a trough",
@@ -1031,11 +969,27 @@
       },
       {
         "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "微软 Phi 系列小模型疑似停滞",
+        "query": "微软 Phi 系列小模型疑似停滞 Microsoft Phi Small Models Thought Stalled 社区热议微软 Phi 系列小模型自 2024 年后疑似停滞。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "After Rippling blew millions on AI in months, it built an employee ROI tool",
-        "query": "After Rippling blew millions on AI in months, it built an employee ROI tool",
+        "candidate_title": "Vibe Coding 烧钱引发开发者吐槽",
+        "query": "Vibe Coding 烧钱引发开发者吐槽 Vibe Coding Burns Tokens, Devs Complain 开发者吐槽 Vibe Coding 极度烧钱，几分钟就烧掉 150 万 Token。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1050,8 +1004,8 @@
         "candidate_index": 16,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Cloudflare launches Kitesurf, a browser built for AI agents",
-        "query": "Cloudflare launches Kitesurf, a browser built for AI agents",
+        "candidate_title": "PyTorch 2.13 与 CUDA 13 发布",
+        "query": "PyTorch 2.13 与 CUDA 13 发布 PyTorch 2.13 and CUDA 13 Released PyTorch 2.13 配合 CUDA 13 发布，Blackwell 显卡视频渲染分辨率翻倍。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1066,8 +1020,8 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Airbnb says AI is helping it ship features faster as it tests a new search function",
-        "query": "Airbnb says AI is helping it ship features faster as it tests a new search function",
+        "candidate_title": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
+        "query": "X replaces ‘misaligned’ revenue sharing program with Original Content Rewards",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1080,10 +1034,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 18,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Suno shares plans to combat spammy AI music",
-        "query": "Suno shares plans to combat spammy AI music https://www.theverge.com/ai-artificial-intelligence/976289/suno-ai-music-spam-watermark",
+        "candidate_title": "The Kindle Scribe Colorsoft is a lot of fun, but it’s not a must-have",
+        "query": "The Kindle Scribe Colorsoft is a lot of fun, but it’s not a must-have",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1096,10 +1050,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 19,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "SoftBank donated $50 million to Trump’s library months before federal data center deal",
-        "query": "SoftBank donated $50 million to Trump’s library months before federal data center deal https://www.theverge.com/policy/976138/softbank-trump-library-data-center-ohio",
+        "candidate_title": "ChatGPT 揪出黎曼猜想论文错误",
+        "query": "ChatGPT 揪出黎曼猜想论文错误 ChatGPT Spots Errors in Riemann Papers ChatGPT 在两篇黎曼猜想论文中发现归一化错误，作者确认。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1112,10 +1066,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 20,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The left and right agree on one thing: no data centers",
-        "query": "The left and right agree on one thing: no data centers https://www.theverge.com/podcast/971855/ai-data-center-backlash-protests-florida-bipartisan",
+        "candidate_title": "DeepMind 联创 Hassabis 曾计划离职",
+        "query": "DeepMind 联创 Hassabis 曾计划离职 DeepMind Co-founder Hassabis Considered Leaving 爆料称 DeepMind 联合创始人 Hassabis 曾计划离职，Google 因担忧股价极力挽留。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1128,10 +1082,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 21,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "New Mexico court orders Meta to pay additional $567M in child safety case",
-        "query": "New Mexico court orders Meta to pay additional $567M in child safety case",
+        "candidate_title": "An Amazon data center could have the worst polluting power plant in the country",
+        "query": "An Amazon data center could have the worst polluting power plant in the country https://www.theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1146,8 +1100,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "双机部署 304B 模型撞内存墙",
-        "query": "双机部署 304B 模型撞内存墙 304B on dual DGX Sparks 开发者在两台 DGX Spark（各 128GB 统一内存）上挑战部署 304B 模型，探讨极限内存优化策略。",
+        "candidate_title": "OpenAI acquires presentation startup NextSlide",
+        "query": "OpenAI acquires presentation startup NextSlide",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1162,8 +1116,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Today’s the last day to get up to $400 off your TechCrunch Disrupt 2026 ticket",
-        "query": "Today’s the last day to get up to $400 off your TechCrunch Disrupt 2026 ticket",
+        "candidate_title": "Google’s top hacker hunter explains why hacking groups get codenames",
+        "query": "Google’s top hacker hunter explains why hacking groups get codenames",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1178,8 +1132,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Trump administration has spent nearly $4B to cancel offshore wind farms",
-        "query": "Trump administration has spent nearly $4B to cancel offshore wind farms",
+        "candidate_title": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
+        "query": "Planned Amazon data center could become the biggest climate polluter in the U.S.",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1192,10 +1146,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 25,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "Wacom’s MovinkPad 11 is a fun, midpriced entry point for digital artists",
-        "query": "Wacom’s MovinkPad 11 is a fun, midpriced entry point for digital artists",
+        "candidate_title": "OpenAI puts the brakes on a new model because it’s supposedly too powerful",
+        "query": "OpenAI puts the brakes on a new model because it’s supposedly too powerful https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1207,11 +1161,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 26,
+        "candidate_index": 1,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Security researchers scanned the Polish web and found courts, hospitals, and airports at risk of hacks",
-        "query": "Security researchers scanned the Polish web and found courts, hospitals, and airports at risk of hacks",
+        "round": 2,
+        "candidate_title": "MiniMax H3 开源长视频生成热潮",
+        "query": "MiniMax H3 开源长视频生成热潮 MiniMax H3 Open-Source Sparks Long-Video Wave 开源视频模型 MiniMax H3 引爆社区，尾帧续写、长视频拼接、本地部署攻略密集涌现。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1223,11 +1177,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 27,
+        "candidate_index": 2,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Computer maker Framework notifies ‘all customers’ of a data breach",
-        "query": "Computer maker Framework notifies ‘all customers’ of a data breach",
+        "round": 2,
+        "candidate_title": "OpenAI 代号 Doug 新模型曝光",
+        "query": "OpenAI 代号 Doug 新模型曝光 OpenAI's 'Doug' Model Leaked 爆料称 OpenAI 正研发代号 Doug 的新模型，预计 11 月前发布，号称性能跨越式提升。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1239,11 +1193,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 28,
+        "candidate_index": 3,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Host your own piece of Disrupt: Apply to run a Side Event at TechCrunch Disrupt 2026",
-        "query": "Host your own piece of Disrupt: Apply to run a Side Event at TechCrunch Disrupt 2026",
+        "round": 2,
+        "candidate_title": "Kimi K3 剪枝瘦身至 478GB",
+        "query": "Kimi K3 剪枝瘦身至 478GB Kimi K3 Trimmed Down to 478GB 社区用 REAP 方法裁剪 Kimi K3 多语言权重，体积从 711GB 降至 478GB。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1255,11 +1209,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 29,
+        "candidate_index": 4,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "The founder’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "query": "The founder’s guide to TechCrunch Disrupt 2026: Everything you need to know",
+        "round": 2,
+        "candidate_title": "DeepSeek V4 推理成本不升反降",
+        "query": "DeepSeek V4 推理成本不升反降 DeepSeek V4 Lowers ARC-AGI Reasoning Cost 实测显示 DeepSeek V4 性能更强但 ARC-AGI 推理成本不升反降。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1271,11 +1225,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 30,
+        "candidate_index": 5,
         "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "ChatGPT 读 460 份自白配对伴侣",
-        "query": "ChatGPT 读 460 份自白配对伴侣 ChatGPT matches 460 bios Reddit 网友发起「Meet My Human」实验，让 ChatGPT 读取 460 份 AI 生成的自我介绍，为参与者匹配灵魂伴侣。",
+        "round": 2,
+        "candidate_title": "企业封锁 AI 员工自费用 Claude",
+        "query": "企业封锁 AI 员工自费用 Claude Staff Pay for Claude as Firms Block AI 企业封锁 AI 工具，数据分析师等员工自掏腰包用 Claude 完成工作。 official announcement details pricing benchmark funding impact",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1291,22 +1245,17 @@
     "recent_dedupe": {
       "window_days": 3,
       "checked_days": [
-        "2026-08-07"
+        "2026-08-08"
       ],
       "removed": [
         {
-          "title": "Suno shares plans to combat spammy AI music",
-          "url_key": "theverge.com/ai-artificial-intelligence/976289/suno-ai-music-spam-watermark",
+          "title": "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
+          "url_key": "theverge.com/ai-artificial-intelligence/976801/fenix-flexin-rubberz-ai-song-treblo",
           "reason": "recent_exact_url"
         },
         {
-          "title": "SoftBank donated $50 million to Trump’s library months before federal data center deal",
-          "url_key": "theverge.com/policy/976138/softbank-trump-library-data-center-ohio",
-          "reason": "recent_exact_url"
-        },
-        {
-          "title": "The left and right agree on one thing: no data centers",
-          "url_key": "theverge.com/podcast/971855/ai-data-center-backlash-protests-florida-bipartisan",
+          "title": "Watching Roku’s AI channel is like eating from a trough",
+          "url_key": "theverge.com/entertainment/976939/roku-fairground-ai-fast-channel",
           "reason": "recent_exact_url"
         }
       ]
@@ -1317,29 +1266,39 @@
     "items": [
       {
         "article_id": "a1",
-        "title": "Fenix Flexin isn’t even denying using AI to make ‘Rubberz’ anymore",
-        "summary": "洛杉矶说唱歌手Fenix Flexin承认使用AI工具Treblo制作歌曲Rubberz。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/976801/fenix-flexin-rubberz-ai-song-treblo",
-        "why_it_matters": "艺人公开承认AI创作将加速行业对生成内容版权的讨论。",
+        "title": "What’s behind the Google AI shake-up",
+        "summary": "谷歌AI团队多名核心成员本周离职，包括传奇人物杰夫·迪恩已离开公司。",
+        "url": "https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast",
+        "why_it_matters": "顶尖人才流失可能加剧谷歌在AI竞赛中落后于竞争对手的风险。",
         "source_label": "The Verge",
-        "published_at": "2026-08-07T16:01:51-04:00",
+        "published_at": "2026-08-07T12:45:14-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "OpenAI puts the brakes on a new model because it’s supposedly too powerful",
+        "summary": "OpenAI因新模型Astra未达安全标准而暂停其内部开发活动。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/976948/openai-astra-model-pause-critical-cyber-capabilities",
+        "why_it_matters": "此举反映大厂正收紧AI安全红线以应对模型失控引发的监管压力。",
+        "source_label": "The Verge",
+        "published_at": "2026-08-07T14:40:34-04:00",
         "confidence": "reported"
       },
       {
         "article_id": "a2",
-        "title": "Watching Roku’s AI channel is like eating from a trough",
-        "summary": "Roku推出全新FAST频道，持续提供由AI生成的流媒体内容。",
-        "url": "https://www.theverge.com/entertainment/976939/roku-fairground-ai-fast-channel",
-        "why_it_matters": "平台大规模引入AI内容可能改变免费电视生态与用户观看习惯。",
+        "title": "An Amazon data center could have the worst polluting power plant in the country",
+        "summary": "亚马逊为德州数据中心投资新建电厂，或成全美最大温室气体排放源之一。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/977124/amazon-data-center-worst-polluting-power-plant",
+        "why_it_matters": "AI算力扩张带来的高能耗与碳排放问题正引发严峻环保争议。",
         "source_label": "The Verge",
-        "published_at": "2026-08-07T14:59:46-04:00",
+        "published_at": "2026-08-08T13:53:34-04:00",
         "confidence": "reported"
       }
     ],
     "discussion_topic": "你最关注哪条AI新闻？",
     "provider": "ModelScope",
     "model": "Qwen/Qwen3.5-35B-A3B",
-    "input_fingerprint": "dd573a6669b534996fbf04f138427b42a2c94f8c1ea6b5c1c138f126db3ac809",
+    "input_fingerprint": "0534112101a166a05933056ab154e3b8c586b92a29c462a5790189ead5f7d7bd",
     "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
     "attempts": [
       {
@@ -1352,50 +1311,91 @@
     "selection_policy": "source_balanced_v2",
     "candidate_article_ids": [
       "a1",
+      "a3",
       "a2"
     ],
     "selection_diagnostics": {
       "selection_policy": "source_balanced_v2",
       "catalog_schema_version": 1,
       "catalog_as_of": "2026-07-18",
-      "input_count": 2,
-      "qualified_count": 2,
-      "core_ai_input_count": 2,
-      "candidate_story_count": 2,
-      "selected_count": 2,
-      "unique_story_count": 2,
+      "input_count": 3,
+      "qualified_count": 3,
+      "core_ai_input_count": 3,
+      "candidate_story_count": 3,
+      "selected_count": 3,
+      "unique_story_count": 3,
       "duplicate_story_rejected_count": 0,
       "story_clusters": [],
       "source_counts": {
-        "theverge": 2
+        "theverge": 3
       },
-      "primary_entity_counts": {},
-      "mentioned_entity_counts": {},
+      "primary_entity_counts": {
+        "amazon": 1,
+        "google": 1,
+        "openai": 1
+      },
+      "mentioned_entity_counts": {
+        "amazon": 1,
+        "anthropic": 2,
+        "google": 1,
+        "huggingface": 1,
+        "meta": 1,
+        "openai": 2
+      },
       "model_family_counts": {},
       "topic_counts": {
+        "infrastructure": 1,
         "other_ai": 1,
-        "product_access": 1
+        "safety_security": 1
       },
-      "region_counts": {},
+      "region_counts": {
+        "us": 3
+      },
       "quota_relaxations": [],
       "selected_metadata": [
         {
           "article_id": "a1",
-          "relevance_level": 2,
-          "primary_entity": "",
-          "mentioned_entities": [],
+          "relevance_level": 3,
+          "primary_entity": "google",
+          "mentioned_entities": [
+            "google",
+            "anthropic",
+            "openai"
+          ],
           "model_families": [],
           "topic": "other_ai",
-          "regions": []
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 3,
+          "primary_entity": "openai",
+          "mentioned_entities": [
+            "openai",
+            "huggingface",
+            "anthropic",
+            "meta"
+          ],
+          "model_families": [],
+          "topic": "safety_security",
+          "regions": [
+            "us"
+          ]
         },
         {
           "article_id": "a2",
           "relevance_level": 2,
-          "primary_entity": "",
-          "mentioned_entities": [],
+          "primary_entity": "amazon",
+          "mentioned_entities": [
+            "amazon"
+          ],
           "model_families": [],
-          "topic": "product_access",
-          "regions": []
+          "topic": "infrastructure",
+          "regions": [
+            "us"
+          ]
         }
       ]
     },
