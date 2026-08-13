@@ -1,0 +1,1593 @@
+{
+  "date": "2026-08-13",
+  "articles": [
+    {
+      "title": "Of course the ChatGPT dog cancer vaccine spawned a startup",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/978671/ai-cured-dog-cancer-mrna-vaccine-startup-gamgee",
+      "description": "Remember that much-hyped story about an Australian tech entrepreneur using ChatGPT, Grok, and other AI tools to craft a personalized cancer vaccine for his dog? Well, surprise: He's launched a startup. That entrepreneur is Paul Conyngham, who says he is launching Gamgee to offer \"personalised mRNA cancer vaccines for dogs.\" But his ambitions go well […]",
+      "publish_time": "2026-08-12T08:09:34-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Of course the ChatGPT dog cancer vaccine spawned a startup",
+        "selection_description": "Remember that much-hyped story about an Australian tech entrepreneur using ChatGPT, Grok, and other AI tools to craft a personalized cancer vaccine for his dog? Well, surprise: He's launched a startup. That entrepreneur is Paul Conyngham, who says he is launching Gamgee to offer \"personalised mRNA cancer vaccines for dogs.\" But his ambitions go well […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/978671/ai-cured-dog-cancer-mrna-vaccine-startup-gamgee"
+      },
+      "evidence": [
+        {
+          "title": "Of course the ChatGPT dog cancer vaccine spawned a startup",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/978671/ai-cured-dog-cancer-mrna-vaccine-startup-gamgee",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-12T08:09:34-04:00",
+          "text": "Remember that much-hyped story about an Australian tech entrepreneur using ChatGPT, Grok, and other AI tools to craft a personalized cancer vaccine for his dog? Well, surprise: He's launched a startup. That entrepreneur is Paul Conyngham, who says he is launching Gamgee to offer \"personalised mRNA cancer vaccines for dogs.\" But his ambitions go well […]",
+          "snippet": "Remember that much-hyped story about an Australian tech entrepreneur using ChatGPT, Grok, and other AI tools to craft a personalized cancer vaccine for his dog? Well, surprise: He's launched a startup. That entrepreneur is Paul Conyngham, who says he is launching Gamgee to offer \"personalised mRNA cancer vaccines for dogs.\" But his ambitions go well […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Twitch streamers can now opt out from training Amazon’s AI",
+      "link": "https://www.theverge.com/tech/979112/twitch-streamers-can-now-opt-out-from-training-amazons-ai",
+      "description": "Twitch users can now opt out of allowing their content to be used to train Amazon's generative AI models. Opting out means that \"your streams, VODs, clips, stream chats, and pictures and text on your channel\" won't be used in \"future training\" of an Amazon AI model \"whose purpose is to generate or synthesize text, […]",
+      "publish_time": "2026-08-12T13:29:10-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Twitch streamers can now opt out from training Amazon’s AI",
+        "selection_description": "Twitch users can now opt out of allowing their content to be used to train Amazon's generative AI models. Opting out means that \"your streams, VODs, clips, stream chats, and pictures and text on your channel\" won't be used in \"future training\" of an Amazon AI model \"whose purpose is to generate or synthesize text, […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/979112/twitch-streamers-can-now-opt-out-from-training-amazons-ai"
+      },
+      "evidence": [
+        {
+          "title": "Twitch streamers can now opt out from training Amazon’s AI",
+          "url": "https://www.theverge.com/tech/979112/twitch-streamers-can-now-opt-out-from-training-amazons-ai",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-12T13:29:10-04:00",
+          "text": "Twitch users can now opt out of allowing their content to be used to train Amazon's generative AI models. Opting out means that \"your streams, VODs, clips, stream chats, and pictures and text on your channel\" won't be used in \"future training\" of an Amazon AI model \"whose purpose is to generate or synthesize text, […]",
+          "snippet": "Twitch users can now opt out of allowing their content to be used to train Amazon's generative AI models. Opting out means that \"your streams, VODs, clips, stream chats, and pictures and text on your channel\" won't be used in \"future training\" of an Amazon AI model \"whose purpose is to generate or synthesize text, […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Guitar company D’Addario admits that AI music was used in a promotional video",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/978982/daddario-guitar-ai-music-suno",
+      "description": "After weeks of controversy and speculation, music company D'Addario has admitted that AI, specifically Suno, was used as part of a recent promotional video. For nearly two weeks, the company has denied the allegations, even as evidence piled up against it. It offered various explanations, from low-quality exports, to combinations of plug-ins like Autotune introducing […]",
+      "publish_time": "2026-08-12T11:52:07-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Guitar company D’Addario admits that AI music was used in a promotional video",
+        "selection_description": "After weeks of controversy and speculation, music company D'Addario has admitted that AI, specifically Suno, was used as part of a recent promotional video. For nearly two weeks, the company has denied the allegations, even as evidence piled up against it. It offered various explanations, from low-quality exports, to combinations of plug-ins like Autotune introducing […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/978982/daddario-guitar-ai-music-suno"
+      },
+      "evidence": [
+        {
+          "title": "Guitar company D’Addario admits that AI music was used in a promotional video",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/978982/daddario-guitar-ai-music-suno",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-12T11:52:07-04:00",
+          "text": "After weeks of controversy and speculation, music company D'Addario has admitted that AI, specifically Suno, was used as part of a recent promotional video. For nearly two weeks, the company has denied the allegations, even as evidence piled up against it. It offered various explanations, from low-quality exports, to combinations of plug-ins like Autotune introducing […]",
+          "snippet": "After weeks of controversy and speculation, music company D'Addario has admitted that AI, specifically Suno, was used as part of a recent promotional video. For nearly two weeks, the company has denied the allegations, even as evidence piled up against it. It offered various explanations, from low-quality exports, to combinations of plug-ins like Autotune introducing […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Apple could help you prove your iPhone photos aren’t deepfakes",
+      "link": "https://www.theverge.com/tech/977921/apple-reference-image-iphone-metadata",
+      "description": "Apple is seemingly developing an iOS feature that can verify when a photograph was taken using an iPhone camera. 9to5Mac reports that the iOS 27 beta 5 includes code references for an \"Apple Reference Image\" system that can embed provenance metadata into iPhone photographs at the point of capture - enabling users to prove where […]",
+      "publish_time": "2026-08-11T12:19:15-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Apple could help you prove your iPhone photos aren’t deepfakes",
+        "selection_description": "Apple is seemingly developing an iOS feature that can verify when a photograph was taken using an iPhone camera. 9to5Mac reports that the iOS 27 beta 5 includes code references for an \"Apple Reference Image\" system that can embed provenance metadata into iPhone photographs at the point of capture - enabling users to prove where […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/977921/apple-reference-image-iphone-metadata"
+      },
+      "evidence": [
+        {
+          "title": "Apple could help you prove your iPhone photos aren’t deepfakes",
+          "url": "https://www.theverge.com/tech/977921/apple-reference-image-iphone-metadata",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-11T12:19:15-04:00",
+          "text": "Apple is seemingly developing an iOS feature that can verify when a photograph was taken using an iPhone camera. 9to5Mac reports that the iOS 27 beta 5 includes code references for an \"Apple Reference Image\" system that can embed provenance metadata into iPhone photographs at the point of capture - enabling users to prove where […]",
+          "snippet": "Apple is seemingly developing an iOS feature that can verify when a photograph was taken using an iPhone camera. 9to5Mac reports that the iOS 27 beta 5 includes code references for an \"Apple Reference Image\" system that can embed provenance metadata into iPhone photographs at the point of capture - enabling users to prove where […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Grok is now an AI ‘teammate’ you can assign work",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch",
+      "description": "SpaceXAI has introduced Grok Bot, an always-on AI agent service designed to behave like independent \"AI teammates\" that can do your work for you. The bots share their own cloud-based computer environment, and can sign into apps, tools, and websites you already use to complete multi-step workplace tasks, only coming back when their assigned work […]",
+      "publish_time": "2026-08-12T07:58:54-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Grok is now an AI ‘teammate’ you can assign work",
+        "selection_description": "SpaceXAI has introduced Grok Bot, an always-on AI agent service designed to behave like independent \"AI teammates\" that can do your work for you. The bots share their own cloud-based computer environment, and can sign into apps, tools, and websites you already use to complete multi-step workplace tasks, only coming back when their assigned work […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch"
+      },
+      "evidence": [
+        {
+          "title": "Grok is now an AI ‘teammate’ you can assign work",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-12T07:58:54-04:00",
+          "text": "SpaceXAI has introduced Grok Bot, an always-on AI agent service designed to behave like independent \"AI teammates\" that can do your work for you. The bots share their own cloud-based computer environment, and can sign into apps, tools, and websites you already use to complete multi-step workplace tasks, only coming back when their assigned work […]",
+          "snippet": "SpaceXAI has introduced Grok Bot, an always-on AI agent service designed to behave like independent \"AI teammates\" that can do your work for you. The bots share their own cloud-based computer environment, and can sign into apps, tools, and websites you already use to complete multi-step workplace tasks, only coming back when their assigned work […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-08-13",
+    "reference_dt": "2026-08-13T11:08:22.393934+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 39,
+    "input_story_count": 10,
+    "input_lead_count": 29,
+    "lead_resolution_calls": 25,
+    "lead_resolved_count": 0,
+    "lead_unresolved_count": 25,
+    "lead_resolution_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "MiniMax H3 视频模型引爆实测潮",
+        "query": "MiniMax H3 视频模型引爆实测潮 MiniMax H3 Video Model Tests MiniMax H3 视频模型引发社区实测潮,涵盖步数调优、预算显卡部署、LoRA 训练与 ComfyUI 工作流。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "DeepSeek V4 Pro 0813 版上线",
+        "query": "DeepSeek V4 Pro 0813 版上线 DeepSeek V4 Pro 0813 Released DeepSeek V4 Pro 0813 版正式上线 OpenRouter,同期出现 V4 Flash 越狱提示词。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Opus 5 自主开发 GTA6",
+        "query": "Claude Opus 5 自主开发 GTA6 Claude Opus 5 Builds GTA6 开发者让 Claude Opus 5 在 24 小时内自主开发 GTA6,延伸出 AI 端到端自主创作商业广告、虚拟小镇自治等挑战。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grok 4.6 跑分达 61",
+        "query": "Grok 4.6 跑分达 61 Grok 4.6 Scores 61 on Index Artificial Analysis 智能指数评测显示,SpaceXAI 旗下 Grok 4.6 跑分达 61。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "通义千问 Qwen3.8-27B 延期",
+        "query": "通义千问 Qwen3.8-27B 延期 Qwen3.8-27B Delay Rumors 通义千问 Qwen3.8-27B 发布前 ModelScope 页面突返 404,引发延期猜测。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google’s Pixel 11 lineup offers fewer hardware changes, but much more Gemini",
+        "query": "Google’s Pixel 11 lineup offers fewer hardware changes, but much more Gemini",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "英伟达融资五千亿押注 AI 基建",
+        "query": "英伟达融资五千亿押注 AI 基建 Nvidia Mobilizes $500B for AI 英伟达联合阿波罗、贝莱德等金融巨头拟融资 5000 亿美元押注 AI 基础设施。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Lovable 融资 4 亿估值翻倍",
+        "query": "Lovable 融资 4 亿估值翻倍 Lovable Raises $400M AI 编程创企 Lovable 完成 4 亿美元融资,估值半年翻倍至 133 亿美元。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "端侧小模型追平前沿大模型热议",
+        "query": "端侧小模型追平前沿大模型热议 Small Models vs Frontier LLMs 社区热议端侧小模型何时追平前沿大模型,并盘点最强 14B 及以下本地开源模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "LFM2.5-VL-3B 端侧视觉模型发布",
+        "query": "LFM2.5-VL-3B 端侧视觉模型发布 Liquid LFM2.5-VL-3B Vision Model Liquid AI 发布约 2GB 的 LFM2.5-VL-3B 端侧视觉模型,定位 grounding 能力大幅提升。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "寻找零拒绝率无审查 AI 模型",
+        "query": "寻找零拒绝率无审查 AI 模型 Quest for Zero-Refusal AI AI 爱好者发起讨论:社区中是否真存在完全无审查、零拒绝率的 AI 模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Northrop’s robot space mechanic is a new way to keep satellites at work longer",
+        "query": "Northrop’s robot space mechanic is a new way to keep satellites at work longer",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI nuclear power firm Fermi finally has a new CEO",
+        "query": "AI nuclear power firm Fermi finally has a new CEO",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI coding startup Cognition reportedly already in talks to raise at $40B valuation",
+        "query": "AI coding startup Cognition reportedly already in talks to raise at $40B valuation",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "As AI safety concerns mount, three pioneers make the case for staying open",
+        "query": "As AI safety concerns mount, three pioneers make the case for staying open",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Muse Glimmer 开源代理模型发布",
+        "query": "Muse Glimmer 开源代理模型发布 Meta Muse Glimmer 30B Agent Model Meta 发布 300 亿参数开源代理模型 Muse Glimmer,开发者已在 RTX 5080 上实测本地体素世界生成。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "After Microsoft threatened legal action, a security researcher publishes a new Windows zero-day bug",
+        "query": "After Microsoft threatened legal action, a security researcher publishes a new Windows zero-day bug",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Zed 编辑器推出 Delta",
+        "query": "Zed 编辑器推出 Delta Zed Editor Launches Delta 高性能代码编辑器 Zed 在官方博客宣布推出名为 Delta 的新能力。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "谷歌布林力推递归自我改进",
+        "query": "谷歌布林力推递归自我改进 Brin Pushes Recursive Self-Improvement 社区截图显示谷歌联合创始人布林力推递归自我改进(RSI),谷歌 AGI 路线图浮现。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grubhub’s $24M FTC settlement is finally reaching diners and drivers",
+        "query": "Grubhub’s $24M FTC settlement is finally reaching diners and drivers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Lovable confirms new $13.3B valuation, raises another $400M",
+        "query": "Lovable confirms new $13.3B valuation, raises another $400M",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Uber Freight reportedly investigating after hacking group claims data breach",
+        "query": "Uber Freight reportedly investigating after hacking group claims data breach",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Mesh, Automattic’s CRM for everyone, comes to Android",
+        "query": "Mesh, Automattic’s CRM for everyone, comes to Android",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "LTX 2.5 开源视频模型实测",
+        "query": "LTX 2.5 开源视频模型实测 LTX 2.5 Open Video Model 开源图生视频模型 LTX 2.5 实测:10 分钟出 1080p60 短片,速度快但画质仍逊 MiniMax H3。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Code 会话明文存储曝光",
+        "query": "Claude Code 会话明文存储曝光 Claude Code Plaintext Sessions 开发者发现 Claude Code 将会话以明文 JSON 本地存储并分享检索技巧,同期 v2.1.229 更新带来插件市场。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "lead_terminal_error_code": null,
+    "observation_signals": [
+      {
+        "title": "MiniMax H3 视频模型引爆实测潮",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=MiniMax+H3+Video+Model+Tests",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "DeepSeek V4 Pro 0813 版上线",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=DeepSeek+V4+Pro+0813+Released",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude Opus 5 自主开发 GTA6",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Claude+Opus+5+Builds+GTA6",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Grok 4.6 跑分达 61",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Grok+4.6+Scores+61+on+Index",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "通义千问 Qwen3.8-27B 延期",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Qwen3.8-27B+Delay+Rumors",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Google’s Pixel 11 lineup offers fewer hardware changes, but much more Gemini",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/pixel-11-has-few-hardware-changes-and-more-gemini/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "英伟达融资五千亿押注 AI 基建",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Nvidia+Mobilizes+%24500B+for+AI",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Lovable 融资 4 亿估值翻倍",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Lovable+Raises+%24400M",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "端侧小模型追平前沿大模型热议",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Small+Models+vs+Frontier+LLMs",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "LFM2.5-VL-3B 端侧视觉模型发布",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Liquid+LFM2.5-VL-3B+Vision+Model",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "寻找零拒绝率无审查 AI 模型",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Quest+for+Zero-Refusal+AI",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Northrop’s robot space mechanic is a new way to keep satellites at work longer",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/northrops-robot-space-mechanic-is-a-new-way-to-keep-satellites-at-work-longer/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI nuclear power firm Fermi finally has a new CEO",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/ai-nuclear-power-firm-fermi-finally-has-a-new-ceo/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI coding startup Cognition reportedly already in talks to raise at $40B valuation",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/ai-coding-startup-cognition-reportedly-already-in-talks-to-raise-at-40b-valuation/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "As AI safety concerns mount, three pioneers make the case for staying open",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/as-ai-safety-concerns-mount-three-pioneers-make-the-case-for-staying-open/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Muse Glimmer 开源代理模型发布",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Meta+Muse+Glimmer+30B+Agent+Model",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "After Microsoft threatened legal action, a security researcher publishes a new Windows zero-day bug",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/after-microsoft-threatened-legal-action-a-security-researcher-publishes-a-new-windows-zero-day-bug/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Zed 编辑器推出 Delta",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Zed+Editor+Launches+Delta",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "谷歌布林力推递归自我改进",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Brin+Pushes+Recursive+Self-Improvement",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Grubhub’s $24M FTC settlement is finally reaching diners and drivers",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/grubhubs-24m-ftc-settlement-is-finally-reaching-diners-and-drivers/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Lovable confirms new $13.3B valuation, raises another $400M",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/lovable-confirms-new-13-3b-valuation-raises-another-400m/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Uber Freight reportedly investigating after hacking group claims data breach",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/uber-freight-reportedly-investigating-after-hacking-group-claims-data-breach/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Mesh, Automattic’s CRM for everyone, comes to Android",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/mesh-automattics-crm-for-everyone-comes-to-android/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "LTX 2.5 开源视频模型实测",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=LTX+2.5+Open+Video+Model",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude Code 会话明文存储曝光",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-13&t=Claude+Code+Plaintext+Sessions",
+        "reason": "lead_resolution_request_failed"
+      }
+    ],
+    "publishability_rejected": [],
+    "stage_failures": [
+      {
+        "stage": "candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ],
+    "prefiltered_count": 39,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 30,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "preserved_budget_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 5,
+    "strict_final_count": 5,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "budget_exhausted",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "candidate_enrichment": [
+        "Of course the ChatGPT dog cancer vaccine spawned a startup",
+        "Twitch streamers can now opt out from training Amazon’s AI",
+        "Guitar company D’Addario admits that AI music was used in a promotional video"
+      ]
+    },
+    "parameters": {
+      "min_articles": 0,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 30,
+      "max_verify_calls": 0,
+      "max_refill_rounds": 0,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "max_lead_candidates": 10,
+      "lead_search_rounds": 2,
+      "lead_search_depth": "advanced",
+      "lead_max_age_hours": 72,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com",
+        "ai.google.dev",
+        "x.ai",
+        "deepseek.com",
+        "qwenlm.github.io",
+        "bigmodel.cn",
+        "moonshot.cn",
+        "volcengine.com",
+        "tencent.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Only fetched candidates were enriched; independent refill stages were not run."
+    ],
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 9,
+    "candidate_dropped": [
+      {
+        "title": "Saber denies replacing Rideshare Stimulator’s writers with ChatGPT",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/games/978558/rideshare-stimulator-writer-ai-saber-interactive",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Made by Google 2026: all the Pixel news and announcements",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/tech/977561/made-by-google-2026-pixel-11-news",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Amazon will train on Twitch streamers’ content by default, unless they opt out",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/amazon-will-train-on-twitch-streamers-content-by-default-unless-they-opt-out/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Some Claude users are mad new watermarks will catch them cheating",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/some-claude-users-are-mad-that-anthropics-new-watermarks-will-catch-them-cheating-at-their-jobs-classes/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI-backed Thrive Holdings raises $2B to bring AI to the enterprise",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/openai-backed-thrive-holdings-raises-2b-to-bring-ai-to-the-enterprise/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Google’s Pixel Watch 5 dives deeper into AI and health",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/tech/978094/pixel-watch-5-hands-on-made-by-google-gemini-wearables-smartwatch",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "ChatGPT and Gemini both just passed 1 billion users",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/978113/chatgpt-gemini-1-billion-users",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Everything announced at Made by Google 2026",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/12/google-unveils-pixel-11-lineup-new-airtag-rival-and-gemini-features-at-made-by-google-2026/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Another OpenAI executive takes off",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/978048/brad-lightcap-openai-executive-departure",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
+    "candidate_enrichment_calls": 30,
+    "candidate_enrichment_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "MiniMax H3 视频模型引爆实测潮",
+        "query": "MiniMax H3 视频模型引爆实测潮 MiniMax H3 Video Model Tests MiniMax H3 视频模型引发社区实测潮,涵盖步数调优、预算显卡部署、LoRA 训练与 ComfyUI 工作流。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "DeepSeek V4 Pro 0813 版上线",
+        "query": "DeepSeek V4 Pro 0813 版上线 DeepSeek V4 Pro 0813 Released DeepSeek V4 Pro 0813 版正式上线 OpenRouter,同期出现 V4 Flash 越狱提示词。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Opus 5 自主开发 GTA6",
+        "query": "Claude Opus 5 自主开发 GTA6 Claude Opus 5 Builds GTA6 开发者让 Claude Opus 5 在 24 小时内自主开发 GTA6,延伸出 AI 端到端自主创作商业广告、虚拟小镇自治等挑战。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grok 4.6 跑分达 61",
+        "query": "Grok 4.6 跑分达 61 Grok 4.6 Scores 61 on Index Artificial Analysis 智能指数评测显示,SpaceXAI 旗下 Grok 4.6 跑分达 61。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "通义千问 Qwen3.8-27B 延期",
+        "query": "通义千问 Qwen3.8-27B 延期 Qwen3.8-27B Delay Rumors 通义千问 Qwen3.8-27B 发布前 ModelScope 页面突返 404,引发延期猜测。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Of course the ChatGPT dog cancer vaccine spawned a startup",
+        "query": "Of course the ChatGPT dog cancer vaccine spawned a startup https://www.theverge.com/ai-artificial-intelligence/978671/ai-cured-dog-cancer-mrna-vaccine-startup-gamgee",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google’s Pixel 11 lineup offers fewer hardware changes, but much more Gemini",
+        "query": "Google’s Pixel 11 lineup offers fewer hardware changes, but much more Gemini",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "英伟达融资五千亿押注 AI 基建",
+        "query": "英伟达融资五千亿押注 AI 基建 Nvidia Mobilizes $500B for AI 英伟达联合阿波罗、贝莱德等金融巨头拟融资 5000 亿美元押注 AI 基础设施。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Lovable 融资 4 亿估值翻倍",
+        "query": "Lovable 融资 4 亿估值翻倍 Lovable Raises $400M AI 编程创企 Lovable 完成 4 亿美元融资,估值半年翻倍至 133 亿美元。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "端侧小模型追平前沿大模型热议",
+        "query": "端侧小模型追平前沿大模型热议 Small Models vs Frontier LLMs 社区热议端侧小模型何时追平前沿大模型,并盘点最强 14B 及以下本地开源模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "LFM2.5-VL-3B 端侧视觉模型发布",
+        "query": "LFM2.5-VL-3B 端侧视觉模型发布 Liquid LFM2.5-VL-3B Vision Model Liquid AI 发布约 2GB 的 LFM2.5-VL-3B 端侧视觉模型,定位 grounding 能力大幅提升。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "寻找零拒绝率无审查 AI 模型",
+        "query": "寻找零拒绝率无审查 AI 模型 Quest for Zero-Refusal AI AI 爱好者发起讨论:社区中是否真存在完全无审查、零拒绝率的 AI 模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Twitch streamers can now opt out from training Amazon’s AI",
+        "query": "Twitch streamers can now opt out from training Amazon’s AI https://www.theverge.com/tech/979112/twitch-streamers-can-now-opt-out-from-training-amazons-ai",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Guitar company D’Addario admits that AI music was used in a promotional video",
+        "query": "Guitar company D’Addario admits that AI music was used in a promotional video https://www.theverge.com/ai-artificial-intelligence/978982/daddario-guitar-ai-music-suno",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Northrop’s robot space mechanic is a new way to keep satellites at work longer",
+        "query": "Northrop’s robot space mechanic is a new way to keep satellites at work longer",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI nuclear power firm Fermi finally has a new CEO",
+        "query": "AI nuclear power firm Fermi finally has a new CEO",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI coding startup Cognition reportedly already in talks to raise at $40B valuation",
+        "query": "AI coding startup Cognition reportedly already in talks to raise at $40B valuation",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "As AI safety concerns mount, three pioneers make the case for staying open",
+        "query": "As AI safety concerns mount, three pioneers make the case for staying open",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Muse Glimmer 开源代理模型发布",
+        "query": "Muse Glimmer 开源代理模型发布 Meta Muse Glimmer 30B Agent Model Meta 发布 300 亿参数开源代理模型 Muse Glimmer,开发者已在 RTX 5080 上实测本地体素世界生成。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "After Microsoft threatened legal action, a security researcher publishes a new Windows zero-day bug",
+        "query": "After Microsoft threatened legal action, a security researcher publishes a new Windows zero-day bug",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Apple could help you prove your iPhone photos aren’t deepfakes",
+        "query": "Apple could help you prove your iPhone photos aren’t deepfakes https://www.theverge.com/tech/977921/apple-reference-image-iphone-metadata",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Zed 编辑器推出 Delta",
+        "query": "Zed 编辑器推出 Delta Zed Editor Launches Delta 高性能代码编辑器 Zed 在官方博客宣布推出名为 Delta 的新能力。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "谷歌布林力推递归自我改进",
+        "query": "谷歌布林力推递归自我改进 Brin Pushes Recursive Self-Improvement 社区截图显示谷歌联合创始人布林力推递归自我改进(RSI),谷歌 AGI 路线图浮现。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grubhub’s $24M FTC settlement is finally reaching diners and drivers",
+        "query": "Grubhub’s $24M FTC settlement is finally reaching diners and drivers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Lovable confirms new $13.3B valuation, raises another $400M",
+        "query": "Lovable confirms new $13.3B valuation, raises another $400M",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Uber Freight reportedly investigating after hacking group claims data breach",
+        "query": "Uber Freight reportedly investigating after hacking group claims data breach",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Mesh, Automattic’s CRM for everyone, comes to Android",
+        "query": "Mesh, Automattic’s CRM for everyone, comes to Android",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "LTX 2.5 开源视频模型实测",
+        "query": "LTX 2.5 开源视频模型实测 LTX 2.5 Open Video Model 开源图生视频模型 LTX 2.5 实测:10 分钟出 1080p60 短片,速度快但画质仍逊 MiniMax H3。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Code 会话明文存储曝光",
+        "query": "Claude Code 会话明文存储曝光 Claude Code Plaintext Sessions 开发者发现 Claude Code 将会话以明文 JSON 本地存储并分享检索技巧,同期 v2.1.229 更新带来插件市场。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Grok is now an AI ‘teammate’ you can assign work",
+        "query": "Grok is now an AI ‘teammate’ you can assign work https://www.theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "story_enrichment_calls": 5,
+    "terminal_error_code": null,
+    "recent_dedupe": {
+      "window_days": 3,
+      "checked_days": [
+        "2026-08-11"
+      ],
+      "removed": []
+    }
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "Of course the ChatGPT dog cancer vaccine spawned a startup",
+        "summary": "澳大利亚企业家 Paul Conyngham 创办 Gamgee，计划为犬只提供个性化 mRNA 癌症疫苗，其曾用 ChatGPT 等 AI 为爱犬定制疫苗。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/978671/ai-cured-dog-cancer-mrna-vaccine-startup-gamgee",
+        "why_it_matters": "这显示生成式 AI 正被用于生物医药创业，可能降低个性化疫苗的研发门槛。",
+        "source_label": "The Verge",
+        "published_at": "2026-08-12T08:09:34-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a5",
+        "title": "Grok is now an AI ‘teammate’ you can assign work",
+        "summary": "SpaceXAI 推出 Grok Bot，该 AI 代理可作为独立“队友”登录应用和网站，为用户完成多步骤工作任务。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch",
+        "why_it_matters": "这意味着 AI 代理从对话工具转向能独立执行操作的办公助手，或改变企业工作流。",
+        "source_label": "The Verge",
+        "published_at": "2026-08-12T07:58:54-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a2",
+        "title": "Twitch streamers can now opt out from training Amazon’s AI",
+        "summary": "Twitch 主播现可选择退出，其直播、视频、剪辑及聊天等内容将不会被用于训练 Amazon 生成式 AI 模型。",
+        "url": "https://www.theverge.com/tech/979112/twitch-streamers-can-now-opt-out-from-training-amazons-ai",
+        "why_it_matters": "这为内容创作者提供了数据控制权，可能推动更多平台建立类似的 AI 训练退出机制。",
+        "source_label": "The Verge",
+        "published_at": "2026-08-12T13:29:10-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "Guitar company D’Addario admits that AI music was used in a promotional video",
+        "summary": "乐器公司 D'Addario 承认在宣传视频中使用 Suno AI 生成音乐，此前该公司曾否认相关指控近两周。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/978982/daddario-guitar-ai-music-suno",
+        "why_it_matters": "该事件反映出品牌使用 AI 音乐面临的信任风险，可能促使行业更透明地披露 AI 生成内容。",
+        "source_label": "The Verge",
+        "published_at": "2026-08-12T11:52:07-04:00",
+        "confidence": "reported"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？",
+    "provider": "SiliconFlow",
+    "model": "Pro/moonshotai/Kimi-K2.6",
+    "input_fingerprint": "b875ed3eae185f17bbd4b8ebb97d0517810787c957475ac6a62bdcfa5737ef18",
+    "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "failed",
+        "error_kind": "RateLimitError"
+      },
+      {
+        "provider": "SiliconFlow",
+        "model": "Pro/moonshotai/Kimi-K2.6",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "selection_policy": "source_balanced_v2",
+    "candidate_article_ids": [
+      "a1",
+      "a5",
+      "a2",
+      "a3"
+    ],
+    "selection_diagnostics": {
+      "selection_policy": "source_balanced_v2",
+      "catalog_schema_version": 1,
+      "catalog_as_of": "2026-07-18",
+      "input_count": 5,
+      "qualified_count": 5,
+      "core_ai_input_count": 4,
+      "candidate_story_count": 5,
+      "selected_count": 4,
+      "unique_story_count": 4,
+      "duplicate_story_rejected_count": 0,
+      "story_clusters": [],
+      "source_counts": {
+        "theverge": 4
+      },
+      "primary_entity_counts": {
+        "amazon": 1,
+        "openai": 1,
+        "xai": 1
+      },
+      "mentioned_entity_counts": {
+        "amazon": 1,
+        "openai": 1,
+        "xai": 2
+      },
+      "model_family_counts": {
+        "gpt": 1,
+        "grok": 2
+      },
+      "topic_counts": {
+        "model_release": 3,
+        "other_ai": 1
+      },
+      "region_counts": {
+        "us": 3
+      },
+      "quota_relaxations": [
+        {
+          "article_id": "a5",
+          "constraints": [
+            "model_family"
+          ]
+        }
+      ],
+      "selected_metadata": [
+        {
+          "article_id": "a1",
+          "relevance_level": 3,
+          "primary_entity": "openai",
+          "mentioned_entities": [
+            "openai",
+            "xai"
+          ],
+          "model_families": [
+            "gpt",
+            "grok"
+          ],
+          "topic": "model_release",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a5",
+          "relevance_level": 3,
+          "primary_entity": "xai",
+          "mentioned_entities": [
+            "xai"
+          ],
+          "model_families": [
+            "grok"
+          ],
+          "topic": "model_release",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a2",
+          "relevance_level": 2,
+          "primary_entity": "amazon",
+          "mentioned_entities": [
+            "amazon"
+          ],
+          "model_families": [],
+          "topic": "model_release",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": []
+        }
+      ]
+    },
+    "validation_passed": true,
+    "presentation": "fact_impact_v1"
+  },
+  "pipeline_diagnostics": {
+    "status": "degraded",
+    "failures": [
+      {
+        "stage": "enrichment.candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      },
+      {
+        "stage": "summary.ModelScope",
+        "code": "RateLimitError",
+        "count": 1
+      }
+    ]
+  }
+}
