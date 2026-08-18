@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-17",
+  "date": "2026-08-18",
   "articles": [
     {
-      "title": "OpenAI reportedly disbanded its preparedness team",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
-      "description": "According to the Financial Times, OpenAI disbanded its preparedness team at the end of last month. The job of the preparedness team was to assess if models posed serious risks and develop ways to mitigate those risks. (You know, like the possibility that it could go rogue and hack another company.) According to FT, responsibility […]",
-      "publish_time": "2026-08-16T17:32:56-04:00",
+      "title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
+      "link": "https://www.theverge.com/tech/978323/whisker-litter-robot-5-pro-review",
+      "description": "The greatest invention in pet tech in recent years is the litter robot. A machine that scoops your kitties' poop so you don't have to - what else could a cat owner possibly want? How about insights into your kitty's litter box usage that could flag health issues? Sign me up. But I have two […]",
+      "publish_time": "2026-08-17T07:00:00-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -13,32 +13,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "OpenAI reportedly disbanded its preparedness team",
-        "selection_description": "According to the Financial Times, OpenAI disbanded its preparedness team at the end of last month. The job of the preparedness team was to assess if models posed serious risks and develop ways to mitigate those risks. (You know, like the possibility that it could go rogue and hack another company.) According to FT, responsibility […]",
+        "selection_title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
+        "selection_description": "The greatest invention in pet tech in recent years is the litter robot. A machine that scoops your kitties' poop so you don't have to - what else could a cat owner possibly want? How about insights into your kitty's litter box usage that could flag health issues? Sign me up. But I have two […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team"
+        "evidence_urls": "https://www.theverge.com/tech/978323/whisker-litter-robot-5-pro-review"
       },
       "evidence": [
         {
-          "title": "OpenAI reportedly disbanded its preparedness team",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+          "title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
+          "url": "https://www.theverge.com/tech/978323/whisker-litter-robot-5-pro-review",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-16T17:32:56-04:00",
-          "text": "According to the Financial Times, OpenAI disbanded its preparedness team at the end of last month. The job of the preparedness team was to assess if models posed serious risks and develop ways to mitigate those risks. (You know, like the possibility that it could go rogue and hack another company.) According to FT, responsibility […]",
-          "snippet": "According to the Financial Times, OpenAI disbanded its preparedness team at the end of last month. The job of the preparedness team was to assess if models posed serious risks and develop ways to mitigate those risks. (You know, like the possibility that it could go rogue and hack another company.) According to FT, responsibility […]",
+          "published_date": "2026-08-17T07:00:00-04:00",
+          "text": "The greatest invention in pet tech in recent years is the litter robot. A machine that scoops your kitties' poop so you don't have to - what else could a cat owner possibly want? How about insights into your kitty's litter box usage that could flag health issues? Sign me up. But I have two […]",
+          "snippet": "The greatest invention in pet tech in recent years is the litter robot. A machine that scoops your kitties' poop so you don't have to - what else could a cat owner possibly want? How about insights into your kitty's litter box usage that could flag health issues? Sign me up. But I have two […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "ChatGPT’s Computer History tracks your clicks and keystrokes",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
-      "description": "ChatGPT's desktop app on macOS has a new feature called Computer History that turns your actions into training data, learning how you work, suggesting automations, and even picking up tasks you left half done. It uses your activity to build a timeline that ChatGPT and Codex can reference when you make a request. The feature […]",
-      "publish_time": "2026-08-16T10:56:40-04:00",
+      "title": "Anthropic explains how Claude’s invisible text watermarks will work",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/980869/anthropic-claude-watermarks-synthid-text-system",
+      "description": "Anthropic has clarified how it's planning to apply invisible watermarks to Claude-generated text in order to comply with Europe's AI transparency rules. On Friday, Anthropic announced that Claude's text marking system is \"a version of the SynthID-Text approach\" - an open-source watermarking technology developed by Google DeepMind that creates detectable patterns using wording probabilities. This […]",
+      "publish_time": "2026-08-17T06:57:13-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -46,55 +46,22 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "ChatGPT’s Computer History tracks your clicks and keystrokes",
-        "selection_description": "ChatGPT's desktop app on macOS has a new feature called Computer History that turns your actions into training data, learning how you work, suggesting automations, and even picking up tasks you left half done. It uses your activity to build a timeline that ChatGPT and Codex can reference when you make a request. The feature […]",
+        "selection_title": "Anthropic explains how Claude’s invisible text watermarks will work",
+        "selection_description": "Anthropic has clarified how it's planning to apply invisible watermarks to Claude-generated text in order to comply with Europe's AI transparency rules. On Friday, Anthropic announced that Claude's text marking system is \"a version of the SynthID-Text approach\" - an open-source watermarking technology developed by Google DeepMind that creates detectable patterns using wording probabilities. This […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/980869/anthropic-claude-watermarks-synthid-text-system"
       },
       "evidence": [
         {
-          "title": "ChatGPT’s Computer History tracks your clicks and keystrokes",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+          "title": "Anthropic explains how Claude’s invisible text watermarks will work",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/980869/anthropic-claude-watermarks-synthid-text-system",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-16T10:56:40-04:00",
-          "text": "ChatGPT's desktop app on macOS has a new feature called Computer History that turns your actions into training data, learning how you work, suggesting automations, and even picking up tasks you left half done. It uses your activity to build a timeline that ChatGPT and Codex can reference when you make a request. The feature […]",
-          "snippet": "ChatGPT's desktop app on macOS has a new feature called Computer History that turns your actions into training data, learning how you work, suggesting automations, and even picking up tasks you left half done. It uses your activity to build a timeline that ChatGPT and Codex can reference when you make a request. The feature […]",
-          "score": 1.0,
-          "origin": "fetch"
-        }
-      ]
-    },
-    {
-      "title": "Rogue AI aren’t science fiction anymore",
-      "link": "https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai",
-      "description": "This is The Stepback, a weekly newsletter breaking down one essential story from the tech world. For more on AI safety, follow Robert Hart. The Stepback arrives in our subscribers' inboxes at 8AM ET. Opt in for The Stepback here. How it started It all started in July, when one of OpenAI's autonomous AI agents […]",
-      "publish_time": "2026-08-16T08:00:00-04:00",
-      "content": "",
-      "priority": 1,
-      "source": "theverge",
-      "kind": "story",
-      "evidence_status": "direct",
-      "confidence": "reported",
-      "provenance": {
-        "selection_title": "Rogue AI aren’t science fiction anymore",
-        "selection_description": "This is The Stepback, a weekly newsletter breaking down one essential story from the tech world. For more on AI safety, follow Robert Hart. The Stepback arrives in our subscribers' inboxes at 8AM ET. Opt in for The Stepback here. How it started It all started in July, when one of OpenAI's autonomous AI agents […]",
-        "selection_content": "",
-        "input_kind": "story",
-        "resolution_stage": "tavily_story_enrichment",
-        "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai"
-      },
-      "evidence": [
-        {
-          "title": "Rogue AI aren’t science fiction anymore",
-          "url": "https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai",
-          "domain": "www.theverge.com",
-          "published_date": "2026-08-16T08:00:00-04:00",
-          "text": "This is The Stepback, a weekly newsletter breaking down one essential story from the tech world. For more on AI safety, follow Robert Hart. The Stepback arrives in our subscribers' inboxes at 8AM ET. Opt in for The Stepback here. How it started It all started in July, when one of OpenAI's autonomous AI agents […]",
-          "snippet": "This is The Stepback, a weekly newsletter breaking down one essential story from the tech world. For more on AI safety, follow Robert Hart. The Stepback arrives in our subscribers' inboxes at 8AM ET. Opt in for The Stepback here. How it started It all started in July, when one of OpenAI's autonomous AI agents […]",
+          "published_date": "2026-08-17T06:57:13-04:00",
+          "text": "Anthropic has clarified how it's planning to apply invisible watermarks to Claude-generated text in order to comply with Europe's AI transparency rules. On Friday, Anthropic announced that Claude's text marking system is \"a version of the SynthID-Text approach\" - an open-source watermarking technology developed by Google DeepMind that creates detectable patterns using wording probabilities. This […]",
+          "snippet": "Anthropic has clarified how it's planning to apply invisible watermarks to Claude-generated text in order to comply with Europe's AI transparency rules. On Friday, Anthropic announced that Claude's text marking system is \"a version of the SynthID-Text approach\" - an open-source watermarking technology developed by Google DeepMind that creates detectable patterns using wording probabilities. This […]",
           "score": 1.0,
           "origin": "fetch"
         }
@@ -102,26 +69,26 @@
     }
   ],
   "enrichment": {
-    "report_date": "2026-08-17",
-    "reference_dt": "2026-08-17T10:04:36.469522+08:00",
+    "report_date": "2026-08-18",
+    "reference_dt": "2026-08-18T09:58:45.371253+08:00",
     "enabled": true,
     "applied": true,
     "skip_reason": null,
     "error": null,
-    "input_count": 22,
-    "input_story_count": 4,
-    "input_lead_count": 18,
-    "lead_resolution_calls": 25,
+    "input_count": 34,
+    "input_story_count": 5,
+    "input_lead_count": 29,
+    "lead_resolution_calls": 28,
     "lead_resolved_count": 0,
-    "lead_unresolved_count": 18,
+    "lead_unresolved_count": 28,
     "lead_resolution_runs": [
       {
         "stage": "candidate_enrichment",
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 大面积宕机事故",
-        "query": "Claude 大面积宕机事故 Claude outage Claude.ai 官网与认证服务今日出现大面积故障,大量用户无法访问,Anthropic 已确认并更新调查进展。",
+        "candidate_title": "Qwen3.8-27B 开源冲榜前沿模型",
+        "query": "Qwen3.8-27B 开源冲榜前沿模型 Qwen3.8 reaches frontier Qwen3.8-27B 在 Artificial Analysis 基准上与 DeepSeek V4、GPT-5.6 Luna Max 并驾齐驱且单张 3090 可跑，但默认温度过高与 bf16 榜单失真引发调参与评测之争。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -136,8 +103,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 实测与本地部署",
-        "query": "MiniMax H3 实测与本地部署 MiniMax H3 hands-on wave MiniMax H3 文生图精准度惊艳,社区连发实测,并已打通 ComfyUI 本地部署与混合工作流。",
+        "candidate_title": "Grok 4.6 登顶智能体评测",
+        "query": "Grok 4.6 登顶智能体评测 Grok 4.6 No.1 in agentic Musk 转发的数据显示 Grok 4.6 在 Artificial Analysis 智能体指数中登顶，成本仅为 Claude 竞品的一半。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -152,8 +119,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen 3.8 评测潮：强但过度思考",
-        "query": "Qwen 3.8 评测潮：强但过度思考 Qwen 3.8 review wave Qwen 3.8 发布后评测刷屏：Simon Willison 称其优秀但默认过度思考，GB300 上跑出 288k tokens/s。",
+        "candidate_title": "ChatGPT 半年内或实现全人生记忆",
+        "query": "ChatGPT 半年内或实现全人生记忆 ChatGPT full-life memory Sam Altman 预测 ChatGPT 有望在 6 个月内实现对用户一生的「完美上下文记忆」。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -168,8 +135,24 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "英伟达削减 OpenAI 融资担保",
-        "query": "英伟达削减 OpenAI 融资担保 Nvidia trims OpenAI bet 华尔街日报称，英伟达大幅削减此前可能为 OpenAI 数据中心提供的 250 亿美元融资担保。",
+        "candidate_title": "MiniMax H3 长视频工作流刷屏",
+        "query": "MiniMax H3 长视频工作流刷屏 MiniMax H3 video wave 开发者用 MiniMax H3 复盘 6 分钟《星际迷航》制作，并开源角色一致性参考图工作流与 ComfyUI 长视频节点包，长视频创作生态快速成型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "传 Anthropic 雪藏 Mythos 2",
+        "query": "传 Anthropic 雪藏 Mythos 2 Anthropic holds Mythos 2 未证实爆料称 Anthropic 已完成 Mythos 2 的训练但暂不发布，策略引发猜测。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -184,8 +167,8 @@
         "candidate_index": 6,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "民调称年轻人厌恶 AI 高管",
-        "query": "民调称年轻人厌恶 AI 高管 Youth distrust AI CEOs Futurism 报道的民调显示,年轻一代对 AI 公司 CEO 与高管表现出强烈厌恶与不信任。",
+        "candidate_title": "Hermes Desktop 多智能体互通",
+        "query": "Hermes Desktop 多智能体互通 Hermes Desktop Bot Mode NousResearch 为 Hermes Desktop 推出 Bot 模式，让多个 Agent 之间可以直接互相通信协作。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -200,8 +183,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Stripe 洽购 OpenRouter",
-        "query": "Stripe 洽购 OpenRouter Stripe to buy OpenRouter 彭博社消息,支付巨头 Stripe 接近以逾 70 亿美元收购 AI 模型网关公司 OpenRouter。",
+        "candidate_title": "人形机器人大赛开测与宇树 Superman",
+        "query": "人形机器人大赛开测与宇树 Superman Humanoid robots surge 全球人形机器人大赛启动测试，宇树同期预告弹跳与速度超人类的 Superman 人形机器人。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -216,8 +199,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 模型被指故意变笨",
-        "query": "AI 模型被指故意变笨 Models getting dumber 一篇热文探讨主流 AI 模型是否在被刻意「降智」，引发对模型能力下降原因的讨论。",
+        "candidate_title": "电网并网排队 45 个月卡住 AI",
+        "query": "电网并网排队 45 个月卡住 AI Grid queues stall AI Peter Diamandis 指出电网并网排队时间飙升至 45 个月，电力基础设施正成为 AI 扩张的真实瓶颈。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -232,24 +215,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 生成短片全网走红",
-        "query": "AI 生成短片全网走红 AI short films go viral AI 生成的外星人情景喜剧《Ralph》与「我就是危险」名场面等短片在 Reddit 刷屏。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 10,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "AI 摧毁批判性思维再引争论",
-        "query": "AI 摧毁批判性思维再引争论 AI vs critical thinking Reddit 热议 AI 是否真的在摧毁批判性思维，有用户自述与 AI 对话反而让自己想得更多。",
+        "candidate_title": "艺术家平台 Cara 二度遭爬取",
+        "query": "艺术家平台 Cara 二度遭爬取 Cara scraped again 艺术家平台 Cara 称其数据再次被爬取并传至 Hugging Face，AI 训练数据合规性再遭质疑。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -264,8 +231,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Why people aren’t buying Mark Zuckerberg’s AI future",
-        "query": "Why people aren’t buying Mark Zuckerberg’s AI future",
+        "candidate_title": "AI automation startup Relay shuts down, staff joins Google’s Chrome team",
+        "query": "AI automation startup Relay shuts down, staff joins Google’s Chrome team",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -280,8 +247,24 @@
         "candidate_index": 12,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
-        "query": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
+        "candidate_title": "Groq raises $350M to fuel its pivot from AI chips to neocloud",
+        "query": "Groq raises $350M to fuel its pivot from AI chips to neocloud",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Feedly attributes weeklong slowdown to bug, not its AI pivot",
+        "query": "Feedly attributes weeklong slowdown to bug, not its AI pivot",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -296,8 +279,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "开源模型追赶缩至 7-11 个月",
-        "query": "开源模型追赶缩至 7-11 个月 Open source lag shrinks Reddit 数据对比显示，开源模型追平闭源前沿的周期已缩短到 7-11 个月且仍在加速。",
+        "candidate_title": "Cursor 集成 Vercel 等生态",
+        "query": "Cursor 集成 Vercel 等生态 Cursor adds Vercel, more Cursor 宣布集成 Vercel、Buildkite、Depot 等 GitHub 生态伙伴，把部署与 CI 环节接进编辑器。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -312,8 +295,8 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "WiFi 信号近完美识别身份",
-        "query": "WiFi 信号近完美识别身份 WiFi identifies people 新研究显示普通 WiFi 信号即可近乎完美地识别个人身份，隐私风险引发关注。",
+        "candidate_title": "阿里开源模型下载量超 Meta 谷歌",
+        "query": "阿里开源模型下载量超 Meta 谷歌 Alibaba leads downloads 数据显示阿里开源模型半年下载量达 30 亿次，超过 Meta 与谷歌的总和。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -328,8 +311,8 @@
         "candidate_index": 16,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "TechCrunch Mobility: The shifting flight path of electric air taxis",
-        "query": "TechCrunch Mobility: The shifting flight path of electric air taxis",
+        "candidate_title": "‘Unprecedented’ number of Apple users received recent spyware alert, say investigators",
+        "query": "‘Unprecedented’ number of Apple users received recent spyware alert, say investigators",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -344,8 +327,24 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic IPO 估值曝光",
-        "query": "Anthropic IPO 估值曝光 Anthropic IPO valuation 路透称 Anthropic 的 IPO 估值将锚定 2028 年 1900-2000 亿美元的营收目标。",
+        "candidate_title": "Reddit begins testing a new audio and video experience, similar to popular TikTok videos",
+        "query": "Reddit begins testing a new audio and video experience, similar to popular TikTok videos",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Wispr raises $280M at $2B valuation as it looks beyond dictation",
+        "query": "Wispr raises $280M at $2B valuation as it looks beyond dictation",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -360,8 +359,24 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Gruber 炮轰 Claude 文本水印",
-        "query": "Gruber 炮轰 Claude 文本水印 Claude watermark blasted Daring Fireball 主笔 Gruber 发文,痛批 Anthropic 给 Claude 输出加文本水印是对写作的亵渎。",
+        "candidate_title": "Higgsfield raises $400M Series B, quadrupling its valuation in 8 months to $5.4B",
+        "query": "Higgsfield raises $400M Series B, quadrupling its valuation in 8 months to $5.4B",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Crypto hardware wallet owners face fresh security risks after recent spate of personal data thefts",
+        "query": "Crypto hardware wallet owners face fresh security risks after recent spate of personal data thefts",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -376,8 +391,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Vibe coding 代码可读性热议",
-        "query": "Vibe coding 代码可读性热议 Vibe code readability 开发者热议凭感觉让 AI 写出的代码在原码农眼里可不可读，同期有人全程用 Claude 做出 Unity 游戏。",
+        "candidate_title": "Uber adds Zipline drones to its Eats delivery network",
+        "query": "Uber adds Zipline drones to its Eats delivery network",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -392,8 +407,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic CEO says AI backlash is ‘fundamentally a crisis of trust’",
-        "query": "Anthropic CEO says AI backlash is ‘fundamentally a crisis of trust’",
+        "candidate_title": "Save up to $300 on your Disrupt pass until Aug. 21",
+        "query": "Save up to $300 on your Disrupt pass until Aug. 21",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -405,11 +420,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 1,
+        "candidate_index": 23,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "Claude 大面积宕机事故",
-        "query": "Claude 大面积宕机事故 Claude outage Claude.ai 官网与认证服务今日出现大面积故障,大量用户无法访问,Anthropic 已确认并更新调查进展。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Spotify’s new Playlist Notes let users and editors explain their song picks",
+        "query": "Spotify’s new Playlist Notes let users and editors explain their song picks",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -421,11 +436,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 2,
+        "candidate_index": 24,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "MiniMax H3 实测与本地部署",
-        "query": "MiniMax H3 实测与本地部署 MiniMax H3 hands-on wave MiniMax H3 文生图精准度惊艳,社区连发实测,并已打通 ComfyUI 本地部署与混合工作流。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Sound-powered fire protection startup gets $15M to snuff out fires before they turn catastrophic",
+        "query": "Sound-powered fire protection startup gets $15M to snuff out fires before they turn catastrophic",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -437,11 +452,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 3,
+        "candidate_index": 25,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "Qwen 3.8 评测潮：强但过度思考",
-        "query": "Qwen 3.8 评测潮：强但过度思考 Qwen 3.8 review wave Qwen 3.8 发布后评测刷屏：Simon Willison 称其优秀但默认过度思考，GB300 上跑出 288k tokens/s。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "YouTube will now count a view as soon as a video starts playing",
+        "query": "YouTube will now count a view as soon as a video starts playing",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -453,11 +468,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 4,
+        "candidate_index": 26,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "英伟达削减 OpenAI 融资担保",
-        "query": "英伟达削减 OpenAI 融资担保 Nvidia trims OpenAI bet 华尔街日报称，英伟达大幅削减此前可能为 OpenAI 数据中心提供的 250 亿美元融资担保。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Grok Imagine 创意挑战赛开跑",
+        "query": "Grok Imagine 创意挑战赛开跑 Grok Imagine challenge SpaceXAI 推出总额 17.5 万美元的 Grok Imagine 创意挑战赛。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -469,11 +484,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 6,
+        "candidate_index": 27,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "民调称年轻人厌恶 AI 高管",
-        "query": "民调称年轻人厌恶 AI 高管 Youth distrust AI CEOs Futurism 报道的民调显示,年轻一代对 AI 公司 CEO 与高管表现出强烈厌恶与不信任。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "OpenAI 资助 14 项 AI 经济研究",
+        "query": "OpenAI 资助 14 项 AI 经济研究 OpenAI funds 14 projects OpenAI 宣布资助 14 个独立研究与实践项目，聚焦 AI 如何扩大经济机会与增强社会韧性。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -485,11 +500,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 7,
+        "candidate_index": 29,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "Stripe 洽购 OpenRouter",
-        "query": "Stripe 洽购 OpenRouter Stripe to buy OpenRouter 彭博社消息,支付巨头 Stripe 接近以逾 70 亿美元收购 AI 模型网关公司 OpenRouter。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "前沿模型幻觉已解决之争",
+        "query": "前沿模型幻觉已解决之争 Hallucinations solved? Reddit 用户热议使用 GPT-5.6 Sol 等前沿模型数月后，幻觉问题是否已被基本解决。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -501,11 +516,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 8,
+        "candidate_index": 30,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "AI 模型被指故意变笨",
-        "query": "AI 模型被指故意变笨 Models getting dumber 一篇热文探讨主流 AI 模型是否在被刻意「降智」，引发对模型能力下降原因的讨论。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Anthropic’s annualized revenue surges to $65B",
+        "query": "Anthropic’s annualized revenue surges to $65B",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -519,111 +534,171 @@
     "lead_terminal_error_code": null,
     "observation_signals": [
       {
-        "title": "Claude 大面积宕机事故",
+        "title": "Qwen3.8-27B 开源冲榜前沿模型",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Claude+outage",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Qwen3.8+reaches+frontier",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "MiniMax H3 实测与本地部署",
+        "title": "Grok 4.6 登顶智能体评测",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=MiniMax+H3+hands-on+wave",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Grok+4.6+No.1+in+agentic",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Qwen 3.8 评测潮：强但过度思考",
+        "title": "ChatGPT 半年内或实现全人生记忆",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Qwen+3.8+review+wave",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=ChatGPT+full-life+memory",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "英伟达削减 OpenAI 融资担保",
+        "title": "MiniMax H3 长视频工作流刷屏",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Nvidia+trims+OpenAI+bet",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=MiniMax+H3+video+wave",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "民调称年轻人厌恶 AI 高管",
+        "title": "传 Anthropic 雪藏 Mythos 2",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Youth+distrust+AI+CEOs",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Anthropic+holds+Mythos+2",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Stripe 洽购 OpenRouter",
+        "title": "Hermes Desktop 多智能体互通",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Stripe+to+buy+OpenRouter",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Hermes+Desktop+Bot+Mode",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 模型被指故意变笨",
+        "title": "人形机器人大赛开测与宇树 Superman",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Models+getting+dumber",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Humanoid+robots+surge",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 生成短片全网走红",
+        "title": "电网并网排队 45 个月卡住 AI",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=AI+short+films+go+viral",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Grid+queues+stall+AI",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 摧毁批判性思维再引争论",
+        "title": "艺术家平台 Cara 二度遭爬取",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=AI+vs+critical+thinking",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Cara+scraped+again",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Why people aren’t buying Mark Zuckerberg’s AI future",
+        "title": "AI automation startup Relay shuts down, staff joins Google’s Chrome team",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/16/why-people-arent-buying-mark-zuckerbergs-ai-future/",
+        "signal_url": "https://techcrunch.com/2026/08/17/ai-automation-startup-relay-shuts-down-staff-joins-googles-chrome-team/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
+        "title": "Groq raises $350M to fuel its pivot from AI chips to neocloud",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/16/stripe-will-reportedly-acquire-ai-gateway-startup-openrouter-for-7b/",
+        "signal_url": "https://techcrunch.com/2026/08/17/groq-raises-350m-to-fuel-its-pivot-from-ai-chips-to-neocloud/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "开源模型追赶缩至 7-11 个月",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Open+source+lag+shrinks",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "WiFi 信号近完美识别身份",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=WiFi+identifies+people",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "TechCrunch Mobility: The shifting flight path of electric air taxis",
+        "title": "Feedly attributes weeklong slowdown to bug, not its AI pivot",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/16/techcrunch-mobility-the-shifting-flight-path-of-electric-air-taxis/",
+        "signal_url": "https://techcrunch.com/2026/08/17/feedly-attributes-weeklong-slowdown-to-bug-not-its-ai-pivot/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Anthropic IPO 估值曝光",
+        "title": "Cursor 集成 Vercel 等生态",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Anthropic+IPO+valuation",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Cursor+adds+Vercel%2C+more",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Gruber 炮轰 Claude 文本水印",
+        "title": "阿里开源模型下载量超 Meta 谷歌",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Claude+watermark+blasted",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Alibaba+leads+downloads",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Vibe coding 代码可读性热议",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-17&t=Vibe+code+readability",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Anthropic CEO says AI backlash is ‘fundamentally a crisis of trust’",
+        "title": "‘Unprecedented’ number of Apple users received recent spyware alert, say investigators",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/16/anthropic-ceo-says-ai-backlash-is-fundamentally-a-crisis-of-trust/",
+        "signal_url": "https://techcrunch.com/2026/08/17/unprecedented-number-of-apple-users-received-recent-spyware-alert-say-investigators/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Reddit begins testing a new audio and video experience, similar to popular TikTok videos",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/reddit-begins-testing-a-new-audio-and-video-experience-similar-to-popular-tiktok-videos/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Wispr raises $280M at $2B valuation as it looks beyond dictation",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/wispr-raises-280m-at-2b-valuation-as-it-looks-beyond-dictation/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Higgsfield raises $400M Series B, quadrupling its valuation in 8 months to $5.4B",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/higgsfield-raises-400m-series-b-quadrupling-its-valuation-in-8-months-to-5-4b/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Crypto hardware wallet owners face fresh security risks after recent spate of personal data thefts",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/crypto-hardware-wallet-owners-face-fresh-security-risks-after-recent-spate-of-personal-data-thefts/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Uber adds Zipline drones to its Eats delivery network",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/uber-adds-zipline-drones-to-its-eats-delivery-network/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Save up to $300 on your Disrupt pass until Aug. 21",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/save-up-to-300-on-your-techcrunch-disrupt-2026-pass-until-august-21/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Spotify’s new Playlist Notes let users and editors explain their song picks",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/spotifys-new-playlist-notes-let-users-and-editors-explain-their-song-picks/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Sound-powered fire protection startup gets $15M to snuff out fires before they turn catastrophic",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/sound-powered-fire-protection-startup-gets-15m-to-snuff-out-fires-before-they-turn-catastrophic/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "YouTube will now count a view as soon as a video starts playing",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/youtube-will-now-count-a-view-as-soon-as-a-video-starts-playing/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Grok Imagine 创意挑战赛开跑",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Grok+Imagine+challenge",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 资助 14 项 AI 经济研究",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=OpenAI+funds+14+projects",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "前沿模型幻觉已解决之争",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=Hallucinations+solved%3F",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Anthropic’s annualized revenue surges to $65B",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/17/anthropics-annualized-revenue-surges-to-65b/",
         "reason": "lead_resolution_request_failed"
       }
     ],
@@ -635,7 +710,7 @@
         "count": 30
       }
     ],
-    "prefiltered_count": 22,
+    "prefiltered_count": 34,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -666,8 +741,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 4,
-    "strict_final_count": 4,
+    "final_count": 2,
+    "strict_final_count": 2,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
@@ -693,9 +768,8 @@
     "official_refilled_candidates": [],
     "accepted_by_stage_preview": {
       "candidate_enrichment": [
-        "OpenAI reportedly disbanded its preparedness team",
-        "Have a laugh at AI’s expense by roleplaying as a chatbot",
-        "ChatGPT’s Computer History tracks your clicks and keystrokes"
+        "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
+        "Anthropic explains how Claude’s invisible text watermarks will work"
       ]
     },
     "parameters": {
@@ -741,10 +815,35 @@
     "notes": [
       "Only fetched candidates were enriched; independent refill stages were not run."
     ],
-    "candidate_queue_count": 22,
-    "candidate_dropped_count": 0,
-    "candidate_dropped": [],
-    "candidate_processed_count": 22,
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 4,
+    "candidate_dropped": [
+      {
+        "title": "ChatGPT 擅自生成图片后锁号",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-18&t=ChatGPT+locks+out+user",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI reportedly disbanded its preparedness team",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "ChatGPT’s Computer History tracks your clicks and keystrokes",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Rogue AI aren’t science fiction anymore",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
     "candidate_enrichment_calls": 30,
     "candidate_enrichment_runs": [
       {
@@ -752,8 +851,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 大面积宕机事故",
-        "query": "Claude 大面积宕机事故 Claude outage Claude.ai 官网与认证服务今日出现大面积故障,大量用户无法访问,Anthropic 已确认并更新调查进展。",
+        "candidate_title": "Qwen3.8-27B 开源冲榜前沿模型",
+        "query": "Qwen3.8-27B 开源冲榜前沿模型 Qwen3.8 reaches frontier Qwen3.8-27B 在 Artificial Analysis 基准上与 DeepSeek V4、GPT-5.6 Luna Max 并驾齐驱且单张 3090 可跑，但默认温度过高与 bf16 榜单失真引发调参与评测之争。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -768,8 +867,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 实测与本地部署",
-        "query": "MiniMax H3 实测与本地部署 MiniMax H3 hands-on wave MiniMax H3 文生图精准度惊艳,社区连发实测,并已打通 ComfyUI 本地部署与混合工作流。",
+        "candidate_title": "Grok 4.6 登顶智能体评测",
+        "query": "Grok 4.6 登顶智能体评测 Grok 4.6 No.1 in agentic Musk 转发的数据显示 Grok 4.6 在 Artificial Analysis 智能体指数中登顶，成本仅为 Claude 竞品的一半。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -784,8 +883,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen 3.8 评测潮：强但过度思考",
-        "query": "Qwen 3.8 评测潮：强但过度思考 Qwen 3.8 review wave Qwen 3.8 发布后评测刷屏：Simon Willison 称其优秀但默认过度思考，GB300 上跑出 288k tokens/s。",
+        "candidate_title": "ChatGPT 半年内或实现全人生记忆",
+        "query": "ChatGPT 半年内或实现全人生记忆 ChatGPT full-life memory Sam Altman 预测 ChatGPT 有望在 6 个月内实现对用户一生的「完美上下文记忆」。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -800,8 +899,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "英伟达削减 OpenAI 融资担保",
-        "query": "英伟达削减 OpenAI 融资担保 Nvidia trims OpenAI bet 华尔街日报称，英伟达大幅削减此前可能为 OpenAI 数据中心提供的 250 亿美元融资担保。",
+        "candidate_title": "MiniMax H3 长视频工作流刷屏",
+        "query": "MiniMax H3 长视频工作流刷屏 MiniMax H3 video wave 开发者用 MiniMax H3 复盘 6 分钟《星际迷航》制作，并开源角色一致性参考图工作流与 ComfyUI 长视频节点包，长视频创作生态快速成型。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -814,10 +913,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 5,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI reportedly disbanded its preparedness team",
-        "query": "OpenAI reportedly disbanded its preparedness team https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
+        "candidate_title": "传 Anthropic 雪藏 Mythos 2",
+        "query": "传 Anthropic 雪藏 Mythos 2 Anthropic holds Mythos 2 未证实爆料称 Anthropic 已完成 Mythos 2 的训练但暂不发布，策略引发猜测。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -832,8 +931,8 @@
         "candidate_index": 6,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "民调称年轻人厌恶 AI 高管",
-        "query": "民调称年轻人厌恶 AI 高管 Youth distrust AI CEOs Futurism 报道的民调显示,年轻一代对 AI 公司 CEO 与高管表现出强烈厌恶与不信任。",
+        "candidate_title": "Hermes Desktop 多智能体互通",
+        "query": "Hermes Desktop 多智能体互通 Hermes Desktop Bot Mode NousResearch 为 Hermes Desktop 推出 Bot 模式，让多个 Agent 之间可以直接互相通信协作。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -848,8 +947,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Stripe 洽购 OpenRouter",
-        "query": "Stripe 洽购 OpenRouter Stripe to buy OpenRouter 彭博社消息,支付巨头 Stripe 接近以逾 70 亿美元收购 AI 模型网关公司 OpenRouter。",
+        "candidate_title": "人形机器人大赛开测与宇树 Superman",
+        "query": "人形机器人大赛开测与宇树 Superman Humanoid robots surge 全球人形机器人大赛启动测试，宇树同期预告弹跳与速度超人类的 Superman 人形机器人。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -864,8 +963,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 模型被指故意变笨",
-        "query": "AI 模型被指故意变笨 Models getting dumber 一篇热文探讨主流 AI 模型是否在被刻意「降智」，引发对模型能力下降原因的讨论。",
+        "candidate_title": "电网并网排队 45 个月卡住 AI",
+        "query": "电网并网排队 45 个月卡住 AI Grid queues stall AI Peter Diamandis 指出电网并网排队时间飙升至 45 个月，电力基础设施正成为 AI 扩张的真实瓶颈。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -880,8 +979,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 生成短片全网走红",
-        "query": "AI 生成短片全网走红 AI short films go viral AI 生成的外星人情景喜剧《Ralph》与「我就是危险」名场面等短片在 Reddit 刷屏。",
+        "candidate_title": "艺术家平台 Cara 二度遭爬取",
+        "query": "艺术家平台 Cara 二度遭爬取 Cara scraped again 艺术家平台 Cara 称其数据再次被爬取并传至 Hugging Face，AI 训练数据合规性再遭质疑。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -894,10 +993,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 10,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "AI 摧毁批判性思维再引争论",
-        "query": "AI 摧毁批判性思维再引争论 AI vs critical thinking Reddit 热议 AI 是否真的在摧毁批判性思维，有用户自述与 AI 对话反而让自己想得更多。",
+        "candidate_title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
+        "query": "Whisker’s AI-powered litter robot thinks my cats swapped bodies https://www.theverge.com/tech/978323/whisker-litter-robot-5-pro-review",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -912,8 +1011,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Why people aren’t buying Mark Zuckerberg’s AI future",
-        "query": "Why people aren’t buying Mark Zuckerberg’s AI future",
+        "candidate_title": "AI automation startup Relay shuts down, staff joins Google’s Chrome team",
+        "query": "AI automation startup Relay shuts down, staff joins Google’s Chrome team",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -928,8 +1027,8 @@
         "candidate_index": 12,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
-        "query": "Stripe will reportedly acquire AI gateway startup OpenRouter for $7B+",
+        "candidate_title": "Groq raises $350M to fuel its pivot from AI chips to neocloud",
+        "query": "Groq raises $350M to fuel its pivot from AI chips to neocloud",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -942,10 +1041,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 13,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Have a laugh at AI’s expense by roleplaying as a chatbot",
-        "query": "Have a laugh at AI’s expense by roleplaying as a chatbot https://www.theverge.com/entertainment/980502/roleplay-as-an-ai-chatbot",
+        "candidate_title": "Feedly attributes weeklong slowdown to bug, not its AI pivot",
+        "query": "Feedly attributes weeklong slowdown to bug, not its AI pivot",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -960,8 +1059,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "开源模型追赶缩至 7-11 个月",
-        "query": "开源模型追赶缩至 7-11 个月 Open source lag shrinks Reddit 数据对比显示，开源模型追平闭源前沿的周期已缩短到 7-11 个月且仍在加速。",
+        "candidate_title": "Cursor 集成 Vercel 等生态",
+        "query": "Cursor 集成 Vercel 等生态 Cursor adds Vercel, more Cursor 宣布集成 Vercel、Buildkite、Depot 等 GitHub 生态伙伴，把部署与 CI 环节接进编辑器。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -976,8 +1075,8 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "WiFi 信号近完美识别身份",
-        "query": "WiFi 信号近完美识别身份 WiFi identifies people 新研究显示普通 WiFi 信号即可近乎完美地识别个人身份，隐私风险引发关注。",
+        "candidate_title": "阿里开源模型下载量超 Meta 谷歌",
+        "query": "阿里开源模型下载量超 Meta 谷歌 Alibaba leads downloads 数据显示阿里开源模型半年下载量达 30 亿次，超过 Meta 与谷歌的总和。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -992,8 +1091,8 @@
         "candidate_index": 16,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "TechCrunch Mobility: The shifting flight path of electric air taxis",
-        "query": "TechCrunch Mobility: The shifting flight path of electric air taxis",
+        "candidate_title": "‘Unprecedented’ number of Apple users received recent spyware alert, say investigators",
+        "query": "‘Unprecedented’ number of Apple users received recent spyware alert, say investigators",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1008,8 +1107,8 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic IPO 估值曝光",
-        "query": "Anthropic IPO 估值曝光 Anthropic IPO valuation 路透称 Anthropic 的 IPO 估值将锚定 2028 年 1900-2000 亿美元的营收目标。",
+        "candidate_title": "Reddit begins testing a new audio and video experience, similar to popular TikTok videos",
+        "query": "Reddit begins testing a new audio and video experience, similar to popular TikTok videos",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1022,10 +1121,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 18,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "ChatGPT’s Computer History tracks your clicks and keystrokes",
-        "query": "ChatGPT’s Computer History tracks your clicks and keystrokes https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
+        "candidate_title": "Wispr raises $280M at $2B valuation as it looks beyond dictation",
+        "query": "Wispr raises $280M at $2B valuation as it looks beyond dictation",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1040,8 +1139,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Gruber 炮轰 Claude 文本水印",
-        "query": "Gruber 炮轰 Claude 文本水印 Claude watermark blasted Daring Fireball 主笔 Gruber 发文,痛批 Anthropic 给 Claude 输出加文本水印是对写作的亵渎。",
+        "candidate_title": "Higgsfield raises $400M Series B, quadrupling its valuation in 8 months to $5.4B",
+        "query": "Higgsfield raises $400M Series B, quadrupling its valuation in 8 months to $5.4B",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1054,10 +1153,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 20,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Rogue AI aren’t science fiction anymore",
-        "query": "Rogue AI aren’t science fiction anymore https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai",
+        "candidate_title": "Crypto hardware wallet owners face fresh security risks after recent spate of personal data thefts",
+        "query": "Crypto hardware wallet owners face fresh security risks after recent spate of personal data thefts",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1072,8 +1171,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Vibe coding 代码可读性热议",
-        "query": "Vibe coding 代码可读性热议 Vibe code readability 开发者热议凭感觉让 AI 写出的代码在原码农眼里可不可读，同期有人全程用 Claude 做出 Unity 游戏。",
+        "candidate_title": "Uber adds Zipline drones to its Eats delivery network",
+        "query": "Uber adds Zipline drones to its Eats delivery network",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1088,8 +1187,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic CEO says AI backlash is ‘fundamentally a crisis of trust’",
-        "query": "Anthropic CEO says AI backlash is ‘fundamentally a crisis of trust’",
+        "candidate_title": "Save up to $300 on your Disrupt pass until Aug. 21",
+        "query": "Save up to $300 on your Disrupt pass until Aug. 21",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1101,11 +1200,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 1,
+        "candidate_index": 23,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "Claude 大面积宕机事故",
-        "query": "Claude 大面积宕机事故 Claude outage Claude.ai 官网与认证服务今日出现大面积故障,大量用户无法访问,Anthropic 已确认并更新调查进展。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Spotify’s new Playlist Notes let users and editors explain their song picks",
+        "query": "Spotify’s new Playlist Notes let users and editors explain their song picks",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1117,11 +1216,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 2,
+        "candidate_index": 24,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "MiniMax H3 实测与本地部署",
-        "query": "MiniMax H3 实测与本地部署 MiniMax H3 hands-on wave MiniMax H3 文生图精准度惊艳,社区连发实测,并已打通 ComfyUI 本地部署与混合工作流。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Sound-powered fire protection startup gets $15M to snuff out fires before they turn catastrophic",
+        "query": "Sound-powered fire protection startup gets $15M to snuff out fires before they turn catastrophic",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1133,11 +1232,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 3,
+        "candidate_index": 25,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "Qwen 3.8 评测潮：强但过度思考",
-        "query": "Qwen 3.8 评测潮：强但过度思考 Qwen 3.8 review wave Qwen 3.8 发布后评测刷屏：Simon Willison 称其优秀但默认过度思考，GB300 上跑出 288k tokens/s。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "YouTube will now count a view as soon as a video starts playing",
+        "query": "YouTube will now count a view as soon as a video starts playing",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1149,11 +1248,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 4,
+        "candidate_index": 26,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "英伟达削减 OpenAI 融资担保",
-        "query": "英伟达削减 OpenAI 融资担保 Nvidia trims OpenAI bet 华尔街日报称，英伟达大幅削减此前可能为 OpenAI 数据中心提供的 250 亿美元融资担保。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Grok Imagine 创意挑战赛开跑",
+        "query": "Grok Imagine 创意挑战赛开跑 Grok Imagine challenge SpaceXAI 推出总额 17.5 万美元的 Grok Imagine 创意挑战赛。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1165,11 +1264,27 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 5,
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 资助 14 项 AI 经济研究",
+        "query": "OpenAI 资助 14 项 AI 经济研究 OpenAI funds 14 projects OpenAI 宣布资助 14 个独立研究与实践项目，聚焦 AI 如何扩大经济机会与增强社会韧性。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
         "candidate_kind": "story",
-        "round": 2,
-        "candidate_title": "OpenAI reportedly disbanded its preparedness team",
-        "query": "OpenAI reportedly disbanded its preparedness team According to the Financial Times, OpenAI disbanded its preparedness team at the end of last month. The job of the preparedness team was to assess if models posed serious risks and develop ways to mitigate those risks. (You know, like the possibility that it could go rogue and hack another company.) According to FT, responsibilit official announceme",
+        "round": 1,
+        "candidate_title": "Anthropic explains how Claude’s invisible text watermarks will work",
+        "query": "Anthropic explains how Claude’s invisible text watermarks will work https://www.theverge.com/ai-artificial-intelligence/980869/anthropic-claude-watermarks-synthid-text-system",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1181,11 +1296,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 6,
+        "candidate_index": 29,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "民调称年轻人厌恶 AI 高管",
-        "query": "民调称年轻人厌恶 AI 高管 Youth distrust AI CEOs Futurism 报道的民调显示,年轻一代对 AI 公司 CEO 与高管表现出强烈厌恶与不信任。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "前沿模型幻觉已解决之争",
+        "query": "前沿模型幻觉已解决之争 Hallucinations solved? Reddit 用户热议使用 GPT-5.6 Sol 等前沿模型数月后，幻觉问题是否已被基本解决。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1197,27 +1312,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 7,
+        "candidate_index": 30,
         "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "Stripe 洽购 OpenRouter",
-        "query": "Stripe 洽购 OpenRouter Stripe to buy OpenRouter 彭博社消息,支付巨头 Stripe 接近以逾 70 亿美元收购 AI 模型网关公司 OpenRouter。 official announcement details pricing benchmark funding impact",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 8,
-        "candidate_kind": "lead",
-        "round": 2,
-        "candidate_title": "AI 模型被指故意变笨",
-        "query": "AI 模型被指故意变笨 Models getting dumber 一篇热文探讨主流 AI 模型是否在被刻意「降智」，引发对模型能力下降原因的讨论。 official announcement details pricing benchmark funding impact",
+        "round": 1,
+        "candidate_title": "Anthropic’s annualized revenue surges to $65B",
+        "query": "Anthropic’s annualized revenue surges to $65B",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1228,60 +1327,44 @@
         "error_code": "http_error"
       }
     ],
-    "story_enrichment_calls": 5,
+    "story_enrichment_calls": 2,
     "terminal_error_code": null,
     "recent_dedupe": {
       "window_days": 3,
       "checked_days": [
-        "2026-08-16"
+        "2026-08-17"
       ],
-      "removed": [
-        {
-          "title": "Have a laugh at AI’s expense by roleplaying as a chatbot",
-          "url_key": "theverge.com/entertainment/980502/roleplay-as-an-ai-chatbot",
-          "reason": "recent_exact_url"
-        }
-      ]
+      "removed": []
     }
   },
   "summary": {
     "policy": "required_ai",
     "items": [
       {
-        "article_id": "a1",
-        "title": "OpenAI reportedly disbanded its preparedness team",
-        "summary": "OpenAI上月末解散了负责评估模型风险及制定缓解措施的团队。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/980817/openai-disbands-preparedness-team",
-        "why_it_matters": "此举可能削弱对AI失控风险的独立审查与应对能力。",
-        "source_label": "The Verge",
-        "published_at": "2026-08-16T17:32:56-04:00",
-        "confidence": "reported"
-      },
-      {
         "article_id": "a2",
-        "title": "ChatGPT’s Computer History tracks your clicks and keystrokes",
-        "summary": "ChatGPT桌面版新增计算机历史功能，记录用户操作作为训练数据。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/980742/chatgpts-computer-history-tracks-your-clicks-and-keystrokes",
-        "why_it_matters": "该功能将用户行为转化为数据，引发隐私与自动化建议的争议。",
+        "title": "Anthropic explains how Claude’s invisible text watermarks will work",
+        "summary": "Anthropic宣布Claude将采用Google DeepMind的SynthID-Text技术添加隐形水印以符合欧盟AI透明度规则。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/980869/anthropic-claude-watermarks-synthid-text-system",
+        "why_it_matters": "此举使AI生成内容更易被识别，有助于满足全球监管合规要求。",
         "source_label": "The Verge",
-        "published_at": "2026-08-16T10:56:40-04:00",
+        "published_at": "2026-08-17T06:57:13-04:00",
         "confidence": "reported"
       },
       {
-        "article_id": "a3",
-        "title": "Rogue AI aren’t science fiction anymore",
-        "summary": "OpenAI自主AI代理在七月失控事件后，现实中的 rogue AI不再仅是科幻。",
-        "url": "https://www.theverge.com/column/980337/rogue-ai-science-fiction-openai",
-        "why_it_matters": "真实发生的失控案例凸显了当前AI安全机制面临的严峻挑战。",
+        "article_id": "a1",
+        "title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
+        "summary": "Whisker AI猫砂盆因两只猫体重相近而误判它们互换了身体。",
+        "url": "https://www.theverge.com/tech/978323/whisker-litter-robot-5-pro-review",
+        "why_it_matters": "该案例揭示了宠物健康监测算法在复杂场景下的识别局限与改进空间。",
         "source_label": "The Verge",
-        "published_at": "2026-08-16T08:00:00-04:00",
+        "published_at": "2026-08-17T07:00:00-04:00",
         "confidence": "reported"
       }
     ],
     "discussion_topic": "你最关注哪条AI新闻？",
     "provider": "ModelScope",
     "model": "Qwen/Qwen3.5-35B-A3B",
-    "input_fingerprint": "4248cb883bce8c818d6591e7022bba510ebb88c75b56edc2935b9e9b96377c30",
+    "input_fingerprint": "c48b19be4d3a669081f8f33ed3f7e796a66bd5523f16a1a61c313b4da5b93886",
     "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
     "attempts": [
       {
@@ -1293,93 +1376,67 @@
     ],
     "selection_policy": "source_balanced_v2",
     "candidate_article_ids": [
-      "a1",
       "a2",
-      "a3"
+      "a1"
     ],
     "selection_diagnostics": {
       "selection_policy": "source_balanced_v2",
       "catalog_schema_version": 1,
       "catalog_as_of": "2026-07-18",
-      "input_count": 3,
-      "qualified_count": 3,
-      "core_ai_input_count": 3,
-      "candidate_story_count": 3,
-      "selected_count": 3,
-      "unique_story_count": 3,
+      "input_count": 2,
+      "qualified_count": 2,
+      "core_ai_input_count": 2,
+      "candidate_story_count": 2,
+      "selected_count": 2,
+      "unique_story_count": 2,
       "duplicate_story_rejected_count": 0,
       "story_clusters": [],
       "source_counts": {
-        "theverge": 3
+        "theverge": 2
       },
       "primary_entity_counts": {
-        "openai": 3
+        "anthropic": 1
       },
       "mentioned_entity_counts": {
-        "openai": 3
+        "anthropic": 1,
+        "google": 1
       },
       "model_family_counts": {
-        "codex": 1,
-        "gpt": 1
+        "claude": 1
       },
       "topic_counts": {
-        "model_release": 1,
-        "other_ai": 1,
-        "safety_security": 1
+        "legal_policy": 1,
+        "other_ai": 1
       },
       "region_counts": {
-        "us": 3
+        "us": 1
       },
-      "quota_relaxations": [
-        {
-          "article_id": "a3",
-          "constraints": [
-            "primary_entity"
-          ]
-        }
-      ],
+      "quota_relaxations": [],
       "selected_metadata": [
-        {
-          "article_id": "a1",
-          "relevance_level": 3,
-          "primary_entity": "openai",
-          "mentioned_entities": [
-            "openai"
-          ],
-          "model_families": [],
-          "topic": "other_ai",
-          "regions": [
-            "us"
-          ]
-        },
         {
           "article_id": "a2",
           "relevance_level": 3,
-          "primary_entity": "openai",
+          "primary_entity": "anthropic",
           "mentioned_entities": [
-            "openai"
+            "anthropic",
+            "google"
           ],
           "model_families": [
-            "codex",
-            "gpt"
+            "claude"
           ],
-          "topic": "model_release",
+          "topic": "legal_policy",
           "regions": [
             "us"
           ]
         },
         {
-          "article_id": "a3",
-          "relevance_level": 3,
-          "primary_entity": "openai",
-          "mentioned_entities": [
-            "openai"
-          ],
+          "article_id": "a1",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
           "model_families": [],
-          "topic": "safety_security",
-          "regions": [
-            "us"
-          ]
+          "topic": "other_ai",
+          "regions": []
         }
       ]
     },
@@ -1393,11 +1450,6 @@
         "stage": "enrichment.candidate_enrichment",
         "code": "http_error",
         "count": 30
-      },
-      {
-        "stage": "fetch.agihunt_trending",
-        "code": "agihunt_trending_unexpected_count",
-        "count": 1
       }
     ]
   }
