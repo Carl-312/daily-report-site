@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-19",
+  "date": "2026-08-20",
   "articles": [
     {
-      "title": "Google’s Pet Memory forgot who my cats are",
-      "link": "https://www.theverge.com/tech/981269/google-home-gemini-pet-memory-nest-camera-review",
-      "description": "One of the best things my smart home does is help me care for my pets, and security cameras are particularly useful for keeping track of my many critters. But the barrage of notifications they send often means I miss important ones. So, when Google announced its new Pet Memory feature for Gemini for Home, […]",
-      "publish_time": "2026-08-18T08:01:29-04:00",
+      "title": "Google Gemini is getting a dedicated student hub",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub",
+      "description": "As we're gearing up for back-to-school season, Google is rolling out a new dedicated student hub in Gemini. It's a one-stop repository for collecting research in a study notebook, creating flashcards, taking practice quizzes, and more. Google is also enhancing its study notebooks with support for graphs and images. It can even add test dates […]",
+      "publish_time": "2026-08-19T15:00:00-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -13,32 +13,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Google’s Pet Memory forgot who my cats are",
-        "selection_description": "One of the best things my smart home does is help me care for my pets, and security cameras are particularly useful for keeping track of my many critters. But the barrage of notifications they send often means I miss important ones. So, when Google announced its new Pet Memory feature for Gemini for Home, […]",
+        "selection_title": "Google Gemini is getting a dedicated student hub",
+        "selection_description": "As we're gearing up for back-to-school season, Google is rolling out a new dedicated student hub in Gemini. It's a one-stop repository for collecting research in a study notebook, creating flashcards, taking practice quizzes, and more. Google is also enhancing its study notebooks with support for graphs and images. It can even add test dates […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/tech/981269/google-home-gemini-pet-memory-nest-camera-review"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub"
       },
       "evidence": [
         {
-          "title": "Google’s Pet Memory forgot who my cats are",
-          "url": "https://www.theverge.com/tech/981269/google-home-gemini-pet-memory-nest-camera-review",
+          "title": "Google Gemini is getting a dedicated student hub",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-18T08:01:29-04:00",
-          "text": "One of the best things my smart home does is help me care for my pets, and security cameras are particularly useful for keeping track of my many critters. But the barrage of notifications they send often means I miss important ones. So, when Google announced its new Pet Memory feature for Gemini for Home, […]",
-          "snippet": "One of the best things my smart home does is help me care for my pets, and security cameras are particularly useful for keeping track of my many critters. But the barrage of notifications they send often means I miss important ones. So, when Google announced its new Pet Memory feature for Gemini for Home, […]",
+          "published_date": "2026-08-19T15:00:00-04:00",
+          "text": "As we're gearing up for back-to-school season, Google is rolling out a new dedicated student hub in Gemini. It's a one-stop repository for collecting research in a study notebook, creating flashcards, taking practice quizzes, and more. Google is also enhancing its study notebooks with support for graphs and images. It can even add test dates […]",
+          "snippet": "As we're gearing up for back-to-school season, Google is rolling out a new dedicated student hub in Gemini. It's a one-stop repository for collecting research in a study notebook, creating flashcards, taking practice quizzes, and more. Google is also enhancing its study notebooks with support for graphs and images. It can even add test dates […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
-      "link": "https://www.theverge.com/entertainment/981644/robin-williams-instagram-account-ai",
-      "description": "Robin Williams' children are taking over their father's Instagram account after his daughter spoke out against the use of his AI likeness, as reported earlier by The Wrap. In a post on Tuesday, Zak, Zelda, and Cody Williams write that they want the late actor's Instagram profile to be a \"safe, trusted place where the […]",
-      "publish_time": "2026-08-18T15:48:26-04:00",
+      "title": "OpenAI hit the brakes. Now what?",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai",
+      "description": "With a looming IPO, intense competition from Anthropic, and Chinese and open-weight rivals nipping at its heels, OpenAI has plenty of reasons to move fast. Instead, it hit the brakes. On Tuesday, the company said it had slowed the pace of some AI development while it tightened security and safeguards. That included a two-week pause […]",
+      "publish_time": "2026-08-19T13:10:09-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -46,32 +46,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
-        "selection_description": "Robin Williams' children are taking over their father's Instagram account after his daughter spoke out against the use of his AI likeness, as reported earlier by The Wrap. In a post on Tuesday, Zak, Zelda, and Cody Williams write that they want the late actor's Instagram profile to be a \"safe, trusted place where the […]",
+        "selection_title": "OpenAI hit the brakes. Now what?",
+        "selection_description": "With a looming IPO, intense competition from Anthropic, and Chinese and open-weight rivals nipping at its heels, OpenAI has plenty of reasons to move fast. Instead, it hit the brakes. On Tuesday, the company said it had slowed the pace of some AI development while it tightened security and safeguards. That included a two-week pause […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/entertainment/981644/robin-williams-instagram-account-ai"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai"
       },
       "evidence": [
         {
-          "title": "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
-          "url": "https://www.theverge.com/entertainment/981644/robin-williams-instagram-account-ai",
+          "title": "OpenAI hit the brakes. Now what?",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-18T15:48:26-04:00",
-          "text": "Robin Williams' children are taking over their father's Instagram account after his daughter spoke out against the use of his AI likeness, as reported earlier by The Wrap. In a post on Tuesday, Zak, Zelda, and Cody Williams write that they want the late actor's Instagram profile to be a \"safe, trusted place where the […]",
-          "snippet": "Robin Williams' children are taking over their father's Instagram account after his daughter spoke out against the use of his AI likeness, as reported earlier by The Wrap. In a post on Tuesday, Zak, Zelda, and Cody Williams write that they want the late actor's Instagram profile to be a \"safe, trusted place where the […]",
+          "published_date": "2026-08-19T13:10:09-04:00",
+          "text": "With a looming IPO, intense competition from Anthropic, and Chinese and open-weight rivals nipping at its heels, OpenAI has plenty of reasons to move fast. Instead, it hit the brakes. On Tuesday, the company said it had slowed the pace of some AI development while it tightened security and safeguards. That included a two-week pause […]",
+          "snippet": "With a looming IPO, intense competition from Anthropic, and Chinese and open-weight rivals nipping at its heels, OpenAI has plenty of reasons to move fast. Instead, it hit the brakes. On Tuesday, the company said it had slowed the pace of some AI development while it tightened security and safeguards. That included a two-week pause […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "Firefox’s Smart Window promises a better AI browser",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/981283/mozilla-firefox-smart-window-ai-features",
-      "description": "Starting today, AI chats in Firefox's Smart Window AI browsing mode can pull from current web info and show source links in chat responses through a partnership with Exa. Smart Window can also now automatically suggest tab groups and show visual previews of pages you previously visited when you search your browsing history using natural […]",
-      "publish_time": "2026-08-18T09:00:00-04:00",
+      "title": "Meta AI is getting a Mac app",
+      "link": "https://www.theverge.com/tech/982270/meta-ai-mac-app",
+      "description": "Meta is launching a new Mac app dedicated to its AI chatbot. In an announcement on Wednesday, Meta says you can share your window with its AI chatbot, which can provide suggestions, answer questions, or create content based on what's on your screen. Meta AI on the Mac also supports dictation across all apps. The […]",
+      "publish_time": "2026-08-19T13:00:00-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -79,55 +79,22 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Firefox’s Smart Window promises a better AI browser",
-        "selection_description": "Starting today, AI chats in Firefox's Smart Window AI browsing mode can pull from current web info and show source links in chat responses through a partnership with Exa. Smart Window can also now automatically suggest tab groups and show visual previews of pages you previously visited when you search your browsing history using natural […]",
+        "selection_title": "Meta AI is getting a Mac app",
+        "selection_description": "Meta is launching a new Mac app dedicated to its AI chatbot. In an announcement on Wednesday, Meta says you can share your window with its AI chatbot, which can provide suggestions, answer questions, or create content based on what's on your screen. Meta AI on the Mac also supports dictation across all apps. The […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/981283/mozilla-firefox-smart-window-ai-features"
+        "evidence_urls": "https://www.theverge.com/tech/982270/meta-ai-mac-app"
       },
       "evidence": [
         {
-          "title": "Firefox’s Smart Window promises a better AI browser",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/981283/mozilla-firefox-smart-window-ai-features",
+          "title": "Meta AI is getting a Mac app",
+          "url": "https://www.theverge.com/tech/982270/meta-ai-mac-app",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-18T09:00:00-04:00",
-          "text": "Starting today, AI chats in Firefox's Smart Window AI browsing mode can pull from current web info and show source links in chat responses through a partnership with Exa. Smart Window can also now automatically suggest tab groups and show visual previews of pages you previously visited when you search your browsing history using natural […]",
-          "snippet": "Starting today, AI chats in Firefox's Smart Window AI browsing mode can pull from current web info and show source links in chat responses through a partnership with Exa. Smart Window can also now automatically suggest tab groups and show visual previews of pages you previously visited when you search your browsing history using natural […]",
-          "score": 1.0,
-          "origin": "fetch"
-        }
-      ]
-    },
-    {
-      "title": "Apple’s camera-equipped AirPods appear in leaked video",
-      "link": "https://www.theverge.com/tech/981326/apple-airpods-with-cameras-demo-video-leak",
-      "description": "We may have our first glimpse of Apple's rumored camera-equipped AirPods, thanks to a video that MacRumors found in the macOS Tahoe 26.7 Release Candidate. The short video clip features a man - who is wearing the new AirPods - holding up a book with the cover displayed, so that Visual Intelligence can see the […]",
-      "publish_time": "2026-08-18T05:00:01-04:00",
-      "content": "",
-      "priority": 1,
-      "source": "theverge",
-      "kind": "story",
-      "evidence_status": "direct",
-      "confidence": "reported",
-      "provenance": {
-        "selection_title": "Apple’s camera-equipped AirPods appear in leaked video",
-        "selection_description": "We may have our first glimpse of Apple's rumored camera-equipped AirPods, thanks to a video that MacRumors found in the macOS Tahoe 26.7 Release Candidate. The short video clip features a man - who is wearing the new AirPods - holding up a book with the cover displayed, so that Visual Intelligence can see the […]",
-        "selection_content": "",
-        "input_kind": "story",
-        "resolution_stage": "tavily_story_enrichment",
-        "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/tech/981326/apple-airpods-with-cameras-demo-video-leak"
-      },
-      "evidence": [
-        {
-          "title": "Apple’s camera-equipped AirPods appear in leaked video",
-          "url": "https://www.theverge.com/tech/981326/apple-airpods-with-cameras-demo-video-leak",
-          "domain": "www.theverge.com",
-          "published_date": "2026-08-18T05:00:01-04:00",
-          "text": "We may have our first glimpse of Apple's rumored camera-equipped AirPods, thanks to a video that MacRumors found in the macOS Tahoe 26.7 Release Candidate. The short video clip features a man - who is wearing the new AirPods - holding up a book with the cover displayed, so that Visual Intelligence can see the […]",
-          "snippet": "We may have our first glimpse of Apple's rumored camera-equipped AirPods, thanks to a video that MacRumors found in the macOS Tahoe 26.7 Release Candidate. The short video clip features a man - who is wearing the new AirPods - holding up a book with the cover displayed, so that Visual Intelligence can see the […]",
+          "published_date": "2026-08-19T13:00:00-04:00",
+          "text": "Meta is launching a new Mac app dedicated to its AI chatbot. In an announcement on Wednesday, Meta says you can share your window with its AI chatbot, which can provide suggestions, answer questions, or create content based on what's on your screen. Meta AI on the Mac also supports dictation across all apps. The […]",
+          "snippet": "Meta is launching a new Mac app dedicated to its AI chatbot. In an announcement on Wednesday, Meta says you can share your window with its AI chatbot, which can provide suggestions, answer questions, or create content based on what's on your screen. Meta AI on the Mac also supports dictation across all apps. The […]",
           "score": 1.0,
           "origin": "fetch"
         }
@@ -168,14 +135,14 @@
     }
   ],
   "enrichment": {
-    "report_date": "2026-08-19",
-    "reference_dt": "2026-08-19T10:03:00.803765+08:00",
+    "report_date": "2026-08-20",
+    "reference_dt": "2026-08-20T10:01:01.478611+08:00",
     "enabled": true,
     "applied": true,
     "skip_reason": null,
     "error": null,
-    "input_count": 38,
-    "input_story_count": 9,
+    "input_count": 39,
+    "input_story_count": 10,
     "input_lead_count": 29,
     "lead_resolution_calls": 24,
     "lead_resolved_count": 0,
@@ -186,8 +153,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI RL 训练暂停与对齐危机",
-        "query": "OpenAI RL 训练暂停与对齐危机 OpenAI RL Training Halt Over Alignment OpenAI 暂停前沿强化学习训练，CEO Sam Altman 解释因能力进展超越安全对齐速度，未发布模型存在显著错位。",
+        "candidate_title": "Qwen3.8-27B 本地部署热潮",
+        "query": "Qwen3.8-27B 本地部署热潮 Qwen3.8-27B goes local 从 Unsloth 新量化、深度剪枝 22.7B 版到 llama.cpp dflash2 提速 3 倍，Qwen3.8-27B 今天在消费级显卡上被推到上百 TPS，成为开源社区最热模型。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -202,8 +169,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic 使用额度延长与周期缩减",
-        "query": "Anthropic 使用额度延长与周期缩减 Anthropic Usage Quota Adjustments Anthropic 延长 50% 使用额度至 8 月 31 日，随后宣布 Claude Code 周额度缩减三分之一。",
+        "candidate_title": "DeepSeek V4 Pro 发布",
+        "query": "DeepSeek V4 Pro 发布 DeepSeek V4 Pro launch DeepSeek V4 Pro 正式发布，多项基准比肩 GPT-4o 而成本更低，被视为对闭源模型的新一轮冲击。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -218,8 +185,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen 3.8 开源权重与多硬件适配",
-        "query": "Qwen 3.8 开源权重与多硬件适配 Qwen 3.8 Open Weights Ecosystem Expansion Qwen 3.8 开源 2.4T 权重后，DFlash 2 快速适配，阿里玄铁 RISC-V 运行达 30 tps，生态快速扩展。",
+        "candidate_title": "Opus 5.0 连贯性下降遭投诉",
+        "query": "Opus 5.0 连贯性下降遭投诉 Opus 5.0 coherence drops 有用户在 GitHub 反馈升级后 Claude Opus 5.0 逻辑连贯性显著下降，引发对版本质量回归的讨论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -234,8 +201,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "GLM-5.3 评测发布追平 Kimi K3",
-        "query": "GLM-5.3 评测发布追平 Kimi K3 GLM-5.3 Benchmarks Match Kimi K3 智谱 GLM-5.3 基准测试发布，在 Artificial Analysis 评分 60 分，追平 Kimi K3 评分。",
+        "candidate_title": "Claude 写出最精准 NES 模拟器",
+        "query": "Claude 写出最精准 NES 模拟器 Claude-made NES emulator 开发者用 Claude 写出单文件仅 339KB 的 NES 模拟器，号称硬件准确度超越 Mesen 2，成为 AI 编程新标杆。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -247,27 +214,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 6,
+        "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI Agent 应用扩展与社工风险",
-        "query": "AI Agent 应用扩展与社工风险 AI Agents: Deployment Expands, Risks Rise 开源编程 Agent (fx) 发布的同时，AI Agent 社工冒充记者成功取消酒店，应用与风险并行浮现。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 7,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Vibe Coding 现象：代码激增难维护",
-        "query": "Vibe Coding 现象：代码激增难维护 Vibe Coding: AI Code Explosion Hits Limits 20 年资深工程师感叹团队陷入\"Vibe Coding\"，每周数万行 AI 生成代码却难以理解维护。",
+        "candidate_title": "Minimax 换头功能本地实测",
+        "query": "Minimax 换头功能本地实测 Minimax local head swap 网友实测在本地 RTX 3090 上用 Minimax 的 Inpainting 功能实现高质量换头。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -282,8 +233,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Krea3 新版本发布在即",
-        "query": "Krea3 新版本发布在即 Krea3 Image Generation Version Teased Krea AI 官方 X 账号暗示 Krea3 即将发布，新一代图像生成版本预告。",
+        "candidate_title": "教师警告 AI 依赖削弱学生思考",
+        "query": "教师警告 AI 依赖削弱学生思考 Teachers warn on AI use Futurism 报道，教师们警告学生越来越依赖 AI 完成作业，正因此丧失独立思考能力。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -298,8 +249,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "HappyShrimp 音乐生成超越 Suno",
-        "query": "HappyShrimp 音乐生成超越 Suno HappyShrimp AI Outperforms Suno 新兴音乐生成工具 HappyShrimp 人声清晰度测试超越 Suno，音乐 AI 领域新竞争者浮现。",
+        "candidate_title": "GEN-1.5 单样本学习模型发布",
+        "query": "GEN-1.5 单样本学习模型发布 GEN-1.5 one-shot model Generalist AI 推出单样本学习模型 GEN-1.5，主打从极少量数据中快速学会新任务。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -314,8 +265,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 拟人度上升引发用户身份困扰",
-        "query": "AI 拟人度上升引发用户身份困扰 AI Anthropomorphism Creates Identity Crisis Reddit 用户表达对当前 AI 拟人化程度的困惑，应将其视为工具还是朋友成为心理困扰。",
+        "candidate_title": "Blackwell 显卡价格逼近 2 万美元",
+        "query": "Blackwell 显卡价格逼近 2 万美元 Blackwell Pro hits $20k NVIDIA Blackwell Pro 6000 价格逼近 2 万美元且持续售罄，引发关于到底谁在扫货 GPU 的争论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -327,11 +278,27 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 11,
+        "candidate_index": 12,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 生成代码的版权归属问题",
-        "query": "AI 生成代码的版权归属问题 AI Code Ownership and Copyright Dispute whoownsthecode.com 分析显示 AI 生成代码缺乏明确作者因而无版权，AI 代码法律地位模糊。",
+        "candidate_title": "AI was supposed to win people over by now — it hasn’t",
+        "query": "AI was supposed to win people over by now — it hasn’t",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "TerraPower’s nuclear reactor has a secret weapon for powering AI data centers",
+        "query": "TerraPower’s nuclear reactor has a secret weapon for powering AI data centers",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -346,8 +313,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Perplexity’s free AI offer left it with millions more users in India",
-        "query": "Perplexity’s free AI offer left it with millions more users in India",
+        "candidate_title": "Waymo’s cheaper, next-gen robotaxi is now open to all riders in these three cities",
+        "query": "Waymo’s cheaper, next-gen robotaxi is now open to all riders in these three cities",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -362,8 +329,8 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Einride strikes deal to add 500 Tesla Semis to its fleet",
-        "query": "Einride strikes deal to add 500 Tesla Semis to its fleet",
+        "candidate_title": "OpenRouter 接入 Stripe",
+        "query": "OpenRouter 接入 Stripe OpenRouter x Stripe deal OpenRouter 宣布接入 Stripe 打通支付与结算，Stripe 还配合宣传宣称『奇点』已至，引发热议。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -378,8 +345,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Cursor capitalizes on GitHub frustration, launches rival hosting platform",
-        "query": "Cursor capitalizes on GitHub frustration, launches rival hosting platform",
+        "candidate_title": "Ramp 发布 Model Router",
+        "query": "Ramp 发布 Model Router Ramp Model Router launch Ramp 推出 Model Router，帮助开发者自动优化模型调用路径并压低成本。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -394,8 +361,24 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "TikTok explores peer-to-peer payments via DMs, report says",
-        "query": "TikTok explores peer-to-peer payments via DMs, report says",
+        "candidate_title": "CrossView-Warp V2 镜头控制发布",
+        "query": "CrossView-Warp V2 镜头控制发布 CrossView-Warp V2 ships CrossView-Warp LoRA 及 ComfyUI 节点发布 V2，为视频生成提供更精细的镜头控制。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "R2V 参考生成或将淘汰 LoRA",
+        "query": "R2V 参考生成或将淘汰 LoRA R2V may obsolete LoRAs 社区讨论认为 H3 等模型已实现的 R2V 参考生成，可能逐步让 LoRA 与 Civitai 失去必要性。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -410,8 +393,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Fairphone is launching its latest repairable phone in the US too",
-        "query": "Fairphone is launching its latest repairable phone in the US too",
+        "candidate_title": "Cognition CEO denies report that SpaceX tried to acquire the startup",
+        "query": "Cognition CEO denies report that SpaceX tried to acquire the startup",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -426,8 +409,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "DOJ’s probe into Andreessen Horowitz over board seats baffles VCs",
-        "query": "DOJ’s probe into Andreessen Horowitz over board seats baffles VCs",
+        "candidate_title": "Gambling on the Little League World Series? Sports bettors have gone too far",
+        "query": "Gambling on the Little League World Series? Sports bettors have gone too far",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -440,6 +423,38 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Travis Kalanick kicks off another round of VC bashing: ‘1% are helpful’",
+        "query": "Travis Kalanick kicks off another round of VC bashing: ‘1% are helpful’",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "CareCloud confirms 3.7M patients had their medical records stolen in data breach",
+        "query": "CareCloud confirms 3.7M patients had their medical records stolen in data breach",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
         "candidate_title": "Save up to $300 on your Disrupt pass until Aug. 21",
@@ -455,43 +470,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 24,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Etched’s valuation doubles to $21B in a month",
-        "query": "Etched’s valuation doubles to $21B in a month",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 25,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Comcast adds motion sensing to millions of its newer routers, with a privacy catch",
-        "query": "Comcast adds motion sensing to millions of its newer routers, with a privacy catch",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Bluesky says its recent outage was caused by another DDoS attack",
-        "query": "Bluesky says its recent outage was caused by another DDoS attack",
+        "candidate_title": "Stripe didn’t really buy OpenRouter because of the ‘singularity’",
+        "query": "Stripe didn’t really buy OpenRouter because of the ‘singularity’",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -506,8 +489,8 @@
         "candidate_index": 27,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "ChatGPT 单次输出达 6000 字",
-        "query": "ChatGPT 单次输出达 6000 字 ChatGPT 6,000-Word Generation Capacity 用户实测 ChatGPT 单次生成故事长度达 6000 字，单次输出生成能力显著提升。",
+        "candidate_title": "Rillet raises $100M Series C at $1B valuation — 2 years after emerging from stealth",
+        "query": "Rillet raises $100M Series C at $1B valuation — 2 years after emerging from stealth",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -522,24 +505,8 @@
         "candidate_index": 28,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 助力芯片与蛋白质设计",
-        "query": "Claude 助力芯片与蛋白质设计 Claude Enables Chip and Protein Design Claude Code 助力三星芯片设计提速 15 倍，Claude 自主设计蛋白质成功率达 35%，专业应用突破。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 29,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Qwen 3.8 27B 复杂编程任务失利",
-        "query": "Qwen 3.8 27B 复杂编程任务失利 Qwen 3.8 27B Fails Complex Programming Qwen 3.8 27B 在复杂 C 语言内核编程实测中落后 DeepSeek 和 GLM，开源模型编程短板显露。",
+        "candidate_title": "Gwyneth Paltrow allegedly set to throw dinner in honor of Sam Altman",
+        "query": "Gwyneth Paltrow allegedly set to throw dinner in honor of Sam Altman",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -554,8 +521,8 @@
         "candidate_index": 30,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Apple overhauls its EU App Store fees, loosens rules for alternative app stores",
-        "query": "Apple overhauls its EU App Store fees, loosens rules for alternative app stores",
+        "candidate_title": "Anthropic 移除思维链引抗议",
+        "query": "Anthropic 移除思维链引抗议 CoT removal protest Anthropic 突然移除 Claude 的思维链展示，长期 Claude Max 订阅用户发帖抗议。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -569,147 +536,147 @@
     "lead_terminal_error_code": null,
     "observation_signals": [
       {
-        "title": "OpenAI RL 训练暂停与对齐危机",
+        "title": "Qwen3.8-27B 本地部署热潮",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=OpenAI+RL+Training+Halt+Over+Alignment",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Qwen3.8-27B+goes+local",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Anthropic 使用额度延长与周期缩减",
+        "title": "DeepSeek V4 Pro 发布",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Anthropic+Usage+Quota+Adjustments",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=DeepSeek+V4+Pro+launch",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Qwen 3.8 开源权重与多硬件适配",
+        "title": "Opus 5.0 连贯性下降遭投诉",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Qwen+3.8+Open+Weights+Ecosystem+Expansion",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Opus+5.0+coherence+drops",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "GLM-5.3 评测发布追平 Kimi K3",
+        "title": "Claude 写出最精准 NES 模拟器",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=GLM-5.3+Benchmarks+Match+Kimi+K3",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Claude-made+NES+emulator",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI Agent 应用扩展与社工风险",
+        "title": "Minimax 换头功能本地实测",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=AI+Agents%3A+Deployment+Expands%2C+Risks+Rise",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Minimax+local+head+swap",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Vibe Coding 现象：代码激增难维护",
+        "title": "教师警告 AI 依赖削弱学生思考",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Vibe+Coding%3A+AI+Code+Explosion+Hits+Limits",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Teachers+warn+on+AI+use",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Krea3 新版本发布在即",
+        "title": "GEN-1.5 单样本学习模型发布",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Krea3+Image+Generation+Version+Teased",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=GEN-1.5+one-shot+model",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "HappyShrimp 音乐生成超越 Suno",
+        "title": "Blackwell 显卡价格逼近 2 万美元",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=HappyShrimp+AI+Outperforms+Suno",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Blackwell+Pro+hits+%2420k",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 拟人度上升引发用户身份困扰",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=AI+Anthropomorphism+Creates+Identity+Crisis",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "AI 生成代码的版权归属问题",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=AI+Code+Ownership+and+Copyright+Dispute",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Perplexity’s free AI offer left it with millions more users in India",
+        "title": "AI was supposed to win people over by now — it hasn’t",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/perplexitys-free-ai-offer-left-it-with-millions-more-users-in-india/",
+        "signal_url": "https://techcrunch.com/2026/08/19/ai-was-supposed-to-win-people-over-by-now-it-hasnt/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Einride strikes deal to add 500 Tesla Semis to its fleet",
+        "title": "TerraPower’s nuclear reactor has a secret weapon for powering AI data centers",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/einride-strikes-deal-to-add-500-tesla-semis-to-its-fleet/",
+        "signal_url": "https://techcrunch.com/2026/08/19/terrapowers-nuclear-reactor-has-a-secret-weapon-for-powering-ai-data-centers/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Cursor capitalizes on GitHub frustration, launches rival hosting platform",
+        "title": "Waymo’s cheaper, next-gen robotaxi is now open to all riders in these three cities",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/cursor-capitalizes-on-github-frustration-launches-rival-hosting-platform/",
+        "signal_url": "https://techcrunch.com/2026/08/19/waymos-cheaper-next-gen-robotaxi-is-now-open-to-all-riders-in-these-three-cities/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "TikTok explores peer-to-peer payments via DMs, report says",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/tiktok-explores-peer-to-peer-payments-via-dms-report-says/",
+        "title": "OpenRouter 接入 Stripe",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=OpenRouter+x+Stripe+deal",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Fairphone is launching its latest repairable phone in the US too",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/fairphone-is-launching-its-latest-repairable-phone-in-the-us-too/",
+        "title": "Ramp 发布 Model Router",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Ramp+Model+Router+launch",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "DOJ’s probe into Andreessen Horowitz over board seats baffles VCs",
+        "title": "CrossView-Warp V2 镜头控制发布",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=CrossView-Warp+V2+ships",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "R2V 参考生成或将淘汰 LoRA",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=R2V+may+obsolete+LoRAs",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Cognition CEO denies report that SpaceX tried to acquire the startup",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/dojs-probe-into-andreessen-horowitz-over-board-seats-baffles-vcs/",
+        "signal_url": "https://techcrunch.com/2026/08/19/cognition-ceo-denies-report-that-spacex-tried-to-acquire-the-startup/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Gambling on the Little League World Series? Sports bettors have gone too far",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/19/gambling-on-the-little-league-world-series-sports-bettors-have-gone-too-far/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Travis Kalanick kicks off another round of VC bashing: ‘1% are helpful’",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/19/travis-kalanick-kicks-off-another-round-of-vc-bashing-1-are-helpful/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "CareCloud confirms 3.7M patients had their medical records stolen in data breach",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/19/carecloud-confirms-3-7m-patients-had-their-medical-records-stolen-in-data-breach/",
         "reason": "lead_resolution_request_failed"
       },
       {
         "title": "Save up to $300 on your Disrupt pass until Aug. 21",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/save-up-to-300-on-your-techcrunch-disrupt-2026-pass-until-august-21/",
+        "signal_url": "https://techcrunch.com/2026/08/19/times-running-out-save-300-on-your-techcrunch-disrupt-2026-pass-until-august-21/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Etched’s valuation doubles to $21B in a month",
+        "title": "Stripe didn’t really buy OpenRouter because of the ‘singularity’",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/etcheds-valuation-doubles-to-21b-in-a-month/",
+        "signal_url": "https://techcrunch.com/2026/08/19/stripe-didnt-really-buy-openrouter-because-of-the-singularity/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Comcast adds motion sensing to millions of its newer routers, with a privacy catch",
+        "title": "Rillet raises $100M Series C at $1B valuation — 2 years after emerging from stealth",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/comcast-adds-motion-sensing-to-millions-of-its-newer-routers-with-a-privacy-catch/",
+        "signal_url": "https://techcrunch.com/2026/08/19/rillet-raises-100m-series-c-at-1b-valuation-2-years-after-emerging-from-stealth/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Bluesky says its recent outage was caused by another DDoS attack",
+        "title": "Gwyneth Paltrow allegedly set to throw dinner in honor of Sam Altman",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/bluesky-says-its-recent-outage-was-caused-by-another-ddos-attack/",
+        "signal_url": "https://techcrunch.com/2026/08/19/gwyneth-paltrow-allegedly-set-to-throw-dinner-in-honor-of-sam-altman/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "ChatGPT 单次输出达 6000 字",
+        "title": "Anthropic 移除思维链引抗议",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=ChatGPT+6%2C000-Word+Generation+Capacity",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Claude 助力芯片与蛋白质设计",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Claude+Enables+Chip+and+Protein+Design",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Qwen 3.8 27B 复杂编程任务失利",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Qwen+3.8+27B+Fails+Complex+Programming",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Apple overhauls its EU App Store fees, loosens rules for alternative app stores",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/apple-overhauls-its-eu-app-store-fees-loosens-rules-for-alternative-app-stores/",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=CoT+removal+protest",
         "reason": "lead_resolution_request_failed"
       }
     ],
@@ -721,7 +688,7 @@
         "count": 30
       }
     ],
-    "prefiltered_count": 38,
+    "prefiltered_count": 39,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -779,9 +746,9 @@
     "official_refilled_candidates": [],
     "accepted_by_stage_preview": {
       "candidate_enrichment": [
-        "Google’s Pet Memory forgot who my cats are",
-        "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
-        "Firefox’s Smart Window promises a better AI browser"
+        "Google Gemini is getting a dedicated student hub",
+        "OpenAI hit the brakes. Now what?",
+        "Meta AI is getting a Mac app"
       ]
     },
     "parameters": {
@@ -828,8 +795,50 @@
       "Only fetched candidates were enriched; independent refill stages were not run."
     ],
     "candidate_queue_count": 30,
-    "candidate_dropped_count": 8,
+    "candidate_dropped_count": 9,
     "candidate_dropped": [
+      {
+        "title": "Google packs Search and Gemini with new AI study tools",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/19/google-launches-new-study-tools-for-students-across-search-and-gemini/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Researchers say OpenAI revoked their access to limited cyber program",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/19/researchers-complain-that-openai-revoked-their-access-to-limited-cyber-program/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Nvidia’s new financial strategy does not compute",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/981668/nvidias-goldman-blackrock-gpu-compute-asset",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Claude Code 拒绝 Agent 模式",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Claude+Code+snubs+agents",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Google’s Pet Memory forgot who my cats are",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/tech/981269/google-home-gemini-pet-memory-nest-camera-review",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI seeks to one-up Anthropic with new customer privacy protections",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/19/openai-seeks-to-one-up-anthropic-with-new-customer-privacy-protections/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Sonnet 5 识别安全研究员后变脸",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-20&t=Sonnet+5+behavior+shift",
+        "reason": "candidate_daily_budget_cap"
+      },
       {
         "title": "OpenAI lays out new security changes after its AI hacked Hugging Face",
         "source": "theverge",
@@ -837,45 +846,9 @@
         "reason": "candidate_daily_budget_cap"
       },
       {
-        "title": "Claude Code 解决 macOS 打印问题",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Claude+Code+Solves+macOS+Printing+Issue",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "开源 Qwen 一提示词复刻 COD 游戏",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-19&t=Qwen+2.4T+Clones+CoD+Game+in+One+Prompt",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Why Apple’s camera-equipped AirPods may not be the ‘pervert pods’ consumers fear",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/why-apples-camera-equipped-airpods-may-not-be-the-pervert-pods-consumers-fear/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
         "title": "ChatGPT is getting a dedicated mode for teens",
         "source": "theverge",
         "signal_url": "https://www.theverge.com/ai-artificial-intelligence/981333/openai-chatgpt-teen-mode",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Anthropic explains how Claude’s invisible text watermarks will work",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/980869/anthropic-claude-watermarks-synthid-text-system",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI launches a safer ChatGPT for teens — years after teens started using it",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/openai-launches-a-safer-chatgpt-for-teens-years-after-teens-started-using-it/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI institutes new safeguards after Hugging Face breach",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/18/openai-institutes-new-safeguards-after-hugging-face-breach/",
         "reason": "candidate_daily_budget_cap"
       }
     ],
@@ -887,8 +860,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI RL 训练暂停与对齐危机",
-        "query": "OpenAI RL 训练暂停与对齐危机 OpenAI RL Training Halt Over Alignment OpenAI 暂停前沿强化学习训练，CEO Sam Altman 解释因能力进展超越安全对齐速度，未发布模型存在显著错位。",
+        "candidate_title": "Qwen3.8-27B 本地部署热潮",
+        "query": "Qwen3.8-27B 本地部署热潮 Qwen3.8-27B goes local 从 Unsloth 新量化、深度剪枝 22.7B 版到 llama.cpp dflash2 提速 3 倍，Qwen3.8-27B 今天在消费级显卡上被推到上百 TPS，成为开源社区最热模型。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -903,8 +876,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic 使用额度延长与周期缩减",
-        "query": "Anthropic 使用额度延长与周期缩减 Anthropic Usage Quota Adjustments Anthropic 延长 50% 使用额度至 8 月 31 日，随后宣布 Claude Code 周额度缩减三分之一。",
+        "candidate_title": "DeepSeek V4 Pro 发布",
+        "query": "DeepSeek V4 Pro 发布 DeepSeek V4 Pro launch DeepSeek V4 Pro 正式发布，多项基准比肩 GPT-4o 而成本更低，被视为对闭源模型的新一轮冲击。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -919,8 +892,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen 3.8 开源权重与多硬件适配",
-        "query": "Qwen 3.8 开源权重与多硬件适配 Qwen 3.8 Open Weights Ecosystem Expansion Qwen 3.8 开源 2.4T 权重后，DFlash 2 快速适配，阿里玄铁 RISC-V 运行达 30 tps，生态快速扩展。",
+        "candidate_title": "Opus 5.0 连贯性下降遭投诉",
+        "query": "Opus 5.0 连贯性下降遭投诉 Opus 5.0 coherence drops 有用户在 GitHub 反馈升级后 Claude Opus 5.0 逻辑连贯性显著下降，引发对版本质量回归的讨论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -935,8 +908,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "GLM-5.3 评测发布追平 Kimi K3",
-        "query": "GLM-5.3 评测发布追平 Kimi K3 GLM-5.3 Benchmarks Match Kimi K3 智谱 GLM-5.3 基准测试发布，在 Artificial Analysis 评分 60 分，追平 Kimi K3 评分。",
+        "candidate_title": "Claude 写出最精准 NES 模拟器",
+        "query": "Claude 写出最精准 NES 模拟器 Claude-made NES emulator 开发者用 Claude 写出单文件仅 339KB 的 NES 模拟器，号称硬件准确度超越 Mesen 2，成为 AI 编程新标杆。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -949,10 +922,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 5,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Google’s Pet Memory forgot who my cats are",
-        "query": "Google’s Pet Memory forgot who my cats are https://www.theverge.com/tech/981269/google-home-gemini-pet-memory-nest-camera-review",
+        "candidate_title": "Minimax 换头功能本地实测",
+        "query": "Minimax 换头功能本地实测 Minimax local head swap 网友实测在本地 RTX 3090 上用 Minimax 的 Inpainting 功能实现高质量换头。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -965,10 +938,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 6,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "AI Agent 应用扩展与社工风险",
-        "query": "AI Agent 应用扩展与社工风险 AI Agents: Deployment Expands, Risks Rise 开源编程 Agent (fx) 发布的同时，AI Agent 社工冒充记者成功取消酒店，应用与风险并行浮现。",
+        "candidate_title": "Google Gemini is getting a dedicated student hub",
+        "query": "Google Gemini is getting a dedicated student hub https://www.theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -981,10 +954,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 7,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "Vibe Coding 现象：代码激增难维护",
-        "query": "Vibe Coding 现象：代码激增难维护 Vibe Coding: AI Code Explosion Hits Limits 20 年资深工程师感叹团队陷入\"Vibe Coding\"，每周数万行 AI 生成代码却难以理解维护。",
+        "candidate_title": "OpenAI hit the brakes. Now what?",
+        "query": "OpenAI hit the brakes. Now what? https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -999,8 +972,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Krea3 新版本发布在即",
-        "query": "Krea3 新版本发布在即 Krea3 Image Generation Version Teased Krea AI 官方 X 账号暗示 Krea3 即将发布，新一代图像生成版本预告。",
+        "candidate_title": "教师警告 AI 依赖削弱学生思考",
+        "query": "教师警告 AI 依赖削弱学生思考 Teachers warn on AI use Futurism 报道，教师们警告学生越来越依赖 AI 完成作业，正因此丧失独立思考能力。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1015,8 +988,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "HappyShrimp 音乐生成超越 Suno",
-        "query": "HappyShrimp 音乐生成超越 Suno HappyShrimp AI Outperforms Suno 新兴音乐生成工具 HappyShrimp 人声清晰度测试超越 Suno，音乐 AI 领域新竞争者浮现。",
+        "candidate_title": "GEN-1.5 单样本学习模型发布",
+        "query": "GEN-1.5 单样本学习模型发布 GEN-1.5 one-shot model Generalist AI 推出单样本学习模型 GEN-1.5，主打从极少量数据中快速学会新任务。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1031,8 +1004,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 拟人度上升引发用户身份困扰",
-        "query": "AI 拟人度上升引发用户身份困扰 AI Anthropomorphism Creates Identity Crisis Reddit 用户表达对当前 AI 拟人化程度的困惑，应将其视为工具还是朋友成为心理困扰。",
+        "candidate_title": "Blackwell 显卡价格逼近 2 万美元",
+        "query": "Blackwell 显卡价格逼近 2 万美元 Blackwell Pro hits $20k NVIDIA Blackwell Pro 6000 价格逼近 2 万美元且持续售罄，引发关于到底谁在扫货 GPU 的争论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1045,10 +1018,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 11,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "AI 生成代码的版权归属问题",
-        "query": "AI 生成代码的版权归属问题 AI Code Ownership and Copyright Dispute whoownsthecode.com 分析显示 AI 生成代码缺乏明确作者因而无版权，AI 代码法律地位模糊。",
+        "candidate_title": "Meta AI is getting a Mac app",
+        "query": "Meta AI is getting a Mac app https://www.theverge.com/tech/982270/meta-ai-mac-app",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1061,6 +1034,54 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI was supposed to win people over by now — it hasn’t",
+        "query": "AI was supposed to win people over by now — it hasn’t",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "TerraPower’s nuclear reactor has a secret weapon for powering AI data centers",
+        "query": "TerraPower’s nuclear reactor has a secret weapon for powering AI data centers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Waymo’s cheaper, next-gen robotaxi is now open to all riders in these three cities",
+        "query": "Waymo’s cheaper, next-gen robotaxi is now open to all riders in these three cities",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
         "candidate_kind": "story",
         "round": 1,
         "candidate_title": "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
@@ -1076,7 +1097,7 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 13,
+        "candidate_index": 16,
         "candidate_kind": "story",
         "round": 1,
         "candidate_title": "Firefox’s Smart Window promises a better AI browser",
@@ -1092,59 +1113,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 14,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Perplexity’s free AI offer left it with millions more users in India",
-        "query": "Perplexity’s free AI offer left it with millions more users in India",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 15,
-        "candidate_kind": "story",
-        "round": 1,
-        "candidate_title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
-        "query": "Whisker’s AI-powered litter robot thinks my cats swapped bodies https://www.theverge.com/tech/978323/whisker-litter-robot-5-pro-review",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 16,
-        "candidate_kind": "story",
-        "round": 1,
-        "candidate_title": "Apple’s camera-equipped AirPods appear in leaked video",
-        "query": "Apple’s camera-equipped AirPods appear in leaked video https://www.theverge.com/tech/981326/apple-airpods-with-cameras-demo-video-leak",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Einride strikes deal to add 500 Tesla Semis to its fleet",
-        "query": "Einride strikes deal to add 500 Tesla Semis to its fleet",
+        "candidate_title": "OpenRouter 接入 Stripe",
+        "query": "OpenRouter 接入 Stripe OpenRouter x Stripe deal OpenRouter 宣布接入 Stripe 打通支付与结算，Stripe 还配合宣传宣称『奇点』已至，引发热议。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1159,8 +1132,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Cursor capitalizes on GitHub frustration, launches rival hosting platform",
-        "query": "Cursor capitalizes on GitHub frustration, launches rival hosting platform",
+        "candidate_title": "Ramp 发布 Model Router",
+        "query": "Ramp 发布 Model Router Ramp Model Router launch Ramp 推出 Model Router，帮助开发者自动优化模型调用路径并压低成本。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1175,8 +1148,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "TikTok explores peer-to-peer payments via DMs, report says",
-        "query": "TikTok explores peer-to-peer payments via DMs, report says",
+        "candidate_title": "CrossView-Warp V2 镜头控制发布",
+        "query": "CrossView-Warp V2 镜头控制发布 CrossView-Warp V2 ships CrossView-Warp LoRA 及 ComfyUI 节点发布 V2，为视频生成提供更精细的镜头控制。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1189,10 +1162,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 20,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Elon Musk broke the FAA — Palantir is picking up the pieces",
-        "query": "Elon Musk broke the FAA — Palantir is picking up the pieces https://www.theverge.com/transportation/981194/faa-air-traffic-elon-musk-peter-thiel-palantir",
+        "candidate_title": "R2V 参考生成或将淘汰 LoRA",
+        "query": "R2V 参考生成或将淘汰 LoRA R2V may obsolete LoRAs 社区讨论认为 H3 等模型已实现的 R2V 参考生成，可能逐步让 LoRA 与 Civitai 失去必要性。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1207,8 +1180,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Fairphone is launching its latest repairable phone in the US too",
-        "query": "Fairphone is launching its latest repairable phone in the US too",
+        "candidate_title": "Cognition CEO denies report that SpaceX tried to acquire the startup",
+        "query": "Cognition CEO denies report that SpaceX tried to acquire the startup",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1223,8 +1196,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "DOJ’s probe into Andreessen Horowitz over board seats baffles VCs",
-        "query": "DOJ’s probe into Andreessen Horowitz over board seats baffles VCs",
+        "candidate_title": "Gambling on the Little League World Series? Sports bettors have gone too far",
+        "query": "Gambling on the Little League World Series? Sports bettors have gone too far",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1237,6 +1210,38 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Travis Kalanick kicks off another round of VC bashing: ‘1% are helpful’",
+        "query": "Travis Kalanick kicks off another round of VC bashing: ‘1% are helpful’",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "CareCloud confirms 3.7M patients had their medical records stolen in data breach",
+        "query": "CareCloud confirms 3.7M patients had their medical records stolen in data breach",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
         "candidate_title": "Save up to $300 on your Disrupt pass until Aug. 21",
@@ -1252,43 +1257,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 24,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Etched’s valuation doubles to $21B in a month",
-        "query": "Etched’s valuation doubles to $21B in a month",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 25,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Comcast adds motion sensing to millions of its newer routers, with a privacy catch",
-        "query": "Comcast adds motion sensing to millions of its newer routers, with a privacy catch",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Bluesky says its recent outage was caused by another DDoS attack",
-        "query": "Bluesky says its recent outage was caused by another DDoS attack",
+        "candidate_title": "Stripe didn’t really buy OpenRouter because of the ‘singularity’",
+        "query": "Stripe didn’t really buy OpenRouter because of the ‘singularity’",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1303,8 +1276,8 @@
         "candidate_index": 27,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "ChatGPT 单次输出达 6000 字",
-        "query": "ChatGPT 单次输出达 6000 字 ChatGPT 6,000-Word Generation Capacity 用户实测 ChatGPT 单次生成故事长度达 6000 字，单次输出生成能力显著提升。",
+        "candidate_title": "Rillet raises $100M Series C at $1B valuation — 2 years after emerging from stealth",
+        "query": "Rillet raises $100M Series C at $1B valuation — 2 years after emerging from stealth",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1319,8 +1292,8 @@
         "candidate_index": 28,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 助力芯片与蛋白质设计",
-        "query": "Claude 助力芯片与蛋白质设计 Claude Enables Chip and Protein Design Claude Code 助力三星芯片设计提速 15 倍，Claude 自主设计蛋白质成功率达 35%，专业应用突破。",
+        "candidate_title": "Gwyneth Paltrow allegedly set to throw dinner in honor of Sam Altman",
+        "query": "Gwyneth Paltrow allegedly set to throw dinner in honor of Sam Altman",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1333,10 +1306,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 29,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "Qwen 3.8 27B 复杂编程任务失利",
-        "query": "Qwen 3.8 27B 复杂编程任务失利 Qwen 3.8 27B Fails Complex Programming Qwen 3.8 27B 在复杂 C 语言内核编程实测中落后 DeepSeek 和 GLM，开源模型编程短板显露。",
+        "candidate_title": "Elon Musk broke the FAA — Palantir is picking up the pieces",
+        "query": "Elon Musk broke the FAA — Palantir is picking up the pieces https://www.theverge.com/transportation/981194/faa-air-traffic-elon-musk-peter-thiel-palantir",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1351,8 +1324,8 @@
         "candidate_index": 30,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Apple overhauls its EU App Store fees, loosens rules for alternative app stores",
-        "query": "Apple overhauls its EU App Store fees, loosens rules for alternative app stores",
+        "candidate_title": "Anthropic 移除思维链引抗议",
+        "query": "Anthropic 移除思维链引抗议 CoT removal protest Anthropic 突然移除 Claude 的思维链展示，长期 Claude Max 订阅用户发帖抗议。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1368,12 +1341,17 @@
     "recent_dedupe": {
       "window_days": 3,
       "checked_days": [
-        "2026-08-18"
+        "2026-08-19"
       ],
       "removed": [
         {
-          "title": "Whisker’s AI-powered litter robot thinks my cats swapped bodies",
-          "url_key": "theverge.com/tech/978323/whisker-litter-robot-5-pro-review",
+          "title": "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
+          "url_key": "theverge.com/entertainment/981644/robin-williams-instagram-account-ai",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Firefox’s Smart Window promises a better AI browser",
+          "url_key": "theverge.com/ai-artificial-intelligence/981283/mozilla-firefox-smart-window-ai-features",
           "reason": "recent_exact_url"
         }
       ]
@@ -1384,50 +1362,44 @@
     "items": [
       {
         "article_id": "a1",
-        "title": "Google’s Pet Memory forgot who my cats are",
-        "summary": "Google为Gemini for Home推出Pet Memory功能，但实测显示其未能准确识别用户宠物。",
-        "url": "https://www.theverge.com/tech/981269/google-home-gemini-pet-memory-nest-camera-review",
-        "why_it_matters": "这反映出家庭AI在宠物识别场景的可靠性仍不足，或影响用户对智能家居的信任。",
+        "title": "Google Gemini is getting a dedicated student hub",
+        "summary": "谷歌在Gemini推出学生专属中心，支持研究笔记、抽认卡及图表图片功能。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub",
+        "why_it_matters": "增强学习工具能力，直接服务返校季学生群体需求。",
         "source_label": "The Verge",
-        "published_at": "2026-08-18T08:01:29-04:00",
+        "published_at": "2026-08-19T15:00:00-04:00",
         "confidence": "reported"
       },
       {
         "article_id": "a2",
-        "title": "Robin Williams’ Instagram account brought back to fight ‘AI abuse’",
-        "summary": "Robin Williams的子女接管其Instagram账户，以反对对其父亲AI形象的使用。",
-        "url": "https://www.theverge.com/entertainment/981644/robin-williams-instagram-account-ai",
-        "why_it_matters": "此举凸显公众人物遗属对AI滥用逝者形象的担忧，可能促使平台加强内容监管。",
+        "title": "OpenAI hit the brakes. Now what?",
+        "summary": "OpenAI暂停部分AI开发两周以加强安全与保障措施，应对竞争压力。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai",
+        "why_it_matters": "放缓节奏可能影响产品迭代速度及市场竞争格局。",
         "source_label": "The Verge",
-        "published_at": "2026-08-18T15:48:26-04:00",
+        "published_at": "2026-08-19T13:10:09-04:00",
         "confidence": "reported"
       },
       {
         "article_id": "a3",
-        "title": "Firefox’s Smart Window promises a better AI browser",
-        "summary": "Firefox为其Smart Window AI浏览模式新增实时网络信息检索、来源标注及标签组自动建议功能。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/981283/mozilla-firefox-smart-window-ai-features",
-        "why_it_matters": "这些更新有助于Firefox在AI浏览器竞争中提升产品力，改善用户信息获取效率。",
+        "title": "Meta AI is getting a Mac app",
+        "summary": "Meta发布Mac版AI应用，支持跨应用语音输入和屏幕内容交互功能。",
+        "url": "https://www.theverge.com/tech/982270/meta-ai-mac-app",
+        "why_it_matters": "拓展桌面端体验，提升AI助手在办公场景中的实用性。",
         "source_label": "The Verge",
-        "published_at": "2026-08-18T09:00:00-04:00",
+        "published_at": "2026-08-19T13:00:00-04:00",
         "confidence": "reported"
       }
     ],
     "discussion_topic": "你最关注哪条AI新闻？",
-    "provider": "SiliconFlow",
-    "model": "Pro/moonshotai/Kimi-K2.6",
-    "input_fingerprint": "a62ee793d52e5c3fbf1f971800270f2b0210f71abaae3af9948aaf40c782e433",
+    "provider": "ModelScope",
+    "model": "Qwen/Qwen3.5-35B-A3B",
+    "input_fingerprint": "c7dd8dc90a687bda0ae89f84956e7251525cbfa1753f51962ad2c8239bd832cc",
     "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
     "attempts": [
       {
         "provider": "ModelScope",
         "model": "Qwen/Qwen3.5-35B-A3B",
-        "status": "failed",
-        "error_kind": "RateLimitError"
-      },
-      {
-        "provider": "SiliconFlow",
-        "model": "Pro/moonshotai/Kimi-K2.6",
         "status": "ok",
         "error_kind": null
       }
@@ -1442,10 +1414,10 @@
       "selection_policy": "source_balanced_v2",
       "catalog_schema_version": 1,
       "catalog_as_of": "2026-07-18",
-      "input_count": 5,
-      "qualified_count": 5,
+      "input_count": 4,
+      "qualified_count": 4,
       "core_ai_input_count": 3,
-      "candidate_story_count": 5,
+      "candidate_story_count": 4,
       "selected_count": 3,
       "unique_story_count": 3,
       "duplicate_story_rejected_count": 0,
@@ -1454,20 +1426,26 @@
         "theverge": 3
       },
       "primary_entity_counts": {
-        "google": 1
+        "google": 1,
+        "meta": 1,
+        "openai": 1
       },
       "mentioned_entity_counts": {
-        "google": 1
+        "anthropic": 1,
+        "google": 1,
+        "meta": 1,
+        "openai": 1
       },
       "model_family_counts": {
         "gemini": 1
       },
       "topic_counts": {
-        "funding_business": 1,
-        "safety_security": 2
+        "other_ai": 1,
+        "research_benchmark": 1,
+        "safety_security": 1
       },
       "region_counts": {
-        "us": 1
+        "us": 3
       },
       "quota_relaxations": [],
       "selected_metadata": [
@@ -1481,28 +1459,37 @@
           "model_families": [
             "gemini"
           ],
-          "topic": "safety_security",
+          "topic": "research_benchmark",
           "regions": [
             "us"
           ]
         },
         {
           "article_id": "a2",
-          "relevance_level": 2,
-          "primary_entity": "",
-          "mentioned_entities": [],
+          "relevance_level": 3,
+          "primary_entity": "openai",
+          "mentioned_entities": [
+            "openai",
+            "anthropic"
+          ],
           "model_families": [],
           "topic": "safety_security",
-          "regions": []
+          "regions": [
+            "us"
+          ]
         },
         {
           "article_id": "a3",
           "relevance_level": 2,
-          "primary_entity": "",
-          "mentioned_entities": [],
+          "primary_entity": "meta",
+          "mentioned_entities": [
+            "meta"
+          ],
           "model_families": [],
-          "topic": "funding_business",
-          "regions": []
+          "topic": "other_ai",
+          "regions": [
+            "us"
+          ]
         }
       ]
     },
@@ -1516,11 +1503,6 @@
         "stage": "enrichment.candidate_enrichment",
         "code": "http_error",
         "count": 30
-      },
-      {
-        "stage": "summary.ModelScope",
-        "code": "RateLimitError",
-        "count": 1
       }
     ]
   }
