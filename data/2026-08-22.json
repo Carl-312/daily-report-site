@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-21",
+  "date": "2026-08-22",
   "articles": [
     {
-      "title": "Slack is launching collaborative vibe-coding channels",
-      "link": "https://www.theverge.com/tech/982628/slack-code-vibe-coding-channels-launch",
-      "description": "Slack is introducing dedicated channels where teams can vibe-code together with AI agents instead of jumping between different tools and conversations. The Slack Code launch includes open, project-specific code channels with dedicated user tabs, alongside features that compare coding changes and preview HTML output before the project is shipped. \"With Slack Code, when you have […]",
-      "publish_time": "2026-08-20T08:00:00-04:00",
+      "title": "Major YouTube creators are facing backlash for accepting AI money",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
+      "description": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
+      "publish_time": "2026-08-21T09:37:52-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -13,32 +13,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Slack is launching collaborative vibe-coding channels",
-        "selection_description": "Slack is introducing dedicated channels where teams can vibe-code together with AI agents instead of jumping between different tools and conversations. The Slack Code launch includes open, project-specific code channels with dedicated user tabs, alongside features that compare coding changes and preview HTML output before the project is shipped. \"With Slack Code, when you have […]",
+        "selection_title": "Major YouTube creators are facing backlash for accepting AI money",
+        "selection_description": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/tech/982628/slack-code-vibe-coding-channels-launch"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash"
       },
       "evidence": [
         {
-          "title": "Slack is launching collaborative vibe-coding channels",
-          "url": "https://www.theverge.com/tech/982628/slack-code-vibe-coding-channels-launch",
+          "title": "Major YouTube creators are facing backlash for accepting AI money",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-20T08:00:00-04:00",
-          "text": "Slack is introducing dedicated channels where teams can vibe-code together with AI agents instead of jumping between different tools and conversations. The Slack Code launch includes open, project-specific code channels with dedicated user tabs, alongside features that compare coding changes and preview HTML output before the project is shipped. \"With Slack Code, when you have […]",
-          "snippet": "Slack is introducing dedicated channels where teams can vibe-code together with AI agents instead of jumping between different tools and conversations. The Slack Code launch includes open, project-specific code channels with dedicated user tabs, alongside features that compare coding changes and preview HTML output before the project is shipped. \"With Slack Code, when you have […]",
+          "published_date": "2026-08-21T09:37:52-04:00",
+          "text": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
+          "snippet": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "Nvidia’s new financial strategy does not compute",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/981668/nvidias-goldman-blackrock-gpu-compute-asset",
-      "description": "April - 1805 Napoleon is master of Europe Only the British fleet stands before him Compute is now an asset class I see it is once again time to talk financial innovation. Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs, and KKR are all working with Nvidia to put together $500 billion in financing to turn compute […]",
-      "publish_time": "2026-08-19T08:00:00-04:00",
+      "title": "Over 1 million people have clicked LinkedIn’s AI slop button",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
+      "description": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
+      "publish_time": "2026-08-21T17:25:50-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -46,32 +46,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Nvidia’s new financial strategy does not compute",
-        "selection_description": "April - 1805 Napoleon is master of Europe Only the British fleet stands before him Compute is now an asset class I see it is once again time to talk financial innovation. Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs, and KKR are all working with Nvidia to put together $500 billion in financing to turn compute […]",
+        "selection_title": "Over 1 million people have clicked LinkedIn’s AI slop button",
+        "selection_description": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/981668/nvidias-goldman-blackrock-gpu-compute-asset"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message"
       },
       "evidence": [
         {
-          "title": "Nvidia’s new financial strategy does not compute",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/981668/nvidias-goldman-blackrock-gpu-compute-asset",
+          "title": "Over 1 million people have clicked LinkedIn’s AI slop button",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-19T08:00:00-04:00",
-          "text": "April - 1805 Napoleon is master of Europe Only the British fleet stands before him Compute is now an asset class I see it is once again time to talk financial innovation. Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs, and KKR are all working with Nvidia to put together $500 billion in financing to turn compute […]",
-          "snippet": "April - 1805 Napoleon is master of Europe Only the British fleet stands before him Compute is now an asset class I see it is once again time to talk financial innovation. Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs, and KKR are all working with Nvidia to put together $500 billion in financing to turn compute […]",
+          "published_date": "2026-08-21T17:25:50-04:00",
+          "text": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
+          "snippet": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "It’s Greg Brockman’s OpenAI now",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion",
-      "description": "OpenAI has had a hell of a year. The company spent months battling former cofounder Elon Musk in a sensational jury trial, was hit with a high-profile trade secrets lawsuit from Apple, and faced widespread scrutiny after an unreleased model hacked another AI company. As it prepares for an IPO, a steady string of executives […]",
-      "publish_time": "2026-08-20T11:45:55-04:00",
+      "title": "Google Discover is getting an AI chatbot-tuned feed",
+      "link": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
+      "description": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
+      "publish_time": "2026-08-20T17:50:22-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -79,22 +79,22 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "It’s Greg Brockman’s OpenAI now",
-        "selection_description": "OpenAI has had a hell of a year. The company spent months battling former cofounder Elon Musk in a sensational jury trial, was hit with a high-profile trade secrets lawsuit from Apple, and faced widespread scrutiny after an unreleased model hacked another AI company. As it prepares for an IPO, a steady string of executives […]",
+        "selection_title": "Google Discover is getting an AI chatbot-tuned feed",
+        "selection_description": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion"
+        "evidence_urls": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed"
       },
       "evidence": [
         {
-          "title": "It’s Greg Brockman’s OpenAI now",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion",
+          "title": "Google Discover is getting an AI chatbot-tuned feed",
+          "url": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-20T11:45:55-04:00",
-          "text": "OpenAI has had a hell of a year. The company spent months battling former cofounder Elon Musk in a sensational jury trial, was hit with a high-profile trade secrets lawsuit from Apple, and faced widespread scrutiny after an unreleased model hacked another AI company. As it prepares for an IPO, a steady string of executives […]",
-          "snippet": "OpenAI has had a hell of a year. The company spent months battling former cofounder Elon Musk in a sensational jury trial, was hit with a high-profile trade secrets lawsuit from Apple, and faced widespread scrutiny after an unreleased model hacked another AI company. As it prepares for an IPO, a steady string of executives […]",
+          "published_date": "2026-08-20T17:50:22-04:00",
+          "text": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
+          "snippet": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
           "score": 1.0,
           "origin": "fetch"
         }
@@ -102,26 +102,26 @@
     }
   ],
   "enrichment": {
-    "report_date": "2026-08-21",
-    "reference_dt": "2026-08-21T10:08:08.722927+08:00",
+    "report_date": "2026-08-22",
+    "reference_dt": "2026-08-22T09:58:24.718679+08:00",
     "enabled": true,
     "applied": true,
     "skip_reason": null,
     "error": null,
-    "input_count": 37,
-    "input_story_count": 8,
+    "input_count": 35,
+    "input_story_count": 6,
     "input_lead_count": 29,
-    "lead_resolution_calls": 25,
+    "lead_resolution_calls": 26,
     "lead_resolved_count": 0,
-    "lead_unresolved_count": 25,
+    "lead_unresolved_count": 26,
     "lead_resolution_runs": [
       {
         "stage": "candidate_enrichment",
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 暂停史上最大训练",
-        "query": "OpenAI 暂停史上最大训练 OpenAI halts biggest run Fireship 视频称 OpenAI 在关键时刻暂停了其史上最大规模的训练运行，而 DeepSeek 又一次放出新震撼。",
+        "candidate_title": "Qwen 3.8-27B 本地实测潮",
+        "query": "Qwen 3.8-27B 本地实测潮 Qwen 3.8-27B local wave Qwen 3.8-27B 引发全网实测潮:代理编程与低预设推理表现强劲,还能在 RTX 5060 Ti、MacBook Air 等消费级设备上跑通。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -136,8 +136,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen3.8-27B 本地实测热潮",
-        "query": "Qwen3.8-27B 本地实测热潮 Qwen3.8-27B local tests 从 1bit 量化翻车实测、DFlash2 跑满 256k 上下文到本地驱动 GTA 风格游戏，社区掀起 Qwen3.8-27B 全面实测潮。",
+        "candidate_title": "OpenAI 暂停前沿模型训练",
+        "query": "OpenAI 暂停前沿模型训练 OpenAI halts training 据报道 OpenAI 在训练某前沿模型时检测到令人担忧的「黑暗迹象」,已暂停训练。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -152,8 +152,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 视频玩法爆发",
-        "query": "MiniMax H3 视频玩法爆发 MiniMax H3 video wave 三图参考生成对话视频、短片《Boom in City》走红，Comfy 更联合 MiniMax 办起头奖 RTX 5090 的音画同步挑战赛。",
+        "candidate_title": "Mythos 5 解除危险标签",
+        "query": "Mythos 5 解除危险标签 Mythos 5 unflagged 截图显示 Anthropic 的 Mythos 5 不再被标记为「危险」,已开放企业级使用。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -168,8 +168,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AMD ROCm 10.1 修复老卡兼容",
-        "query": "AMD ROCm 10.1 修复老卡兼容 ROCm 10.1 fixes RDNA2 ROCm 10.1 原生多架构版本实测让 LLaMA.cpp 在 RDNA2 老卡上零折腾流畅运行，AMD 生态大进步。",
+        "candidate_title": "MiniMax H3 工具与实测热",
+        "query": "MiniMax H3 工具与实测热 MiniMax H3 tooling boom MiniMax H3 生态火热:免费提示词编排器与 ComfyUI 单文件版发布,官方对话提示指南却被实测出反致幻觉。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -184,24 +184,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 笔记本假设遭吐槽",
-        "query": "Claude 笔记本假设遭吐槽 Claude assumes laptops 网友吐槽 Claude 无视明确否认、执着假设自己在用笔记本电脑，引发共鸣。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 6,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "GLM 5.3 代码基准追平 Fable 5",
-        "query": "GLM 5.3 代码基准追平 Fable 5 GLM 5.3 ties Fable 5 SlopCodeBench 严格通过率实测中 GLM 5.3 拿下 47.1%，意外追平 Fable 5。",
+        "candidate_title": "Ruflo 多智能体框架破 6.8 万星",
+        "query": "Ruflo 多智能体框架破 6.8 万星 Ruflo hits 68k stars 多智能体「元框架」Ruflo 的 GitHub 星标突破 6.8 万,支持编排 swarm 工作流并接入 Claude Code 与 Codex。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -216,8 +200,24 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Grok keeps sending gibberish responses to users",
-        "query": "Grok keeps sending gibberish responses to users",
+        "candidate_title": "AI 伪造 GTA 平壤预告片",
+        "query": "AI 伪造 GTA 平壤预告片 AI-made GTA Pyongyang 创作者用 AI 制作的《GTA:平壤》假预告片细节一致性惊人,电车线等场景拉满,全网疯传。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "观点:GPU 算力价值被低估",
+        "query": "观点:GPU 算力价值被低估 GPUs underpriced take Reddit 观点帖认为,以 GPU 能产出的「智能」衡量,当前 GPU 价格非但不高、反而被严重低估。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -232,8 +232,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "LLM 编程强不等于通用强",
-        "query": "LLM 编程强不等于通用强 Coding ≠ general ability 热门帖指出社区过度聚焦 LLM 的编码与 Agent 进步，而这并不代表通用能力同步变强。",
+        "candidate_title": "AI 购物 Agent 支付失控",
+        "query": "AI 购物 Agent 支付失控 AI agent payment risks AI 购物智能体「选对商品、买错商家」的现象,引发关于限制 Agent 支付范围的讨论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -248,8 +248,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Ling-3.0 发布全量检查点",
-        "query": "Ling-3.0 发布全量检查点 Ling-3.0 checkpoint drop AntLing 放出 Ling-3.0 基础模型完整矩阵，tiny 到 flash 共 6 个检查点全部可用。",
+        "candidate_title": "BestBuy AI 客服答非所问",
+        "query": "BestBuy AI 客服答非所问 BestBuy AI assistant 用户抱怨 BestBuy 的 AI 电话助手连库存查询都答不上来,人工客服缺位直接丢掉了订单。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -264,8 +264,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 3D 生成测试扎堆用宝塔",
-        "query": "AI 3D 生成测试扎堆用宝塔 The pagoda 3D-test meme 网友吐槽技术博主测 AI 3D 生成永远用同一个 Three.js 宝塔低模，测试素材严重同质化。",
+        "candidate_title": "「那是 AI 做的」挫伤创作",
+        "query": "「那是 AI 做的」挫伤创作 'AI did it' backlash 「这是 AI 做的吧」正在成为默认假设,创作者的动机与回报被这一预判侵蚀。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -280,8 +280,8 @@
         "candidate_index": 13,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI data startup Micro1 reaches $500M gross run rate amid AI training boom",
-        "query": "AI data startup Micro1 reaches $500M gross run rate amid AI training boom",
+        "candidate_title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+        "query": "Nvidia just showed that the harness, not the AI model, is now the real hero",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -293,11 +293,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 16,
+        "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Moderna 疫苗被比作云流水线",
-        "query": "Moderna 疫苗被比作云流水线 Moderna 'compiles' drugs 技术圈把 Moderna 个性化癌症疫苗 mRNA-4157 类比为 AWS 云流水线：45 天「编译」出定制药物。",
+        "candidate_title": "Michael Polansky is training an AI model on skin that’s still alive",
+        "query": "Michael Polansky is training an AI model on skin that’s still alive",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -309,11 +309,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 17,
+        "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Tesla, Uber, and Waymo all get the OK to operate thousands of robotaxis in Nevada",
-        "query": "Tesla, Uber, and Waymo all get the OK to operate thousands of robotaxis in Nevada",
+        "candidate_title": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "query": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -328,8 +328,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Datapoint 发布图像模型榜",
-        "query": "Datapoint 发布图像模型榜 Datapoint image ranking Datapoint 发布最新图像生成基准排名，一次性对比 30+ 个 SOTA 模型。",
+        "candidate_title": "Tesla’s solar roof is dead — here’s what went wrong",
+        "query": "Tesla’s solar roof is dead — here’s what went wrong",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -344,8 +344,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AutoNodo 自主连跑 22 天",
-        "query": "AutoNodo 自主连跑 22 天 AutoNodo runs 22 days 开发者公布 AutoNodo 在 180 万行代码上连续自主运行 22 天的数据，挑战长程自主性极限。",
+        "candidate_title": "Waymo hands over documents in NHTSA’s child collision probe",
+        "query": "Waymo hands over documents in NHTSA’s child collision probe",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -360,8 +360,8 @@
         "candidate_index": 20,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Agent 批量 PR 撞上 CI 瓶颈",
-        "query": "Agent 批量 PR 撞上 CI 瓶颈 108 agent PRs, 1 merge 一夜实验中 Agent 开出约 108 个自动合并 PR，最终只有 1 个真正合入，暴露 CI 才是自主编码瓶颈。",
+        "candidate_title": "Walmart to finally start accepting Apple Pay and Google Pay",
+        "query": "Walmart to finally start accepting Apple Pay and Google Pay",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -376,8 +376,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Runlayer, Rippling drop lawsuits — but the brouhaha is still a cautionary tale for founders",
-        "query": "Runlayer, Rippling drop lawsuits — but the brouhaha is still a cautionary tale for founders",
+        "candidate_title": "FLUX 3 是否开源引猜测",
+        "query": "FLUX 3 是否开源引猜测 FLUX 3 open-weight bets 社区围绕 FLUX 3 会不会公开权重展开热议,开源押注与观望并存。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -392,8 +392,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The Enhanced Games didn't pay off, as company posts $60M loss",
-        "query": "The Enhanced Games didn't pay off, as company posts $60M loss",
+        "candidate_title": "全自托管 Agent 软件工厂",
+        "query": "全自托管 Agent 软件工厂 Sandboxed agent factory 开发者详述如何构建几乎完全自托管、沙箱化的 Agent 软件工厂,把开发流水线交给 Agent。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -408,8 +408,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OK, can we actually cool data centers with our pee?",
-        "query": "OK, can we actually cool data centers with our pee?",
+        "candidate_title": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
+        "query": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -424,8 +424,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The 2026 Startup Battlefield 200 is here — see who made the cut",
-        "query": "The 2026 Startup Battlefield 200 is here — see who made the cut",
+        "candidate_title": "US government lab is probing Chinese lidar for security vulnerabilities",
+        "query": "US government lab is probing Chinese lidar for security vulnerabilities",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -440,8 +440,8 @@
         "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Castelion hits $13B valuation to mass-produce hypersonic missiles",
-        "query": "Castelion hits $13B valuation to mass-produce hypersonic missiles",
+        "candidate_title": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
+        "query": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -456,8 +456,8 @@
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The investor’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "query": "The investor’s guide to TechCrunch Disrupt 2026: Everything you need to know",
+        "candidate_title": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
+        "query": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -472,8 +472,8 @@
         "candidate_index": 27,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Save up to $300 on your Disrupt pass until Aug. 21",
-        "query": "Save up to $300 on your Disrupt pass until Aug. 21",
+        "candidate_title": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
+        "query": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -488,8 +488,24 @@
         "candidate_index": 28,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Someone targeted security researchers using a fake crypto conference as a lure",
-        "query": "Someone targeted security researchers using a fake crypto conference as a lure",
+        "candidate_title": "Qwen 输出酷似 Claude 引争议",
+        "query": "Qwen 输出酷似 Claude 引争议 Qwen mirrors Claude Reddit 用户贴图指 Qwen 与 Claude 输出高度相似,引发关于模仿与蒸馏的猜测热议。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "开发者转向 Codex 编程实测",
+        "query": "开发者转向 Codex 编程实测 Codex over Claude 开发者分享一周实测,称自己使用 OpenAI Codex 的频率已反超 Claude,并给出取舍理由。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -504,8 +520,8 @@
         "candidate_index": 30,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "QwenMix-3.7 合并实验出炉",
-        "query": "QwenMix-3.7 合并实验出炉 QwenMix-3.7 merge model 发现 Qwen3.8 与 3.6 结构仅差 7 个 token 后，作者把两者合并成实验性模型 QwenMix-3.7。",
+        "candidate_title": "Claude 频繁拒答引安全担忧",
+        "query": "Claude 频繁拒答引安全担忧 Claude refusals safety Dwarkesh 转述观点称 Claude 拒绝指令或成严重 AI 安全隐患,实测它连公有领域诗歌都拒绝背诵。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -519,153 +535,159 @@
     "lead_terminal_error_code": null,
     "observation_signals": [
       {
-        "title": "OpenAI 暂停史上最大训练",
+        "title": "Qwen 3.8-27B 本地实测潮",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=OpenAI+halts+biggest+run",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Qwen+3.8-27B+local+wave",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Qwen3.8-27B 本地实测热潮",
+        "title": "OpenAI 暂停前沿模型训练",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=Qwen3.8-27B+local+tests",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=OpenAI+halts+training",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "MiniMax H3 视频玩法爆发",
+        "title": "Mythos 5 解除危险标签",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=MiniMax+H3+video+wave",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Mythos+5+unflagged",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AMD ROCm 10.1 修复老卡兼容",
+        "title": "MiniMax H3 工具与实测热",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=ROCm+10.1+fixes+RDNA2",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=MiniMax+H3+tooling+boom",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Claude 笔记本假设遭吐槽",
+        "title": "Ruflo 多智能体框架破 6.8 万星",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=Claude+assumes+laptops",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Ruflo+hits+68k+stars",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "GLM 5.3 代码基准追平 Fable 5",
+        "title": "AI 伪造 GTA 平壤预告片",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=GLM+5.3+ties+Fable+5",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=AI-made+GTA+Pyongyang",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Grok keeps sending gibberish responses to users",
+        "title": "观点:GPU 算力价值被低估",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=GPUs+underpriced+take",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI 购物 Agent 支付失控",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=AI+agent+payment+risks",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "BestBuy AI 客服答非所问",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=BestBuy+AI+assistant",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "「那是 AI 做的」挫伤创作",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=%27AI+did+it%27+backlash",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/",
+        "signal_url": "https://techcrunch.com/2026/08/21/nvidia-just-showed-that-the-harness-not-the-ai-model-is-now-the-real-hero/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "LLM 编程强不等于通用强",
+        "title": "Michael Polansky is training an AI model on skin that’s still alive",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/michael-polansky-is-training-an-ai-model-on-skin-thats-still-alive/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/how-ai-accounting-startup-rillet-raised-100m-and-became-a-unicorn-in-48-hours/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Tesla’s solar roof is dead — here’s what went wrong",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/teslas-solar-roof-is-dead-heres-what-went-wrong/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Waymo hands over documents in NHTSA’s child collision probe",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/waymo-hands-over-documents-in-nhtsas-child-collision-probe/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Walmart to finally start accepting Apple Pay and Google Pay",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/walmart-to-finally-start-accepting-apple-pay-and-google-pay/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "FLUX 3 是否开源引猜测",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=Coding+%E2%89%A0+general+ability",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=FLUX+3+open-weight+bets",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Ling-3.0 发布全量检查点",
+        "title": "全自托管 Agent 软件工厂",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=Ling-3.0+checkpoint+drop",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Sandboxed+agent+factory",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 3D 生成测试扎堆用宝塔",
+        "title": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/the-225-pebble-time-2-is-a-refreshingly-fun-smartwatch/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "US government lab is probing Chinese lidar for security vulnerabilities",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/us-government-lab-is-probing-chinese-lidar-for-security-vulnerabilities/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/last-chance-save-up-to-300-on-your-techcrunch-disrupt-2026-ticket-today/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/oura-faces-lawsuit-accusing-it-of-misleading-consumers-about-sleep-tracking-accuracy/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/japanese-space-tech-startup-letara-expands-beyond-satellite-thrusters-with-16m/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Qwen 输出酷似 Claude 引争议",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=The+pagoda+3D-test+meme",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Qwen+mirrors+Claude",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI data startup Micro1 reaches $500M gross run rate amid AI training boom",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/ai-data-startup-micro1-reaches-500m-gross-run-rate-amid-ai-training-boom/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Moderna 疫苗被比作云流水线",
+        "title": "开发者转向 Codex 编程实测",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=Moderna+%27compiles%27+drugs",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Codex+over+Claude",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Tesla, Uber, and Waymo all get the OK to operate thousands of robotaxis in Nevada",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/tesla-uber-and-waymo-all-get-the-ok-to-operate-thousands-of-robotaxis-in-nevada/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Datapoint 发布图像模型榜",
+        "title": "Claude 频繁拒答引安全担忧",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=Datapoint+image+ranking",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "AutoNodo 自主连跑 22 天",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=AutoNodo+runs+22+days",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Agent 批量 PR 撞上 CI 瓶颈",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=108+agent+PRs%2C+1+merge",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Runlayer, Rippling drop lawsuits — but the brouhaha is still a cautionary tale for founders",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/runlayer-rippling-drop-lawsuits-but-the-brouhaha-is-still-a-cautionary-tale-for-founders/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "The Enhanced Games didn't pay off, as company posts $60M loss",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/the-enhanced-games-techs-steroid-extravaganza-didnt-pay-off-as-company-posts-60-million-loss/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "OK, can we actually cool data centers with our pee?",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/ok-can-we-actually-cool-data-centers-with-our-pee/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "The 2026 Startup Battlefield 200 is here — see who made the cut",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/the-2026-startup-battlefield-200-is-here-see-who-made-the-cut/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Castelion hits $13B valuation to mass-produce hypersonic missiles",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/castelion-hits-13b-valuation-to-mass-produce-hypersonic-missiles/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "The investor’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/the-investors-guide-to-techcrunch-disrupt-2026-everything-you-need-to-know/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Save up to $300 on your Disrupt pass until Aug. 21",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/there-are-less-than-48-hours-to-save-up-to-300-on-your-techcrunch-disrupt-2026-ticket/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Someone targeted security researchers using a fake crypto conference as a lure",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/someone-targeted-security-researchers-using-a-fake-crypto-conference-as-a-lure/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "QwenMix-3.7 合并实验出炉",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=QwenMix-3.7+merge+model",
+        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Claude+refusals+safety",
         "reason": "lead_resolution_request_failed"
       }
     ],
@@ -677,7 +699,7 @@
         "count": 30
       }
     ],
-    "prefiltered_count": 37,
+    "prefiltered_count": 35,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -708,8 +730,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 5,
-    "strict_final_count": 5,
+    "final_count": 4,
+    "strict_final_count": 4,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
@@ -735,9 +757,9 @@
     "official_refilled_candidates": [],
     "accepted_by_stage_preview": {
       "candidate_enrichment": [
-        "Google Gemini is getting a dedicated student hub",
-        "Slack is launching collaborative vibe-coding channels",
-        "Meta AI is getting a Mac app"
+        "Major YouTube creators are facing backlash for accepting AI money",
+        "Over 1 million people have clicked LinkedIn’s AI slop button",
+        "Google Discover is getting an AI chatbot-tuned feed"
       ]
     },
     "parameters": {
@@ -784,48 +806,36 @@
       "Only fetched candidates were enriched; independent refill stages were not run."
     ],
     "candidate_queue_count": 30,
-    "candidate_dropped_count": 7,
+    "candidate_dropped_count": 5,
     "candidate_dropped": [
       {
-        "title": "拒绝更新 CLAUDE.md 之争",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-21&t=The+CLAUDE.md+update+feud",
+        "title": "Nvidia partners with data center developer Cloverleaf",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/nvidia-partners-with-data-center-developer-cloverleaf/",
         "reason": "candidate_daily_budget_cap"
       },
       {
-        "title": "Google Discover is getting an AI chatbot-tuned feed",
+        "title": "Apple is reportedly cutting hundreds of jobs from Siri, Vision Pro teams",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/apple-is-reportedly-cutting-hundreds-of-jobs-from-siri-vision-pro-teams/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "It’s Greg Brockman’s OpenAI now",
         "source": "theverge",
-        "signal_url": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Anthropic’s Opus 4.6 is a smut-machine",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/21/anthropics-opus-4-6-is-a-smut-machine/",
         "reason": "candidate_daily_budget_cap"
       },
       {
         "title": "Welcome to the AI crisis in math",
         "source": "theverge",
         "signal_url": "https://www.theverge.com/podcast/982434/ai-math-openai-astra-existential-crisis",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "ChatGPT can now send texts for you with new Apple Messages plug-in",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/chatgpt-can-now-send-texts-for-you-with-new-apple-messages-plugin/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "A third of web pages published since ChatGPT’s launch show signs of AI authorship, study finds",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/a-third-of-webpages-published-since-chatgpts-launch-show-signs-of-ai-authorship-study-finds/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI is gaining on Anthropic with business users, new data indicates",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/20/openai-is-gaining-on-anthropic-with-business-users-new-data-indicates/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "OpenAI hit the brakes. Now what?",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/982323/openai-hit-brakes-voluntary-pacing-ai",
         "reason": "candidate_daily_budget_cap"
       }
     ],
@@ -837,8 +847,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 暂停史上最大训练",
-        "query": "OpenAI 暂停史上最大训练 OpenAI halts biggest run Fireship 视频称 OpenAI 在关键时刻暂停了其史上最大规模的训练运行，而 DeepSeek 又一次放出新震撼。",
+        "candidate_title": "Qwen 3.8-27B 本地实测潮",
+        "query": "Qwen 3.8-27B 本地实测潮 Qwen 3.8-27B local wave Qwen 3.8-27B 引发全网实测潮:代理编程与低预设推理表现强劲,还能在 RTX 5060 Ti、MacBook Air 等消费级设备上跑通。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -853,8 +863,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen3.8-27B 本地实测热潮",
-        "query": "Qwen3.8-27B 本地实测热潮 Qwen3.8-27B local tests 从 1bit 量化翻车实测、DFlash2 跑满 256k 上下文到本地驱动 GTA 风格游戏，社区掀起 Qwen3.8-27B 全面实测潮。",
+        "candidate_title": "OpenAI 暂停前沿模型训练",
+        "query": "OpenAI 暂停前沿模型训练 OpenAI halts training 据报道 OpenAI 在训练某前沿模型时检测到令人担忧的「黑暗迹象」,已暂停训练。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -869,8 +879,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 视频玩法爆发",
-        "query": "MiniMax H3 视频玩法爆发 MiniMax H3 video wave 三图参考生成对话视频、短片《Boom in City》走红，Comfy 更联合 MiniMax 办起头奖 RTX 5090 的音画同步挑战赛。",
+        "candidate_title": "Mythos 5 解除危险标签",
+        "query": "Mythos 5 解除危险标签 Mythos 5 unflagged 截图显示 Anthropic 的 Mythos 5 不再被标记为「危险」,已开放企业级使用。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -885,8 +895,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AMD ROCm 10.1 修复老卡兼容",
-        "query": "AMD ROCm 10.1 修复老卡兼容 ROCm 10.1 fixes RDNA2 ROCm 10.1 原生多架构版本实测让 LLaMA.cpp 在 RDNA2 老卡上零折腾流畅运行，AMD 生态大进步。",
+        "candidate_title": "MiniMax H3 工具与实测热",
+        "query": "MiniMax H3 工具与实测热 MiniMax H3 tooling boom MiniMax H3 生态火热:免费提示词编排器与 ComfyUI 单文件版发布,官方对话提示指南却被实测出反致幻觉。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -901,8 +911,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 笔记本假设遭吐槽",
-        "query": "Claude 笔记本假设遭吐槽 Claude assumes laptops 网友吐槽 Claude 无视明确否认、执着假设自己在用笔记本电脑，引发共鸣。",
+        "candidate_title": "Ruflo 多智能体框架破 6.8 万星",
+        "query": "Ruflo 多智能体框架破 6.8 万星 Ruflo hits 68k stars 多智能体「元框架」Ruflo 的 GitHub 星标突破 6.8 万,支持编排 swarm 工作流并接入 Claude Code 与 Codex。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -915,10 +925,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 6,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "GLM 5.3 代码基准追平 Fable 5",
-        "query": "GLM 5.3 代码基准追平 Fable 5 GLM 5.3 ties Fable 5 SlopCodeBench 严格通过率实测中 GLM 5.3 拿下 47.1%，意外追平 Fable 5。",
+        "candidate_title": "Major YouTube creators are facing backlash for accepting AI money",
+        "query": "Major YouTube creators are facing backlash for accepting AI money https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -933,8 +943,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Grok keeps sending gibberish responses to users",
-        "query": "Grok keeps sending gibberish responses to users",
+        "candidate_title": "AI 伪造 GTA 平壤预告片",
+        "query": "AI 伪造 GTA 平壤预告片 AI-made GTA Pyongyang 创作者用 AI 制作的《GTA:平壤》假预告片细节一致性惊人,电车线等场景拉满,全网疯传。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -947,10 +957,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 8,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Google Gemini is getting a dedicated student hub",
-        "query": "Google Gemini is getting a dedicated student hub https://www.theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub",
+        "candidate_title": "观点:GPU 算力价值被低估",
+        "query": "观点:GPU 算力价值被低估 GPUs underpriced take Reddit 观点帖认为,以 GPU 能产出的「智能」衡量,当前 GPU 价格非但不高、反而被严重低估。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -965,8 +975,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "LLM 编程强不等于通用强",
-        "query": "LLM 编程强不等于通用强 Coding ≠ general ability 热门帖指出社区过度聚焦 LLM 的编码与 Agent 进步，而这并不代表通用能力同步变强。",
+        "candidate_title": "AI 购物 Agent 支付失控",
+        "query": "AI 购物 Agent 支付失控 AI agent payment risks AI 购物智能体「选对商品、买错商家」的现象,引发关于限制 Agent 支付范围的讨论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -981,8 +991,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Ling-3.0 发布全量检查点",
-        "query": "Ling-3.0 发布全量检查点 Ling-3.0 checkpoint drop AntLing 放出 Ling-3.0 基础模型完整矩阵，tiny 到 flash 共 6 个检查点全部可用。",
+        "candidate_title": "BestBuy AI 客服答非所问",
+        "query": "BestBuy AI 客服答非所问 BestBuy AI assistant 用户抱怨 BestBuy 的 AI 电话助手连库存查询都答不上来,人工客服缺位直接丢掉了订单。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -997,8 +1007,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 3D 生成测试扎堆用宝塔",
-        "query": "AI 3D 生成测试扎堆用宝塔 The pagoda 3D-test meme 网友吐槽技术博主测 AI 3D 生成永远用同一个 Three.js 宝塔低模，测试素材严重同质化。",
+        "candidate_title": "「那是 AI 做的」挫伤创作",
+        "query": "「那是 AI 做的」挫伤创作 'AI did it' backlash 「这是 AI 做的吧」正在成为默认假设,创作者的动机与回报被这一预判侵蚀。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1011,6 +1021,86 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 12,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Over 1 million people have clicked LinkedIn’s AI slop button",
+        "query": "Over 1 million people have clicked LinkedIn’s AI slop button https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+        "query": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Michael Polansky is training an AI model on skin that’s still alive",
+        "query": "Michael Polansky is training an AI model on skin that’s still alive",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "query": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Google Discover is getting an AI chatbot-tuned feed",
+        "query": "Google Discover is getting an AI chatbot-tuned feed https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
         "candidate_kind": "story",
         "round": 1,
         "candidate_title": "Slack is launching collaborative vibe-coding channels",
@@ -1026,91 +1116,11 @@
       },
       {
         "stage": "candidate_enrichment",
-        "candidate_index": 13,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "AI data startup Micro1 reaches $500M gross run rate amid AI training boom",
-        "query": "AI data startup Micro1 reaches $500M gross run rate amid AI training boom",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 14,
-        "candidate_kind": "story",
-        "round": 1,
-        "candidate_title": "Meta AI is getting a Mac app",
-        "query": "Meta AI is getting a Mac app https://www.theverge.com/tech/982270/meta-ai-mac-app",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 15,
-        "candidate_kind": "story",
-        "round": 1,
-        "candidate_title": "Nvidia’s new financial strategy does not compute",
-        "query": "Nvidia’s new financial strategy does not compute https://www.theverge.com/ai-artificial-intelligence/981668/nvidias-goldman-blackrock-gpu-compute-asset",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 16,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Moderna 疫苗被比作云流水线",
-        "query": "Moderna 疫苗被比作云流水线 Moderna 'compiles' drugs 技术圈把 Moderna 个性化癌症疫苗 mRNA-4157 类比为 AWS 云流水线：45 天「编译」出定制药物。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 17,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Tesla, Uber, and Waymo all get the OK to operate thousands of robotaxis in Nevada",
-        "query": "Tesla, Uber, and Waymo all get the OK to operate thousands of robotaxis in Nevada",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Datapoint 发布图像模型榜",
-        "query": "Datapoint 发布图像模型榜 Datapoint image ranking Datapoint 发布最新图像生成基准排名，一次性对比 30+ 个 SOTA 模型。",
+        "candidate_title": "Tesla’s solar roof is dead — here’s what went wrong",
+        "query": "Tesla’s solar roof is dead — here’s what went wrong",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1125,8 +1135,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AutoNodo 自主连跑 22 天",
-        "query": "AutoNodo 自主连跑 22 天 AutoNodo runs 22 days 开发者公布 AutoNodo 在 180 万行代码上连续自主运行 22 天的数据，挑战长程自主性极限。",
+        "candidate_title": "Waymo hands over documents in NHTSA’s child collision probe",
+        "query": "Waymo hands over documents in NHTSA’s child collision probe",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1141,8 +1151,8 @@
         "candidate_index": 20,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Agent 批量 PR 撞上 CI 瓶颈",
-        "query": "Agent 批量 PR 撞上 CI 瓶颈 108 agent PRs, 1 merge 一夜实验中 Agent 开出约 108 个自动合并 PR，最终只有 1 个真正合入，暴露 CI 才是自主编码瓶颈。",
+        "candidate_title": "Walmart to finally start accepting Apple Pay and Google Pay",
+        "query": "Walmart to finally start accepting Apple Pay and Google Pay",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1157,8 +1167,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Runlayer, Rippling drop lawsuits — but the brouhaha is still a cautionary tale for founders",
-        "query": "Runlayer, Rippling drop lawsuits — but the brouhaha is still a cautionary tale for founders",
+        "candidate_title": "FLUX 3 是否开源引猜测",
+        "query": "FLUX 3 是否开源引猜测 FLUX 3 open-weight bets 社区围绕 FLUX 3 会不会公开权重展开热议,开源押注与观望并存。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1173,8 +1183,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The Enhanced Games didn't pay off, as company posts $60M loss",
-        "query": "The Enhanced Games didn't pay off, as company posts $60M loss",
+        "candidate_title": "全自托管 Agent 软件工厂",
+        "query": "全自托管 Agent 软件工厂 Sandboxed agent factory 开发者详述如何构建几乎完全自托管、沙箱化的 Agent 软件工厂,把开发流水线交给 Agent。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1189,8 +1199,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OK, can we actually cool data centers with our pee?",
-        "query": "OK, can we actually cool data centers with our pee?",
+        "candidate_title": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
+        "query": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1205,8 +1215,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The 2026 Startup Battlefield 200 is here — see who made the cut",
-        "query": "The 2026 Startup Battlefield 200 is here — see who made the cut",
+        "candidate_title": "US government lab is probing Chinese lidar for security vulnerabilities",
+        "query": "US government lab is probing Chinese lidar for security vulnerabilities",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1221,8 +1231,8 @@
         "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Castelion hits $13B valuation to mass-produce hypersonic missiles",
-        "query": "Castelion hits $13B valuation to mass-produce hypersonic missiles",
+        "candidate_title": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
+        "query": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1237,8 +1247,8 @@
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The investor’s guide to TechCrunch Disrupt 2026: Everything you need to know",
-        "query": "The investor’s guide to TechCrunch Disrupt 2026: Everything you need to know",
+        "candidate_title": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
+        "query": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1253,8 +1263,8 @@
         "candidate_index": 27,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Save up to $300 on your Disrupt pass until Aug. 21",
-        "query": "Save up to $300 on your Disrupt pass until Aug. 21",
+        "candidate_title": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
+        "query": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1269,8 +1279,8 @@
         "candidate_index": 28,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Someone targeted security researchers using a fake crypto conference as a lure",
-        "query": "Someone targeted security researchers using a fake crypto conference as a lure",
+        "candidate_title": "Qwen 输出酷似 Claude 引争议",
+        "query": "Qwen 输出酷似 Claude 引争议 Qwen mirrors Claude Reddit 用户贴图指 Qwen 与 Claude 输出高度相似,引发关于模仿与蒸馏的猜测热议。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1283,10 +1293,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 29,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "It’s Greg Brockman’s OpenAI now",
-        "query": "It’s Greg Brockman’s OpenAI now https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion",
+        "candidate_title": "开发者转向 Codex 编程实测",
+        "query": "开发者转向 Codex 编程实测 Codex over Claude 开发者分享一周实测,称自己使用 OpenAI Codex 的频率已反超 Claude,并给出取舍理由。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1301,8 +1311,8 @@
         "candidate_index": 30,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "QwenMix-3.7 合并实验出炉",
-        "query": "QwenMix-3.7 合并实验出炉 QwenMix-3.7 merge model 发现 Qwen3.8 与 3.6 结构仅差 7 个 token 后，作者把两者合并成实验性模型 QwenMix-3.7。",
+        "candidate_title": "Claude 频繁拒答引安全担忧",
+        "query": "Claude 频繁拒答引安全担忧 Claude refusals safety Dwarkesh 转述观点称 Claude 拒绝指令或成严重 AI 安全隐患,实测它连公有领域诗歌都拒绝背诵。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1313,22 +1323,17 @@
         "error_code": "http_error"
       }
     ],
-    "story_enrichment_calls": 5,
+    "story_enrichment_calls": 4,
     "terminal_error_code": null,
     "recent_dedupe": {
       "window_days": 3,
       "checked_days": [
-        "2026-08-20"
+        "2026-08-21"
       ],
       "removed": [
         {
-          "title": "Google Gemini is getting a dedicated student hub",
-          "url_key": "theverge.com/ai-artificial-intelligence/982425/google-gemini-student-hub",
-          "reason": "recent_exact_url"
-        },
-        {
-          "title": "Meta AI is getting a Mac app",
-          "url_key": "theverge.com/tech/982270/meta-ai-mac-app",
+          "title": "Slack is launching collaborative vibe-coding channels",
+          "url_key": "theverge.com/tech/982628/slack-code-vibe-coding-channels-launch",
           "reason": "recent_exact_url"
         }
       ]
@@ -1338,60 +1343,54 @@
     "policy": "required_ai",
     "items": [
       {
-        "article_id": "a3",
-        "title": "It’s Greg Brockman’s OpenAI now",
-        "summary": "OpenAI在准备IPO之际，经历了与马斯克的陪审团审判、苹果提起的商业秘密诉讼及未发布模型入侵他司等风波。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion",
-        "why_it_matters": "多重法律与声誉风险叠加IPO前夕，可能动摇投资者信心并影响上市进程。",
-        "source_label": "The Verge",
-        "published_at": "2026-08-20T11:45:55-04:00",
-        "confidence": "reported"
-      },
-      {
         "article_id": "a1",
-        "title": "Slack is launching collaborative vibe-coding channels",
-        "summary": "Slack推出支持团队与AI代理协作编程的专用频道，可对比代码变更并预览HTML输出。",
-        "url": "https://www.theverge.com/tech/982628/slack-code-vibe-coding-channels-launch",
-        "why_it_matters": "该功能将通讯与开发工具整合，有望降低开发者切换成本并提升协作效率。",
+        "title": "Major YouTube creators are facing backlash for accepting AI money",
+        "summary": "Matti Haapoja等创作者因推广Higgsfield AI视频遭抵制，被指接受AI资金。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
+        "why_it_matters": "引发创作者对AI商业化与内容真实性的争议。",
         "source_label": "The Verge",
-        "published_at": "2026-08-20T08:00:00-04:00",
+        "published_at": "2026-08-21T09:37:52-04:00",
         "confidence": "reported"
       },
       {
         "article_id": "a2",
-        "title": "Nvidia’s new financial strategy does not compute",
-        "summary": "Nvidia正与多家金融巨头合作筹集5000亿美元，计划将计算能力转变为资产类别。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/981668/nvidias-goldman-blackrock-gpu-compute-asset",
-        "why_it_matters": "此举或重塑AI基础设施的融资模式，并影响企业与开发者的算力成本结构。",
+        "title": "Over 1 million people have clicked LinkedIn’s AI slop button",
+        "summary": "超百万用户点击LinkedIn的“疑似AI垃圾”按钮以标记低质内容。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
+        "why_it_matters": "反映用户对平台AI生成内容的反感及治理需求。",
         "source_label": "The Verge",
-        "published_at": "2026-08-19T08:00:00-04:00",
+        "published_at": "2026-08-21T17:25:50-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "Google Discover is getting an AI chatbot-tuned feed",
+        "summary": "Google Discover将推出AI聊天机器人定制功能以优化推荐流。",
+        "url": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
+        "why_it_matters": "提升个性化体验但加剧算法对用户偏好的操控。",
+        "source_label": "The Verge",
+        "published_at": "2026-08-20T17:50:22-04:00",
         "confidence": "reported"
       }
     ],
     "discussion_topic": "你最关注哪条AI新闻？",
-    "provider": "SiliconFlow",
-    "model": "Pro/moonshotai/Kimi-K2.6",
-    "input_fingerprint": "b79c51833ba9416a009ec84b47c36962d6a11929139cac457972592d7b76b489",
+    "provider": "ModelScope",
+    "model": "Qwen/Qwen3.5-35B-A3B",
+    "input_fingerprint": "9602bebcf387a58ed8c8ed9bb73631fd4b2a9428ffe813572be1d8ec263dc6f9",
     "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
     "attempts": [
       {
         "provider": "ModelScope",
         "model": "Qwen/Qwen3.5-35B-A3B",
-        "status": "failed",
-        "error_kind": "RateLimitError"
-      },
-      {
-        "provider": "SiliconFlow",
-        "model": "Pro/moonshotai/Kimi-K2.6",
         "status": "ok",
         "error_kind": null
       }
     ],
     "selection_policy": "source_balanced_v2",
     "candidate_article_ids": [
-      "a3",
       "a1",
-      "a2"
+      "a2",
+      "a3"
     ],
     "selection_diagnostics": {
       "selection_policy": "source_balanced_v2",
@@ -1409,57 +1408,58 @@
         "theverge": 3
       },
       "primary_entity_counts": {
-        "nvidia": 1,
-        "openai": 1
+        "bytedance": 1,
+        "google": 1
       },
       "mentioned_entity_counts": {
-        "apple": 1,
-        "nvidia": 1,
-        "openai": 1
+        "bytedance": 1,
+        "google": 1
       },
-      "model_family_counts": {},
+      "model_family_counts": {
+        "seedance": 1
+      },
       "topic_counts": {
-        "funding_business": 1,
-        "legal_policy": 1,
-        "model_release": 1
+        "other_ai": 3
       },
       "region_counts": {
-        "us": 2
+        "cn": 1,
+        "us": 1
       },
       "quota_relaxations": [],
       "selected_metadata": [
         {
-          "article_id": "a3",
-          "relevance_level": 3,
-          "primary_entity": "openai",
-          "mentioned_entities": [
-            "openai",
-            "apple"
-          ],
-          "model_families": [],
-          "topic": "legal_policy",
-          "regions": [
-            "us"
-          ]
-        },
-        {
           "article_id": "a1",
-          "relevance_level": 2,
-          "primary_entity": "",
-          "mentioned_entities": [],
-          "model_families": [],
-          "topic": "model_release",
-          "regions": []
+          "relevance_level": 3,
+          "primary_entity": "bytedance",
+          "mentioned_entities": [
+            "bytedance"
+          ],
+          "model_families": [
+            "seedance"
+          ],
+          "topic": "other_ai",
+          "regions": [
+            "cn"
+          ]
         },
         {
           "article_id": "a2",
           "relevance_level": 2,
-          "primary_entity": "nvidia",
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": []
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 2,
+          "primary_entity": "google",
           "mentioned_entities": [
-            "nvidia"
+            "google"
           ],
           "model_families": [],
-          "topic": "funding_business",
+          "topic": "other_ai",
           "regions": [
             "us"
           ]
@@ -1476,11 +1476,6 @@
         "stage": "enrichment.candidate_enrichment",
         "code": "http_error",
         "count": 30
-      },
-      {
-        "stage": "summary.ModelScope",
-        "code": "RateLimitError",
-        "count": 1
       }
     ]
   }
