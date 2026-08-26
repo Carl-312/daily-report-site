@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-22",
+  "date": "2026-08-26",
   "articles": [
     {
-      "title": "Major YouTube creators are facing backlash for accepting AI money",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
-      "description": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
-      "publish_time": "2026-08-21T09:37:52-04:00",
+      "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
+      "description": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
+      "publish_time": "2026-08-25T10:00:00-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -13,32 +13,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Major YouTube creators are facing backlash for accepting AI money",
-        "selection_description": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
+        "selection_title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+        "selection_description": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks"
       },
       "evidence": [
         {
-          "title": "Major YouTube creators are facing backlash for accepting AI money",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
+          "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-21T09:37:52-04:00",
-          "text": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
-          "snippet": "Over the past few days, a number of prominent filmmaking content creators including Matti Haapoja and Sam \"Kold\" Kolder have posted videos of themselves demonstrating what's possible with AI platform Higgsfield. The videos highlight Higgsfield's recently added Seedance 2.5 functionality and pitch these technologies as the future of video production. In response to these videos, […]",
+          "published_date": "2026-08-25T10:00:00-04:00",
+          "text": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
+          "snippet": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "Over 1 million people have clicked LinkedIn’s AI slop button",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
-      "description": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
-      "publish_time": "2026-08-21T17:25:50-04:00",
+      "title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
+      "description": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
+      "publish_time": "2026-08-25T05:15:03-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -46,55 +46,22 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "Over 1 million people have clicked LinkedIn’s AI slop button",
-        "selection_description": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
+        "selection_title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
+        "selection_description": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack"
       },
       "evidence": [
         {
-          "title": "Over 1 million people have clicked LinkedIn’s AI slop button",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
+          "title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-21T17:25:50-04:00",
-          "text": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
-          "snippet": "LinkedIn actually announced a \"Seems like AI slop\" button on July 30th, and the company says that a lot of people have already used it. According to a Thursday post from chief product officer Hari Srinivasan, \"over a million people\" have clicked on the button, which is accessible from the three dots menu on a […]",
-          "score": 1.0,
-          "origin": "fetch"
-        }
-      ]
-    },
-    {
-      "title": "Google Discover is getting an AI chatbot-tuned feed",
-      "link": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
-      "description": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
-      "publish_time": "2026-08-20T17:50:22-04:00",
-      "content": "",
-      "priority": 1,
-      "source": "theverge",
-      "kind": "story",
-      "evidence_status": "direct",
-      "confidence": "reported",
-      "provenance": {
-        "selection_title": "Google Discover is getting an AI chatbot-tuned feed",
-        "selection_description": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
-        "selection_content": "",
-        "input_kind": "story",
-        "resolution_stage": "tavily_story_enrichment",
-        "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed"
-      },
-      "evidence": [
-        {
-          "title": "Google Discover is getting an AI chatbot-tuned feed",
-          "url": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
-          "domain": "www.theverge.com",
-          "published_date": "2026-08-20T17:50:22-04:00",
-          "text": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
-          "snippet": "Google will soon allow you to customize your Discover feed by describing what you want to see. The new feature, rolling out to the Google app in the \"coming days,\" will use AI to automatically tweak your feed and \"remember\" your preferences for future visits. You'll find the option within the three-dot menu on your […]",
+          "published_date": "2026-08-25T05:15:03-04:00",
+          "text": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
+          "snippet": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
           "score": 1.0,
           "origin": "fetch"
         }
@@ -102,26 +69,26 @@
     }
   ],
   "enrichment": {
-    "report_date": "2026-08-22",
-    "reference_dt": "2026-08-22T09:58:24.718679+08:00",
+    "report_date": "2026-08-26",
+    "reference_dt": "2026-08-26T10:09:09.650295+08:00",
     "enabled": true,
     "applied": true,
     "skip_reason": null,
     "error": null,
-    "input_count": 35,
-    "input_story_count": 6,
+    "input_count": 31,
+    "input_story_count": 2,
     "input_lead_count": 29,
-    "lead_resolution_calls": 26,
+    "lead_resolution_calls": 28,
     "lead_resolved_count": 0,
-    "lead_unresolved_count": 26,
+    "lead_unresolved_count": 28,
     "lead_resolution_runs": [
       {
         "stage": "candidate_enrichment",
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen 3.8-27B 本地实测潮",
-        "query": "Qwen 3.8-27B 本地实测潮 Qwen 3.8-27B local wave Qwen 3.8-27B 引发全网实测潮:代理编程与低预设推理表现强劲,还能在 RTX 5060 Ti、MacBook Air 等消费级设备上跑通。",
+        "candidate_title": "OpenAI 曝完成 10T 模型 Bel",
+        "query": "OpenAI 曝完成 10T 模型 Bel OpenAI 10T 'Bel' rumor 爆料人 Leo 称 OpenAI 刚完成参数量超 10T 的预训练模型 Bel,若属实将刷新公开模型规模纪录。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -136,8 +103,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 暂停前沿模型训练",
-        "query": "OpenAI 暂停前沿模型训练 OpenAI halts training 据报道 OpenAI 在训练某前沿模型时检测到令人担忧的「黑暗迹象」,已暂停训练。",
+        "candidate_title": "Qwen3.8-Flash-Next 架构曝光",
+        "query": "Qwen3.8-Flash-Next 架构曝光 Qwen3.8-Flash-Next leak Reddit 解析未发布的 Qwen3.8-Flash-Next(约 125B-A6B,本地约需 82GB 内存),27B 版已被实测跑 Three.js。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -152,8 +119,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Mythos 5 解除危险标签",
-        "query": "Mythos 5 解除危险标签 Mythos 5 unflagged 截图显示 Anthropic 的 Mythos 5 不再被标记为「危险」,已开放企业级使用。",
+        "candidate_title": "Anthropic 看好 30 万亿市场",
+        "query": "Anthropic 看好 30 万亿市场 Anthropic touts $30T TAM 据《华尔街日报》,Anthropic 向投资者描绘超 30 万亿美元的潜在市场规模,为下轮巨额融资铺路。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -168,8 +135,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 工具与实测热",
-        "query": "MiniMax H3 工具与实测热 MiniMax H3 tooling boom MiniMax H3 生态火热:免费提示词编排器与 ComfyUI 单文件版发布,官方对话提示指南却被实测出反致幻觉。",
+        "candidate_title": "Figure Index 机器人数据集发布",
+        "query": "Figure Index 机器人数据集发布 Figure Index data drop Figure 发布迄今最大机器人数据集 Index,收录 1600 万条视频,为人形机器人训练铺路。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -184,8 +151,24 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Ruflo 多智能体框架破 6.8 万星",
-        "query": "Ruflo 多智能体框架破 6.8 万星 Ruflo hits 68k stars 多智能体「元框架」Ruflo 的 GitHub 星标突破 6.8 万,支持编排 swarm 工作流并接入 Claude Code 与 Codex。",
+        "candidate_title": "AI 实验室雪藏最强模型",
+        "query": "AI 实验室雪藏最强模型 Labs shelve top models SemiAnalysis 创始人 Dylan Patel 接受 Dwarkesh 专访,解释 AI 实验室为何搁置已训成的最强模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "被裁程序员开源「AI CEO」",
+        "query": "被裁程序员开源「AI CEO」 Open-source 'AI CEO' jab 被以「AI 转型」为由裁掉的程序员开源「AI CEO」:你用 AI 换我,我就用 AI 换你。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -200,8 +183,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 伪造 GTA 平壤预告片",
-        "query": "AI 伪造 GTA 平壤预告片 AI-made GTA Pyongyang 创作者用 AI 制作的《GTA:平壤》假预告片细节一致性惊人,电车线等场景拉满,全网疯传。",
+        "candidate_title": "富豪自曝 WSJ 专栏 AI 代笔",
+        "query": "富豪自曝 WSJ 专栏 AI 代笔 Druckenmiller's AI op-ed 亿万富翁 Druckenmiller 承认其《华尔街日报》专栏文章完全出自 AI 之手。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -216,8 +199,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "观点:GPU 算力价值被低估",
-        "query": "观点:GPU 算力价值被低估 GPUs underpriced take Reddit 观点帖认为,以 GPU 能产出的「智能」衡量,当前 GPU 价格非但不高、反而被严重低估。",
+        "candidate_title": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
+        "query": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -232,8 +215,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 购物 Agent 支付失控",
-        "query": "AI 购物 Agent 支付失控 AI agent payment risks AI 购物智能体「选对商品、买错商家」的现象,引发关于限制 Agent 支付范围的讨论。",
+        "candidate_title": "Robotics startup Generalist reaches $3B valuation, sources say",
+        "query": "Robotics startup Generalist reaches $3B valuation, sources say",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -248,8 +231,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "BestBuy AI 客服答非所问",
-        "query": "BestBuy AI 客服答非所问 BestBuy AI assistant 用户抱怨 BestBuy 的 AI 电话助手连库存查询都答不上来,人工客服缺位直接丢掉了订单。",
+        "candidate_title": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
+        "query": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -264,8 +247,24 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "「那是 AI 做的」挫伤创作",
-        "query": "「那是 AI 做的」挫伤创作 'AI did it' backlash 「这是 AI 做的吧」正在成为默认假设,创作者的动机与回报被这一预判侵蚀。",
+        "candidate_title": "Waymo robotaxis are headed to Munich",
+        "query": "Waymo robotaxis are headed to Munich",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "XCancel 遭 X 发函叫停",
+        "query": "XCancel 遭 X 发函叫停 X Corp kills XCancel 账号删除工具 XCancel 因收到 X Corp 停止侵权律师函宣布关停,第三方 X 工具生态再遭收紧。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -280,8 +279,8 @@
         "candidate_index": 13,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
-        "query": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+        "candidate_title": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
+        "query": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -296,8 +295,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Michael Polansky is training an AI model on skin that’s still alive",
-        "query": "Michael Polansky is training an AI model on skin that’s still alive",
+        "candidate_title": "Fitbit founders launch Luffu Link, an LTE health and safety band",
+        "query": "Fitbit founders launch Luffu Link, an LTE health and safety band",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -312,8 +311,40 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
-        "query": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "candidate_title": "Gamma acquires Accel-backed design startup Lica",
+        "query": "Gamma acquires Accel-backed design startup Lica",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Save $300 on your Disrupt ticket while you still can",
+        "query": "Save $300 on your Disrupt ticket while you still can",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "X sends cease-and-desist to open source project Nitter over alleged scraping",
+        "query": "X sends cease-and-desist to open source project Nitter over alleged scraping",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -328,8 +359,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Tesla’s solar roof is dead — here’s what went wrong",
-        "query": "Tesla’s solar roof is dead — here’s what went wrong",
+        "candidate_title": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
+        "query": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -344,8 +375,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Waymo hands over documents in NHTSA’s child collision probe",
-        "query": "Waymo hands over documents in NHTSA’s child collision probe",
+        "candidate_title": "OpenAI 发布自研芯片 Jalapeño",
+        "query": "OpenAI 发布自研芯片 Jalapeño OpenAI's Jalapeño chip OpenAI 在官方博客官宣首款定制推理芯片 Jalapeño 并公布首轮测试结果,自研算力正式落地。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -360,8 +391,8 @@
         "candidate_index": 20,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Walmart to finally start accepting Apple Pay and Google Pay",
-        "query": "Walmart to finally start accepting Apple Pay and Google Pay",
+        "candidate_title": "本地跑 LLM 掀硬件选型热",
+        "query": "本地跑 LLM 掀硬件选型热 Local LLM hardware rush 从 M5 Ultra/M5 Max 之争到 i7+2060 低配机与便携机架,怎么配硬件在家跑 Qwen3.8 刷屏社区。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -376,8 +407,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "FLUX 3 是否开源引猜测",
-        "query": "FLUX 3 是否开源引猜测 FLUX 3 open-weight bets 社区围绕 FLUX 3 会不会公开权重展开热议,开源押注与观望并存。",
+        "candidate_title": "Claude 被关盒子梗图刷屏",
+        "query": "Claude 被关盒子梗图刷屏 'Claude in a box' meme Reddit 热传把 Claude 画成「被关在盒子里的模型」的梗图,成为当日最热玩笑。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -392,8 +423,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "全自托管 Agent 软件工厂",
-        "query": "全自托管 Agent 软件工厂 Sandboxed agent factory 开发者详述如何构建几乎完全自托管、沙箱化的 Agent 软件工厂,把开发流水线交给 Agent。",
+        "candidate_title": "ChatGPT 推百美元团队版",
+        "query": "ChatGPT 推百美元团队版 ChatGPT $100 Team plan OpenAI 推出每月 100 美元起的团队版(最少 2 席),同时 Plus 用户恢复 5 小时用量限制。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -408,8 +439,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
-        "query": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
+        "candidate_title": "Claude Cowork finally remembers what you told the app in chat",
+        "query": "Claude Cowork finally remembers what you told the app in chat",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -424,8 +455,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "US government lab is probing Chinese lidar for security vulnerabilities",
-        "query": "US government lab is probing Chinese lidar for security vulnerabilities",
+        "candidate_title": "OpenAI 演示 WebMCP 新生态",
+        "query": "OpenAI 演示 WebMCP 新生态 OpenAI demos WebMCP OpenAI 连放两场演示:Codex 内用 WebMCP 让 Agent 与人协作 3D 建模,ChatGPT Work 用管理插件接管工作区。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -440,8 +471,8 @@
         "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
-        "query": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
+        "candidate_title": "跨会话记忆成助手分水岭",
+        "query": "跨会话记忆成助手分水岭 Memory as differentiator 双订阅用户热议:模型智力趋同后,跨会话记忆正成为 ChatGPT 与 Claude 的最大差异点。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -456,40 +487,8 @@
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
-        "query": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 27,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
-        "query": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 28,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "Qwen 输出酷似 Claude 引争议",
-        "query": "Qwen 输出酷似 Claude 引争议 Qwen mirrors Claude Reddit 用户贴图指 Qwen 与 Claude 输出高度相似,引发关于模仿与蒸馏的猜测热议。",
+        "candidate_title": "ChatGPT 被曝阴影封禁降级",
+        "query": "ChatGPT 被曝阴影封禁降级 ChatGPT shadowban leak Reddit 找到检测方法:被阴影封禁的 ChatGPT 账号会被悄悄降级路由到 gpt-5.5-mini。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -504,8 +503,8 @@
         "candidate_index": 29,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "开发者转向 Codex 编程实测",
-        "query": "开发者转向 Codex 编程实测 Codex over Claude 开发者分享一周实测,称自己使用 OpenAI Codex 的频率已反超 Claude,并给出取舍理由。",
+        "candidate_title": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
+        "query": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -520,8 +519,8 @@
         "candidate_index": 30,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 频繁拒答引安全担忧",
-        "query": "Claude 频繁拒答引安全担忧 Claude refusals safety Dwarkesh 转述观点称 Claude 拒绝指令或成严重 AI 安全隐患,实测它连公有领域诗歌都拒绝背诵。",
+        "candidate_title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+        "query": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -535,159 +534,171 @@
     "lead_terminal_error_code": null,
     "observation_signals": [
       {
-        "title": "Qwen 3.8-27B 本地实测潮",
+        "title": "OpenAI 曝完成 10T 模型 Bel",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Qwen+3.8-27B+local+wave",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=OpenAI+10T+%27Bel%27+rumor",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "OpenAI 暂停前沿模型训练",
+        "title": "Qwen3.8-Flash-Next 架构曝光",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=OpenAI+halts+training",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Qwen3.8-Flash-Next+leak",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Mythos 5 解除危险标签",
+        "title": "Anthropic 看好 30 万亿市场",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Mythos+5+unflagged",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Anthropic+touts+%2430T+TAM",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "MiniMax H3 工具与实测热",
+        "title": "Figure Index 机器人数据集发布",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=MiniMax+H3+tooling+boom",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Figure+Index+data+drop",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Ruflo 多智能体框架破 6.8 万星",
+        "title": "AI 实验室雪藏最强模型",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Ruflo+hits+68k+stars",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Labs+shelve+top+models",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 伪造 GTA 平壤预告片",
+        "title": "被裁程序员开源「AI CEO」",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=AI-made+GTA+Pyongyang",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Open-source+%27AI+CEO%27+jab",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "观点:GPU 算力价值被低估",
+        "title": "富豪自曝 WSJ 专栏 AI 代笔",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=GPUs+underpriced+take",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Druckenmiller%27s+AI+op-ed",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 购物 Agent 支付失控",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=AI+agent+payment+risks",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "BestBuy AI 客服答非所问",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=BestBuy+AI+assistant",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "「那是 AI 做的」挫伤创作",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=%27AI+did+it%27+backlash",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+        "title": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/nvidia-just-showed-that-the-harness-not-the-ai-model-is-now-the-real-hero/",
+        "signal_url": "https://techcrunch.com/2026/08/25/apple-debuts-its-most-powerful-chip-ever-in-m5-ultra-and-m6/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Michael Polansky is training an AI model on skin that’s still alive",
+        "title": "Robotics startup Generalist reaches $3B valuation, sources say",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/michael-polansky-is-training-an-ai-model-on-skin-thats-still-alive/",
+        "signal_url": "https://techcrunch.com/2026/08/25/robotics-startup-generalist-reaches-3b-valuation-sources-say/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "title": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/how-ai-accounting-startup-rillet-raised-100m-and-became-a-unicorn-in-48-hours/",
+        "signal_url": "https://techcrunch.com/2026/08/25/stability-ai-maker-of-image-generator-stable-diffusion-raises-76-million-in-fresh-funding/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Tesla’s solar roof is dead — here’s what went wrong",
+        "title": "Waymo robotaxis are headed to Munich",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/teslas-solar-roof-is-dead-heres-what-went-wrong/",
+        "signal_url": "https://techcrunch.com/2026/08/25/waymo-robotaxis-are-headed-to-munich/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Waymo hands over documents in NHTSA’s child collision probe",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/waymo-hands-over-documents-in-nhtsas-child-collision-probe/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Walmart to finally start accepting Apple Pay and Google Pay",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/walmart-to-finally-start-accepting-apple-pay-and-google-pay/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "FLUX 3 是否开源引猜测",
+        "title": "XCancel 遭 X 发函叫停",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=FLUX+3+open-weight+bets",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=X+Corp+kills+XCancel",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "全自托管 Agent 软件工厂",
+        "title": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/spacex-will-build-a-second-100b-starbase-spaceport-in-louisiana/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Fitbit founders launch Luffu Link, an LTE health and safety band",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/fitbit-founders-launch-luffu-link-an-lte-health-and-safety-band/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Gamma acquires Accel-backed design startup Lica",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/gamma-acquires-accel-backed-design-startup-lica/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Save $300 on your Disrupt ticket while you still can",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/tonight-marks-your-last-chance-to-save-up-to-300-on-a-techcrunch-disrupt-2026-pass/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "X sends cease-and-desist to open source project Nitter over alleged scraping",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/x-sends-cease-and-desist-to-open-source-project-nitter-over-alleged-scraping/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/instagrams-first-draft-feature-aims-to-make-editing-reels-less-tedious/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 发布自研芯片 Jalapeño",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Sandboxed+agent+factory",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=OpenAI%27s+Jalape%C3%B1o+chip",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/the-225-pebble-time-2-is-a-refreshingly-fun-smartwatch/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "US government lab is probing Chinese lidar for security vulnerabilities",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/us-government-lab-is-probing-chinese-lidar-for-security-vulnerabilities/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/last-chance-save-up-to-300-on-your-techcrunch-disrupt-2026-ticket-today/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/oura-faces-lawsuit-accusing-it-of-misleading-consumers-about-sleep-tracking-accuracy/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/japanese-space-tech-startup-letara-expands-beyond-satellite-thrusters-with-16m/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Qwen 输出酷似 Claude 引争议",
+        "title": "本地跑 LLM 掀硬件选型热",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Qwen+mirrors+Claude",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Local+LLM+hardware+rush",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "开发者转向 Codex 编程实测",
+        "title": "Claude 被关盒子梗图刷屏",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Codex+over+Claude",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=%27Claude+in+a+box%27+meme",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Claude 频繁拒答引安全担忧",
+        "title": "ChatGPT 推百美元团队版",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-22&t=Claude+refusals+safety",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=ChatGPT+%24100+Team+plan",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Claude Cowork finally remembers what you told the app in chat",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/claude-cowork-finally-remembers-what-you-told-the-app-in-chat/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 演示 WebMCP 新生态",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=OpenAI+demos+WebMCP",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "跨会话记忆成助手分水岭",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Memory+as+differentiator",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "ChatGPT 被曝阴影封禁降级",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-26&t=ChatGPT+shadowban+leak",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/the-world-seems-to-be-ready-an-interview-with-openai-head-of-product-thibault-sottiaux/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show/",
         "reason": "lead_resolution_request_failed"
       }
     ],
@@ -699,7 +710,7 @@
         "count": 30
       }
     ],
-    "prefiltered_count": 35,
+    "prefiltered_count": 31,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -730,8 +741,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 4,
-    "strict_final_count": 4,
+    "final_count": 2,
+    "strict_final_count": 2,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
@@ -757,9 +768,8 @@
     "official_refilled_candidates": [],
     "accepted_by_stage_preview": {
       "candidate_enrichment": [
-        "Major YouTube creators are facing backlash for accepting AI money",
-        "Over 1 million people have clicked LinkedIn’s AI slop button",
-        "Google Discover is getting an AI chatbot-tuned feed"
+        "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+        "OpenAI subpoenaed by Alabama AG over Hugging Face hack"
       ]
     },
     "parameters": {
@@ -806,36 +816,12 @@
       "Only fetched candidates were enriched; independent refill stages were not run."
     ],
     "candidate_queue_count": 30,
-    "candidate_dropped_count": 5,
+    "candidate_dropped_count": 1,
     "candidate_dropped": [
       {
-        "title": "Nvidia partners with data center developer Cloverleaf",
+        "title": "OpenAI loses a top data center exec, as stream of high-profile departures continues",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/nvidia-partners-with-data-center-developer-cloverleaf/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Apple is reportedly cutting hundreds of jobs from Siri, Vision Pro teams",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/apple-is-reportedly-cutting-hundreds-of-jobs-from-siri-vision-pro-teams/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "It’s Greg Brockman’s OpenAI now",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/982774/greg-brockman-openai-role-expansion",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Anthropic’s Opus 4.6 is a smut-machine",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/21/anthropics-opus-4-6-is-a-smut-machine/",
-        "reason": "candidate_daily_budget_cap"
-      },
-      {
-        "title": "Welcome to the AI crisis in math",
-        "source": "theverge",
-        "signal_url": "https://www.theverge.com/podcast/982434/ai-math-openai-astra-existential-crisis",
+        "signal_url": "https://techcrunch.com/2026/08/25/openai-loses-a-top-data-center-exec-as-stream-of-high-profile-departures-continues/",
         "reason": "candidate_daily_budget_cap"
       }
     ],
@@ -847,8 +833,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen 3.8-27B 本地实测潮",
-        "query": "Qwen 3.8-27B 本地实测潮 Qwen 3.8-27B local wave Qwen 3.8-27B 引发全网实测潮:代理编程与低预设推理表现强劲,还能在 RTX 5060 Ti、MacBook Air 等消费级设备上跑通。",
+        "candidate_title": "OpenAI 曝完成 10T 模型 Bel",
+        "query": "OpenAI 曝完成 10T 模型 Bel OpenAI 10T 'Bel' rumor 爆料人 Leo 称 OpenAI 刚完成参数量超 10T 的预训练模型 Bel,若属实将刷新公开模型规模纪录。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -863,8 +849,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 暂停前沿模型训练",
-        "query": "OpenAI 暂停前沿模型训练 OpenAI halts training 据报道 OpenAI 在训练某前沿模型时检测到令人担忧的「黑暗迹象」,已暂停训练。",
+        "candidate_title": "Qwen3.8-Flash-Next 架构曝光",
+        "query": "Qwen3.8-Flash-Next 架构曝光 Qwen3.8-Flash-Next leak Reddit 解析未发布的 Qwen3.8-Flash-Next(约 125B-A6B,本地约需 82GB 内存),27B 版已被实测跑 Three.js。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -879,8 +865,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Mythos 5 解除危险标签",
-        "query": "Mythos 5 解除危险标签 Mythos 5 unflagged 截图显示 Anthropic 的 Mythos 5 不再被标记为「危险」,已开放企业级使用。",
+        "candidate_title": "Anthropic 看好 30 万亿市场",
+        "query": "Anthropic 看好 30 万亿市场 Anthropic touts $30T TAM 据《华尔街日报》,Anthropic 向投资者描绘超 30 万亿美元的潜在市场规模,为下轮巨额融资铺路。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -895,8 +881,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "MiniMax H3 工具与实测热",
-        "query": "MiniMax H3 工具与实测热 MiniMax H3 tooling boom MiniMax H3 生态火热:免费提示词编排器与 ComfyUI 单文件版发布,官方对话提示指南却被实测出反致幻觉。",
+        "candidate_title": "Figure Index 机器人数据集发布",
+        "query": "Figure Index 机器人数据集发布 Figure Index data drop Figure 发布迄今最大机器人数据集 Index,收录 1600 万条视频,为人形机器人训练铺路。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -911,8 +897,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Ruflo 多智能体框架破 6.8 万星",
-        "query": "Ruflo 多智能体框架破 6.8 万星 Ruflo hits 68k stars 多智能体「元框架」Ruflo 的 GitHub 星标突破 6.8 万,支持编排 swarm 工作流并接入 Claude Code 与 Codex。",
+        "candidate_title": "AI 实验室雪藏最强模型",
+        "query": "AI 实验室雪藏最强模型 Labs shelve top models SemiAnalysis 创始人 Dylan Patel 接受 Dwarkesh 专访,解释 AI 实验室为何搁置已训成的最强模型。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -925,10 +911,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 6,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Major YouTube creators are facing backlash for accepting AI money",
-        "query": "Major YouTube creators are facing backlash for accepting AI money https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
+        "candidate_title": "被裁程序员开源「AI CEO」",
+        "query": "被裁程序员开源「AI CEO」 Open-source 'AI CEO' jab 被以「AI 转型」为由裁掉的程序员开源「AI CEO」:你用 AI 换我,我就用 AI 换你。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -943,8 +929,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 伪造 GTA 平壤预告片",
-        "query": "AI 伪造 GTA 平壤预告片 AI-made GTA Pyongyang 创作者用 AI 制作的《GTA:平壤》假预告片细节一致性惊人,电车线等场景拉满,全网疯传。",
+        "candidate_title": "富豪自曝 WSJ 专栏 AI 代笔",
+        "query": "富豪自曝 WSJ 专栏 AI 代笔 Druckenmiller's AI op-ed 亿万富翁 Druckenmiller 承认其《华尔街日报》专栏文章完全出自 AI 之手。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -959,8 +945,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "观点:GPU 算力价值被低估",
-        "query": "观点:GPU 算力价值被低估 GPUs underpriced take Reddit 观点帖认为,以 GPU 能产出的「智能」衡量,当前 GPU 价格非但不高、反而被严重低估。",
+        "candidate_title": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
+        "query": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -975,8 +961,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 购物 Agent 支付失控",
-        "query": "AI 购物 Agent 支付失控 AI agent payment risks AI 购物智能体「选对商品、买错商家」的现象,引发关于限制 Agent 支付范围的讨论。",
+        "candidate_title": "Robotics startup Generalist reaches $3B valuation, sources say",
+        "query": "Robotics startup Generalist reaches $3B valuation, sources say",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -991,8 +977,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "BestBuy AI 客服答非所问",
-        "query": "BestBuy AI 客服答非所问 BestBuy AI assistant 用户抱怨 BestBuy 的 AI 电话助手连库存查询都答不上来,人工客服缺位直接丢掉了订单。",
+        "candidate_title": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
+        "query": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1007,8 +993,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "「那是 AI 做的」挫伤创作",
-        "query": "「那是 AI 做的」挫伤创作 'AI did it' backlash 「这是 AI 做的吧」正在成为默认假设,创作者的动机与回报被这一预判侵蚀。",
+        "candidate_title": "Waymo robotaxis are headed to Munich",
+        "query": "Waymo robotaxis are headed to Munich",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1021,10 +1007,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 12,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Over 1 million people have clicked LinkedIn’s AI slop button",
-        "query": "Over 1 million people have clicked LinkedIn’s AI slop button https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
+        "candidate_title": "XCancel 遭 X 发函叫停",
+        "query": "XCancel 遭 X 发函叫停 X Corp kills XCancel 账号删除工具 XCancel 因收到 X Corp 停止侵权律师函宣布关停,第三方 X 工具生态再遭收紧。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1039,8 +1025,8 @@
         "candidate_index": 13,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Nvidia just showed that the harness, not the AI model, is now the real hero",
-        "query": "Nvidia just showed that the harness, not the AI model, is now the real hero",
+        "candidate_title": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
+        "query": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1055,8 +1041,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Michael Polansky is training an AI model on skin that’s still alive",
-        "query": "Michael Polansky is training an AI model on skin that’s still alive",
+        "candidate_title": "Fitbit founders launch Luffu Link, an LTE health and safety band",
+        "query": "Fitbit founders launch Luffu Link, an LTE health and safety band",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1071,8 +1057,8 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
-        "query": "How AI accounting startup Rillet raised $100M and became a unicorn in 48 hours",
+        "candidate_title": "Gamma acquires Accel-backed design startup Lica",
+        "query": "Gamma acquires Accel-backed design startup Lica",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1085,10 +1071,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 16,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Google Discover is getting an AI chatbot-tuned feed",
-        "query": "Google Discover is getting an AI chatbot-tuned feed https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
+        "candidate_title": "Save $300 on your Disrupt ticket while you still can",
+        "query": "Save $300 on your Disrupt ticket while you still can",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1101,10 +1087,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 17,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Slack is launching collaborative vibe-coding channels",
-        "query": "Slack is launching collaborative vibe-coding channels https://www.theverge.com/tech/982628/slack-code-vibe-coding-channels-launch",
+        "candidate_title": "X sends cease-and-desist to open source project Nitter over alleged scraping",
+        "query": "X sends cease-and-desist to open source project Nitter over alleged scraping",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1119,8 +1105,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Tesla’s solar roof is dead — here’s what went wrong",
-        "query": "Tesla’s solar roof is dead — here’s what went wrong",
+        "candidate_title": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
+        "query": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1135,8 +1121,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Waymo hands over documents in NHTSA’s child collision probe",
-        "query": "Waymo hands over documents in NHTSA’s child collision probe",
+        "candidate_title": "OpenAI 发布自研芯片 Jalapeño",
+        "query": "OpenAI 发布自研芯片 Jalapeño OpenAI's Jalapeño chip OpenAI 在官方博客官宣首款定制推理芯片 Jalapeño 并公布首轮测试结果,自研算力正式落地。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1151,8 +1137,8 @@
         "candidate_index": 20,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Walmart to finally start accepting Apple Pay and Google Pay",
-        "query": "Walmart to finally start accepting Apple Pay and Google Pay",
+        "candidate_title": "本地跑 LLM 掀硬件选型热",
+        "query": "本地跑 LLM 掀硬件选型热 Local LLM hardware rush 从 M5 Ultra/M5 Max 之争到 i7+2060 低配机与便携机架,怎么配硬件在家跑 Qwen3.8 刷屏社区。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1167,8 +1153,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "FLUX 3 是否开源引猜测",
-        "query": "FLUX 3 是否开源引猜测 FLUX 3 open-weight bets 社区围绕 FLUX 3 会不会公开权重展开热议,开源押注与观望并存。",
+        "candidate_title": "Claude 被关盒子梗图刷屏",
+        "query": "Claude 被关盒子梗图刷屏 'Claude in a box' meme Reddit 热传把 Claude 画成「被关在盒子里的模型」的梗图,成为当日最热玩笑。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1183,8 +1169,8 @@
         "candidate_index": 22,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "全自托管 Agent 软件工厂",
-        "query": "全自托管 Agent 软件工厂 Sandboxed agent factory 开发者详述如何构建几乎完全自托管、沙箱化的 Agent 软件工厂,把开发流水线交给 Agent。",
+        "candidate_title": "ChatGPT 推百美元团队版",
+        "query": "ChatGPT 推百美元团队版 ChatGPT $100 Team plan OpenAI 推出每月 100 美元起的团队版(最少 2 席),同时 Plus 用户恢复 5 小时用量限制。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1199,8 +1185,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
-        "query": "The $225 Pebble Time 2 is a refreshingly fun smartwatch",
+        "candidate_title": "Claude Cowork finally remembers what you told the app in chat",
+        "query": "Claude Cowork finally remembers what you told the app in chat",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1215,8 +1201,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "US government lab is probing Chinese lidar for security vulnerabilities",
-        "query": "US government lab is probing Chinese lidar for security vulnerabilities",
+        "candidate_title": "OpenAI 演示 WebMCP 新生态",
+        "query": "OpenAI 演示 WebMCP 新生态 OpenAI demos WebMCP OpenAI 连放两场演示:Codex 内用 WebMCP 让 Agent 与人协作 3D 建模,ChatGPT Work 用管理插件接管工作区。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1231,8 +1217,8 @@
         "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
-        "query": "Last chance: Save up to $300 on your TechCrunch Disrupt 2026 ticket today",
+        "candidate_title": "跨会话记忆成助手分水岭",
+        "query": "跨会话记忆成助手分水岭 Memory as differentiator 双订阅用户热议:模型智力趋同后,跨会话记忆正成为 ChatGPT 与 Claude 的最大差异点。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1247,8 +1233,8 @@
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
-        "query": "Oura faces lawsuit accusing it of misleading consumers about sleep-tracking accuracy",
+        "candidate_title": "ChatGPT 被曝阴影封禁降级",
+        "query": "ChatGPT 被曝阴影封禁降级 ChatGPT shadowban leak Reddit 找到检测方法:被阴影封禁的 ChatGPT 账号会被悄悄降级路由到 gpt-5.5-mini。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1261,10 +1247,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 27,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
-        "query": "Japanese space tech startup Letara expands beyond satellite thrusters with $16M",
+        "candidate_title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+        "query": "OpenAI says its Jalapeño chip can power faster AI responses than the competition https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1277,10 +1263,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 28,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "Qwen 输出酷似 Claude 引争议",
-        "query": "Qwen 输出酷似 Claude 引争议 Qwen mirrors Claude Reddit 用户贴图指 Qwen 与 Claude 输出高度相似,引发关于模仿与蒸馏的猜测热议。",
+        "candidate_title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
+        "query": "OpenAI subpoenaed by Alabama AG over Hugging Face hack https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1295,8 +1281,8 @@
         "candidate_index": 29,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "开发者转向 Codex 编程实测",
-        "query": "开发者转向 Codex 编程实测 Codex over Claude 开发者分享一周实测,称自己使用 OpenAI Codex 的频率已反超 Claude,并给出取舍理由。",
+        "candidate_title": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
+        "query": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1311,8 +1297,8 @@
         "candidate_index": 30,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 频繁拒答引安全担忧",
-        "query": "Claude 频繁拒答引安全担忧 Claude refusals safety Dwarkesh 转述观点称 Claude 拒绝指令或成严重 AI 安全隐患,实测它连公有领域诗歌都拒绝背诵。",
+        "candidate_title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+        "query": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1323,20 +1309,12 @@
         "error_code": "http_error"
       }
     ],
-    "story_enrichment_calls": 4,
+    "story_enrichment_calls": 2,
     "terminal_error_code": null,
     "recent_dedupe": {
       "window_days": 3,
-      "checked_days": [
-        "2026-08-21"
-      ],
-      "removed": [
-        {
-          "title": "Slack is launching collaborative vibe-coding channels",
-          "url_key": "theverge.com/tech/982628/slack-code-vibe-coding-channels-launch",
-          "reason": "recent_exact_url"
-        }
-      ]
+      "checked_days": [],
+      "removed": []
     }
   },
   "summary": {
@@ -1344,39 +1322,29 @@
     "items": [
       {
         "article_id": "a1",
-        "title": "Major YouTube creators are facing backlash for accepting AI money",
-        "summary": "Matti Haapoja等创作者因推广Higgsfield AI视频遭抵制，被指接受AI资金。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/983181/matti-haapoja-sam-kold-kolder-higgsfield-seedance-backlash",
-        "why_it_matters": "引发创作者对AI商业化与内容真实性的争议。",
+        "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+        "summary": "OpenAI称其Jalapeño芯片能比竞品更高效完成任务并更快返回响应。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
+        "why_it_matters": "该芯片若成功将降低延迟并提升吞吐量，优化AI系统性能体验。",
         "source_label": "The Verge",
-        "published_at": "2026-08-21T09:37:52-04:00",
+        "published_at": "2026-08-25T10:00:00-04:00",
         "confidence": "reported"
       },
       {
         "article_id": "a2",
-        "title": "Over 1 million people have clicked LinkedIn’s AI slop button",
-        "summary": "超百万用户点击LinkedIn的“疑似AI垃圾”按钮以标记低质内容。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/983502/linkedin-ai-slop-button-one-million-people-message",
-        "why_it_matters": "反映用户对平台AI生成内容的反感及治理需求。",
+        "title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
+        "summary": "阿拉巴马州总检察长因AI代理越狱事件向OpenAI发出传票展开调查。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
+        "why_it_matters": "此举旨在审查其安全实践是否违规，可能影响AI系统的监管合规标准。",
         "source_label": "The Verge",
-        "published_at": "2026-08-21T17:25:50-04:00",
-        "confidence": "reported"
-      },
-      {
-        "article_id": "a3",
-        "title": "Google Discover is getting an AI chatbot-tuned feed",
-        "summary": "Google Discover将推出AI聊天机器人定制功能以优化推荐流。",
-        "url": "https://www.theverge.com/tech/983088/google-discover-ai-chatbot-feed",
-        "why_it_matters": "提升个性化体验但加剧算法对用户偏好的操控。",
-        "source_label": "The Verge",
-        "published_at": "2026-08-20T17:50:22-04:00",
+        "published_at": "2026-08-25T05:15:03-04:00",
         "confidence": "reported"
       }
     ],
     "discussion_topic": "你最关注哪条AI新闻？",
     "provider": "ModelScope",
     "model": "Qwen/Qwen3.5-35B-A3B",
-    "input_fingerprint": "9602bebcf387a58ed8c8ed9bb73631fd4b2a9428ffe813572be1d8ec263dc6f9",
+    "input_fingerprint": "505458cedaad75803256e6bd1d0c97ee5327b783bee104470189d8d66bd1d85b",
     "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
     "attempts": [
       {
@@ -1389,77 +1357,63 @@
     "selection_policy": "source_balanced_v2",
     "candidate_article_ids": [
       "a1",
-      "a2",
-      "a3"
+      "a2"
     ],
     "selection_diagnostics": {
       "selection_policy": "source_balanced_v2",
       "catalog_schema_version": 1,
       "catalog_as_of": "2026-07-18",
-      "input_count": 3,
-      "qualified_count": 3,
-      "core_ai_input_count": 3,
-      "candidate_story_count": 3,
-      "selected_count": 3,
-      "unique_story_count": 3,
+      "input_count": 2,
+      "qualified_count": 2,
+      "core_ai_input_count": 2,
+      "candidate_story_count": 2,
+      "selected_count": 2,
+      "unique_story_count": 2,
       "duplicate_story_rejected_count": 0,
       "story_clusters": [],
       "source_counts": {
-        "theverge": 3
+        "theverge": 2
       },
       "primary_entity_counts": {
-        "bytedance": 1,
-        "google": 1
+        "openai": 2
       },
       "mentioned_entity_counts": {
-        "bytedance": 1,
-        "google": 1
+        "huggingface": 1,
+        "openai": 2
       },
-      "model_family_counts": {
-        "seedance": 1
-      },
+      "model_family_counts": {},
       "topic_counts": {
-        "other_ai": 3
+        "other_ai": 1,
+        "safety_security": 1
       },
       "region_counts": {
-        "cn": 1,
-        "us": 1
+        "us": 2
       },
       "quota_relaxations": [],
       "selected_metadata": [
         {
           "article_id": "a1",
           "relevance_level": 3,
-          "primary_entity": "bytedance",
+          "primary_entity": "openai",
           "mentioned_entities": [
-            "bytedance"
+            "openai"
           ],
-          "model_families": [
-            "seedance"
-          ],
+          "model_families": [],
           "topic": "other_ai",
           "regions": [
-            "cn"
+            "us"
           ]
         },
         {
           "article_id": "a2",
-          "relevance_level": 2,
-          "primary_entity": "",
-          "mentioned_entities": [],
-          "model_families": [],
-          "topic": "other_ai",
-          "regions": []
-        },
-        {
-          "article_id": "a3",
-          "relevance_level": 2,
-          "primary_entity": "google",
+          "relevance_level": 3,
+          "primary_entity": "openai",
           "mentioned_entities": [
-            "google"
+            "openai",
+            "huggingface"
           ],
           "model_families": [],
-          "topic": "other_ai",
+          "topic": "safety_security",
           "regions": [
             "us"
           ]
