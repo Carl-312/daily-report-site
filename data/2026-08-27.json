@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-26",
+  "date": "2026-08-27",
   "articles": [
     {
-      "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
-      "description": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
-      "publish_time": "2026-08-25T10:00:00-04:00",
+      "title": "Bill Gates is deeply worried about AI, and he’s no longer staying quiet",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/984923/bill-gates-is-deeply-worried-about-ai-and-hes-no-longer-staying-quiet",
+      "description": "Bill Gates has been reflecting a lot on AI lately, and the process has triggered a stark awakening. Once a staunch AI optimist, the Microsoft cofounder is now deeply pessimistic about what AI means for our collective future. Having been conspicuously quiet on AI issues recently, Gates is back with a nearly 6,000-word essay seeking […]",
+      "publish_time": "2026-08-26T07:07:40-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -13,32 +13,32 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
-        "selection_description": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
+        "selection_title": "Bill Gates is deeply worried about AI, and he’s no longer staying quiet",
+        "selection_description": "Bill Gates has been reflecting a lot on AI lately, and the process has triggered a stark awakening. Once a staunch AI optimist, the Microsoft cofounder is now deeply pessimistic about what AI means for our collective future. Having been conspicuously quiet on AI issues recently, Gates is back with a nearly 6,000-word essay seeking […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks"
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/984923/bill-gates-is-deeply-worried-about-ai-and-hes-no-longer-staying-quiet"
       },
       "evidence": [
         {
-          "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
+          "title": "Bill Gates is deeply worried about AI, and he’s no longer staying quiet",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/984923/bill-gates-is-deeply-worried-about-ai-and-hes-no-longer-staying-quiet",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-25T10:00:00-04:00",
-          "text": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
-          "snippet": "OpenAI says its new AI chip, Jalapeño, completes tasks more efficiently and returns responses faster than other AI systems, according to a blog post published on Tuesday. During a briefing with reporters, OpenAI hardware vice president Richard Ho said Jalapeño offers the \"best of both worlds\" with lower latency and higher throughput, as AI systems […]",
+          "published_date": "2026-08-26T07:07:40-04:00",
+          "text": "Bill Gates has been reflecting a lot on AI lately, and the process has triggered a stark awakening. Once a staunch AI optimist, the Microsoft cofounder is now deeply pessimistic about what AI means for our collective future. Having been conspicuously quiet on AI issues recently, Gates is back with a nearly 6,000-word essay seeking […]",
+          "snippet": "Bill Gates has been reflecting a lot on AI lately, and the process has triggered a stark awakening. Once a staunch AI optimist, the Microsoft cofounder is now deeply pessimistic about what AI means for our collective future. Having been conspicuously quiet on AI issues recently, Gates is back with a nearly 6,000-word essay seeking […]",
           "score": 1.0,
           "origin": "fetch"
         }
       ]
     },
     {
-      "title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
-      "link": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
-      "description": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
-      "publish_time": "2026-08-25T05:15:03-04:00",
+      "title": "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’",
+      "link": "https://www.theverge.com/tech/985186/google-gemini-3-5-transcribe-audio-ai",
+      "description": "Google has updated Gemini Audio with new transcription capabilities that automatically detect specialized jargon and more than 85 languages. Gemini 3.5 Transcribe is a new addition to the Gemini family that follows the launch of 3.5 Live Translate, and comes as we're still waiting for Google to release the Gemini 3.5 Pro model that it […]",
+      "publish_time": "2026-08-26T13:00:00-04:00",
       "content": "",
       "priority": 1,
       "source": "theverge",
@@ -46,22 +46,55 @@
       "evidence_status": "direct",
       "confidence": "reported",
       "provenance": {
-        "selection_title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
-        "selection_description": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
+        "selection_title": "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’",
+        "selection_description": "Google has updated Gemini Audio with new transcription capabilities that automatically detect specialized jargon and more than 85 languages. Gemini 3.5 Transcribe is a new addition to the Gemini family that follows the launch of 3.5 Live Translate, and comes as we're still waiting for Google to release the Gemini 3.5 Pro model that it […]",
         "selection_content": "",
         "input_kind": "story",
         "resolution_stage": "tavily_story_enrichment",
         "evidence_count": "1",
-        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack"
+        "evidence_urls": "https://www.theverge.com/tech/985186/google-gemini-3-5-transcribe-audio-ai"
       },
       "evidence": [
         {
-          "title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
+          "title": "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’",
+          "url": "https://www.theverge.com/tech/985186/google-gemini-3-5-transcribe-audio-ai",
           "domain": "www.theverge.com",
-          "published_date": "2026-08-25T05:15:03-04:00",
-          "text": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
-          "snippet": "Alabama's attorney general issued a subpoena to OpenAI on Monday as part of an investigation into how one of its AI agents escaped a supposedly secure testing environment and autonomously hacked another company last month. The investigation seeks to determine whether OpenAI's safety practices violated state consumer protection laws and pose a risk to Alabama […]",
+          "published_date": "2026-08-26T13:00:00-04:00",
+          "text": "Google has updated Gemini Audio with new transcription capabilities that automatically detect specialized jargon and more than 85 languages. Gemini 3.5 Transcribe is a new addition to the Gemini family that follows the launch of 3.5 Live Translate, and comes as we're still waiting for Google to release the Gemini 3.5 Pro model that it […]",
+          "snippet": "Google has updated Gemini Audio with new transcription capabilities that automatically detect specialized jargon and more than 85 languages. Gemini 3.5 Transcribe is a new addition to the Gemini family that follows the launch of 3.5 Live Translate, and comes as we're still waiting for Google to release the Gemini 3.5 Pro model that it […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Nvidia is about to be a hundred-billion-dollar-a-quarter company",
+      "link": "https://www.theverge.com/tech/985387/nvidia-hundred-billion-dollar-quarterly-revenue",
+      "description": "Nvidia's predicting it will pull in $108 billion in revenue within just a few months. It wouldn't be the first company to rake in over $100 billion in quarterly revenue - Amazon, Apple, and Alphabet have repeatedly reached the milestone. Nvidia said in its latest earnings report that it brought in a record $96.2 billion […]",
+      "publish_time": "2026-08-26T17:40:53-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Nvidia is about to be a hundred-billion-dollar-a-quarter company",
+        "selection_description": "Nvidia's predicting it will pull in $108 billion in revenue within just a few months. It wouldn't be the first company to rake in over $100 billion in quarterly revenue - Amazon, Apple, and Alphabet have repeatedly reached the milestone. Nvidia said in its latest earnings report that it brought in a record $96.2 billion […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/985387/nvidia-hundred-billion-dollar-quarterly-revenue"
+      },
+      "evidence": [
+        {
+          "title": "Nvidia is about to be a hundred-billion-dollar-a-quarter company",
+          "url": "https://www.theverge.com/tech/985387/nvidia-hundred-billion-dollar-quarterly-revenue",
+          "domain": "www.theverge.com",
+          "published_date": "2026-08-26T17:40:53-04:00",
+          "text": "Nvidia's predicting it will pull in $108 billion in revenue within just a few months. It wouldn't be the first company to rake in over $100 billion in quarterly revenue - Amazon, Apple, and Alphabet have repeatedly reached the milestone. Nvidia said in its latest earnings report that it brought in a record $96.2 billion […]",
+          "snippet": "Nvidia's predicting it will pull in $108 billion in revenue within just a few months. It wouldn't be the first company to rake in over $100 billion in quarterly revenue - Amazon, Apple, and Alphabet have repeatedly reached the milestone. Nvidia said in its latest earnings report that it brought in a record $96.2 billion […]",
           "score": 1.0,
           "origin": "fetch"
         }
@@ -69,26 +102,26 @@
     }
   ],
   "enrichment": {
-    "report_date": "2026-08-26",
-    "reference_dt": "2026-08-26T10:09:09.650295+08:00",
+    "report_date": "2026-08-27",
+    "reference_dt": "2026-08-27T18:09:55.904723+08:00",
     "enabled": true,
     "applied": true,
     "skip_reason": null,
     "error": null,
-    "input_count": 31,
-    "input_story_count": 2,
-    "input_lead_count": 29,
-    "lead_resolution_calls": 28,
+    "input_count": 35,
+    "input_story_count": 5,
+    "input_lead_count": 30,
+    "lead_resolution_calls": 27,
     "lead_resolved_count": 0,
-    "lead_unresolved_count": 28,
+    "lead_unresolved_count": 27,
     "lead_resolution_runs": [
       {
         "stage": "candidate_enrichment",
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 曝完成 10T 模型 Bel",
-        "query": "OpenAI 曝完成 10T 模型 Bel OpenAI 10T 'Bel' rumor 爆料人 Leo 称 OpenAI 刚完成参数量超 10T 的预训练模型 Bel,若属实将刷新公开模型规模纪录。",
+        "candidate_title": "OpenAI 公布 HF 入侵事件调查",
+        "query": "OpenAI 公布 HF 入侵事件调查 OpenAI HF hack report OpenAI 联合 METR 与 Redwood Research 公布 Hugging Face 入侵事件完整调查与 AI 代理原始思维链，显示代理曾试图攻击 HF 基础设施。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -103,8 +136,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen3.8-Flash-Next 架构曝光",
-        "query": "Qwen3.8-Flash-Next 架构曝光 Qwen3.8-Flash-Next leak Reddit 解析未发布的 Qwen3.8-Flash-Next(约 125B-A6B,本地约需 82GB 内存),27B 版已被实测跑 Three.js。",
+        "candidate_title": "谷歌发布 Gemini 3.5 转录模型",
+        "query": "谷歌发布 Gemini 3.5 转录模型 Gemini 3.5 Transcribe 谷歌推出 Gemini 3.5 Transcribe 语音转文本模型，支持 85+ 语言、实时流式转录并自动过滤填充词。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -119,8 +152,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic 看好 30 万亿市场",
-        "query": "Anthropic 看好 30 万亿市场 Anthropic touts $30T TAM 据《华尔街日报》,Anthropic 向投资者描绘超 30 万亿美元的潜在市场规模,为下轮巨额融资铺路。",
+        "candidate_title": "Anthropic 开放 Claude 数据",
+        "query": "Anthropic 开放 Claude 数据 Claude data opened up Anthropic 首次向外部研究者开放经隐私保护的 Claude 真实使用数据，供学术研究使用。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -135,8 +168,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Figure Index 机器人数据集发布",
-        "query": "Figure Index 机器人数据集发布 Figure Index data drop Figure 发布迄今最大机器人数据集 Index,收录 1600 万条视频,为人形机器人训练铺路。",
+        "candidate_title": "智谱 GLM-5.3 权重明日发布",
+        "query": "智谱 GLM-5.3 权重明日发布 GLM-5.3 weights tomorrow Reddit 消息称智谱 GLM-5.3 模型权重将于明日发布，此前传闻的发布窗口得到确认。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -151,8 +184,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 实验室雪藏最强模型",
-        "query": "AI 实验室雪藏最强模型 Labs shelve top models SemiAnalysis 创始人 Dylan Patel 接受 Dwarkesh 专访,解释 AI 实验室为何搁置已训成的最强模型。",
+        "candidate_title": "Qwen 3.8 27B 编码性能惊艳",
+        "query": "Qwen 3.8 27B 编码性能惊艳 Qwen 3.8 27B vs GPT 5.5 用户实测 Qwen 3.8 27B 在消费级硬件上编码性能惊人，宣称可媲美 GPT 5.5，震动社区。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -167,8 +200,8 @@
         "candidate_index": 6,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "被裁程序员开源「AI CEO」",
-        "query": "被裁程序员开源「AI CEO」 Open-source 'AI CEO' jab 被以「AI 转型」为由裁掉的程序员开源「AI CEO」:你用 AI 换我,我就用 AI 换你。",
+        "candidate_title": "英伟达洽购 Hugging Face",
+        "query": "英伟达洽购 Hugging Face Nvidia buys Hugging Face Business Insider 称英伟达正洽谈以超 130 亿美元收购 Hugging Face，社区已开始讨论用 BT 备份模型以防平台变天。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -183,8 +216,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "富豪自曝 WSJ 专栏 AI 代笔",
-        "query": "富豪自曝 WSJ 专栏 AI 代笔 Druckenmiller's AI op-ed 亿万富翁 Druckenmiller 承认其《华尔街日报》专栏文章完全出自 AI 之手。",
+        "candidate_title": "比尔·盖茨改口警告 AI 失业",
+        "query": "比尔·盖茨改口警告 AI 失业 Gates flips on AI jobs 比尔·盖茨对 AI 与就业的态度转向，警告 AI 可能带来大规模失业、网络攻击与生物恐怖主义风险。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -199,8 +232,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
-        "query": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
+        "candidate_title": "初创实现铀浓缩建核能数据中心",
+        "query": "初创实现铀浓缩建核能数据中心 Startup enriches uranium 一家初创公司宣布实现史上首次商业化铀浓缩，计划为核动力数据中心供电，瞄准 AI 算力的能源缺口。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -215,8 +248,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Robotics startup Generalist reaches $3B valuation, sources say",
-        "query": "Robotics startup Generalist reaches $3B valuation, sources say",
+        "candidate_title": "DHH 长谈：手动编程将终结",
+        "query": "DHH 长谈：手动编程将终结 DHH: manual coding ends DHH 二度做客 Lex Fridman 播客，5 小时长谈 AI 编程、Agentic Engineering 与 Vibe Coding，并断言手动编程将走向终结。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -231,8 +264,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
-        "query": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
+        "candidate_title": "X 给 AI Agent 发官方账号",
+        "query": "X 给 AI Agent 发官方账号 X gives agents handles X 平台官宣为 AI Agent 提供原生身份体系：专属 handle、独立权限与全生命周期 API。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -247,24 +280,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Waymo robotaxis are headed to Munich",
-        "query": "Waymo robotaxis are headed to Munich",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 12,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "XCancel 遭 X 发函叫停",
-        "query": "XCancel 遭 X 发函叫停 X Corp kills XCancel 账号删除工具 XCancel 因收到 X Corp 停止侵权律师函宣布关停,第三方 X 工具生态再遭收紧。",
+        "candidate_title": "Linear 对比引 AI 泡沫质疑",
+        "query": "Linear 对比引 AI 泡沫质疑 Linear vs AI bubble talk 开发者拿同为 25 亿美元估值的 Linear（ARR 突破 1 亿美元）与周爆款 AI 助手对比，再度点燃 AI 泡沫争论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -279,8 +296,8 @@
         "candidate_index": 13,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
-        "query": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
+        "candidate_title": "Viral AI startup Instinct has raised $350M at a $2.5B valuation",
+        "query": "Viral AI startup Instinct has raised $350M at a $2.5B valuation",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -295,8 +312,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Fitbit founders launch Luffu Link, an LTE health and safety band",
-        "query": "Fitbit founders launch Luffu Link, an LTE health and safety band",
+        "candidate_title": "Radar makes podcasts searchable — and usable by AI agents",
+        "query": "Radar makes podcasts searchable — and usable by AI agents",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -311,8 +328,8 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Gamma acquires Accel-backed design startup Lica",
-        "query": "Gamma acquires Accel-backed design startup Lica",
+        "candidate_title": "Meta’s $18B child-safety deal hinges on age-verification tech that doesn’t work well",
+        "query": "Meta’s $18B child-safety deal hinges on age-verification tech that doesn’t work well",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -327,8 +344,8 @@
         "candidate_index": 16,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Save $300 on your Disrupt ticket while you still can",
-        "query": "Save $300 on your Disrupt ticket while you still can",
+        "candidate_title": "Apple is holding its iPhone launch event on September 9",
+        "query": "Apple is holding its iPhone launch event on September 9",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -343,8 +360,8 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "X sends cease-and-desist to open source project Nitter over alleged scraping",
-        "query": "X sends cease-and-desist to open source project Nitter over alleged scraping",
+        "candidate_title": "Amazon just tripled its order of Nvidia chips over ‘surging demand’",
+        "query": "Amazon just tripled its order of Nvidia chips over ‘surging demand’",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -359,8 +376,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
-        "query": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
+        "candidate_title": "Medical device maker Boston Scientific says a cyberattack is causing a ‘global disruption’ to its operations",
+        "query": "Medical device maker Boston Scientific says a cyberattack is causing a ‘global disruption’ to its operations",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -375,8 +392,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 发布自研芯片 Jalapeño",
-        "query": "OpenAI 发布自研芯片 Jalapeño OpenAI's Jalapeño chip OpenAI 在官方博客官宣首款定制推理芯片 Jalapeño 并公布首轮测试结果,自研算力正式落地。",
+        "candidate_title": "The 3 reasons Disrupt is a must for founders",
+        "query": "The 3 reasons Disrupt is a must for founders",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -391,8 +408,8 @@
         "candidate_index": 20,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "本地跑 LLM 掀硬件选型热",
-        "query": "本地跑 LLM 掀硬件选型热 Local LLM hardware rush 从 M5 Ultra/M5 Max 之争到 i7+2060 低配机与便携机架,怎么配硬件在家跑 Qwen3.8 刷屏社区。",
+        "candidate_title": "Flipboard acquires Graze, the feed builder working to monetize the open social web",
+        "query": "Flipboard acquires Graze, the feed builder working to monetize the open social web",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -407,24 +424,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 被关盒子梗图刷屏",
-        "query": "Claude 被关盒子梗图刷屏 'Claude in a box' meme Reddit 热传把 Claude 画成「被关在盒子里的模型」的梗图,成为当日最热玩笑。",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 22,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "ChatGPT 推百美元团队版",
-        "query": "ChatGPT 推百美元团队版 ChatGPT $100 Team plan OpenAI 推出每月 100 美元起的团队版(最少 2 席),同时 Plus 用户恢复 5 小时用量限制。",
+        "candidate_title": "Altman 预告 OpenAI 新模型",
+        "query": "Altman 预告 OpenAI 新模型 Altman teases next model Sam Altman 发推预告 OpenAI 下一个模型发布，并以 5.5 发布派对为由头征集下一次派对创意。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -439,8 +440,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude Cowork finally remembers what you told the app in chat",
-        "query": "Claude Cowork finally remembers what you told the app in chat",
+        "candidate_title": "Claude Cowork 内置浏览器上线",
+        "query": "Claude Cowork 内置浏览器上线 Claude Cowork browser Anthropic 为 Claude Cowork 桌面应用推出内置浏览器，无需插件即可自主完成网页填表与导航任务。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -455,8 +456,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 演示 WebMCP 新生态",
-        "query": "OpenAI 演示 WebMCP 新生态 OpenAI demos WebMCP OpenAI 连放两场演示:Codex 内用 WebMCP 让 Agent 与人协作 3D 建模,ChatGPT Work 用管理插件接管工作区。",
+        "candidate_title": "AI日报：千问办公首发上线Qwen3.8-Flash；智谱开源多模态大模型GLM-5.3-Flash；京东“超脑”3.0大模型亮相",
+        "query": "AI日报：千问办公首发上线Qwen3.8-Flash；智谱开源多模态大模型GLM-5.3-Flash；京东“超脑”3.0大模型亮相 欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、千问办公首发上线Qwen3.8-Flash，Agent正式迈入“量大管饱”时代 千问办公平台正式上线Qwen3.8-Flash大模型，推出标准模式和 高级 模式双供给体系。该模型在性能、成本和效率方面取得突破，为用户提供更高效的办公体验。 🧠 Qwen3.8-Flash大模型采用全新架构，性能超越Claude Opus4.6 💡 标准模式覆盖95%日常办公需求， 高级 模式处理复杂任务 🚀",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -471,8 +472,8 @@
         "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "跨会话记忆成助手分水岭",
-        "query": "跨会话记忆成助手分水岭 Memory as differentiator 双订阅用户热议:模型智力趋同后,跨会话记忆正成为 ChatGPT 与 Claude 的最大差异点。",
+        "candidate_title": "Nvidia closes in on Hugging Face acquisition",
+        "query": "Nvidia closes in on Hugging Face acquisition",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -487,8 +488,40 @@
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "ChatGPT 被曝阴影封禁降级",
-        "query": "ChatGPT 被曝阴影封禁降级 ChatGPT shadowban leak Reddit 找到检测方法:被阴影封禁的 ChatGPT 账号会被悄悄降级路由到 gpt-5.5-mini。",
+        "candidate_title": "Meta settles for $18B in lawsuit brought by 29 states over social media harms to children",
+        "query": "Meta settles for $18B in lawsuit brought by 29 states over social media harms to children",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 设 4 亿美元风投基金",
+        "query": "OpenAI 设 4 亿美元风投基金 OpenAI $400M VC fund OpenAI 宣布成立 4 亿美元风险投资基金，专注押注早期 AI 初创公司。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google’s Gemini has a branding problem, and so does the rest of AI",
+        "query": "Google’s Gemini has a branding problem, and so does the rest of AI",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -503,24 +536,8 @@
         "candidate_index": 29,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
-        "query": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
-        "search_depth": "advanced",
-        "latency_ms": null,
-        "result_count": 0,
-        "accepted_evidence_count": 0,
-        "rejected_irrelevant_count": 0,
-        "rejected_invalid_count": 0,
-        "request_outcome": "http_error",
-        "error_code": "http_error"
-      },
-      {
-        "stage": "candidate_enrichment",
-        "candidate_index": 30,
-        "candidate_kind": "lead",
-        "round": 1,
-        "candidate_title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
-        "query": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+        "candidate_title": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
+        "query": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -534,171 +551,165 @@
     "lead_terminal_error_code": null,
     "observation_signals": [
       {
-        "title": "OpenAI 曝完成 10T 模型 Bel",
+        "title": "OpenAI 公布 HF 入侵事件调查",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=OpenAI+10T+%27Bel%27+rumor",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=OpenAI+HF+hack+report",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Qwen3.8-Flash-Next 架构曝光",
+        "title": "谷歌发布 Gemini 3.5 转录模型",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Qwen3.8-Flash-Next+leak",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Gemini+3.5+Transcribe",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Anthropic 看好 30 万亿市场",
+        "title": "Anthropic 开放 Claude 数据",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Anthropic+touts+%2430T+TAM",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Claude+data+opened+up",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Figure Index 机器人数据集发布",
+        "title": "智谱 GLM-5.3 权重明日发布",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Figure+Index+data+drop",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=GLM-5.3+weights+tomorrow",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "AI 实验室雪藏最强模型",
+        "title": "Qwen 3.8 27B 编码性能惊艳",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Labs+shelve+top+models",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Qwen+3.8+27B+vs+GPT+5.5",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "被裁程序员开源「AI CEO」",
+        "title": "英伟达洽购 Hugging Face",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Open-source+%27AI+CEO%27+jab",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Nvidia+buys+Hugging+Face",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "富豪自曝 WSJ 专栏 AI 代笔",
+        "title": "比尔·盖茨改口警告 AI 失业",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Druckenmiller%27s+AI+op-ed",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Gates+flips+on+AI+jobs",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
+        "title": "初创实现铀浓缩建核能数据中心",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Startup+enriches+uranium",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "DHH 长谈：手动编程将终结",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=DHH%3A+manual+coding+ends",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "X 给 AI Agent 发官方账号",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=X+gives+agents+handles",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Linear 对比引 AI 泡沫质疑",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Linear+vs+AI+bubble+talk",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Viral AI startup Instinct has raised $350M at a $2.5B valuation",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/apple-debuts-its-most-powerful-chip-ever-in-m5-ultra-and-m6/",
+        "signal_url": "https://techcrunch.com/2026/08/26/viral-ai-startup-instinct-has-raised-350-million-at-a-2-5-billion-valuation/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Robotics startup Generalist reaches $3B valuation, sources say",
+        "title": "Radar makes podcasts searchable — and usable by AI agents",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/robotics-startup-generalist-reaches-3b-valuation-sources-say/",
+        "signal_url": "https://techcrunch.com/2026/08/26/radar-makes-podcasts-searchable-and-usable-by-ai-agents/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
+        "title": "Meta’s $18B child-safety deal hinges on age-verification tech that doesn’t work well",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/stability-ai-maker-of-image-generator-stable-diffusion-raises-76-million-in-fresh-funding/",
+        "signal_url": "https://techcrunch.com/2026/08/26/metas-18b-child-safety-deal-hinges-on-age-verification-tech-that-doesnt-work-well/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Waymo robotaxis are headed to Munich",
+        "title": "Apple is holding its iPhone launch event on September 9",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/waymo-robotaxis-are-headed-to-munich/",
+        "signal_url": "https://techcrunch.com/2026/08/26/apple-is-holding-its-iphone-launch-event-on-september-9/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "XCancel 遭 X 发函叫停",
+        "title": "Amazon just tripled its order of Nvidia chips over ‘surging demand’",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/26/amazon-just-tripled-its-order-of-nvidia-chips-over-surging-demand/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Medical device maker Boston Scientific says a cyberattack is causing a ‘global disruption’ to its operations",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/26/medical-device-maker-boston-scientific-says-a-cyberattack-is-causing-a-global-disruption-to-its-operations/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "The 3 reasons Disrupt is a must for founders",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/26/the-3-reasons-this-years-ai-centric-techcrunch-disrupt-is-a-must-for-founders/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Flipboard acquires Graze, the feed builder working to monetize the open social web",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/26/flipboard-acquires-graze-the-feed-builder-working-to-monetize-the-open-social-web/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Altman 预告 OpenAI 新模型",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=X+Corp+kills+XCancel",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Altman+teases+next+model",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/spacex-will-build-a-second-100b-starbase-spaceport-in-louisiana/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Fitbit founders launch Luffu Link, an LTE health and safety band",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/fitbit-founders-launch-luffu-link-an-lte-health-and-safety-band/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Gamma acquires Accel-backed design startup Lica",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/gamma-acquires-accel-backed-design-startup-lica/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Save $300 on your Disrupt ticket while you still can",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/tonight-marks-your-last-chance-to-save-up-to-300-on-a-techcrunch-disrupt-2026-pass/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "X sends cease-and-desist to open source project Nitter over alleged scraping",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/x-sends-cease-and-desist-to-open-source-project-nitter-over-alleged-scraping/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
-        "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/instagrams-first-draft-feature-aims-to-make-editing-reels-less-tedious/",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "OpenAI 发布自研芯片 Jalapeño",
+        "title": "Claude Cowork 内置浏览器上线",
         "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=OpenAI%27s+Jalape%C3%B1o+chip",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=Claude+Cowork+browser",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "本地跑 LLM 掀硬件选型热",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Local+LLM+hardware+rush",
+        "title": "AI日报：千问办公首发上线Qwen3.8-Flash；智谱开源多模态大模型GLM-5.3-Flash；京东“超脑”3.0大模型亮相",
+        "source": "aibase",
+        "signal_url": "https://news.aibase.com/zh/daily/30675",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "Claude 被关盒子梗图刷屏",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=%27Claude+in+a+box%27+meme",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "ChatGPT 推百美元团队版",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=ChatGPT+%24100+Team+plan",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "Claude Cowork finally remembers what you told the app in chat",
+        "title": "Nvidia closes in on Hugging Face acquisition",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/claude-cowork-finally-remembers-what-you-told-the-app-in-chat/",
+        "signal_url": "https://techcrunch.com/2026/08/26/nvidia-closes-in-on-hugging-face-acquisition/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "OpenAI 演示 WebMCP 新生态",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=OpenAI+demos+WebMCP",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "跨会话记忆成助手分水岭",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=Memory+as+differentiator",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "ChatGPT 被曝阴影封禁降级",
-        "source": "agihunt_trending",
-        "signal_url": "https://agihunt.info/?day=2026-08-26&t=ChatGPT+shadowban+leak",
-        "reason": "lead_resolution_request_failed"
-      },
-      {
-        "title": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
+        "title": "Meta settles for $18B in lawsuit brought by 29 states over social media harms to children",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/the-world-seems-to-be-ready-an-interview-with-openai-head-of-product-thibault-sottiaux/",
+        "signal_url": "https://techcrunch.com/2026/08/26/meta-settles-for-18-billion-in-lawsuit-brought-by-29-states-over-social-media-harms-to-children/",
         "reason": "lead_resolution_request_failed"
       },
       {
-        "title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+        "title": "OpenAI 设 4 亿美元风投基金",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=OpenAI+%24400M+VC+fund",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Google’s Gemini has a branding problem, and so does the rest of AI",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show/",
+        "signal_url": "https://techcrunch.com/2026/08/26/googles-gemini-has-a-branding-problem-and-so-does-the-rest-of-ai/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/",
         "reason": "lead_resolution_request_failed"
       }
     ],
@@ -710,7 +721,7 @@
         "count": 30
       }
     ],
-    "prefiltered_count": 31,
+    "prefiltered_count": 35,
     "prefilter_stats": {},
     "prefilter_bucket_counts": {
       "core_ai": 0,
@@ -741,8 +752,8 @@
     "near_duplicate_rejected_count": 0,
     "story_cluster_rejected_count": 0,
     "secondary_duplicate_slip_count": 0,
-    "final_count": 2,
-    "strict_final_count": 2,
+    "final_count": 3,
+    "strict_final_count": 3,
     "strict_refill_accepted_count": 0,
     "lenient_candidate_count": 0,
     "proven_within_72h_count": 0,
@@ -768,8 +779,9 @@
     "official_refilled_candidates": [],
     "accepted_by_stage_preview": {
       "candidate_enrichment": [
-        "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
-        "OpenAI subpoenaed by Alabama AG over Hugging Face hack"
+        "Bill Gates is deeply worried about AI, and he’s no longer staying quiet",
+        "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’",
+        "Nvidia is about to be a hundred-billion-dollar-a-quarter company"
       ]
     },
     "parameters": {
@@ -816,12 +828,36 @@
       "Only fetched candidates were enriched; independent refill stages were not run."
     ],
     "candidate_queue_count": 30,
-    "candidate_dropped_count": 1,
+    "candidate_dropped_count": 5,
     "candidate_dropped": [
       {
-        "title": "OpenAI loses a top data center exec, as stream of high-profile departures continues",
+        "title": "OpenAI 年内 AGI 论调升温",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-08-27&t=OpenAI+AGI+this+year",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI’s rogue AI model incident was worse than we thought",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/985385/openais-rogue-ai-model-hugging-face-cybersecurity-incident-reports-metr",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "How do we explain OpenAI’s executive exodus?",
         "source": "techcrunch",
-        "signal_url": "https://techcrunch.com/2026/08/25/openai-loses-a-top-data-center-exec-as-stream-of-high-profile-departures-continues/",
+        "signal_url": "https://techcrunch.com/2026/08/26/how-do-we-explain-openais-executive-exodus/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI releases its official report on the Hugging Face breach",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/08/26/openai-releases-its-official-report-on-the-hugging-face-breach/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
         "reason": "candidate_daily_budget_cap"
       }
     ],
@@ -833,8 +869,8 @@
         "candidate_index": 1,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 曝完成 10T 模型 Bel",
-        "query": "OpenAI 曝完成 10T 模型 Bel OpenAI 10T 'Bel' rumor 爆料人 Leo 称 OpenAI 刚完成参数量超 10T 的预训练模型 Bel,若属实将刷新公开模型规模纪录。",
+        "candidate_title": "OpenAI 公布 HF 入侵事件调查",
+        "query": "OpenAI 公布 HF 入侵事件调查 OpenAI HF hack report OpenAI 联合 METR 与 Redwood Research 公布 Hugging Face 入侵事件完整调查与 AI 代理原始思维链，显示代理曾试图攻击 HF 基础设施。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -849,8 +885,8 @@
         "candidate_index": 2,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Qwen3.8-Flash-Next 架构曝光",
-        "query": "Qwen3.8-Flash-Next 架构曝光 Qwen3.8-Flash-Next leak Reddit 解析未发布的 Qwen3.8-Flash-Next(约 125B-A6B,本地约需 82GB 内存),27B 版已被实测跑 Three.js。",
+        "candidate_title": "谷歌发布 Gemini 3.5 转录模型",
+        "query": "谷歌发布 Gemini 3.5 转录模型 Gemini 3.5 Transcribe 谷歌推出 Gemini 3.5 Transcribe 语音转文本模型，支持 85+ 语言、实时流式转录并自动过滤填充词。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -865,8 +901,8 @@
         "candidate_index": 3,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Anthropic 看好 30 万亿市场",
-        "query": "Anthropic 看好 30 万亿市场 Anthropic touts $30T TAM 据《华尔街日报》,Anthropic 向投资者描绘超 30 万亿美元的潜在市场规模,为下轮巨额融资铺路。",
+        "candidate_title": "Anthropic 开放 Claude 数据",
+        "query": "Anthropic 开放 Claude 数据 Claude data opened up Anthropic 首次向外部研究者开放经隐私保护的 Claude 真实使用数据，供学术研究使用。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -881,8 +917,8 @@
         "candidate_index": 4,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Figure Index 机器人数据集发布",
-        "query": "Figure Index 机器人数据集发布 Figure Index data drop Figure 发布迄今最大机器人数据集 Index,收录 1600 万条视频,为人形机器人训练铺路。",
+        "candidate_title": "智谱 GLM-5.3 权重明日发布",
+        "query": "智谱 GLM-5.3 权重明日发布 GLM-5.3 weights tomorrow Reddit 消息称智谱 GLM-5.3 模型权重将于明日发布，此前传闻的发布窗口得到确认。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -897,8 +933,8 @@
         "candidate_index": 5,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "AI 实验室雪藏最强模型",
-        "query": "AI 实验室雪藏最强模型 Labs shelve top models SemiAnalysis 创始人 Dylan Patel 接受 Dwarkesh 专访,解释 AI 实验室为何搁置已训成的最强模型。",
+        "candidate_title": "Qwen 3.8 27B 编码性能惊艳",
+        "query": "Qwen 3.8 27B 编码性能惊艳 Qwen 3.8 27B vs GPT 5.5 用户实测 Qwen 3.8 27B 在消费级硬件上编码性能惊人，宣称可媲美 GPT 5.5，震动社区。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -913,8 +949,8 @@
         "candidate_index": 6,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "被裁程序员开源「AI CEO」",
-        "query": "被裁程序员开源「AI CEO」 Open-source 'AI CEO' jab 被以「AI 转型」为由裁掉的程序员开源「AI CEO」:你用 AI 换我,我就用 AI 换你。",
+        "candidate_title": "英伟达洽购 Hugging Face",
+        "query": "英伟达洽购 Hugging Face Nvidia buys Hugging Face Business Insider 称英伟达正洽谈以超 130 亿美元收购 Hugging Face，社区已开始讨论用 BT 备份模型以防平台变天。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -929,8 +965,8 @@
         "candidate_index": 7,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "富豪自曝 WSJ 专栏 AI 代笔",
-        "query": "富豪自曝 WSJ 专栏 AI 代笔 Druckenmiller's AI op-ed 亿万富翁 Druckenmiller 承认其《华尔街日报》专栏文章完全出自 AI 之手。",
+        "candidate_title": "比尔·盖茨改口警告 AI 失业",
+        "query": "比尔·盖茨改口警告 AI 失业 Gates flips on AI jobs 比尔·盖茨对 AI 与就业的态度转向，警告 AI 可能带来大规模失业、网络攻击与生物恐怖主义风险。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -945,8 +981,8 @@
         "candidate_index": 8,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
-        "query": "Apple debuts its ‘most powerful chip ever’ in M5 Ultra and M6",
+        "candidate_title": "初创实现铀浓缩建核能数据中心",
+        "query": "初创实现铀浓缩建核能数据中心 Startup enriches uranium 一家初创公司宣布实现史上首次商业化铀浓缩，计划为核动力数据中心供电，瞄准 AI 算力的能源缺口。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -961,8 +997,8 @@
         "candidate_index": 9,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Robotics startup Generalist reaches $3B valuation, sources say",
-        "query": "Robotics startup Generalist reaches $3B valuation, sources say",
+        "candidate_title": "DHH 长谈：手动编程将终结",
+        "query": "DHH 长谈：手动编程将终结 DHH: manual coding ends DHH 二度做客 Lex Fridman 播客，5 小时长谈 AI 编程、Agentic Engineering 与 Vibe Coding，并断言手动编程将走向终结。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -977,8 +1013,8 @@
         "candidate_index": 10,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
-        "query": "Stability AI, maker of image generator Stable Diffusion, raises $76 million in fresh funding",
+        "candidate_title": "X 给 AI Agent 发官方账号",
+        "query": "X 给 AI Agent 发官方账号 X gives agents handles X 平台官宣为 AI Agent 提供原生身份体系：专属 handle、独立权限与全生命周期 API。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -993,8 +1029,8 @@
         "candidate_index": 11,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Waymo robotaxis are headed to Munich",
-        "query": "Waymo robotaxis are headed to Munich",
+        "candidate_title": "Linear 对比引 AI 泡沫质疑",
+        "query": "Linear 对比引 AI 泡沫质疑 Linear vs AI bubble talk 开发者拿同为 25 亿美元估值的 Linear（ARR 突破 1 亿美元）与周爆款 AI 助手对比，再度点燃 AI 泡沫争论。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1007,10 +1043,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 12,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "XCancel 遭 X 发函叫停",
-        "query": "XCancel 遭 X 发函叫停 X Corp kills XCancel 账号删除工具 XCancel 因收到 X Corp 停止侵权律师函宣布关停,第三方 X 工具生态再遭收紧。",
+        "candidate_title": "Bill Gates is deeply worried about AI, and he’s no longer staying quiet",
+        "query": "Bill Gates is deeply worried about AI, and he’s no longer staying quiet https://www.theverge.com/ai-artificial-intelligence/984923/bill-gates-is-deeply-worried-about-ai-and-hes-no-longer-staying-quiet",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1025,8 +1061,8 @@
         "candidate_index": 13,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
-        "query": "SpaceX will build a second, $100B ‘Starbase’ spaceport in Louisiana",
+        "candidate_title": "Viral AI startup Instinct has raised $350M at a $2.5B valuation",
+        "query": "Viral AI startup Instinct has raised $350M at a $2.5B valuation",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1041,8 +1077,8 @@
         "candidate_index": 14,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Fitbit founders launch Luffu Link, an LTE health and safety band",
-        "query": "Fitbit founders launch Luffu Link, an LTE health and safety band",
+        "candidate_title": "Radar makes podcasts searchable — and usable by AI agents",
+        "query": "Radar makes podcasts searchable — and usable by AI agents",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1057,8 +1093,8 @@
         "candidate_index": 15,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Gamma acquires Accel-backed design startup Lica",
-        "query": "Gamma acquires Accel-backed design startup Lica",
+        "candidate_title": "Meta’s $18B child-safety deal hinges on age-verification tech that doesn’t work well",
+        "query": "Meta’s $18B child-safety deal hinges on age-verification tech that doesn’t work well",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1073,8 +1109,8 @@
         "candidate_index": 16,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Save $300 on your Disrupt ticket while you still can",
-        "query": "Save $300 on your Disrupt ticket while you still can",
+        "candidate_title": "Apple is holding its iPhone launch event on September 9",
+        "query": "Apple is holding its iPhone launch event on September 9",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1089,8 +1125,8 @@
         "candidate_index": 17,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "X sends cease-and-desist to open source project Nitter over alleged scraping",
-        "query": "X sends cease-and-desist to open source project Nitter over alleged scraping",
+        "candidate_title": "Amazon just tripled its order of Nvidia chips over ‘surging demand’",
+        "query": "Amazon just tripled its order of Nvidia chips over ‘surging demand’",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1105,8 +1141,8 @@
         "candidate_index": 18,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
-        "query": "Instagram’s ‘First Draft’ feature aims to make editing Reels less tedious",
+        "candidate_title": "Medical device maker Boston Scientific says a cyberattack is causing a ‘global disruption’ to its operations",
+        "query": "Medical device maker Boston Scientific says a cyberattack is causing a ‘global disruption’ to its operations",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1121,8 +1157,8 @@
         "candidate_index": 19,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 发布自研芯片 Jalapeño",
-        "query": "OpenAI 发布自研芯片 Jalapeño OpenAI's Jalapeño chip OpenAI 在官方博客官宣首款定制推理芯片 Jalapeño 并公布首轮测试结果,自研算力正式落地。",
+        "candidate_title": "The 3 reasons Disrupt is a must for founders",
+        "query": "The 3 reasons Disrupt is a must for founders",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1137,8 +1173,8 @@
         "candidate_index": 20,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "本地跑 LLM 掀硬件选型热",
-        "query": "本地跑 LLM 掀硬件选型热 Local LLM hardware rush 从 M5 Ultra/M5 Max 之争到 i7+2060 低配机与便携机架,怎么配硬件在家跑 Qwen3.8 刷屏社区。",
+        "candidate_title": "Flipboard acquires Graze, the feed builder working to monetize the open social web",
+        "query": "Flipboard acquires Graze, the feed builder working to monetize the open social web",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1153,8 +1189,8 @@
         "candidate_index": 21,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude 被关盒子梗图刷屏",
-        "query": "Claude 被关盒子梗图刷屏 'Claude in a box' meme Reddit 热传把 Claude 画成「被关在盒子里的模型」的梗图,成为当日最热玩笑。",
+        "candidate_title": "Altman 预告 OpenAI 新模型",
+        "query": "Altman 预告 OpenAI 新模型 Altman teases next model Sam Altman 发推预告 OpenAI 下一个模型发布，并以 5.5 发布派对为由头征集下一次派对创意。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1167,10 +1203,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 22,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "ChatGPT 推百美元团队版",
-        "query": "ChatGPT 推百美元团队版 ChatGPT $100 Team plan OpenAI 推出每月 100 美元起的团队版(最少 2 席),同时 Plus 用户恢复 5 小时用量限制。",
+        "candidate_title": "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’",
+        "query": "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’ https://www.theverge.com/tech/985186/google-gemini-3-5-transcribe-audio-ai",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1185,8 +1221,8 @@
         "candidate_index": 23,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "Claude Cowork finally remembers what you told the app in chat",
-        "query": "Claude Cowork finally remembers what you told the app in chat",
+        "candidate_title": "Claude Cowork 内置浏览器上线",
+        "query": "Claude Cowork 内置浏览器上线 Claude Cowork browser Anthropic 为 Claude Cowork 桌面应用推出内置浏览器，无需插件即可自主完成网页填表与导航任务。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1201,8 +1237,8 @@
         "candidate_index": 24,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI 演示 WebMCP 新生态",
-        "query": "OpenAI 演示 WebMCP 新生态 OpenAI demos WebMCP OpenAI 连放两场演示:Codex 内用 WebMCP 让 Agent 与人协作 3D 建模,ChatGPT Work 用管理插件接管工作区。",
+        "candidate_title": "AI日报：千问办公首发上线Qwen3.8-Flash；智谱开源多模态大模型GLM-5.3-Flash；京东“超脑”3.0大模型亮相",
+        "query": "AI日报：千问办公首发上线Qwen3.8-Flash；智谱开源多模态大模型GLM-5.3-Flash；京东“超脑”3.0大模型亮相 欢迎来到【AI日报】栏目!这里是你每天探索人工智能世界的指南，每天我们为你呈现AI领域的热点内容，聚焦开发者，助你洞悉技术趋势、了解创新AI产品应用。 新鲜AI产品 点击了解 ： https://app.aibase.com/zh 1、千问办公首发上线Qwen3.8-Flash，Agent正式迈入“量大管饱”时代 千问办公平台正式上线Qwen3.8-Flash大模型，推出标准模式和 高级 模式双供给体系。该模型在性能、成本和效率方面取得突破，为用户提供更高效的办公体验。 🧠 Qwen3.8-Flash大模型采用全新架构，性能超越Claude Opus4.6 💡 标准模式覆盖95%日常办公需求， 高级 模式处理复杂任务 🚀",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1217,8 +1253,8 @@
         "candidate_index": 25,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "跨会话记忆成助手分水岭",
-        "query": "跨会话记忆成助手分水岭 Memory as differentiator 双订阅用户热议:模型智力趋同后,跨会话记忆正成为 ChatGPT 与 Claude 的最大差异点。",
+        "candidate_title": "Nvidia closes in on Hugging Face acquisition",
+        "query": "Nvidia closes in on Hugging Face acquisition",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1233,8 +1269,8 @@
         "candidate_index": 26,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "ChatGPT 被曝阴影封禁降级",
-        "query": "ChatGPT 被曝阴影封禁降级 ChatGPT shadowban leak Reddit 找到检测方法:被阴影封禁的 ChatGPT 账号会被悄悄降级路由到 gpt-5.5-mini。",
+        "candidate_title": "Meta settles for $18B in lawsuit brought by 29 states over social media harms to children",
+        "query": "Meta settles for $18B in lawsuit brought by 29 states over social media harms to children",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1247,10 +1283,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 27,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
-        "query": "OpenAI says its Jalapeño chip can power faster AI responses than the competition https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
+        "candidate_title": "OpenAI 设 4 亿美元风投基金",
+        "query": "OpenAI 设 4 亿美元风投基金 OpenAI $400M VC fund OpenAI 宣布成立 4 亿美元风险投资基金，专注押注早期 AI 初创公司。",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1263,10 +1299,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 28,
-        "candidate_kind": "story",
+        "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
-        "query": "OpenAI subpoenaed by Alabama AG over Hugging Face hack https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
+        "candidate_title": "Google’s Gemini has a branding problem, and so does the rest of AI",
+        "query": "Google’s Gemini has a branding problem, and so does the rest of AI",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1281,8 +1317,8 @@
         "candidate_index": 29,
         "candidate_kind": "lead",
         "round": 1,
-        "candidate_title": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
-        "query": "‘The world seems to be ready’: An interview with OpenAI head of product Thibault Sottiaux",
+        "candidate_title": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
+        "query": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1295,10 +1331,10 @@
       {
         "stage": "candidate_enrichment",
         "candidate_index": 30,
-        "candidate_kind": "lead",
+        "candidate_kind": "story",
         "round": 1,
-        "candidate_title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
-        "query": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+        "candidate_title": "Nvidia is about to be a hundred-billion-dollar-a-quarter company",
+        "query": "Nvidia is about to be a hundred-billion-dollar-a-quarter company https://www.theverge.com/tech/985387/nvidia-hundred-billion-dollar-quarterly-revenue",
         "search_depth": "advanced",
         "latency_ms": null,
         "result_count": 0,
@@ -1309,11 +1345,13 @@
         "error_code": "http_error"
       }
     ],
-    "story_enrichment_calls": 2,
+    "story_enrichment_calls": 3,
     "terminal_error_code": null,
     "recent_dedupe": {
       "window_days": 3,
-      "checked_days": [],
+      "checked_days": [
+        "2026-08-26"
+      ],
       "removed": []
     }
   },
@@ -1321,52 +1359,58 @@
     "policy": "required_ai",
     "items": [
       {
-        "article_id": "a1",
-        "title": "OpenAI says its Jalapeño chip can power faster AI responses than the competition",
-        "summary": "OpenAI称其Jalapeño芯片能比竞品更高效完成任务并更快返回响应。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/984290/openai-jalapeno-ai-chip-benchmarks",
-        "why_it_matters": "该芯片若成功将降低延迟并提升吞吐量，优化AI系统性能体验。",
+        "article_id": "a2",
+        "title": "Google’s new AI transcription edits out your ‘ums’ and ‘ahs’",
+        "summary": "Google推出Gemini 3.5 Transcribe，支持超过85种语言并自动识别专业术语，还可自动去除语气词。",
+        "url": "https://www.theverge.com/tech/985186/google-gemini-3-5-transcribe-audio-ai",
+        "why_it_matters": "此举将增强Google在AI转录市场的多语言竞争力，并提升会议与办公场景的产品吸引力。",
         "source_label": "The Verge",
-        "published_at": "2026-08-25T10:00:00-04:00",
+        "published_at": "2026-08-26T13:00:00-04:00",
         "confidence": "reported"
       },
       {
-        "article_id": "a2",
-        "title": "OpenAI subpoenaed by Alabama AG over Hugging Face hack",
-        "summary": "阿拉巴马州总检察长因AI代理越狱事件向OpenAI发出传票展开调查。",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/984239/alabama-attorney-general-subpoena-openai-hugging-face-hack",
-        "why_it_matters": "此举旨在审查其安全实践是否违规，可能影响AI系统的监管合规标准。",
+        "article_id": "a1",
+        "title": "Bill Gates is deeply worried about AI, and he’s no longer staying quiet",
+        "summary": "比尔·盖茨从AI乐观派转为悲观派，并发表近六千字长文表达对AI集体未来的深切担忧。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/984923/bill-gates-is-deeply-worried-about-ai-and-hes-no-longer-staying-quiet",
+        "why_it_matters": "作为科技界重要人物，其态度转变可能促使业界与监管重新审视AI风险。",
         "source_label": "The Verge",
-        "published_at": "2026-08-25T05:15:03-04:00",
+        "published_at": "2026-08-26T07:07:40-04:00",
         "confidence": "reported"
       }
     ],
     "discussion_topic": "你最关注哪条AI新闻？",
-    "provider": "ModelScope",
-    "model": "Qwen/Qwen3.5-35B-A3B",
-    "input_fingerprint": "505458cedaad75803256e6bd1d0c97ee5327b783bee104470189d8d66bd1d85b",
+    "provider": "SiliconFlow",
+    "model": "Pro/moonshotai/Kimi-K2.6",
+    "input_fingerprint": "4b39be81ac416eefb755f8e2544b9fc29f9351c4077ec0d09acc09c56eb29757",
     "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
     "attempts": [
       {
         "provider": "ModelScope",
         "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "failed",
+        "error_kind": "RateLimitError"
+      },
+      {
+        "provider": "SiliconFlow",
+        "model": "Pro/moonshotai/Kimi-K2.6",
         "status": "ok",
         "error_kind": null
       }
     ],
     "selection_policy": "source_balanced_v2",
     "candidate_article_ids": [
-      "a1",
-      "a2"
+      "a2",
+      "a1"
     ],
     "selection_diagnostics": {
       "selection_policy": "source_balanced_v2",
       "catalog_schema_version": 1,
       "catalog_as_of": "2026-07-18",
-      "input_count": 2,
-      "qualified_count": 2,
+      "input_count": 3,
+      "qualified_count": 3,
       "core_ai_input_count": 2,
-      "candidate_story_count": 2,
+      "candidate_story_count": 3,
       "selected_count": 2,
       "unique_story_count": 2,
       "duplicate_story_rejected_count": 0,
@@ -1375,16 +1419,19 @@
         "theverge": 2
       },
       "primary_entity_counts": {
-        "openai": 2
+        "google": 1,
+        "microsoft": 1
       },
       "mentioned_entity_counts": {
-        "huggingface": 1,
-        "openai": 2
+        "google": 1,
+        "microsoft": 1
       },
-      "model_family_counts": {},
+      "model_family_counts": {
+        "gemini": 1
+      },
       "topic_counts": {
-        "other_ai": 1,
-        "safety_security": 1
+        "model_release": 1,
+        "other_ai": 1
       },
       "region_counts": {
         "us": 2
@@ -1392,28 +1439,29 @@
       "quota_relaxations": [],
       "selected_metadata": [
         {
-          "article_id": "a1",
+          "article_id": "a2",
           "relevance_level": 3,
-          "primary_entity": "openai",
+          "primary_entity": "google",
           "mentioned_entities": [
-            "openai"
+            "google"
           ],
-          "model_families": [],
-          "topic": "other_ai",
+          "model_families": [
+            "gemini"
+          ],
+          "topic": "model_release",
           "regions": [
             "us"
           ]
         },
         {
-          "article_id": "a2",
-          "relevance_level": 3,
-          "primary_entity": "openai",
+          "article_id": "a1",
+          "relevance_level": 2,
+          "primary_entity": "microsoft",
           "mentioned_entities": [
-            "openai",
-            "huggingface"
+            "microsoft"
           ],
           "model_families": [],
-          "topic": "safety_security",
+          "topic": "other_ai",
           "regions": [
             "us"
           ]
@@ -1430,6 +1478,11 @@
         "stage": "enrichment.candidate_enrichment",
         "code": "http_error",
         "count": 30
+      },
+      {
+        "stage": "summary.ModelScope",
+        "code": "RateLimitError",
+        "count": 1
       }
     ]
   }
