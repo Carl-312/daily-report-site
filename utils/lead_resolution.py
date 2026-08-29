@@ -166,6 +166,110 @@ def _result_matches_lead(result: dict[str, Any], lead: dict[str, Any]) -> bool:
     )
 
 
+def annotate_direct_stories_with_trending_signals(
+    stories: list[dict[str, Any]],
+    leads: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Transfer a matched Trending signal without replacing direct evidence.
+
+    A rendered AGI Hunt lead can describe the same event as a fetched
+    TechCrunch or The Verge story. When Tavily is unavailable, keep the direct
+    story URL and source but preserve the private rank/heat signal so the local
+    selector can still use it. Unmatched leads remain private observations.
+    """
+
+    trending_leads = []
+    for lead in leads:
+        if compact_text(lead.get("source")).lower() != "agihunt_trending":
+            continue
+        provenance = lead.get("provenance")
+        if not isinstance(provenance, dict):
+            continue
+        rank = _safe_int(provenance.get("trend_rank"), 0)
+        if rank < 1:
+            continue
+        trending_leads.append(lead)
+    trending_leads.sort(
+        key=lambda lead: (
+            _safe_int(lead.get("provenance", {}).get("trend_rank"), 1_000_000),
+            -_safe_float(lead.get("provenance", {}).get("trend_heat")),
+        )
+    )
+
+    annotated: list[dict[str, Any]] = []
+    for story in stories:
+        item = dict(story)
+        result = {
+            "title": compact_text(item.get("title")),
+            "url": compact_text(item.get("link")),
+        }
+        matched_lead = next(
+            (
+                lead
+                for lead in trending_leads
+                if _direct_story_matches_trending_lead(result, lead)
+            ),
+            None,
+        )
+        if matched_lead is None:
+            annotated.append(item)
+            continue
+
+        lead_provenance = matched_lead["provenance"]
+        provenance = item.get("provenance")
+        provenance = dict(provenance) if isinstance(provenance, dict) else {}
+        for key in (
+            "trend_day",
+            "trend_window",
+            "trend_rank",
+            "trend_heat",
+            "trend_state",
+            "trend_delta",
+            "trend_term_en",
+            "observed_at",
+        ):
+            if key in lead_provenance:
+                provenance[key] = lead_provenance[key]
+        provenance.update(
+            {
+                "trend_signal_provider": "agihunt_trending",
+                "trend_signal_match": "direct_story_title",
+            }
+        )
+        item["provenance"] = provenance
+        annotated.append(item)
+    return annotated
+
+
+def _direct_story_matches_trending_lead(
+    story: dict[str, Any], lead: dict[str, Any]
+) -> bool:
+    """Use stricter title identity than a query-relative Tavily result."""
+
+    provenance = lead.get("provenance")
+    provenance = provenance if isinstance(provenance, dict) else {}
+    trend_term = compact_text(provenance.get("trend_term_en"))
+    if not trend_term:
+        return _result_matches_lead(story, lead)
+
+    lead_terms = _identity_terms(f"{lead.get('title') or ''} {trend_term}")
+    story_terms = _identity_terms(story.get("title"))
+    required_identifiers = {
+        term for term in lead_terms if any(character.isdigit() for character in term)
+    }
+    if required_identifiers and not required_identifiers.issubset(story_terms):
+        return False
+    if len(lead_terms & story_terms) >= 3:
+        return True
+    # Preserve a policy story that directly matches the distinctive
+    # "open weights" trend even when the people named in the social signal do
+    # not appear in the article headline.
+    return {"open", "weight"}.issubset(lead_terms) and {
+        "open",
+        "weight",
+    }.issubset(story_terms)
+
+
 def _published_timestamp(value: Any) -> float:
     text = compact_text(value)
     if not text:
@@ -558,6 +662,7 @@ def run_candidate_enrichment_stage(
                 "authentication_error",
                 "invalid_request",
                 "rate_limited",
+                "usage_limit_exceeded",
                 "deadline_exceeded",
             }:
                 terminal_error_code = outcome
@@ -744,6 +849,7 @@ def run_lead_resolution_stage(
                 "authentication_error",
                 "invalid_request",
                 "rate_limited",
+                "usage_limit_exceeded",
                 "deadline_exceeded",
             }:
                 terminal_error_code = outcome

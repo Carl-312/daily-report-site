@@ -12,8 +12,11 @@ pip install -r requirements-dev.txt
 
 依赖分层约定：
 
-- `requirements.txt`：运行时依赖
-- `requirements-dev.txt`：开发依赖入口，包含 Ruff、pytest、pytest-cov
+- `requirements.in` / `requirements-dev.in`：人工维护的兼容范围
+- `requirements.txt` / `requirements-dev.txt`：提交到仓库的完整传递依赖锁
+
+更新依赖时使用 Python 3.12 重新编译两个锁文件，并同时提交输入与锁文件；CI 和部署只安装
+锁文件，依赖升级因此必须经过显式代码审查。
 
 ## 分支与提交流程
 
