@@ -96,6 +96,44 @@ def test_disabled_or_missing_key_preserves_stories_and_keeps_leads_private() -> 
         assert enriched["report"]["observation_signals"][0]["title"] == signal["title"]
 
 
+def test_matching_trending_signal_ranks_an_existing_direct_story_without_replacing_it() -> (
+    None
+):
+    direct = story(1, entity="Anthropic")
+    direct["title"] = "Anthropic launches Claude Opus 5"
+    unrelated = story(2, entity="Anthropic")
+    unrelated["title"] = "Anthropic updates Claude voice mode"
+    signal = lead("Anthropic 发布 Claude Opus 5")
+    signal["provenance"] = {
+        **signal["provenance"],
+        "trend_rank": "2",
+        "trend_heat": 18.4,
+        "trend_state": "up",
+        "trend_term_en": "Anthropic launches Claude Opus 5",
+    }
+
+    enriched = enrich_articles_with_tavily(
+        [direct, unrelated, signal],
+        report_date="2026-07-21",
+        settings=settings(),
+        tavily_api_key="",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    kept = enriched["articles"][0]
+    assert kept["title"] == direct["title"]
+    assert kept["link"] == direct["link"]
+    assert kept["source"] == direct["source"]
+    assert kept["provenance"]["trend_rank"] == "2"
+    assert kept["provenance"]["trend_heat"] == 18.4
+    assert kept["provenance"]["trend_signal_provider"] == "agihunt_trending"
+    assert kept["provenance"]["trend_signal_match"] == "direct_story_title"
+    assert "signal_url" not in kept["provenance"]
+    assert enriched["report"]["trending_signal_match_count"] == 1
+    assert "trend_rank" not in enriched["articles"][1].get("provenance", {})
+
+
 def test_empty_metadata_queue_never_calls_tavily_or_refill(monkeypatch) -> None:
     monkeypatch.setattr(
         news_enrichment,
@@ -292,6 +330,41 @@ def test_metadata_admission_caps_the_queue_so_every_candidate_is_searched(
     assert enriched["report"]["input_count"] == 31
     assert enriched["report"]["candidate_queue_count"] == 30
     assert enriched["report"]["candidate_processed_count"] == 30
-    assert enriched["report"]["candidate_dropped_count"] == 1
+    assert enriched["report"]["candidate_dropped_count"] == 0
+    assert enriched["report"]["candidate_unenriched_story_count"] == 1
     assert enriched["report"]["total_calls"] == 30
-    assert len(enriched["articles"]) == 30
+    assert len(enriched["articles"]) == 31
+
+
+def test_usage_limit_stops_requests_and_preserves_all_direct_stories(
+    monkeypatch,
+) -> None:
+    response = requests.Response()
+    response.status_code = 432
+    calls = 0
+
+    def fail_with_usage_limit(*_args, **_kwargs):
+        nonlocal calls
+        calls += 1
+        raise requests.HTTPError(response=response)
+
+    monkeypatch.setattr(news_enrichment, "search_tavily", fail_with_usage_limit)
+    direct_stories = [story(index, entity=f"Vendor{index}") for index in range(31)]
+    signal = lead()
+
+    enriched = enrich_articles_with_tavily(
+        [*direct_stories, signal],
+        report_date="2026-07-21",
+        settings=settings(max_total_calls=30),
+        tavily_api_key="key",
+        enabled=True,
+        reference_dt=REFERENCE,
+    )
+
+    assert calls == 1
+    assert len(enriched["articles"]) == 31
+    assert enriched["report"]["terminal_error_code"] == "usage_limit_exceeded"
+    assert enriched["report"]["stop_reason"] == (
+        "candidate_enrichment_usage_limit_exceeded"
+    )
+    assert enriched["report"]["lead_unresolved_count"] == 1

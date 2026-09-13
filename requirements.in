@@ -1,0 +1,10 @@
+# Runtime dependency compatibility ranges.
+# Compile the exact transitive lock with the command recorded in requirements.txt.
+openai>=2.48,<3
+python-dotenv>=1.2,<2
+pydantic>=2.13,<3
+pyyaml>=6,<7
+requests>=2.34,<3
+beautifulsoup4>=4.15,<5
+pytz>=2026.2
+markdown>=3.10,<4
