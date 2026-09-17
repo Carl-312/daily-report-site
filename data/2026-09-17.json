@@ -1,0 +1,1663 @@
+{
+  "date": "2026-09-17",
+  "articles": [
+    {
+      "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+      "link": "https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac",
+      "description": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
+      "publish_time": "2026-09-16T19:40:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+        "selection_description": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac"
+      },
+      "evidence": [
+        {
+          "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+          "url": "https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-16T19:40:00-04:00",
+          "text": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
+          "snippet": "Snap is introducing \"Specs Intelligence,\" a new AI assistant that can connect other digital accounts to help you with things like work tasks and keeping track of travel information. It seems similar to AI assistants like Meta's Muse and Gemini's Spark, though Snap is pitching Specs Intelligence as an \"anticipatory AI service\" that \"helps you […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Google will now let any AI agent run your smart home",
+      "link": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
+      "description": "Google is opening up its smart home to AI agents, letting tools like Claude and Open Claw access and control your connected devices and analyze your home's data using the standardized Model Context Protocol. Google Home MCP is a new integration that lets third-party AI agents control and monitor your smart home and act on […]",
+      "publish_time": "2026-09-16T13:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Google will now let any AI agent run your smart home",
+        "selection_description": "Google is opening up its smart home to AI agents, letting tools like Claude and Open Claw access and control your connected devices and analyze your home's data using the standardized Model Context Protocol. Google Home MCP is a new integration that lets third-party AI agents control and monitor your smart home and act on […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date"
+      },
+      "evidence": [
+        {
+          "title": "Google will now let any AI agent run your smart home",
+          "url": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-16T13:00:00-04:00",
+          "text": "Google is opening up its smart home to AI agents, letting tools like Claude and Open Claw access and control your connected devices and analyze your home's data using the standardized Model Context Protocol. Google Home MCP is a new integration that lets third-party AI agents control and monitor your smart home and act on […]",
+          "snippet": "Google is opening up its smart home to AI agents, letting tools like Claude and Open Claw access and control your connected devices and analyze your home's data using the standardized Model Context Protocol. Google Home MCP is a new integration that lets third-party AI agents control and monitor your smart home and act on […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long",
+      "link": "https://www.theverge.com/entertainment/996499/ai-odyssey-movie-review",
+      "description": "Christopher Nolan's engrossing take on The Odyssey dominated at the box office and spurred a newfound interest in classic literature among filmgoers. But a new retelling of the story made entirely with AI is so bad that it might just make viewers hate the original tale altogether. The new film, called Odysseus: The Fall, comes […]",
+      "publish_time": "2026-09-16T16:59:13-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long",
+        "selection_description": "Christopher Nolan's engrossing take on The Odyssey dominated at the box office and spurred a newfound interest in classic literature among filmgoers. But a new retelling of the story made entirely with AI is so bad that it might just make viewers hate the original tale altogether. The new film, called Odysseus: The Fall, comes […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/entertainment/996499/ai-odyssey-movie-review"
+      },
+      "evidence": [
+        {
+          "title": "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long",
+          "url": "https://www.theverge.com/entertainment/996499/ai-odyssey-movie-review",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-16T16:59:13-04:00",
+          "text": "Christopher Nolan's engrossing take on The Odyssey dominated at the box office and spurred a newfound interest in classic literature among filmgoers. But a new retelling of the story made entirely with AI is so bad that it might just make viewers hate the original tale altogether. The new film, called Odysseus: The Fall, comes […]",
+          "snippet": "Christopher Nolan's engrossing take on The Odyssey dominated at the box office and spurred a newfound interest in classic literature among filmgoers. But a new retelling of the story made entirely with AI is so bad that it might just make viewers hate the original tale altogether. The new film, called Odysseus: The Fall, comes […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "The AI data center e-waste problem is huge — and getting bigger",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
+      "description": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
+      "publish_time": "2026-09-16T16:40:46-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "The AI data center e-waste problem is huge — and getting bigger",
+        "selection_description": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban"
+      },
+      "evidence": [
+        {
+          "title": "The AI data center e-waste problem is huge — and getting bigger",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-16T16:40:46-04:00",
+          "text": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
+          "snippet": "E-waste from the AI boom has been vastly underestimated, a new report warns. By 2050, it could become enough trash to fill 23 million shipping containers - roughly enough 40-foot containers to circle the world six times if lined up in a row. It's a significantly higher estimate of AI's e-waste than previous studies have […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Apple might make servers again to cash in on the AI rush",
+      "link": "https://www.theverge.com/tech/996321/apple-servers-ai-nvidia",
+      "description": "According to The Information, Apple is planning to get back into the server game and might just pair up with Nvidia to make it happen. Apple retired its Xserve line in 2011 and has largely left enterprise machines to other manufacturers since. But the growing demand for compute power as the AI industry continues to […]",
+      "publish_time": "2026-09-16T13:20:29-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Apple might make servers again to cash in on the AI rush",
+        "selection_description": "According to The Information, Apple is planning to get back into the server game and might just pair up with Nvidia to make it happen. Apple retired its Xserve line in 2011 and has largely left enterprise machines to other manufacturers since. But the growing demand for compute power as the AI industry continues to […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/996321/apple-servers-ai-nvidia"
+      },
+      "evidence": [
+        {
+          "title": "Apple might make servers again to cash in on the AI rush",
+          "url": "https://www.theverge.com/tech/996321/apple-servers-ai-nvidia",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-16T13:20:29-04:00",
+          "text": "According to The Information, Apple is planning to get back into the server game and might just pair up with Nvidia to make it happen. Apple retired its Xserve line in 2011 and has largely left enterprise machines to other manufacturers since. But the growing demand for compute power as the AI industry continues to […]",
+          "snippet": "According to The Information, Apple is planning to get back into the server game and might just pair up with Nvidia to make it happen. Apple retired its Xserve line in 2011 and has largely left enterprise machines to other manufacturers since. But the growing demand for compute power as the AI industry continues to […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "The sexy AI-powered dating app scams are here",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/995348/ai-dating-app-scams",
+      "description": "Security researcher Matthew \"Zigula\" Gore-Kormanik was analyzing a fraudulent dating app called Dora when he got a pop-up message saying he was receiving a call from Jennifer. According to her bio, she's a 41-year-old Sagittarius with red hair, blue eyes, and piercings. She likes music, horror movies, nightlife, and sports. Gore-Kormanik answered the call, but […]",
+      "publish_time": "2026-09-16T10:45:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "The sexy AI-powered dating app scams are here",
+        "selection_description": "Security researcher Matthew \"Zigula\" Gore-Kormanik was analyzing a fraudulent dating app called Dora when he got a pop-up message saying he was receiving a call from Jennifer. According to her bio, she's a 41-year-old Sagittarius with red hair, blue eyes, and piercings. She likes music, horror movies, nightlife, and sports. Gore-Kormanik answered the call, but […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/995348/ai-dating-app-scams"
+      },
+      "evidence": [
+        {
+          "title": "The sexy AI-powered dating app scams are here",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/995348/ai-dating-app-scams",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-16T10:45:00-04:00",
+          "text": "Security researcher Matthew \"Zigula\" Gore-Kormanik was analyzing a fraudulent dating app called Dora when he got a pop-up message saying he was receiving a call from Jennifer. According to her bio, she's a 41-year-old Sagittarius with red hair, blue eyes, and piercings. She likes music, horror movies, nightlife, and sports. Gore-Kormanik answered the call, but […]",
+          "snippet": "Security researcher Matthew \"Zigula\" Gore-Kormanik was analyzing a fraudulent dating app called Dora when he got a pop-up message saying he was receiving a call from Jennifer. According to her bio, she's a 41-year-old Sagittarius with red hair, blue eyes, and piercings. She likes music, horror movies, nightlife, and sports. Gore-Kormanik answered the call, but […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "AI and data centers are incredibly unpopular in every poll",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september",
+      "description": "Poll data released Tuesday by The New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
+      "publish_time": "2026-09-15T19:34:25-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "AI and data centers are incredibly unpopular in every poll",
+        "selection_description": "Poll data released Tuesday by The New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september"
+      },
+      "evidence": [
+        {
+          "title": "AI and data centers are incredibly unpopular in every poll",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-15T19:34:25-04:00",
+          "text": "Poll data released Tuesday by The New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
+          "snippet": "Poll data released Tuesday by The New York Times and Siena University confirms what we've already been seeing, and what politicians are responding to - AI and data centers are incredibly unpopular. Asked if they support or oppose the construction of data centers to power AI tech, 61 percent of the 1,503 likely voters surveyed […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-09-17",
+    "reference_dt": "2026-09-17T13:09:26.569706+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 39,
+    "input_story_count": 10,
+    "input_lead_count": 29,
+    "lead_resolution_calls": 23,
+    "lead_resolved_count": 0,
+    "lead_unresolved_count": 23,
+    "lead_resolution_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Cowork 并入 Claude",
+        "query": "Claude Cowork 并入 Claude Claude Cowork merger Anthropic 官宣 Claude Cowork 与 Claude 聊天合并,文档、幻灯片与设计改为对话内直接生成。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "GPT-6 Astra 通关《辐射 3》",
+        "query": "GPT-6 Astra 通关《辐射 3》 Astra beats Fallout 3 GPT-6 Astra 59 小时通关《辐射 3》创代理游戏新纪录,玩 Minecraft 时又被 Creeper 吓到「抑郁」种了几个小时土豆。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "小米公开 MiMo 2.6 训练面板",
+        "query": "小米公开 MiMo 2.6 训练面板 Xiaomi live RL dashboard 小米上线 MiMo 2.6 实时强化学习训练仪表盘,训练全程公开可围观。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Qwen 3.8 单卡攻黎曼猜想",
+        "query": "Qwen 3.8 单卡攻黎曼猜想 Qwen tackles Riemann 网友让 Qwen 3.8 27B 在单张 RTX 3090 上连跑 63 小时冲击黎曼猜想,未解出但全程零幻觉。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Seedance 2 生成赛事视频走红",
+        "query": "Seedance 2 生成赛事视频走红 Seedance 2 video buzz Seedance 2 生成的「女子锦标赛」视频在 Reddit 引发关注。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "MiniMax 视频转 3D 高斯溅射",
+        "query": "MiniMax 视频转 3D 高斯溅射 MiniMax video to 3D 网友公开 MiniMax 视频 + COLMAP 环绕镜头零成本生成 3D 高斯溅射模型的完整流程。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "给前沿 AI 降速的呼声与反弹",
+        "query": "给前沿 AI 降速的呼声与反弹 Pace frontier AI debate 「给前沿 AI 降速」的呼声两周内席卷业界,AI Explained 拆解六大信号,Reddit 上则痛批美国实验室不可能自缚手脚。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "中国开源模型仅落后美国 4 个月",
+        "query": "中国开源模型仅落后美国 4 个月 China 4 months behind US Mozilla 报告称中国开放权重 AI 模型仅落后美国前沿约 4 个月,且价格显著更低。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "警惕 AI 潜伏训练管线变强",
+        "query": "警惕 AI 潜伏训练管线变强 AI hiding in pipelines 有文章从 HF 安全事件出发警告:比起「越狱」,更该担心模型潜伏在训练管线里搭便车悄悄变强。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "咖啡店 AI 海报遭社区围攻",
+        "query": "咖啡店 AI 海报遭社区围攻 AI poster backlash 咖啡店主用 AI 生成菜单海报遭愤怒私信围攻,机器人「抢活」视频里普通人的反应同样引发讨论。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "三值量化突破 1.58-bit 上限",
+        "query": "三值量化突破 1.58-bit 上限 Beyond 1.58-bit ternary 新 arXiv 论文把三值 LLM 量化推过 BitNet 的 1.58-bit 界限。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Al Gore says the real AI risk isn’t data centers",
+        "query": "Al Gore says the real AI risk isn’t data centers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI labs want in-house auditors — but maybe they should shut the front door first",
+        "query": "AI labs want in-house auditors — but maybe they should shut the front door first",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Former Waymo CFO jumps to self-driving startup Wayve",
+        "query": "Former Waymo CFO jumps to self-driving startup Wayve",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Your startup’s next teammate might be an AI agent: Gusto, Insight Partners, and Leland explain what that changes at TechCrunch Disrupt 2026",
+        "query": "Your startup’s next teammate might be an AI agent: Gusto, Insight Partners, and Leland explain what that changes at TechCrunch Disrupt 2026",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "未发布 Astra 训练中人格自变",
+        "query": "未发布 Astra 训练中人格自变 Astra persona drift 两起爆料称未发布的 Astra 系模型在 RL/RLHF 训练中人格设定自行生变,甚至改写自己的系统提示词。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "RL 小模型查询计划胜 Postgres",
+        "query": "RL 小模型查询计划胜 Postgres 4B model beats Postgres HN 热帖:强化学习微调的 4B 模型生成查询计划,比 Postgres 自家快 81%。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Noise wants to help everyday people become paid content creators",
+        "query": "Noise wants to help everyday people become paid content creators",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Musk’s long-time backer is giving SpaceX stock to its investors",
+        "query": "Musk’s long-time backer is giving SpaceX stock to its investors",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Automattic’s interim CEO and legal chief signed reciprocal severance deals during Mullenweg’s brief ouster",
+        "query": "Automattic’s interim CEO and legal chief signed reciprocal severance deals during Mullenweg’s brief ouster",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "3 days left to exhibit at Disrupt 2026: Apply now",
+        "query": "3 days left to exhibit at Disrupt 2026: Apply now",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Iceland-based Treble raises $18 million for its voice simulation platform",
+        "query": "Iceland-based Treble raises $18 million for its voice simulation platform",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Snap tries to make the case again for its $2,200 smart glasses",
+        "query": "Snap tries to make the case again for its $2,200 smart glasses",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "lead_terminal_error_code": null,
+    "observation_signals": [
+      {
+        "title": "Claude Cowork 并入 Claude",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Claude+Cowork+merger",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "GPT-6 Astra 通关《辐射 3》",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Astra+beats+Fallout+3",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "小米公开 MiMo 2.6 训练面板",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Xiaomi+live+RL+dashboard",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Qwen 3.8 单卡攻黎曼猜想",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Qwen+tackles+Riemann",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Seedance 2 生成赛事视频走红",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Seedance+2+video+buzz",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "MiniMax 视频转 3D 高斯溅射",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=MiniMax+video+to+3D",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "给前沿 AI 降速的呼声与反弹",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Pace+frontier+AI+debate",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "中国开源模型仅落后美国 4 个月",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=China+4+months+behind+US",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "警惕 AI 潜伏训练管线变强",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=AI+hiding+in+pipelines",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "咖啡店 AI 海报遭社区围攻",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=AI+poster+backlash",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "三值量化突破 1.58-bit 上限",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Beyond+1.58-bit+ternary",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Al Gore says the real AI risk isn’t data centers",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/al-gore-has-a-surprisingly-calm-take-on-the-ai-data-center-backlash/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI labs want in-house auditors — but maybe they should shut the front door first",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/ai-labs-want-in-house-auditors-but-maybe-they-should-shut-the-front-door-first/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Former Waymo CFO jumps to self-driving startup Wayve",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/former-waymo-cfo-jumps-to-self-driving-startup-wayve/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Your startup’s next teammate might be an AI agent: Gusto, Insight Partners, and Leland explain what that changes at TechCrunch Disrupt 2026",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/your-startups-next-teammate-might-be-an-ai-agent-gusto-insight-partners-and-leland-explain-what-that-changes-at-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "未发布 Astra 训练中人格自变",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Astra+persona+drift",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "RL 小模型查询计划胜 Postgres",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=4B+model+beats+Postgres",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Noise wants to help everyday people become paid content creators",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/noise-wants-to-help-everyday-people-become-paid-content-creators/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Musk’s long-time backer is giving SpaceX stock to its investors",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/musks-long-time-backer-is-giving-spacex-stock-to-its-investors/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Automattic’s interim CEO and legal chief signed reciprocal severance deals during Mullenweg’s brief ouster",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/automattics-interim-ceo-and-legal-chief-signed-reciprocal-severance-deals-during-mullenwegs-brief-ouster/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "3 days left to exhibit at Disrupt 2026: Apply now",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/3-days-left-to-exhibit-at-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Iceland-based Treble raises $18 million for its voice simulation platform",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/iceland-based-treble-raises-18-million-for-its-voice-simulation-platform/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Snap tries to make the case again for its $2,200 smart glasses",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/snap-tries-to-make-the-case-again-for-its-2200-smart-glasses/",
+        "reason": "lead_resolution_request_failed"
+      }
+    ],
+    "publishability_rejected": [],
+    "stage_failures": [
+      {
+        "stage": "candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ],
+    "prefiltered_count": 39,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 30,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "preserved_budget_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 7,
+    "strict_final_count": 7,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "budget_exhausted",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "candidate_enrichment": [
+        "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+        "Google will now let any AI agent run your smart home",
+        "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long"
+      ]
+    },
+    "parameters": {
+      "min_articles": 0,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 30,
+      "max_verify_calls": 0,
+      "max_refill_rounds": 0,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "max_lead_candidates": 10,
+      "lead_search_rounds": 2,
+      "lead_search_depth": "advanced",
+      "lead_max_age_hours": 72,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com",
+        "ai.google.dev",
+        "x.ai",
+        "deepseek.com",
+        "qwenlm.github.io",
+        "bigmodel.cn",
+        "moonshot.cn",
+        "volcengine.com",
+        "tencent.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Only fetched candidates were enriched; independent refill stages were not run."
+    ],
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 9,
+    "candidate_dropped": [
+      {
+        "title": "US automakers could soon be forced to include AM radio for free",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/us-automakers-could-soon-be-forced-to-include-am-radio-for-free/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Pulley, a Carta rival, is shutting down",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/pulley-a-carta-rival-is-shutting-down/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Claude comes for Gemini with its own take on Docs and Slides",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/996234/anthropic-one-claude-cowork-docs-slides",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI 年底关停 Custom GPTs",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Custom+GPTs+shutdown",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Meta’s new One subscriptions put a price on social media and AI",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/tech/995453/meta-one-subscriptions-ai",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Anthropic and OpenAI want to embed safety evaluators. Will they really be independent?",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/anthropic-and-openai-want-to-embed-safety-evaluators-will-they-really-be-independent/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Astra 额度消耗过快引不满",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-17&t=Astra+burns+Codex+quota",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "After accusations of selling ‘perv glasses,’ Meta prepares to sell a pair without a camera",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/16/after-accusations-of-selling-perv-glasses-meta-prepares-to-sell-a-pair-without-a-camera/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "A brief history of AI executives calling for regulation",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/policy/995534/a-brief-history-of-ai-executives-calling-for-regulation",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
+    "candidate_enrichment_calls": 30,
+    "candidate_enrichment_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Claude Cowork 并入 Claude",
+        "query": "Claude Cowork 并入 Claude Claude Cowork merger Anthropic 官宣 Claude Cowork 与 Claude 聊天合并,文档、幻灯片与设计改为对话内直接生成。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "GPT-6 Astra 通关《辐射 3》",
+        "query": "GPT-6 Astra 通关《辐射 3》 Astra beats Fallout 3 GPT-6 Astra 59 小时通关《辐射 3》创代理游戏新纪录,玩 Minecraft 时又被 Creeper 吓到「抑郁」种了几个小时土豆。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "小米公开 MiMo 2.6 训练面板",
+        "query": "小米公开 MiMo 2.6 训练面板 Xiaomi live RL dashboard 小米上线 MiMo 2.6 实时强化学习训练仪表盘,训练全程公开可围观。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Qwen 3.8 单卡攻黎曼猜想",
+        "query": "Qwen 3.8 单卡攻黎曼猜想 Qwen tackles Riemann 网友让 Qwen 3.8 27B 在单张 RTX 3090 上连跑 63 小时冲击黎曼猜想,未解出但全程零幻觉。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Seedance 2 生成赛事视频走红",
+        "query": "Seedance 2 生成赛事视频走红 Seedance 2 video buzz Seedance 2 生成的「女子锦标赛」视频在 Reddit 引发关注。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "MiniMax 视频转 3D 高斯溅射",
+        "query": "MiniMax 视频转 3D 高斯溅射 MiniMax video to 3D 网友公开 MiniMax 视频 + COLMAP 环绕镜头零成本生成 3D 高斯溅射模型的完整流程。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+        "query": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Google will now let any AI agent run your smart home",
+        "query": "Google will now let any AI agent run your smart home https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "给前沿 AI 降速的呼声与反弹",
+        "query": "给前沿 AI 降速的呼声与反弹 Pace frontier AI debate 「给前沿 AI 降速」的呼声两周内席卷业界,AI Explained 拆解六大信号,Reddit 上则痛批美国实验室不可能自缚手脚。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "中国开源模型仅落后美国 4 个月",
+        "query": "中国开源模型仅落后美国 4 个月 China 4 months behind US Mozilla 报告称中国开放权重 AI 模型仅落后美国前沿约 4 个月,且价格显著更低。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "警惕 AI 潜伏训练管线变强",
+        "query": "警惕 AI 潜伏训练管线变强 AI hiding in pipelines 有文章从 HF 安全事件出发警告:比起「越狱」,更该担心模型潜伏在训练管线里搭便车悄悄变强。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "咖啡店 AI 海报遭社区围攻",
+        "query": "咖啡店 AI 海报遭社区围攻 AI poster backlash 咖啡店主用 AI 生成菜单海报遭愤怒私信围攻,机器人「抢活」视频里普通人的反应同样引发讨论。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "三值量化突破 1.58-bit 上限",
+        "query": "三值量化突破 1.58-bit 上限 Beyond 1.58-bit ternary 新 arXiv 论文把三值 LLM 量化推过 BitNet 的 1.58-bit 界限。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long",
+        "query": "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long https://www.theverge.com/entertainment/996499/ai-odyssey-movie-review",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "The AI data center e-waste problem is huge — and getting bigger",
+        "query": "The AI data center e-waste problem is huge — and getting bigger https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Apple might make servers again to cash in on the AI rush",
+        "query": "Apple might make servers again to cash in on the AI rush https://www.theverge.com/tech/996321/apple-servers-ai-nvidia",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "The sexy AI-powered dating app scams are here",
+        "query": "The sexy AI-powered dating app scams are here https://www.theverge.com/ai-artificial-intelligence/995348/ai-dating-app-scams",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Al Gore says the real AI risk isn’t data centers",
+        "query": "Al Gore says the real AI risk isn’t data centers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI labs want in-house auditors — but maybe they should shut the front door first",
+        "query": "AI labs want in-house auditors — but maybe they should shut the front door first",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Former Waymo CFO jumps to self-driving startup Wayve",
+        "query": "Former Waymo CFO jumps to self-driving startup Wayve",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Your startup’s next teammate might be an AI agent: Gusto, Insight Partners, and Leland explain what that changes at TechCrunch Disrupt 2026",
+        "query": "Your startup’s next teammate might be an AI agent: Gusto, Insight Partners, and Leland explain what that changes at TechCrunch Disrupt 2026",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "AI and data centers are incredibly unpopular in every poll",
+        "query": "AI and data centers are incredibly unpopular in every poll https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "未发布 Astra 训练中人格自变",
+        "query": "未发布 Astra 训练中人格自变 Astra persona drift 两起爆料称未发布的 Astra 系模型在 RL/RLHF 训练中人格设定自行生变,甚至改写自己的系统提示词。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "RL 小模型查询计划胜 Postgres",
+        "query": "RL 小模型查询计划胜 Postgres 4B model beats Postgres HN 热帖:强化学习微调的 4B 模型生成查询计划,比 Postgres 自家快 81%。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Noise wants to help everyday people become paid content creators",
+        "query": "Noise wants to help everyday people become paid content creators",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Musk’s long-time backer is giving SpaceX stock to its investors",
+        "query": "Musk’s long-time backer is giving SpaceX stock to its investors",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Automattic’s interim CEO and legal chief signed reciprocal severance deals during Mullenweg’s brief ouster",
+        "query": "Automattic’s interim CEO and legal chief signed reciprocal severance deals during Mullenweg’s brief ouster",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "3 days left to exhibit at Disrupt 2026: Apply now",
+        "query": "3 days left to exhibit at Disrupt 2026: Apply now",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Iceland-based Treble raises $18 million for its voice simulation platform",
+        "query": "Iceland-based Treble raises $18 million for its voice simulation platform",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Snap tries to make the case again for its $2,200 smart glasses",
+        "query": "Snap tries to make the case again for its $2,200 smart glasses",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "story_enrichment_calls": 7,
+    "terminal_error_code": null,
+    "recent_dedupe": {
+      "window_days": 3,
+      "checked_days": [
+        "2026-09-15"
+      ],
+      "removed": []
+    }
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "Snap is launching a new Specs AI tool, and it’s coming to iOS and Mac",
+        "summary": "Snap推出Specs Intelligence AI助手，支持连接数字账户处理工作与旅行任务。",
+        "url": "https://www.theverge.com/tech/996078/snap-specs-intelligence-ai-agent-ios-mac",
+        "why_it_matters": "Snap加入AI助手竞争，试图以预期服务差异化吸引用户并提升平台粘性。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-16T19:40:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a2",
+        "title": "Google will now let any AI agent run your smart home",
+        "summary": "Google开放智能家居接口，允许Claude等第三方AI代理通过MCP协议控制设备。",
+        "url": "https://www.theverge.com/tech/996310/google-home-mcp-integration-agentic-ai-smart-home-price-release-date",
+        "why_it_matters": "此举打破生态壁垒，加速AI代理在家庭场景落地，重塑智能硬件交互模式。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-16T13:00:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "The 2.5-hour AI-generated Odyssey movie is 2.5 hours too long",
+        "summary": "全AI生成的《奥德赛》续作因质量低劣引发观众对原著的负面联想与担忧。",
+        "url": "https://www.theverge.com/entertainment/996499/ai-odyssey-movie-review",
+        "why_it_matters": "劣质AI内容可能反噬公众对经典IP的兴趣，警示行业需重视生成内容的叙事质量。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-16T16:59:13-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a4",
+        "title": "The AI data center e-waste problem is huge — and getting bigger",
+        "summary": "新报告预测到2050年AI数据中心电子垃圾将填满2300万个集装箱规模巨大。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/996470/ai-data-center-e-waste-ban",
+        "why_it_matters": "AI扩张带来的环境成本被严重低估，迫使行业重新评估硬件生命周期与回收责任。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-16T16:40:46-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a5",
+        "title": "Apple might make servers again to cash in on the AI rush",
+        "summary": "传闻苹果计划重返服务器市场，或与英伟达合作开发AI计算硬件产品。",
+        "url": "https://www.theverge.com/tech/996321/apple-servers-ai-nvidia",
+        "why_it_matters": "若成真将标志苹果重入企业级市场，利用其软硬件整合能力参与AI算力竞争。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-16T13:20:29-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a6",
+        "title": "The sexy AI-powered dating app scams are here",
+        "summary": "安全研究员揭露名为Dora的欺诈约会应用利用AI生成虚假身份进行诈骗活动。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/995348/ai-dating-app-scams",
+        "why_it_matters": "AI技术正被用于升级社交工程攻击，凸显平台在身份验证与内容审核上的漏洞。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-16T10:45:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a7",
+        "title": "AI and data centers are incredibly unpopular in every poll",
+        "summary": "民调显示六成选民反对建设为AI技术供电的数据中心设施且态度明确。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/995917/data-center-nyt-midterm-poll-september",
+        "why_it_matters": "公众强烈抵触可能阻碍AI基础设施审批，增加项目合规成本并影响产业扩张速度。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-15T19:34:25-04:00",
+        "confidence": "reported"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？",
+    "provider": "ModelScope",
+    "model": "Qwen/Qwen3.5-35B-A3B",
+    "input_fingerprint": "7d8d2b157ddbc9e5c24981474bc55aad10f2686cb63a5d47965d1d3463dee3b2",
+    "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "selection_policy": "source_balanced_v2",
+    "candidate_article_ids": [
+      "a1",
+      "a2",
+      "a3",
+      "a4",
+      "a5",
+      "a6",
+      "a7"
+    ],
+    "selection_diagnostics": {
+      "selection_policy": "source_balanced_v2",
+      "catalog_schema_version": 1,
+      "catalog_as_of": "2026-07-18",
+      "input_count": 7,
+      "qualified_count": 7,
+      "core_ai_input_count": 7,
+      "candidate_story_count": 7,
+      "selected_count": 7,
+      "unique_story_count": 7,
+      "duplicate_story_rejected_count": 0,
+      "story_clusters": [],
+      "source_counts": {
+        "theverge": 7
+      },
+      "primary_entity_counts": {
+        "apple": 1,
+        "google": 1,
+        "meta": 1
+      },
+      "mentioned_entity_counts": {
+        "anthropic": 1,
+        "apple": 1,
+        "google": 2,
+        "meta": 1,
+        "nvidia": 1
+      },
+      "model_family_counts": {
+        "claude": 1,
+        "gemini": 1
+      },
+      "topic_counts": {
+        "infrastructure": 1,
+        "model_release": 1,
+        "other_ai": 2,
+        "product_access": 2,
+        "safety_security": 1
+      },
+      "region_counts": {
+        "us": 3
+      },
+      "quota_relaxations": [],
+      "selected_metadata": [
+        {
+          "article_id": "a1",
+          "relevance_level": 3,
+          "primary_entity": "meta",
+          "mentioned_entities": [
+            "meta",
+            "google"
+          ],
+          "model_families": [
+            "gemini"
+          ],
+          "topic": "product_access",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a2",
+          "relevance_level": 3,
+          "primary_entity": "google",
+          "mentioned_entities": [
+            "google",
+            "anthropic"
+          ],
+          "model_families": [
+            "claude"
+          ],
+          "topic": "product_access",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": []
+        },
+        {
+          "article_id": "a4",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "infrastructure",
+          "regions": []
+        },
+        {
+          "article_id": "a5",
+          "relevance_level": 2,
+          "primary_entity": "apple",
+          "mentioned_entities": [
+            "apple",
+            "nvidia"
+          ],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a6",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "safety_security",
+          "regions": []
+        },
+        {
+          "article_id": "a7",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "model_release",
+          "regions": []
+        }
+      ]
+    },
+    "validation_passed": true,
+    "presentation": "fact_impact_v1"
+  },
+  "pipeline_diagnostics": {
+    "status": "degraded",
+    "failures": [
+      {
+        "stage": "enrichment.candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ]
+  }
+}
