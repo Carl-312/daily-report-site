@@ -1,0 +1,1453 @@
+{
+  "date": "2026-09-22",
+  "articles": [
+    {
+      "title": "California tightens rules on AI data center energy and water use",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/998453/california-ai-data-center-bills",
+      "description": "California Gov. Gavin Newsom has signed seven bills designed to prevent AI data centers from passing utility costs onto residents, as reported earlier by the Los Angeles Times. The package of laws requires the California Public Utilities Commission to introduce a new rate classification for data centers while forcing them to pay for upgrades to […]",
+      "publish_time": "2026-09-21T16:29:45-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "California tightens rules on AI data center energy and water use",
+        "selection_description": "California Gov. Gavin Newsom has signed seven bills designed to prevent AI data centers from passing utility costs onto residents, as reported earlier by the Los Angeles Times. The package of laws requires the California Public Utilities Commission to introduce a new rate classification for data centers while forcing them to pay for upgrades to […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/998453/california-ai-data-center-bills"
+      },
+      "evidence": [
+        {
+          "title": "California tightens rules on AI data center energy and water use",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/998453/california-ai-data-center-bills",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-21T16:29:45-04:00",
+          "text": "California Gov. Gavin Newsom has signed seven bills designed to prevent AI data centers from passing utility costs onto residents, as reported earlier by the Los Angeles Times. The package of laws requires the California Public Utilities Commission to introduce a new rate classification for data centers while forcing them to pay for upgrades to […]",
+          "snippet": "California Gov. Gavin Newsom has signed seven bills designed to prevent AI data centers from passing utility costs onto residents, as reported earlier by the Los Angeles Times. The package of laws requires the California Public Utilities Commission to introduce a new rate classification for data centers while forcing them to pay for upgrades to […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+      "link": "https://www.theverge.com/tech/998191/apple-siri-ai-iphone-16-class-action-lawsuit-settlement",
+      "description": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and […]",
+      "publish_time": "2026-09-21T09:36:52-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+        "selection_description": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/998191/apple-siri-ai-iphone-16-class-action-lawsuit-settlement"
+      },
+      "evidence": [
+        {
+          "title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+          "url": "https://www.theverge.com/tech/998191/apple-siri-ai-iphone-16-class-action-lawsuit-settlement",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-21T09:36:52-04:00",
+          "text": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and […]",
+          "snippet": "Apple is paying $250 million to settle claims that it failed to deliver an AI-upgraded Siri - and now, eligible iPhone owners can submit a claim for a payout. If you live in the US and purchased an iPhone 15 Pro, iPhone 15 Pro Max, or any iPhone 16 model between June 10th, 2024, and […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Amazon blocks Meta’s Muse AI agent",
+      "link": "https://www.theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping",
+      "description": "Meta's Muse AI agent has been blocked from shopping Amazon on behalf of its users, GeekWire reports. A popup message started appearing on Sunday for Muse users saying that \"continued access by an unauthorized AI agent violates Amazon's Conditions of Use, to which our customers have agreed.\" According to GeekWire, Meta didn't notify Amazon that […]",
+      "publish_time": "2026-09-21T05:21:47-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Amazon blocks Meta’s Muse AI agent",
+        "selection_description": "Meta's Muse AI agent has been blocked from shopping Amazon on behalf of its users, GeekWire reports. A popup message started appearing on Sunday for Muse users saying that \"continued access by an unauthorized AI agent violates Amazon's Conditions of Use, to which our customers have agreed.\" According to GeekWire, Meta didn't notify Amazon that […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping"
+      },
+      "evidence": [
+        {
+          "title": "Amazon blocks Meta’s Muse AI agent",
+          "url": "https://www.theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-21T05:21:47-04:00",
+          "text": "Meta's Muse AI agent has been blocked from shopping Amazon on behalf of its users, GeekWire reports. A popup message started appearing on Sunday for Muse users saying that \"continued access by an unauthorized AI agent violates Amazon's Conditions of Use, to which our customers have agreed.\" According to GeekWire, Meta didn't notify Amazon that […]",
+          "snippet": "Meta's Muse AI agent has been blocked from shopping Amazon on behalf of its users, GeekWire reports. A popup message started appearing on Sunday for Muse users saying that \"continued access by an unauthorized AI agent violates Amazon's Conditions of Use, to which our customers have agreed.\" According to GeekWire, Meta didn't notify Amazon that […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-09-22",
+    "reference_dt": "2026-09-22T13:16:27.361129+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 36,
+    "input_story_count": 8,
+    "input_lead_count": 28,
+    "lead_resolution_calls": 24,
+    "lead_resolved_count": 0,
+    "lead_unresolved_count": 24,
+    "lead_resolution_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 数学模型攻克百个开放难题",
+        "query": "OpenAI 数学模型攻克百个开放难题 OpenAI cracks open math OpenAI 公告称其新数学模型经 24 天训练解决百余个长期开放数学问题,学界震动,赞美与「数学没有被解决」的反驳齐飞。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "小米 MiMo v2.6 发布并开源",
+        "query": "小米 MiMo v2.6 发布并开源 Xiaomi ships MiMo v2.6 小米迭代自研 MiMo v2.6,Hugging Face 开源 Flash-RL 版与蒸馏 Qwen 9B 小模型,网传 pro 版也已现身。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grok 4.7 首批评测口碑翻车",
+        "query": "Grok 4.7 首批评测口碑翻车 Grok 4.7 review flop Grok 4.7 评测基准图外流后,首批实测用户大失所望,直言不敌 Gemini 系列。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Fable 5 中位思维水准下滑",
+        "query": "Fable 5 中位思维水准下滑 Fable 5 median dip 有观察指出 Fable 5 的「中位数思维」水平在 8 月出现下滑,引发模型质量讨论。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Yandex 开源 AliceAI 模型",
+        "query": "Yandex 开源 AliceAI 模型 Yandex opens up AliceAI 俄罗斯 Yandex 在 Hugging Face 开源 AliceAI-Foundation-80B-A3B-Base,对标 Qwen 与 DeepSeek。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
+        "query": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI 编码引发工程文化反弹",
+        "query": "AI 编码引发工程文化反弹 Backlash to AI coding AI 编码让提交量暴增拖垮 CI、Linear 被迫改造流水线,同时工程师撰文拒读 AI 代笔内容、vibe coding 作品遭社区围攻。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "英伟达 NVFP4 低精度训练",
+        "query": "英伟达 NVFP4 低精度训练 NVIDIA's NVFP4 training bycloud 详解英伟达力推的 NVFP4 低精度格式如何让 LLM 在 FP4 下稳定完成预训练。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "亚马逊封堵 Meta 的 Muse 代购",
+        "query": "亚马逊封堵 Meta 的 Muse 代购 Amazon blocks Meta Muse Meta 新推的 AI 购物 agent Muse 尝试代表用户在亚马逊站内下单,遭亚马逊直接封堵。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "phantom-kv 按请求去除拒答",
+        "query": "phantom-kv 按请求去除拒答 phantom-kv per-request 开源项目 phantom-kv 用 18MB 训练好的 KV 缓存按请求移除 LLM 拒答,完全不改模型权重。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "华尔街转冷 AI 数据中心热潮",
+        "query": "华尔街转冷 AI 数据中心热潮 Wall St cools on AI DCs 纽约时报报道,随着数据中心相关 IPO 密集推出,华尔街对 AI 数据中心建设热潮的质疑声渐起。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "With Tabby, a former accountant is using AI to make accountants obsolete",
+        "query": "With Tabby, a former accountant is using AI to make accountants obsolete",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google 位置数据被罚 4 亿欧",
+        "query": "Google 位置数据被罚 4 亿欧 Google's €403M DPC fine 爱尔兰数据保护委员会因位置数据处理问题对 Google 开出 4.03 亿欧元罚单。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Kairos Power gets up to $100M from Samsung group to build nuclear reactor for Google",
+        "query": "Kairos Power gets up to $100M from Samsung group to build nuclear reactor for Google",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
+        "query": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Corridor raises $25M seed to build a health benefits brokerage for SMBs",
+        "query": "Corridor raises $25M seed to build a health benefits brokerage for SMBs",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "X will now tell users when governments have forced it to limit their posts",
+        "query": "X will now tell users when governments have forced it to limit their posts",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "5 days left to save up to $200 on your Disrupt ticket",
+        "query": "5 days left to save up to $200 on your Disrupt ticket",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Benchmark's full partnership will gather at Disrupt",
+        "query": "Benchmark's full partnership will gather at Disrupt",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meet the next wave of VCs judging Startup Battlefield 200 at TechCrunch Disrupt 2026",
+        "query": "Meet the next wave of VCs judging Startup Battlefield 200 at TechCrunch Disrupt 2026",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "前 OpenAI 研究员发布 Jev 模型",
+        "query": "前 OpenAI 研究员发布 Jev 模型 Ex-OpenAI Jev debuts 前 OpenAI 研究员 Diogo Almeida 隐身两年打造的「System 1」模型 Jev 宣称快 200 倍且不会幻觉,引发热议。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 零样本生成 SVG 动画",
+        "query": "Opus 零样本生成 SVG 动画 Opus one-shot SVG art 用户分享 Claude Opus 零样本一次生成的复杂 SVG 动画,效果惊艳社区。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meta’s AI agent has been blocked from using Amazon.com",
+        "query": "Meta’s AI agent has been blocked from using Amazon.com",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The man who built Apple’s stores doesn’t buy Silicon Valley’s bet on AI shopping",
+        "query": "The man who built Apple’s stores doesn’t buy Silicon Valley’s bet on AI shopping",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "lead_terminal_error_code": null,
+    "observation_signals": [
+      {
+        "title": "OpenAI 数学模型攻克百个开放难题",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=OpenAI+cracks+open+math",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "小米 MiMo v2.6 发布并开源",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Xiaomi+ships+MiMo+v2.6",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Grok 4.7 首批评测口碑翻车",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Grok+4.7+review+flop",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Fable 5 中位思维水准下滑",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Fable+5+median+dip",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Yandex 开源 AliceAI 模型",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Yandex+opens+up+AliceAI",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/metas-muse-is-outpacing-chatgpts-early-mobile-launch/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "AI 编码引发工程文化反弹",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Backlash+to+AI+coding",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "英伟达 NVFP4 低精度训练",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=NVIDIA%27s+NVFP4+training",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "亚马逊封堵 Meta 的 Muse 代购",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Amazon+blocks+Meta+Muse",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "phantom-kv 按请求去除拒答",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=phantom-kv+per-request",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "华尔街转冷 AI 数据中心热潮",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Wall+St+cools+on+AI+DCs",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "With Tabby, a former accountant is using AI to make accountants obsolete",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/with-tabby-a-former-accountant-is-using-ai-to-make-accountants-obsolete/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Google 位置数据被罚 4 亿欧",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Google%27s+%E2%82%AC403M+DPC+fine",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Kairos Power gets up to $100M from Samsung group to build nuclear reactor for Google",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/kairos-power-gets-up-to-100m-from-samsung-group-to-build-nuclear-reactor-for-google/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/ouras-2-2b-ipo-is-mostly-a-payday-for-existing-shareholders/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Corridor raises $25M seed to build a health benefits brokerage for SMBs",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/corridor-raises-25m-seed-to-build-a-health-benefits-brokerage-for-smbs/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "X will now tell users when governments have forced it to limit their posts",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/x-will-now-tell-users-when-governments-have-forced-it-to-limit-their-posts/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "5 days left to save up to $200 on your Disrupt ticket",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/discover-whats-next-5-days-left-to-save-up-to-200-on-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Benchmark's full partnership will gather at Disrupt",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/where-will-the-next-breakout-startup-come-from-benchmarks-full-partnership-weighs-in-at-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Meet the next wave of VCs judging Startup Battlefield 200 at TechCrunch Disrupt 2026",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/meet-the-next-wave-of-vcs-judging-startup-battlefield-200-at-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "前 OpenAI 研究员发布 Jev 模型",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Ex-OpenAI+Jev+debuts",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Opus 零样本生成 SVG 动画",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=Opus+one-shot+SVG+art",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Meta’s AI agent has been blocked from using Amazon.com",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/metas-ai-agent-has-been-blocked-from-using-amazon-com/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "The man who built Apple’s stores doesn’t buy Silicon Valley’s bet on AI shopping",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/the-man-who-built-apples-stores-doesnt-buy-silicon-valleys-bet-on-ai-shopping/",
+        "reason": "lead_resolution_request_failed"
+      }
+    ],
+    "publishability_rejected": [],
+    "stage_failures": [
+      {
+        "stage": "candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ],
+    "prefiltered_count": 36,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 30,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "preserved_budget_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 6,
+    "strict_final_count": 6,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "budget_exhausted",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "candidate_enrichment": [
+        "California tightens rules on AI data center energy and water use",
+        "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+        "Trump now says he wants to form an ‘AI Force’"
+      ]
+    },
+    "parameters": {
+      "min_articles": 0,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 30,
+      "max_verify_calls": 0,
+      "max_refill_rounds": 0,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "max_lead_candidates": 10,
+      "lead_search_rounds": 2,
+      "lead_search_depth": "advanced",
+      "lead_max_age_hours": 72,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com",
+        "ai.google.dev",
+        "x.ai",
+        "deepseek.com",
+        "qwenlm.github.io",
+        "bigmodel.cn",
+        "moonshot.cn",
+        "volcengine.com",
+        "tencent.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Only fetched candidates were enriched; independent refill stages were not run."
+    ],
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 6,
+    "candidate_dropped": [
+      {
+        "title": "From first users to billions: Google’s Robby Stein joins TechCrunch Disrupt 2026",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/from-first-users-to-billions-googles-robby-stein-joins-techcrunch-disrupt-2026/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI 规范拟探索成人模式",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=OpenAI+mulls+adult+mode",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Can John Ternus find Apple’s next big thing?",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/podcast/996874/apple-john-ternus-tim-cook-mark-gurman-future-ai-siri-iphone",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "GPT-6 刚发就被梗成过时软件",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-22&t=GPT-6+%27legacy+software%27",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "UN says AI safeguards can’t wait for certainty",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/998090/un-ai-panel-hugging-face-hack-precautionary-principle",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "OpenAI forms math advisory group as its AI resolves more than 100 open problems",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/21/openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems/",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
+    "candidate_enrichment_calls": 30,
+    "candidate_enrichment_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 数学模型攻克百个开放难题",
+        "query": "OpenAI 数学模型攻克百个开放难题 OpenAI cracks open math OpenAI 公告称其新数学模型经 24 天训练解决百余个长期开放数学问题,学界震动,赞美与「数学没有被解决」的反驳齐飞。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "小米 MiMo v2.6 发布并开源",
+        "query": "小米 MiMo v2.6 发布并开源 Xiaomi ships MiMo v2.6 小米迭代自研 MiMo v2.6,Hugging Face 开源 Flash-RL 版与蒸馏 Qwen 9B 小模型,网传 pro 版也已现身。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Grok 4.7 首批评测口碑翻车",
+        "query": "Grok 4.7 首批评测口碑翻车 Grok 4.7 review flop Grok 4.7 评测基准图外流后,首批实测用户大失所望,直言不敌 Gemini 系列。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Fable 5 中位思维水准下滑",
+        "query": "Fable 5 中位思维水准下滑 Fable 5 median dip 有观察指出 Fable 5 的「中位数思维」水平在 8 月出现下滑,引发模型质量讨论。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Yandex 开源 AliceAI 模型",
+        "query": "Yandex 开源 AliceAI 模型 Yandex opens up AliceAI 俄罗斯 Yandex 在 Hugging Face 开源 AliceAI-Foundation-80B-A3B-Base,对标 Qwen 与 DeepSeek。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
+        "query": "Meta’s Muse is outpacing ChatGPT’s early mobile launch",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "AI 编码引发工程文化反弹",
+        "query": "AI 编码引发工程文化反弹 Backlash to AI coding AI 编码让提交量暴增拖垮 CI、Linear 被迫改造流水线,同时工程师撰文拒读 AI 代笔内容、vibe coding 作品遭社区围攻。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "英伟达 NVFP4 低精度训练",
+        "query": "英伟达 NVFP4 低精度训练 NVIDIA's NVFP4 training bycloud 详解英伟达力推的 NVFP4 低精度格式如何让 LLM 在 FP4 下稳定完成预训练。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "亚马逊封堵 Meta 的 Muse 代购",
+        "query": "亚马逊封堵 Meta 的 Muse 代购 Amazon blocks Meta Muse Meta 新推的 AI 购物 agent Muse 尝试代表用户在亚马逊站内下单,遭亚马逊直接封堵。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "phantom-kv 按请求去除拒答",
+        "query": "phantom-kv 按请求去除拒答 phantom-kv per-request 开源项目 phantom-kv 用 18MB 训练好的 KV 缓存按请求移除 LLM 拒答,完全不改模型权重。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "华尔街转冷 AI 数据中心热潮",
+        "query": "华尔街转冷 AI 数据中心热潮 Wall St cools on AI DCs 纽约时报报道,随着数据中心相关 IPO 密集推出,华尔街对 AI 数据中心建设热潮的质疑声渐起。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "California tightens rules on AI data center energy and water use",
+        "query": "California tightens rules on AI data center energy and water use https://www.theverge.com/ai-artificial-intelligence/998453/california-ai-data-center-bills",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+        "query": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement https://www.theverge.com/tech/998191/apple-siri-ai-iphone-16-class-action-lawsuit-settlement",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "With Tabby, a former accountant is using AI to make accountants obsolete",
+        "query": "With Tabby, a former accountant is using AI to make accountants obsolete",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Trump now says he wants to form an ‘AI Force’",
+        "query": "Trump now says he wants to form an ‘AI Force’ https://www.theverge.com/ai-artificial-intelligence/997867/trump-ai-force-ai-czar",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Humans, not rogue AI, are still the biggest cybersecurity risk to energy systems",
+        "query": "Humans, not rogue AI, are still the biggest cybersecurity risk to energy systems https://www.theverge.com/science/997834/ai-cyberattack-energy-critical-infrastructure",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Google 位置数据被罚 4 亿欧",
+        "query": "Google 位置数据被罚 4 亿欧 Google's €403M DPC fine 爱尔兰数据保护委员会因位置数据处理问题对 Google 开出 4.03 亿欧元罚单。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Kairos Power gets up to $100M from Samsung group to build nuclear reactor for Google",
+        "query": "Kairos Power gets up to $100M from Samsung group to build nuclear reactor for Google",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
+        "query": "Oura’s $2.2B IPO is mostly a payday for existing shareholders",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Corridor raises $25M seed to build a health benefits brokerage for SMBs",
+        "query": "Corridor raises $25M seed to build a health benefits brokerage for SMBs",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "X will now tell users when governments have forced it to limit their posts",
+        "query": "X will now tell users when governments have forced it to limit their posts",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "5 days left to save up to $200 on your Disrupt ticket",
+        "query": "5 days left to save up to $200 on your Disrupt ticket",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Benchmark's full partnership will gather at Disrupt",
+        "query": "Benchmark's full partnership will gather at Disrupt",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meet the next wave of VCs judging Startup Battlefield 200 at TechCrunch Disrupt 2026",
+        "query": "Meet the next wave of VCs judging Startup Battlefield 200 at TechCrunch Disrupt 2026",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "前 OpenAI 研究员发布 Jev 模型",
+        "query": "前 OpenAI 研究员发布 Jev 模型 Ex-OpenAI Jev debuts 前 OpenAI 研究员 Diogo Almeida 隐身两年打造的「System 1」模型 Jev 宣称快 200 倍且不会幻觉,引发热议。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 零样本生成 SVG 动画",
+        "query": "Opus 零样本生成 SVG 动画 Opus one-shot SVG art 用户分享 Claude Opus 零样本一次生成的复杂 SVG 动画,效果惊艳社区。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meta’s AI agent has been blocked from using Amazon.com",
+        "query": "Meta’s AI agent has been blocked from using Amazon.com",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "No one is surprised that Nvidia’s Jensen Huang thinks AI fears are overblown",
+        "query": "No one is surprised that Nvidia’s Jensen Huang thinks AI fears are overblown https://www.theverge.com/ai-artificial-intelligence/997936/nvidia-jensen-huang-ai-fears-overblown",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Amazon blocks Meta’s Muse AI agent",
+        "query": "Amazon blocks Meta’s Muse AI agent https://www.theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The man who built Apple’s stores doesn’t buy Silicon Valley’s bet on AI shopping",
+        "query": "The man who built Apple’s stores doesn’t buy Silicon Valley’s bet on AI shopping",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "story_enrichment_calls": 6,
+    "terminal_error_code": null,
+    "recent_dedupe": {
+      "window_days": 3,
+      "checked_days": [
+        "2026-09-21"
+      ],
+      "removed": [
+        {
+          "title": "Trump now says he wants to form an ‘AI Force’",
+          "url_key": "theverge.com/ai-artificial-intelligence/997867/trump-ai-force-ai-czar",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Humans, not rogue AI, are still the biggest cybersecurity risk to energy systems",
+          "url_key": "theverge.com/science/997834/ai-cyberattack-energy-critical-infrastructure",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "No one is surprised that Nvidia’s Jensen Huang thinks AI fears are overblown",
+          "url_key": "theverge.com/ai-artificial-intelligence/997936/nvidia-jensen-huang-ai-fears-overblown",
+          "reason": "recent_exact_url"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "California tightens rules on AI data center energy and water use",
+        "summary": "加州签署七项法案，要求AI数据中心承担升级费用并禁止向居民转嫁公用事业成本。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/998453/california-ai-data-center-bills",
+        "why_it_matters": "新规将增加AI算力运营成本，可能影响数据中心选址与扩张策略。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-21T16:29:45-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a2",
+        "title": "iPhone owners can now submit claims in Apple’s $250 million Siri AI settlement",
+        "summary": "苹果启动2.5亿美元Siri AI集体诉讼和解，符合条件的iPhone用户可提交索赔申请。",
+        "url": "https://www.theverge.com/tech/998191/apple-siri-ai-iphone-16-class-action-lawsuit-settlement",
+        "why_it_matters": "和解案反映市场对AI功能承诺的监管压力，或推动厂商更谨慎宣传技术能力。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-21T09:36:52-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "Amazon blocks Meta’s Muse AI agent",
+        "summary": "亚马逊以违反使用条款为由，阻止Meta Muse AI代理代表用户在其平台购物。",
+        "url": "https://www.theverge.com/tech/998078/amazon-blocks-meta-muse-ai-agent-shopping",
+        "why_it_matters": "平台限制第三方AI代理访问，凸显电商生态对自动化交互的控制权争夺。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-21T05:21:47-04:00",
+        "confidence": "reported"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？",
+    "provider": "ModelScope",
+    "model": "Qwen/Qwen3.5-35B-A3B",
+    "input_fingerprint": "b1e3b3f7222c61f6cc2cd01c31ae915944632c0689978baa92703ecb8622be95",
+    "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "selection_policy": "source_balanced_v2",
+    "candidate_article_ids": [
+      "a1",
+      "a2",
+      "a3"
+    ],
+    "selection_diagnostics": {
+      "selection_policy": "source_balanced_v2",
+      "catalog_schema_version": 1,
+      "catalog_as_of": "2026-07-18",
+      "input_count": 3,
+      "qualified_count": 3,
+      "core_ai_input_count": 3,
+      "candidate_story_count": 3,
+      "selected_count": 3,
+      "unique_story_count": 3,
+      "duplicate_story_rejected_count": 0,
+      "story_clusters": [],
+      "source_counts": {
+        "theverge": 3
+      },
+      "primary_entity_counts": {
+        "amazon": 1,
+        "apple": 1
+      },
+      "mentioned_entity_counts": {
+        "amazon": 1,
+        "apple": 1,
+        "meta": 1
+      },
+      "model_family_counts": {},
+      "topic_counts": {
+        "infrastructure": 1,
+        "other_ai": 1,
+        "product_access": 1
+      },
+      "region_counts": {
+        "us": 2
+      },
+      "quota_relaxations": [],
+      "selected_metadata": [
+        {
+          "article_id": "a1",
+          "relevance_level": 2,
+          "primary_entity": "",
+          "mentioned_entities": [],
+          "model_families": [],
+          "topic": "infrastructure",
+          "regions": []
+        },
+        {
+          "article_id": "a2",
+          "relevance_level": 2,
+          "primary_entity": "apple",
+          "mentioned_entities": [
+            "apple"
+          ],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 2,
+          "primary_entity": "amazon",
+          "mentioned_entities": [
+            "amazon",
+            "meta"
+          ],
+          "model_families": [],
+          "topic": "product_access",
+          "regions": [
+            "us"
+          ]
+        }
+      ]
+    },
+    "validation_passed": true,
+    "presentation": "fact_impact_v1"
+  },
+  "pipeline_diagnostics": {
+    "status": "degraded",
+    "failures": [
+      {
+        "stage": "enrichment.candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ]
+  }
+}
