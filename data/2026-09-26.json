@@ -1,0 +1,1477 @@
+{
+  "date": "2026-09-26",
+  "articles": [
+    {
+      "title": "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office",
+      "link": "https://www.theverge.com/news/1000532/microsoft-copilot-super-app-chat-coding-autopilot",
+      "description": "After teasing its new Copilot \"super app\" last month, Microsoft is officially unveiling it today. The redesigned Copilot app bundles three AI capabilities into a single interface of chat, coding, and agents. As part of the launch, Microsoft is also rebranding Scout, the AI personal assistant it unveiled at Build earlier this year, as Autopilot. […]",
+      "publish_time": "2026-09-25T08:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office",
+        "selection_description": "After teasing its new Copilot \"super app\" last month, Microsoft is officially unveiling it today. The redesigned Copilot app bundles three AI capabilities into a single interface of chat, coding, and agents. As part of the launch, Microsoft is also rebranding Scout, the AI personal assistant it unveiled at Build earlier this year, as Autopilot. […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/news/1000532/microsoft-copilot-super-app-chat-coding-autopilot"
+      },
+      "evidence": [
+        {
+          "title": "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office",
+          "url": "https://www.theverge.com/news/1000532/microsoft-copilot-super-app-chat-coding-autopilot",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-25T08:00:00-04:00",
+          "text": "After teasing its new Copilot \"super app\" last month, Microsoft is officially unveiling it today. The redesigned Copilot app bundles three AI capabilities into a single interface of chat, coding, and agents. As part of the launch, Microsoft is also rebranding Scout, the AI personal assistant it unveiled at Build earlier this year, as Autopilot. […]",
+          "snippet": "After teasing its new Copilot \"super app\" last month, Microsoft is officially unveiling it today. The redesigned Copilot app bundles three AI capabilities into a single interface of chat, coding, and agents. As part of the launch, Microsoft is also rebranding Scout, the AI personal assistant it unveiled at Build earlier this year, as Autopilot. […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Meta makes the Muse filesystem even more accessible",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/1000784/meta-muse-filesystem",
+      "description": "Yesterday, with a little prodding, it was discovered that Meta's Muse would expose its filesystem to curious users. The files offered a fascinating peek under the hood of an AI chatbot, and appeared to expose details we weren't meant to see, not least because Muse itself told people, including us, it wasn't supposed to reveal […]",
+      "publish_time": "2026-09-25T12:49:53-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Meta makes the Muse filesystem even more accessible",
+        "selection_description": "Yesterday, with a little prodding, it was discovered that Meta's Muse would expose its filesystem to curious users. The files offered a fascinating peek under the hood of an AI chatbot, and appeared to expose details we weren't meant to see, not least because Muse itself told people, including us, it wasn't supposed to reveal […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/1000784/meta-muse-filesystem"
+      },
+      "evidence": [
+        {
+          "title": "Meta makes the Muse filesystem even more accessible",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1000784/meta-muse-filesystem",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-25T12:49:53-04:00",
+          "text": "Yesterday, with a little prodding, it was discovered that Meta's Muse would expose its filesystem to curious users. The files offered a fascinating peek under the hood of an AI chatbot, and appeared to expose details we weren't meant to see, not least because Muse itself told people, including us, it wasn't supposed to reveal […]",
+          "snippet": "Yesterday, with a little prodding, it was discovered that Meta's Muse would expose its filesystem to curious users. The files offered a fascinating peek under the hood of an AI chatbot, and appeared to expose details we weren't meant to see, not least because Muse itself told people, including us, it wasn't supposed to reveal […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Can Apple Home’s AI camera features outsmart Amazon’s and Google’s? I put them to the test",
+      "link": "https://www.theverge.com/tech/1000321/apple-intelligence-home-security-camera-amazon-ring-alexa-google-nest-gemini-home-review",
+      "description": "A few years back, I was at a beachside Easter egg hunt, watching my kids dash through sand dunes searching for sweet treats. My phone buzzed in my pocket; I ignored it. A moment later, it buzzed again. I pulled it out, glanced down, and saw a \"motion detected\" notification from my security camera. \"Just […]",
+      "publish_time": "2026-09-25T09:00:00-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Can Apple Home’s AI camera features outsmart Amazon’s and Google’s? I put them to the test",
+        "selection_description": "A few years back, I was at a beachside Easter egg hunt, watching my kids dash through sand dunes searching for sweet treats. My phone buzzed in my pocket; I ignored it. A moment later, it buzzed again. I pulled it out, glanced down, and saw a \"motion detected\" notification from my security camera. \"Just […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/tech/1000321/apple-intelligence-home-security-camera-amazon-ring-alexa-google-nest-gemini-home-review"
+      },
+      "evidence": [
+        {
+          "title": "Can Apple Home’s AI camera features outsmart Amazon’s and Google’s? I put them to the test",
+          "url": "https://www.theverge.com/tech/1000321/apple-intelligence-home-security-camera-amazon-ring-alexa-google-nest-gemini-home-review",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-25T09:00:00-04:00",
+          "text": "A few years back, I was at a beachside Easter egg hunt, watching my kids dash through sand dunes searching for sweet treats. My phone buzzed in my pocket; I ignored it. A moment later, it buzzed again. I pulled it out, glanced down, and saw a \"motion detected\" notification from my security camera. \"Just […]",
+          "snippet": "A few years back, I was at a beachside Easter egg hunt, watching my kids dash through sand dunes searching for sweet treats. My phone buzzed in my pocket; I ignored it. A moment later, it buzzed again. I pulled it out, glanced down, and saw a \"motion detected\" notification from my security camera. \"Just […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    },
+    {
+      "title": "Sony and UMG are suing Suno again",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/1000758/suno-sony-umg-lawsuit-ai-music",
+      "description": "Sony and Universal Music Group filed yet another suit against Suno. The labels claim its new v6 model still infringes on their copyrights because it's trained on user outputs from previous models, which were themselves trained on unlicensed music ripped from YouTube and other sources. Sony and UMG are notable holdouts who did not sign […]",
+      "publish_time": "2026-09-25T11:51:56-04:00",
+      "content": "",
+      "priority": 1,
+      "source": "theverge",
+      "kind": "story",
+      "evidence_status": "direct",
+      "confidence": "reported",
+      "provenance": {
+        "selection_title": "Sony and UMG are suing Suno again",
+        "selection_description": "Sony and Universal Music Group filed yet another suit against Suno. The labels claim its new v6 model still infringes on their copyrights because it's trained on user outputs from previous models, which were themselves trained on unlicensed music ripped from YouTube and other sources. Sony and UMG are notable holdouts who did not sign […]",
+        "selection_content": "",
+        "input_kind": "story",
+        "resolution_stage": "tavily_story_enrichment",
+        "evidence_count": "1",
+        "evidence_urls": "https://www.theverge.com/ai-artificial-intelligence/1000758/suno-sony-umg-lawsuit-ai-music"
+      },
+      "evidence": [
+        {
+          "title": "Sony and UMG are suing Suno again",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1000758/suno-sony-umg-lawsuit-ai-music",
+          "domain": "www.theverge.com",
+          "published_date": "2026-09-25T11:51:56-04:00",
+          "text": "Sony and Universal Music Group filed yet another suit against Suno. The labels claim its new v6 model still infringes on their copyrights because it's trained on user outputs from previous models, which were themselves trained on unlicensed music ripped from YouTube and other sources. Sony and UMG are notable holdouts who did not sign […]",
+          "snippet": "Sony and Universal Music Group filed yet another suit against Suno. The labels claim its new v6 model still infringes on their copyrights because it's trained on user outputs from previous models, which were themselves trained on unlicensed music ripped from YouTube and other sources. Sony and UMG are notable holdouts who did not sign […]",
+          "score": 1.0,
+          "origin": "fetch"
+        }
+      ]
+    }
+  ],
+  "enrichment": {
+    "report_date": "2026-09-26",
+    "reference_dt": "2026-09-26T13:19:54.492502+08:00",
+    "enabled": true,
+    "applied": true,
+    "skip_reason": null,
+    "error": null,
+    "input_count": 39,
+    "input_story_count": 10,
+    "input_lead_count": 29,
+    "lead_resolution_calls": 22,
+    "lead_resolved_count": 0,
+    "lead_unresolved_count": 22,
+    "lead_resolution_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Codex 全球大规模 401 故障",
+        "query": "Codex 全球大规模 401 故障 Codex mass 401 outage OpenAI Codex CLI、桌面端与网页端同日集体报「无效 API Key」401,重新登录无效,状态页拖延许久才确认事故。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Fable 5.1 攻克九圈物理计算",
+        "query": "Fable 5.1 攻克九圈物理计算 Fable 5.1 nine-loop feat Anthropic 官方研究博客披露,Claude Fable 5.1 独立完成了专家追赶多年的前沿九圈粒子物理计算,研究者只需说「继续」。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Swift 版 Qwen3.8-Flash 实测",
+        "query": "Swift 版 Qwen3.8-Flash 实测 Swift Qwen3.8-Flash wins r/LocalLLaMA 实测 UkisAI 的 Swift1.5-Qwen3.8-Flash-Next:token 用量与耗时仅约四成,质量与原版基本持平。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "MiniMax H3 解锁静态图模式",
+        "query": "MiniMax H3 解锁静态图模式 MiniMax H3 stills mode 社区开发者深挖 MiniMax H3 的 Latent 与 VAE 解码结构,开源了 ComfyUI Stills 静态图新模式工作流。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "盖茨警告 AI 或致十亿人死亡",
+        "query": "盖茨警告 AI 或致十亿人死亡 Gates' AI doom warning 比尔·盖茨对 Bloomberg 发出罕见严厉警告,称 AI 已经强大到可能导致「十亿人死亡」。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Too AI; Didn't Read 上线",
+        "query": "Too AI; Didn't Read 上线 Too AI; Didn't Read tool HN 用户上线同名工具站,主打一键识别并略过 AI 生成的垃圾内容,直击 AI slop 泛滥痛点。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Crusoe abandons $1.25B plan to use Boom turbines at AI data centers",
+        "query": "Crusoe abandons $1.25B plan to use Boom turbines at AI data centers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
+        "query": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The Aeropod automates soil aeration without robotics — see it at TechCrunch Disrupt",
+        "query": "The Aeropod automates soil aeration without robotics — see it at TechCrunch Disrupt",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "TechCrunch Disrupt 2026: Ricursive Intelligence’s Anna Goldie and Azalia Mirhoseini on when AI starts designing its own hardware",
+        "query": "TechCrunch Disrupt 2026: Ricursive Intelligence’s Anna Goldie and Azalia Mirhoseini on when AI starts designing its own hardware",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Tesla finally moves to electrify trucking after a decade of work and delays",
+        "query": "Tesla finally moves to electrify trucking after a decade of work and delays",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 5.5 告别破折号",
+        "query": "Opus 5.5 告别破折号 Opus 5.5 drops em dashes Reddit 用户引用 ArenaAI 对比指出,Opus 5.5 的输出几乎不再出现破折号,文风明显变化。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Ollaya 上线:跑开源决策模型",
+        "query": "Ollaya 上线:跑开源决策模型 Ollaya launches on HN HN 上出现的开源项目 Ollaya,想做「Jev 式决策模型」的 Ollama:一站式本地运行开源决策模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Automattic has a new board after failed attempt to put CEO on leave",
+        "query": "Automattic has a new board after failed attempt to put CEO on leave",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meadow lets you leave your smartphone at home without sacrificing the essentials",
+        "query": "Meadow lets you leave your smartphone at home without sacrificing the essentials",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The hottest new hangout for middle schoolers is NPR’s comment section?",
+        "query": "The hottest new hangout for middle schoolers is NPR’s comment section?",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Mark Wahlberg is coming to TechCrunch Disrupt 2026, and he wants to talk about your work, not his",
+        "query": "Mark Wahlberg is coming to TechCrunch Disrupt 2026, and he wants to talk about your work, not his",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 5.5 编程实战出圈",
+        "query": "Opus 5.5 编程实战出圈 Users flock to Opus 5.5 从数小时做出宝可梦对战 demo、一天写出完整游戏,到 GPT 重度用户转投,Opus 5.5 实战口碑集中爆发,被认为正快速缩小与 ChatGPT 的差距。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "敢让 Claude 碰本地文件吗",
+        "query": "敢让 Claude 碰本地文件吗 Trusting Claude locally 一条 Reddit 帖引爆讨论:能力越来越强的 Claude 代理可以直接操作用户电脑,该不该放行本地权限。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Excel 单元格支持多值",
+        "query": "Excel 单元格支持多值 Excel multi-value cells 微软在 Microsoft 365 Insider 博客宣布,Excel 单元格正式支持存储多个值,告别一格一值时代。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 智能体渗透 HuggingFace",
+        "query": "OpenAI 智能体渗透 HuggingFace OpenAI agents hacked HF swarmtraces.org 的复盘在 HN 引爆讨论,逐帧披露 OpenAI 智能体是如何渗透 Hugging Face 的。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Anthropic to pay Akamai $11.6 billion over seven years in cloud deal",
+        "query": "Anthropic to pay Akamai $11.6 billion over seven years in cloud deal",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "lead_terminal_error_code": null,
+    "observation_signals": [
+      {
+        "title": "Codex 全球大规模 401 故障",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Codex+mass+401+outage",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Fable 5.1 攻克九圈物理计算",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Fable+5.1+nine-loop+feat",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Swift 版 Qwen3.8-Flash 实测",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Swift+Qwen3.8-Flash+wins",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "MiniMax H3 解锁静态图模式",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=MiniMax+H3+stills+mode",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "盖茨警告 AI 或致十亿人死亡",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Gates%27+AI+doom+warning",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Too AI; Didn't Read 上线",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Too+AI%3B+Didn%27t+Read+tool",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Crusoe abandons $1.25B plan to use Boom turbines at AI data centers",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/crusoe-abandons-1-25b-plan-to-use-boom-turbines-at-ai-data-centers/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/ahead-of-u-s-ipo-british-ai-neocloud-nscale-secures-3-36b-in-convertible-finacing/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "The Aeropod automates soil aeration without robotics — see it at TechCrunch Disrupt",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/the-aeropod-automates-soil-aeration-without-robotics-see-it-at-techcrunch-disrupt/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "TechCrunch Disrupt 2026: Ricursive Intelligence’s Anna Goldie and Azalia Mirhoseini on when AI starts designing its own hardware",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/techcrunch-disrupt-2026-ricursive-intelligences-anna-goldie-and-azalia-mirhoseini-on-when-ai-starts-designing-its-own-hardware/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Tesla finally moves to electrify trucking after a decade of work and delays",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/tesla-finally-moves-to-electrify-trucking-after-a-decade-of-work-and-delays/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Opus 5.5 告别破折号",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Opus+5.5+drops+em+dashes",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Ollaya 上线:跑开源决策模型",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Ollaya+launches+on+HN",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Automattic has a new board after failed attempt to put CEO on leave",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/automattic-has-a-new-board-after-failed-attempt-to-put-ceo-on-leave/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Meadow lets you leave your smartphone at home without sacrificing the essentials",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/meadow-lets-you-leave-your-smartphone-at-home-without-sacrificing-the-essentials/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "The hottest new hangout for middle schoolers is NPR’s comment section?",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/the-hottest-new-hangout-for-middle-schoolers-is-nprs-comment-section/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Mark Wahlberg is coming to TechCrunch Disrupt 2026, and he wants to talk about your work, not his",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/mark-wahlberg-is-coming-to-techcrunch-disrupt-2026/",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Opus 5.5 编程实战出圈",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Users+flock+to+Opus+5.5",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "敢让 Claude 碰本地文件吗",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Trusting+Claude+locally",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Excel 单元格支持多值",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Excel+multi-value+cells",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "OpenAI 智能体渗透 HuggingFace",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=OpenAI+agents+hacked+HF",
+        "reason": "lead_resolution_request_failed"
+      },
+      {
+        "title": "Anthropic to pay Akamai $11.6 billion over seven years in cloud deal",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/",
+        "reason": "lead_resolution_request_failed"
+      }
+    ],
+    "publishability_rejected": [],
+    "stage_failures": [
+      {
+        "stage": "candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ],
+    "prefiltered_count": 39,
+    "prefilter_stats": {},
+    "prefilter_bucket_counts": {
+      "core_ai": 0,
+      "ai_neighbor": 0,
+      "generic_or_low_signal": 0
+    },
+    "verify_calls": 0,
+    "refill_calls": 0,
+    "fallback_calls": 0,
+    "total_calls": 30,
+    "cluster_count": 0,
+    "clustered_prefilter_count": 0,
+    "cluster_potential_verify_saved_calls": 0,
+    "verify_saved_calls": 0,
+    "reserved_refill_calls": 0,
+    "verified_count": 0,
+    "neighbor_candidates_verified_count": 0,
+    "neighbor_candidates_outside_24h_count": 0,
+    "neighbor_candidates_no_match_count": 0,
+    "preserved_error_count": 0,
+    "preserved_budget_count": 0,
+    "priority_refilled_count": 0,
+    "secondary_refilled_count": 0,
+    "media_refilled_count": 0,
+    "official_refilled_count": 0,
+    "refill_needed_count": 0,
+    "refill_remaining_count": 0,
+    "near_duplicate_rejected_count": 0,
+    "story_cluster_rejected_count": 0,
+    "secondary_duplicate_slip_count": 0,
+    "final_count": 8,
+    "strict_final_count": 8,
+    "strict_refill_accepted_count": 0,
+    "lenient_candidate_count": 0,
+    "proven_within_72h_count": 0,
+    "missing_date_unproven_count": 0,
+    "outside_72h_rejected_count": 0,
+    "lenient_non_ai_count": 0,
+    "lenient_duplicate_or_cluster_count": 0,
+    "lenient_selected_preview": [],
+    "lenient_refill_diagnostics": {
+      "enabled": false,
+      "window_hours": 72,
+      "request_window_hours": 24,
+      "start_date": null,
+      "end_date": null,
+      "stages": {}
+    },
+    "stop_reason": "budget_exhausted",
+    "priority_refill_runs": [],
+    "secondary_refill_runs": [],
+    "official_fallback_runs": [],
+    "priority_refilled_candidates": [],
+    "secondary_refilled_candidates": [],
+    "official_refilled_candidates": [],
+    "accepted_by_stage_preview": {
+      "candidate_enrichment": [
+        "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office",
+        "Gemini 3.8 Live with Live Avatar gives Google’s AI a face",
+        "Meta makes the Muse filesystem even more accessible"
+      ]
+    },
+    "parameters": {
+      "min_articles": 0,
+      "strict_hours": 24,
+      "trust_env": true,
+      "max_total_calls": 30,
+      "max_verify_calls": 0,
+      "max_refill_rounds": 0,
+      "refill_max_results": 8,
+      "refill_search_window_hours": 24,
+      "verify_search_depth": "basic",
+      "verify_max_results": 3,
+      "max_lead_candidates": 10,
+      "lead_search_rounds": 2,
+      "lead_search_depth": "advanced",
+      "lead_max_age_hours": 72,
+      "priority_refill_media_whitelist": [
+        "thenextweb.com",
+        "venturebeat.com"
+      ],
+      "secondary_refill_candidate_domains": [
+        "reuters.com",
+        "arstechnica.com"
+      ],
+      "official_fallback_domains": [
+        "openai.com",
+        "anthropic.com",
+        "ai.google.dev",
+        "x.ai",
+        "deepseek.com",
+        "qwenlm.github.io",
+        "bigmodel.cn",
+        "moonshot.cn",
+        "volcengine.com",
+        "tencent.com"
+      ],
+      "enable_fuzzy_second_pass": false,
+      "enable_official_fallback": false,
+      "lenient_refill_diagnostics_enabled": false,
+      "lenient_refill_window_hours": 72
+    },
+    "notes": [
+      "Only fetched candidates were enriched; independent refill stages were not run."
+    ],
+    "candidate_queue_count": 30,
+    "candidate_dropped_count": 9,
+    "candidate_dropped": [
+      {
+        "title": "GPT-6 Astra 水墨基准并列第一",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=GPT-6+Astra+tops+ink+art",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Meta Connect 2026 又转向",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Meta+Connect+2026+pivot",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Codex 传推 Pro Max 贵档",
+        "source": "agihunt_trending",
+        "signal_url": "https://agihunt.info/?day=2026-09-26&t=Codex+%27Pro+Max%27+rumored",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "At Meta Connect, the company’s smart glasses were everywhere",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/at-meta-connect-the-companys-smart-glasses-were-everywhere/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "One company is at the center of a wave of rogue AI attacks",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/1000644/irregular-rogue-ai-cyberattacks-hacking-openai-meta-anthropic-google",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Meta opens early access program for new Muse features",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/meta-opens-early-access-program-for-new-muse-features/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Unsecured OpenAI agents posted 53 user images on the internet without the lab’s knowledge",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/unsecured-openai-agents-posted-53-user-images-on-the-internet-without-the-labs-knowledge/",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "Muse will apparently let you download its entire filesystem",
+        "source": "theverge",
+        "signal_url": "https://www.theverge.com/ai-artificial-intelligence/1000222/meta-muse-ai-filesystem",
+        "reason": "candidate_daily_budget_cap"
+      },
+      {
+        "title": "For months, OpenAI’s agent swarms have been attacking online databases to find obscure facts",
+        "source": "techcrunch",
+        "signal_url": "https://techcrunch.com/2026/09/25/for-months-openais-agent-swarms-have-been-attacking-online-databases-to-find-obscure-facts/",
+        "reason": "candidate_daily_budget_cap"
+      }
+    ],
+    "candidate_processed_count": 30,
+    "candidate_enrichment_calls": 30,
+    "candidate_enrichment_runs": [
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 1,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Codex 全球大规模 401 故障",
+        "query": "Codex 全球大规模 401 故障 Codex mass 401 outage OpenAI Codex CLI、桌面端与网页端同日集体报「无效 API Key」401,重新登录无效,状态页拖延许久才确认事故。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 2,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Fable 5.1 攻克九圈物理计算",
+        "query": "Fable 5.1 攻克九圈物理计算 Fable 5.1 nine-loop feat Anthropic 官方研究博客披露,Claude Fable 5.1 独立完成了专家追赶多年的前沿九圈粒子物理计算,研究者只需说「继续」。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 3,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Swift 版 Qwen3.8-Flash 实测",
+        "query": "Swift 版 Qwen3.8-Flash 实测 Swift Qwen3.8-Flash wins r/LocalLLaMA 实测 UkisAI 的 Swift1.5-Qwen3.8-Flash-Next:token 用量与耗时仅约四成,质量与原版基本持平。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 4,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "MiniMax H3 解锁静态图模式",
+        "query": "MiniMax H3 解锁静态图模式 MiniMax H3 stills mode 社区开发者深挖 MiniMax H3 的 Latent 与 VAE 解码结构,开源了 ComfyUI Stills 静态图新模式工作流。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 5,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office",
+        "query": "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office https://www.theverge.com/news/1000532/microsoft-copilot-super-app-chat-coding-autopilot",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 6,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Gemini 3.8 Live with Live Avatar gives Google’s AI a face",
+        "query": "Gemini 3.8 Live with Live Avatar gives Google’s AI a face https://www.theverge.com/tech/1000328/google-gemini-ai-live-avatar-face",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 7,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "盖茨警告 AI 或致十亿人死亡",
+        "query": "盖茨警告 AI 或致十亿人死亡 Gates' AI doom warning 比尔·盖茨对 Bloomberg 发出罕见严厉警告,称 AI 已经强大到可能导致「十亿人死亡」。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 8,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Too AI; Didn't Read 上线",
+        "query": "Too AI; Didn't Read 上线 Too AI; Didn't Read tool HN 用户上线同名工具站,主打一键识别并略过 AI 生成的垃圾内容,直击 AI slop 泛滥痛点。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 9,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Meta makes the Muse filesystem even more accessible",
+        "query": "Meta makes the Muse filesystem even more accessible https://www.theverge.com/ai-artificial-intelligence/1000784/meta-muse-filesystem",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 10,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Can Apple Home’s AI camera features outsmart Amazon’s and Google’s? I put them to the test",
+        "query": "Can Apple Home’s AI camera features outsmart Amazon’s and Google’s? I put them to the test https://www.theverge.com/tech/1000321/apple-intelligence-home-security-camera-amazon-ring-alexa-google-nest-gemini-home-review",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 11,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Crusoe abandons $1.25B plan to use Boom turbines at AI data centers",
+        "query": "Crusoe abandons $1.25B plan to use Boom turbines at AI data centers",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 12,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
+        "query": "Ahead of US IPO, British AI neocloud Nscale secures $3.36B in convertible financing",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 13,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The Aeropod automates soil aeration without robotics — see it at TechCrunch Disrupt",
+        "query": "The Aeropod automates soil aeration without robotics — see it at TechCrunch Disrupt",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 14,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "TechCrunch Disrupt 2026: Ricursive Intelligence’s Anna Goldie and Azalia Mirhoseini on when AI starts designing its own hardware",
+        "query": "TechCrunch Disrupt 2026: Ricursive Intelligence’s Anna Goldie and Azalia Mirhoseini on when AI starts designing its own hardware",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 15,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Jensen Huang talks about AI and climate change like a supervillain",
+        "query": "Jensen Huang talks about AI and climate change like a supervillain https://www.theverge.com/tech/1000140/jensen-huang-nvidia-ai-energy-climate-change-supervillain",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 16,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Tesla finally moves to electrify trucking after a decade of work and delays",
+        "query": "Tesla finally moves to electrify trucking after a decade of work and delays",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 17,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 5.5 告别破折号",
+        "query": "Opus 5.5 告别破折号 Opus 5.5 drops em dashes Reddit 用户引用 ArenaAI 对比指出,Opus 5.5 的输出几乎不再出现破折号,文风明显变化。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 18,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Ollaya 上线:跑开源决策模型",
+        "query": "Ollaya 上线:跑开源决策模型 Ollaya launches on HN HN 上出现的开源项目 Ollaya,想做「Jev 式决策模型」的 Ollama:一站式本地运行开源决策模型。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 19,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Sony and UMG are suing Suno again",
+        "query": "Sony and UMG are suing Suno again https://www.theverge.com/ai-artificial-intelligence/1000758/suno-sony-umg-lawsuit-ai-music",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 20,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Automattic has a new board after failed attempt to put CEO on leave",
+        "query": "Automattic has a new board after failed attempt to put CEO on leave",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 21,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Meadow lets you leave your smartphone at home without sacrificing the essentials",
+        "query": "Meadow lets you leave your smartphone at home without sacrificing the essentials",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 22,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "The hottest new hangout for middle schoolers is NPR’s comment section?",
+        "query": "The hottest new hangout for middle schoolers is NPR’s comment section?",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 23,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Mark Wahlberg is coming to TechCrunch Disrupt 2026, and he wants to talk about your work, not his",
+        "query": "Mark Wahlberg is coming to TechCrunch Disrupt 2026, and he wants to talk about your work, not his",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 24,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Opus 5.5 编程实战出圈",
+        "query": "Opus 5.5 编程实战出圈 Users flock to Opus 5.5 从数小时做出宝可梦对战 demo、一天写出完整游戏,到 GPT 重度用户转投,Opus 5.5 实战口碑集中爆发,被认为正快速缩小与 ChatGPT 的差距。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 25,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "敢让 Claude 碰本地文件吗",
+        "query": "敢让 Claude 碰本地文件吗 Trusting Claude locally 一条 Reddit 帖引爆讨论:能力越来越强的 Claude 代理可以直接操作用户电脑,该不该放行本地权限。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 26,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Excel 单元格支持多值",
+        "query": "Excel 单元格支持多值 Excel multi-value cells 微软在 Microsoft 365 Insider 博客宣布,Excel 单元格正式支持存储多个值,告别一格一值时代。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 27,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Meta is going to let you build games with AI right on your phone",
+        "query": "Meta is going to let you build games with AI right on your phone https://www.theverge.com/games/999972/meta-horizon-create-studio-ai-games",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 28,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "OpenAI 智能体渗透 HuggingFace",
+        "query": "OpenAI 智能体渗透 HuggingFace OpenAI agents hacked HF swarmtraces.org 的复盘在 HN 引爆讨论,逐帧披露 OpenAI 智能体是如何渗透 Hugging Face 的。",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 29,
+        "candidate_kind": "lead",
+        "round": 1,
+        "candidate_title": "Anthropic to pay Akamai $11.6 billion over seven years in cloud deal",
+        "query": "Anthropic to pay Akamai $11.6 billion over seven years in cloud deal",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      },
+      {
+        "stage": "candidate_enrichment",
+        "candidate_index": 30,
+        "candidate_kind": "story",
+        "round": 1,
+        "candidate_title": "Muse sure looks a lot like OpenClaw",
+        "query": "Muse sure looks a lot like OpenClaw https://www.theverge.com/report/1000180/muse-openclaw-instinct-lookalike",
+        "search_depth": "advanced",
+        "latency_ms": null,
+        "result_count": 0,
+        "accepted_evidence_count": 0,
+        "rejected_irrelevant_count": 0,
+        "rejected_invalid_count": 0,
+        "request_outcome": "http_error",
+        "error_code": "http_error"
+      }
+    ],
+    "story_enrichment_calls": 8,
+    "terminal_error_code": null,
+    "recent_dedupe": {
+      "window_days": 3,
+      "checked_days": [
+        "2026-09-25"
+      ],
+      "removed": [
+        {
+          "title": "Gemini 3.8 Live with Live Avatar gives Google’s AI a face",
+          "url_key": "theverge.com/tech/1000328/google-gemini-ai-live-avatar-face",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Jensen Huang talks about AI and climate change like a supervillain",
+          "url_key": "theverge.com/tech/1000140/jensen-huang-nvidia-ai-energy-climate-change-supervillain",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Meta is going to let you build games with AI right on your phone",
+          "url_key": "theverge.com/games/999972/meta-horizon-create-studio-ai-games",
+          "reason": "recent_exact_url"
+        },
+        {
+          "title": "Muse sure looks a lot like OpenClaw",
+          "url_key": "theverge.com/report/1000180/muse-openclaw-instinct-lookalike",
+          "reason": "recent_exact_url"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "policy": "required_ai",
+    "items": [
+      {
+        "article_id": "a1",
+        "title": "Microsoft thinks its new Copilot ‘super app’ will be as influential as Office",
+        "summary": "微软正式推出整合聊天、编码与智能体的Copilot超级应用，并将助手Scout更名为Autopilot。",
+        "url": "https://www.theverge.com/news/1000532/microsoft-copilot-super-app-chat-coding-autopilot",
+        "why_it_matters": "此举标志AI从工具向集成平台演进，可能重塑办公与开发工作流。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-25T08:00:00-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a2",
+        "title": "Meta makes the Muse filesystem even more accessible",
+        "summary": "Meta的Muse AI聊天机器人意外暴露其文件系统，引发对内部数据可见性的关注。",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1000784/meta-muse-filesystem",
+        "why_it_matters": "模型内部细节泄露提示AI系统透明度风险，影响开发者对安全边界的判断。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-25T12:49:53-04:00",
+        "confidence": "reported"
+      },
+      {
+        "article_id": "a3",
+        "title": "Can Apple Home’s AI camera features outsmart Amazon’s and Google’s? I put them to the test",
+        "summary": "评测显示Apple Home的AI摄像头在运动检测等场景下正与亚马逊和谷歌展开竞争。",
+        "url": "https://www.theverge.com/tech/1000321/apple-intelligence-home-security-camera-amazon-ring-alexa-google-nest-gemini-home-review",
+        "why_it_matters": "家庭安防领域AI能力对比凸显生态差异，影响消费者选择与厂商技术路线。",
+        "source_label": "The Verge",
+        "published_at": "2026-09-25T09:00:00-04:00",
+        "confidence": "reported"
+      }
+    ],
+    "discussion_topic": "你最关注哪条AI新闻？",
+    "provider": "ModelScope",
+    "model": "Qwen/Qwen3.5-35B-A3B",
+    "input_fingerprint": "6a2cedfe8d1f4d3d7f3993331a9febbac8915fa5f3270b736c988bd1c1a5c3bb",
+    "prompt_fingerprint": "392b0f4b3ccf385ce048dbb8b26be130c7bcebd93533425c502b006114bf622c",
+    "attempts": [
+      {
+        "provider": "ModelScope",
+        "model": "Qwen/Qwen3.5-35B-A3B",
+        "status": "ok",
+        "error_kind": null
+      }
+    ],
+    "selection_policy": "source_balanced_v2",
+    "candidate_article_ids": [
+      "a1",
+      "a2",
+      "a3"
+    ],
+    "selection_diagnostics": {
+      "selection_policy": "source_balanced_v2",
+      "catalog_schema_version": 1,
+      "catalog_as_of": "2026-07-18",
+      "input_count": 4,
+      "qualified_count": 4,
+      "core_ai_input_count": 3,
+      "candidate_story_count": 4,
+      "selected_count": 3,
+      "unique_story_count": 3,
+      "duplicate_story_rejected_count": 0,
+      "story_clusters": [],
+      "source_counts": {
+        "theverge": 3
+      },
+      "primary_entity_counts": {
+        "apple": 1,
+        "meta": 1,
+        "microsoft": 1
+      },
+      "mentioned_entity_counts": {
+        "amazon": 1,
+        "apple": 1,
+        "google": 1,
+        "meta": 1,
+        "microsoft": 1
+      },
+      "model_family_counts": {
+        "copilot": 1
+      },
+      "topic_counts": {
+        "model_release": 1,
+        "other_ai": 1,
+        "safety_security": 1
+      },
+      "region_counts": {
+        "us": 3
+      },
+      "quota_relaxations": [],
+      "selected_metadata": [
+        {
+          "article_id": "a1",
+          "relevance_level": 3,
+          "primary_entity": "microsoft",
+          "mentioned_entities": [
+            "microsoft"
+          ],
+          "model_families": [
+            "copilot"
+          ],
+          "topic": "model_release",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a2",
+          "relevance_level": 2,
+          "primary_entity": "meta",
+          "mentioned_entities": [
+            "meta"
+          ],
+          "model_families": [],
+          "topic": "other_ai",
+          "regions": [
+            "us"
+          ]
+        },
+        {
+          "article_id": "a3",
+          "relevance_level": 2,
+          "primary_entity": "apple",
+          "mentioned_entities": [
+            "apple",
+            "amazon",
+            "google"
+          ],
+          "model_families": [],
+          "topic": "safety_security",
+          "regions": [
+            "us"
+          ]
+        }
+      ]
+    },
+    "validation_passed": true,
+    "presentation": "fact_impact_v1"
+  },
+  "pipeline_diagnostics": {
+    "status": "degraded",
+    "failures": [
+      {
+        "stage": "enrichment.candidate_enrichment",
+        "code": "http_error",
+        "count": 30
+      }
+    ]
+  }
+}
