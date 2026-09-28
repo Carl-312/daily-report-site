@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -25,6 +26,8 @@ def _llm_config(**overrides):
         "fallback_api_base_url": "https://siliconflow.test/v1",
         "fallback_model": "Pro/moonshotai/Kimi-K2.6",
         "max_output": 2000,
+        "summary_request_timeout_seconds": 180,
+        "summary_provider_budget_seconds": 240,
         "title_max": 150,
         "desc_max": 300,
         "prompt_path": "missing-prompt.md",
@@ -52,6 +55,13 @@ def _valid_summary(item_count: int = 1) -> str:
             ],
             "discussion_topic": "你最关注哪条AI新闻？欢迎留言分享你的看法！",
         },
+        ensure_ascii=False,
+    )
+
+
+def _valid_repair_item() -> str:
+    return json.dumps(
+        json.loads(_valid_summary())["items"][0],
         ensure_ascii=False,
     )
 
@@ -276,7 +286,7 @@ def test_summarize_applies_verified_glm52_request_controls(monkeypatch) -> None:
     )
     captured: dict = {}
 
-    def fake_summarize_sync(_client, params):
+    def fake_summarize_sync(_client, params, **_kwargs):
         captured.update(params)
         return _valid_summary()
 
@@ -302,7 +312,7 @@ def test_summarize_tries_modelscope_secondary_before_siliconflow(
     )
     calls: list[tuple[str, str]] = []
 
-    def fake_summarize_sync(client, params):
+    def fake_summarize_sync(client, params, **_kwargs):
         calls.append((client, params["model"]))
         if params["model"] == "Tencent-Hunyuan/Hy3":
             return _valid_summary()
@@ -334,7 +344,7 @@ def test_summarize_treats_empty_provider_response_as_failure(monkeypatch) -> Non
     )
     calls: list[str] = []
 
-    def fake_summarize_sync(client, params):
+    def fake_summarize_sync(client, params, **_kwargs):
         calls.append(params["model"])
         if params["model"] == "ZhipuAI/GLM-5.2":
             return "  \n"
@@ -376,6 +386,117 @@ def test_summarize_sync_rejects_empty_message_content() -> None:
         summarizer._summarize_sync(client, {})
 
 
+def test_summarize_sync_applies_transport_timeout() -> None:
+    captured: dict = {}
+
+    class Client:
+        def __init__(self) -> None:
+            self.chat = SimpleNamespace(completions=SimpleNamespace(create=self.create))
+
+        def with_options(self, *, timeout):
+            captured["timeout"] = timeout
+            return self
+
+        @staticmethod
+        def create(**kwargs):
+            captured["request"] = kwargs
+            return SimpleNamespace(
+                choices=[SimpleNamespace(message=SimpleNamespace(content="ok"))]
+            )
+
+    summarizer._summarize_sync(
+        Client(),
+        {"model": "model"},
+        timeout_seconds=17.5,
+    )
+
+    assert captured["timeout"] == 17.5
+    assert captured["request"] == {"model": "model", "stream": False}
+
+
+def test_targeted_repair_preserves_other_items_and_discussion_topic() -> None:
+    draft = summarizer._parse_summary_draft(_valid_summary(item_count=2))
+    repaired = json.loads(_valid_repair_item())
+    repaired["summary"] = (
+        "人工智能公司发布新的开发工具，并面向开发者开放多项核心能力，"
+        "帮助团队提升复杂任务的实际交付效率。"
+    )
+
+    merged = summarizer._parse_summary_draft(
+        summarizer._merge_targeted_repair(
+            draft,
+            0,
+            json.dumps(repaired, ensure_ascii=False),
+        )
+    )
+
+    assert merged.items[0].summary == repaired["summary"]
+    assert merged.items[1] == draft.items[1]
+    assert merged.discussion_topic == draft.discussion_topic
+
+
+def test_summary_request_timeout_respects_all_three_budgets() -> None:
+    now = datetime(2026, 7, 25, tzinfo=timezone.utc)
+
+    assert (
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=40),
+            provider_deadline_at=now + timedelta(seconds=90),
+            request_timeout_seconds=120,
+            now=now,
+        )
+        == 40
+    )
+    assert (
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=200),
+            provider_deadline_at=now + timedelta(seconds=30),
+            request_timeout_seconds=120,
+            now=now,
+        )
+        == 30
+    )
+    assert (
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=200),
+            provider_deadline_at=now + timedelta(seconds=180),
+            request_timeout_seconds=120,
+            now=now,
+        )
+        == 120
+    )
+
+
+def test_summary_provider_budget_is_capped_by_run_deadline() -> None:
+    now = datetime(2026, 7, 25, tzinfo=timezone.utc)
+
+    assert summarizer._summary_provider_deadline(
+        now + timedelta(seconds=600), 240, now=now
+    ) == now + timedelta(seconds=240)
+    assert summarizer._summary_provider_deadline(
+        now + timedelta(seconds=100), 240, now=now
+    ) == now + timedelta(seconds=100)
+
+
+def test_summary_request_timeout_distinguishes_run_and_provider_expiry() -> None:
+    now = datetime(2026, 7, 25, tzinfo=timezone.utc)
+
+    with pytest.raises(summarizer.RunDeadlineExceeded):
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now,
+            provider_deadline_at=now + timedelta(seconds=30),
+            request_timeout_seconds=120,
+            now=now,
+        )
+    with pytest.raises(summarizer.SummaryProviderBudgetExceeded):
+        summarizer._bounded_summary_request_timeout(
+            run_deadline_at=now + timedelta(seconds=30),
+            provider_deadline_at=now,
+            request_timeout_seconds=120,
+            now=now,
+        )
+
+
 def test_summarize_result_records_provider_attempts_and_article_provenance(
     monkeypatch,
 ) -> None:
@@ -387,7 +508,7 @@ def test_summarize_result_records_provider_attempts_and_article_provenance(
         lambda base_url, api_key: f"{base_url}|{api_key}",
     )
 
-    def fake_summarize_sync(client, params):
+    def fake_summarize_sync(client, params, **_kwargs):
         if params["model"] == "ZhipuAI/GLM-5.2":
             raise RuntimeError("primary unavailable")
         return _valid_summary()
@@ -448,8 +569,11 @@ def test_daily_prompt_declares_complete_sentence_and_length_contract() -> None:
     assert "每条输入必须输出一次" in prompt
     assert "保持 `article_id` 和顺序" in prompt
     assert "输入已经由程序完成选题、去重、排序和来源配额" in prompt
+    assert "只写标题明确指向的一件" in prompt
     assert "不输出标题" in prompt
     assert "不要复述 `trend_signal`" in prompt
+    assert "`evidence_status`、`confidence`、`publish_time`" in prompt
+    assert "不得把证据域数量写成新闻事实" in prompt
     assert "把它作为主要选题信号" not in prompt
     assert len(prompt.splitlines()) <= 12
 
@@ -477,7 +601,7 @@ def test_summarize_result_rejects_missing_or_duplicate_selected_candidates(
     monkeypatch.setattr(
         summarizer,
         "_summarize_sync",
-        lambda client, params: _summary_with_sources(
+        lambda client, params, **_kwargs: _summary_with_sources(
             ["a1", "a1", "a1", "a2", "a2", "a3", "a3", "a4", "a4", "a1"]
         ),
     )
@@ -528,8 +652,105 @@ def test_compress_articles_omits_links_from_the_model_input(monkeypatch) -> None
             "article_id": "a1",
             "title": "AI launch",
             "description": "new capability",
+            "evidence_status": "direct",
+            "confidence": "reported",
+            "publish_time": "",
+            "evidence_domain_count": 1,
         }
     ]
+
+
+def test_compress_articles_exposes_private_editorial_metadata(monkeypatch) -> None:
+    monkeypatch.setattr(summarizer, "get_config", _llm_config)
+
+    compressed = summarizer.compress_articles(
+        [
+            {
+                "title": "AI launch",
+                "description": "new capability",
+                "link": "https://www.example.test/private-source",
+                "publish_time": "Tue, 21 Jul 2026 16:58:25 GMT",
+                "evidence_status": "corroborated",
+                "confidence": "corroborated",
+                "evidence": [
+                    {
+                        "title": "Corroboration",
+                        "url": "https://reuters.com/technology/corroboration",
+                        "published_date": "2026-07-21",
+                        "snippet": "A second direct report.",
+                    },
+                    {
+                        "title": "Same domain",
+                        "url": "https://example.test/duplicate-domain",
+                        "published_date": "2026-07-21",
+                        "snippet": "The original domain again.",
+                    },
+                ],
+            }
+        ]
+    )
+
+    assert compressed[0]["evidence_status"] == "corroborated"
+    assert compressed[0]["confidence"] == "corroborated"
+    assert compressed[0]["publish_time"] == "2026-07-21T16:58:25Z"
+    assert compressed[0]["evidence_domain_count"] == 2
+    assert "link" not in compressed[0]
+
+
+def test_live_offline_and_publication_validation_share_the_p1_shortlist(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        summarizer, "get_config", lambda: _llm_config(max_summary_items=1)
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(
+        summarizer,
+        "create_client",
+        lambda base_url, api_key: f"{base_url}|{api_key}",
+    )
+    captured_input: dict = {}
+
+    def fake_summarize_sync(_client, params, **_kwargs):
+        captured_input.update(json.loads(params["messages"][-1]["content"]))
+        return _summary_with_sources(["a2"])
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+    articles = [
+        {
+            "title": "AI assistant Alpha launches a workflow update",
+            "description": (
+                "The AI report documents a concrete product change and its result."
+            ),
+            "link": "https://news.example/alpha",
+            "publish_time": "2026-07-22T10:00:00Z",
+            "priority": 1,
+            "source": "same-source",
+        },
+        {
+            "title": "AI assistant Beta launches a workflow update",
+            "description": (
+                "The AI report documents a concrete product change and its result."
+            ),
+            "link": "https://news.example/beta",
+            "publish_time": "2026-07-21T10:00:00Z",
+            "priority": 1,
+            "source": "same-source",
+            "evidence_status": "corroborated",
+            "confidence": "corroborated",
+            "evidence": [
+                {"url": "https://reuters.com/technology/beta", "snippet": "Report"}
+            ],
+        },
+    ]
+
+    live = summarizer.summarize_result(articles, stream=False)
+    offline = summarizer.offline_summary_result(articles, limit=1)
+
+    assert live.candidate_article_ids == offline.candidate_article_ids == ("a2",)
+    assert [item["article_id"] for item in captured_input["articles"]] == ["a2"]
+    assert captured_input["articles"][0]["evidence_domain_count"] == 2
+    assert live.selection_diagnostics == offline.selection_diagnostics
 
 
 def test_compress_articles_exposes_trending_rank_and_heat_to_the_editor(
@@ -690,11 +911,11 @@ def test_summary_provider_repairs_one_reader_contract_failure(
             },
             ensure_ascii=False,
         ),
-        _valid_summary(),
+        _valid_repair_item(),
     ]
     calls: list[dict] = []
 
-    def fake_summarize_sync(_client, params):
+    def fake_summarize_sync(_client, params, **_kwargs):
         calls.append(params)
         return responses.pop(0)
 
@@ -704,9 +925,74 @@ def test_summary_provider_repairs_one_reader_contract_failure(
 
     assert result.provider == "ModelScope"
     assert len(calls) == 2
-    repair_message = calls[1]["messages"][-1]["content"]
-    assert "30–80 个可见字符" in repair_message
-    assert "逐条保留输入 article_id 和顺序" in repair_message
+    repair_instruction = calls[1]["messages"][0]["content"]
+    repair_input = json.loads(calls[1]["messages"][-1]["content"])
+    assert "30–80 个可见字符" in repair_instruction
+    assert repair_input["source_article"]["article_id"] == "a1"
+    assert repair_input["current_item"]["article_id"] == "a1"
+    assert calls[1]["max_tokens"] == 512
+
+
+def test_summary_provider_repairs_grounding_failure_after_shape_repair(
+    monkeypatch,
+) -> None:
+    monkeypatch.setattr(
+        summarizer,
+        "get_config",
+        lambda: _llm_config(modelscope_secondary_model="", fallback_api_key=""),
+    )
+    monkeypatch.setattr(summarizer, "load_prompt", lambda: "prompt")
+    monkeypatch.setattr(summarizer, "create_client", lambda *_args: "client")
+    responses = [
+        json.dumps(
+            {
+                "items": [
+                    {
+                        "article_id": "a1",
+                        "summary": "人工智能公司发布新工具，并扩大产品能力。",
+                    }
+                ],
+                "discussion_topic": "你最关注哪条AI新闻？",
+            },
+            ensure_ascii=False,
+        ),
+        json.dumps(
+            {
+                "article_id": "a1",
+                "summary": (
+                    "人工智能公司发布开发者工具，并计划在未来5年扩大产品覆盖范围。"
+                ),
+                "why_it_matters": "这会改变开发团队采用相关能力的成本与效率。",
+            },
+            ensure_ascii=False,
+        ),
+        _valid_repair_item(),
+    ]
+    calls: list[tuple[dict, float | None]] = []
+    request_timeouts = iter((120.0, 80.0, 40.0))
+    monkeypatch.setattr(
+        summarizer,
+        "_bounded_summary_request_timeout",
+        lambda **_kwargs: next(request_timeouts),
+    )
+
+    def fake_summarize_sync(_client, params, *, timeout_seconds=None):
+        calls.append((params, timeout_seconds))
+        return responses.pop(0)
+
+    monkeypatch.setattr(summarizer, "_summarize_sync", fake_summarize_sync)
+
+    result = summarizer.summarize_result([{"title": "Story"}], stream=False)
+
+    assert result.provider == "ModelScope"
+    assert len(calls) == 3
+    assert [timeout for _params, timeout in calls] == [120.0, 80.0, 40.0]
+    grounding_repair = json.loads(calls[2][0]["messages"][-1]["content"])
+    assert (
+        grounding_repair["validation_error"]
+        == "item 1 has unsupported numeric claims: 5"
+    )
+    assert grounding_repair["source_article"]["article_id"] == "a1"
 
 
 def test_offline_summary_preserves_a_complete_source_sentence_without_truncation() -> (
