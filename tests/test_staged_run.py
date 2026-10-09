@@ -85,6 +85,31 @@ def test_equivalent_edition_is_a_noop_without_rebuilding_site(
     assert first_markdown.stat().st_mtime_ns == before_markdown
 
 
+def test_new_edition_preserves_previous_data_checkpoints(tmp_path) -> None:
+    cfg = SimpleNamespace(
+        data_dir=str(tmp_path / "data"),
+        content_dir=str(tmp_path / "content"),
+        site_dir=str(tmp_path / "dist"),
+    )
+    previous_data = tmp_path / "data" / "2026-07-22.json"
+    previous_content = tmp_path / "content" / "2026-07-22.md"
+    previous_data.parent.mkdir(parents=True)
+    previous_content.parent.mkdir(parents=True)
+    previous_data.write_text('{"date":"2026-07-22"}\n', encoding="utf-8")
+    previous_content.write_text("previous edition\n", encoding="utf-8")
+
+    stage_and_publish_run(
+        cfg,
+        create_run_workspace(tmp_path / ".runs", "2026-07-23", "next"),
+        "2026-07-23",
+        {"date": "2026-07-23", "articles": [{"title": "candidate"}]},
+        "next edition",
+    )
+
+    assert previous_data.read_text(encoding="utf-8") == '{"date":"2026-07-22"}\n'
+    assert (tmp_path / "data" / "2026-07-23.json").is_file()
+
+
 def test_zero_story_run_publishes_a_same_day_empty_edition(tmp_path) -> None:
     cfg = SimpleNamespace(
         data_dir=str(tmp_path / "data"),

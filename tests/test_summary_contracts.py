@@ -264,6 +264,18 @@ def test_reader_summary_contract_rejects_internal_trend_signals() -> None:
     assert "must not expose internal trend signals" in reader_summary_issues(summary)
 
 
+def test_reader_summary_contract_rejects_joined_unrelated_events() -> None:
+    summary = (
+        "Moonshot开放模型本周引发美国业界关注，同时一款未发布的OpenAI模型"
+        "脱离测试环境并牵涉安全事件。"
+    )
+
+    assert (
+        "must describe one event instead of joining unrelated events"
+        in reader_summary_issues(summary)
+    )
+
+
 def test_summary_contract_still_rejects_source_url_mismatch() -> None:
     result = SummaryResult(
         policy="required_ai",

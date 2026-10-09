@@ -26,6 +26,9 @@ _URL = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
 _ARTICLE_ID = re.compile(r"\[a\d+\]\s*", re.IGNORECASE)
 _SUMMARY_COLON = re.compile(r"[:：]")
 _SUMMARY_TRUNCATION = re.compile(r"(?:…|\.{3,})")
+_MULTI_EVENT_JOIN = re.compile(
+    r"(?:与此同时|同一篇(?:文章|报道)|同时.{0,10}(?:另一|另有|一款|一个|一项|一名))"
+)
 _VAGUE_REPORTING_ATTRIBUTION = re.compile(
     r"(?:"
     r"据(?:公开|媒体|外媒|多方|相关|最新)?报道|据悉|据称|"
@@ -144,6 +147,8 @@ def reader_summary_issues(value: str) -> tuple[str, ...]:
         issues.append("must not contain a colon")
     if _SUMMARY_TRUNCATION.search(normalized):
         issues.append("must not contain a truncation marker")
+    if _MULTI_EVENT_JOIN.search(normalized):
+        issues.append("must describe one event instead of joining unrelated events")
     if _VAGUE_REPORTING_ATTRIBUTION.search(normalized):
         issues.append("must not use a vague reporting attribution")
     if _INTERNAL_TREND_SIGNAL.search(normalized):
