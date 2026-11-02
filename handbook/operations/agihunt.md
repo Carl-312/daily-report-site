@@ -162,8 +162,8 @@ python main.py run --offline --agihunt on --enrichment off
 ## GitHub 灰度
 
 1. 在仓库 Settings → Secrets and variables → Actions 中由维护者添加 `AGIHUNT_API_KEY`。
-2. 从功能分支手动触发 **Daily Report Deploy**，或在 `main` 上保持 `publish=false`。
-3. 设定 `enable_agihunt=true`、`enable_tavily=false`、`publish=false`。工作流会传入 `--agihunt on`，只上传 preview artifact，不会回写仓库或发布 Pages。
+2. 从功能分支或 `main` 手动触发 **Daily Report Deploy**。
+3. 选择 `run_mode=agihunt_shadow`。工作流会传入 `--agihunt on`，只上传 preview artifact，不会回写仓库或发布 Pages。
 4. workflow 会运行 `scripts/agihunt_gray_health.py`；通过后下载
    `daily-report-preview-<run_id>`，检查根目录的去敏
    `agihunt-gray-health.json`、`data/`、`content/` 和生成的 `dist/`。`.runs/`

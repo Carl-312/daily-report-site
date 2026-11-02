@@ -28,6 +28,16 @@ python main.py fetch --agihunt on --enrichment off
 
 具体授权、灰度和回滚步骤见[AGIHunt 运行手册](../operations/agihunt.md)。
 
+## 当前直接 Story 参考实现
+
+- `sources/techcrunch.py` 读取 TechCrunch 官方人工智能分类 RSS，要求 canonical URL、非空摘要和
+  可解析的 `pubDate`，输出 `kind=story`。
+- `sources/theverge.py` 读取 The Verge 官方 AI Atom feed，采用同样的直接证据和滚动 48 小时边界。
+- source adapter 应优先提供可独立发布的正文摘要与来源发布时间；Tavily 只做可选补证，不能成为
+  一个正常 RSS/source adapter 的发布前置条件。
+- 只有标题、榜单信号或观察时间而无来源正文的记录才能标记为 `kind=lead`，并在补证失败时
+  保持私有。
+
 ---
 
 ## 📋 前置知识

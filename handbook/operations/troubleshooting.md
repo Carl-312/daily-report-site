@@ -115,8 +115,8 @@ python3 main.py run --offline --enrichment off
 
 检查 `Daily Report Deploy` 的手动输入：
 
-- `enable_tavily` 必须设为 `true`，否则不会追加 `--enrichment on`。
-- `skip_generate=true` 只重建站点，不运行抓取和 Tavily。
+- `run_mode` 必须选择 `formal_gray`，该预设会同时开启 Tavily、Trending 和灰度 Pages 硬门禁。
+- `run_mode=rebuild_preview` 只重建站点，不运行抓取和 Tavily。
 - 仓库 secret 需要配置 `TAVILY_API_KEY`；缺失时 workflow 仍应完成，但 JSON 会记录安全降级。
 - 非 `main` 分支运行不会回写 `data/` / `content/` 或发布 Pages，只适合看日志。
 
