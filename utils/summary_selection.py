@@ -21,6 +21,11 @@ from utils.editorial_catalog import (
     analyze_editorial_text,
     load_editorial_catalog,
 )
+from utils.story_quality import (
+    direct_evidence_domains,
+    normalized_source_publish_time,
+    source_publish_datetime,
+)
 
 SUMMARY_SELECTION_POLICY_V1 = "source_balanced_v1"
 SUMMARY_SELECTION_POLICY = "source_balanced_v2"
@@ -288,6 +293,9 @@ class _EditorialCandidate:
     priority: int
     trend_rank: int
     trend_heat: float
+    evidence_domain_count: int
+    normalized_publish_time: str
+    publish_timestamp: float
     analysis: EditorialAnalysis
     number_keys: tuple[str, ...]
 
@@ -348,6 +356,8 @@ def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
         )
     else:
         analysis = analyze_article(article)
+    evidence_domains = direct_evidence_domains(article)
+    published = source_publish_datetime(article)
     return _EditorialCandidate(
         article_id=article_reference_id(article, index),
         original_index=index,
@@ -357,6 +367,9 @@ def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
         priority=_safe_int(article.get("priority"), 0),
         trend_rank=_safe_int(provenance.get("trend_rank"), 1_000_000),
         trend_heat=_safe_float(provenance.get("trend_heat"), 0.0),
+        evidence_domain_count=len(evidence_domains),
+        normalized_publish_time=normalized_source_publish_time(article),
+        publish_timestamp=published.timestamp() if published is not None else 0.0,
         analysis=analysis,
         number_keys=_number_keys(article),
     )
@@ -364,12 +377,15 @@ def _editorial_candidate(article: dict, index: int) -> _EditorialCandidate:
 
 def _base_order_v2(
     candidate: _EditorialCandidate,
-) -> tuple[int, int, int, float, int]:
+) -> tuple[int, int, int, float, int, int, float, int]:
     return (
         -candidate.analysis.relevance_level,
         -candidate.priority,
         candidate.trend_rank,
         -candidate.trend_heat,
+        -candidate.evidence_domain_count,
+        -int(bool(candidate.normalized_publish_time)),
+        -candidate.publish_timestamp,
         candidate.original_index,
     )
 
@@ -495,7 +511,7 @@ def _selection_key(
     *,
     source_counts: Counter[str],
     topic_counts: Counter[str],
-) -> tuple[int, int, int, int, int, float, int]:
+) -> tuple[int, int, int, int, int, float, int, int, float, int]:
     # The third item from one topic is softly delayed, while relevance and
     # source priority remain the stronger editorial signals.
     topic_penalty = max(0, topic_counts[candidate.analysis.topic] - 1)
@@ -506,6 +522,9 @@ def _selection_key(
         source_counts[candidate.source_group],
         candidate.trend_rank,
         -candidate.trend_heat,
+        -candidate.evidence_domain_count,
+        -int(bool(candidate.normalized_publish_time)),
+        -candidate.publish_timestamp,
         candidate.original_index,
     )
 
@@ -716,6 +735,8 @@ def select_summary_candidates_with_diagnostics(
                 "model_families": list(candidate.analysis.model_families),
                 "topic": candidate.analysis.topic,
                 "regions": list(candidate.analysis.regions),
+                "evidence_domain_count": candidate.evidence_domain_count,
+                "publish_time": candidate.normalized_publish_time,
             }
         )
 
